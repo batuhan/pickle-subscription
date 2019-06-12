@@ -1,10 +1,8 @@
-let System = require("../models/system-options");
-let Stripe = require("../config/stripe");
-let _ = require("lodash");
-let injectProperties = function() {
+const Stripe = require("../config/stripe");
+const injectProperties = function() {
   return function(req, res, next) {
-    let store = require("../config/redux/store");
-    let options = store.getState().options;
+    const store = require("../config/redux/store");
+    const options = store.getState().options;
     Object.defineProperty(res.locals, "sysprops", {
       get: function() {
         return store.getState().options;

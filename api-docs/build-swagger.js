@@ -1,13 +1,10 @@
-let path = require("path");
 require("dotenv").config({
   path: require("path").join(__dirname, "../env/.env"),
 });
 const fs = require("fs");
 
-let knex = require("../config/db");
-
 async function buildModelResources() {
-  let models = [
+  const models = [
     require("../models/charge"),
     require("../models/event-log"),
     require("../models/file"),
@@ -32,9 +29,9 @@ async function buildModelResources() {
     require("../models/base/entity")("webhooks"),
     require("../models/base/entity")("user_permissions"),
   ];
-  let swaggerResources = {};
+  const swaggerResources = {};
 
-  for (let model of models) {
+  for (const model of models) {
     swaggerResources[model.table] = await buildSwagger(model);
   }
 
@@ -48,19 +45,19 @@ async function buildModelResources() {
 }
 
 async function buildSwagger(model) {
-  let schema = await model.getSchema(true, true);
+  const schema = await model.getSchema(true, true);
   console.log(schema);
   return Object.entries(schema).reduce(
     (acc, [key, value]) => {
-      let property = {};
+      const property = {};
       console.log(key);
       if (key === "references") {
-        let entries = Object.entries(value);
+        const entries = Object.entries(value);
         if (entries.length === 0) {
           return acc;
         }
         acc.properties["references"] = entries.reduce(
-          (refAcc, [refKey, refValue]) => {
+          (refAcc, [refKey]) => {
             refAcc.properties[refKey] = {
               type: "array",
               items: [{ $ref: "#/definitions/" + refKey }],
@@ -119,7 +116,7 @@ async function buildSwagger(model) {
 }
 
 function buildEntityPaths() {
-  let resources = [
+  const resources = [
     {
       endpointName: "users",
       resourceName: "users",
@@ -206,8 +203,8 @@ function buildEntityPaths() {
     },
   ];
 
-  let modelPaths = resources.reduce((acc, resource) => {
-    let { endpointName, resourceName, ownership, deletedRoutes } = resource;
+  const modelPaths = resources.reduce((acc, resource) => {
+    const { endpointName, resourceName, ownership, deletedRoutes } = resource;
     acc[`/${endpointName}`] = {
       get: {
         summary: "Get " + resourceName,

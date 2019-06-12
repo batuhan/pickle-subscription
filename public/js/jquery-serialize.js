@@ -6,12 +6,12 @@
  * @version 2.5.0
  */
 !(function(e, i) {
-  if ("function" == typeof define && define.amd)
+  if (typeof define === "function" && define.amd)
     define(["exports", "jquery"], function(e, r) {
       return i(e, r);
     });
-  else if ("undefined" != typeof exports) {
-    var r = require("jquery");
+  else if (typeof exports !== "undefined") {
+    const r = require("jquery");
     i(exports, r);
   } else i(e, e.jQuery || e.Zepto || e.ender || e.$);
 })(this, function(e, i) {
@@ -22,7 +22,7 @@
     function a(e, i) {
       for (var r, a = e.match(t.key); void 0 !== (r = a.pop()); )
         if (t.push.test(r)) {
-          var u = s(e.replace(/\[\]$/, ""));
+          const u = s(e.replace(/\[\]$/, ""));
           i = n([], u, i);
         } else
           t.fixed.test(r)
@@ -34,22 +34,22 @@
       return void 0 === h[e] && (h[e] = 0), h[e]++;
     }
     function u(e) {
-      switch (i('[name="' + e.name + '"]', r).attr("type")) {
+      switch (i(`[name="${  e.name  }"]`, r).attr("type")) {
         case "checkbox":
-          return "on" === e.value ? !0 : e.value;
+          return e.value === "on" ? !0 : e.value;
         default:
           return e.value;
       }
     }
     function f(i) {
       if (!t.validate.test(i.name)) return this;
-      var r = a(i.name, u(i));
+      const r = a(i.name, u(i));
       return (l = e.extend(!0, l, r)), this;
     }
     function d(i) {
       if (!e.isArray(i))
         throw new Error("formSerializer.addPairs expects an Array");
-      for (var r = 0, t = i.length; t > r; r++) this.addPair(i[r]);
+      for (let r = 0, t = i.length; t > r; r++) this.addPair(i[r]);
       return this;
     }
     function o() {
@@ -58,8 +58,8 @@
     function c() {
       return JSON.stringify(o());
     }
-    var l = {},
-      h = {};
+    var l = {};
+      var h = {};
     (this.addPair = f),
       (this.addPairs = d),
       (this.serialize = o),
@@ -80,7 +80,7 @@
     (r.serializeJSON = function() {
       return new r(i, this).addPairs(this.serializeArray()).serializeJSON();
     }),
-    "undefined" != typeof i.fn &&
+    typeof i.fn !== "undefined" &&
       ((i.fn.serializeObject = r.serializeObject),
       (i.fn.serializeJSON = r.serializeJSON)),
     (e.FormSerializer = r),

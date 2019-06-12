@@ -1,7 +1,7 @@
 import React from "react";
-import Load from "../utilities/load.jsx";
 import { Link, browserHistory } from "react-router";
 import Alert from "react-s-alert";
+import Load from "../utilities/load.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import { DataForm, DataChild } from "../utilities/data-form.jsx";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
@@ -13,14 +13,14 @@ class UserForm extends React.Component {
     super(props);
     this.state = {
       user: {},
-      url: "/api/v1/users/" + props.params.userId,
+      url: `/api/v1/users/${  props.params.userId}`,
       loading: true,
     };
     this.handleImage = this.handleImage.bind(this);
   }
 
   componentDidMount() {
-    var that = this;
+    const that = this;
     if (!isAuthorized({})) {
       return browserHistory.push("/login");
     }
@@ -33,11 +33,11 @@ class UserForm extends React.Component {
   }
 
   handleImage(e) {
-    var self = this;
+    const self = this;
 
     e.preventDefault();
 
-    let init = {
+    const init = {
       method: "PUT",
       credentials: "include",
       body: new FormData(document.getElementById("imgform")),
@@ -52,10 +52,10 @@ class UserForm extends React.Component {
     if (this.state.loading) return <Load />;
     if (this.state.user == {}) {
       return <p className="help-block center-align">There is no user</p>;
-    } else {
-      let user = this.state.user;
+    } 
+      const {user} = this.state;
 
-      let pageName = this.props.route.name;
+      const pageName = this.props.route.name;
       return (
         <Authorizer>
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -63,7 +63,7 @@ class UserForm extends React.Component {
             <Content>
               <div className="badge badge-40">
                 <img
-                  src={this.state.url + "/avatar"}
+                  src={`${this.state.url  }/avatar`}
                   className="max-w-40 h-40 img-circle"
                   alt="badge"
                 />
@@ -75,12 +75,14 @@ class UserForm extends React.Component {
                 </div>
                 <Authorizer permission="can_administrate">
                   <div className="article-item-description">
-                    Created {new Date(user.created).toDateString()}
+                    Created 
+                    {' '}
+                    {new Date(user.created).toDateString()}
                   </div>
                 </Authorizer>
               </div>
 
-              <h5 class="m-20 m-t-40 m-b-10">Upload your profile picture</h5>
+              <h5 className="m-20 m-t-40 m-b-10">Upload your profile picture</h5>
               <form id="imgform" encType="multipart/form-data">
                 <input id="avatar" type="file" name="avatar" />
                 <button type="submit" onClick={this.handleImage}>
@@ -91,7 +93,7 @@ class UserForm extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

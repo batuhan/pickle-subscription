@@ -1,7 +1,8 @@
 import React from "react";
 import { TwitterPicker, SketchPicker } from "react-color";
-let _ = require("lodash");
-let values = require("object.values");
+
+const _ = require("lodash");
+const values = require("object.values");
 const PropTypes = require("prop-types");
 
 if (!Object.values) {
@@ -9,7 +10,7 @@ if (!Object.values) {
 }
 
 class Inputs extends React.Component {
-  //TODO: make default value get set in dataform on mounting component
+  // TODO: make default value get set in dataform on mounting component
   constructor(props) {
     super(props);
     this.state = { type: this.props.type, value: null };
@@ -65,11 +66,11 @@ class Inputs extends React.Component {
   }
 
   clickInsideListener(event) {
-    let self = this;
-    let colorPickerElement = document.getElementById(
+    const self = this;
+    const colorPickerElement = document.getElementById(
       `color_picker_${self.state.name}`,
     );
-    let isClickInside = colorPickerElement.contains(event.target);
+    const isClickInside = colorPickerElement.contains(event.target);
     if (!isClickInside) {
       self.setState({ showPicker: false, showCustomPicker: false });
     }
@@ -80,8 +81,8 @@ class Inputs extends React.Component {
   }
 
   handlePriceChange(e) {
-    let self = this;
-    let value = e.target.value || e.target.defaultValue;
+    const self = this;
+    const value = e.target.value || e.target.defaultValue;
 
     if (!isNaN(value)) {
       if (value != "" && value != null) {
@@ -89,28 +90,28 @@ class Inputs extends React.Component {
         this.props.onChange(e);
       } else if (value == 0) {
         self.setState({ priceValue: 0 });
-        let newEvent = e;
+        const newEvent = e;
         newEvent.target.value = 0;
         this.props.onChange(newEvent);
       } else {
         self.setState({ priceValue: 0 });
-        let newEvent = e;
+        const newEvent = e;
         newEvent.target.value = null;
         this.props.onChange(newEvent);
       }
       self.setState({ error: false });
     } else {
-      let newEvent = e;
+      const newEvent = e;
       newEvent.target.value = null;
       self.setState({ error: "Price must be a whole number." });
     }
   }
 
   handleColorPickerChange(color, e) {
-    //change the color picker colors
-    let currentColor = this.state.value;
-    let currentColors = this.state.colors;
-    let indexOfColor = _.indexOf(currentColors, _.toUpper(currentColor));
+    // change the color picker colors
+    const currentColor = this.state.value;
+    const currentColors = this.state.colors;
+    const indexOfColor = _.indexOf(currentColors, _.toUpper(currentColor));
     if (indexOfColor) {
       currentColors[indexOfColor] = _.toUpper(color.hex);
     }
@@ -118,42 +119,44 @@ class Inputs extends React.Component {
     this.setState(
       { value: _.toUpper(color.hex), colors: currentColors, showPicker: false },
       () => {
-        let event = new Event("input", { bubbles: true });
+        const event = new Event("input", { bubbles: true });
         document
           .getElementById(`color_picker_${this.state.name}_input`)
           .dispatchEvent(event);
 
-        //remove event listener for clicking outside
+        // remove event listener for clicking outside
         document
           .getElementById(`color_picker_${this.state.name}`)
           .removeEventListener("click", this.clickInsideListener);
       },
     );
   }
+
   handleShowPicker() {
     this.setState({ showPicker: true });
   }
+
   handleShowCustomPicker() {
     this.setState({ showCustomPicker: true });
   }
 
   render() {
-    //initializing data
-    const type = this.state.type;
-    let maxLength = this.props.maxLength ? this.props.maxLength : false;
-    let name = this.props.name ? this.props.name : false;
-    let label = this.props.label ? this.props.label : false;
-    let defaultValue = this.props.value || this.props.defaultValue;
-    let placeholder = this.props.placeholder;
-    let disabled = this.props.disabled;
+    // initializing data
+    const {type} = this.state;
+    const maxLength = this.props.maxLength ? this.props.maxLength : false;
+    const name = this.props.name ? this.props.name : false;
+    const label = this.props.label ? this.props.label : false;
+    const defaultValue = this.props.value || this.props.defaultValue;
+    const {placeholder} = this.props;
+    const {disabled} = this.props;
     let error =
       (this.props.errors &&
         this.props.errors.length &&
         this.props.errors[0].message) ||
       null;
-    let warning = this.props.warning ? this.props.warning : false;
+    const warning = this.props.warning ? this.props.warning : false;
 
-    //error checking props
+    // error checking props
     if (!name) {
       error = "Component requires a name passed in props.";
     } else if (!label && type != "hidden") {
@@ -183,8 +186,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } else if (type == "price") {
-      //TODO: Handle on load, change the price mask for editing forms
+    } if (type == "price") {
+      // TODO: Handle on load, change the price mask for editing forms
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -215,8 +218,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } else if (type == "textarea") {
-      let row = this.props.row ? this.props.row : 4;
+    } if (type == "textarea") {
+      const row = this.props.row ? this.props.row : 4;
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -236,7 +239,7 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } else if (type == "select") {
+    } if (type == "select") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -254,7 +257,7 @@ class Inputs extends React.Component {
             onChange={this.handleChange}
           >
             {this.props.value == null && defaultValue == null ? (
-              <option value={null}>{""}</option>
+              <option value={null} />
             ) : (
               ""
             )}
@@ -262,15 +265,15 @@ class Inputs extends React.Component {
               this.props.options.map(option => (
                 <option
                   key={`option-${
-                    typeof option == "object" ? Object.keys(option)[0] : option
+                    typeof option === "object" ? Object.keys(option)[0] : option
                   }`}
                   value={
-                    typeof option == "object"
+                    typeof option === "object"
                       ? Object.values(option)[0]
                       : option
                   }
                 >
-                  {typeof option == "object" ? Object.keys(option)[0] : option}
+                  {typeof option === "object" ? Object.keys(option)[0] : option}
                 </option>
               ))
             ) : (
@@ -283,7 +286,7 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } else if (type == "bool" || type == "boolean") {
+    } if (type == "bool" || type == "boolean") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -300,13 +303,13 @@ class Inputs extends React.Component {
             name={name}
             onChange={this.handleChange}
           >
-            <option value={true}>True</option>
+            <option value>True</option>
             <option value={false}>False</option>
           </select>
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } else if (type == "checkbox") {
+    } if (type == "checkbox") {
       return (
         <div className={`form-group ${error ? "has-error" : ""}`}>
           {label && <label className="control-label">{label}</label>}
@@ -322,7 +325,7 @@ class Inputs extends React.Component {
           )}
         </div>
       );
-    } else if (type == "color_picker") {
+    } if (type == "color_picker") {
       console.log("color picker color:", this.state.value);
       return (
         <div
@@ -339,10 +342,10 @@ class Inputs extends React.Component {
             className="ColorPickerPreview"
             style={{
               backgroundColor: this.state.value,
-              width: 50 + "px",
-              height: 50 + "px",
+              width: `${50  }px`,
+              height: `${50  }px`,
               cursor: "pointer",
-              borderRadius: 5 + "px",
+              borderRadius: `${5  }px`,
             }}
             onClick={this.handleShowPicker}
           />

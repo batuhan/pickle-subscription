@@ -1,6 +1,6 @@
 import React from "react";
 
-let SecureString = props => {
+const SecureString = props => {
   return (
     <div className="form-group form-group-flex addon-text-widget-input-wrapper">
       <input
@@ -13,7 +13,7 @@ let SecureString = props => {
   );
 };
 
-let widget = {
+const widget = {
   widget: SecureString,
   type: "secure-string",
   label: "Secure String",

@@ -1,5 +1,6 @@
 import React from "react";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import Featured from "../layouts/featured.jsx";
 import Content from "../layouts/content.jsx";
 import PageSection from "../layouts/page-section.jsx";
@@ -10,8 +11,8 @@ import {
   AdminEditingGear,
   AdminEditingSidebar,
 } from "../layouts/admin-sidebar.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class Home extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Home extends React.Component {
     const value = target.type === "checkbox" ? target.checked : target.value;
     if (value != "") {
       this.setState({
-        serviceUrl: "/api/v1/service-templates/search?key=name&value=" + value,
+        serviceUrl: `/api/v1/service-templates/search?key=name&value=${  value}`,
         searchValue: value,
       });
     } else {
@@ -61,20 +62,22 @@ class Home extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   render() {
-    let featuredServicesHeading,
-      featuredServicesShowAllButton,
-      featuredServiceSectionBackgroundColor = "";
+    let featuredServicesHeading;
+      let featuredServicesShowAllButton;
+      let featuredServiceSectionBackgroundColor = "";
 
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       featuredServicesHeading = _.get(
         options,
         "featured_service_heading.value",
@@ -165,15 +168,17 @@ class HomeFeatures extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   render() {
-    let featuredAreaStyle = this.props.featuredAreaStyle || {
+    const featuredAreaStyle = this.props.featuredAreaStyle || {
       position: "absolute",
       width: "100%",
       height: "100%",
@@ -188,10 +193,10 @@ class HomeFeatures extends React.Component {
       justifyContent: "center",
     };
 
-    let featuredHeading,
-      featuredDescription = "";
+    let featuredHeading;
+      let featuredDescription = "";
 
-    let options = this.props.options;
+    const {options} = this.props;
     featuredHeading = _.get(
       options,
       "home_featured_heading.value",
@@ -203,7 +208,7 @@ class HomeFeatures extends React.Component {
       "You can set this text in system options",
     );
 
-    let featuredHeadingStyle = this.props.featuredHeadingStyle || {
+    const featuredHeadingStyle = this.props.featuredHeadingStyle || {
       fontSize: "72px",
       marginBottom: "30px",
       color: _.get(
@@ -213,7 +218,7 @@ class HomeFeatures extends React.Component {
       ),
     };
 
-    let featuredIntroStyle = this.props.featuredIntroStyle || {
+    const featuredIntroStyle = this.props.featuredIntroStyle || {
       fontSize: "26px",
       color: _.get(
         this.props.options,
@@ -230,9 +235,9 @@ class HomeFeatures extends React.Component {
           <div className="featured-intro" style={featuredAreaStyle}>
             <h1 style={featuredHeadingStyle}>{featuredHeading}</h1>
             <p style={featuredIntroStyle}>{featuredDescription}</p>
-            {/*{this.state.searchBar &&*/}
-            {/*<SearchServiceBar searchValue={this.state.searchValue} handleChange={this.handleChange}/>*/}
-            {/*}*/}
+            {/* {this.state.searchBar && */}
+            {/* <SearchServiceBar searchValue={this.state.searchValue} handleChange={this.handleChange}/> */}
+            {/* } */}
             {this.state.editingGear && (
               <AdminEditingGear
                 toggle={this.toggleEditingMode}

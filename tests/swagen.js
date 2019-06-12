@@ -1,27 +1,27 @@
-let knex = require("../config/db");
+const knex = require("../config/db");
 
-let ServiceTemplate = require("../models/service-template");
-let ServiceTemplateProperties = require("../models/service-template-property");
-let ServiceCategorites = require("../models/service-category");
-let ServiceInstance = require("../models/service-instance");
-let ServiceInstanceProperties = require("../models/service-instance-property");
-let ServiceInstanceMessages = require("../models/service-instance-message");
-let ChargeItems = require("../models/charge");
-let ServiceInstanceCancellation = require("../models/service-instance-cancellation");
-let Users = require("../models/user");
-let Roles = require("../models/role");
-let EventLogs = require("../models/event-log");
-let NotificationTemplates = require("../models/notification-template");
-let Invoice = require("../models/invoice");
-let InvoiceLine = require("../models/invoice-line");
-let Transactions = require("../models/transaction");
-let SystemOptions = require("../models/system-options");
-let Files = require("../models/file");
+const ServiceTemplate = require("../models/service-template");
+const ServiceTemplateProperties = require("../models/service-template-property");
+const ServiceCategorites = require("../models/service-category");
+const ServiceInstance = require("../models/service-instance");
+const ServiceInstanceProperties = require("../models/service-instance-property");
+const ServiceInstanceMessages = require("../models/service-instance-message");
+const ChargeItems = require("../models/charge");
+const ServiceInstanceCancellation = require("../models/service-instance-cancellation");
+const Users = require("../models/user");
+const Roles = require("../models/role");
+const EventLogs = require("../models/event-log");
+const NotificationTemplates = require("../models/notification-template");
+const Invoice = require("../models/invoice");
+const InvoiceLine = require("../models/invoice-line");
+const Transactions = require("../models/transaction");
+const SystemOptions = require("../models/system-options");
+const Files = require("../models/file");
 
 console.log(knex.fn.now());
 
 function genProp(data) {
-  let returnProp = {};
+  const returnProp = {};
   if (data.type == "character varying") {
     returnProp.type = "string";
   } else {
@@ -36,14 +36,14 @@ function genProp(data) {
 }
 function generate(model) {
   model.getSchema(true, true, function(schema) {
-    let json = { type: "object", properties: {} };
-    for (let prop in schema) {
+    const json = { type: "object", properties: {} };
+    for (const prop in schema) {
       if (prop == "references") {
-        let newProp = { type: "object", properties: {} };
-        for (let refProp in schema[prop]) {
+        const newProp = { type: "object", properties: {} };
+        for (const refProp in schema[prop]) {
           newProp.properties[refProp] = {
             type: "array",
-            items: [{ $ref: "#/definitions/" + refProp }],
+            items: [{ $ref: `#/definitions/${  refProp}` }],
           };
         }
         json.properties[prop] = newProp;

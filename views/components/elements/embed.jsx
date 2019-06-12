@@ -1,7 +1,7 @@
 import React from "react";
-import Fetcher from "../utilities/fetcher.jsx";
 import { Link } from "react-router";
 import _ from "lodash";
+import Fetcher from "../utilities/fetcher.jsx";
 import Load from "../utilities/load.jsx";
 import { Price, getPrice } from "../utilities/price.jsx";
 import DateFormat from "../utilities/date-format.jsx";
@@ -21,7 +21,7 @@ class Embed extends React.Component {
     };
 
     document.body.classList.add("EmbedFrame");
-    let attributeRemove = [
+    const attributeRemove = [
       "data-layout",
       "data-sidebar",
       "data-navbar",
@@ -36,7 +36,7 @@ class Embed extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
 
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
@@ -49,7 +49,7 @@ class Embed extends React.Component {
   }
 
   getCoverImage() {
-    let self = this;
+    const self = this;
     fetch(`/api/v1/service-templates/${this.props.params.serviceId}/image`)
       .then(function(response) {
         if (response.ok) {
@@ -58,7 +58,7 @@ class Embed extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ image: objectURL });
       })
       .catch(function(error) {});
@@ -66,9 +66,10 @@ class Embed extends React.Component {
 
   getRandomColor() {
     // let colors = ['#2ecc71', '#2980b9', '#34495e', '#f1c40f', '#e67e22', '#e74c3c', '#7f8c8d'];
-    let colors = ["#34495e"];
+    const colors = ["#34495e"];
     return colors[this.getRandomInt(0, colors.length - 1)];
   }
+
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -76,21 +77,21 @@ class Embed extends React.Component {
   }
 
   render() {
-    let service = this.state.service;
-    let urlQuery = this.props.location.query;
+    const {service} = this.state;
+    const urlQuery = this.props.location.query;
 
-    let boxColor = { h: 0, s: 0, l: 100 };
-    let boxColor2 = { h: boxColor.h, s: boxColor.s, l: boxColor.l };
+    const boxColor = { h: 0, s: 0, l: 100 };
+    const boxColor2 = { h: boxColor.h, s: boxColor.s, l: boxColor.l };
     let cardStyle = {
       backgroundColor:
-        "hsl(" + boxColor.h + ", " + boxColor.s + "%, " + boxColor.l + "%)",
+        `hsl(${  boxColor.h  }, ${  boxColor.s  }%, ${  boxColor.l  }%)`,
     };
     let cardFooterStyle = {
       backgroundColor:
-        "hsl(" + boxColor2.h + ", " + boxColor2.s + "%, " + boxColor2.l + "%)",
+        `hsl(${  boxColor2.h  }, ${  boxColor2.s  }%, ${  boxColor2.l  }%)`,
     };
 
-    let isColor = new RegExp("(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)", "i");
+    const isColor = new RegExp("(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)", "i");
     let tempColor = "";
 
     if (urlQuery.bodyColor !== "undefined") {
@@ -106,7 +107,7 @@ class Embed extends React.Component {
       }
     }
 
-    let borderRadius = { borderRadius: "0px" };
+    const borderRadius = { borderRadius: "0px" };
     if (urlQuery.borderRadius !== "undefined") {
       if (parseInt(urlQuery.borderRadius) !== NaN) {
         cardStyle.borderRadius = `${urlQuery.borderRadius}px`;
@@ -124,7 +125,7 @@ class Embed extends React.Component {
       }
     }
 
-    let requestButton = urlQuery.requestButton || "Request";
+    const requestButton = urlQuery.requestButton || "Request";
 
     let headerStyle = {};
     if (this.state.image) {
@@ -145,7 +146,7 @@ class Embed extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <div id="embed">
           <div
@@ -159,16 +160,16 @@ class Embed extends React.Component {
               }`}
               style={headerStyle}
             >
-              {/*service.references.service_categories[0].name*/}
+              {/* service.references.service_categories[0].name */}
             </div>
 
             <div
               className={`card-block ${typeof urlQuery.icon === true &&
                 "with-icon"}`}
             >
-              {/*{(typeof(urlQuery.noIcon) === 'undefined') &&*/}
-              {/*<img className="service-icon" src={`/api/v1/service-templates/${this.props.params.serviceId}/image?${new Date().getTime()}`}/>*/}
-              {/*}*/}
+              {/* {(typeof(urlQuery.noIcon) === 'undefined') && */}
+              {/* <img className="service-icon" src={`/api/v1/service-templates/${this.props.params.serviceId}/image?${new Date().getTime()}`}/> */}
+              {/* } */}
 
               <div className="card-title-holder">
                 <h4 className="card-title" style={textColor}>
@@ -177,12 +178,14 @@ class Embed extends React.Component {
 
                 {typeof urlQuery.noDate === "undefined" && (
                   <small className="meta" style={textColor}>
-                    Published on: {<DateFormat date={service.created_at} />}
+                    Published on: 
+                    {' '}
+                    {<DateFormat date={service.created_at} />}
                   </small>
                 )}
               </div>
 
-              <div className="clearfix"></div>
+              <div className="clearfix" />
             </div>
             <div className="card-body">
               {typeof urlQuery.fullDescription === "undefined" ? (
@@ -215,7 +218,7 @@ class Embed extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

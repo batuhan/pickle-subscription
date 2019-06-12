@@ -42,9 +42,9 @@ class ImageUploader extends React.Component {
       if (!this.state.imageChanged) {
         if (this.props.handleSuccess) {
           return this.props.handleSuccess();
-        } else {
+        } 
           return;
-        }
+        
       }
       this.handleImage();
     }
@@ -55,11 +55,11 @@ class ImageUploader extends React.Component {
   }
 
   onImageSelected(e) {
-    let self = this;
+    const self = this;
     self.setState({ loadingImage: true });
-    let src = e.currentTarget;
-    let targetImg = document.getElementById(`edit-${this.state.elementID}-img`);
-    let fileReader = new FileReader();
+    const src = e.currentTarget;
+    const targetImg = document.getElementById(`edit-${this.state.elementID}-img`);
+    const fileReader = new FileReader();
 
     fileReader.addEventListener(
       "load",
@@ -88,8 +88,8 @@ class ImageUploader extends React.Component {
   }
 
   getCoverImage() {
-    let self = this;
-    let myImage = document.getElementById(`edit-${this.state.elementID}-img`);
+    const self = this;
+    const myImage = document.getElementById(`edit-${this.state.elementID}-img`);
     fetch(this.props.imageGETURL || self.state.imageURL, {
       method: "GET",
       header: new Headers({ "Content-Type": "application/json" }),
@@ -106,7 +106,7 @@ class ImageUploader extends React.Component {
         if (myBlob.type == "text/html") {
           throw "not an image";
         }
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         myImage.src = objectURL;
       })
       .catch(function(error) {
@@ -118,8 +118,8 @@ class ImageUploader extends React.Component {
 
   handleImage(e) {
     if (e != undefined) e.preventDefault();
-    let self = this;
-    let init = {
+    const self = this;
+    const init = {
       method: "PUT",
       credentials: "include",
       body: new FormData(
@@ -151,7 +151,7 @@ class ImageUploader extends React.Component {
   }
 
   removeImage(e) {
-    let self = this;
+    const self = this;
     e.preventDefault();
     Fetcher(self.props.imageURL, "DELETE", null, null)
       .then(function(response) {

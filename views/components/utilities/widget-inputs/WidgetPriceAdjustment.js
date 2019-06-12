@@ -2,7 +2,7 @@ import React from "react";
 
 function Adjustment(props) {
   let { operation, price } = props;
-  //todo: make this less hardcoded.
+  // todo: make this less hardcoded.
   let message = "";
   if (operation === "add" || operation === "subtract") {
     price = (price / 100).toFixed(2);
@@ -11,16 +11,20 @@ function Adjustment(props) {
     case "add":
       message = (
         <div>
-          ${price}{" "}
-          <span class="request-form-price-adjust-discount">Add-on</span>
+          $
+          {price}
+          {" "}
+          <span className="request-form-price-adjust-discount">Add-on</span>
         </div>
       );
       break;
     case "subtract":
       message = (
         <div>
-          ${price}{" "}
-          <span class="request-form-price-adjust-discount">Discount</span>
+          $
+          {price}
+          {" "}
+          <span className="request-form-price-adjust-discount">Discount</span>
         </div>
       );
 
@@ -28,7 +32,10 @@ function Adjustment(props) {
     case "multiply":
       message = (
         <div>
-          ${price}%{" "}
+          $
+          {price}
+%
+          {" "}
           <span className="request-form-price-adjust-increase">Increase</span>
         </div>
       );
@@ -37,8 +44,11 @@ function Adjustment(props) {
     case "divide":
       message = (
         <div>
-          ${price}%{" "}
-          <span class="request-form-price-adjust-decrease">Discount</span>
+          $
+          {price}
+%
+          {" "}
+          <span className="request-form-price-adjust-decrease">Discount</span>
         </div>
       );
       break;

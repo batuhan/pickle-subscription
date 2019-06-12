@@ -1,7 +1,7 @@
 import React from "react";
+import { Link, browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import Login from "../forms/login.jsx";
-import { Link, browserHistory } from "react-router";
 
 /**
  * Uses Modal.jsx component to house the content of this modal
@@ -17,16 +17,16 @@ class ModalAddCategory extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "User Login";
+    const self = this;
+    const pageName = "User Login";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={this.props.hide}
-        hideFooter={true}
+        hideFooter
         width={this.props.width}
       >
         <div className="table-responsive">
@@ -34,7 +34,7 @@ class ModalAddCategory extends React.Component {
             hide={self.props.hide}
             email={this.state.email}
             invitationExists={this.props.invitationExists}
-            modal={true}
+            modal
           />
         </div>
       </Modal>

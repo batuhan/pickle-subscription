@@ -1,8 +1,8 @@
 import React from "react";
 import CurrencyInput from "react-currency-input";
-import { toCents } from "../../../../lib/handleInputs";
 import { connect } from "react-redux";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { toCents } from "../../../../lib/handleInputs";
 
 class WidgetPricingInput extends React.Component {
   constructor(props) {
@@ -13,10 +13,10 @@ class WidgetPricingInput extends React.Component {
   }
 
   handleChange(isCents) {
-    let self = this;
+    const self = this;
     return function(e, maskedValue, floatvalue) {
-      let name = e.target.name;
-      let value = isCents ? toCents(floatvalue) : floatvalue;
+      const {name} = e.target;
+      const value = isCents ? toCents(floatvalue) : floatvalue;
       self.setState({ [name]: value }, () => {
         self.props.input.onChange(self.state[name]);
       });
@@ -24,20 +24,20 @@ class WidgetPricingInput extends React.Component {
   }
 
   render() {
-    //renders a number input or a currency input based on the operation type
-    let self = this;
-    let props = this.props;
-    let {
+    // renders a number input or a currency input based on the operation type
+    const self = this;
+    const {props} = this;
+    const {
       options,
       operation,
       input: { name, value, onChange },
     } = props;
-    let prefix = options.currency
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
 
     if (operation == "add" || operation == "subtract") {
-      let price = (value / 100).toFixed(2);
+      const price = (value / 100).toFixed(2);
       return (
         <CurrencyInput
           className="form-control addon-checkbox-widget-price-input"
@@ -50,7 +50,7 @@ class WidgetPricingInput extends React.Component {
           value={price}
         />
       );
-    } else if (operation == "divide" || operation == "multiply") {
+    } if (operation == "divide" || operation == "multiply") {
       return (
         <CurrencyInput
           className="form-control addon-checkbox-widget-price-input"
@@ -63,15 +63,15 @@ class WidgetPricingInput extends React.Component {
         />
         // <input {...props.input} type="number" className="form-control addon-checkbox-widget-price-input"/>
       );
-    } else {
+    } 
       return (
         <span className="addon-widget-price-tip">Select a pricing type</span>
       );
-    }
+    
   }
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return {
     options: state.options,
   };

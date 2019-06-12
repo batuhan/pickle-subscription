@@ -7,8 +7,8 @@ import Buttons from "../buttons.jsx";
 class ServiceInstanceMessageForm extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let id = this.props.instanceId;
+    const uid = cookie.load("uid");
+    const id = this.props.instanceId;
     this.state = {
       instanceId: id,
       currentUser: uid,
@@ -26,14 +26,14 @@ class ServiceInstanceMessageForm extends React.Component {
   }
 
   getValidators(references = null) {
-    let validateRequired = val => {
+    const validateRequired = val => {
       return val === 0 || val === false || (val != "" && val != null);
     };
-    let validateEmptyString = val => {
+    const validateEmptyString = val => {
       return val.trim() != "";
     };
 
-    let validateMessage = val => {
+    const validateMessage = val => {
       return (
         (validateRequired(val) && validateEmptyString(val)) || {
           error: "Message cannot be empty.",
@@ -41,7 +41,7 @@ class ServiceInstanceMessageForm extends React.Component {
       );
     };
 
-    let validatorJSON = {
+    const validatorJSON = {
       message: validateMessage,
     };
 
@@ -53,14 +53,14 @@ class ServiceInstanceMessageForm extends React.Component {
   }
 
   render() {
-    let self = this;
+    const self = this;
     return (
       <div>
         <DataForm
           validators={this.getValidators(null)}
           handleResponse={this.handleResponse}
           url={`${self.state.url}`}
-          method={"POST"}
+          method="POST"
         >
           <div className="m-b-20">
             <Inputs
@@ -68,19 +68,19 @@ class ServiceInstanceMessageForm extends React.Component {
               name="user_id"
               value={self.state.currentUser}
               onChange={function() {}}
-              receiveOnChange={true}
-              receiveValue={true}
+              receiveOnChange
+              receiveValue
             />
             <Inputs
               type="hidden"
               name="service_instance_id"
               value={self.state.instanceId}
               onChange={function() {}}
-              receiveOnChange={true}
-              receiveValue={true}
+              receiveOnChange
+              receiveValue
             />
 
-            {/*TODO: Reset Inputs after submission*/}
+            {/* TODO: Reset Inputs after submission */}
             <Inputs
               type="textarea"
               name="message"
@@ -88,8 +88,8 @@ class ServiceInstanceMessageForm extends React.Component {
               rows="4"
               label="Leave your comments or questions and we will respond as soon as we can!"
               onChange={function() {}}
-              receiveOnChange={true}
-              receiveValue={true}
+              receiveOnChange
+              receiveValue
             />
           </div>
           <div className="text-right">

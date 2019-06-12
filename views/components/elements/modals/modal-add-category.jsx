@@ -12,7 +12,7 @@ class ModalAddCategory extends React.Component {
   }
 
   render() {
-    let self = this;
+    const self = this;
     let pageName = "Add a Product / Service Category";
     if (this.props.id) {
       pageName = "Edit a Product / Service Category";
@@ -21,10 +21,10 @@ class ModalAddCategory extends React.Component {
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <AddCategoryFormv2

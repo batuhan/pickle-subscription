@@ -1,25 +1,25 @@
 !(function(t, e) {
-  "object" == typeof exports && "object" == typeof module
+  typeof exports === "object" && typeof module === "object"
     ? (module.exports = e())
-    : "function" == typeof define && define.amd
+    : typeof define === "function" && define.amd
     ? define([], e)
-    : "object" == typeof exports
+    : typeof exports === "object"
     ? (exports.Handlebars = e())
     : (t.Handlebars = e());
 })(this, function() {
   return (function(t) {
     function e(s) {
       if (r[s]) return r[s].exports;
-      var i = (r[s] = { exports: {}, id: s, loaded: !1 });
+      const i = (r[s] = { exports: {}, id: s, loaded: !1 });
       return t[s].call(i.exports, i, i.exports, e), (i.loaded = !0), i.exports;
     }
     var r = {};
     return (e.m = t), (e.c = r), (e.p = ""), e(0);
   })([
     function(t, e, r) {
-      "use strict";
+      
       function s() {
-        var t = v();
+        const t = v();
         return (
           (t.compile = function(e, r) {
             return l.compile(e, r, t);
@@ -27,52 +27,52 @@
           (t.precompile = function(e, r) {
             return l.precompile(e, r, t);
           }),
-          (t.AST = c["default"]),
+          (t.AST = c.default),
           (t.Compiler = l.Compiler),
-          (t.JavaScriptCompiler = u["default"]),
+          (t.JavaScriptCompiler = u.default),
           (t.Parser = h.parser),
           (t.parse = h.parse),
           t
         );
       }
-      var i = r(1)["default"];
+      const i = r(1).default;
       e.__esModule = !0;
-      var a = r(2),
-        n = i(a),
-        o = r(21),
-        c = i(o),
-        h = r(22),
-        l = r(27),
-        p = r(28),
-        u = i(p),
-        f = r(25),
-        d = i(f),
-        m = r(20),
-        g = i(m),
-        v = n["default"].create,
-        y = s();
+      const a = r(2);
+        const n = i(a);
+        const o = r(21);
+        var c = i(o);
+        var h = r(22);
+        var l = r(27);
+        const p = r(28);
+        var u = i(p);
+        const f = r(25);
+        const d = i(f);
+        const m = r(20);
+        const g = i(m);
+        var v = n.default.create;
+        const y = s();
       (y.create = s),
-        g["default"](y),
-        (y.Visitor = d["default"]),
-        (y["default"] = y),
-        (e["default"] = y),
-        (t.exports = e["default"]);
+        g.default(y),
+        (y.Visitor = d.default),
+        (y.default = y),
+        (e.default = y),
+        (t.exports = e.default);
     },
     function(t, e) {
-      "use strict";
-      (e["default"] = function(t) {
+      
+      (e.default = function(t) {
         return t && t.__esModule ? t : { default: t };
       }),
         (e.__esModule = !0);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s() {
-        var t = new o.HandlebarsEnvironment();
+        const t = new o.HandlebarsEnvironment();
         return (
           f.extend(t, o),
-          (t.SafeString = h["default"]),
-          (t.Exception = p["default"]),
+          (t.SafeString = h.default),
+          (t.Exception = p.default),
           (t.Utils = f),
           (t.escapeExpression = f.escapeExpression),
           (t.VM = m),
@@ -82,42 +82,42 @@
           t
         );
       }
-      var i = r(3)["default"],
-        a = r(1)["default"];
+      const i = r(3).default;
+        const a = r(1).default;
       e.__esModule = !0;
-      var n = r(4),
-        o = i(n),
-        c = r(18),
-        h = a(c),
-        l = r(6),
-        p = a(l),
-        u = r(5),
-        f = i(u),
-        d = r(19),
-        m = i(d),
-        g = r(20),
-        v = a(g),
-        y = s();
+      const n = r(4);
+        var o = i(n);
+        const c = r(18);
+        var h = a(c);
+        const l = r(6);
+        var p = a(l);
+        const u = r(5);
+        var f = i(u);
+        const d = r(19);
+        var m = i(d);
+        const g = r(20);
+        const v = a(g);
+        const y = s();
       (y.create = s),
-        v["default"](y),
-        (y["default"] = y),
-        (e["default"] = y),
-        (t.exports = e["default"]);
+        v.default(y),
+        (y.default = y),
+        (e.default = y),
+        (t.exports = e.default);
     },
     function(t, e) {
-      "use strict";
-      (e["default"] = function(t) {
+      
+      (e.default = function(t) {
         if (t && t.__esModule) return t;
-        var e = {};
-        if (null != t)
-          for (var r in t)
+        const e = {};
+        if (t != null)
+          for (const r in t)
             Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r]);
-        return (e["default"] = t), e;
+        return (e.default = t), e;
       }),
         (e.__esModule = !0);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t, e, r) {
         (this.helpers = t || {}),
           (this.partials = e || {}),
@@ -125,20 +125,20 @@
           c.registerDefaultHelpers(this),
           h.registerDefaultDecorators(this);
       }
-      var i = r(1)["default"];
+      const i = r(1).default;
       (e.__esModule = !0), (e.HandlebarsEnvironment = s);
-      var a = r(5),
-        n = r(6),
-        o = i(n),
-        c = r(7),
-        h = r(15),
-        l = r(17),
-        p = i(l),
-        u = "4.0.5";
+      const a = r(5);
+        const n = r(6);
+        const o = i(n);
+        var c = r(7);
+        var h = r(15);
+        const l = r(17);
+        const p = i(l);
+        const u = "4.0.5";
       e.VERSION = u;
-      var f = 7;
+      const f = 7;
       e.COMPILER_REVISION = f;
-      var d = {
+      const d = {
         1: "<= 1.0.rc.2",
         2: "== 1.0.0-rc.3",
         3: "== 1.0.0-rc.4",
@@ -148,89 +148,89 @@
         7: ">= 4.0.0",
       };
       e.REVISION_CHANGES = d;
-      var m = "[object Object]";
+      const m = "[object Object]";
       s.prototype = {
         constructor: s,
-        logger: p["default"],
-        log: p["default"].log,
-        registerHelper: function(t, e) {
+        logger: p.default,
+        log: p.default.log,
+        registerHelper(t, e) {
           if (a.toString.call(t) === m) {
             if (e)
-              throw new o["default"]("Arg not supported with multiple helpers");
+              throw new o.default("Arg not supported with multiple helpers");
             a.extend(this.helpers, t);
           } else this.helpers[t] = e;
         },
-        unregisterHelper: function(t) {
+        unregisterHelper(t) {
           delete this.helpers[t];
         },
-        registerPartial: function(t, e) {
+        registerPartial(t, e) {
           if (a.toString.call(t) === m) a.extend(this.partials, t);
           else {
-            if ("undefined" == typeof e)
-              throw new o["default"](
-                'Attempting to register a partial called "' +
-                  t +
-                  '" as undefined',
+            if (typeof e === "undefined")
+              throw new o.default(
+                `Attempting to register a partial called "${ 
+                  t 
+                  }" as undefined`,
               );
             this.partials[t] = e;
           }
         },
-        unregisterPartial: function(t) {
+        unregisterPartial(t) {
           delete this.partials[t];
         },
-        registerDecorator: function(t, e) {
+        registerDecorator(t, e) {
           if (a.toString.call(t) === m) {
             if (e)
-              throw new o["default"](
+              throw new o.default(
                 "Arg not supported with multiple decorators",
               );
             a.extend(this.decorators, t);
           } else this.decorators[t] = e;
         },
-        unregisterDecorator: function(t) {
+        unregisterDecorator(t) {
           delete this.decorators[t];
         },
       };
-      var g = p["default"].log;
-      (e.log = g), (e.createFrame = a.createFrame), (e.logger = p["default"]);
+      const g = p.default.log;
+      (e.log = g), (e.createFrame = a.createFrame), (e.logger = p.default);
     },
     function(t, e) {
-      "use strict";
+      
       function r(t) {
         return l[t];
       }
       function s(t) {
-        for (var e = 1; e < arguments.length; e++)
-          for (var r in arguments[e])
+        for (let e = 1; e < arguments.length; e++)
+          for (const r in arguments[e])
             Object.prototype.hasOwnProperty.call(arguments[e], r) &&
               (t[r] = arguments[e][r]);
         return t;
       }
       function i(t, e) {
-        for (var r = 0, s = t.length; r < s; r++) if (t[r] === e) return r;
+        for (let r = 0, s = t.length; r < s; r++) if (t[r] === e) return r;
         return -1;
       }
       function a(t) {
-        if ("string" != typeof t) {
+        if (typeof t !== "string") {
           if (t && t.toHTML) return t.toHTML();
-          if (null == t) return "";
-          if (!t) return t + "";
-          t = "" + t;
+          if (t == null) return "";
+          if (!t) return `${t  }`;
+          t = `${  t}`;
         }
         return u.test(t) ? t.replace(p, r) : t;
       }
       function n(t) {
-        return (!t && 0 !== t) || !(!m(t) || 0 !== t.length);
+        return (!t && t !== 0) || !(!m(t) || t.length !== 0);
       }
       function o(t) {
-        var e = s({}, t);
+        const e = s({}, t);
         return (e._parent = t), e;
       }
       function c(t, e) {
         return (t.path = e), t;
       }
       function h(t, e) {
-        return (t ? t + "." : "") + e;
+        return (t ? `${t  }.` : "") + e;
       }
       (e.__esModule = !0),
         (e.extend = s),
@@ -248,40 +248,40 @@
           "'": "&#x27;",
           "`": "&#x60;",
           "=": "&#x3D;",
-        },
-        p = /[&<>"'`=]/g,
-        u = /[&<>"'`=]/,
-        f = Object.prototype.toString;
+        };
+        var p = /[&<>"'`=]/g;
+        var u = /[&<>"'`=]/;
+        const f = Object.prototype.toString;
       e.toString = f;
-      var d = function(t) {
-        return "function" == typeof t;
+      let d = function(t) {
+        return typeof t === "function";
       };
       d(/x/) &&
         (e.isFunction = d = function(t) {
-          return "function" == typeof t && "[object Function]" === f.call(t);
+          return typeof t === "function" && f.call(t) === "[object Function]";
         }),
         (e.isFunction = d);
       var m =
         Array.isArray ||
         function(t) {
           return (
-            !(!t || "object" != typeof t) && "[object Array]" === f.call(t)
+            !(!t || typeof t !== "object") && f.call(t) === "[object Array]"
           );
         };
       e.isArray = m;
     },
     function(t, e) {
-      "use strict";
+      
       function r(t, e) {
-        var i = e && e.loc,
-          a = void 0,
-          n = void 0;
+        const i = e && e.loc;
+          let a = void 0;
+          let n = void 0;
         i &&
           ((a = i.start.line),
           (n = i.start.column),
-          (t += " - " + a + ":" + n));
+          (t += ` - ${  a  }:${  n}`));
         for (
-          var o = Error.prototype.constructor.call(this, t), c = 0;
+          let o = Error.prototype.constructor.call(this, t), c = 0;
           c < s.length;
           c++
         )
@@ -300,75 +300,75 @@
         "stack",
       ];
       (r.prototype = new Error()),
-        (e["default"] = r),
-        (t.exports = e["default"]);
+        (e.default = r),
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t) {
-        n["default"](t),
-          c["default"](t),
-          l["default"](t),
-          u["default"](t),
-          d["default"](t),
-          g["default"](t),
-          y["default"](t);
+        n.default(t),
+          c.default(t),
+          l.default(t),
+          u.default(t),
+          d.default(t),
+          g.default(t),
+          y.default(t);
       }
-      var i = r(1)["default"];
+      const i = r(1).default;
       (e.__esModule = !0), (e.registerDefaultHelpers = s);
-      var a = r(8),
-        n = i(a),
-        o = r(9),
-        c = i(o),
-        h = r(10),
-        l = i(h),
-        p = r(11),
-        u = i(p),
-        f = r(12),
-        d = i(f),
-        m = r(13),
-        g = i(m),
-        v = r(14),
-        y = i(v);
+      const a = r(8);
+        var n = i(a);
+        const o = r(9);
+        var c = i(o);
+        const h = r(10);
+        var l = i(h);
+        const p = r(11);
+        var u = i(p);
+        const f = r(12);
+        var d = i(f);
+        const m = r(13);
+        var g = i(m);
+        const v = r(14);
+        var y = i(v);
     },
     function(t, e, r) {
-      "use strict";
+      
       e.__esModule = !0;
-      var s = r(5);
-      (e["default"] = function(t) {
+      const s = r(5);
+      (e.default = function(t) {
         t.registerHelper("blockHelperMissing", function(e, r) {
-          var i = r.inverse,
-            a = r.fn;
+          const i = r.inverse;
+            const a = r.fn;
           if (e === !0) return a(this);
-          if (e === !1 || null == e) return i(this);
+          if (e === !1 || e == null) return i(this);
           if (s.isArray(e))
             return e.length > 0
               ? (r.ids && (r.ids = [r.name]), t.helpers.each(e, r))
               : i(this);
           if (r.data && r.ids) {
-            var n = s.createFrame(r.data);
+            const n = s.createFrame(r.data);
             (n.contextPath = s.appendContextPath(r.data.contextPath, r.name)),
               (r = { data: n });
           }
           return a(e, r);
         });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
-      var s = r(1)["default"];
+      
+      const s = r(1).default;
       e.__esModule = !0;
-      var i = r(5),
-        a = r(6),
-        n = s(a);
-      (e["default"] = function(t) {
+      const i = r(5);
+        const a = r(6);
+        const n = s(a);
+      (e.default = function(t) {
         t.registerHelper("each", function(t, e) {
           function r(e, r, a) {
             h &&
               ((h.key = e),
               (h.index = r),
-              (h.first = 0 === r),
+              (h.first = r === 0),
               (h.last = !!a),
               l && (h.contextPath = l + e)),
               (c += s(t[e], {
@@ -376,57 +376,57 @@
                 blockParams: i.blockParams([t[e], e], [l + e, null]),
               }));
           }
-          if (!e) throw new n["default"]("Must pass iterator to #each");
-          var s = e.fn,
-            a = e.inverse,
-            o = 0,
-            c = "",
-            h = void 0,
-            l = void 0;
+          if (!e) throw new n.default("Must pass iterator to #each");
+          var s = e.fn;
+            const a = e.inverse;
+            let o = 0;
+            var c = "";
+            var h = void 0;
+            var l = void 0;
           if (
             (e.data &&
               e.ids &&
-              (l = i.appendContextPath(e.data.contextPath, e.ids[0]) + "."),
+              (l = `${i.appendContextPath(e.data.contextPath, e.ids[0])  }.`),
             i.isFunction(t) && (t = t.call(this)),
             e.data && (h = i.createFrame(e.data)),
-            t && "object" == typeof t)
+            t && typeof t === "object")
           )
             if (i.isArray(t))
-              for (var p = t.length; o < p; o++)
+              for (let p = t.length; o < p; o++)
                 o in t && r(o, o, o === t.length - 1);
             else {
-              var u = void 0;
-              for (var f in t)
+              let u = void 0;
+              for (const f in t)
                 t.hasOwnProperty(f) &&
                   (void 0 !== u && r(u, o - 1), (u = f), o++);
               void 0 !== u && r(u, o - 1, !0);
             }
-          return 0 === o && (c = a(this)), c;
+          return o === 0 && (c = a(this)), c;
         });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
-      var s = r(1)["default"];
+      
+      const s = r(1).default;
       e.__esModule = !0;
-      var i = r(6),
-        a = s(i);
-      (e["default"] = function(t) {
+      const i = r(6);
+        const a = s(i);
+      (e.default = function(t) {
         t.registerHelper("helperMissing", function() {
-          if (1 !== arguments.length)
-            throw new a["default"](
-              'Missing helper: "' + arguments[arguments.length - 1].name + '"',
+          if (arguments.length !== 1)
+            throw new a.default(
+              `Missing helper: "${  arguments[arguments.length - 1].name  }"`,
             );
         });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       e.__esModule = !0;
-      var s = r(5);
-      (e["default"] = function(t) {
+      const s = r(5);
+      (e.default = function(t) {
         t.registerHelper("if", function(t, e) {
           return (
             s.isFunction(t) && (t = t.call(this)),
@@ -436,19 +436,19 @@
           );
         }),
           t.registerHelper("unless", function(e, r) {
-            return t.helpers["if"].call(this, e, {
+            return t.helpers.if.call(this, e, {
               fn: r.inverse,
               inverse: r.fn,
               hash: r.hash,
             });
           });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e) {
-      "use strict";
+      
       (e.__esModule = !0),
-        (e["default"] = function(t) {
+        (e.default = function(t) {
           t.registerHelper("log", function() {
             for (
               var e = [void 0], r = arguments[arguments.length - 1], s = 0;
@@ -456,36 +456,36 @@
               s++
             )
               e.push(arguments[s]);
-            var i = 1;
-            null != r.hash.level
+            let i = 1;
+            r.hash.level != null
               ? (i = r.hash.level)
-              : r.data && null != r.data.level && (i = r.data.level),
+              : r.data && r.data.level != null && (i = r.data.level),
               (e[0] = i),
               t.log.apply(t, e);
           });
         }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e) {
-      "use strict";
+      
       (e.__esModule = !0),
-        (e["default"] = function(t) {
+        (e.default = function(t) {
           t.registerHelper("lookup", function(t, e) {
             return t && t[e];
           });
         }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       e.__esModule = !0;
-      var s = r(5);
-      (e["default"] = function(t) {
+      const s = r(5);
+      (e.default = function(t) {
         t.registerHelper("with", function(t, e) {
           s.isFunction(t) && (t = t.call(this));
-          var r = e.fn;
+          const r = e.fn;
           if (s.isEmpty(t)) return e.inverse(this);
-          var i = e.data;
+          let i = e.data;
           return (
             e.data &&
               e.ids &&
@@ -501,32 +501,32 @@
           );
         });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t) {
-        n["default"](t);
+        n.default(t);
       }
-      var i = r(1)["default"];
+      const i = r(1).default;
       (e.__esModule = !0), (e.registerDefaultDecorators = s);
-      var a = r(16),
-        n = i(a);
+      const a = r(16);
+        var n = i(a);
     },
     function(t, e, r) {
-      "use strict";
+      
       e.__esModule = !0;
-      var s = r(5);
-      (e["default"] = function(t) {
+      const s = r(5);
+      (e.default = function(t) {
         t.registerDecorator("inline", function(t, e, r, i) {
-          var a = t;
+          let a = t;
           return (
             e.partials ||
               ((e.partials = {}),
               (a = function(i, a) {
-                var n = r.partials;
+                const n = r.partials;
                 r.partials = s.extend({}, n, e.partials);
-                var o = t(i, a);
+                const o = t(i, a);
                 return (r.partials = n), o;
               })),
             (e.partials[i.args[0]] = i.fn),
@@ -534,28 +534,28 @@
           );
         });
       }),
-        (t.exports = e["default"]);
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       e.__esModule = !0;
-      var s = r(5),
-        i = {
+      const s = r(5);
+        var i = {
           methodMap: ["debug", "info", "warn", "error"],
           level: "info",
-          lookupLevel: function(t) {
-            if ("string" == typeof t) {
-              var e = s.indexOf(i.methodMap, t.toLowerCase());
+          lookupLevel(t) {
+            if (typeof t === "string") {
+              const e = s.indexOf(i.methodMap, t.toLowerCase());
               t = e >= 0 ? e : parseInt(t, 10);
             }
             return t;
           },
-          log: function(t) {
+          log(t) {
             if (
               ((t = i.lookupLevel(t)),
-              "undefined" != typeof console && i.lookupLevel(i.level) <= t)
+              typeof console !== "undefined" && i.lookupLevel(i.level) <= t)
             ) {
-              var e = i.methodMap[t];
+              let e = i.methodMap[t];
               console[e] || (e = "log");
               for (
                 var r = arguments.length, s = Array(r > 1 ? r - 1 : 0), a = 1;
@@ -567,41 +567,41 @@
             }
           },
         };
-      (e["default"] = i), (t.exports = e["default"]);
+      (e.default = i), (t.exports = e.default);
     },
     function(t, e) {
-      "use strict";
+      
       function r(t) {
         this.string = t;
       }
       (e.__esModule = !0),
         (r.prototype.toString = r.prototype.toHTML = function() {
-          return "" + this.string;
+          return `${  this.string}`;
         }),
-        (e["default"] = r),
-        (t.exports = e["default"]);
+        (e.default = r),
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t) {
-        var e = (t && t[0]) || 1,
-          r = v.COMPILER_REVISION;
+        const e = (t && t[0]) || 1;
+          const r = v.COMPILER_REVISION;
         if (e !== r) {
           if (e < r) {
-            var s = v.REVISION_CHANGES[r],
-              i = v.REVISION_CHANGES[e];
-            throw new g["default"](
-              "Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version (" +
-                s +
-                ") or downgrade your runtime to an older version (" +
-                i +
-                ").",
+            const s = v.REVISION_CHANGES[r];
+              const i = v.REVISION_CHANGES[e];
+            throw new g.default(
+              `Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version (${ 
+                s 
+                }) or downgrade your runtime to an older version (${ 
+                i 
+                }).`,
             );
           }
-          throw new g["default"](
-            "Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version (" +
-              t[1] +
-              ").",
+          throw new g.default(
+            `Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version (${ 
+              t[1] 
+              }).`,
           );
         }
       }
@@ -609,13 +609,13 @@
         function r(r, s, i) {
           i.hash && ((s = d.extend({}, s, i.hash)), i.ids && (i.ids[0] = !0)),
             (r = e.VM.resolvePartial.call(this, r, s, i));
-          var a = e.VM.invokePartial.call(this, r, s, i);
+          let a = e.VM.invokePartial.call(this, r, s, i);
           if (
-            (null == a &&
+            (a == null &&
               e.compile &&
               ((i.partials[i.name] = e.compile(r, t.compilerOptions, e)),
               (a = i.partials[i.name](s, i))),
-            null != a)
+            a != null)
           ) {
             if (i.indent) {
               for (
@@ -628,24 +628,24 @@
             }
             return a;
           }
-          throw new g["default"](
-            "The partial " +
-              i.name +
-              " could not be compiled when running in runtime-only mode",
+          throw new g.default(
+            `The partial ${ 
+              i.name 
+              } could not be compiled when running in runtime-only mode`,
           );
         }
         function s(e) {
           function r(e) {
-            return "" + t.main(i, e, i.helpers, i.partials, n, c, o);
+            return `${  t.main(i, e, i.helpers, i.partials, n, c, o)}`;
           }
-          var a =
+          const a =
               arguments.length <= 1 || void 0 === arguments[1]
                 ? {}
-                : arguments[1],
-            n = a.data;
+                : arguments[1];
+            var n = a.data;
           s._setup(a), !a.partial && t.useData && (n = h(e, n));
-          var o = void 0,
-            c = t.useBlockParams ? [] : void 0;
+          var o = void 0;
+            var c = t.useBlockParams ? [] : void 0;
           return (
             t.useDepths &&
               (o = a.depths
@@ -656,33 +656,33 @@
             (r = l(t.main, r, i, a.depths || [], n, c))(e, a)
           );
         }
-        if (!e) throw new g["default"]("No environment passed to template");
+        if (!e) throw new g.default("No environment passed to template");
         if (!t || !t.main)
-          throw new g["default"]("Unknown template object: " + typeof t);
+          throw new g.default(`Unknown template object: ${  typeof t}`);
         (t.main.decorator = t.main_d), e.VM.checkRevision(t.compiler);
         var i = {
-          strict: function(t, e) {
+          strict(t, e) {
             if (!(e in t))
-              throw new g["default"]('"' + e + '" not defined in ' + t);
+              throw new g.default(`"${  e  }" not defined in ${  t}`);
             return t[e];
           },
-          lookup: function(t, e) {
-            for (var r = t.length, s = 0; s < r; s++)
-              if (t[s] && null != t[s][e]) return t[s][e];
+          lookup(t, e) {
+            for (let r = t.length, s = 0; s < r; s++)
+              if (t[s] && t[s][e] != null) return t[s][e];
           },
-          lambda: function(t, e) {
-            return "function" == typeof t ? t.call(e) : t;
+          lambda(t, e) {
+            return typeof t === "function" ? t.call(e) : t;
           },
           escapeExpression: d.escapeExpression,
           invokePartial: r,
-          fn: function(e) {
-            var r = t[e];
-            return (r.decorator = t[e + "_d"]), r;
+          fn(e) {
+            const r = t[e];
+            return (r.decorator = t[`${e  }_d`]), r;
           },
           programs: [],
-          program: function(t, e, r, s, i) {
-            var n = this.programs[t],
-              o = this.fn(t);
+          program(t, e, r, s, i) {
+            let n = this.programs[t];
+              const o = this.fn(t);
             return (
               e || i || s || r
                 ? (n = a(this, t, o, e, r, s, i))
@@ -690,12 +690,12 @@
               n
             );
           },
-          data: function(t, e) {
+          data(t, e) {
             for (; t && e--; ) t = t._parent;
             return t;
           },
-          merge: function(t, e) {
-            var r = t || e;
+          merge(t, e) {
+            let r = t || e;
             return t && e && t !== e && (r = d.extend({}, e, t)), r;
           },
           noop: e.VM.noop,
@@ -715,9 +715,9 @@
           }),
           (s._child = function(e, r, s, n) {
             if (t.useBlockParams && !s)
-              throw new g["default"]("must pass block params");
+              throw new g.default("must pass block params");
             if (t.useDepths && !n)
-              throw new g["default"]("must pass parent depths");
+              throw new g.default("must pass parent depths");
             return a(i, e, t[e], r, 0, s, n);
           }),
           s
@@ -725,11 +725,11 @@
       }
       function a(t, e, r, s, i, a, n) {
         function o(e) {
-          var i =
+          const i =
               arguments.length <= 1 || void 0 === arguments[1]
                 ? {}
-                : arguments[1],
-            o = n;
+                : arguments[1];
+            let o = n;
           return (
             n && e !== n[0] && (o = [e].concat(n)),
             r(
@@ -756,7 +756,7 @@
           t
             ? t.call || r.name || ((r.name = t), (t = r.partials[t]))
             : (t =
-                "@partial-block" === r.name
+                r.name === "@partial-block"
                   ? r.data["partial-block"]
                   : r.partials[r.name]),
           t
@@ -765,7 +765,7 @@
       function o(t, e, r) {
         (r.partial = !0),
           r.ids && (r.data.contextPath = r.ids[0] || r.data.contextPath);
-        var s = void 0;
+        let s = void 0;
         if (
           (r.fn &&
             r.fn !== c &&
@@ -775,8 +775,8 @@
           void 0 === t && s && (t = s),
           void 0 === t)
         )
-          throw new g["default"](
-            "The partial " + r.name + " could not be found",
+          throw new g.default(
+            `The partial ${  r.name  } could not be found`,
           );
         if (t instanceof Function) return t(e, r);
       }
@@ -791,13 +791,13 @@
       }
       function l(t, e, r, s, i, a) {
         if (t.decorator) {
-          var n = {};
+          const n = {};
           (e = t.decorator(e, n, r, s && s[0], i, a, s)), d.extend(e, n);
         }
         return e;
       }
-      var p = r(3)["default"],
-        u = r(1)["default"];
+      const p = r(3).default;
+        const u = r(1).default;
       (e.__esModule = !0),
         (e.checkRevision = s),
         (e.template = i),
@@ -805,24 +805,24 @@
         (e.resolvePartial = n),
         (e.invokePartial = o),
         (e.noop = c);
-      var f = r(5),
-        d = p(f),
-        m = r(6),
-        g = u(m),
-        v = r(4);
+      const f = r(5);
+        var d = p(f);
+        const m = r(6);
+        var g = u(m);
+        var v = r(4);
     },
     function(t, e) {
       (function(r) {
-        "use strict";
+        
         (e.__esModule = !0),
-          (e["default"] = function(t) {
-            var e = "undefined" != typeof r ? r : window,
-              s = e.Handlebars;
+          (e.default = function(t) {
+            const e = typeof r !== "undefined" ? r : window;
+              const s = e.Handlebars;
             t.noConflict = function() {
               return e.Handlebars === t && (e.Handlebars = s), t;
             };
           }),
-          (t.exports = e["default"]);
+          (t.exports = e.default);
       }.call(
         e,
         (function() {
@@ -831,61 +831,61 @@
       ));
     },
     function(t, e) {
-      "use strict";
+      
       e.__esModule = !0;
       var r = {
         helpers: {
-          helperExpression: function(t) {
+          helperExpression(t) {
             return (
-              "SubExpression" === t.type ||
-              (("MustacheStatement" === t.type ||
-                "BlockStatement" === t.type) &&
+              t.type === "SubExpression" ||
+              ((t.type === "MustacheStatement" ||
+                t.type === "BlockStatement") &&
                 !!((t.params && t.params.length) || t.hash))
             );
           },
-          scopedId: function(t) {
+          scopedId(t) {
             return /^\.|this\b/.test(t.original);
           },
-          simpleId: function(t) {
-            return 1 === t.parts.length && !r.helpers.scopedId(t) && !t.depth;
+          simpleId(t) {
+            return t.parts.length === 1 && !r.helpers.scopedId(t) && !t.depth;
           },
         },
       };
-      (e["default"] = r), (t.exports = e["default"]);
+      (e.default = r), (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t, e) {
-        if ("Program" === t.type) return t;
-        (o["default"].yy = f),
+        if (t.type === "Program") return t;
+        (o.default.yy = f),
           (f.locInfo = function(t) {
             return new f.SourceLocation(e && e.srcName, t);
           });
-        var r = new h["default"](e);
-        return r.accept(o["default"].parse(t));
+        const r = new h.default(e);
+        return r.accept(o.default.parse(t));
       }
-      var i = r(1)["default"],
-        a = r(3)["default"];
+      const i = r(1).default;
+        const a = r(3).default;
       (e.__esModule = !0), (e.parse = s);
-      var n = r(23),
-        o = i(n),
-        c = r(24),
-        h = i(c),
-        l = r(26),
-        p = a(l),
-        u = r(5);
-      e.parser = o["default"];
+      const n = r(23);
+        var o = i(n);
+        const c = r(24);
+        var h = i(c);
+        const l = r(26);
+        const p = a(l);
+        const u = r(5);
+      e.parser = o.default;
       var f = {};
       u.extend(f, p);
     },
     function(t, e) {
-      "use strict";
-      var r = (function() {
+      
+      const r = (function() {
         function t() {
           this.yy = {};
         }
-        var e = {
-            trace: function() {},
+        const e = {
+            trace() {},
             yy: {},
             symbols_: {
               error: 2,
@@ -1114,8 +1114,8 @@
               [76, 1],
               [76, 2],
             ],
-            performAction: function(t, e, r, s, i, a, n) {
-              var o = a.length - 1;
+            performAction(t, e, r, s, i, a, n) {
+              const o = a.length - 1;
               switch (i) {
                 case 1:
                   return a[o - 1];
@@ -1224,8 +1224,8 @@
                       a[o],
                       !1,
                       this._$,
-                    ),
-                    h = s.prepareProgram([c], a[o - 1].loc);
+                    );
+                    var h = s.prepareProgram([c], a[o - 1].loc);
                   (h.chained = !0),
                     (this.$ = { strip: a[o - 2].strip, program: h, chain: !0 });
                   break;
@@ -1343,8 +1343,8 @@
                 case 37:
                   this.$ = {
                     type: "BooleanLiteral",
-                    value: "true" === a[o],
-                    original: "true" === a[o],
+                    value: a[o] === "true",
+                    original: a[o] === "true",
                     loc: s.locInfo(this._$),
                   };
                   break;
@@ -2825,70 +2825,70 @@
               136: [2, 75],
               137: [2, 32],
             },
-            parseError: function(t, e) {
+            parseError(t, e) {
               throw new Error(t);
             },
-            parse: function(t) {
+            parse(t) {
               function e() {
-                var t;
+                let t;
                 return (
                   (t = r.lexer.lex() || 1),
-                  "number" != typeof t && (t = r.symbols_[t] || t),
+                  typeof t !== "number" && (t = r.symbols_[t] || t),
                   t
                 );
               }
-              var r = this,
-                s = [0],
-                i = [null],
-                a = [],
-                n = this.table,
-                o = "",
-                c = 0,
-                h = 0,
-                l = 0;
+              var r = this;
+                let s = [0];
+                let i = [null];
+                let a = [];
+                const n = this.table;
+                let o = "";
+                let c = 0;
+                let h = 0;
+                let l = 0;
               this.lexer.setInput(t),
                 (this.lexer.yy = this.yy),
                 (this.yy.lexer = this.lexer),
                 (this.yy.parser = this),
-                "undefined" == typeof this.lexer.yylloc &&
+                typeof this.lexer.yylloc === "undefined" &&
                   (this.lexer.yylloc = {});
-              var p = this.lexer.yylloc;
+              let p = this.lexer.yylloc;
               a.push(p);
-              var u = this.lexer.options && this.lexer.options.ranges;
-              "function" == typeof this.yy.parseError &&
+              const u = this.lexer.options && this.lexer.options.ranges;
+              typeof this.yy.parseError === "function" &&
                 (this.parseError = this.yy.parseError);
               for (var f, d, m, g, v, y, k, S, b, _ = {}; ; ) {
                 if (
                   ((m = s[s.length - 1]),
                   this.defaultActions[m]
                     ? (g = this.defaultActions[m])
-                    : ((null !== f && "undefined" != typeof f) || (f = e()),
+                    : ((f !== null && typeof f !== "undefined") || (f = e()),
                       (g = n[m] && n[m][f])),
-                  "undefined" == typeof g || !g.length || !g[0])
+                  typeof g === "undefined" || !g.length || !g[0])
                 ) {
-                  var P = "";
+                  let P = "";
                   if (!l) {
                     b = [];
                     for (y in n[m])
                       this.terminals_[y] &&
                         y > 2 &&
-                        b.push("'" + this.terminals_[y] + "'");
+                        b.push(`'${  this.terminals_[y]  }'`);
                     (P = this.lexer.showPosition
-                      ? "Parse error on line " +
-                        (c + 1) +
-                        ":\n" +
-                        this.lexer.showPosition() +
-                        "\nExpecting " +
-                        b.join(", ") +
-                        ", got '" +
-                        (this.terminals_[f] || f) +
-                        "'"
-                      : "Parse error on line " +
-                        (c + 1) +
-                        ": Unexpected " +
-                        (1 == f
+                      ? `Parse error on line ${ 
+                        c + 1 
+                        }:\n${ 
+                        this.lexer.showPosition() 
+                        }\nExpecting ${ 
+                        b.join(", ") 
+                        }, got '${ 
+                        this.terminals_[f] || f 
+                        }'`
+                      : `Parse error on line ${ 
+                        c + 1 
+                        }: Unexpected ${ 
+                        f == 1
                           ? "end of input"
-                          : "'" + (this.terminals_[f] || f) + "'")),
+                          : `'${  this.terminals_[f] || f  }'`}`),
                       this.parseError(P, {
                         text: this.lexer.match,
                         token: this.terminals_[f] || f,
@@ -2900,10 +2900,10 @@
                 }
                 if (g[0] instanceof Array && g.length > 1)
                   throw new Error(
-                    "Parse Error: multiple actions possible at state: " +
-                      m +
-                      ", token: " +
-                      f,
+                    `Parse Error: multiple actions possible at state: ${ 
+                      m 
+                      }, token: ${ 
+                      f}`,
                   );
                 switch (g[0]) {
                   case 1:
@@ -2945,7 +2945,7 @@
                         i,
                         a,
                       )),
-                      "undefined" != typeof v)
+                      typeof v !== "undefined")
                     )
                       return v;
                     k &&
@@ -2964,15 +2964,15 @@
               }
               return !0;
             },
-          },
-          r = (function() {
-            var t = {
+          };
+          const r = (function() {
+            const t = {
               EOF: 1,
-              parseError: function(t, e) {
+              parseError(t, e) {
                 if (!this.yy.parser) throw new Error(t);
                 this.yy.parser.parseError(t, e);
               },
-              setInput: function(t) {
+              setInput(t) {
                 return (
                   (this._input = t),
                   (this._more = this._less = this.done = !1),
@@ -2990,14 +2990,14 @@
                   this
                 );
               },
-              input: function() {
-                var t = this._input[0];
+              input() {
+                const t = this._input[0];
                 (this.yytext += t),
                   this.yyleng++,
                   this.offset++,
                   (this.match += t),
                   (this.matched += t);
-                var e = t.match(/(?:\r\n?|\n).*/g);
+                const e = t.match(/(?:\r\n?|\n).*/g);
                 return (
                   e
                     ? (this.yylineno++, this.yylloc.last_line++)
@@ -3007,23 +3007,23 @@
                   t
                 );
               },
-              unput: function(t) {
-                var e = t.length,
-                  r = t.split(/(?:\r\n?|\n)/g);
+              unput(t) {
+                const e = t.length;
+                  const r = t.split(/(?:\r\n?|\n)/g);
                 (this._input = t + this._input),
                   (this.yytext = this.yytext.substr(
                     0,
                     this.yytext.length - e - 1,
                   )),
                   (this.offset -= e);
-                var s = this.match.split(/(?:\r\n?|\n)/g);
+                const s = this.match.split(/(?:\r\n?|\n)/g);
                 (this.match = this.match.substr(0, this.match.length - 1)),
                   (this.matched = this.matched.substr(
                     0,
                     this.matched.length - 1,
                   )),
                   r.length - 1 && (this.yylineno -= r.length - 1);
-                var i = this.yylloc.range;
+                const i = this.yylloc.range;
                 return (
                   (this.yylloc = {
                     first_line: this.yylloc.first_line,
@@ -3040,14 +3040,14 @@
                   this
                 );
               },
-              more: function() {
+              more() {
                 return (this._more = !0), this;
               },
-              less: function(t) {
+              less(t) {
                 this.unput(this.match.slice(t));
               },
-              pastInput: function() {
-                var t = this.matched.substr(
+              pastInput() {
+                const t = this.matched.substr(
                   0,
                   this.matched.length - this.match.length,
                 );
@@ -3056,8 +3056,8 @@
                   t.substr(-20).replace(/\n/g, "")
                 );
               },
-              upcomingInput: function() {
-                var t = this.match;
+              upcomingInput() {
+                let t = this.match;
                 return (
                   t.length < 20 && (t += this._input.substr(0, 20 - t.length)),
                   (t.substr(0, 20) + (t.length > 20 ? "..." : "")).replace(
@@ -3066,15 +3066,15 @@
                   )
                 );
               },
-              showPosition: function() {
-                var t = this.pastInput(),
-                  e = new Array(t.length + 1).join("-");
-                return t + this.upcomingInput() + "\n" + e + "^";
+              showPosition() {
+                const t = this.pastInput();
+                  const e = new Array(t.length + 1).join("-");
+                return `${t + this.upcomingInput()  }\n${  e  }^`;
               },
-              next: function() {
+              next() {
                 if (this.done) return this.EOF;
                 this._input || (this.done = !0);
-                var t, e, r, s, i;
+                let t; let e; let r; let s; let i;
                 this._more || ((this.yytext = ""), (this.match = ""));
                 for (
                   var a = this._currentRules(), n = 0;
@@ -3117,36 +3117,36 @@
                       this.conditionStack[this.conditionStack.length - 1],
                     )),
                     this.done && this._input && (this.done = !1),
-                    t ? t : void 0)
-                  : "" === this._input
+                    t || void 0)
+                  : this._input === ""
                   ? this.EOF
                   : this.parseError(
-                      "Lexical error on line " +
-                        (this.yylineno + 1) +
-                        ". Unrecognized text.\n" +
-                        this.showPosition(),
+                      `Lexical error on line ${ 
+                        this.yylineno + 1 
+                        }. Unrecognized text.\n${ 
+                        this.showPosition()}`,
                       { text: "", token: null, line: this.yylineno },
                     );
               },
-              lex: function() {
-                var t = this.next();
-                return "undefined" != typeof t ? t : this.lex();
+              lex() {
+                const t = this.next();
+                return typeof t !== "undefined" ? t : this.lex();
               },
-              begin: function(t) {
+              begin(t) {
                 this.conditionStack.push(t);
               },
-              popState: function() {
+              popState() {
                 return this.conditionStack.pop();
               },
-              _currentRules: function() {
+              _currentRules() {
                 return this.conditions[
                   this.conditionStack[this.conditionStack.length - 1]
                 ].rules;
               },
-              topState: function() {
+              topState() {
                 return this.conditionStack[this.conditionStack.length - 2];
               },
-              pushState: function(t) {
+              pushState(t) {
                 this.begin(t);
               },
             };
@@ -3159,9 +3159,9 @@
                 switch (r) {
                   case 0:
                     if (
-                      ("\\\\" === e.yytext.slice(-2)
+                      (e.yytext.slice(-2) === "\\\\"
                         ? (i(0, 1), this.begin("mu"))
-                        : "\\" === e.yytext.slice(-1)
+                        : e.yytext.slice(-1) === "\\"
                         ? (i(0, 1), this.begin("emu"))
                         : this.begin("mu"),
                       e.yytext)
@@ -3177,8 +3177,8 @@
                   case 4:
                     return (
                       this.popState(),
-                      "raw" ===
-                      this.conditionStack[this.conditionStack.length - 1]
+                      this.conditionStack[this.conditionStack.length - 1] ===
+                      "raw"
                         ? 15
                         : ((e.yytext = e.yytext.substr(5, e.yyleng - 9)),
                           "END_RAW_BLOCK")
@@ -3369,47 +3369,47 @@
           })();
         return (e.lexer = r), (t.prototype = e), (e.Parser = t), new t();
       })();
-      (e.__esModule = !0), (e["default"] = r);
+      (e.__esModule = !0), (e.default = r);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s() {
-        var t =
+        const t =
           arguments.length <= 0 || void 0 === arguments[0] ? {} : arguments[0];
         this.options = t;
       }
       function i(t, e, r) {
         void 0 === e && (e = t.length);
-        var s = t[e - 1],
-          i = t[e - 2];
+        const s = t[e - 1];
+          const i = t[e - 2];
         return s
-          ? "ContentStatement" === s.type
+          ? s.type === "ContentStatement"
             ? (i || !r ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(s.original)
             : void 0
           : r;
       }
       function a(t, e, r) {
         void 0 === e && (e = -1);
-        var s = t[e + 1],
-          i = t[e + 2];
+        const s = t[e + 1];
+          const i = t[e + 2];
         return s
-          ? "ContentStatement" === s.type
+          ? s.type === "ContentStatement"
             ? (i || !r ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(s.original)
             : void 0
           : r;
       }
       function n(t, e, r) {
-        var s = t[null == e ? 0 : e + 1];
-        if (s && "ContentStatement" === s.type && (r || !s.rightStripped)) {
-          var i = s.value;
+        const s = t[e == null ? 0 : e + 1];
+        if (s && s.type === "ContentStatement" && (r || !s.rightStripped)) {
+          const i = s.value;
           (s.value = s.value.replace(r ? /^\s+/ : /^[ \t]*\r?\n?/, "")),
             (s.rightStripped = s.value !== i);
         }
       }
       function o(t, e, r) {
-        var s = t[null == e ? t.length - 1 : e - 1];
-        if (s && "ContentStatement" === s.type && (r || !s.leftStripped)) {
-          var i = s.value;
+        const s = t[e == null ? t.length - 1 : e - 1];
+        if (s && s.type === "ContentStatement" && (r || !s.leftStripped)) {
+          const i = s.value;
           return (
             (s.value = s.value.replace(r ? /\s+$/ : /[ \t]+$/, "")),
             (s.leftStripped = s.value !== i),
@@ -3417,31 +3417,31 @@
           );
         }
       }
-      var c = r(1)["default"];
+      const c = r(1).default;
       e.__esModule = !0;
-      var h = r(25),
-        l = c(h);
-      (s.prototype = new l["default"]()),
+      const h = r(25);
+        const l = c(h);
+      (s.prototype = new l.default()),
         (s.prototype.Program = function(t) {
-          var e = !this.options.ignoreStandalone,
-            r = !this.isRootSeen;
+          const e = !this.options.ignoreStandalone;
+            const r = !this.isRootSeen;
           this.isRootSeen = !0;
-          for (var s = t.body, c = 0, h = s.length; c < h; c++) {
-            var l = s[c],
-              p = this.accept(l);
+          for (let s = t.body, c = 0, h = s.length; c < h; c++) {
+            const l = s[c];
+              const p = this.accept(l);
             if (p) {
-              var u = i(s, c, r),
-                f = a(s, c, r),
-                d = p.openStandalone && u,
-                m = p.closeStandalone && f,
-                g = p.inlineStandalone && u && f;
+              const u = i(s, c, r);
+                const f = a(s, c, r);
+                const d = p.openStandalone && u;
+                const m = p.closeStandalone && f;
+                const g = p.inlineStandalone && u && f;
               p.close && n(s, c, !0),
                 p.open && o(s, c, !0),
                 e &&
                   g &&
                   (n(s, c),
                   o(s, c) &&
-                    "PartialStatement" === l.type &&
+                    l.type === "PartialStatement" &&
                     (l.indent = /([ \t]+$)/.exec(s[c - 1].original)[1])),
                 e && d && (n((l.program || l.inverse).body), o(s, c)),
                 e && m && (n(s, c), o((l.inverse || l.program).body));
@@ -3453,21 +3453,21 @@
           t,
         ) {
           this.accept(t.program), this.accept(t.inverse);
-          var e = t.program || t.inverse,
-            r = t.program && t.inverse,
-            s = r,
-            c = r;
+          const e = t.program || t.inverse;
+            const r = t.program && t.inverse;
+            let s = r;
+            let c = r;
           if (r && r.chained)
             for (s = r.body[0].program; c.chained; )
               c = c.body[c.body.length - 1].program;
-          var h = {
+          const h = {
             open: t.openStrip.open,
             close: t.closeStrip.close,
             openStandalone: a(e.body),
             closeStandalone: i((s || e).body),
           };
           if ((t.openStrip.close && n(e.body, null, !0), r)) {
-            var l = t.inverseStrip;
+            const l = t.inverseStrip;
             l.open && o(e.body, null, !0),
               l.close && n(s.body, null, !0),
               t.closeStrip.open && o(c.body, null, !0),
@@ -3484,14 +3484,14 @@
         (s.prototype.PartialStatement = s.prototype.CommentStatement = function(
           t,
         ) {
-          var e = t.strip || {};
+          const e = t.strip || {};
           return { inlineStandalone: !0, open: e.open, close: e.close };
         }),
-        (e["default"] = s),
-        (t.exports = e["default"]);
+        (e.default = s),
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s() {
         this.parents = [];
       }
@@ -3510,50 +3510,50 @@
           this.acceptArray(t.params),
           this.acceptKey(t, "hash");
       }
-      var o = r(1)["default"];
+      const o = r(1).default;
       e.__esModule = !0;
-      var c = r(6),
-        h = o(c);
+      const c = r(6);
+        const h = o(c);
       (s.prototype = {
         constructor: s,
         mutating: !1,
-        acceptKey: function(t, e) {
-          var r = this.accept(t[e]);
+        acceptKey(t, e) {
+          const r = this.accept(t[e]);
           if (this.mutating) {
             if (r && !s.prototype[r.type])
-              throw new h["default"](
-                'Unexpected node type "' +
-                  r.type +
-                  '" found when accepting ' +
-                  e +
-                  " on " +
-                  t.type,
+              throw new h.default(
+                `Unexpected node type "${ 
+                  r.type 
+                  }" found when accepting ${ 
+                  e 
+                  } on ${ 
+                  t.type}`,
               );
             t[e] = r;
           }
         },
-        acceptRequired: function(t, e) {
+        acceptRequired(t, e) {
           if ((this.acceptKey(t, e), !t[e]))
-            throw new h["default"](t.type + " requires " + e);
+            throw new h.default(`${t.type  } requires ${  e}`);
         },
-        acceptArray: function(t) {
-          for (var e = 0, r = t.length; e < r; e++)
+        acceptArray(t) {
+          for (let e = 0, r = t.length; e < r; e++)
             this.acceptKey(t, e), t[e] || (t.splice(e, 1), e--, r--);
         },
-        accept: function(t) {
+        accept(t) {
           if (t) {
             if (!this[t.type])
-              throw new h["default"]("Unknown type: " + t.type, t);
+              throw new h.default(`Unknown type: ${  t.type}`, t);
             this.current && this.parents.unshift(this.current),
               (this.current = t);
-            var e = this[t.type](t);
+            const e = this[t.type](t);
             return (
               (this.current = this.parents.shift()),
               !this.mutating || e ? e : e !== !1 ? t : void 0
             );
           }
         },
-        Program: function(t) {
+        Program(t) {
           this.acceptArray(t.body);
         },
         MustacheStatement: i,
@@ -3561,34 +3561,34 @@
         BlockStatement: a,
         DecoratorBlock: a,
         PartialStatement: n,
-        PartialBlockStatement: function(t) {
+        PartialBlockStatement(t) {
           n.call(this, t), this.acceptKey(t, "program");
         },
-        ContentStatement: function() {},
-        CommentStatement: function() {},
+        ContentStatement() {},
+        CommentStatement() {},
         SubExpression: i,
-        PathExpression: function() {},
-        StringLiteral: function() {},
-        NumberLiteral: function() {},
-        BooleanLiteral: function() {},
-        UndefinedLiteral: function() {},
-        NullLiteral: function() {},
-        Hash: function(t) {
+        PathExpression() {},
+        StringLiteral() {},
+        NumberLiteral() {},
+        BooleanLiteral() {},
+        UndefinedLiteral() {},
+        NullLiteral() {},
+        Hash(t) {
           this.acceptArray(t.pairs);
         },
-        HashPair: function(t) {
+        HashPair(t) {
           this.acceptRequired(t, "value");
         },
       }),
-        (e["default"] = s),
-        (t.exports = e["default"]);
+        (e.default = s),
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t, e) {
         if (((e = e.path ? e.path.original : e), t.path.original !== e)) {
-          var r = { loc: t.path.loc };
-          throw new g["default"](t.path.original + " doesn't match " + e, r);
+          const r = { loc: t.path.loc };
+          throw new g.default(`${t.path.original  } doesn't match ${  e}`, r);
         }
       }
       function i(t, e) {
@@ -3601,8 +3601,8 @@
       }
       function n(t, e) {
         return {
-          open: "~" === t.charAt(2),
-          close: "~" === e.charAt(e.length - 3),
+          open: t.charAt(2) === "~",
+          close: e.charAt(e.length - 3) === "~",
         };
       }
       function o(t) {
@@ -3615,17 +3615,17 @@
           o < c;
           o++
         ) {
-          var h = e[o].part,
-            l = e[o].original !== h;
+          const h = e[o].part;
+            const l = e[o].original !== h;
           if (
             ((s += (e[o].separator || "") + h),
-            l || (".." !== h && "." !== h && "this" !== h))
+            l || (h !== ".." && h !== "." && h !== "this"))
           )
             i.push(h);
           else {
             if (i.length > 0)
-              throw new g["default"]("Invalid path: " + s, { loc: r });
-            ".." === h && (a++, (n += "../"));
+              throw new g.default(`Invalid path: ${  s}`, { loc: r });
+            h === ".." && (a++, (n += "../"));
           }
         }
         return {
@@ -3638,9 +3638,9 @@
         };
       }
       function h(t, e, r, s, i, a) {
-        var n = s.charAt(3) || s.charAt(2),
-          o = "{" !== n && "&" !== n,
-          c = /\*/.test(s);
+        const n = s.charAt(3) || s.charAt(2);
+          const o = n !== "{" && n !== "&";
+          const c = /\*/.test(s);
         return {
           type: c ? "Decorator" : "MustacheStatement",
           path: t,
@@ -3653,7 +3653,7 @@
       }
       function l(t, e, r, i) {
         s(t, r), (i = this.locInfo(i));
-        var a = { type: "Program", body: e, strip: {}, loc: i };
+        const a = { type: "Program", body: e, strip: {}, loc: i };
         return {
           type: "BlockStatement",
           path: t.path,
@@ -3668,13 +3668,13 @@
       }
       function p(t, e, r, i, a, n) {
         i && i.path && s(t, i);
-        var o = /\*/.test(t.open);
+        const o = /\*/.test(t.open);
         e.blockParams = t.blockParams;
-        var c = void 0,
-          h = void 0;
+        let c = void 0;
+          let h = void 0;
         if (r) {
           if (o)
-            throw new g["default"]("Unexpected inverse block on decorator", r);
+            throw new g.default("Unexpected inverse block on decorator", r);
           r.chain && (r.program.body[0].closeStrip = i.strip),
             (h = r.strip),
             (c = r.program);
@@ -3697,8 +3697,8 @@
       }
       function u(t, e) {
         if (!e && t.length) {
-          var r = t[0].loc,
-            s = t[t.length - 1].loc;
+          const r = t[0].loc;
+            const s = t[t.length - 1].loc;
           r &&
             s &&
             (e = {
@@ -3724,7 +3724,7 @@
           }
         );
       }
-      var d = r(1)["default"];
+      const d = r(1).default;
       (e.__esModule = !0),
         (e.SourceLocation = i),
         (e.id = a),
@@ -3736,30 +3736,30 @@
         (e.prepareBlock = p),
         (e.prepareProgram = u),
         (e.preparePartialBlock = f);
-      var m = r(6),
-        g = d(m);
+      const m = r(6);
+        var g = d(m);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s() {}
       function i(t, e, r) {
-        if (null == t || ("string" != typeof t && "Program" !== t.type))
-          throw new l["default"](
-            "You must pass a string or Handlebars AST to Handlebars.precompile. You passed " +
-              t,
+        if (t == null || (typeof t !== "string" && t.type !== "Program"))
+          throw new l.default(
+            `You must pass a string or Handlebars AST to Handlebars.precompile. You passed ${ 
+              t}`,
           );
         (e = e || {}),
           "data" in e || (e.data = !0),
           e.compat && (e.useDepths = !0);
-        var s = r.parse(t, e),
-          i = new r.Compiler().compile(s, e);
+        const s = r.parse(t, e);
+          const i = new r.Compiler().compile(s, e);
         return new r.JavaScriptCompiler().compile(i, e);
       }
       function a(t, e, r) {
         function s() {
-          var s = r.parse(t, e),
-            i = new r.Compiler().compile(s, e),
-            a = new r.JavaScriptCompiler().compile(i, e, void 0, !0);
+          const s = r.parse(t, e);
+            const i = new r.Compiler().compile(s, e);
+            const a = new r.JavaScriptCompiler().compile(i, e, void 0, !0);
           return r.template(a);
         }
         function i(t, e) {
@@ -3767,11 +3767,11 @@
         }
         if (
           (void 0 === e && (e = {}),
-          null == t || ("string" != typeof t && "Program" !== t.type))
+          t == null || (typeof t !== "string" && t.type !== "Program"))
         )
-          throw new l["default"](
-            "You must pass a string or Handlebars AST to Handlebars.compile. You passed " +
-              t,
+          throw new l.default(
+            `You must pass a string or Handlebars AST to Handlebars.compile. You passed ${ 
+              t}`,
           );
         "data" in e || (e.data = !0), e.compat && (e.useDepths = !0);
         var a = void 0;
@@ -3788,42 +3788,42 @@
       function n(t, e) {
         if (t === e) return !0;
         if (p.isArray(t) && p.isArray(e) && t.length === e.length) {
-          for (var r = 0; r < t.length; r++) if (!n(t[r], e[r])) return !1;
+          for (let r = 0; r < t.length; r++) if (!n(t[r], e[r])) return !1;
           return !0;
         }
       }
       function o(t) {
         if (!t.path.parts) {
-          var e = t.path;
+          const e = t.path;
           t.path = {
             type: "PathExpression",
             data: !1,
             depth: 0,
-            parts: [e.original + ""],
-            original: e.original + "",
+            parts: [`${e.original  }`],
+            original: `${e.original  }`,
             loc: e.loc,
           };
         }
       }
-      var c = r(1)["default"];
+      const c = r(1).default;
       (e.__esModule = !0),
         (e.Compiler = s),
         (e.precompile = i),
         (e.compile = a);
-      var h = r(6),
-        l = c(h),
-        p = r(5),
-        u = r(21),
-        f = c(u),
-        d = [].slice;
+      const h = r(6);
+        var l = c(h);
+        var p = r(5);
+        const u = r(21);
+        const f = c(u);
+        const d = [].slice;
       s.prototype = {
         compiler: s,
-        equals: function(t) {
-          var e = this.opcodes.length;
+        equals(t) {
+          let e = this.opcodes.length;
           if (t.opcodes.length !== e) return !1;
           for (var r = 0; r < e; r++) {
-            var s = this.opcodes[r],
-              i = t.opcodes[r];
+            const s = this.opcodes[r];
+              const i = t.opcodes[r];
             if (s.opcode !== i.opcode || !n(s.args, i.args)) return !1;
           }
           e = this.children.length;
@@ -3832,7 +3832,7 @@
           return !0;
         },
         guid: 0,
-        compile: function(t, e) {
+        compile(t, e) {
           (this.sourceNode = []),
             (this.opcodes = []),
             (this.children = []),
@@ -3840,7 +3840,7 @@
             (this.stringParams = e.stringParams),
             (this.trackIds = e.trackIds),
             (e.blockParams = e.blockParams || []);
-          var r = e.knownHelpers;
+          const r = e.knownHelpers;
           if (
             ((e.knownHelpers = {
               helperMissing: !0,
@@ -3854,13 +3854,13 @@
             }),
             r)
           )
-            for (var s in r) s in r && (e.knownHelpers[s] = r[s]);
+            for (const s in r) s in r && (e.knownHelpers[s] = r[s]);
           return this.accept(t);
         },
-        compileProgram: function(t) {
-          var e = new this.compiler(),
-            r = e.compile(t, this.options),
-            s = this.guid++;
+        compileProgram(t) {
+          const e = new this.compiler();
+            const r = e.compile(t, this.options);
+            const s = this.guid++;
           return (
             (this.usePartial = this.usePartial || r.usePartial),
             (this.children[s] = r),
@@ -3868,33 +3868,33 @@
             s
           );
         },
-        accept: function(t) {
+        accept(t) {
           if (!this[t.type])
-            throw new l["default"]("Unknown type: " + t.type, t);
+            throw new l.default(`Unknown type: ${  t.type}`, t);
           this.sourceNode.unshift(t);
-          var e = this[t.type](t);
+          const e = this[t.type](t);
           return this.sourceNode.shift(), e;
         },
-        Program: function(t) {
+        Program(t) {
           this.options.blockParams.unshift(t.blockParams);
           for (var e = t.body, r = e.length, s = 0; s < r; s++)
             this.accept(e[s]);
           return (
             this.options.blockParams.shift(),
-            (this.isSimple = 1 === r),
+            (this.isSimple = r === 1),
             (this.blockParams = t.blockParams ? t.blockParams.length : 0),
             this
           );
         },
-        BlockStatement: function(t) {
+        BlockStatement(t) {
           o(t);
-          var e = t.program,
-            r = t.inverse;
+          let e = t.program;
+            let r = t.inverse;
           (e = e && this.compileProgram(e)), (r = r && this.compileProgram(r));
-          var s = this.classifySexpr(t);
-          "helper" === s
+          const s = this.classifySexpr(t);
+          s === "helper"
             ? this.helperSexpr(t, e, r)
-            : "simple" === s
+            : s === "simple"
             ? (this.simpleSexpr(t),
               this.opcode("pushProgram", e),
               this.opcode("pushProgram", r),
@@ -3907,67 +3907,67 @@
               this.opcode("ambiguousBlockValue")),
             this.opcode("append");
         },
-        DecoratorBlock: function(t) {
-          var e = t.program && this.compileProgram(t.program),
-            r = this.setupFullMustacheParams(t, e, void 0),
-            s = t.path;
+        DecoratorBlock(t) {
+          const e = t.program && this.compileProgram(t.program);
+            const r = this.setupFullMustacheParams(t, e, void 0);
+            const s = t.path;
           (this.useDecorators = !0),
             this.opcode("registerDecorator", r.length, s.original);
         },
-        PartialStatement: function(t) {
+        PartialStatement(t) {
           this.usePartial = !0;
-          var e = t.program;
+          let e = t.program;
           e && (e = this.compileProgram(t.program));
-          var r = t.params;
+          const r = t.params;
           if (r.length > 1)
-            throw new l["default"](
-              "Unsupported number of partial arguments: " + r.length,
+            throw new l.default(
+              `Unsupported number of partial arguments: ${  r.length}`,
               t,
             );
           r.length ||
             (this.options.explicitPartialContext
               ? this.opcode("pushLiteral", "undefined")
               : r.push({ type: "PathExpression", parts: [], depth: 0 }));
-          var s = t.name.original,
-            i = "SubExpression" === t.name.type;
+          const s = t.name.original;
+            const i = t.name.type === "SubExpression";
           i && this.accept(t.name),
             this.setupFullMustacheParams(t, e, void 0, !0);
-          var a = t.indent || "";
+          let a = t.indent || "";
           this.options.preventIndent &&
             a &&
             (this.opcode("appendContent", a), (a = "")),
             this.opcode("invokePartial", i, s, a),
             this.opcode("append");
         },
-        PartialBlockStatement: function(t) {
+        PartialBlockStatement(t) {
           this.PartialStatement(t);
         },
-        MustacheStatement: function(t) {
+        MustacheStatement(t) {
           this.SubExpression(t),
             t.escaped && !this.options.noEscape
               ? this.opcode("appendEscaped")
               : this.opcode("append");
         },
-        Decorator: function(t) {
+        Decorator(t) {
           this.DecoratorBlock(t);
         },
-        ContentStatement: function(t) {
+        ContentStatement(t) {
           t.value && this.opcode("appendContent", t.value);
         },
-        CommentStatement: function() {},
-        SubExpression: function(t) {
+        CommentStatement() {},
+        SubExpression(t) {
           o(t);
-          var e = this.classifySexpr(t);
-          "simple" === e
+          const e = this.classifySexpr(t);
+          e === "simple"
             ? this.simpleSexpr(t)
-            : "helper" === e
+            : e === "helper"
             ? this.helperSexpr(t)
             : this.ambiguousSexpr(t);
         },
-        ambiguousSexpr: function(t, e, r) {
-          var s = t.path,
-            i = s.parts[0],
-            a = null != e || null != r;
+        ambiguousSexpr(t, e, r) {
+          const s = t.path;
+            const i = s.parts[0];
+            const a = e != null || r != null;
           this.opcode("getContext", s.depth),
             this.opcode("pushProgram", e),
             this.opcode("pushProgram", r),
@@ -3975,21 +3975,21 @@
             this.accept(s),
             this.opcode("invokeAmbiguous", i, a);
         },
-        simpleSexpr: function(t) {
-          var e = t.path;
+        simpleSexpr(t) {
+          const e = t.path;
           (e.strict = !0), this.accept(e), this.opcode("resolvePossibleLambda");
         },
-        helperSexpr: function(t, e, r) {
-          var s = this.setupFullMustacheParams(t, e, r),
-            i = t.path,
-            a = i.parts[0];
+        helperSexpr(t, e, r) {
+          const s = this.setupFullMustacheParams(t, e, r);
+            const i = t.path;
+            const a = i.parts[0];
           if (this.options.knownHelpers[a])
             this.opcode("invokeKnownHelper", s.length, a);
           else {
             if (this.options.knownHelpersOnly)
-              throw new l["default"](
-                "You specified knownHelpersOnly, but used the unknown helper " +
-                  a,
+              throw new l.default(
+                `You specified knownHelpersOnly, but used the unknown helper ${ 
+                  a}`,
                 t,
               );
             (i.strict = !0),
@@ -3999,15 +3999,15 @@
                 "invokeHelper",
                 s.length,
                 i.original,
-                f["default"].helpers.simpleId(i),
+                f.default.helpers.simpleId(i),
               );
           }
         },
-        PathExpression: function(t) {
+        PathExpression(t) {
           this.addDepth(t.depth), this.opcode("getContext", t.depth);
-          var e = t.parts[0],
-            r = f["default"].helpers.scopedId(t),
-            s = !t.depth && !r && this.blockParamIndex(e);
+          const e = t.parts[0];
+            const r = f.default.helpers.scopedId(t);
+            const s = !t.depth && !r && this.blockParamIndex(e);
           s
             ? this.opcode("lookupBlockParam", s, t.parts)
             : e
@@ -4017,74 +4017,74 @@
               : this.opcode("lookupOnContext", t.parts, t.falsy, t.strict, r)
             : this.opcode("pushContext");
         },
-        StringLiteral: function(t) {
+        StringLiteral(t) {
           this.opcode("pushString", t.value);
         },
-        NumberLiteral: function(t) {
+        NumberLiteral(t) {
           this.opcode("pushLiteral", t.value);
         },
-        BooleanLiteral: function(t) {
+        BooleanLiteral(t) {
           this.opcode("pushLiteral", t.value);
         },
-        UndefinedLiteral: function() {
+        UndefinedLiteral() {
           this.opcode("pushLiteral", "undefined");
         },
-        NullLiteral: function() {
+        NullLiteral() {
           this.opcode("pushLiteral", "null");
         },
-        Hash: function(t) {
-          var e = t.pairs,
-            r = 0,
-            s = e.length;
+        Hash(t) {
+          const e = t.pairs;
+            let r = 0;
+            const s = e.length;
           for (this.opcode("pushHash"); r < s; r++) this.pushParam(e[r].value);
           for (; r--; ) this.opcode("assignToHash", e[r].key);
           this.opcode("popHash");
         },
-        opcode: function(t) {
+        opcode(t) {
           this.opcodes.push({
             opcode: t,
             args: d.call(arguments, 1),
             loc: this.sourceNode[0].loc,
           });
         },
-        addDepth: function(t) {
+        addDepth(t) {
           t && (this.useDepths = !0);
         },
-        classifySexpr: function(t) {
-          var e = f["default"].helpers.simpleId(t.path),
-            r = e && !!this.blockParamIndex(t.path.parts[0]),
-            s = !r && f["default"].helpers.helperExpression(t),
-            i = !r && (s || e);
+        classifySexpr(t) {
+          const e = f.default.helpers.simpleId(t.path);
+            const r = e && !!this.blockParamIndex(t.path.parts[0]);
+            let s = !r && f.default.helpers.helperExpression(t);
+            let i = !r && (s || e);
           if (i && !s) {
-            var a = t.path.parts[0],
-              n = this.options;
+            const a = t.path.parts[0];
+              const n = this.options;
             n.knownHelpers[a] ? (s = !0) : n.knownHelpersOnly && (i = !1);
           }
           return s ? "helper" : i ? "ambiguous" : "simple";
         },
-        pushParams: function(t) {
-          for (var e = 0, r = t.length; e < r; e++) this.pushParam(t[e]);
+        pushParams(t) {
+          for (let e = 0, r = t.length; e < r; e++) this.pushParam(t[e]);
         },
-        pushParam: function(t) {
-          var e = null != t.value ? t.value : t.original || "";
+        pushParam(t) {
+          let e = t.value != null ? t.value : t.original || "";
           if (this.stringParams)
             e.replace &&
               (e = e.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".")),
               t.depth && this.addDepth(t.depth),
               this.opcode("getContext", t.depth || 0),
               this.opcode("pushStringParam", e, t.type),
-              "SubExpression" === t.type && this.accept(t);
+              t.type === "SubExpression" && this.accept(t);
           else {
             if (this.trackIds) {
-              var r = void 0;
+              let r = void 0;
               if (
                 (!t.parts ||
-                  f["default"].helpers.scopedId(t) ||
+                  f.default.helpers.scopedId(t) ||
                   t.depth ||
                   (r = this.blockParamIndex(t.parts[0])),
                 r)
               ) {
-                var s = t.parts.slice(1).join(".");
+                const s = t.parts.slice(1).join(".");
                 this.opcode("pushId", "BlockParam", r, s);
               } else
                 (e = t.original || e),
@@ -4098,8 +4098,8 @@
             this.accept(t);
           }
         },
-        setupFullMustacheParams: function(t, e, r, s) {
-          var i = t.params;
+        setupFullMustacheParams(t, e, r, s) {
+          const i = t.params;
           return (
             this.pushParams(i),
             this.opcode("pushProgram", e),
@@ -4108,25 +4108,25 @@
             i
           );
         },
-        blockParamIndex: function(t) {
-          for (var e = 0, r = this.options.blockParams.length; e < r; e++) {
-            var s = this.options.blockParams[e],
-              i = s && p.indexOf(s, t);
+        blockParamIndex(t) {
+          for (let e = 0, r = this.options.blockParams.length; e < r; e++) {
+            const s = this.options.blockParams[e];
+              const i = s && p.indexOf(s, t);
             if (s && i >= 0) return [e, i];
           }
         },
       };
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t) {
         this.value = t;
       }
       function i() {}
       function a(t, e, r, s) {
-        var i = e.popStack(),
-          a = 0,
-          n = r.length;
+        let i = e.popStack();
+          let a = 0;
+          let n = r.length;
         for (t && n--; a < n; a++) i = e.nameLookup(i, r[a], s);
         return t
           ? [
@@ -4139,29 +4139,29 @@
             ]
           : i;
       }
-      var n = r(1)["default"];
+      const n = r(1).default;
       e.__esModule = !0;
-      var o = r(4),
-        c = r(6),
-        h = n(c),
-        l = r(5),
-        p = r(29),
-        u = n(p);
+      const o = r(4);
+        const c = r(6);
+        const h = n(c);
+        const l = r(5);
+        const p = r(29);
+        const u = n(p);
       (i.prototype = {
-        nameLookup: function(t, e) {
+        nameLookup(t, e) {
           return i.isValidJavaScriptVariableName(e)
             ? [t, ".", e]
             : [t, "[", JSON.stringify(e), "]"];
         },
-        depthedLookup: function(t) {
+        depthedLookup(t) {
           return [this.aliasable("container.lookup"), '(depths, "', t, '")'];
         },
-        compilerInfo: function() {
-          var t = o.COMPILER_REVISION,
-            e = o.REVISION_CHANGES[t];
+        compilerInfo() {
+          const t = o.COMPILER_REVISION;
+            const e = o.REVISION_CHANGES[t];
           return [t, e];
         },
-        appendToBuffer: function(t, e, r) {
+        appendToBuffer(t, e, r) {
           return (
             l.isArray(t) || (t = [t]),
             (t = this.source.wrap(t, e)),
@@ -4172,10 +4172,10 @@
               : ((t.appendToBuffer = !0), t)
           );
         },
-        initializeBuffer: function() {
+        initializeBuffer() {
           return this.quotedString("");
         },
-        compile: function(t, e, r, s) {
+        compile(t, e, r, s) {
           (this.environment = t),
             (this.options = e),
             (this.stringParams = this.options.stringParams),
@@ -4204,11 +4204,11 @@
               t.useDecorators ||
               this.options.compat),
             (this.useBlockParams = this.useBlockParams || t.useBlockParams);
-          var i = t.opcodes,
-            a = void 0,
-            n = void 0,
-            o = void 0,
-            c = void 0;
+          const i = t.opcodes;
+            let a = void 0;
+            let n = void 0;
+            let o = void 0;
+            let c = void 0;
           for (o = 0, c = i.length; o < c; o++)
             (a = i[o]),
               (this.source.currentLocation = a.loc),
@@ -4221,7 +4221,7 @@
               this.inlineStack.length ||
               this.compileStack.length)
           )
-            throw new h["default"](
+            throw new h.default(
               "Compile completed with content left on stack",
             );
           this.decorators.isEmpty()
@@ -4247,18 +4247,18 @@
                   ),
                   this.decorators.push("}\n"),
                   (this.decorators = this.decorators.merge())));
-          var l = this.createFunctionContext(s);
+          const l = this.createFunctionContext(s);
           if (this.isChild) return l;
-          var p = { compiler: this.compilerInfo(), main: l };
+          let p = { compiler: this.compilerInfo(), main: l };
           this.decorators &&
             ((p.main_d = this.decorators), (p.useDecorators = !0));
-          var u = this.context,
-            f = u.programs,
-            d = u.decorators;
+          const u = this.context;
+            const f = u.programs;
+            const d = u.decorators;
           for (o = 0, c = f.length; o < c; o++)
             f[o] &&
               ((p[o] = f[o]),
-              d[o] && ((p[o + "_d"] = d[o]), (p.useDecorators = !0)));
+              d[o] && ((p[`${o  }_d`] = d[o]), (p.useDecorators = !0)));
           return (
             this.environment.usePartial && (p.usePartial = !0),
             this.options.data && (p.useData = !0),
@@ -4279,38 +4279,38 @@
             p
           );
         },
-        preamble: function() {
+        preamble() {
           (this.lastContext = 0),
-            (this.source = new u["default"](this.options.srcName)),
-            (this.decorators = new u["default"](this.options.srcName));
+            (this.source = new u.default(this.options.srcName)),
+            (this.decorators = new u.default(this.options.srcName));
         },
-        createFunctionContext: function(t) {
-          var e = "",
-            r = this.stackVars.concat(this.registers.list);
-          r.length > 0 && (e += ", " + r.join(", "));
-          var s = 0;
-          for (var i in this.aliases) {
-            var a = this.aliases[i];
+        createFunctionContext(t) {
+          let e = "";
+            const r = this.stackVars.concat(this.registers.list);
+          r.length > 0 && (e += `, ${  r.join(", ")}`);
+          let s = 0;
+          for (const i in this.aliases) {
+            const a = this.aliases[i];
             this.aliases.hasOwnProperty(i) &&
               a.children &&
               a.referenceCount > 1 &&
-              ((e += ", alias" + ++s + "=" + i), (a.children[0] = "alias" + s));
+              ((e += `, alias${  ++s  }=${  i}`), (a.children[0] = `alias${  s}`));
           }
-          var n = ["container", "depth0", "helpers", "partials", "data"];
+          const n = ["container", "depth0", "helpers", "partials", "data"];
           (this.useBlockParams || this.useDepths) && n.push("blockParams"),
             this.useDepths && n.push("depths");
-          var o = this.mergeSource(e);
+          const o = this.mergeSource(e);
           return t
             ? (n.push(o), Function.apply(this, n))
             : this.source.wrap(["function(", n.join(","), ") {\n  ", o, "}"]);
         },
-        mergeSource: function(t) {
-          var e = this.environment.isSimple,
-            r = !this.forceBuffer,
-            s = void 0,
-            i = void 0,
-            a = void 0,
-            n = void 0;
+        mergeSource(t) {
+          const e = this.environment.isSimple;
+            let r = !this.forceBuffer;
+            let s = void 0;
+            let i = void 0;
+            let a = void 0;
+            let n = void 0;
           return (
             this.source.each(function(t) {
               t.appendToBuffer
@@ -4326,27 +4326,27 @@
               ? a
                 ? (a.prepend("return "), n.add(";"))
                 : i || this.source.push('return "";')
-              : ((t += ", buffer = " + (s ? "" : this.initializeBuffer())),
+              : ((t += `, buffer = ${  s ? "" : this.initializeBuffer()}`),
                 a
                   ? (a.prepend("return buffer + "), n.add(";"))
                   : this.source.push("return buffer;")),
             t &&
-              this.source.prepend("var " + t.substring(2) + (s ? "" : ";\n")),
+              this.source.prepend(`var ${  t.substring(2)  }${s ? "" : ";\n"}`),
             this.source.merge()
           );
         },
-        blockValue: function(t) {
-          var e = this.aliasable("helpers.blockHelperMissing"),
-            r = [this.contextName(0)];
+        blockValue(t) {
+          const e = this.aliasable("helpers.blockHelperMissing");
+            const r = [this.contextName(0)];
           this.setupHelperArgs(t, 0, r);
-          var s = this.popStack();
+          const s = this.popStack();
           r.splice(1, 0, s), this.push(this.source.functionCall(e, "call", r));
         },
-        ambiguousBlockValue: function() {
-          var t = this.aliasable("helpers.blockHelperMissing"),
-            e = [this.contextName(0)];
+        ambiguousBlockValue() {
+          const t = this.aliasable("helpers.blockHelperMissing");
+            const e = [this.contextName(0)];
           this.setupHelperArgs("", 0, e, !0), this.flushInline();
-          var r = this.topStack();
+          const r = this.topStack();
           e.splice(1, 0, r),
             this.pushSource([
               "if (!",
@@ -4358,20 +4358,20 @@
               "}",
             ]);
         },
-        appendContent: function(t) {
+        appendContent(t) {
           this.pendingContent
             ? (t = this.pendingContent + t)
             : (this.pendingLocation = this.source.currentLocation),
             (this.pendingContent = t);
         },
-        append: function() {
+        append() {
           if (this.isInline())
             this.replaceStack(function(t) {
               return [" != null ? ", t, ' : ""'];
             }),
               this.pushSource(this.appendToBuffer(this.popStack()));
           else {
-            var t = this.popStack();
+            const t = this.popStack();
             this.pushSource([
               "if (",
               t,
@@ -4387,7 +4387,7 @@
                 ]);
           }
         },
-        appendEscaped: function() {
+        appendEscaped() {
           this.pushSource(
             this.appendToBuffer([
               this.aliasable("container.escapeExpression"),
@@ -4397,41 +4397,41 @@
             ]),
           );
         },
-        getContext: function(t) {
+        getContext(t) {
           this.lastContext = t;
         },
-        pushContext: function() {
+        pushContext() {
           this.pushStackLiteral(this.contextName(this.lastContext));
         },
-        lookupOnContext: function(t, e, r, s) {
-          var i = 0;
+        lookupOnContext(t, e, r, s) {
+          let i = 0;
           s || !this.options.compat || this.lastContext
             ? this.pushContext()
             : this.push(this.depthedLookup(t[i++])),
             this.resolvePath("context", t, i, e, r);
         },
-        lookupBlockParam: function(t, e) {
+        lookupBlockParam(t, e) {
           (this.useBlockParams = !0),
             this.push(["blockParams[", t[0], "][", t[1], "]"]),
             this.resolvePath("context", e, 1);
         },
-        lookupData: function(t, e, r) {
+        lookupData(t, e, r) {
           t
-            ? this.pushStackLiteral("container.data(data, " + t + ")")
+            ? this.pushStackLiteral(`container.data(data, ${  t  })`)
             : this.pushStackLiteral("data"),
             this.resolvePath("data", e, 0, !0, r);
         },
-        resolvePath: function(t, e, r, s, i) {
-          var n = this;
+        resolvePath(t, e, r, s, i) {
+          const n = this;
           if (this.options.strict || this.options.assumeObjects)
             return void this.push(a(this.options.strict && i, this, e, t));
-          for (var o = e.length; r < o; r++)
+          for (let o = e.length; r < o; r++)
             this.replaceStack(function(i) {
-              var a = n.nameLookup(i, e[r], t);
+              const a = n.nameLookup(i, e[r], t);
               return s ? [" && ", a] : [" != null ? ", a, " : ", i];
             });
         },
-        resolvePossibleLambda: function() {
+        resolvePossibleLambda() {
           this.push([
             this.aliasable("container.lambda"),
             "(",
@@ -4441,25 +4441,25 @@
             ")",
           ]);
         },
-        pushStringParam: function(t, e) {
+        pushStringParam(t, e) {
           this.pushContext(),
             this.pushString(e),
-            "SubExpression" !== e &&
-              ("string" == typeof t
+            e !== "SubExpression" &&
+              (typeof t === "string"
                 ? this.pushString(t)
                 : this.pushStackLiteral(t));
         },
-        emptyHash: function(t) {
+        emptyHash(t) {
           this.trackIds && this.push("{}"),
             this.stringParams && (this.push("{}"), this.push("{}")),
             this.pushStackLiteral(t ? "undefined" : "{}");
         },
-        pushHash: function() {
+        pushHash() {
           this.hash && this.hashes.push(this.hash),
             (this.hash = { values: [], types: [], contexts: [], ids: [] });
         },
-        popHash: function() {
-          var t = this.hash;
+        popHash() {
+          const t = this.hash;
           (this.hash = this.hashes.pop()),
             this.trackIds && this.push(this.objectLiteral(t.ids)),
             this.stringParams &&
@@ -4467,20 +4467,20 @@
               this.push(this.objectLiteral(t.types))),
             this.push(this.objectLiteral(t.values));
         },
-        pushString: function(t) {
+        pushString(t) {
           this.pushStackLiteral(this.quotedString(t));
         },
-        pushLiteral: function(t) {
+        pushLiteral(t) {
           this.pushStackLiteral(t);
         },
-        pushProgram: function(t) {
-          null != t
+        pushProgram(t) {
+          t != null
             ? this.pushStackLiteral(this.programExpression(t))
             : this.pushStackLiteral(null);
         },
-        registerDecorator: function(t, e) {
-          var r = this.nameLookup("decorators", e, "decorator"),
-            s = this.setupHelperArgs(e, t);
+        registerDecorator(t, e) {
+          const r = this.nameLookup("decorators", e, "decorator");
+            const s = this.setupHelperArgs(e, t);
           this.decorators.push([
             "fn = ",
             this.decorators.functionCall(r, "", [
@@ -4492,27 +4492,27 @@
             " || fn;",
           ]);
         },
-        invokeHelper: function(t, e, r) {
-          var s = this.popStack(),
-            i = this.setupHelper(t, e),
-            a = r ? [i.name, " || "] : "",
-            n = ["("].concat(a, s);
+        invokeHelper(t, e, r) {
+          const s = this.popStack();
+            const i = this.setupHelper(t, e);
+            const a = r ? [i.name, " || "] : "";
+            const n = ["("].concat(a, s);
           this.options.strict ||
             n.push(" || ", this.aliasable("helpers.helperMissing")),
             n.push(")"),
             this.push(this.source.functionCall(n, "call", i.callParams));
         },
-        invokeKnownHelper: function(t, e) {
-          var r = this.setupHelper(t, e);
+        invokeKnownHelper(t, e) {
+          const r = this.setupHelper(t, e);
           this.push(this.source.functionCall(r.name, "call", r.callParams));
         },
-        invokeAmbiguous: function(t, e) {
+        invokeAmbiguous(t, e) {
           this.useRegister("helper");
-          var r = this.popStack();
+          const r = this.popStack();
           this.emptyHash();
-          var s = this.setupHelper(0, t, e),
-            i = (this.lastHelper = this.nameLookup("helpers", t, "helper")),
-            a = ["(", "(helper = ", i, " || ", r, ")"];
+          const s = this.setupHelper(0, t, e);
+            const i = (this.lastHelper = this.nameLookup("helpers", t, "helper"));
+            const a = ["(", "(helper = ", i, " || ", r, ")"];
           this.options.strict ||
             ((a[0] = "(helper = "),
             a.push(
@@ -4531,9 +4531,9 @@
               " : helper))",
             ]);
         },
-        invokePartial: function(t, e, r) {
-          var s = [],
-            i = this.setupParams(e, 1, s);
+        invokePartial(t, e, r) {
+          const s = [];
+            let i = this.setupParams(e, 1, s);
           t && ((e = this.popStack()), delete i.name),
             r && (i.indent = JSON.stringify(r)),
             (i.helpers = "helpers"),
@@ -4549,49 +4549,49 @@
               this.source.functionCall("container.invokePartial", "", s),
             );
         },
-        assignToHash: function(t) {
-          var e = this.popStack(),
-            r = void 0,
-            s = void 0,
-            i = void 0;
+        assignToHash(t) {
+          const e = this.popStack();
+            let r = void 0;
+            let s = void 0;
+            let i = void 0;
           this.trackIds && (i = this.popStack()),
             this.stringParams && ((s = this.popStack()), (r = this.popStack()));
-          var a = this.hash;
+          const a = this.hash;
           r && (a.contexts[t] = r),
             s && (a.types[t] = s),
             i && (a.ids[t] = i),
             (a.values[t] = e);
         },
-        pushId: function(t, e, r) {
-          "BlockParam" === t
+        pushId(t, e, r) {
+          t === "BlockParam"
             ? this.pushStackLiteral(
-                "blockParams[" +
-                  e[0] +
-                  "].path[" +
-                  e[1] +
-                  "]" +
-                  (r ? " + " + JSON.stringify("." + r) : ""),
+                `blockParams[${ 
+                  e[0] 
+                  }].path[${ 
+                  e[1] 
+                  }]${ 
+                  r ? ` + ${  JSON.stringify(`.${  r}`)}` : ""}`,
               )
-            : "PathExpression" === t
+            : t === "PathExpression"
             ? this.pushString(e)
-            : "SubExpression" === t
+            : t === "SubExpression"
             ? this.pushStackLiteral("true")
             : this.pushStackLiteral("null");
         },
         compiler: i,
-        compileChildren: function(t, e) {
+        compileChildren(t, e) {
           for (
-            var r = t.children, s = void 0, i = void 0, a = 0, n = r.length;
+            let r = t.children, s = void 0, i = void 0, a = 0, n = r.length;
             a < n;
             a++
           ) {
             (s = r[a]), (i = new this.compiler());
-            var o = this.matchExistingProgram(s);
-            null == o
+            let o = this.matchExistingProgram(s);
+            o == null
               ? (this.context.programs.push(""),
                 (o = this.context.programs.length),
                 (s.index = o),
-                (s.name = "program" + o),
+                (s.name = `program${  o}`),
                 (this.context.programs[o] = i.compile(
                   s,
                   e,
@@ -4603,42 +4603,42 @@
                 (this.useDepths = this.useDepths || i.useDepths),
                 (this.useBlockParams = this.useBlockParams || i.useBlockParams))
               : ((s.index = o),
-                (s.name = "program" + o),
+                (s.name = `program${  o}`),
                 (this.useDepths = this.useDepths || s.useDepths),
                 (this.useBlockParams =
                   this.useBlockParams || s.useBlockParams));
           }
         },
-        matchExistingProgram: function(t) {
-          for (var e = 0, r = this.context.environments.length; e < r; e++) {
-            var s = this.context.environments[e];
+        matchExistingProgram(t) {
+          for (let e = 0, r = this.context.environments.length; e < r; e++) {
+            const s = this.context.environments[e];
             if (s && s.equals(t)) return e;
           }
         },
-        programExpression: function(t) {
-          var e = this.environment.children[t],
-            r = [e.index, "data", e.blockParams];
+        programExpression(t) {
+          const e = this.environment.children[t];
+            const r = [e.index, "data", e.blockParams];
           return (
             (this.useBlockParams || this.useDepths) && r.push("blockParams"),
             this.useDepths && r.push("depths"),
-            "container.program(" + r.join(", ") + ")"
+            `container.program(${  r.join(", ")  })`
           );
         },
-        useRegister: function(t) {
+        useRegister(t) {
           this.registers[t] ||
             ((this.registers[t] = !0), this.registers.list.push(t));
         },
-        push: function(t) {
+        push(t) {
           return (
             t instanceof s || (t = this.source.wrap(t)),
             this.inlineStack.push(t),
             t
           );
         },
-        pushStackLiteral: function(t) {
+        pushStackLiteral(t) {
           this.push(new s(t));
         },
-        pushSource: function(t) {
+        pushSource(t) {
           this.pendingContent &&
             (this.source.push(
               this.appendToBuffer(
@@ -4649,77 +4649,77 @@
             (this.pendingContent = void 0)),
             t && this.source.push(t);
         },
-        replaceStack: function(t) {
-          var e = ["("],
-            r = void 0,
-            i = void 0,
-            a = void 0;
+        replaceStack(t) {
+          let e = ["("];
+            let r = void 0;
+            let i = void 0;
+            let a = void 0;
           if (!this.isInline())
-            throw new h["default"]("replaceStack on non-inline");
-          var n = this.popStack(!0);
+            throw new h.default("replaceStack on non-inline");
+          const n = this.popStack(!0);
           if (n instanceof s) (r = [n.value]), (e = ["(", r]), (a = !0);
           else {
             i = !0;
-            var o = this.incrStack();
+            const o = this.incrStack();
             (e = ["((", this.push(o), " = ", n, ")"]), (r = this.topStack());
           }
-          var c = t.call(this, r);
+          const c = t.call(this, r);
           a || this.popStack(),
             i && this.stackSlot--,
             this.push(e.concat(c, ")"));
         },
-        incrStack: function() {
+        incrStack() {
           return (
             this.stackSlot++,
             this.stackSlot > this.stackVars.length &&
-              this.stackVars.push("stack" + this.stackSlot),
+              this.stackVars.push(`stack${  this.stackSlot}`),
             this.topStackName()
           );
         },
-        topStackName: function() {
-          return "stack" + this.stackSlot;
+        topStackName() {
+          return `stack${  this.stackSlot}`;
         },
-        flushInline: function() {
-          var t = this.inlineStack;
+        flushInline() {
+          const t = this.inlineStack;
           this.inlineStack = [];
-          for (var e = 0, r = t.length; e < r; e++) {
-            var i = t[e];
+          for (let e = 0, r = t.length; e < r; e++) {
+            const i = t[e];
             if (i instanceof s) this.compileStack.push(i);
             else {
-              var a = this.incrStack();
+              const a = this.incrStack();
               this.pushSource([a, " = ", i, ";"]), this.compileStack.push(a);
             }
           }
         },
-        isInline: function() {
+        isInline() {
           return this.inlineStack.length;
         },
-        popStack: function(t) {
-          var e = this.isInline(),
-            r = (e ? this.inlineStack : this.compileStack).pop();
+        popStack(t) {
+          const e = this.isInline();
+            const r = (e ? this.inlineStack : this.compileStack).pop();
           if (!t && r instanceof s) return r.value;
           if (!e) {
-            if (!this.stackSlot) throw new h["default"]("Invalid stack pop");
+            if (!this.stackSlot) throw new h.default("Invalid stack pop");
             this.stackSlot--;
           }
           return r;
         },
-        topStack: function() {
-          var t = this.isInline() ? this.inlineStack : this.compileStack,
-            e = t[t.length - 1];
+        topStack() {
+          const t = this.isInline() ? this.inlineStack : this.compileStack;
+            const e = t[t.length - 1];
           return e instanceof s ? e.value : e;
         },
-        contextName: function(t) {
-          return this.useDepths && t ? "depths[" + t + "]" : "depth" + t;
+        contextName(t) {
+          return this.useDepths && t ? `depths[${  t  }]` : `depth${  t}`;
         },
-        quotedString: function(t) {
+        quotedString(t) {
           return this.source.quotedString(t);
         },
-        objectLiteral: function(t) {
+        objectLiteral(t) {
           return this.source.objectLiteral(t);
         },
-        aliasable: function(t) {
-          var e = this.aliases[t];
+        aliasable(t) {
+          let e = this.aliases[t];
           return e
             ? (e.referenceCount++, e)
             : ((e = this.aliases[t] = this.source.wrap(t)),
@@ -4727,15 +4727,15 @@
               (e.referenceCount = 1),
               e);
         },
-        setupHelper: function(t, e, r) {
-          var s = [],
-            i = this.setupHelperArgs(e, t, s, r),
-            a = this.nameLookup("helpers", e, "helper"),
-            n = this.aliasable(
-              this.contextName(0) +
-                " != null ? " +
-                this.contextName(0) +
-                " : {}",
+        setupHelper(t, e, r) {
+          const s = [];
+            const i = this.setupHelperArgs(e, t, s, r);
+            const a = this.nameLookup("helpers", e, "helper");
+            const n = this.aliasable(
+              `${this.contextName(0) 
+                } != null ? ${ 
+                this.contextName(0) 
+                } : {}`,
             );
           return {
             params: s,
@@ -4744,13 +4744,13 @@
             callParams: [n].concat(s),
           };
         },
-        setupParams: function(t, e, r) {
-          var s = {},
-            i = [],
-            a = [],
-            n = [],
-            o = !r,
-            c = void 0;
+        setupParams(t, e, r) {
+          const s = {};
+            const i = [];
+            const a = [];
+            const n = [];
+            const o = !r;
+            let c = void 0;
           o && (r = []),
             (s.name = this.quotedString(t)),
             (s.hash = this.popStack()),
@@ -4758,12 +4758,12 @@
             this.stringParams &&
               ((s.hashTypes = this.popStack()),
               (s.hashContexts = this.popStack()));
-          var h = this.popStack(),
-            l = this.popStack();
+          const h = this.popStack();
+            const l = this.popStack();
           (l || h) &&
             ((s.fn = l || "container.noop"),
             (s.inverse = h || "container.noop"));
-          for (var p = e; p--; )
+          for (let p = e; p--; )
             (c = this.popStack()),
               (r[p] = c),
               this.trackIds && (n[p] = this.popStack()),
@@ -4780,8 +4780,8 @@
             s
           );
         },
-        setupHelperArgs: function(t, e, r, s) {
-          var i = this.setupParams(t, e, r);
+        setupHelperArgs(t, e, r, s) {
+          let i = this.setupParams(t, e, r);
           return (
             (i = this.objectLiteral(i)),
             s
@@ -4796,7 +4796,7 @@
       }),
         (function() {
           for (
-            var t = "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
+            let t = "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
                 " ",
               ),
               e = (i.RESERVED_WORDS = {}),
@@ -4810,25 +4810,25 @@
         (i.isValidJavaScriptVariableName = function(t) {
           return !i.RESERVED_WORDS[t] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(t);
         }),
-        (e["default"] = i),
-        (t.exports = e["default"]);
+        (e.default = i),
+        (t.exports = e.default);
     },
     function(t, e, r) {
-      "use strict";
+      
       function s(t, e, r) {
         if (a.isArray(t)) {
           for (var s = [], i = 0, n = t.length; i < n; i++)
             s.push(e.wrap(t[i], r));
           return s;
         }
-        return "boolean" == typeof t || "number" == typeof t ? t + "" : t;
+        return typeof t === "boolean" || typeof t === "number" ? `${t  }` : t;
       }
       function i(t) {
         (this.srcFile = t), (this.source = []);
       }
       e.__esModule = !0;
-      var a = r(5),
-        n = void 0;
+      var a = r(5);
+        let n = void 0;
       try {
       } catch (o) {}
       n ||
@@ -4836,31 +4836,31 @@
           (this.src = ""), s && this.add(s);
         }),
         (n.prototype = {
-          add: function(t) {
+          add(t) {
             a.isArray(t) && (t = t.join("")), (this.src += t);
           },
-          prepend: function(t) {
+          prepend(t) {
             a.isArray(t) && (t = t.join("")), (this.src = t + this.src);
           },
-          toStringWithSourceMap: function() {
+          toStringWithSourceMap() {
             return { code: this.toString() };
           },
-          toString: function() {
+          toString() {
             return this.src;
           },
         })),
         (i.prototype = {
-          isEmpty: function() {
+          isEmpty() {
             return !this.source.length;
           },
-          prepend: function(t, e) {
+          prepend(t, e) {
             this.source.unshift(this.wrap(t, e));
           },
-          push: function(t, e) {
+          push(t, e) {
             this.source.push(this.wrap(t, e));
           },
-          merge: function() {
-            var t = this.empty();
+          merge() {
+            const t = this.empty();
             return (
               this.each(function(e) {
                 t.add(["  ", e, "\n"]);
@@ -4868,16 +4868,16 @@
               t
             );
           },
-          each: function(t) {
-            for (var e = 0, r = this.source.length; e < r; e++)
+          each(t) {
+            for (let e = 0, r = this.source.length; e < r; e++)
               t(this.source[e]);
           },
-          empty: function() {
-            var t = this.currentLocation || { start: {} };
+          empty() {
+            const t = this.currentLocation || { start: {} };
             return new n(t.start.line, t.start.column, this.srcFile);
           },
-          wrap: function(t) {
-            var e =
+          wrap(t) {
+            const e =
               arguments.length <= 1 || void 0 === arguments[1]
                 ? this.currentLocation || { start: {} }
                 : arguments[1];
@@ -4886,47 +4886,47 @@
               : ((t = s(t, this, e)),
                 new n(e.start.line, e.start.column, this.srcFile, t));
           },
-          functionCall: function(t, e, r) {
+          functionCall(t, e, r) {
             return (
               (r = this.generateList(r)),
-              this.wrap([t, e ? "." + e + "(" : "(", r, ")"])
+              this.wrap([t, e ? `.${  e  }(` : "(", r, ")"])
             );
           },
-          quotedString: function(t) {
+          quotedString(t) {
             return (
-              '"' +
-              (t + "")
+              `"${ 
+              (`${t  }`)
                 .replace(/\\/g, "\\\\")
                 .replace(/"/g, '\\"')
                 .replace(/\n/g, "\\n")
                 .replace(/\r/g, "\\r")
                 .replace(/\u2028/g, "\\u2028")
-                .replace(/\u2029/g, "\\u2029") +
-              '"'
+                .replace(/\u2029/g, "\\u2029") 
+              }"`
             );
           },
-          objectLiteral: function(t) {
-            var e = [];
-            for (var r in t)
+          objectLiteral(t) {
+            const e = [];
+            for (const r in t)
               if (t.hasOwnProperty(r)) {
-                var i = s(t[r], this);
-                "undefined" !== i && e.push([this.quotedString(r), ":", i]);
+                const i = s(t[r], this);
+                i !== "undefined" && e.push([this.quotedString(r), ":", i]);
               }
-            var a = this.generateList(e);
+            const a = this.generateList(e);
             return a.prepend("{"), a.add("}"), a;
           },
-          generateList: function(t) {
+          generateList(t) {
             for (var e = this.empty(), r = 0, i = t.length; r < i; r++)
               r && e.add(","), e.add(s(t[r], this));
             return e;
           },
-          generateArray: function(t) {
-            var e = this.generateList(t);
+          generateArray(t) {
+            const e = this.generateList(t);
             return e.prepend("["), e.add("]"), e;
           },
         }),
-        (e["default"] = i),
-        (t.exports = e["default"]);
+        (e.default = i),
+        (t.exports = e.default);
     },
   ]);
 });

@@ -10,9 +10,9 @@ class ServiceCatalogList extends React.Component {
     return (
       <div className="col-md-12">
         <Tabs
-          tabUrl={`/api/v1/service-categories`}
-          contentUrl={`/api/v1/service-templates?key=category_id&value=`}
-          imgUrl={`/api/v1/service-templates`}
+          tabUrl="/api/v1/service-categories"
+          contentUrl="/api/v1/service-templates?key=category_id&value="
+          imgUrl="/api/v1/service-templates"
         />
       </div>
     );

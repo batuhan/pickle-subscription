@@ -1,12 +1,13 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import ModalPaymentSetup from "./modal-payment-setup.jsx";
 import { Price } from "../../utilities/price.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalPayChargeItem extends React.Component {
   constructor(props) {
@@ -16,9 +17,9 @@ class ModalPayChargeItem extends React.Component {
       uid = this.props.ownerId;
     }
 
-    let username = cookie.load("username");
-    let service = this.props.myInstance;
-    let charge = this.props.chargeId;
+    const username = cookie.load("username");
+    const service = this.props.myInstance;
+    const charge = this.props.chargeId;
     let charge_item = false;
 
     if (
@@ -42,11 +43,11 @@ class ModalPayChargeItem extends React.Component {
 
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
       pay_charge_url: `/api/v1/charge/${this.props.chargeId}/approve`,
-      user_url: user_url,
-      charge_item: charge_item,
+      user_url,
+      charge_item,
       charge_id: charge,
       service_id: service.id,
       service_name: service.name,
@@ -65,46 +66,46 @@ class ModalPayChargeItem extends React.Component {
   }
 
   componentWillMount() {
-    //checks if user has a card before mount
+    // checks if user has a card before mount
     this.fetcherUserPaymentInfo();
   }
 
   fetcherUserPaymentInfo() {
-    let self = this;
-    //try and fetch user's card info from our database
+    const self = this;
+    // try and fetch user's card info from our database
     Fetcher(`${self.state.user_url}`).then(function(response) {
       if (!response.error) {
         if (!response[0]) {
-          //if calling /api/v1/user/:uid
+          // if calling /api/v1/user/:uid
           if (response.references.funds.length > 0) {
-            let funds = _.get(response, "references.funds");
+            const funds = _.get(response, "references.funds");
             if (funds.length > 0) {
-              let fund = funds[0];
-              let card = funds[0].source.card;
+              const fund = funds[0];
+              const {card} = funds[0].source;
               self.setState({
                 loading: false,
                 hasCard: true,
                 paymentSetupModal: false,
                 current_modal: "model_pay_charge",
-                fund: fund,
-                card: card,
+                fund,
+                card,
               });
             }
           }
         } else {
-          //if calling /api/v1/user/own
+          // if calling /api/v1/user/own
           if (response[0].references.funds.length > 0) {
-            let funds = _.get(response, "[0]references.funds");
+            const funds = _.get(response, "[0]references.funds");
             if (funds.length > 0) {
-              let fund = funds[0];
-              let card = funds[0].source.card;
+              const fund = funds[0];
+              const {card} = funds[0].source;
               self.setState({
                 loading: false,
                 hasCard: true,
                 paymentSetupModal: false,
                 current_modal: "model_pay_charge",
-                fund: fund,
-                card: card,
+                fund,
+                card,
               });
             }
           }
@@ -118,6 +119,7 @@ class ModalPayChargeItem extends React.Component {
   handlePaymentSetup() {
     this.setState({ current_modal: "payment_setup", paymentSetupModal: true });
   }
+
   onPaymentSetupClose() {
     this.fetcherUserPaymentInfo();
     this.setState({
@@ -128,17 +130,17 @@ class ModalPayChargeItem extends React.Component {
 
   onPay(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
     if (!self.state.hasCard) {
       self.handlePaymentSetup();
     } else {
       Fetcher(self.state.pay_charge_url, "POST", {}).then(function(response) {
         if (!response.error) {
-          //check stripe response for error
+          // check stripe response for error
           if (response.type == "StripeInvalidRequestError") {
-            //check what error it is
-            //make sure stripe has card and db has card
+            // check what error it is
+            // make sure stripe has card and db has card
             if (
               response.message == "This customer has no attached payment source"
             ) {
@@ -158,13 +160,13 @@ class ModalPayChargeItem extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Pay Line Item";
-    let currentModal = this.state.current_modal;
-    let chargeId = this.state.charge_id;
-    let chargeDescription = this.state.charge_item.description;
-    let chargeAmount = this.state.charge_item.amount;
-    let serviceName = this.state.service_name;
+    const self = this;
+    const pageName = "Pay Line Item";
+    const currentModal = this.state.current_modal;
+    const chargeId = this.state.charge_id;
+    const chargeDescription = this.state.charge_item.description;
+    const chargeAmount = this.state.charge_item.amount;
+    const serviceName = this.state.service_name;
 
     if (currentModal == "model_pay_charge" && !self.state.paid) {
       return (
@@ -172,7 +174,7 @@ class ModalPayChargeItem extends React.Component {
           modalTitle={pageName}
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="490px"
         >
@@ -185,15 +187,23 @@ class ModalPayChargeItem extends React.Component {
                       You are about to pay for the following line item.
                     </strong>
                   </p>
-                  <p>Service: {serviceName}</p>
-                  <p>Line Item: {chargeDescription}</p>
                   <p>
-                    Price: <Price value={chargeAmount} />
+Service:
+                    {serviceName}
+                  </p>
+                  <p>
+Line Item:
+                    {chargeDescription}
+                  </p>
+                  <p>
+                    Price: 
+                    {' '}
+                    <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-primary btn-rounded"
                 onClick={self.onPay}
@@ -210,13 +220,13 @@ class ModalPayChargeItem extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_pay_charge" && self.state.paid) {
+    } if (currentModal == "model_pay_charge" && self.state.paid) {
       return (
         <Modal
           modalTitle={pageName}
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="490px"
         >
@@ -227,15 +237,23 @@ class ModalPayChargeItem extends React.Component {
                   <p>
                     <strong>Thank you, you have paid this line item!</strong>
                   </p>
-                  <p>Service: {serviceName}</p>
-                  <p>Line Item: {chargeDescription}</p>
                   <p>
-                    Price: <Price value={chargeAmount} />
+Service:
+                    {serviceName}
+                  </p>
+                  <p>
+Line Item:
+                    {chargeDescription}
+                  </p>
+                  <p>
+                    Price: 
+                    {' '}
+                    <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-default btn-rounded"
                 onClick={self.props.hide}
@@ -246,7 +264,7 @@ class ModalPayChargeItem extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "payment_setup") {
+    } if (currentModal == "payment_setup") {
       return (
         <ModalPaymentSetup
           ownerId={self.state.uid}

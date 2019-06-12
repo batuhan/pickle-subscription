@@ -1,7 +1,7 @@
 import React from "react";
-import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import { required } from "redux-form-validators";
 import { Field } from "redux-form";
+import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import { inputField } from "./servicebot-base-field.jsx";
 
 function Category(props) {
@@ -29,8 +29,8 @@ function Category(props) {
   );
 }
 
-let AddCategoryForm = function(props) {
-  let initialRequests = [];
+const AddCategoryForm = function(props) {
+  const initialRequests = [];
   let submissionRequest = {
     method: "POST",
     url: `/api/v1/service-categories`,

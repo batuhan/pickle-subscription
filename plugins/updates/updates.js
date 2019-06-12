@@ -1,23 +1,23 @@
-let consume = require("pluginbot/effects/consume");
+const consume = require("pluginbot/effects/consume");
 
-let run = function*(config, provide, services) {
-  let database = yield consume(services.database);
-  let analytics = yield consume(services.analytics);
-  let request = require("request");
-  let semver = require("semver");
-  let _ = require("lodash");
-  let master = config.master;
-  let interval = config.interval; //24 hours
-  let Notification = require("../../models/notifications");
-  let dispatchEvent = require("../../config/redux/store").dispatchEvent;
-  let salt = process.env.INSTANCE_SALT;
+const run = function*(config, provide, services) {
+  const database = yield consume(services.database);
+  const analytics = yield consume(services.analytics);
+  const request = require("request");
+  const semver = require("semver");
+  const _ = require("lodash");
+  const {master} = config;
+  const {interval} = config; // 24 hours
+  const Notification = require("../../models/notifications");
+  const {dispatchEvent} = require("../../config/redux/store");
+  const salt = process.env.INSTANCE_SALT;
   // let hash = require("bcryptjs").hashSync(salt, 10).toString("hex");
-  let checkMaster = async function() {
+  const checkMaster = async function() {
     console.log("CHECKIN WITH BIG PAPA FOR BIG ANNOUNCEMENTS");
-    let version = process.env.npm_package_version;
+    const version = process.env.npm_package_version;
 
-    let data = await analytics.getAnalyticsData();
-    let statsToGet = [
+    const data = await analytics.getAnalyticsData();
+    const statsToGet = [
       "totalCustomers",
       "totalFlaggedCustomers",
       "totalServiceInstances",
@@ -25,19 +25,19 @@ let run = function*(config, provide, services) {
       "totalPublishedTemplates",
       "totalUnpublishedTemplates",
     ];
-    let stats = _.pick(data, statsToGet);
-    //for each metricName metricValue pair (entries) create a string of metricName=metricValue and join all by & to create query string for url
-    let query = Object.entries(stats)
+    const stats = _.pick(data, statsToGet);
+    // for each metricName metricValue pair (entries) create a string of metricName=metricValue and join all by & to create query string for url
+    const query = Object.entries(stats)
       .map(metric => {
-        return metric[0] + "=" + metric[1];
+        return `${metric[0]  }=${  metric[1]}`;
       })
       .join("&");
-    let url =
-      master + "?instance_hash=" + salt + "&version=" + version + "&" + query;
+    const url =
+      `${master  }?instance_hash=${  salt  }&version=${  version  }&${  query}`;
     console.log(url);
 
     request(url, function(error, response, body) {
-      //console.log(response);
+      // console.log(response);
       if (error) {
         console.log("error");
         console.log(error);
@@ -45,7 +45,7 @@ let run = function*(config, provide, services) {
         try {
           return Promise.all(
             JSON.parse(body).notifications.map(notification => {
-              let data = notification.data;
+              const {data} = notification;
               return Notification.createPromise(data)
                 .then(result => {
                   store.dispatchEvent("master_notification_created", result);
@@ -63,7 +63,7 @@ let run = function*(config, provide, services) {
             }),
           );
         } catch (e) {
-          console.error("error connecting to hub: " + e);
+          console.error(`error connecting to hub: ${  e}`);
         }
       }
     });

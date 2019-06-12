@@ -1,8 +1,8 @@
 !(function(e) {
-  "undefined" != typeof exports
+  typeof exports !== "undefined"
     ? e(exports)
     : ((self.hljs = e({})),
-      "function" == typeof define &&
+      typeof define === "function" &&
         define.amd &&
         define("hljs", [], function() {
           return self.hljs;
@@ -18,17 +18,17 @@
     return e.nodeName.toLowerCase();
   }
   function n(e, r) {
-    var t = e && e.exec(r);
-    return t && 0 == t.index;
+    const t = e && e.exec(r);
+    return t && t.index == 0;
   }
   function a(e) {
     return /^(no-?highlight|plain|text)$/i.test(e);
   }
   function c(e) {
-    var r,
-      t,
-      n,
-      c = e.className + " ";
+    let r;
+      let t;
+      let n;
+      let c = `${e.className  } `;
     if (
       ((c += e.parentNode ? e.parentNode.className : ""),
       (t = /\blang(?:uage)?-([\w-]+)\b/i.exec(c)))
@@ -38,20 +38,20 @@
       if (E(c[r]) || a(c[r])) return c[r];
   }
   function i(e, r) {
-    var t,
-      n = {};
+    let t;
+      const n = {};
     for (t in e) n[t] = e[t];
     if (r) for (t in r) n[t] = r[t];
     return n;
   }
   function o(e) {
-    var r = [];
+    const r = [];
     return (
       (function n(e, a) {
-        for (var c = e.firstChild; c; c = c.nextSibling)
-          3 == c.nodeType
+        for (let c = e.firstChild; c; c = c.nextSibling)
+          c.nodeType == 3
             ? (a += c.nodeValue.length)
-            : 1 == c.nodeType &&
+            : c.nodeType == 1 &&
               (r.push({ event: "start", offset: a, node: c }),
               (a = n(c, a)),
               t(c).match(/br|hr|img|input/) ||
@@ -68,7 +68,7 @@
           ? e[0].offset < n[0].offset
             ? e
             : n
-          : "start" == n[0].event
+          : n[0].event == "start"
           ? e
           : n
         : e.length
@@ -77,26 +77,26 @@
     }
     function i(e) {
       function n(e) {
-        return " " + e.nodeName + '="' + r(e.value) + '"';
+        return ` ${  e.nodeName  }="${  r(e.value)  }"`;
       }
       l +=
-        "<" + t(e) + Array.prototype.map.call(e.attributes, n).join("") + ">";
+        `<${  t(e)  }${Array.prototype.map.call(e.attributes, n).join("")  }>`;
     }
     function o(e) {
-      l += "</" + t(e) + ">";
+      l += `</${  t(e)  }>`;
     }
     function s(e) {
-      ("start" == e.event ? i : o)(e.node);
+      (e.event == "start" ? i : o)(e.node);
     }
     for (var u = 0, l = "", f = []; e.length || n.length; ) {
-      var b = c();
+      let b = c();
       if (((l += r(a.substr(u, b[0].offset - u))), (u = b[0].offset), b == e)) {
         f.reverse().forEach(o);
         do s(b.splice(0, 1)[0]), (b = c());
         while (b == e && b.length && b[0].offset == u);
         f.reverse().forEach(i);
       } else
-        "start" == b[0].event ? f.push(b[0].node) : f.pop(),
+        b[0].event == "start" ? f.push(b[0].node) : f.pop(),
           s(b.splice(0, 1)[0]);
     }
     return l + r(a.substr(u));
@@ -106,20 +106,20 @@
       return (e && e.source) || e;
     }
     function t(t, n) {
-      return new RegExp(r(t), "m" + (e.cI ? "i" : "") + (n ? "g" : ""));
+      return new RegExp(r(t), `m${  e.cI ? "i" : ""  }${n ? "g" : ""}`);
     }
     function n(a, c) {
       if (!a.compiled) {
         if (((a.compiled = !0), (a.k = a.k || a.bK), a.k)) {
-          var o = {},
-            s = function(r, t) {
+          const o = {};
+            const s = function(r, t) {
               e.cI && (t = t.toLowerCase()),
                 t.split(" ").forEach(function(e) {
-                  var t = e.split("|");
+                  const t = e.split("|");
                   o[t[0]] = [r, t[1] ? Number(t[1]) : 1];
                 });
             };
-          "string" == typeof a.k
+          typeof a.k === "string"
             ? s("keyword", a.k)
             : Object.keys(a.k).forEach(function(e) {
                 s(e, a.k[e]);
@@ -128,7 +128,7 @@
         }
         (a.lR = t(a.l || /\b\w+\b/, !0)),
           c &&
-            (a.bK && (a.b = "\\b(" + a.bK.split(" ").join("|") + ")\\b"),
+            (a.bK && (a.b = `\\b(${  a.bK.split(" ").join("|")  })\\b`),
             a.b || (a.b = /\B|\b/),
             (a.bR = t(a.b)),
             a.e || a.eW || (a.e = /\B|\b/),
@@ -138,22 +138,22 @@
           a.i && (a.iR = t(a.i)),
           void 0 === a.r && (a.r = 1),
           a.c || (a.c = []);
-        var u = [];
+        const u = [];
         a.c.forEach(function(e) {
           e.v
             ? e.v.forEach(function(r) {
                 u.push(i(e, r));
               })
-            : u.push("self" == e ? a : e);
+            : u.push(e == "self" ? a : e);
         }),
           (a.c = u),
           a.c.forEach(function(e) {
             n(e, a);
           }),
           a.starts && n(a.starts, c);
-        var l = a.c
+        const l = a.c
           .map(function(e) {
-            return e.bK ? "\\.?(" + e.b + ")\\.?" : e.b;
+            return e.bK ? `\\.?(${  e.b  })\\.?` : e.b;
           })
           .concat([a.tE, a.i])
           .map(r)
@@ -161,7 +161,7 @@
         a.t = l.length
           ? t(l.join("|"), !0)
           : {
-              exec: function() {
+              exec() {
                 return null;
               },
             };
@@ -171,7 +171,7 @@
   }
   function l(e, t, a, c) {
     function i(e, r) {
-      for (var t = 0; t < r.c.length; t++) if (n(r.c[t].bR, e)) return r.c[t];
+      for (let t = 0; t < r.c.length; t++) if (n(r.c[t].bR, e)) return r.c[t];
     }
     function o(e, r) {
       if (n(e.eR, r)) {
@@ -184,23 +184,23 @@
       return !a && n(r.iR, e);
     }
     function b(e, r) {
-      var t = N.cI ? r[0].toLowerCase() : r[0];
+      const t = N.cI ? r[0].toLowerCase() : r[0];
       return e.k.hasOwnProperty(t) && e.k[t];
     }
     function g(e, r, t, n) {
-      var a = n ? "" : w.classPrefix,
-        c = '<span class="' + a,
-        i = t ? "" : "</span>";
-      return (c += e + '">'), c + r + i;
+      const a = n ? "" : w.classPrefix;
+        let c = `<span class="${  a}`;
+        const i = t ? "" : "</span>";
+      return (c += `${e  }">`), c + r + i;
     }
     function p() {
       if (!M.k) return r(B);
-      var e = "",
-        t = 0;
+      let e = "";
+        let t = 0;
       M.lR.lastIndex = 0;
-      for (var n = M.lR.exec(B); n; ) {
+      for (let n = M.lR.exec(B); n; ) {
         e += r(B.substr(t, n.index - t));
-        var a = b(M, n);
+        const a = b(M, n);
         a ? ((L += a[1]), (e += g(a[0], r(n[0])))) : (e += r(n[0])),
           (t = M.lR.lastIndex),
           (n = M.lR.exec(B));
@@ -208,9 +208,9 @@
       return e + r(B.substr(t));
     }
     function h() {
-      var e = "string" == typeof M.sL;
+      const e = typeof M.sL === "string";
       if (e && !y[M.sL]) return r(B);
-      var t = e ? l(M.sL, B, !0, R[M.sL]) : f(B, M.sL.length ? M.sL : void 0);
+      const t = e ? l(M.sL, B, !0, R[M.sL]) : f(B, M.sL.length ? M.sL : void 0);
       return (
         M.r > 0 && (L += t.r),
         e && (R[M.sL] = t.top),
@@ -221,7 +221,7 @@
       return void 0 !== M.sL ? h() : p();
     }
     function m(e, t) {
-      var n = e.cN ? g(e.cN, "", !0) : "";
+      const n = e.cN ? g(e.cN, "", !0) : "";
       e.rB
         ? ((x += n), (B = ""))
         : e.eB
@@ -231,11 +231,11 @@
     }
     function v(e, t) {
       if (((B += e), void 0 === t)) return (x += d()), 0;
-      var n = i(t, M);
+      const n = i(t, M);
       if (n) return (x += d()), m(n, t), n.rB ? 0 : t.length;
-      var a = o(M, t);
+      const a = o(M, t);
       if (a) {
-        var c = M;
+        const c = M;
         c.rE || c.eE || (B += t), (x += d());
         do M.cN && (x += "</span>"), (L += M.r), (M = M.parent);
         while (M != a.parent);
@@ -248,20 +248,20 @@
       }
       if (s(t, M))
         throw new Error(
-          'Illegal lexeme "' + t + '" for mode "' + (M.cN || "<unnamed>") + '"',
+          `Illegal lexeme "${  t  }" for mode "${  M.cN || "<unnamed>"  }"`,
         );
       return (B += t), t.length || 1;
     }
     var N = E(e);
-    if (!N) throw new Error('Unknown language: "' + e + '"');
+    if (!N) throw new Error(`Unknown language: "${  e  }"`);
     u(N);
-    var C,
-      M = c || N,
-      R = {},
-      x = "";
+    let C;
+      var M = c || N;
+      var R = {};
+      var x = "";
     for (C = M; C != N; C = C.parent) C.cN && (x = g(C.cN, "", !0) + x);
-    var B = "",
-      L = 0;
+    var B = "";
+      var L = 0;
     try {
       for (var S, A, k = 0; (M.t.lastIndex = k), (S = M.t.exec(t)), S; )
         (A = v(t.substr(k, S.index - k), S[0])), (k = S.index + A);
@@ -269,18 +269,18 @@
         C.cN && (x += "</span>");
       return { r: L, value: x, language: e, top: M };
     } catch (I) {
-      if (-1 != I.message.indexOf("Illegal")) return { r: 0, value: r(t) };
+      if (I.message.indexOf("Illegal") != -1) return { r: 0, value: r(t) };
       throw I;
     }
   }
   function f(e, t) {
     t = t || w.languages || Object.keys(y);
-    var n = { r: 0, value: r(e) },
-      a = n;
+    let n = { r: 0, value: r(e) };
+      let a = n;
     return (
       t.forEach(function(r) {
         if (E(r)) {
-          var t = l(r, e, !1);
+          const t = l(r, e, !1);
           (t.language = r),
             t.r > a.r && (a = t),
             t.r > n.r && ((a = n), (n = t));
@@ -301,18 +301,18 @@
     );
   }
   function g(e, r, t) {
-    var n = r ? C[r] : t,
-      a = [e.trim()];
+    const n = r ? C[r] : t;
+      const a = [e.trim()];
     return (
       e.match(/\bhljs\b/) || a.push("hljs"),
-      -1 === e.indexOf(n) && a.push(n),
+      e.indexOf(n) === -1 && a.push(n),
       a.join(" ").trim()
     );
   }
   function p(e) {
-    var r = c(e);
+    const r = c(e);
     if (!a(r)) {
-      var t;
+      let t;
       w.useBR
         ? ((t = document.createElementNS(
             "http://www.w3.org/1999/xhtml",
@@ -322,11 +322,11 @@
             .replace(/\n/g, "")
             .replace(/<br[ \/]*>/g, "\n")))
         : (t = e);
-      var n = t.textContent,
-        i = r ? l(r, n, !0) : f(n),
-        u = o(t);
+      const n = t.textContent;
+        const i = r ? l(r, n, !0) : f(n);
+        const u = o(t);
       if (u.length) {
-        var p = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+        const p = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
         (p.innerHTML = i.value), (i.value = s(u, o(p), n));
       }
       (i.value = b(i.value)),
@@ -346,7 +346,7 @@
   function d() {
     if (!d.called) {
       d.called = !0;
-      var e = document.querySelectorAll("pre code");
+      const e = document.querySelectorAll("pre code");
       Array.prototype.forEach.call(e, p);
     }
   }
@@ -355,7 +355,7 @@
       addEventListener("load", d, !1);
   }
   function v(r, t) {
-    var n = (y[r] = t(e));
+    const n = (y[r] = t(e));
     n.aliases &&
       n.aliases.forEach(function(e) {
         C[e] = r;
@@ -372,9 +372,9 @@
       tabReplace: null,
       useBR: !1,
       languages: void 0,
-    },
-    y = {},
-    C = {};
+    };
+    var y = {};
+    var C = {};
   return (
     (e.highlight = l),
     (e.highlightAuto = f),
@@ -402,7 +402,7 @@
       b: /\b(a|an|the|are|I|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|like)\b/,
     }),
     (e.C = function(r, t, n) {
-      var a = e.inherit({ cN: "comment", b: r, e: t, c: [] }, n || {});
+      const a = e.inherit({ cN: "comment", b: r, e: t, c: [] }, n || {});
       return (
         a.c.push(e.PWM),
         a.c.push({ cN: "doctag", b: "(?:TODO|FIXME|NOTE|BUG|XXX):", r: 0 }),
@@ -418,8 +418,8 @@
     (e.CSSNM = {
       cN: "number",
       b:
-        e.NR +
-        "(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",
+        `${e.NR 
+        }(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?`,
       r: 0,
     }),
     (e.RM = {
@@ -435,10 +435,10 @@
   );
 }),
   hljs.registerLanguage("json", function(e) {
-    var r = { literal: "true false null" },
-      t = [e.QSM, e.CNM],
-      n = { e: ",", eW: !0, eE: !0, c: t, k: r },
-      a = {
+    const r = { literal: "true false null" };
+      const t = [e.QSM, e.CNM];
+      const n = { e: ",", eW: !0, eE: !0, c: t, k: r };
+      const a = {
         b: "{",
         e: "}",
         c: [
@@ -454,14 +454,14 @@
           },
         ],
         i: "\\S",
-      },
-      c = { b: "\\[", e: "\\]", c: [e.inherit(n)], i: "\\S" };
+      };
+      const c = { b: "\\[", e: "\\]", c: [e.inherit(n)], i: "\\S" };
     return t.splice(t.length, 0, a, c), { c: t, k: r, i: "\\S" };
   }),
   hljs.registerLanguage("xml", function(e) {
-    var r = "[A-Za-z0-9\\._:-]+",
-      t = { b: /<\?(php)?(?!\w)/, e: /\?>/, sL: "php" },
-      n = {
+    const r = "[A-Za-z0-9\\._:-]+";
+      const t = { b: /<\?(php)?(?!\w)/, e: /\?>/, sL: "php" };
+      const n = {
         eW: !0,
         i: /</,
         r: 0,
@@ -558,7 +558,7 @@
           r: 0,
         },
         {
-          b: "(" + e.RSR + "|\\b(case|return|throw)\\b)\\s*",
+          b: `(${  e.RSR  }|\\b(case|return|throw)\\b)\\s*`,
           k: "return throw case",
           c: [
             e.CLCM,
@@ -587,7 +587,7 @@
           i: /\[|%/,
         },
         { b: /\$[(.]/ },
-        { b: "\\." + e.IR, r: 0 },
+        { b: `\\.${  e.IR}`, r: 0 },
         {
           cN: "class",
           bK: "class",
@@ -602,8 +602,8 @@
     };
   }),
   hljs.registerLanguage("css", function(e) {
-    var r = "[a-zA-Z-][a-zA-Z0-9_-]*",
-      t = {
+    const r = "[a-zA-Z-][a-zA-Z0-9_-]*";
+      const t = {
         b: /[A-Z\_\.\-]+\s*:/,
         rB: !0,
         e: ";",

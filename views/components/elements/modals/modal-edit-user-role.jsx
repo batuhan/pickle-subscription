@@ -12,16 +12,16 @@ class ModalEditUserRole extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = `Edit User Role`;
+    const self = this;
+    const pageName = `Edit User Role`;
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <div className="row">

@@ -7,33 +7,39 @@ class OfferingsStatsWidgets extends React.Component {
   }
 
   render() {
-    let self = this;
-    let analytics = self.props.data;
+    const self = this;
+    const analytics = self.props.data;
     return (
       <div className="offerings-widgets row">
         <div className="offerings-widget master col-md-2">
-          Total Offerings: <b>{analytics.offeringStats.total}</b>
+          Total Offerings: 
+          {' '}
+          <b>{analytics.offeringStats.total}</b>
         </div>
         <div className="offerings-widget col-md-3">
-          Subscriptions:{" "}
+          Subscriptions:
+          {" "}
           <span className="status-badge green">
             <b>{analytics.offeringStats.totalSubscription}</b>
           </span>
         </div>
         <div className="offerings-widget col-md-3">
-          Scheduled Payments:{" "}
+          Scheduled Payments:
+          {" "}
           <span className="status-badge green">
             <b>{analytics.offeringStats.totalSplit}</b>
           </span>
         </div>
         <div className="offerings-widget col-md-2">
-          One Times:{" "}
+          One Times:
+          {" "}
           <span className="status-badge green">
             <b>{analytics.offeringStats.totalOneTime}</b>
           </span>
         </div>
         <div className="offerings-widget col-md-2">
-          Quotes:{" "}
+          Quotes:
+          {" "}
           <span className="status-badge green">
             <b>{analytics.offeringStats.totalQuote}</b>
           </span>

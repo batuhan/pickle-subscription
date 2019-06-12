@@ -1,10 +1,10 @@
-let sagaMiddleware = require("../../middleware/express-saga-middleware");
-let { call, put, all, select } = require("redux-saga/effects");
-let { triggerEvent } = require("../../config/redux/actions");
+const sagaMiddleware = require("../../middleware/express-saga-middleware");
+const { call, put, all, select } = require("redux-saga/effects");
+const { triggerEvent } = require("../../config/redux/actions");
 
 module.exports = function*(configurationManager) {
   function* getPublic(req, res, next) {
-    let publicOptions = yield call(
+    const publicOptions = yield call(
       configurationManager.getConfigurations,
       true,
     );
@@ -12,13 +12,13 @@ module.exports = function*(configurationManager) {
   }
 
   function* updatePublic(req, res, next) {
-    let updates = yield call(
+    const updates = yield call(
       configurationManager.updateConfigurations,
       req.body,
       true,
     );
-    //todo: why is this so stupid
-    let reduced = updates.reduce((settings, setting) => {
+    // todo: why is this so stupid
+    const reduced = updates.reduce((settings, setting) => {
       settings[setting[0].option] = setting[0].value;
       return settings;
     }, {});
@@ -29,11 +29,11 @@ module.exports = function*(configurationManager) {
     res.json({ secret: process.env.SECRET_KEY });
   }
 
-  //todo: maybe api gateway can make saga middleware?
-  let getPublicMiddleware = yield call(sagaMiddleware, getPublic);
-  let putPublicMiddleware = yield call(sagaMiddleware, updatePublic);
+  // todo: maybe api gateway can make saga middleware?
+  const getPublicMiddleware = yield call(sagaMiddleware, getPublic);
+  const putPublicMiddleware = yield call(sagaMiddleware, updatePublic);
 
-  let routeDefinition = [
+  const routeDefinition = [
     {
       endpoint: "/system-options/public",
       method: "get",

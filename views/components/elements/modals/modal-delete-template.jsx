@@ -1,15 +1,15 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import Alerts from "../alerts.jsx";
 
 class ModalDeleteTemplate extends React.Component {
   constructor(props) {
     super(props);
-    let templateObject = this.props.templateObject;
+    const {templateObject} = this.props;
     this.state = {
       loading: true,
       template: templateObject,
@@ -27,7 +27,7 @@ class ModalDeleteTemplate extends React.Component {
   }
 
   fetchTemplate() {
-    let self = this;
+    const self = this;
     Fetcher(
       `/api/v1/service-templates/${self.state.template_id}`,
       "GET",
@@ -46,7 +46,7 @@ class ModalDeleteTemplate extends React.Component {
   }
 
   onDelete(event) {
-    let self = this;
+    const self = this;
     event.preventDefault();
     self.setState({ loading: false });
     Fetcher(self.state.action_url, "DELETE", {}).then(function(response) {
@@ -75,16 +75,16 @@ class ModalDeleteTemplate extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
-      let self = this;
-      let pageName = "Delete a Service";
-      let pageMessage = "delete";
-      let actionFunction = this.onDelete;
-      let currentModal = self.state.current_modal;
-      let template = self.state.template;
-      let name = template.name;
-      let description = template.description;
-      let status = template.published;
+    } 
+      const self = this;
+      const pageName = "Delete a Service";
+      const pageMessage = "delete";
+      const actionFunction = this.onDelete;
+      const currentModal = self.state.current_modal;
+      const {template} = self.state;
+      const {name} = template;
+      const {description} = template;
+      const status = template.published;
 
       if (currentModal == "modal_action") {
         return (
@@ -92,7 +92,7 @@ class ModalDeleteTemplate extends React.Component {
             modalTitle={pageName}
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -110,18 +110,31 @@ class ModalDeleteTemplate extends React.Component {
                   <div className="col-xs-12">
                     <p>
                       <strong>
-                        You are about to {pageMessage} the following service.
+                        You are about to 
+                        {' '}
+                        {pageMessage}
+                        {' '}
+the following service.
                       </strong>
                     </p>
                     <ul>
-                      <li>Service: {name}</li>
-                      <li>Description: {description}</li>
-                      <li>Status: {status ? "Published" : "Unpublished"}</li>
+                      <li>
+Service:
+                        {name}
+                      </li>
+                      <li>
+Description:
+                        {description}
+                      </li>
+                      <li>
+Status:
+                        {status ? "Published" : "Unpublished"}
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-primary btn-rounded"
                   onClick={actionFunction}
@@ -138,7 +151,7 @@ class ModalDeleteTemplate extends React.Component {
             </div>
           </Modal>
         );
-      } else if (currentModal == "modal_action_success") {
+      } if (currentModal == "modal_action_success") {
         return (
           <Modal
             modalTitle={pageName}
@@ -151,7 +164,11 @@ class ModalDeleteTemplate extends React.Component {
                   <div className="col-xs-12">
                     <p>
                       <strong>
-                        You have successfully {pageMessage} {name}
+                        You have successfully 
+                        {' '}
+                        {pageMessage} 
+                        {' '}
+                        {name}
                       </strong>
                     </p>
                   </div>
@@ -161,7 +178,7 @@ class ModalDeleteTemplate extends React.Component {
           </Modal>
         );
       }
-    }
+    
   }
 }
 

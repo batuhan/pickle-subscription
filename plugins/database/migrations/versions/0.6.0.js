@@ -1,5 +1,5 @@
 module.exports = {
-  up: function(knex) {
+  up(knex) {
     return knex.schema
       .alterTable("properties", t => {
         t.jsonb("config");
@@ -10,7 +10,7 @@ module.exports = {
         return knex("service_template_properties").where(true, true);
       })
       .then(props => {
-        let propUpdates = props.map(prop => {
+        const propUpdates = props.map(prop => {
           prop.type = prop.prop_input_type;
           prop.data = { value: prop.value };
           if (prop.prop_values) {
@@ -26,7 +26,7 @@ module.exports = {
         return knex("service_instance_properties").where(true, true);
       })
       .then(props => {
-        let propUpdates = props.map(prop => {
+        const propUpdates = props.map(prop => {
           prop.data = { value: prop.value };
           return knex("service_instance_properties")
             .where("id", prop.id)
@@ -47,7 +47,7 @@ module.exports = {
           });
       });
   },
-  down: function(knex) {
+  down(knex) {
     return Promise.resolve(
       knex.schema
         .alterTable("service_template_properties", t => {
@@ -64,7 +64,7 @@ module.exports = {
           return knex("properties").where(true, true);
         })
         .then(props => {
-          let propUpdates = props.map(prop => {
+          const propUpdates = props.map(prop => {
             if (prop.data && prop.data.value) {
               console.log("UPDATERR");
               prop.value = prop.data.value;
@@ -82,7 +82,7 @@ module.exports = {
         })
         .then(props => {
           console.log(props);
-          let propUpdates = props.map(prop => {
+          const propUpdates = props.map(prop => {
             if (prop.config && prop.config.value) {
               prop.prop_values = prop.config.value;
             }

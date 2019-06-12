@@ -11,13 +11,13 @@ class Buttons extends React.Component {
   }
 
   processButton(link, id) {
-    let myLink = _.isFunction(link) ? link(this.props.active) : link;
+    const myLink = _.isFunction(link) ? link(this.props.active) : link;
 
     if (myLink) {
-      let linkArray = myLink.split("/");
+      const linkArray = myLink.split("/");
       if (linkArray.indexOf(":id") > -1) {
         linkArray[linkArray.indexOf(":id")] = id;
-        let resultLink = linkArray.join("/");
+        const resultLink = linkArray.join("/");
 
         return resultLink;
       }

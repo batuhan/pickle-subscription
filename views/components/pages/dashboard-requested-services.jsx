@@ -31,7 +31,7 @@ class DashboardRequestedServices extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
+    const self = this;
 
     Fetcher("/api/v1/service-instances/search?key=status&value=requested").then(
       function(response) {
@@ -60,12 +60,15 @@ class DashboardRequestedServices extends React.Component {
       </div>
     );
   }
+
   nameFormatter(cell, row) {
     return <Link to={`/service-instance/${row.id}`}>{cell}</Link>;
   }
+
   createdFormatter(cell) {
     return <DateFormat date={cell} time />;
   }
+
   rowActionsFormatter(cell, row) {
     return (
       <Dropdown
@@ -86,7 +89,7 @@ class DashboardRequestedServices extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <ServiceBotTableBase
           noDataText="There are no newly ordered products / services yet!"
@@ -105,7 +108,7 @@ class DashboardRequestedServices extends React.Component {
           <TableHeaderColumn
             dataField="name"
             dataFormat={this.nameFormatter}
-            dataSort={true}
+            dataSort
             width="200"
           >
             Product / Service Name
@@ -113,23 +116,23 @@ class DashboardRequestedServices extends React.Component {
           <TableHeaderColumn
             dataField="created_at"
             dataFormat={this.createdFormatter}
-            dataSort={true}
+            dataSort
             width="80"
           >
             Created On
           </TableHeaderColumn>
           <TableHeaderColumn
             dataField="Actions"
-            className={"action-column-header"}
-            columnClassName={"action-column"}
+            className="action-column-header"
+            columnClassName="action-column"
             dataFormat={this.rowActionsFormatter}
             searchable={false}
             width="80"
             filter={false}
-          ></TableHeaderColumn>
+          />
         </ServiceBotTableBase>
       );
-    }
+    
   }
 }
 

@@ -3,14 +3,14 @@ import { TwitterPicker, SketchPicker } from "react-color";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { connect } from "react-redux";
 
-let _ = require("lodash");
-let values = require("object.values");
+const _ = require("lodash");
+const values = require("object.values");
 
 if (!Object.values) {
   values.shim();
 }
 class Inputs extends React.Component {
-  //TODO: make default value get set in dataform on mounting component
+  // TODO: make default value get set in dataform on mounting component
   constructor(props) {
     super(props);
     this.state = { type: this.props.type, value: null };
@@ -83,25 +83,25 @@ class Inputs extends React.Component {
   }
 
   clickInsideListener(event) {
-    let self = this;
-    let colorPickerElement = document.getElementById(
+    const self = this;
+    const colorPickerElement = document.getElementById(
       `color_picker_${self.state.name}`,
     );
-    let isClickInside = colorPickerElement.contains(event.target);
+    const isClickInside = colorPickerElement.contains(event.target);
     if (!isClickInside) {
       self.setState({ showPicker: false, showCustomPicker: false });
     }
   }
 
-  //process dependency
+  // process dependency
   manageDependency() {
-    let self = this;
-    let dependencies = this.props.manageDependency;
+    const self = this;
+    const dependencies = this.props.manageDependency;
     if (dependencies) {
       return React.Children.map(self.props.children, child => {
-        let newProps = dependencies.map(dep => {
+        const newProps = dependencies.map(dep => {
           if (child.props.name == dep.dependsOn) {
-            let dependentChild = React.Children.map(
+            const dependentChild = React.Children.map(
               self.props.children,
               child => {
                 if (child.props.name == dep.name) {
@@ -114,15 +114,15 @@ class Inputs extends React.Component {
         })[0];
         if (newProps) {
           return React.cloneElement(child, newProps);
-        } else {
+        } 
           return child;
-        }
+        
       });
     }
   }
 
-  //filters children based on the this component's props' filter function's result.
-  //will show child elements based on parent value.
+  // filters children based on the this component's props' filter function's result.
+  // will show child elements based on parent value.
   renderChildren(parentValue) {
     let myChildren = this.props.children;
     if (this.props.manageDependency) {
@@ -137,23 +137,23 @@ class Inputs extends React.Component {
   }
 
   handleChange(e) {
-    let value = e.target.value || e.target.defaultValue;
+    const value = e.target.value || e.target.defaultValue;
     if (this.props.dependentFunction) {
       this.props.dependentFunction(value, this.props.dependent);
     }
 
-    //we will not need to do this for props.formLess when we move everything to the new way of submitting forms
+    // we will not need to do this for props.formLess when we move everything to the new way of submitting forms
     if (this.props.onChange && this.props.formLess === true) {
       this.props.onChange(e, this);
-      this.setState({ value: value });
+      this.setState({ value });
     } else {
       this.props.onChange(e);
     }
   }
 
   handlePriceChange(e) {
-    let self = this;
-    let value = e.target.value || e.target.defaultValue;
+    const self = this;
+    const value = e.target.value || e.target.defaultValue;
 
     if (!isNaN(value)) {
       if (value != "" && value != null) {
@@ -161,28 +161,28 @@ class Inputs extends React.Component {
         this.props.onChange(e);
       } else if (value == 0) {
         self.setState({ priceValue: 0 });
-        let newEvent = e;
+        const newEvent = e;
         newEvent.target.value = 0;
         this.props.onChange(newEvent);
       } else {
         self.setState({ priceValue: 0 });
-        let newEvent = e;
+        const newEvent = e;
         newEvent.target.value = null;
         this.props.onChange(newEvent);
       }
       self.setState({ error: false });
     } else {
-      let newEvent = e;
+      const newEvent = e;
       newEvent.target.value = null;
       self.setState({ error: "Price must be a whole number." });
     }
   }
 
   handleColorPickerChange(color, e) {
-    //change the color picker colors
-    let currentColor = this.state.value;
-    let currentColors = this.state.colors;
-    let indexOfColor = _.indexOf(currentColors, _.toUpper(currentColor));
+    // change the color picker colors
+    const currentColor = this.state.value;
+    const currentColors = this.state.colors;
+    const indexOfColor = _.indexOf(currentColors, _.toUpper(currentColor));
     if (indexOfColor) {
       currentColors[indexOfColor] = _.toUpper(color.hex);
     }
@@ -190,37 +190,39 @@ class Inputs extends React.Component {
     this.setState(
       { value: _.toUpper(color.hex), colors: currentColors, showPicker: false },
       () => {
-        let event = {
+        const event = {
           currentTarget: {
             name: this.state.name,
             value: this.state.value,
           },
         };
         this.props.onChange(event);
-        //remove event listener for clicking outside
+        // remove event listener for clicking outside
         document
           .getElementById(`color_picker_${this.state.name}`)
           .removeEventListener("click", this.clickInsideListener);
       },
     );
   }
+
   handleShowPicker() {
     this.setState({ showPicker: true });
   }
+
   handleShowCustomPicker() {
     this.setState({ showCustomPicker: true });
   }
 
   render() {
-    //initializing data
-    const type = this.state.type;
-    let maxLength = this.props.maxLength ? this.props.maxLength : false;
-    let name = this.props.name ? this.props.name : false;
-    let label = this.props.label ? this.props.label : false;
-    let hideLabel = this.props.hideLabel ? this.props.hideLabel : false;
-    let defaultValue = this.props.value || this.props.defaultValue;
-    let placeholder = this.props.placeholder;
-    let disabled = this.props.disabled ? true : false;
+    // initializing data
+    const {type} = this.state;
+    const maxLength = this.props.maxLength ? this.props.maxLength : false;
+    const name = this.props.name ? this.props.name : false;
+    const label = this.props.label ? this.props.label : false;
+    const hideLabel = this.props.hideLabel ? this.props.hideLabel : false;
+    const defaultValue = this.props.value || this.props.defaultValue;
+    const {placeholder} = this.props;
+    const disabled = !!this.props.disabled;
     let error =
       this.props.errors && this.props.errors.length
         ? this.props.errors[0].message
@@ -229,14 +231,14 @@ class Inputs extends React.Component {
         : this.state.error
         ? this.state.error
         : false;
-    let warning = this.props.warning ? this.props.warning : false;
+    const warning = this.props.warning ? this.props.warning : false;
 
-    let { options } = this.props;
-    let prefix = options.currency
+    const { options } = this.props;
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
 
-    //error checking props
+    // error checking props
     if (!name) {
       error = "Component requires a name passed in props.";
     } else if (!label && type != "hidden" && !hideLabel) {
@@ -273,8 +275,8 @@ class Inputs extends React.Component {
           {warning && <span className="help-block">{warning}</span>}
         </div>
       );
-    } else if (type == "price") {
-      //TODO: Handle on load, change the price mask for editing forms
+    } if (type == "price") {
+      // TODO: Handle on load, change the price mask for editing forms
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -306,8 +308,8 @@ class Inputs extends React.Component {
           {warning && <span className="help-block">{warning}</span>}
         </div>
       );
-    } else if (type == "textarea") {
-      let row = this.props.row ? this.props.row : 4;
+    } if (type == "textarea") {
+      const row = this.props.row ? this.props.row : 4;
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -328,7 +330,7 @@ class Inputs extends React.Component {
           {warning && <span className="help-block">{warning}</span>}
         </div>
       );
-    } else if (type == "select") {
+    } if (type == "select") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -348,7 +350,7 @@ class Inputs extends React.Component {
             {this.props.value == null &&
             defaultValue == null &&
             !this.props.hideValue ? (
-              <option value={null}>{""}</option>
+              <option value={null} />
             ) : (
               ""
             )}
@@ -356,15 +358,15 @@ class Inputs extends React.Component {
               this.props.options.map(option => (
                 <option
                   key={`option-${
-                    typeof option == "object" ? Object.keys(option)[0] : option
+                    typeof option === "object" ? Object.keys(option)[0] : option
                   }`}
                   value={
-                    typeof option == "object"
+                    typeof option === "object"
                       ? Object.values(option)[0]
                       : option
                   }
                 >
-                  {typeof option == "object" ? Object.keys(option)[0] : option}
+                  {typeof option === "object" ? Object.keys(option)[0] : option}
                 </option>
               ))
             ) : (
@@ -373,14 +375,14 @@ class Inputs extends React.Component {
                 objects
               </span>
             )}
-            {/*<option value={this.props.value || this.props.defaultValue}>{this.props.value || this.props.defaultValue}</option>*/}
+            {/* <option value={this.props.value || this.props.defaultValue}>{this.props.value || this.props.defaultValue}</option> */}
           </select>
           {error && <span className="help-block">{error}</span>}
           {warning && <span className="help-block">{warning}</span>}
           {this.renderChildren(this.props.value || defaultValue)}
         </div>
       );
-    } else if (type == "bool" || type == "boolean") {
+    } if (type == "bool" || type == "boolean") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -397,14 +399,14 @@ class Inputs extends React.Component {
             name={name}
             onChange={this.handleChange}
           >
-            <option value={true}>True</option>
+            <option value>True</option>
             <option value={false}>False</option>
           </select>
           {error && <span className="help-block">{error}</span>}
           {warning && <span className="help-block">{warning}</span>}
         </div>
       );
-    } else if (type == "checkbox") {
+    } if (type == "checkbox") {
       return (
         <div className={`form-group ${error ? "has-error" : ""}`}>
           {label && <label className="control-label">{label}</label>}
@@ -420,7 +422,7 @@ class Inputs extends React.Component {
           )}
         </div>
       );
-    } else if (type == "color_picker") {
+    } if (type == "color_picker") {
       return (
         <div
           key={`color_picker_${this.state.name}`}
@@ -436,10 +438,10 @@ class Inputs extends React.Component {
             className="ColorPickerPreview"
             style={{
               backgroundColor: this.state.value,
-              width: 50 + "px",
-              height: 50 + "px",
+              width: `${50  }px`,
+              height: `${50  }px`,
               cursor: "pointer",
-              borderRadius: 5 + "px",
+              borderRadius: `${5  }px`,
             }}
             onClick={this.handleShowPicker}
           />
@@ -463,10 +465,10 @@ class Inputs extends React.Component {
               onChange={this.handleColorPickerChange}
             />
           )}
-          {/*{ this.state.showCustomPicker &&*/}
-          {/*<SketchPicker color={{color: {hex: this.state.value}}} colors={this.state.colors}*/}
-          {/*onChange={this.handleColorPickerChange}/>*/}
-          {/*}*/}
+          {/* { this.state.showCustomPicker && */}
+          {/* <SketchPicker color={{color: {hex: this.state.value}}} colors={this.state.colors} */}
+          {/* onChange={this.handleColorPickerChange}/> */}
+          {/* } */}
           {this.props.error && (
             <span className="help-block">{this.props.error}</span>
           )}

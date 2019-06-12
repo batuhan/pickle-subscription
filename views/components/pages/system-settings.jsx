@@ -17,8 +17,8 @@ class SystemSettings extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let subtitle = "Change system settings, theme, and content";
+    const pageName = this.props.route.name;
+    const subtitle = "Change system settings, theme, and content";
     return (
       <Authorizer permissions="can_administrate">
         <Jumbotron pageName={pageName} subtitle={subtitle} />

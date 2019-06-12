@@ -1,12 +1,12 @@
 module.exports = {
-  up: async function(knex) {
-    let SystemOptions = require("../../../../models/base/entity")(
+  async up(knex) {
+    const SystemOptions = require("../../../../models/base/entity")(
       "system_options",
       [],
       "option",
       knex,
     );
-    let optionUpdates = {
+    const optionUpdates = {
       service_box_body_text_color: {
         option: "service_box_body_text_color",
         value: "#000000",
@@ -123,5 +123,5 @@ module.exports = {
     return await SystemOptions.batchUpdate(Object.values(optionUpdates));
   },
 
-  down: async function(knex) {},
+  async down(knex) {},
 };

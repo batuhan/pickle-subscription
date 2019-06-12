@@ -41,9 +41,9 @@ class FileUploader extends React.Component {
   }
 
   onFileSelected(e) {
-    let self = this;
+    const self = this;
     self.setState({ loadingFile: true });
-    let src = e.currentTarget;
+    const src = e.currentTarget;
 
     self.setState(
       { loadingFile: false, fileSelected: true, theFile: src.files[0] },
@@ -59,8 +59,8 @@ class FileUploader extends React.Component {
 
   handleFile(e) {
     if (e != undefined) e.preventDefault();
-    let self = this;
-    let init = {
+    const self = this;
+    const init = {
       method: "POST",
       credentials: "include",
       body: new FormData(
@@ -130,9 +130,9 @@ class FileUploader extends React.Component {
                 style={{ display: "none" }}
               />
             </div>
-            {/*{(this.state.fileSelected && this.state.uploadButton) &&*/}
-            {/*<div className="file-upload-message"><span className="help-block">{`selected ${this.state.theFile.name}, click save file to upload.`}</span></div>*/}
-            {/*}*/}
+            {/* {(this.state.fileSelected && this.state.uploadButton) && */}
+            {/* <div className="file-upload-message"><span className="help-block">{`selected ${this.state.theFile.name}, click save file to upload.`}</span></div> */}
+            {/* } */}
           </form>
         </div>
       </div>

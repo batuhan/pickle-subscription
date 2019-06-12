@@ -1,13 +1,14 @@
 import React from "react";
-let _ = require("lodash");
 import update from "immutability-helper";
 import Inputs from "../../utilities/inputs.jsx";
 import InfoToolTip from "../tooltips/info-tooltip.jsx";
 
+const _ = require("lodash");
+
 class ServiceTemplateFormSubscriptionFields extends React.Component {
   constructor(props) {
     super(props);
-    let templateData = this.props.templateData || {};
+    const templateData = this.props.templateData || {};
     this.state = {
       serviceType: this.props.serviceType || "_SUBSCRIPTION",
       data: {
@@ -41,7 +42,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
   }
 
   getServiceType() {
-    let serviceType = this.state.serviceType;
+    const {serviceType} = this.state;
     let serviceTypeAttribute = "";
     if (serviceType == "_SUBSCRIPTION") {
       serviceTypeAttribute = "subscription";
@@ -54,7 +55,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
   }
 
   componentDidMount() {
-    let set = { form: { $merge: this.state.data[this.getServiceType()] } };
+    const set = { form: { $merge: this.state.data[this.getServiceType()] } };
     this.props.onChange(null, set);
   }
 
@@ -62,8 +63,8 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
     if (!_.isObject(e)) {
       return;
     }
-    let serviceType = this.state.serviceType;
-    let set = { data: {} };
+    const {serviceType} = this.state;
+    const set = { data: {} };
     let serviceTypeAttribute = "";
     if (serviceType == "_SUBSCRIPTION") {
       serviceTypeAttribute = "subscription";
@@ -75,7 +76,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
     set.data[serviceTypeAttribute] = {};
     set.data[serviceTypeAttribute][e.target.name] = { $set: e.target.value };
 
-    let formSet = { form: { [e.target.name]: { $set: e.target.value } } };
+    const formSet = { form: { [e.target.name]: { $set: e.target.value } } };
     const newData = update(this.state, set);
     this.props.onChange(null, formSet);
     this.setState(newData);
@@ -92,21 +93,21 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
       serviceTypeAttribute = "custom";
     }
 
-    let set = { form: { $merge: this.state.data[serviceTypeAttribute] } };
+    const set = { form: { $merge: this.state.data[serviceTypeAttribute] } };
     this.props.onChange(null, set);
     this.setState({ serviceType: e.target.value });
   }
 
   render() {
-    let defaultData = this.state.data;
+    const defaultData = this.state.data;
 
-    let serviceType = this.state.serviceType;
-    let serviceFields = () => {
+    const {serviceType} = this.state;
+    const serviceFields = () => {
       if (serviceType == "_SUBSCRIPTION") {
         return (
           <div className="service-fields">
             <div className="form-group">
-              {/*<label className="control-label">Service Subscription Amount</label>*/}
+              {/* <label className="control-label">Service Subscription Amount</label> */}
               <Inputs
                 key="subscription_amount"
                 type="price"
@@ -115,11 +116,12 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
                 value={defaultData.subscription.amount}
                 onChange={this.handleChange}
               />
-              {/*<input className="form-control" type="number" name="amount" value={defaultData.subscription.amount} onChange={this.handleChange}/>*/}
+              {/* <input className="form-control" type="number" name="amount" value={defaultData.subscription.amount} onChange={this.handleChange}/> */}
             </div>
             <div className="form-group">
               <label className="control-label">
-                Bill Customer Every{" "}
+                Bill Customer Every
+                {" "}
                 <InfoToolTip
                   title={
                     'If selected "Month" for billing cycle, and interval is 3, the customer will be charged every three months.'
@@ -152,28 +154,28 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
                     value={defaultData.subscription.interval}
                     onChange={this.handleChange}
                   >
-                    <option value={"day"}>Day</option>
-                    <option value={"week"}>Week</option>
-                    <option value={"month"}>Month</option>
-                    <option value={"year"}>Year</option>
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
                   </select>
                 </div>
               </div>
             </div>
-            {/*<div className="form-group">*/}
-            {/*<label className="control-label">Prorated? <InfoToolTip title={''} text="i" placement="right"/></label>*/}
-            {/*<select className="form-control" type="select" name="subscription_prorate" value={defaultData.subscription.subscription_prorate} onChange={this.handleChange}>*/}
-            {/*<option value={true}>Yes</option>*/}
-            {/*<option value={false}>No</option>*/}
-            {/*</select>*/}
-            {/*</div>*/}
+            {/* <div className="form-group"> */}
+            {/* <label className="control-label">Prorated? <InfoToolTip title={''} text="i" placement="right"/></label> */}
+            {/* <select className="form-control" type="select" name="subscription_prorate" value={defaultData.subscription.subscription_prorate} onChange={this.handleChange}> */}
+            {/* <option value={true}>Yes</option> */}
+            {/* <option value={false}>No</option> */}
+            {/* </select> */}
+            {/* </div> */}
           </div>
         );
-      } else if (serviceType == "_ONE_TIME") {
+      } if (serviceType == "_ONE_TIME") {
         return (
           <div className="service-fields">
             <div className="form-group">
-              {/*<label className="control-label">One-Time Charge Amount</label>*/}
+              {/* <label className="control-label">One-Time Charge Amount</label> */}
               <input
                 className="form-control"
                 type="hidden"
@@ -188,7 +190,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
                 value={defaultData.one_time.amount}
                 onChange={this.handleChange}
               />
-              {/*<input className="form-control" type="number" name="amount2" value={defaultData.one_time.amount} onChange={this.handleChange}/>*/}
+              {/* <input className="form-control" type="number" name="amount2" value={defaultData.one_time.amount} onChange={this.handleChange}/> */}
             </div>
             <div className="form-group">
               <input
@@ -219,7 +221,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
             </div>
           </div>
         );
-      } else if (serviceType == "_CUSTOM") {
+      } if (serviceType == "_CUSTOM") {
         return (
           <div className="service-fields">
             <p className="help-block">

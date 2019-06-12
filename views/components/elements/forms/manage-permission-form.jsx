@@ -4,7 +4,8 @@ import Fetcher from "../../utilities/fetcher.jsx";
 import ContentTitle from "../../layouts/content-title.jsx";
 import Buttons from "../buttons.jsx";
 import Alerts from "../alerts.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class RoleToggle extends React.Component {
   constructor(props) {
@@ -77,7 +78,7 @@ class ManagePermissionForm extends React.Component {
   }
 
   fetchManagePermissions() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.managePermissionsUrl).then(function(response) {
       if (!response.error) {
         self.setState({ permissionMap: response });
@@ -88,7 +89,7 @@ class ManagePermissionForm extends React.Component {
   }
 
   fetchPermissions() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.getPermissionsUrl).then(function(response) {
       if (!response.error) {
         self.setState({ permissions: response });
@@ -100,7 +101,7 @@ class ManagePermissionForm extends React.Component {
   }
 
   fetchRoles() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.getRolesUrl).then(function(response) {
       if (!response.error) {
         self.setState({ loading: false, roles: response });
@@ -118,39 +119,39 @@ class ManagePermissionForm extends React.Component {
   }
 
   getRolePermissions(role_id) {
-    let self = this;
-    let permissions = _.filter(self.state.permissionMap, function(role) {
+    const self = this;
+    const permissions = _.filter(self.state.permissionMap, function(role) {
       return role.role_id == role_id;
     });
     return permissions[0].permission_ids;
   }
 
   handleTogglePermission(data) {
-    let self = this;
-    let index = _.findIndex(self.state.permissionMap, function(role) {
+    const self = this;
+    const index = _.findIndex(self.state.permissionMap, function(role) {
       return role.role_id == data.role;
     });
-    let currentPermissions = self.state.permissionMap[index].permission_ids;
+    const currentPermissions = self.state.permissionMap[index].permission_ids;
     if (!data.yes) {
-      //removing permission from state
-      let removePermissions = _.remove(currentPermissions, function(pid) {
+      // removing permission from state
+      const removePermissions = _.remove(currentPermissions, function(pid) {
         return pid == data.permission;
       });
-      let newPermissions = _.difference(currentPermissions, removePermissions);
-      let newPermissionMap = self.state.permissionMap;
+      const newPermissions = _.difference(currentPermissions, removePermissions);
+      const newPermissionMap = self.state.permissionMap;
       newPermissionMap[index].permission_ids = newPermissions;
       self.setState({ changed: true, permissionMap: newPermissionMap });
     } else {
-      //adding permission to state
-      let newPermissions = _.concat(currentPermissions, data.permission);
-      let newPermissionMap = self.state.permissionMap;
+      // adding permission to state
+      const newPermissions = _.concat(currentPermissions, data.permission);
+      const newPermissionMap = self.state.permissionMap;
       newPermissionMap[index].permission_ids = newPermissions;
       self.setState({ changed: true, permissionMap: newPermissionMap });
     }
   }
 
   savePermissions() {
-    let self = this;
+    const self = this;
     self.setState({ ajaxLoad: true });
     Fetcher(
       self.state.managePermissionsUrl,
@@ -168,12 +169,12 @@ class ManagePermissionForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
-      let roles = this.state.roles;
-      let permissions = this.state.permissions;
-      let permissionMap = this.state.managePermissions;
+    } 
+      const {roles} = this.state;
+      const {permissions} = this.state;
+      const permissionMap = this.state.managePermissions;
 
-      let renderRoles = () => {
+      const renderRoles = () => {
         return roles.map(role => (
           <th key={`role-${role.id}`} className={`capitalize role-${role.id}`}>
             {role.role_name}
@@ -181,7 +182,7 @@ class ManagePermissionForm extends React.Component {
         ));
       };
 
-      let renderPermissions = () => {
+      const renderPermissions = () => {
         return permissions.map(permission => (
           <tr
             key={`permission-${permission.id}`}
@@ -201,7 +202,7 @@ class ManagePermissionForm extends React.Component {
                     role={role.id}
                     permission={permission.id}
                     onChange={this.handleTogglePermission}
-                    checked={true}
+                    checked
                   />
                 ) : (
                   <RoleToggle
@@ -240,7 +241,7 @@ class ManagePermissionForm extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 

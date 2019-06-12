@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, hashHistory } from "react-router";
+import { connect } from "react-redux";
 import Featured from "../layouts/featured.jsx";
 import Content from "../layouts/content.jsx";
 import PageSection from "../layouts/page-section.jsx";
@@ -7,9 +8,9 @@ import SearchServiceBar from "../elements/home/service-list-search.jsx";
 import Inputs from "../utilities/inputs.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import ServiceList from "../elements/home/service-list.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
 import IconHeading from "../layouts/icon-heading.jsx";
+
+const _ = require("lodash");
 
 class AllServices extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class AllServices extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/service-categories").then(function(response) {
       if (!response.error) {
         self.setState({ categories: response });
@@ -39,7 +40,7 @@ class AllServices extends React.Component {
     if (value && value != 0) {
       this.setState({
         serviceUrl:
-          "/api/v1/service-templates/search?key=category_id&value=" + value,
+          `/api/v1/service-templates/search?key=category_id&value=${  value}`,
         searchValue: value,
       });
     } else {
@@ -54,7 +55,7 @@ class AllServices extends React.Component {
     let headingText = "All Products & Services";
 
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       headingText = _.get(
         options,
         "services_listing_page_heading_text.value",
@@ -82,7 +83,7 @@ class AllServices extends React.Component {
                       defaultValue="0"
                       onChange={this.handleChange}
                     >
-                      <option key={`categories-0`} value="0" selected>
+                      <option key="categories-0" value="0" selected>
                         All Services
                       </option>
                       {this.state.categories.length &&

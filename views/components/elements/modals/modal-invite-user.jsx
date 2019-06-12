@@ -12,17 +12,17 @@ class ModalInviteUser extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Invite New User";
+    const self = this;
+    const pageName = "Invite New User";
 
     return (
       <Modal
         modalTitle={pageName}
         icon="fa-user-plus"
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <InviteUserForm

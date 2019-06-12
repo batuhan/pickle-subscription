@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, browserHistory } from "react-router";
-import { Price, getPrice } from "../../utilities/price.jsx";
 import { connect } from "react-redux";
-let _ = require("lodash");
 import getSymbolFromCurrency from "currency-symbol-map";
+import { Price, getPrice } from "../../utilities/price.jsx";
+
+const _ = require("lodash");
 
 class ServiceListItem extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class ServiceListItem extends React.Component {
   }
 
   getCoverImage() {
-    let self = this;
+    const self = this;
     fetch(`/api/v1/service-templates/${this.props.service.id}/image`)
       .then(function(response) {
         if (response.ok) {
@@ -43,14 +44,14 @@ class ServiceListItem extends React.Component {
         throw new Error("Network response was not ok.", response);
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ image: objectURL });
       })
       .catch(function(error) {});
   }
 
   getIcon() {
-    let self = this;
+    const self = this;
     fetch(`/api/v1/service-templates/${this.props.service.id}/icon`)
       .then(function(response) {
         if (response.ok) {
@@ -59,7 +60,7 @@ class ServiceListItem extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ icon: objectURL });
       })
       .catch(function(error) {});
@@ -71,7 +72,7 @@ class ServiceListItem extends React.Component {
 
   render() {
     let style = {};
-    let options = this.props.options;
+    const {options} = this.props;
     if (this.state.image) {
       style.header = {
         backgroundImage: `url('${this.state.image}')`,
@@ -92,8 +93,7 @@ class ServiceListItem extends React.Component {
           "#ffffff",
         );
       }
-    } else {
-      if (options) {
+    } else if (options) {
         style.header = {
           backgroundColor: _.get(
             options,
@@ -110,7 +110,6 @@ class ServiceListItem extends React.Component {
       } else {
         style = { backgroundColor: "#000", color: "#fff", height: "150px" };
       }
-    }
 
     if (options) {
       style.body = {
@@ -123,34 +122,36 @@ class ServiceListItem extends React.Component {
       };
     }
 
-    //gathering data
-    let myService = this.props.service;
-    let serviceId = myService.id;
-    let serviceName = myService.name;
-    let serviceDescription = myService.description;
-    let category = _.get(
+    // gathering data
+    const myService = this.props.service;
+    const serviceId = myService.id;
+    const serviceName = myService.name;
+    const serviceDescription = myService.description;
+    const category = _.get(
       myService,
       "references.service_categories[0].name",
       "",
     );
 
-    let getPriceOrTrial = () => {
+    const getPriceOrTrial = () => {
       if (
         _.get(this.props.options, "show_trial.value") == "false" ||
         myService.trial_period_days <= 0
       ) {
         return getPrice(myService);
-      } else {
+      } 
         return (
           <span>
-            {myService.trial_period_days} {"Day Free Trial"}
+            {myService.trial_period_days} 
+            {' '}
+            {"Day Free Trial"}
           </span>
         );
-      }
+      
     };
 
-    let getRequestText = () => {
-      let serType = myService.type;
+    const getRequestText = () => {
+      const serType = myService.type;
       if (
         _.get(this.props.options, "show_trial.value") == "false" ||
         myService.trial_period_days <= 0
@@ -161,22 +162,22 @@ class ServiceListItem extends React.Component {
         ) {
           if (serType === "subscription") {
             return "Subscribe";
-          } else if (serType === "one_time") {
+          } if (serType === "one_time") {
             return "Buy";
-          } else if (serType === "custom") {
+          } if (serType === "custom") {
             return "Request";
-          } else {
+          } 
             return "";
-          }
-        } else {
+          
+        } 
           return _.get(
             this.props.options,
             "service_box_request_button_text.value",
           );
-        }
-      } else {
+        
+      } 
         return "Afterwards";
-      }
+      
     };
 
     return (
@@ -193,7 +194,7 @@ class ServiceListItem extends React.Component {
         >
           <div
             id={`service-${serviceId}`}
-            className={`card service`}
+            className="card service"
             style={style.body}
           >
             <div
@@ -220,7 +221,8 @@ class ServiceListItem extends React.Component {
                   <h3 className="card-title">{serviceName}</h3>
                   {this.state.display_setting.date && (
                     <small className="meta">
-                      Published on:{" "}
+                      Published on:
+                      {" "}
                       {new Date(this.props.created).toDateString()}
                     </small>
                   )}
@@ -249,7 +251,7 @@ class ServiceListItem extends React.Component {
                   color: style.header.color,
                 }}
               >
-                <span>{getRequestText() + " "}</span>
+                <span>{`${getRequestText()  } `}</span>
                 <span>{getPrice(myService) ? getPrice(myService) : ""}</span>
               </div>
             </Link>

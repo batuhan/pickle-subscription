@@ -10,7 +10,7 @@ class AdminEditingGear extends React.Component {
   }
 
   render() {
-    let { toggle, name } = this.props;
+    const { toggle, name } = this.props;
 
     if (isAuthorized({ permissions: ["can_administrate"] })) {
       return (
@@ -21,9 +21,9 @@ class AdminEditingGear extends React.Component {
           </span>
         </div>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 }
 

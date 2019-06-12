@@ -5,6 +5,7 @@ import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
 import Buttons from "../buttons.jsx";
 import Alerts from "../alerts.jsx";
+
 class SystemSettingsForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +20,10 @@ class SystemSettingsForm extends React.Component {
     this.handleSubmission = this.handleSubmission.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
   }
+
   handleSubmission() {
-    let self = this;
-    let payload = self.props.formData; // this formData object came from Redux store
+    const self = this;
+    const payload = self.props.formData; // this formData object came from Redux store
     self.setState({ ajaxLoad: true });
     Fetcher(this.state.formURL, "POST", payload).then(function(response) {
       if (!response.error) {
@@ -33,7 +35,7 @@ class SystemSettingsForm extends React.Component {
             icon: "check",
             message: "Success! Stripe data has been imported!",
           },
-        }); //change the last one to what u are doing
+        }); // change the last one to what u are doing
       } else {
         console.error(`Server Error:`, response.error);
         self.setState({
@@ -51,9 +53,10 @@ class SystemSettingsForm extends React.Component {
   onUpdate(form) {
     this.setState({ formData: form });
   }
+
   render() {
-    let self = this;
-    let getAlerts = () => {
+    const self = this;
+    const getAlerts = () => {
       if (self.state.alerts) {
         return (
           <Alerts
@@ -67,7 +70,7 @@ class SystemSettingsForm extends React.Component {
     };
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success && false) {
+    } if (this.state.success && false) {
       return (
         // this is disabled
         <div>
@@ -78,7 +81,7 @@ class SystemSettingsForm extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return (
         <div className="row">
           <div className="basic-info col-md-12">
@@ -120,7 +123,7 @@ class SystemSettingsForm extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import Fetcher from "../../utilities/fetcher.jsx";
 import FileUploader from "../../utilities/file-uploader.jsx";
-import Buttons from "../../elements/buttons.jsx";
+import Buttons from "../buttons.jsx";
 import DateFormat from "../../utilities/date-format.jsx";
-import DataTable from "../../elements/datatable/datatable.jsx";
+import DataTable from "../datatable/datatable.jsx";
 
 class ServiceInstanceFiles extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class ServiceInstanceFiles extends React.Component {
   }
 
   fetchFiles() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (response != null) {
         if (!response.error) {
@@ -41,9 +41,9 @@ class ServiceInstanceFiles extends React.Component {
   }
 
   modDataID(data) {
-    let self = this;
+    const self = this;
 
-    let deleteFile = () => {
+    const deleteFile = () => {
       Fetcher(
         `/api/v1/service-instances/${this.state.instanceId}/files/${data}`,
         "DELETE",
@@ -81,7 +81,7 @@ class ServiceInstanceFiles extends React.Component {
   render() {
     if (this.state.loading) {
       return <load />;
-    } else {
+    } 
       return (
         <div className="service-instance-box">
           <div className="service-instance-box-title">
@@ -91,7 +91,7 @@ class ServiceInstanceFiles extends React.Component {
                 elementID="service-file"
                 fileStyle="service-file"
                 name="files"
-                uploadButton={true}
+                uploadButton
                 fileURL={`/api/v1/service-instances/${this.props.instanceId}/files`}
                 handleSuccess={this.fetchFiles}
               />
@@ -111,7 +111,7 @@ class ServiceInstanceFiles extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

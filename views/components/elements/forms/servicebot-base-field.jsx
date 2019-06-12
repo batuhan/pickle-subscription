@@ -3,22 +3,22 @@ import CurrencyInput from "react-currency-input";
 import "./css/servicebot-base-field.css";
 import ReactTooltip from "react-tooltip";
 import dollarsToCents from "dollars-to-cents";
-import { toCents } from "../../../../lib/handleInputs";
 // import CurrencyInput from 'react-currency-masked-input'
 import { connect } from "react-redux";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { toCents } from "../../../../lib/handleInputs";
 
-let widgetField = props => {
-  let {
+const widgetField = props => {
+  const {
     widget,
     label,
     type,
     meta: { touched, error, warning },
   } = props;
-  let WidgetComponent = widget;
+  const WidgetComponent = widget;
 
   return (
-    <div className={`form-group form-group-flex`}>
+    <div className="form-group form-group-flex">
       {label &&
         type !== "hidden" &&
         (type === "text" || type === "secure-string") && (
@@ -34,21 +34,21 @@ let widgetField = props => {
   );
 };
 
-let inputField = props => {
-  let {
+const inputField = props => {
+  const {
     input,
     placeholder,
     label,
     type,
     meta: { touched, error, warning },
   } = props;
-  let autofocus = props && props.willAutoFocus;
+  const autofocus = props && props.willAutoFocus;
 
-  let formControlClass = `form-control ${touched &&
+  const formControlClass = `form-control ${touched &&
     error &&
     "has-error"} ${touched && warning && "has-warning"}`;
 
-  let getInputField = type => {
+  const getInputField = type => {
     switch (type) {
       case "textarea":
         return (
@@ -84,7 +84,7 @@ let inputField = props => {
   };
 
   return (
-    <div className={`form-group form-group-flex`}>
+    <div className="form-group form-group-flex">
       {label && type !== "hidden" && (
         <label className="control-label form-label-flex-md">{label}</label>
       )}
@@ -103,17 +103,19 @@ class selectField extends React.Component {
     super(props);
     this.state = {};
   }
+
   componentDidMount() {
-    let { options, valueKey, input } = this.props;
+    const { options, valueKey, input } = this.props;
     if (!input.value && options.length > 0) {
-      let value = valueKey ? options[0][valueKey] : options[0].id;
+      const value = valueKey ? options[0][valueKey] : options[0].id;
       input.onChange(value);
     }
   }
+
   componentDidUpdate(prevProps, prevState) {
-    let { options, valueKey, labelKey, defaultValue, input } = this.props;
-    let self = this;
-    //if there is a default value, set it, other wise, use the first option
+    const { options, valueKey, labelKey, defaultValue, input } = this.props;
+    const self = this;
+    // if there is a default value, set it, other wise, use the first option
     if (
       (!input.value || !options.find(option => option.id == input.value)) &&
       options.length > 0
@@ -125,7 +127,7 @@ class selectField extends React.Component {
   }
 
   render() {
-    let {
+    const {
       input,
       label,
       type,
@@ -173,7 +175,7 @@ class OnOffToggleField extends React.Component {
   }
 
   componentDidMount() {
-    let initialValue = this.props.input.value || false;
+    const initialValue = this.props.input.value || false;
     if (this.props.input.onChange) {
       this.props.input.onChange(initialValue);
     }
@@ -181,7 +183,7 @@ class OnOffToggleField extends React.Component {
 
   toggle() {
     if (this.props.input.onChange) {
-      let newVal = !this.props.input.value;
+      const newVal = !this.props.input.value;
       // this.props.setValue(newVal);
       this.props.input.onChange(newVal);
     }
@@ -190,17 +192,18 @@ class OnOffToggleField extends React.Component {
   hoverOn() {
     this.setState({ hover: true });
   }
+
   hoverOff() {
     this.setState({ hover: false });
   }
 
   render() {
-    let { faIcon, icon, color, input, label, type } = this.props;
+    const { faIcon, icon, color, input, label, type } = this.props;
     let style = {};
     if (input.value === true) {
       style = { ...style, color: "#ffffff", backgroundColor: color };
     } else if (this.state.hover) {
-      style = { ...style, color: color, borderColor: color };
+      style = { ...style, color, borderColor: color };
     } else {
       style = { ...style, color: "#dedede" };
     }
@@ -222,7 +225,7 @@ class OnOffToggleField extends React.Component {
           <span style={style} className="itf-icon">
             <i className={`fa fa-${faIcon || "check"}`} />
           </span>
-          {/*<ReactTooltip place="bottom" type="dark" effect="solid"/>*/}
+          {/* <ReactTooltip place="bottom" type="dark" effect="solid"/> */}
           <input
             className="hidden checkbox"
             name={input.name}
@@ -250,7 +253,7 @@ class iconToggleField extends React.Component {
   }
 
   toggle() {
-    let newVal = !this.state.value;
+    const newVal = !this.state.value;
     this.setState({ value: newVal });
     this.props.setValue(newVal);
   }
@@ -258,12 +261,13 @@ class iconToggleField extends React.Component {
   hoverOn() {
     this.setState({ hover: true });
   }
+
   hoverOff() {
     this.setState({ hover: false });
   }
 
   render() {
-    let {
+    const {
       faIcon,
       icon,
       color,
@@ -278,7 +282,7 @@ class iconToggleField extends React.Component {
     if (value == true || this.state.value == true) {
       style = { ...style, color: "#ffffff", backgroundColor: color };
     } else if (this.state.hover) {
-      style = { ...style, color: color, borderColor: color };
+      style = { ...style, color, borderColor: color };
     } else {
       style = { ...style, color: "#dedede" };
     }
@@ -319,16 +323,16 @@ class priceField extends React.Component {
   }
 
   handleChange(e, maskedValue, floatvalue) {
-    let name = e.target.name;
-    let self = this;
-    let price = this.props.isCents ? toCents(floatvalue) : floatvalue;
+    const {name} = e.target;
+    const self = this;
+    const price = this.props.isCents ? toCents(floatvalue) : floatvalue;
     this.setState({ [name]: price }, () => {
       self.props.input.onChange(self.state[name]);
     });
   }
 
   render() {
-    let {
+    const {
       options,
       isCents,
       input: { name, value, onChange },
@@ -336,12 +340,12 @@ class priceField extends React.Component {
       type,
       meta: { touched, error, warning },
     } = this.props;
-    let prefix = options.currency
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
-    let price = isCents ? (value / 100).toFixed(2) : value;
+    const price = isCents ? (value / 100).toFixed(2) : value;
     return (
-      <div className={`form-group form-group-flex`}>
+      <div className="form-group form-group-flex">
         {label && (
           <label className="control-label form-label-flex-md">{label}</label>
         )}

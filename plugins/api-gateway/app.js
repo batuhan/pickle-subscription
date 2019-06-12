@@ -1,29 +1,30 @@
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var express = require("express");
-var expressSession = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const express = require("express");
+const expressSession = require("express-session");
 const knexSession = require("connect-session-knex")(expressSession);
-var flash = require("connect-flash");
-var swaggerJSDoc = require("swagger-jsdoc");
-var logger = require("morgan");
-var passport = require("passport");
-var path = require("path");
-var helmet = require("helmet");
-let consume = require("pluginbot/effects/consume");
-let { call, put, spawn, takeEvery, select } = require("redux-saga/effects");
-let HOME_PATH = path.resolve(__dirname, "../../", "public");
-let createServer = require("./server");
+const flash = require("connect-flash");
+const swaggerJSDoc = require("swagger-jsdoc");
+const logger = require("morgan");
+const passport = require("passport");
+const path = require("path");
+const helmet = require("helmet");
+const consume = require("pluginbot/effects/consume");
+const { call, put, spawn, takeEvery, select } = require("redux-saga/effects");
+
+const HOME_PATH = path.resolve(__dirname, "../../", "public");
+const createServer = require("./server");
 
 module.exports = {
-  run: function*(config, provide, services) {
-    let appConfig = config.appConfig;
-    var app = express();
+  *run(config, provide, services) {
+    const {appConfig} = config;
+    const app = express();
     app.use(
       helmet({
         frameguard: false,
       }),
     );
-    var exphbs = require("express-handlebars");
+    const exphbs = require("express-handlebars");
     app.engine(
       "handlebars",
       exphbs({ defaultLayout: "main", layoutsDir: HOME_PATH }),
@@ -42,7 +43,7 @@ module.exports = {
       }),
     );
 
-    //todo: possibly unsafe? -- look to make this configurable, rather have opt-in than opt-out so default is secure
+    // todo: possibly unsafe? -- look to make this configurable, rather have opt-in than opt-out so default is secure
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Credentials", true);
       res.header("Access-Control-Allow-Origin", "*");
@@ -55,24 +56,24 @@ module.exports = {
 
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, "../../public")));
-    let servers = createServer(appConfig, app);
+    const servers = createServer(appConfig, app);
     yield provide({ expressApp: app });
 
-    //wait for database to become available
-    let database = yield consume(services.database);
-    let fileManager = yield consume(services.fileManager);
+    // wait for database to become available
+    const database = yield consume(services.database);
+    const fileManager = yield consume(services.fileManager);
 
-    let CONFIG_PATH = appConfig.configPath;
-    let Settings = require("../../models/system-options");
-    let injectProperties = require("../../middleware/property-injector");
+    const CONFIG_PATH = appConfig.configPath;
+    const Settings = require("../../models/system-options");
+    const injectProperties = require("../../middleware/property-injector");
     require("../../config/passport.js")(passport);
     yield provide({ passport });
-    let hostname = process.env.VIRTUAL_HOST || "localhost";
+    const hostname = process.env.VIRTUAL_HOST || "localhost";
 
-    //var subpath = express();
+    // var subpath = express();
 
     // swagger definition
-    var swaggerDefinition = {
+    const swaggerDefinition = {
       info: {
         title: "ServiceBot API",
         version: "1.0.0",
@@ -83,16 +84,16 @@ module.exports = {
     };
 
     // options for the swagger docs
-    var options = {
+    const options = {
       // import swaggerDefinitions
-      swaggerDefinition: swaggerDefinition,
+      swaggerDefinition,
       // path to the API docs
       apis: ["../../api/*"],
     };
 
     // initialize swagger-jsdoc
     // serve swagger
-    var swaggerSpec = swaggerJSDoc(options);
+    const swaggerSpec = swaggerJSDoc(options);
 
     swaggerSpec.paths = {
       ...require("../../api-docs/api-paths.json"),
@@ -110,8 +111,8 @@ module.exports = {
       res.send(swaggerSpec);
     });
 
-    let KnexStore = new knexSession({ knex: database });
-    //todo: move this into a plugin
+    const KnexStore = new knexSession({ knex: database });
+    // todo: move this into a plugin
     app.use(
       expressSession({
         secret: process.env.SECRET_KEY,
@@ -127,14 +128,14 @@ module.exports = {
     app.use(flash());
     app.use(injectProperties());
 
-    //auth route doesn't go in express route so it doesn't need auth
+    // auth route doesn't go in express route so it doesn't need auth
 
-    //initialize api route
-    var api = express.Router();
+    // initialize api route
+    const api = express.Router();
     app.use("/api/v1", api);
     require("../../api/auth")(api, passport);
 
-    //force all requests to api route to look for token, if token is present in header the user will be logged in with taht token
+    // force all requests to api route to look for token, if token is present in header the user will be logged in with taht token
     api.use(function(req, res, next) {
       passport.authenticate("jwt", function(err, user, info) {
         if (err) {
@@ -158,7 +159,7 @@ module.exports = {
       })(req, res, next);
     });
 
-    //todo: move apis to plugins.
+    // todo: move apis to plugins.
     require("../../api/users")(api, passport);
     require("../../api/funds")(api);
     require("../../api/invoices")(api);
@@ -177,8 +178,8 @@ module.exports = {
     require("../../api/permissions")(api);
     require("../../api/roles")(api);
     require("../../api/webhooks")(api);
-    let routeConsumer = require("./router");
-    let authService = yield consume(services.authService);
+    const routeConsumer = require("./router");
+    const authService = yield consume(services.authService);
     yield spawn(routeConsumer, api, services.routeDefinition, authService);
 
     api.use(function(req, res, next) {
@@ -189,18 +190,18 @@ module.exports = {
       }
     });
 
-    let store = require("../../config/redux/store");
+    const store = require("../../config/redux/store");
 
     app.get("*", async function(req, res) {
       if (req.path.split("/")[3] == "embed" && req.method === "GET") {
         res.removeHeader("X-Frame-Options");
       }
 
-      let configBuilder = require("pluginbot/config");
-      let clientPlugins = Object.keys(
+      const configBuilder = require("pluginbot/config");
+      const clientPlugins = Object.keys(
         (await configBuilder.buildClientConfig(CONFIG_PATH)).plugins,
       );
-      let { site_title, site_description, hostname } = store.getState().options;
+      const { site_title, site_description, hostname } = store.getState().options;
       res.render("main", {
         bundle: appConfig.bundle_path,
         plugins: clientPlugins,
@@ -212,7 +213,7 @@ module.exports = {
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
-      var err = new Error("Not Found");
+      const err = new Error("Not Found");
       err.status = 404;
       next(err);
     });
@@ -234,7 +235,7 @@ module.exports = {
       // send the error
       res.status(err.status || 500).json({ error: res.locals.error });
 
-      //res.render('error');
+      // res.render('error');
     });
   },
 };

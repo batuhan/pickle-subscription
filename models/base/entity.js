@@ -1,12 +1,12 @@
-let knex = require("../../config/db.js");
-let _ = require("lodash");
-let Promise = require("bluebird");
-let promiseProxy = require("../../lib/promiseProxy");
-var whereFilter = require("knex-filter-loopback").whereFilter;
+const _ = require("lodash");
+const Promise = require("bluebird");
+const promiseProxy = require("../../lib/promiseProxy");
+const {whereFilter} = require("knex-filter-loopback");
+const knex = require("../../config/db.js");
 
-//TODO - BIG TASK - relationship system, allow to define relationships in model and relationship tables - would autodelete rel rows
-//TODO - Big task - full promise support..........
-//todo - big task - refactor ORM completely....
+// TODO - BIG TASK - relationship system, allow to define relationships in model and relationship tables - would autodelete rel rows
+// TODO - Big task - full promise support..........
+// todo - big task - refactor ORM completely....
 /**
  *
  * @param tableName - name of table the entity belongs to
@@ -22,8 +22,8 @@ module.exports = function(
   primaryKey = "id",
   database = knex,
 ) {
-  var Entity = function(data) {
-    let self = this;
+  const Entity = function(data) {
+    const self = this;
     this.data = data;
     // this.references = new Proxy({}, {
     //     get: async function (target, name) {
@@ -49,7 +49,7 @@ module.exports = function(
 
   Entity.prototype.data = {};
 
-  //introduced to support plugins
+  // introduced to support plugins
   Entity.changeDB = db => {
     Entity.database = db;
   };
@@ -66,16 +66,16 @@ module.exports = function(
     if (Entity.references == null || Entity.references.length == 0) {
       callback([]);
     }
-    let self = this;
-    let reference = Entity.references.find(
+    const self = this;
+    const reference = Entity.references.find(
       rel => rel.model.table == model.table,
     );
     if (!reference) {
       callback([]);
       return;
     }
-    let referenceModel = reference.model;
-    let referenceField = reference.referenceField;
+    const referenceModel = reference.model;
+    const {referenceField} = reference;
     if (reference.direction === "from") {
       referenceModel.findOnRelative(referenceField, self.get("id"), function(
         results,
@@ -94,7 +94,7 @@ module.exports = function(
   }
 
   Entity.createPromise = function(entityData) {
-    let self = this;
+    const self = this;
     return Entity.database(Entity.table)
       .columnInfo()
       .then(function(info) {
@@ -113,7 +113,7 @@ module.exports = function(
       });
   };
   Entity.prototype.create = function(callback) {
-    let self = this;
+    const self = this;
     Entity.database(Entity.table)
       .columnInfo()
       .then(function(info) {
@@ -134,8 +134,8 @@ module.exports = function(
   };
 
   function update(callback) {
-    var self = this;
-    var id = this.get(primaryKey);
+    const self = this;
+    const id = this.get(primaryKey);
     if (!id) {
       throw "cannot update non existent";
     }
@@ -161,7 +161,7 @@ module.exports = function(
   }
 
   Entity.prototype.delete = function(callback) {
-    let id = this.get("id");
+    const id = this.get("id");
     Entity.database(Entity.table)
       .where("id", id)
       .del()
@@ -174,14 +174,14 @@ module.exports = function(
       });
   };
 
-  let attachReferences = function(callback) {
+  const attachReferences = function(callback) {
     this.data.references = {};
-    let self = this;
+    const self = this;
     if (references == null || references.length == 0) {
       return callback(self);
     }
-    for (let reference of references) {
-      let referenceModel = reference.model;
+    for (const reference of references) {
+      const referenceModel = reference.model;
       this.getRelated(referenceModel, function(results) {
         self.data.references[referenceModel.table] = results.map(
           entity => entity.data,
@@ -198,7 +198,7 @@ module.exports = function(
     reference,
     callback,
   ) {
-    let self = this;
+    const self = this;
     if (reference.readOnly) {
       console.log("Reference is readonly");
       callback(self);
@@ -206,8 +206,8 @@ module.exports = function(
       referenceData.forEach(
         newChild => (newChild[reference.referenceField] = this.get(primaryKey)),
       );
-      //console.log("referenceDate");
-      //console.log(referenceData);
+      // console.log("referenceDate");
+      // console.log(referenceData);
       reference.model.batchCreate(referenceData, function(response) {
         if (reference.direction == "to") {
           self.set(
@@ -226,36 +226,36 @@ module.exports = function(
     }
   };
 
-  //todo - combine stuff into a single query
-  //todo - possibly dispatch events
+  // todo - combine stuff into a single query
+  // todo - possibly dispatch events
   Entity.prototype.updateReferences = async function(referenceData, reference) {
-    let self = this;
+    const self = this;
     if (reference.readOnly) {
       console.log("Reference is readonly");
       this;
     } else {
       //
-      let ids = referenceData.reduce(
+      const ids = referenceData.reduce(
         (acc, refInstance) => acc.concat(refInstance.id || []),
         [],
       );
       referenceData.forEach(
         newChild => (newChild[reference.referenceField] = this.get(primaryKey)),
       );
-      let references = await this.getRelated(reference.model.table);
-      let removedReferences = await reference.model.batchDelete({
+      const references = await this.getRelated(reference.model.table);
+      const removedReferences = await reference.model.batchDelete({
         not: { id: { in: ids } },
         [reference.referenceField]: self.get(primaryKey),
       });
-      let upsertedReferences = await reference.model.batchUpdate(referenceData);
+      const upsertedReferences = await reference.model.batchUpdate(referenceData);
 
       return upsertedReferences;
     }
   };
 
-  //TODO: think about no result case, not too happy how handling it now.
+  // TODO: think about no result case, not too happy how handling it now.
 
-  //Also want to think about having generic find method all models would use
+  // Also want to think about having generic find method all models would use
   Entity.findAll = function(key = true, value = true, callback) {
     Entity.database(Entity.table)
       .where(key, value)
@@ -263,7 +263,7 @@ module.exports = function(
         if (!result) {
           result = [];
         }
-        let entities = result.map(e => new Entity(e));
+        const entities = result.map(e => new Entity(e));
         callback(entities);
       })
       .catch(function(err) {
@@ -271,10 +271,10 @@ module.exports = function(
       });
   };
 
-  //best one! (todo... clean up ORM cuz it sucks)
+  // best one! (todo... clean up ORM cuz it sucks)
   Entity.find = async function(filter = {}, attatchReferences = false) {
     try {
-      let entities = await Entity.database(Entity.table).where(
+      const entities = await Entity.database(Entity.table).where(
         whereFilter(filter),
       );
       return entities ? entities.map(e => new Entity(e)) : [];
@@ -284,7 +284,7 @@ module.exports = function(
     }
   };
 
-  //Find on relative function will call the findAll function by default. Allowing overrides at a model layer.
+  // Find on relative function will call the findAll function by default. Allowing overrides at a model layer.
   Entity.findOnRelative = function(key = true, value = true, callback) {
     Entity.findAll(key, value, function(result) {
       callback(result);
@@ -299,7 +299,7 @@ module.exports = function(
         if (!result) {
           result = [];
         }
-        let entities = result.map(e => new Entity(e));
+        const entities = result.map(e => new Entity(e));
         callback(entities);
       })
       .catch(function(err) {
@@ -307,7 +307,7 @@ module.exports = function(
       });
   };
 
-  let findOne = function(key, value, callback) {
+  const findOne = function(key, value, callback) {
     Entity.database(Entity.table)
       .where(key, value)
       .then(function(result) {
@@ -320,7 +320,7 @@ module.exports = function(
         console.log(err);
       });
   };
-  //Generic findById function. Finds the record by passing the id.
+  // Generic findById function. Finds the record by passing the id.
   Entity.findById = function(id, callback) {
     Entity.database(Entity.table)
       .where("id", id)
@@ -335,12 +335,12 @@ module.exports = function(
       });
   };
 
-  let getSchema = function(includeTo, includeFrom, callback) {
-    //get column info for this entity
+  const getSchema = function(includeTo, includeFrom, callback) {
+    // get column info for this entity
     Entity.database(Entity.table)
       .columnInfo()
       .then(function(info) {
-        let schema = info;
+        const schema = info;
         schema.references = {};
         Entity.references
           .reduce(function(promise, relationship) {
@@ -351,7 +351,7 @@ module.exports = function(
               return promise;
             }
 
-            //reduce by returning same promise with .then for each relationship where the schema has the relationship added
+            // reduce by returning same promise with .then for each relationship where the schema has the relationship added
             return promise.then(function() {
               return Entity.database(relationship.model.table)
                 .columnInfo()
@@ -366,12 +366,12 @@ module.exports = function(
       });
   };
 
-  //gets results that contain the value
+  // gets results that contain the value
 
   Entity.search = function(key, value, callback) {
-    let query = "LOWER(" + key + ") LIKE '%' || LOWER(?) || '%' ";
+    let query = `LOWER(${  key  }) LIKE '%' || LOWER(?) || '%' `;
     if (value % 1 === 0) {
-      query = key + " = ?";
+      query = `${key  } = ?`;
     }
     Entity.database(Entity.table)
       .whereRaw(query, value)
@@ -379,7 +379,7 @@ module.exports = function(
         if (!result) {
           result = [];
         }
-        let entities = result.map(e => new Entity(e));
+        const entities = result.map(e => new Entity(e));
         callback(entities);
       })
       .catch(function(err) {
@@ -387,10 +387,10 @@ module.exports = function(
       });
   };
 
-  //Returns the total number of rows for the Entity Table
+  // Returns the total number of rows for the Entity Table
 
   Entity.getRowCountByKey = function(key, value, callback) {
-    let query = Entity.database(Entity.table).count();
+    const query = Entity.database(Entity.table).count();
     if (key) {
       query.where(key, value);
     }
@@ -404,7 +404,7 @@ module.exports = function(
   };
 
   Entity.getSumOfColumnFiltered = function(column, key, value, callback) {
-    let query = Entity.database(Entity.table).sum(column);
+    const query = Entity.database(Entity.table).sum(column);
     if (key) {
       query.where(key, value);
     }
@@ -417,7 +417,7 @@ module.exports = function(
         console.log(err);
       });
   };
-  //get objects created between dates
+  // get objects created between dates
   Entity.findBetween = function(from, to, dateField = "created", callback) {
     Entity.database(Entity.table)
       .whereBetween(dateField, [from, to])
@@ -425,7 +425,7 @@ module.exports = function(
         if (!result) {
           result = [];
         }
-        let entities = result.map(e => new Entity(e));
+        const entities = result.map(e => new Entity(e));
         callback(entities);
       })
       .catch(function(err) {
@@ -434,9 +434,9 @@ module.exports = function(
   };
 
   async function getReferences(reference, filter = {}) {
-    let refTable = reference.model.table;
-    let referenceField = reference.referenceField;
-    let join = [refTable];
+    const refTable = reference.model.table;
+    const {referenceField} = reference;
+    const join = [refTable];
 
     if (reference.direction === "from") {
       join.push(
@@ -450,7 +450,7 @@ module.exports = function(
       );
     }
 
-    let results = await Entity.database(Entity.table)
+    const results = await Entity.database(Entity.table)
       .select(
         `${Entity.table}.${Entity.primaryKey} as parent_key`,
         `${refTable}.*`,
@@ -458,7 +458,7 @@ module.exports = function(
       .leftJoin(...join)
       .where(whereFilter(filter));
     return results.reduce((acc, row) => {
-      let parent_key = row.parent_key;
+      const {parent_key} = row;
       delete row.parent_key;
       if (row[reference.model.primaryKey]) {
         acc[parent_key] = (acc[parent_key] || []).concat(row);
@@ -472,14 +472,14 @@ module.exports = function(
       return entities;
     }
 
-    let ids = entities.map(entity => entity.data[Entity.primaryKey]);
-    let key = `${Entity.table}.${Entity.primaryKey}`;
-    let filter = { [key]: { in: ids } };
-    for (let reference of Entity.references) {
-      let referenceData = await getReferences(reference, filter);
+    const ids = entities.map(entity => entity.data[Entity.primaryKey]);
+    const key = `${Entity.table}.${Entity.primaryKey}`;
+    const filter = { [key]: { in: ids } };
+    for (const reference of Entity.references) {
+      const referenceData = await getReferences(reference, filter);
       entities = entities.map(entity => {
-        entity.data["references"] = {
-          ...entity.data["references"],
+        entity.data.references = {
+          ...entity.data.references,
           [reference.model.table]:
             referenceData[entity.data[Entity.primaryKey]] || [],
         };
@@ -499,8 +499,8 @@ module.exports = function(
    * @param callback
    */
 
-  //todo: refactor..
-  let batchCreate = function(dataArray, callback) {
+  // todo: refactor..
+  const batchCreate = function(dataArray, callback) {
     Entity.database(Entity.table)
       .columnInfo()
       .then(function(info) {
@@ -522,8 +522,8 @@ module.exports = function(
       });
   };
 
-  //TODO this batch update work
-  let batchUpdate = function(dataArray, callback) {
+  // TODO this batch update work
+  const batchUpdate = function(dataArray, callback) {
     Entity.database(Entity.table)
       .columnInfo()
       .then(function(info) {
@@ -541,12 +541,12 @@ module.exports = function(
                   .where(Entity.primaryKey, entityData[Entity.primaryKey])
                   .update(entityData)
                   .returning("*");
-              } else {
+              } 
                 return trx
                   .from(Entity.table)
                   .insert(entityData)
                   .returning("*");
-              }
+              
             });
           })
           .then(function(result) {

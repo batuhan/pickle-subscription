@@ -1,4 +1,4 @@
-var SystemOption = require("./base/entity")("system_options", [], "option");
+const SystemOption = require("./base/entity")("system_options", [], "option");
 
 SystemOption.getOptions = function() {
   return new Promise((resolve, reject) => {

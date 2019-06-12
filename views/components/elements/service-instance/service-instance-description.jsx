@@ -10,8 +10,8 @@ class ServiceInstanceDescription extends React.Component {
   }
 
   componentDidMount() {
-    let descriptionElement = document.getElementById("service-description");
-    let descriptionElementHeight = descriptionElement.getBoundingClientRect()
+    const descriptionElement = document.getElementById("service-description");
+    const descriptionElementHeight = descriptionElement.getBoundingClientRect()
       .height;
     this.setState({ descriptionHeight: descriptionElementHeight });
   }
@@ -30,12 +30,12 @@ class ServiceInstanceDescription extends React.Component {
 
   getToggleStyle() {
     if (!this.state.opened && this.state.descriptionHeight > 315) {
-      let style = { height: 315, overflow: "hidden" };
+      const style = { height: 315, overflow: "hidden" };
       return style;
-    } else {
-      let style = { height: "auto" };
+    } 
+      const style = { height: "auto" };
       return style;
-    }
+    
   }
 
   render() {

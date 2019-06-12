@@ -7,7 +7,7 @@ class ServiceBotTableNoData extends React.Component {
   }
 
   render() {
-    let { title, body, buttonLabel, buttonAction } = this.props;
+    const { title, body, buttonLabel, buttonAction } = this.props;
 
     return (
       <div className="no-data-message">

@@ -1,4 +1,4 @@
-let ServiceInstanceCancellation = require("./base/entity")(
+const ServiceInstanceCancellation = require("./base/entity")(
   "service_instance_cancellations",
 );
 

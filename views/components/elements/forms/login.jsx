@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, browserHistory } from "react-router";
+import update from "immutability-helper";
+import Alert from "react-s-alert";
+import { connect } from "react-redux";
+import cookie from "react-cookie";
 import Content from "../../layouts/content.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Load from "../../utilities/load.jsx";
-import update from "immutability-helper";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
-import Alert from "react-s-alert";
 import Buttons from "../buttons.jsx";
-import { connect } from "react-redux";
 import {
   setUid,
   setUser,
@@ -17,8 +18,8 @@ import {
   dismissAlert,
   setPermissions,
 } from "../../utilities/actions";
-import cookie from "react-cookie";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class Login extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Login extends React.Component {
 
   handleLogin(e) {
     e.preventDefault();
-    let self = this;
+    const self = this;
 
     Fetcher("/api/v1/auth/session", "POST", self.state.form).then(
       async function(result) {
@@ -46,34 +47,34 @@ class Login extends React.Component {
             self.props.setUser(user),
           );
 
-          //update redux store with the uid
+          // update redux store with the uid
           self.props.setUid(cookie.load("uid"));
 
-          //update redux store with version number
+          // update redux store with version number
           Fetcher("/api/v1/system-options/version").then(function(version) {
             self.props.setVersion(version.version);
           });
 
-          //if the user came from a modal, close the modal, else send user back 2 pages
+          // if the user came from a modal, close the modal, else send user back 2 pages
           if (self.props.modal !== true) {
             if (
               self.props.location.state &&
               self.props.location.state.fromSignup
             ) {
               return browserHistory.go(-2);
-            } else if (
+            } if (
               result.permissions.includes("can_administrate", "can_manage")
             ) {
               return browserHistory.push("/dashboard");
-            } else {
+            } 
               return browserHistory.push("/my-services");
-            }
-            //browserHistory.goBack();
-          } else {
+            
+            // browserHistory.goBack();
+          } 
             self.props.hide();
-          }
+          
 
-          //if there was an alert in the state and store, dismiss it
+          // if there was an alert in the state and store, dismiss it
           if (self.state.alerts.length) {
             const removedAlert = self.props.alerts.filter(
               alert => alert.id !== self.state.alerts[0].id,
@@ -82,7 +83,7 @@ class Login extends React.Component {
             self.props.dismissAlert(removedAlert);
           }
         } else {
-          let loginErrorAlert = {
+          const loginErrorAlert = {
             id: "112",
             message: "Your user name or password is not correct.",
             show: true,
@@ -98,9 +99,9 @@ class Login extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const {target} = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const {name} = target;
     const formState = update(this.state, { form: { [name]: { $set: value } } });
     this.setState(formState);
   }
@@ -133,17 +134,20 @@ class Login extends React.Component {
   render() {
     if (!this.props.options.allow_registration) {
       return <Load />;
-    } else {
+    } 
       if (this.props.modal && this.props.email) {
         return (
-          <Content primary={true}>
+          <Content primary>
             <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
               <form className="sign-in">
-                {/*<img className="login-brand" src="/assets/logos/brand-logo-dark.png"/>*/}
+                {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
                 {this.state.invitationExists && (
                   <div>
                     <h3 className="text-center">
-                      Account confirmation email is sent to {this.props.email}?
+                      Account confirmation email is sent to 
+                      {' '}
+                      {this.props.email}
+?
                     </h3>
                     <p>
                       Please check your email to complete your account before
@@ -164,7 +168,10 @@ class Login extends React.Component {
 
                 {!this.state.invitationExists && (
                   <div>
-                    <h3>Login as: {this.props.email}</h3>
+                    <h3>
+Login as:
+                      {this.props.email}
+                    </h3>
                     <p>Please login to continue</p>
                     <div
                       className={`form-group ${this.state.errors &&
@@ -206,15 +213,15 @@ class Login extends React.Component {
             </div>
           </Content>
         );
-      } else {
+      } 
         return (
-          <Authorizer anonymous={true}>
-            <Content primary={true}>
-              {/*<div className="left-panel col-md-6">adsf</div>*/}
+          <Authorizer anonymous>
+            <Content primary>
+              {/* <div className="left-panel col-md-6">adsf</div> */}
               <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
                 <form className="sign-in">
-                  {/*<Alert stack={{limit: 3}} position='bottom'/>*/}
-                  {/*<img className="login-brand" src="/assets/logos/brand-logo-dark.png"/>*/}
+                  {/* <Alert stack={{limit: 3}} position='bottom'/> */}
+                  {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
                   <h3>Login</h3>
 
                   <div className="form-group">
@@ -278,8 +285,8 @@ class Login extends React.Component {
             </Content>
           </Authorizer>
         );
-      }
-    }
+      
+    
   }
 }
 

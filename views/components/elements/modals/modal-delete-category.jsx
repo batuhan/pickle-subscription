@@ -12,16 +12,16 @@ class DeleteCategory extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Delete Category";
+    const self = this;
+    const pageName = "Delete Category";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <DeleteCategoryForm id={this.props.id} hide={self.props.hide} />

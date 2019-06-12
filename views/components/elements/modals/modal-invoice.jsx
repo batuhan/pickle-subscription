@@ -1,26 +1,27 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { browserHistory } from "react-router";
 import cookie from "react-cookie";
+import { connect } from "react-redux";
+import getSymbolFromCurrency from "currency-symbol-map";
+import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Modal from "../../utilities/modal.jsx";
 import DateFormat from "../../utilities/date-format.jsx";
 import { Price } from "../../utilities/price.jsx";
-import { connect } from "react-redux";
-import getSymbolFromCurrency from "currency-symbol-map";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalInvoice extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let username = cookie.load("username");
+    const uid = cookie.load("uid");
+    const username = cookie.load("username");
     this.state = {
       loading: true,
       nextInvoice: false,
       currentUser: false,
       url: `/api/v1/invoices/upcoming/${uid}`,
-      uid: uid,
+      uid,
       email: username,
     };
     this.fetchNextInvoice = this.fetchNextInvoice.bind(this);
@@ -31,7 +32,7 @@ class ModalInvoice extends React.Component {
   }
 
   fetchNextInvoice() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url)
       .then(function(response) {
         if (response != null) {
@@ -58,35 +59,35 @@ class ModalInvoice extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Upcoming Invoice";
+    const self = this;
+    const pageName = "Upcoming Invoice";
 
     if (self.state.loading) {
       return <Load />;
-    } else {
-      let myNextInvoice = self.state.nextInvoice;
+    } 
+      const myNextInvoice = self.state.nextInvoice;
       if (myNextInvoice) {
-        let amountDue = myNextInvoice.amount_due || 0;
-        let total = myNextInvoice.total || 0;
-        let prefix = getSymbolFromCurrency(myNextInvoice.currency);
-        let nextPaymentAttempt = myNextInvoice.next_payment_attempt || "";
-        let closed = myNextInvoice.closed || false;
-        let paid = myNextInvoice.paid || false;
+        const amountDue = myNextInvoice.amount_due || 0;
+        const total = myNextInvoice.total || 0;
+        const prefix = getSymbolFromCurrency(myNextInvoice.currency);
+        const nextPaymentAttempt = myNextInvoice.next_payment_attempt || "";
+        const closed = myNextInvoice.closed || false;
+        const paid = myNextInvoice.paid || false;
 
-        let lineItemCount = myNextInvoice.lines.total_count || 0;
-        let lineItems = myNextInvoice.lines.data; //data is an array of objects
+        const lineItemCount = myNextInvoice.lines.total_count || 0;
+        const lineItems = myNextInvoice.lines.data; // data is an array of objects
 
-        let item_name = item => {
+        const item_name = item => {
           if (item.description) {
             return item.description;
-          } else if (item.plan) {
+          } if (item.plan) {
             return item.plan.name;
-          } else {
+          } 
             return item.type;
-          }
+          
         };
 
-        let items = () => {
+        const items = () => {
           return lineItems.map(item => (
             <tr key={item.id}>
               <td>{item_name(item)}</td>
@@ -100,8 +101,8 @@ class ModalInvoice extends React.Component {
           ));
         };
 
-        let last4,
-          fund = null;
+        let last4;
+          let fund = null;
 
         if (self.state.currentUser) {
           fund = self.state.currentUser.references.funds;
@@ -110,9 +111,9 @@ class ModalInvoice extends React.Component {
           }
         }
 
-        let modalHeadingStyle = {};
+        const modalHeadingStyle = {};
         if (this.props.options) {
-          let options = this.props.options;
+          const {options} = this.props;
           modalHeadingStyle.backgroundColor = _.get(
             options,
             "primary_theme_background_color.value",
@@ -158,7 +159,9 @@ class ModalInvoice extends React.Component {
                       <br />
                       <span>
                         <i className="fa fa-credit-card" />
-                        *** *** *** {last4}
+                        *** *** *** 
+                        {' '}
+                        {last4}
                       </span>
                       <br />
                     </div>
@@ -196,7 +199,7 @@ class ModalInvoice extends React.Component {
             </div>
           </Modal>
         );
-      } else {
+      } 
         return (
           <Modal
             modalTitle={pageName}
@@ -215,8 +218,8 @@ class ModalInvoice extends React.Component {
             </div>
           </Modal>
         );
-      }
-    }
+      
+    
   }
 }
 

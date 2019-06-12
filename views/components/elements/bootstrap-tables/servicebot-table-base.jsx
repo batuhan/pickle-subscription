@@ -47,7 +47,7 @@ class ServiceBotTableBase extends React.Component {
   }
 
   renderCustomButtonGroup(props) {
-    let self = this;
+    const self = this;
     return (
       <ButtonGroup
         className="servicebot-table-btn-group"
@@ -57,7 +57,7 @@ class ServiceBotTableBase extends React.Component {
           <button
             {...self.props.createItemProps}
             type="button"
-            className={`btn btn-default`}
+            className="btn btn-default"
             onClick={() => {
               self.props.createItemAction
                 ? self.props.createItemAction()
@@ -66,7 +66,9 @@ class ServiceBotTableBase extends React.Component {
                   );
             }}
           >
-            <i className="fa fa-plus" /> {self.props.createItemLabel}
+            <i className="fa fa-plus" /> 
+            {' '}
+            {self.props.createItemLabel}
           </button>
         )}
         {props.showSelectedOnlyBtn}
@@ -103,7 +105,7 @@ class ServiceBotTableBase extends React.Component {
   }
 
   onAfterDeleteRow(rowKeys) {
-    alert("The rowkey you drop: " + rowKeys);
+    alert(`The rowkey you drop: ${  rowKeys}`);
   }
 
   customConfirmDeleteRow(next, dropRowKeys) {
@@ -116,10 +118,10 @@ class ServiceBotTableBase extends React.Component {
   }
 
   customColumns(children) {
-    let self = this;
+    const self = this;
 
     const customChildren = React.Children.map(children, child => {
-      let props =
+      const props =
         child.props.searchable && self.state.advancedFilter
           ? { filter: child.props.filter || self.state.advancedFilter }
           : { filter: false };
@@ -130,7 +132,7 @@ class ServiceBotTableBase extends React.Component {
   }
 
   render() {
-    let {
+    const {
       noDataText,
       children,
       rows,
@@ -174,9 +176,9 @@ class ServiceBotTableBase extends React.Component {
           data={rows}
           deleteRow={deleteRow}
           // selectRow={ false }
-          exportCSV={true}
-          search={true}
-          multiColumnSearch={true}
+          exportCSV
+          search
+          multiColumnSearch
           striped
           hover
           pagination

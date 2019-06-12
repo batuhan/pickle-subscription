@@ -1,11 +1,11 @@
 import React from "react";
 import cookie from "react-cookie";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
 import { BillingForm } from "../elements/forms/billing-settings-form.jsx";
-import { connect } from "react-redux";
 
 class BillingSettings extends React.Component {
   constructor(props) {
@@ -17,9 +17,10 @@ class BillingSettings extends React.Component {
       return browserHistory.push("/login");
     }
   }
+
   render() {
-    let pageName = this.props.route.name;
-    let spk = cookie.load("spk");
+    const pageName = this.props.route.name;
+    const spk = cookie.load("spk");
     return (
       <Authorizer>
         <Jumbotron pageName={pageName} location={this.props.location} />

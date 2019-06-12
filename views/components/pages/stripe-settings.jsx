@@ -18,14 +18,14 @@ class StripeSettings extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = this.props.route.name;
-    let breadcrumbs = [
+    const self = this;
+    const pageName = this.props.route.name;
+    const breadcrumbs = [
       { name: "Home", link: "home" },
       { name: "My Services", link: "/my-services" },
       { name: pageName, link: null },
     ];
-    let subtitle =
+    const subtitle =
       "Servicebot works with Stripe. Integrate and import your existing Stripe data with one click.";
     return (
       <Authorizer permissions="can_administrate">

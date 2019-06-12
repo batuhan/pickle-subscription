@@ -1,15 +1,15 @@
-let User = require("../models/user");
-let ServiceInstance = require("../models/service-instance");
-let ServiceTemplate = require("../models/service-template");
-let ServiceTemplateProperty = require("../models/service-template-property");
-let ServiceInstanceProperty = require("../models/service-instance-property");
-let ServiceCategory = require("../models/service-category");
-let Invoice = require("../models/invoice");
-let InvoiceLine = require("../models/invoice-line");
-let Transaction = require("../models/transaction");
+const User = require("../models/user");
+const ServiceInstance = require("../models/service-instance");
+const ServiceTemplate = require("../models/service-template");
+const ServiceTemplateProperty = require("../models/service-template-property");
+const ServiceInstanceProperty = require("../models/service-instance-property");
+const ServiceCategory = require("../models/service-category");
+const Invoice = require("../models/invoice");
+const InvoiceLine = require("../models/invoice-line");
+const Transaction = require("../models/transaction");
 
-//password 1234
-var demo_users = [
+// password 1234
+const demo_users = [
   {
     role_id: 1,
     name: null,
@@ -42,7 +42,7 @@ var demo_users = [
   },
 ];
 
-var demo_service_category = [
+const demo_service_category = [
   {
     name: "Web Development",
     description: "Development of custom websites and applications",
@@ -61,7 +61,7 @@ var demo_service_category = [
   },
 ];
 
-var demo_service_template = [
+const demo_service_template = [
   {
     created_by: 1,
     name: "Small Website",
@@ -243,7 +243,7 @@ var demo_service_template = [
   },
 ];
 
-var demo_service_template_properties = [
+const demo_service_template_properties = [
   {
     name: "small_website_company_name",
     value: "Your Companies Name",
@@ -324,7 +324,7 @@ var demo_service_template_properties = [
   },
 ];
 
-var demo_service_instance = [
+const demo_service_instance = [
   {
     service_id: 7,
     user_id: 1,
@@ -459,7 +459,7 @@ var demo_service_instance = [
   },
 ];
 
-var demo_service_instance_properties = [
+const demo_service_instance_properties = [
   {
     name: "small_website_company_name",
     value: "Your Companies Name",
@@ -486,7 +486,7 @@ var demo_service_instance_properties = [
   },
 ];
 
-let demo_invoices = [
+const demo_invoices = [
   {
     user_id: 1,
     service_instance_id: null,
@@ -567,7 +567,7 @@ let demo_invoices = [
   },
 ];
 
-let demo_invoice_lines = [
+const demo_invoice_lines = [
   {
     invoice_id: 1,
     line_item_id: "sub_A8Zqw22C79cQHJ",
@@ -726,7 +726,7 @@ let demo_invoice_lines = [
   },
 ];
 
-let demo_transactions = [
+const demo_transactions = [
   {
     invoice_id: 1,
     user_id: 1,
@@ -881,17 +881,17 @@ let demo_transactions = [
 
 module.exports = new Promise(function(resolve_top, reject_top) {
   return new Promise(function(resolve, reject) {
-    //Create users
+    // Create users
     Promise.all(
       demo_users.map(function(userData) {
         return new Promise(function(resolve_user, reject_user) {
-          let newUser = new User(userData);
+          const newUser = new User(userData);
           newUser.createWithStripe(function(err, result) {
             if (!err) {
               return resolve_user(result);
-            } else {
+            } 
               return reject_user(err);
-            }
+            
           });
         });
       }),
@@ -905,7 +905,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
   })
     .then(function() {
-      //Create Service categories
+      // Create Service categories
       return new Promise(function(resolve, reject) {
         ServiceCategory.batchCreate(demo_service_category, function(result) {
           return resolve(result);
@@ -913,7 +913,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         ServiceTemplate.batchCreate(demo_service_template, function(result) {
           return resolve(result);
@@ -921,7 +921,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         ServiceTemplateProperty.batchCreate(
           demo_service_template_properties,
@@ -932,7 +932,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         ServiceInstance.batchCreate(demo_service_instance, function(result) {
           return resolve(result);
@@ -940,7 +940,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         ServiceInstanceProperty.batchCreate(
           demo_service_instance_properties,
@@ -951,7 +951,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         Invoice.batchCreate(demo_invoices, function(result) {
           return resolve(result);
@@ -959,7 +959,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         Transaction.batchCreate(demo_transactions, function(result) {
           return resolve(result);
@@ -967,7 +967,7 @@ module.exports = new Promise(function(resolve_top, reject_top) {
       });
     })
     .then(function() {
-      //Create Service templates
+      // Create Service templates
       return new Promise(function(resolve, reject) {
         InvoiceLine.batchCreate(demo_invoice_lines, function(result) {
           return resolve(result);
@@ -982,12 +982,12 @@ module.exports = new Promise(function(resolve_top, reject_top) {
     });
 });
 
-//user
-//service template
-//service template properties
-//service instance
-//service instance properties
-//messages
-//invoice
-//transaction
-//invoice lines
+// user
+// service template
+// service template properties
+// service instance
+// service instance properties
+// messages
+// invoice
+// transaction
+// invoice lines

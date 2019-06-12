@@ -1,19 +1,22 @@
 import React from "react";
 import update from "immutability-helper";
 import Fetcher from "./fetcher.jsx";
-let _ = require("lodash");
-var values = require("object.values");
 import Load from "./load.jsx";
 
-//todo: future this system can be cleaned up a ton, maybe a complete redo later
-//todo: handle new data children default values
+const _ = require("lodash");
+const values = require("object.values");
+
+// todo: future this system can be cleaned up a ton, maybe a complete redo later
+// todo: handle new data children default values
 class DataChild extends React.Component {
   constructor(props) {
     super(props);
   }
+
   componentWillUnmount() {
     this.props.handleDeleteChild();
   }
+
   render() {
     return <div>{this.props.children}</div>;
   }
@@ -62,7 +65,7 @@ class DataWysiwyg extends React.Component {
 class DataForm extends React.Component {
   constructor(props) {
     super(props);
-    var initialState = {
+    const initialState = {
       form: { references: {} },
       errors: {},
       ajaxLoad: false,
@@ -75,8 +78,8 @@ class DataForm extends React.Component {
   }
 
   stateGetter(children, modelName, objectName, initial) {
-    let self = this;
-    let initialChildren = initial.form.references;
+    const self = this;
+    const initialChildren = initial.form.references;
     React.Children.forEach(children, function(child, index) {
       let currModel = modelName;
       let currObject = objectName;
@@ -89,7 +92,7 @@ class DataForm extends React.Component {
         currObject = child.props.objectName || objectName;
       }
 
-      //todo: fix dirty hack
+      // todo: fix dirty hack
       if (child.props.isDataChild) {
         if (initialChildren[currModel] == null) {
           initialChildren[currModel] = { [currObject]: {} };
@@ -98,7 +101,7 @@ class DataForm extends React.Component {
         }
       }
 
-      //if child is an input, select, textarea or any component with props.receiveOnCHange and props. receiveValue
+      // if child is an input, select, textarea or any component with props.receiveOnCHange and props. receiveValue
       if (
         (child.type == "input" ||
           child.type == "select" ||
@@ -133,29 +136,29 @@ class DataForm extends React.Component {
   }
 
   recursiveInputModifier(children, modelName, objectName) {
-    let self = this;
+    const self = this;
 
     return React.Children.map(children, function(child, index) {
-      var childProps = {};
-      var currentError = false;
-      var currentWarning = false;
+      const childProps = {};
+      let currentError = false;
+      let currentWarning = false;
 
       if (child == null) {
         return;
       }
 
-      //todo: flag elements that should have onChange attached to them (so we wont have a hardcoded type like wysiwyg)
+      // todo: flag elements that should have onChange attached to them (so we wont have a hardcoded type like wysiwyg)
 
-      //if child is an input, select or a component with receiveOnChange = true
+      // if child is an input, select or a component with receiveOnChange = true
       if (
         (child.type == "input" ||
           child.type == "select" ||
           (child.props && child.props.receiveOnChange)) &&
         child.props.type != "submit"
       ) {
-        //if child is a component and has props.receiveValue (Stop looking and do stuff)
+        // if child is a component and has props.receiveValue (Stop looking and do stuff)
         if (child.props && child.props.receiveValue) {
-          let newProps = {};
+          const newProps = {};
           let path = "";
 
           if (modelName && objectName) {
@@ -164,7 +167,7 @@ class DataForm extends React.Component {
             path = `${child.props.name}`;
           }
 
-          //checking to see if it has an error or warning
+          // checking to see if it has an error or warning
           if (_.has(self.state.errors, path)) {
             if (_.has(self.state.errors, `${path}.error`)) {
               currentError = _.get(self.state.errors, `${path}.error`);
@@ -172,7 +175,7 @@ class DataForm extends React.Component {
               currentWarning = _.get(self.state.errors, `${path}.warning`);
             }
           }
-          //setting up the props for the component
+          // setting up the props for the component
           newProps.onChange = self.handleInputChange(
             child,
             modelName,
@@ -182,11 +185,11 @@ class DataForm extends React.Component {
             _.get(self.state.form, path) ||
             child.props.value ||
             child.props.defaultValue;
-          newProps.error = currentError ? currentError : false;
+          newProps.error = currentError || false;
           newProps.className = currentError
             ? "form-control has-error"
             : "form-control";
-          newProps.warning = currentWarning ? currentWarning : false;
+          newProps.warning = currentWarning || false;
 
           if (child.props.children) {
             newProps.children = self.recursiveInputModifier(
@@ -196,12 +199,12 @@ class DataForm extends React.Component {
             );
           }
 
-          //returning the cloned element with the new props
+          // returning the cloned element with the new props
           return React.cloneElement(child, newProps);
-        } else {
-          //otherwise, child is a regular input element
+        } 
+          // otherwise, child is a regular input element
 
-          //making sure this element has a name then try and see if it has an error or warning
+          // making sure this element has a name then try and see if it has an error or warning
           if (_.has(child.props, "name")) {
             if (
               Object.keys(self.state.errors).length > 0 &&
@@ -221,20 +224,20 @@ class DataForm extends React.Component {
             }
           }
 
-          //setting up the props for the element
-          let newProps = {
+          // setting up the props for the element
+          const newProps = {
             onChange: self.handleInputChange(child, modelName, objectName),
-            "data-error": currentError ? currentError : false,
+            "data-error": currentError || false,
             className: currentError ? "form-control has-error" : "form-control",
-            "data-warning": currentWarning ? currentWarning : false,
+            "data-warning": currentWarning || false,
           };
 
-          //returning the cloned element with the new props
+          // returning the cloned element with the new props
           return React.cloneElement(child, newProps);
-        }
-      } else if (child.props) {
-        let currModel = child.props.modelName || modelName;
-        let currObject = child.props.objectName || objectName;
+        
+      } if (child.props) {
+        const currModel = child.props.modelName || modelName;
+        const currObject = child.props.objectName || objectName;
         if (child.props.objectName) {
           childProps.handleDeleteChild = self.handleDeleteChild(
             currModel,
@@ -255,11 +258,12 @@ class DataForm extends React.Component {
       return child;
     });
   }
+
   handleDeleteChild(modelName, objectName) {
-    let self = this;
+    const self = this;
     return function() {
       if (self.state.form.references[modelName]) {
-        let newState = _.cloneDeep(self.state);
+        const newState = _.cloneDeep(self.state);
         delete newState.form.references[modelName][objectName];
         self.setState(newState);
       }
@@ -276,22 +280,22 @@ class DataForm extends React.Component {
   }
 
   submitDataForm() {
-    let self = this;
-    let form = self.state.form;
-    let formChildren = form.references;
-    let errors = {};
+    const self = this;
+    const {form} = self.state;
+    const formChildren = form.references;
+    const errors = {};
 
-    //having validators is optional
-    let validators = self.props.validators || false;
+    // having validators is optional
+    const validators = self.props.validators || false;
     if (validators) {
-      let childValidators = self.props.validators.references || false;
+      const childValidators = self.props.validators.references || false;
 
-      //Validating dataForm inputs
+      // Validating dataForm inputs
 
-      for (var prop in form) {
+      for (const prop in form) {
         if (_.isFunction(validators[prop])) {
-          //validation functions will return true or an error object
-          let testResult = validators[prop](form[prop]);
+          // validation functions will return true or an error object
+          const testResult = validators[prop](form[prop]);
           if (testResult === true) {
           } else {
             _.set(errors, `${prop}`, { error: testResult.error });
@@ -300,16 +304,16 @@ class DataForm extends React.Component {
       }
 
       if (childValidators) {
-        //Validating dataChild inputs
+        // Validating dataChild inputs
 
-        //accessing path formChild.references
+        // accessing path formChild.references
         for (var model in formChildren) {
-          //accessing path formChild.references[modelName]
-          for (var modelItem in formChildren[model]) {
-            //accessing path formChild.references[modelName][fieldName]
-            for (var modelField in formChildren[model][modelItem]) {
+          // accessing path formChild.references[modelName]
+          for (const modelItem in formChildren[model]) {
+            // accessing path formChild.references[modelName][fieldName]
+            for (const modelField in formChildren[model][modelItem]) {
               if (_.isFunction(childValidators[model][modelField])) {
-                let testResult = childValidators[model][modelField](
+                const testResult = childValidators[model][modelField](
                   formChildren[model][modelItem][modelField],
                 );
                 if (testResult === true) {
@@ -320,17 +324,16 @@ class DataForm extends React.Component {
                     { error: testResult.error },
                   );
                 }
-              } else {
-                if (_.has(formChildren[model][modelItem], "value")) {
+              } else if (_.has(formChildren[model][modelItem], "value")) {
                   if (_.has(childValidators, model)) {
                     if (_.has(childValidators[model], modelItem)) {
                       if (
                         _.isFunction(childValidators[model][modelItem].value)
                       ) {
-                        let theValidator =
+                        const theValidator =
                           childValidators[model][modelItem].value;
-                        let theValue = formChildren[model][modelItem].value;
-                        let testResult = theValidator(theValue);
+                        const theValue = formChildren[model][modelItem].value;
+                        const testResult = theValidator(theValue);
                         if (testResult === true) {
                         } else {
                           _.set(
@@ -351,23 +354,22 @@ class DataForm extends React.Component {
                     }
                   }
                 }
-              }
             }
           }
         }
       }
     }
 
-    //if errors has objects in it, meaning have error in form
+    // if errors has objects in it, meaning have error in form
     if (Object.keys(errors).length > 0 && errors.constructor === Object) {
-      self.setState({ errors: errors }, function() {
+      self.setState({ errors }, function() {
         if (self.props.onUpdate && _.isFunction(self.props.onUpdate)) {
           self.props.onUpdate(JSON.stringify(self.state));
         }
       });
     } else {
-      //otherwise, submit the form
-      //Polyfill for object.values
+      // otherwise, submit the form
+      // Polyfill for object.values
       for (var model in formChildren) {
         formChildren[model] = values(formChildren[model]);
       }
@@ -376,20 +378,21 @@ class DataForm extends React.Component {
       self.setState({ ajaxLoad: true });
 
       form.references = formChildren;
-      let method = self.props.method || "POST";
+      const method = self.props.method || "POST";
       Fetcher(self.props.url, method, form).then(function(result) {
         self.setState({ ajaxLoad: false });
         self.props.handleResponse(result);
       });
     }
   }
+
   handleInputChange(element, modelName = null, objectName = null) {
-    let self = this;
+    const self = this;
     return function(event, newSet = null, nameOverride = null) {
-      let set = { form: { references: {} } };
+      const set = { form: { references: {} } };
       if (newSet && !event) {
         return self.setState(currState => {
-          let newState = update(currState, newSet);
+          const newState = update(currState, newSet);
           if (self.props.onUpdate) {
             self.props.onUpdate(JSON.stringify(newState));
           }
@@ -401,13 +404,13 @@ class DataForm extends React.Component {
       let name = "";
 
       if (event && event.target) {
-        const target = event.target;
+        const {target} = event;
         value = target.type === "checkbox" ? target.checked : target.value;
         name = target.name;
-        //if target doesn't exist - assume the event is the value
+        // if target doesn't exist - assume the event is the value
       } else {
         value = event;
-        name = nameOverride ? nameOverride : element.props.name;
+        name = nameOverride || element.props.name;
       }
 
       self.setState(currState => {
@@ -449,8 +452,8 @@ class DataForm extends React.Component {
         }
         return formState;
       });
-      //const formState = update(self.state, set);
-      //self.setState(formState);
+      // const formState = update(self.state, set);
+      // self.setState(formState);
       // if(self.props.onUpdate) {
       //     self.props.onUpdate(JSON.stringify(formState));
       // }
@@ -459,7 +462,7 @@ class DataForm extends React.Component {
   }
 
   render() {
-    let children = this.recursiveInputModifier(this.props.children, null, null);
+    const children = this.recursiveInputModifier(this.props.children, null, null);
 
     return (
       <form id={this.props.id} className="dataform">

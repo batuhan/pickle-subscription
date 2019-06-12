@@ -1,3 +1,3 @@
-var ServiceCategory = require("./base/entity")("service_categories");
+const ServiceCategory = require("./base/entity")("service_categories");
 
 module.exports = ServiceCategory;

@@ -1,25 +1,25 @@
 module.exports = function(database, initConfig) {
-  //todo: move dependencies into plugins
-  //todo: should not depend on code from another plugin directly...
-  let options = require("../system-options/default-options");
-  let systemOptions = options.options;
-  let SystemOption = require("../../models/system-options");
-  let ServiceCategory = require("../../models/service-category");
-  let Permission = require("../../models/permission");
-  let NotificationTemplate = require("../../models/notification-template");
-  let User = require("../../models/user");
-  let Role = require("../../models/role");
-  let DefaultTemplates = require("../../config/default-notifications");
+  // todo: move dependencies into plugins
+  // todo: should not depend on code from another plugin directly...
+  const options = require("../system-options/default-options");
+  const systemOptions = options.options;
+  const SystemOption = require("../../models/system-options");
+  const ServiceCategory = require("../../models/service-category");
+  const Permission = require("../../models/permission");
+  const NotificationTemplate = require("../../models/notification-template");
+  const User = require("../../models/user");
+  const Role = require("../../models/role");
+  const DefaultTemplates = require("../../config/default-notifications");
 
-  let assignPermissionPromise = function(
+  const assignPermissionPromise = function(
     initConfig,
     permission_objects,
     initialRoleMap,
   ) {
     return function(role) {
       return new Promise(function(resolve, reject) {
-        let mapped = initialRoleMap[role.get("role_name")];
-        let perms_to_assign = permission_objects.filter(p =>
+        const mapped = initialRoleMap[role.get("role_name")];
+        const perms_to_assign = permission_objects.filter(p =>
           mapped.includes(p.get("permission_name")),
         );
         role.assignPermission(perms_to_assign, function(result) {
@@ -29,16 +29,16 @@ module.exports = function(database, initConfig) {
     };
   };
 
-  let createAdmin = initConfig => {
+  const createAdmin = initConfig => {
     return new Promise((resolve, reject) => {
       if (initConfig && initConfig.admin_user && initConfig.admin_password) {
-        //sets the stripe keys so the createWithStripe function has access to store data that needs to exist...
-        let stripeOptions = {
+        // sets the stripe keys so the createWithStripe function has access to store data that needs to exist...
+        const stripeOptions = {
           stripe_secret_key: initConfig.stripe_secret,
           stripe_publishable_key: initConfig.stripe_public,
         };
         Role.findOne("role_name", "admin", adminRole => {
-          let admin = new User({
+          const admin = new User({
             email: initConfig.admin_user,
             password: require("bcryptjs").hashSync(
               initConfig.admin_password,
@@ -73,21 +73,21 @@ module.exports = function(database, initConfig) {
   };
 
   return new Promise(function(resolve, reject) {
-    let initialRoleMap = require("./initial-role-map.json");
+    const initialRoleMap = require("./initial-role-map.json");
 
-    //todo: can we just take admin since it probably has all the permissions?
-    let permissions = [
+    // todo: can we just take admin since it probably has all the permissions?
+    const permissions = [
       ...new Set([
         ...initialRoleMap.admin,
         ...initialRoleMap.user,
         ...initialRoleMap.staff,
       ]),
     ];
-    let roles = Object.keys(initialRoleMap);
-    let permission_data = permissions.map(permission => ({
+    const roles = Object.keys(initialRoleMap);
+    const permission_data = permissions.map(permission => ({
       permission_name: permission,
     }));
-    let role_data = roles.map(role => ({ role_name: role }));
+    const role_data = roles.map(role => ({ role_name: role }));
 
     if (initConfig.stripe_public && initConfig.stripe_secret) {
       systemOptions.push(
@@ -106,7 +106,7 @@ module.exports = function(database, initConfig) {
       );
     }
 
-    let defaultCategory = new ServiceCategory({
+    const defaultCategory = new ServiceCategory({
       name: "Uncategorized",
       description: "Uncategorized Services",
     });
@@ -114,25 +114,25 @@ module.exports = function(database, initConfig) {
       console.log("Default Category created");
     });
 
-    //create default email templates
+    // create default email templates
     NotificationTemplate.batchCreate(DefaultTemplates.templates, function(
       emailResult,
     ) {
-      //create roles
+      // create roles
       Role.batchCreate(role_data, function(roles) {
-        //get the User role id for default_user_role
-        let userRole = roles.filter(role => role["role_name"] == "user")[0];
+        // get the User role id for default_user_role
+        const userRole = roles.filter(role => role.role_name == "user")[0];
         systemOptions.push({
           option: "default_user_role",
           public: true,
           type: "system",
           data_type: "user_role",
-          value: userRole["id"],
+          value: userRole.id,
         });
 
-        //create options
+        // create options
         SystemOption.batchCreate(systemOptions, function(optionResult) {
-          let EmailTemplateToRoles = require("../../models/base/entity")(
+          const EmailTemplateToRoles = require("../../models/base/entity")(
             "notification_templates_to_roles",
             [],
             "id",
@@ -143,17 +143,17 @@ module.exports = function(database, initConfig) {
             function(emailToRolesResult) {},
           );
 
-          //create role objects from results of inserts
-          let role_objects = roles.map(role => new Role(role));
+          // create role objects from results of inserts
+          const role_objects = roles.map(role => new Role(role));
 
-          //create permissions
+          // create permissions
           Permission.batchCreate(permission_data, function(result) {
-            //create permission objects from results of inserts
-            let permission_objects = result.map(
+            // create permission objects from results of inserts
+            const permission_objects = result.map(
               permission => new Permission(permission),
             );
 
-            //assign permissions to roles
+            // assign permissions to roles
             resolve(
               Promise.all(
                 role_objects.map(
@@ -165,9 +165,9 @@ module.exports = function(database, initConfig) {
                 ),
               )
                 .then(function() {
-                  //Assign all system settings
+                  // Assign all system settings
                   return new Promise(function(resolve, reject) {
-                    let options = [
+                    const options = [
                       {
                         option: "company_name",
                         value: initConfig.company_name,

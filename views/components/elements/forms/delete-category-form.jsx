@@ -3,12 +3,13 @@ import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Alerts from "../alerts.jsx";
 import Buttons from "../buttons.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class DeleteCategoryForm extends React.Component {
   constructor(props) {
     super(props);
-    let id = this.props.id;
+    const {id} = this.props;
     this.state = {
       url: `/api/v1/service-categories/${id}`,
       response: {},
@@ -21,12 +22,12 @@ class DeleteCategoryForm extends React.Component {
   }
 
   fetchDeleteCategory() {
-    let self = this;
+    const self = this;
     Fetcher(this.state.url, "DELETE").then(function(response) {
       if (!response.error) {
-        self.setState({ success: true, response: response });
+        self.setState({ success: true, response });
       } else {
-        let msg =
+        const msg =
           "Cannot delete a category that has service templates attached to it.";
         self.setState({
           alerts: {
@@ -42,7 +43,7 @@ class DeleteCategoryForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return (
         <div>
           <div className="p-20">
@@ -50,7 +51,7 @@ class DeleteCategoryForm extends React.Component {
               <strong>Delete Category Success!</strong>
             </p>
           </div>
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="default"
@@ -60,8 +61,8 @@ class DeleteCategoryForm extends React.Component {
           </div>
         </div>
       );
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="suspend-user-form">
           <div className="p-20">
@@ -78,7 +79,7 @@ class DeleteCategoryForm extends React.Component {
             </p>
           </div>
 
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="primary"
@@ -95,7 +96,7 @@ class DeleteCategoryForm extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

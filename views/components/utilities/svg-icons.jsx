@@ -8,7 +8,7 @@ class SVGIcons extends React.Component {
   componentDidMount() {}
 
   render() {
-    let {
+    const {
       children,
       id,
       width,

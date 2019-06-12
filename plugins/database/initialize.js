@@ -1,17 +1,18 @@
-let consume = require("pluginbot/effects/consume");
-let { call, put } = require("redux-saga/effects");
-let createTable = function(knex) {
+const consume = require("pluginbot/effects/consume");
+const { call, put } = require("redux-saga/effects");
+
+const createTable = function(knex) {
   return async function(tableName, tableFunction) {
-    let table = await knex.schema.createTable(tableName, tableFunction);
-    console.log("Created table : " + tableName);
+    const table = await knex.schema.createTable(tableName, tableFunction);
+    console.log(`Created table : ${  tableName}`);
     return table;
   };
 };
 
-//todo: split this up into multiple plugins.
-let buildTables = async function(knex) {
+// todo: split this up into multiple plugins.
+const buildTables = async function(knex) {
   console.log("Creating tables...");
-  let create = createTable(knex);
+  const create = createTable(knex);
 
   await create("user_roles", function(table) {
     table.increments();
@@ -239,7 +240,7 @@ let buildTables = async function(knex) {
     table.timestamps(true, true);
   });
   await create("service_template_properties", function(table) {
-    //Inherits the properties table.
+    // Inherits the properties table.
     table.inherits("properties");
     table.increments();
     table
@@ -252,7 +253,7 @@ let buildTables = async function(knex) {
     table.timestamps(true, true);
   });
   await create("service_instance_properties", function(table) {
-    //Inherits the properties table.
+    // Inherits the properties table.
     table.inherits("properties");
     table.increments();
     table

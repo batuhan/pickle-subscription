@@ -1,21 +1,21 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 
 class ModalRequestCancellation extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let username = cookie.load("username");
-    let serviceInstance = this.props.myInstance;
+    const uid = cookie.load("uid");
+    const username = cookie.load("username");
+    const serviceInstance = this.props.myInstance;
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
-      serviceInstance: serviceInstance,
+      serviceInstance,
       delete_url: `/api/v1/service-instances/${serviceInstance.id}`,
       current_modal: "model_delete",
     };
@@ -24,7 +24,7 @@ class ModalRequestCancellation extends React.Component {
 
   onDelete(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     Fetcher(self.state.delete_url, "DELETE", {}).then(function(response) {
       if (!response.error) {
         self.setState({
@@ -41,10 +41,10 @@ class ModalRequestCancellation extends React.Component {
   }
 
   render() {
-    let self = this;
-    let currentModal = this.state.current_modal;
-    let instance = self.state.serviceInstance;
-    let name = instance.name;
+    const self = this;
+    const currentModal = this.state.current_modal;
+    const instance = self.state.serviceInstance;
+    const {name} = instance;
 
     if (currentModal === "model_delete") {
       if (isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
@@ -54,7 +54,7 @@ class ModalRequestCancellation extends React.Component {
             icon="fa-ban"
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -74,12 +74,14 @@ class ModalRequestCancellation extends React.Component {
                       service!
                     </p>
                     <p>
-                      Service Name: <b>{name}</b>
+                      Service Name: 
+                      {' '}
+                      <b>{name}</b>
                     </p>
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-default btn-rounded"
                   onClick={self.props.hide}
@@ -96,12 +98,12 @@ class ModalRequestCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } else {
+      } 
         return (
           <div>You do not have the permission to access this feature.</div>
         );
-      }
-    } else if (currentModal === "model_delete_success") {
+      
+    } if (currentModal === "model_delete_success") {
       return (
         <Modal
           modalTitle="Service Cancellation Successful"
@@ -115,7 +117,10 @@ class ModalRequestCancellation extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Service {name}, has been successfully deleted.
+                      Service 
+                      {' '}
+                      {name}
+, has been successfully deleted.
                     </strong>
                   </p>
                 </div>

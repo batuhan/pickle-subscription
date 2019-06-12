@@ -1,13 +1,14 @@
 import React from "react";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import { Authorizer } from "../../utilities/authorizer.jsx";
 import ServiceListItem from "./service-list-item.jsx";
 import SVGIcons from "../../utilities/svg-icons.jsx";
-import ServiceBotTableNoData from "../../elements/bootstrap-tables/servicebot-table-no-data.jsx";
-let _ = require("lodash");
-import { connect } from "react-redux";
+import ServiceBotTableNoData from "../bootstrap-tables/servicebot-table-no-data.jsx";
+
+const _ = require("lodash");
 
 class ServiceList extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class ServiceList extends React.Component {
   }
 
   componentDidMount() {
-    let that = this;
+    const that = this;
     Fetcher(that.state.url).then(function(response) {
       if (!response.error) {
         that.setState({ services: response });
@@ -31,7 +32,7 @@ class ServiceList extends React.Component {
   }
 
   componentDidUpdate() {
-    let myItemsList = document.getElementsByClassName("card-wrapper");
+    const myItemsList = document.getElementsByClassName("card-wrapper");
     let max = 0;
     for (let i = 0; i < myItemsList.length; i++) {
       if (myItemsList[i].clientHeight > max) {
@@ -45,7 +46,7 @@ class ServiceList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let self = this;
+    const self = this;
     if (nextProps.url != this.props.url) {
       Fetcher(nextProps.url).then(function(response) {
         if (!response.error) {
@@ -56,7 +57,7 @@ class ServiceList extends React.Component {
   }
 
   render() {
-    let { options } = this.props;
+    const { options } = this.props;
 
     if (this.state.loading) return <Load />;
     if (this.state.services.length < 1) {
@@ -450,7 +451,7 @@ class ServiceList extends React.Component {
           </Authorizer>
         </div>
       );
-    } else {
+    } 
       return (
         <div className="call-services" ref="allServices">
           <div className="row" ref="hello">
@@ -470,7 +471,7 @@ class ServiceList extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

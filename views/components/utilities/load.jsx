@@ -11,7 +11,7 @@ class Load extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     if (this.props.timeout !== false) {
       this.timeout = setTimeout(function() {
         self.setState({
@@ -28,7 +28,7 @@ class Load extends React.Component {
   }
 
   render() {
-    let style = {};
+    const style = {};
     let loadingStyle = {};
     if (this.state.type == "content" || this.state.type == "dataform") {
       if (this.state.loadState == "loading") {
@@ -60,7 +60,7 @@ class Load extends React.Component {
 
     return (
       <div className="loader" style={style}>
-        <div className={this.state.loadState} style={loadingStyle}></div>
+        <div className={this.state.loadState} style={loadingStyle} />
         <p className={`help-block m-b-0 ${this.state.loadState}`}>
           {this.state.message}
         </p>

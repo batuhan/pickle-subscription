@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import PluginbotProvider from "pluginbot-react/dist/provider";
 
 // App
+import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import App from "./components/app.jsx";
 import Home from "./components/pages/home.jsx";
 import AllServices from "./components/pages/all-services.jsx";
@@ -55,14 +56,14 @@ import Embed from "./components/elements/embed.jsx";
 import Setup from "./components/pages/setup.jsx";
 import GenericNotFound from "./components/pages/notfound.jsx";
 
-import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 
 class AppRouter extends React.Component {
   componentWillMount() {
     this.props.initialize();
   }
+
   render() {
-    let user = this.props.user;
+    const {user} = this.props;
     return (
       <Router history={browserHistory}>
         <Route name="Home" path="/" component={App}>
@@ -232,7 +233,7 @@ class AppRouter extends React.Component {
               path=":templateId/duplicate"
               component={ManageCatalogDuplicate}
             />
-            {/*<Route name="Edit Template" path=":templateId/edit" component={ManageCatalogEdit}/>*/}
+            {/* <Route name="Edit Template" path=":templateId/edit" component={ManageCatalogEdit}/> */}
           </Route>
           {/* Query routes */}
           <Route
@@ -274,7 +275,7 @@ class AppRouter extends React.Component {
         </Route>
         <Route
           name="Embed"
-          path={"/service/:serviceId/embed"}
+          path="/service/:serviceId/embed"
           component={Embed}
         />
         <Route name="Automated Installation" path="setup" component={Setup} />
@@ -283,7 +284,7 @@ class AppRouter extends React.Component {
     );
   }
 }
-let mapDispatch = function(dispatch) {
+const mapDispatch = function(dispatch) {
   return { initialize: () => dispatch(require("./store").initializedState()) };
 };
 AppRouter = connect(
@@ -301,12 +302,12 @@ class AppWrapper extends React.Component {
   }
 
   async componentDidMount() {
-    let pluginbot = await require("./store").pluginbot;
+    const pluginbot = await require("./store").pluginbot;
     this.setState({ pluginbot });
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
     if (this.state.pluginbot) {
       const history = syncHistoryWithStore(
         this.state.pluginbot.store.getState().history,
@@ -317,9 +318,9 @@ class AppWrapper extends React.Component {
           <AppRouter history={history} store={this.state.pluginbot.store} />
         </PluginbotProvider>
       );
-    } else {
+    } 
       return <div>Initializing...</div>;
-    }
+    
   }
 }
 

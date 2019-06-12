@@ -1,4 +1,4 @@
-import Fetcher from "../utilities/fetcher.jsx";
+import Fetcher from "./fetcher.jsx";
 
 /*
  * action types

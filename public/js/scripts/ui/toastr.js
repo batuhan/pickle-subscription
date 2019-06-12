@@ -1,11 +1,11 @@
-"use strict";
+
 /**
  * @author Batch Themes Ltd.
  */
 (function() {
   $(function() {
     $(".btn-toast").on("click", function() {
-      var type = $(this).data("type");
+      const type = $(this).data("type");
       if (type === "success") {
         toastr.options = {
           positionClass: "toast-top-right",

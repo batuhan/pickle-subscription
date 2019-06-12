@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
-import Authorizer from "../utilities/authorizer.jsx";
 import cookie from "react-cookie";
+import Authorizer from "../utilities/authorizer.jsx";
 
 /**
  * This is old nav from the theme, we now use nav-bootstrap.jsx
@@ -9,8 +9,8 @@ import cookie from "react-cookie";
 
 class Nav extends React.Component {
   render() {
-    let uid = cookie.load("uid");
-    let email = cookie.load("username");
+    const uid = cookie.load("uid");
+    const email = cookie.load("username");
     return (
       <nav className="navbar">
         <Authorizer>
@@ -105,7 +105,7 @@ class Nav extends React.Component {
               Log Out
             </button>
           </Authorizer>
-          <Authorizer anonymous={true}>
+          <Authorizer anonymous>
             <Link to="login" className="btn btn-rounded btn-flat btn-login">
               Log In
             </Link>

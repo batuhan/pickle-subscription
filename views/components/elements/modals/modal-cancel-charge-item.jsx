@@ -1,12 +1,13 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import ModalPaymentSetup from "./modal-payment-setup.jsx";
 import { Price } from "../../utilities/price.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalPayChargeItem extends React.Component {
   constructor(props) {
@@ -16,9 +17,9 @@ class ModalPayChargeItem extends React.Component {
       uid = this.props.ownerId;
     }
 
-    let username = cookie.load("username");
-    let service = this.props.myInstance;
-    let charge = this.props.chargeId;
+    const username = cookie.load("username");
+    const service = this.props.myInstance;
+    const charge = this.props.chargeId;
     let charge_item = false;
 
     if (
@@ -42,11 +43,11 @@ class ModalPayChargeItem extends React.Component {
 
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
       cancel_charge_url: `/api/v1/charge/${this.props.chargeId}/cancel`,
-      user_url: user_url,
-      charge_item: charge_item,
+      user_url,
+      charge_item,
       charge_id: charge,
       service_id: service.id,
       service_name: service.name,
@@ -69,7 +70,7 @@ class ModalPayChargeItem extends React.Component {
 
   onCancel(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
     Fetcher(self.state.cancel_charge_url, "POST", {}).then(function(response) {
       if (!response.error) {
@@ -84,13 +85,13 @@ class ModalPayChargeItem extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Cancel Charge item";
-    let currentModal = this.state.current_modal;
-    let chargeId = this.state.charge_id;
-    let chargeDescription = this.state.charge_item.description;
-    let chargeAmount = this.state.charge_item.amount;
-    let serviceName = this.state.service_name;
+    const self = this;
+    const pageName = "Cancel Charge item";
+    const currentModal = this.state.current_modal;
+    const chargeId = this.state.charge_id;
+    const chargeDescription = this.state.charge_item.description;
+    const chargeAmount = this.state.charge_item.amount;
+    const serviceName = this.state.service_name;
 
     if (currentModal == "model_cancel_charge" && !self.state.cancelled) {
       return (
@@ -98,7 +99,7 @@ class ModalPayChargeItem extends React.Component {
           modalTitle={pageName}
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="490px"
         >
@@ -111,14 +112,19 @@ class ModalPayChargeItem extends React.Component {
                       You are about to cancel the following charge item:
                     </strong>
                   </p>
-                  <p>Charge Description: {chargeDescription}</p>
                   <p>
-                    Charge Amount: <Price value={chargeAmount} />
+Charge Description:
+                    {chargeDescription}
+                  </p>
+                  <p>
+                    Charge Amount: 
+                    {' '}
+                    <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-primary btn-rounded"
                 onClick={self.onCancel}
@@ -135,13 +141,13 @@ class ModalPayChargeItem extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_cancel_charge" && self.state.cancelled) {
+    } if (currentModal == "model_cancel_charge" && self.state.cancelled) {
       return (
         <Modal
           modalTitle={pageName}
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="490px"
         >
@@ -155,7 +161,7 @@ class ModalPayChargeItem extends React.Component {
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-default btn-rounded"
                 onClick={self.props.hide}

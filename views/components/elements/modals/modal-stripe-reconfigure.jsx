@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "../../utilities/modal.jsx";
 import Buttons from "../buttons.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalConfirm extends React.Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class ModalConfirm extends React.Component {
   componentWillMount() {}
 
   render() {
-    let self = this;
-    let pageName = "Confirm Stripe API Key Change";
+    const self = this;
+    const pageName = "Confirm Stripe API Key Change";
 
     let formData = {};
     if (self.props.formData) {
@@ -25,7 +26,7 @@ class ModalConfirm extends React.Component {
       <Modal
         modalTitle={pageName}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
         titleColor="modal-danger"
         top="40%"
         width="650px"
@@ -57,7 +58,7 @@ class ModalConfirm extends React.Component {
               </div>
             </div>
           </div>
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="danger"

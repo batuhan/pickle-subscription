@@ -1,13 +1,13 @@
 import React from "react";
 import cookie from "react-cookie";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
 import ContentTitle from "../layouts/content-title.jsx";
 import UserFormEdit from "../elements/forms/user-form-edit.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
-import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
+    const uid = cookie.load("uid");
     this.state = { myUser: false, url: `/api/v1/users/${uid}` };
 
     this.fetchUser = this.fetchUser.bind(this);
@@ -29,13 +29,13 @@ class Profile extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ uid: this.props.uid })) {
       return browserHistory.push("/login");
-    } else {
+    } 
       this.fetchUser();
-    }
+    
   }
 
   fetchUser() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
         self.setState({ loading: false, myUser: response });
@@ -47,10 +47,10 @@ class Profile extends React.Component {
   }
 
   getUserEditForm() {
-    let user = this.props.user;
+    const {user} = this.props;
     if (user && user.status != "invited") {
       return <UserFormEdit myUser={this.state.myUser} />;
-    } else {
+    } 
       return (
         <div className="invited-user-profile basic-info col-md-6 col-md-offset-3">
           <span>
@@ -59,11 +59,11 @@ class Profile extends React.Component {
           </span>
         </div>
       );
-    }
+    
   }
 
   render() {
-    let pageName = this.props.route.name;
+    const pageName = this.props.route.name;
 
     if (this.state.loading) {
       return (
@@ -81,7 +81,7 @@ class Profile extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return (
         <div>
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -97,7 +97,7 @@ class Profile extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

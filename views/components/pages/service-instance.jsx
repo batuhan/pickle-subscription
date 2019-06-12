@@ -2,6 +2,7 @@ import React from "react";
 import cookie from "react-cookie";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { Link, browserHistory } from "react-router";
+import $ from "jquery";
 import Load from "../utilities/load.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
@@ -28,15 +29,14 @@ import ModalPaymentSetup from "../elements/modals/modal-payment-setup.jsx";
 import { ModalEditProperties } from "../elements/forms/edit-instance-properties-form.jsx";
 import ServiceInstanceFiles from "../elements/service-instance/service-instance-files.jsx";
 import DateFormat from "../utilities/date-format.jsx";
-import $ from "jquery";
 import "../../../public/js/bootstrap-3.3.7-dist/js/bootstrap.js";
 import _ from "lodash";
 
 class ServiceInstance extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let id = this.props.params.instanceId;
+    const uid = cookie.load("uid");
+    const id = this.props.params.instanceId;
     this.state = {
       instanceId: id,
       instance: false,
@@ -103,7 +103,7 @@ class ServiceInstance extends React.Component {
 
     $(this.refs.dropdownToggle3).dropdown();
 
-    let self = this;
+    const self = this;
     self.fetchInstance();
     self.fetchUserFund();
   }
@@ -113,7 +113,7 @@ class ServiceInstance extends React.Component {
   }
 
   fetchInstance() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url)
       .then(function(response) {
         if (response != null) {
@@ -129,7 +129,7 @@ class ServiceInstance extends React.Component {
   }
 
   fetchUserFund() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.fundUrl).then(function(response) {
       if (!response.error) {
         if (response.references.funds.length > 0) {
@@ -140,7 +140,7 @@ class ServiceInstance extends React.Component {
   }
 
   handleComponentUpdating() {
-    let self = this;
+    const self = this;
     self.fetchInstance();
   }
 
@@ -148,6 +148,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ approveModal: true });
   }
+
   onApproveClose() {
     this.setState({ approveModal: false });
     this.handleComponentUpdating();
@@ -157,6 +158,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ cancelModal: true });
   }
+
   onCancelClose() {
     this.setState({ cancelModal: false });
     this.handleComponentUpdating();
@@ -166,6 +168,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ undoCancelModal: true });
   }
+
   onUndoCancelClose() {
     this.setState({ undoCancelModal: false });
     this.handleComponentUpdating();
@@ -175,6 +178,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ viewPaymentModal: true });
   }
+
   onViewPaymentModalClose() {
     this.setState({ viewPaymentModal: false });
     this.handleComponentUpdating();
@@ -184,6 +188,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ editInstanceModal: true });
   }
+
   onEditInstanceModalClose() {
     this.setState({ editInstanceModal: false });
     this.handleComponentUpdating();
@@ -193,6 +198,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ editPaymentModal: true });
   }
+
   onEditPaymentModalClose() {
     this.setState({ editPaymentModal: false });
     this.handleComponentUpdating();
@@ -202,6 +208,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ editPropertyModal: true });
   }
+
   onEditPropertiesModalClose() {
     this.setState({ editPropertyModal: false });
     this.handleComponentUpdating();
@@ -211,6 +218,7 @@ class ServiceInstance extends React.Component {
     event.preventDefault();
     this.setState({ addChargeItemModal: true });
   }
+
   onAddChargeItemModalClose() {
     this.setState({ addChargeItemModal: false });
     this.handleComponentUpdating();
@@ -221,6 +229,7 @@ class ServiceInstance extends React.Component {
       this.setState({ payChargeItemModal: true, payChargeItemId: chargeId });
     }
   }
+
   onPayChargeItemModalClose() {
     this.setState({ payChargeItemModal: false });
     this.handleComponentUpdating();
@@ -234,6 +243,7 @@ class ServiceInstance extends React.Component {
       });
     }
   }
+
   onCancelChargeItemModalClose() {
     this.setState({ cancelChargeItemModal: false });
     this.handleComponentUpdating();
@@ -242,14 +252,17 @@ class ServiceInstance extends React.Component {
   handlePayAllChargesModal() {
     this.setState({ payAllChargesModal: true });
   }
+
   onPayAllChargesModalClose() {
     this.setState({ payAllChargesModal: false });
     this.handleComponentUpdating();
   }
+
   handleAddFund(event) {
     event.preventDefault();
     this.setState({ fundModal: true });
   }
+
   onAddFundClose() {
     this.setState({ fundModal: false });
     this.fetchUserFund();
@@ -257,7 +270,7 @@ class ServiceInstance extends React.Component {
   }
 
   getStatusButtons() {
-    let self = this;
+    const self = this;
     let status = false;
     if (self.state.instance && self.state.instance.payment_plan) {
       status = self.state.instance.status;
@@ -269,7 +282,7 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } else if (status == "running") {
+      } if (status == "running") {
         return (
           <li>
             <Link to="#" onClick={self.handleCancel}>
@@ -277,7 +290,7 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } else if (status == "waiting_cancellation") {
+      } if (status == "waiting_cancellation") {
         return (
           <li>
             <Link to="#" onClick={self.handleUndoCancel}>
@@ -285,7 +298,7 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } else if (status == "cancelled") {
+      } if (status == "cancelled") {
         return (
           <li>
             <Link to="#" onClick={self.handleApprove}>
@@ -298,8 +311,8 @@ class ServiceInstance extends React.Component {
   }
 
   getActionButtons(instance) {
-    let self = this;
-    //Only view actions for non-suspended users
+    const self = this;
+    // Only view actions for non-suspended users
     if (instance.references.users[0].status != "suspended") {
       return (
         <Authorizer permissions="can_administrate">
@@ -312,7 +325,9 @@ class ServiceInstance extends React.Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Actions <span className="caret" />
+              Actions 
+              {' '}
+              <span className="caret" />
             </button>
             <ul className="dropdown-menu dropdown-menu-right">
               <li>
@@ -343,13 +358,13 @@ class ServiceInstance extends React.Component {
           </div>
         </Authorizer>
       );
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   getAdditionalCharges(myInstance, myInstanceChargeItems) {
-    let self = this;
+    const self = this;
     if (myInstance.status !== "cancelled") {
       if (
         myInstanceChargeItems.false &&
@@ -369,16 +384,16 @@ class ServiceInstance extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         return null;
-      }
+      
     }
   }
 
   render() {
-    let self = this;
-    let pageName = `My Account > Purchased Item`;
-    let subtitle = `Updated: `;
+    const self = this;
+    const pageName = `My Account > Purchased Item`;
+    const subtitle = `Updated: `;
 
     if (this.state.loading) {
       return (
@@ -388,10 +403,10 @@ class ServiceInstance extends React.Component {
             <Content key={Object.id}>
               <ReactCSSTransitionGroup
                 component="div"
-                transitionName={"fade"}
-                transitionAppear={true}
-                transitionEnter={true}
-                transitionLeave={true}
+                transitionName="fade"
+                transitionAppear
+                transitionEnter
+                transitionLeave
                 transitionAppearTimeout={1000}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}
@@ -402,22 +417,22 @@ class ServiceInstance extends React.Component {
           </div>
         </Authorizer>
       );
-    } else {
+    } 
       const myInstance = this.state.instance;
       const myInstanceChargeItems = _.groupBy(
         myInstance.references.charge_items,
         "approved",
       );
-      let id,
-        name,
-        amount,
-        interval,
-        owner,
-        ownerId = null;
+      let id;
+        let name;
+        let amount;
+        let interval;
+        let owner;
+        let ownerId = null;
 
-      //Gather data first
+      // Gather data first
       if (self.state.instance) {
-        let service = self.state.instance;
+        const service = self.state.instance;
         id = service.id;
         owner = service.references.users[0];
         ownerId = service.user_id;
@@ -440,7 +455,7 @@ class ServiceInstance extends React.Component {
               hide={self.onApproveClose}
             />
           );
-        } else if (self.state.cancelModal) {
+        } if (self.state.cancelModal) {
           return (
             <ModalRequestCancellation
               myInstance={self.state.instance}
@@ -448,7 +463,7 @@ class ServiceInstance extends React.Component {
               hide={self.onCancelClose}
             />
           );
-        } else if (self.state.undoCancelModal) {
+        } if (self.state.undoCancelModal) {
           return (
             <ModalManageCancellation
               myInstance={self.state.instance}
@@ -456,14 +471,14 @@ class ServiceInstance extends React.Component {
               hide={self.onUndoCancelClose}
             />
           );
-        } else if (self.state.viewPaymentModal) {
+        } if (self.state.viewPaymentModal) {
           return (
             <ModalPaymentHistory
               show={self.state.viewPaymentModal}
               hide={self.onViewPaymentModalClose}
             />
           );
-        } else if (self.state.editInstanceModal) {
+        } if (self.state.editInstanceModal) {
           return (
             <ModalEditInstance
               myInstance={self.state.instance}
@@ -471,7 +486,7 @@ class ServiceInstance extends React.Component {
               hide={self.onEditInstanceModalClose}
             />
           );
-        } else if (self.state.editPaymentModal) {
+        } if (self.state.editPaymentModal) {
           return (
             <ModalEditPaymentPlan
               myInstance={self.state.instance}
@@ -479,7 +494,7 @@ class ServiceInstance extends React.Component {
               hide={self.onEditPaymentModalClose}
             />
           );
-        } else if (self.state.addChargeItemModal) {
+        } if (self.state.addChargeItemModal) {
           return (
             <ModalAddChargeItem
               myInstance={self.state.instance}
@@ -487,7 +502,7 @@ class ServiceInstance extends React.Component {
               hide={self.onAddChargeItemModalClose}
             />
           );
-        } else if (self.state.payChargeItemModal) {
+        } if (self.state.payChargeItemModal) {
           return (
             <ModalPayChargeItem
               myInstance={self.state.instance}
@@ -497,7 +512,7 @@ class ServiceInstance extends React.Component {
               hide={self.onPayChargeItemModalClose}
             />
           );
-        } else if (self.state.cancelChargeItemModal) {
+        } if (self.state.cancelChargeItemModal) {
           return (
             <ModalCancelChargeItem
               myInstance={self.state.instance}
@@ -507,7 +522,7 @@ class ServiceInstance extends React.Component {
               hide={self.onCancelChargeItemModalClose}
             />
           );
-        } else if (self.state.payAllChargesModal) {
+        } if (self.state.payAllChargesModal) {
           return (
             <ModalPayAllCharges
               myInstance={self.state.instance}
@@ -543,24 +558,24 @@ class ServiceInstance extends React.Component {
         <Authorizer>
           <Jumbotron
             pageName={pageName}
-            subtitle={
+            subtitle={(
               <span>
                 {subtitle}
                 <strong>
                   <DateFormat date={myInstance.updated_at} time />
                 </strong>
               </span>
-            }
+)}
           />
-          {/*<Jumbotron pageName={pageName} subtitle={`${myInstance.description} . ${myInstance.subscription_id || ""}`} />*/}
+          {/* <Jumbotron pageName={pageName} subtitle={`${myInstance.description} . ${myInstance.subscription_id || ""}`} /> */}
           <div className="page-service-instance">
             <Content>
               <ReactCSSTransitionGroup
                 component="div"
-                transitionName={"fade"}
-                transitionAppear={true}
-                transitionEnter={true}
-                transitionLeave={true}
+                transitionName="fade"
+                transitionAppear
+                transitionEnter
+                transitionLeave
                 transitionAppearTimeout={1000}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}
@@ -635,7 +650,7 @@ class ServiceInstance extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

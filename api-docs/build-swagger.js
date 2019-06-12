@@ -1,13 +1,13 @@
-let path = require("path");
+const path = require("path");
 require("dotenv").config({
   path: require("path").join(__dirname, "../env/.env"),
 });
 const fs = require("fs");
 
-let knex = require("../config/db");
+const knex = require("../config/db");
 
 async function buildModelResources() {
-  let models = [
+  const models = [
     require("../models/charge"),
     require("../models/event-log"),
     require("../models/file"),
@@ -32,9 +32,9 @@ async function buildModelResources() {
     require("../models/base/entity")("webhooks"),
     require("../models/base/entity")("user_permissions"),
   ];
-  let swaggerResources = {};
+  const swaggerResources = {};
 
-  for (let model of models) {
+  for (const model of models) {
     swaggerResources[model.table] = await buildSwagger(model);
   }
 
@@ -48,22 +48,22 @@ async function buildModelResources() {
 }
 
 async function buildSwagger(model) {
-  let schema = await model.getSchema(true, true);
+  const schema = await model.getSchema(true, true);
   console.log(schema);
   return Object.entries(schema).reduce(
     (acc, [key, value]) => {
-      let property = {};
+      const property = {};
       console.log(key);
       if (key === "references") {
-        let entries = Object.entries(value);
+        const entries = Object.entries(value);
         if (entries.length === 0) {
           return acc;
         }
-        acc.properties["references"] = entries.reduce(
+        acc.properties.references = entries.reduce(
           (refAcc, [refKey, refValue]) => {
             refAcc.properties[refKey] = {
               type: "array",
-              items: [{ $ref: "#/definitions/" + refKey }],
+              items: [{ $ref: `#/definitions/${  refKey}` }],
             };
             return refAcc;
           },
@@ -78,7 +78,7 @@ async function buildSwagger(model) {
         acc.required.push(key);
       }
 
-      let type = value.type;
+      let {type} = value;
       if (key === "password") {
         property.format = "password";
       }
@@ -119,7 +119,7 @@ async function buildSwagger(model) {
 }
 
 function buildEntityPaths() {
-  let resources = [
+  const resources = [
     {
       endpointName: "users",
       resourceName: "users",
@@ -206,14 +206,14 @@ function buildEntityPaths() {
     },
   ];
 
-  let modelPaths = resources.reduce((acc, resource) => {
-    let { endpointName, resourceName, ownership, deletedRoutes } = resource;
+  const modelPaths = resources.reduce((acc, resource) => {
+    const { endpointName, resourceName, ownership, deletedRoutes } = resource;
     acc[`/${endpointName}`] = {
       get: {
-        summary: "Get " + resourceName,
+        summary: `Get ${  resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
-        operationId: "get_" + endpointName.split("-").join("_"),
+        operationId: `get_${  endpointName.split("-").join("_")}`,
         security: [
           {
             internalApiKey: [],
@@ -221,11 +221,11 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: "An array of " + resourceName,
+            description: `An array of ${  resourceName}`,
             schema: {
               type: "array",
               items: {
-                $ref: "#/definitions/" + resourceName,
+                $ref: `#/definitions/${  resourceName}`,
               },
             },
           },
@@ -234,10 +234,10 @@ function buildEntityPaths() {
     };
     acc[`/${endpointName}/search`] = {
       get: {
-        summary: "Get " + resourceName,
+        summary: `Get ${  resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
-        operationId: "get_" + endpointName.split("-").join("_") + "_search",
+        operationId: `get_${  endpointName.split("-").join("_")  }_search`,
         security: [
           {
             internalApiKey: [],
@@ -261,11 +261,11 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: "An array of filtered" + resourceName,
+            description: `An array of filtered${  resourceName}`,
             schema: {
               type: "array",
               items: {
-                $ref: "#/definitions/" + resourceName,
+                $ref: `#/definitions/${  resourceName}`,
               },
             },
           },
@@ -275,7 +275,7 @@ function buildEntityPaths() {
 
     acc[`/${endpointName}/{id}`] = {
       get: {
-        summary: "Get " + resourceName + " by id",
+        summary: `Get ${  resourceName  } by id`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `get_${endpointName.split("-").join("_")}_id`,
@@ -288,7 +288,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: resourceName + " id",
+            description: `${resourceName  } id`,
             required: true,
             type: "number",
             format: "double",
@@ -296,9 +296,9 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: resourceName + " with id",
+            description: `${resourceName  } with id`,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         },
@@ -308,10 +308,10 @@ function buildEntityPaths() {
     if (ownership) {
       acc[`/${endpointName}/own`] = {
         get: {
-          summary: "Get requester's " + resourceName,
+          summary: `Get requester's ${  resourceName}`,
           tags: [endpointName],
           produces: ["application/json"],
-          operationId: "get_" + endpointName.split("-").join("_") + "_own",
+          operationId: `get_${  endpointName.split("-").join("_")  }_own`,
           security: [
             {
               internalApiKey: [],
@@ -320,11 +320,11 @@ function buildEntityPaths() {
           responses: {
             "200": {
               description:
-                "An array of " + resourceName + ", owned by requester",
+                `An array of ${  resourceName  }, owned by requester`,
               schema: {
                 type: "array",
                 items: {
-                  $ref: "#/definitions/" + resourceName,
+                  $ref: `#/definitions/${  resourceName}`,
                 },
               },
             },
@@ -334,8 +334,8 @@ function buildEntityPaths() {
     }
 
     if (!deletedRoutes || !deletedRoutes.includes("post")) {
-      acc[`/${endpointName}`]["post"] = {
-        summary: "Create new " + resourceName,
+      acc[`/${endpointName}`].post = {
+        summary: `Create new ${  resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `post_${endpointName.split("-").join("_")}`,
@@ -348,26 +348,26 @@ function buildEntityPaths() {
           {
             name: "data",
             in: "body",
-            description: resourceName + " to create",
+            description: `${resourceName  } to create`,
             required: true,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         ],
         responses: {
           "200": {
-            description: resourceName + " with id",
+            description: `${resourceName  } with id`,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         },
       };
     }
     if (!deletedRoutes || !deletedRoutes.includes("put")) {
-      acc[`/${endpointName}/{id}`]["put"] = {
-        summary: "Update " + resourceName,
+      acc[`/${endpointName}/{id}`].put = {
+        summary: `Update ${  resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `put_${endpointName.split("-").join("_")}_id`,
@@ -380,7 +380,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: resourceName + " id",
+            description: `${resourceName  } id`,
             required: true,
             type: "number",
             format: "double",
@@ -391,23 +391,23 @@ function buildEntityPaths() {
             description: "Data to update",
             required: true,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         ],
         responses: {
           "200": {
-            description: resourceName + " with id",
+            description: `${resourceName  } with id`,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         },
       };
     }
     if (!deletedRoutes || !deletedRoutes.includes("delete")) {
-      acc[`/${endpointName}/{id}`]["delete"] = {
-        summary: "Delete " + resourceName + " by id",
+      acc[`/${endpointName}/{id}`].delete = {
+        summary: `Delete ${  resourceName  } by id`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `delete_${endpointName.split("-").join("_")}_id`,
@@ -420,7 +420,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: resourceName + " id",
+            description: `${resourceName  } id`,
             required: true,
             type: "number",
             format: "double",
@@ -428,9 +428,9 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: resourceName + " that was deleted",
+            description: `${resourceName  } that was deleted`,
             schema: {
-              $ref: "#/definitions/" + resourceName,
+              $ref: `#/definitions/${  resourceName}`,
             },
           },
         },

@@ -1,5 +1,5 @@
-//the default system options
-let systemOptions = {
+// the default system options
+const systemOptions = {
   options: [
     {
       option: "button_default_color",
@@ -380,7 +380,7 @@ let systemOptions = {
       data_type: "bool",
     },
   ],
-  populateOptions: function(
+  populateOptions(
     options = systemOptions.options,
     model = require("../models/system-options"),
   ) {

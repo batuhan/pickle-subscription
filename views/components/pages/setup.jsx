@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, browserHistory } from "react-router";
 import Alert from "react-s-alert";
-import Fetcher from "../utilities/fetcher.jsx";
 import update from "immutability-helper";
+import fetch from "fetch-retry";
+import Fetcher from "../utilities/fetcher.jsx";
 import Authorizer from "../utilities/authorizer.jsx";
 import Load from "../utilities/load.jsx";
-import fetch from "fetch-retry";
 import { DataForm, DataChild } from "../utilities/data-form.jsx";
 import Multistep from "../elements/forms/multistep.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
@@ -184,14 +184,16 @@ class SetupStripe extends React.Component {
           <div className="title">
             <h3>ServiceBot works with Stripe:</h3>
             <p>
-              Copy your Standard API keys{" "}
+              Copy your Standard API keys
+              {" "}
               <a
                 className="intext-link"
                 href="https://dashboard.stripe.com/account/apikeys"
                 target="_blank"
               >
                 from Stripe
-              </a>{" "}
+              </a>
+              {" "}
               and paste them in the Secret key and Publishable key below. Once
               you enter your keys, you can import your Stripe account to your
               Servicebot.
@@ -237,13 +239,14 @@ class Setup extends React.Component {
   }
 
   async componentDidMount() {
-    let steps = await Fetcher("/api/v1/setup/steps");
+    const steps = await Fetcher("/api/v1/setup/steps");
     this.setState({ steps });
     document.getElementById("servicebot-loader").classList.add("move-out");
     if (this.props.options.text_size) {
       browserHistory.push("home");
     }
   }
+
   componentDidUpdate(previousState, prevProps) {
     if (this.props.options.text_size) {
       browserHistory.push("home");
@@ -251,7 +254,7 @@ class Setup extends React.Component {
   }
 
   handleSubmit(e = null) {
-    let self = this;
+    const self = this;
     if (e != null) {
       console.error(e);
       e.preventDefault();
@@ -267,9 +270,9 @@ class Setup extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const {target} = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const {name} = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -277,6 +280,7 @@ class Setup extends React.Component {
     });
     this.setState(formState);
   }
+
   checkStripe(callback) {
     Fetcher("/api/v1/check-stripe", "POST", this.state.form).then(function(
       result,
@@ -284,12 +288,13 @@ class Setup extends React.Component {
       if (!result.error) {
         callback();
       } else {
-        //todo: make fields red
+        // todo: make fields red
       }
     });
   }
+
   checkDB(callback) {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/check-db", "POST", this.state.form).then(function(result) {
       if (!result.error) {
         if (result.empty) {
@@ -300,9 +305,10 @@ class Setup extends React.Component {
       }
     });
   }
+
   render() {
-    let pageName = this.props.route.name || "ServiceBot Setup";
-    let breadcrumbs = [{ name: "Welcome to ServiceBot", link: "/setup" }];
+    const pageName = this.props.route.name || "ServiceBot Setup";
+    const breadcrumbs = [{ name: "Welcome to ServiceBot", link: "/setup" }];
     if (this.state.steps.length === 0) {
       return <Load />;
     }
@@ -338,15 +344,16 @@ class Setup extends React.Component {
       },
     };
 
-    let steps = this.state.steps.map(step => stepMap[step]);
+    const steps = this.state.steps.map(step => stepMap[step]);
     return (
-      <div style={{ backgroundColor: "#0097f1", minHeight: 100 + "vh" }}>
+      <div style={{ backgroundColor: "#0097f1", minHeight: `${100  }vh` }}>
         {this.state.loading && <Load />}
         <div className="installation row">
           <div className="installation-logo col-md-12">
             <img src="/assets/logos/v1/servicebot-logo-full-white.png" />
             <h1>
-              Welcome to ServiceBot Installer - Installing version{" "}
+              Welcome to ServiceBot Installer - Installing version
+              {" "}
               {version.version}
             </h1>
           </div>
@@ -356,7 +363,7 @@ class Setup extends React.Component {
             <Content>
               <Alert stack={{ limit: 3 }} />
               <form onSubmit={this.handleSubmit}>
-                {/*{JSON.stringify(this.state.form)}*/}
+                {/* {JSON.stringify(this.state.form)} */}
                 <Multistep steps={steps} />
                 <br />
               </form>
@@ -368,7 +375,7 @@ class Setup extends React.Component {
   }
 }
 
-let mapDispatch = function(dispatch) {
+const mapDispatch = function(dispatch) {
   return {
     initialize: initialOptions => dispatch(initializedState(initialOptions)),
   };

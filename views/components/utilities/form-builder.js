@@ -1,21 +1,21 @@
-import { setFormData } from "./actions";
 import { connect } from "react-redux";
 import _ from "lodash";
 import update from "immutability-helper";
 import React from "react";
 import PropTypes from "prop-types";
+import { setFormData } from "./actions";
 
-let mapStateToProps = function(name, mapState) {
+const mapStateToProps = function(name, mapState) {
   return function(state, ownProps) {
     if (state.allForms[name]) {
       return { ...mapState(state), formData: state.allForms[name] };
-    } else {
+    } 
       return {};
-    }
+    
   };
 };
 
-let mapDispatchToProps = function(name, mapDispatch) {
+const mapDispatchToProps = function(name, mapDispatch) {
   return (dispatch, ownProps) => {
     return {
       ...mapDispatch(dispatch),
@@ -23,7 +23,7 @@ let mapDispatchToProps = function(name, mapDispatch) {
         dispatch(setFormData(name, newFormData));
       },
       validateForm: formData => {
-        let validatedForm = handleValidation(formData);
+        const validatedForm = handleValidation(formData);
         dispatch(setFormData(name, validatedForm));
         return validatedForm;
       },
@@ -39,17 +39,17 @@ let handleValidation = function(
 ) {
   // console.log("validator called");
 
-  let self = this;
-  let errors = false; //this is used to check and set the boolean error at the top level of formData object.
-  let currentDataset = stateFormData; //this will be a subset of the original formData when it's in the recursive call.
-  let formData = newFormData || stateFormData; //this is to keep a full object of the updated formData in every recursive call.
+  const self = this;
+  let errors = false; // this is used to check and set the boolean error at the top level of formData object.
+  const currentDataset = stateFormData; // this will be a subset of the original formData when it's in the recursive call.
+  let formData = newFormData || stateFormData; // this is to keep a full object of the updated formData in every recursive call.
   if (refModel === null && refIndex === null) {
     formData = update(formData, { hasErrors: { $set: false } });
   }
   if (currentDataset.validators && currentDataset.validators.length) {
     currentDataset.validators.map(validator => {
-      let key = Object.keys(validator)[0];
-      let result =
+      const key = Object.keys(validator)[0];
+      const result =
         typeof validator[key] === "function"
           ? validator[key](currentDataset[key])
           : true;
@@ -72,14 +72,14 @@ let handleValidation = function(
           return formData;
         }
       } else {
-        //the error is corrected, remove item from the error object
+        // the error is corrected, remove item from the error object
         if (refModel === null && refIndex === null) {
-          let filteredErrors = _.filter(formData.errors, obj => {
+          const filteredErrors = _.filter(formData.errors, obj => {
             return obj.field != key;
           });
           formData = update(formData, { errors: { $set: filteredErrors } });
         } else {
-          let filteredErrors = _.filter(currentDataset.errors, obj => {
+          const filteredErrors = _.filter(currentDataset.errors, obj => {
             return obj.field != key;
           });
           formData = update(formData, {
@@ -108,7 +108,7 @@ let handleValidation = function(
   return formData;
 };
 
-let buildFormData = function(
+const buildFormData = function(
   name,
   value,
   refName = null,
@@ -132,17 +132,17 @@ let buildFormData = function(
         },
       });
       return update(formData, { $set: newData });
-    } else {
+    } 
       const newData = update(formData, {
         [name]: { $set: value },
         validators: { $set: [{ [name]: validator }] },
       });
       return update(formData, { $set: newData });
-    }
+    
   };
 };
 
-let buildFormRefsData = function(name, value, refName, refID, validator) {
+const buildFormRefsData = function(name, value, refName, refID, validator) {
   return function(formData) {
     if ((!refName && !refID) || !refName) {
       return buildFormData(name, value, refName, refID, validator)(formData);
@@ -163,7 +163,7 @@ let buildFormRefsData = function(name, value, refName, refID, validator) {
   };
 };
 
-let formBuilder = function(
+const formBuilder = function(
   formName,
   defaultFormData = null,
   mapState = () => {},
@@ -180,7 +180,7 @@ let formBuilder = function(
       }
 
       initializeInput(component) {
-        let self = this;
+        const self = this;
         // console.log("inputs component", self);
         this.props.setFormData(
           buildFormRefsData(
@@ -224,14 +224,14 @@ let formBuilder = function(
 
       getChildContext() {
         return {
-          formName: formName,
+          formName,
           handleInputsChange: this.handleInputsChange,
           initializeInput: this.initializeInput,
         };
       }
 
       render() {
-        //renders your form component
+        // renders your form component
         return <Component {...this.props} />;
       }
     }

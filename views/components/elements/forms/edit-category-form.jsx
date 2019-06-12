@@ -4,14 +4,15 @@ import Fetcher from "../../utilities/fetcher.jsx";
 import Inputs from "../../utilities/inputs.jsx";
 import { DataForm } from "../../utilities/data-form.jsx";
 import Buttons from "../buttons.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class EditCategoryForm extends React.Component {
   constructor(props) {
     super(props);
-    let categoryId = this.props.id;
+    const categoryId = this.props.id;
     this.state = {
-      url: `/api/v1/service-categories/` + categoryId,
+      url: `/api/v1/service-categories/${  categoryId}`,
       response: {},
       loading: true,
       success: false,
@@ -21,12 +22,12 @@ class EditCategoryForm extends React.Component {
 
   handleResponse(response) {
     if (!response.error) {
-      this.setState({ success: true, response: response });
+      this.setState({ success: true, response });
     }
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (response != null) {
         if (!response.error) {
@@ -40,7 +41,7 @@ class EditCategoryForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return (
         <div className="p-20">
           <p>
@@ -49,14 +50,14 @@ class EditCategoryForm extends React.Component {
           <p>{this.state.response.name || "something went wrong."}</p>
         </div>
       );
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="invite-user-form">
           <DataForm
             handleResponse={this.handleResponse}
             url={this.state.url}
-            method={"PUT"}
+            method="PUT"
           >
             <div className="p-20">
               <p>
@@ -68,8 +69,8 @@ class EditCategoryForm extends React.Component {
                 label="Name"
                 defaultValue={this.state.category.name}
                 onChange={function() {}}
-                receiveOnChange={true}
-                receiveValue={true}
+                receiveOnChange
+                receiveValue
               />
               <Inputs
                 type="text"
@@ -77,12 +78,12 @@ class EditCategoryForm extends React.Component {
                 label="Description (Optional)"
                 defaultValue={this.state.category.description}
                 onChange={function() {}}
-                receiveOnChange={true}
-                receiveValue={true}
+                receiveOnChange
+                receiveValue
               />
             </div>
 
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <Buttons
                 containerClass="inline"
                 btnType="primary"
@@ -101,7 +102,7 @@ class EditCategoryForm extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

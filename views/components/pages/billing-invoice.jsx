@@ -15,10 +15,11 @@ class BillingInvoice extends React.Component {
       return browserHistory.push("/login");
     }
   }
+
   render() {
-    var self = this;
-    let pageName = self.props.route.name;
-    let breadcrumbs = [
+    const self = this;
+    const pageName = self.props.route.name;
+    const breadcrumbs = [
       { name: "Home", link: "home" },
       { name: "My Services", link: "/my-services" },
       { name: pageName, link: null },

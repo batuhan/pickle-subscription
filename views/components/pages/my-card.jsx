@@ -17,8 +17,8 @@ class MyCard extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let breadcrumbs = [
+    const pageName = this.props.route.name;
+    const breadcrumbs = [
       { name: "Home", link: "home" },
       { name: "My Services", link: "/my-services" },
       { name: "My Profile", link: "/profile" },

@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-let _ = require("lodash");
 import {
   hexToRgb,
   rgbToHex,
   getDarkenedRGB,
 } from "../../utilities/color-converter.js";
+
+const _ = require("lodash");
 
 class DashboardWidget extends React.Component {
   constructor(props) {
@@ -14,12 +15,12 @@ class DashboardWidget extends React.Component {
   }
 
   render() {
-    let self = this;
+    const self = this;
 
-    let style = { widget: {}, widgetDark: {} };
+    const style = { widget: {}, widgetDark: {} };
 
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       style.widget.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -123,7 +124,7 @@ class DashboardWidget extends React.Component {
           </Link>
         </div>
       );
-    } else if (this.props.clickAction) {
+    } if (this.props.clickAction) {
       return (
         <div
           className={
@@ -135,7 +136,7 @@ class DashboardWidget extends React.Component {
           </Link>
         </div>
       );
-    } else {
+    } 
       return (
         <div
           className={
@@ -145,7 +146,7 @@ class DashboardWidget extends React.Component {
           {widgetContent}
         </div>
       );
-    }
+    
   }
 }
 

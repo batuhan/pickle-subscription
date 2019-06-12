@@ -35,7 +35,7 @@ class ManageNotificationTemplates extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
+    const self = this;
 
     Fetcher("/api/v1/notification-templates").then(function(response) {
       if (!response.error) {
@@ -52,12 +52,15 @@ class ManageNotificationTemplates extends React.Component {
   subjectFormatter(cell, row) {
     return <Link to={`/notification-templates/${row.id}`}>{cell}</Link>;
   }
+
   createdAtFormatter(cell) {
     return <DateFormat date={cell} time />;
   }
+
   updatedAtFormatter(cell) {
     return <DateFormat date={cell} time />;
   }
+
   rowActionsFormatter(cell, row) {
     return (
       <Dropdown
@@ -76,12 +79,12 @@ class ManageNotificationTemplates extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let subtitle = "Manage email and notification templates";
+    const pageName = this.props.route.name;
+    const subtitle = "Manage email and notification templates";
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <Authorizer permissions="can_administrate">
           <Jumbotron pageName={pageName} subtitle={subtitle} />
@@ -101,14 +104,14 @@ class ManageNotificationTemplates extends React.Component {
                       isKey
                       dataField="subject"
                       dataFormat={this.subjectFormatter}
-                      dataSort={true}
+                      dataSort
                       width="250"
                     >
                       Subject
                     </TableHeaderColumn>
                     <TableHeaderColumn
                       dataField="description"
-                      dataSort={true}
+                      dataSort
                       width="350"
                     >
                       Description
@@ -116,7 +119,7 @@ class ManageNotificationTemplates extends React.Component {
                     <TableHeaderColumn
                       dataField="updated_at"
                       dataFormat={this.updatedAtFormatter}
-                      dataSort={true}
+                      dataSort
                       searchable={false}
                       width="150"
                     >
@@ -124,13 +127,13 @@ class ManageNotificationTemplates extends React.Component {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                       dataField="Actions"
-                      className={"action-column-header"}
-                      columnClassName={"action-column"}
+                      className="action-column-header"
+                      columnClassName="action-column"
                       dataFormat={this.rowActionsFormatter}
                       searchable={false}
                       width="80"
                       filter={false}
-                    ></TableHeaderColumn>
+                    />
                   </ServiceBotTableBase>
                 </div>
               </div>
@@ -138,7 +141,7 @@ class ManageNotificationTemplates extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

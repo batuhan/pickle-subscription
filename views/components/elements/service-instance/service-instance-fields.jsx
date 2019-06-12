@@ -1,6 +1,7 @@
 import React from "react";
 import { isAuthorized } from "../../utilities/authorizer.jsx";
 import ServiceInstanceField from "./service-instance-field.jsx";
+
 class ServiceInstanceFields extends React.Component {
   render() {
     return (
@@ -19,7 +20,7 @@ class ServiceInstanceFields extends React.Component {
                 return (
                   <div className="form-group form-group-flex">
                     <ServiceInstanceField
-                      key={"item-" + field.id}
+                      key={`item-${  field.id}`}
                       field={field}
                     />
                   </div>

@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 
-let CleanBreadcrumb = function(breadcrumb) {
-  let cleaned = _.replace(breadcrumb, /[-_]/g, " ");
-  let capitalized = _.capitalize(cleaned);
+const CleanBreadcrumb = function(breadcrumb) {
+  const cleaned = _.replace(breadcrumb, /[-_]/g, " ");
+  const capitalized = _.capitalize(cleaned);
   return capitalized;
 };
 
-let CleanBreadcrumbLink = function(link) {
+const CleanBreadcrumbLink = function(link) {
   let newLink = link;
   if (newLink.charAt(newLink.length - 1) == "/") {
     newLink = newLink.substr(0, newLink.length - 1);
@@ -31,9 +31,9 @@ class Breadcrumb extends React.Component {
   }
 
   render() {
-    let path = this.props.location.pathname;
+    const path = this.props.location.pathname;
 
-    let pathArray = path.split("/");
+    const pathArray = path.split("/");
 
     if (pathArray.length) {
       if (pathArray.length == 2 && pathArray[1] == "") {
@@ -44,14 +44,14 @@ class Breadcrumb extends React.Component {
             </Link>
           </li>
         );
-      } else if (pathArray.length >= 2) {
+      } if (pathArray.length >= 2) {
         let breadcrumbLink = "";
         let count = 0;
         return (
           <ol className="breadcrumb icon-home icon-angle-right no-bg">
             {pathArray.map(breadcrumb => (
               <li
-                data={(breadcrumbLink = breadcrumbLink + breadcrumb + "/")}
+                data={(breadcrumbLink = `${breadcrumbLink + breadcrumb  }/`)}
                 key={`breadcrumb-${breadcrumb}-${count++}`}
                 style={this.state.color}
               >
@@ -77,7 +77,7 @@ class Breadcrumb extends React.Component {
             ))}
           </ol>
         );
-      } else {
+      } 
         return (
           <li style={this.state.color}>
             <Link to="/" style={this.state.color}>
@@ -85,7 +85,7 @@ class Breadcrumb extends React.Component {
             </Link>
           </li>
         );
-      }
+      
     }
   }
 }

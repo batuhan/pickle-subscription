@@ -1,17 +1,17 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { Link, browserHistory } from "react-router";
-import Fetcher from "../../utilities/fetcher.jsx";
 import update from "immutability-helper";
-import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
 import { connect } from "react-redux";
+import Fetcher from "../../utilities/fetcher.jsx";
+import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
 import { setPermissions } from "../../utilities/actions";
 
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
-    let uid = this.props.params.uid || null;
-    let token = this.props.params.token || null;
+    const uid = this.props.params.uid || null;
+    const token = this.props.params.token || null;
     this.state = {
       resetPassURL: `/api/v1/auth/reset-password/${uid}/${token}`,
       form: {},
@@ -22,7 +22,7 @@ class ResetPassword extends React.Component {
 
   handleReset(e) {
     e.preventDefault();
-    let self = this;
+    const self = this;
     Fetcher(this.state.resetPassURL, "POST", this.state.form).then(function(
       result,
     ) {
@@ -33,9 +33,9 @@ class ResetPassword extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const {target} = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const {name} = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -62,11 +62,12 @@ class ResetPassword extends React.Component {
 
     document.body.classList.add("login");
   }
+
   render() {
     return (
-      <Authorizer anonymous={true}>
+      <Authorizer anonymous>
         <form className="sign-in">
-          {/*<img className="login-brand" src="/assets/logos/brand-logo-dark.png"/>*/}
+          {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
           <h3>Reset Password</h3>
           <p>Enter your new password to reset.</p>
           <div className="form-group">

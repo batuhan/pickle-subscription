@@ -1,7 +1,8 @@
 import React from "react";
-import Load from "../utilities/load.jsx";
 import { connect } from "react-redux";
-let _ = require("lodash");
+import Load from "../utilities/load.jsx";
+
+const _ = require("lodash");
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -59,14 +60,14 @@ class Buttons extends React.Component {
   }
 
   success() {
-    let self = this;
+    const self = this;
     setTimeout(() => {
       self.setState({ success: false });
     }, 3000);
 
-    let style = { color: "#8BC34A" };
+    const style = { color: "#8BC34A" };
     if (this.state.systemOptions) {
-      let options = this.state.systemOptions;
+      const options = this.state.systemOptions;
       style.color = _.get(
         options,
         "button_success_icon_color.value",
@@ -83,15 +84,16 @@ class Buttons extends React.Component {
   hover() {
     this.setState({ hover: true });
   }
+
   unHover() {
     this.setState({ hover: false });
   }
 
   render() {
-    let btnStyle = { border: "none" };
+    const btnStyle = { border: "none" };
     if (this.props.options) {
-      let options = this.props.options;
-      let hover = this.state.hover;
+      const {options} = this.props;
+      const {hover} = this.state;
       if (this.state.btnType == "default") {
         if (!hover) {
           btnStyle.backgroundColor = _.get(

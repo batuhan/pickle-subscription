@@ -15,9 +15,10 @@ class ManageCatalog extends React.Component {
       return browserHistory.push("/login");
     }
   }
+
   render() {
-    let pageName = this.props.route.name;
-    let subtitle = "Create and manage offerings";
+    const pageName = this.props.route.name;
+    const subtitle = "Create and manage offerings";
     return (
       <Authorizer permissions="can_administrate">
         <Jumbotron pageName={pageName} subtitle={subtitle} />

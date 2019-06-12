@@ -1,7 +1,7 @@
 import React from "react";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 
 /**
@@ -15,8 +15,8 @@ class ModalPaymentHistory extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Payment History";
+    const self = this;
+    const pageName = "Payment History";
 
     return (
       <Modal

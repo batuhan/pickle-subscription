@@ -5,8 +5,8 @@ import ModalRequestCancellation from "../modals/modal-request-cancellation.jsx";
 import ModalManageCancellation from "../modals/modal-manage-cancellation.jsx";
 import ModalPayAllCharges from "../modals/modal-pay-all-charges.jsx";
 import { Price } from "../../utilities/price.jsx";
-import ApplicationLauncher from "../../elements/my-services/application-launcher.jsx";
-import TrialActionButton from "../../elements/my-services/trial-action-button.jsx";
+import ApplicationLauncher from "./application-launcher.jsx";
+import TrialActionButton from "./trial-action-button.jsx";
 import ModalPaymentSetup from "../modals/modal-payment-setup.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 
@@ -58,6 +58,7 @@ class DashboardServiceListItem extends React.Component {
     event.preventDefault();
     this.setState({ approveModal: true });
   }
+
   onApproveClose() {
     this.setState({ approveModal: false });
     this.props.handleComponentUpdating();
@@ -67,6 +68,7 @@ class DashboardServiceListItem extends React.Component {
     event.preventDefault();
     this.setState({ cancelModal: true });
   }
+
   onCancelClose() {
     this.setState({ cancelModal: false });
     this.props.handleComponentUpdating();
@@ -76,6 +78,7 @@ class DashboardServiceListItem extends React.Component {
     event.preventDefault();
     this.setState({ undoCancelModal: true });
   }
+
   onUndoCancelClose() {
     this.setState({ undoCancelModal: false });
     this.props.handleComponentUpdating();
@@ -85,14 +88,17 @@ class DashboardServiceListItem extends React.Component {
     event.preventDefault();
     this.setState({ payChargeModal: true });
   }
+
   onPayChargesClose() {
     this.setState({ payChargeModal: false });
     this.props.handleComponentUpdating();
   }
+
   handleAddFund(event) {
     event.preventDefault();
     this.setState({ fundModal: true });
   }
+
   onAddFundClose() {
     this.setState({ fundModal: false });
     this.props.fetchFunds();
@@ -100,15 +106,15 @@ class DashboardServiceListItem extends React.Component {
   }
 
   render() {
-    let self = this;
-    let id,
-      name,
-      amount,
-      interval,
-      status,
-      service = null;
+    const self = this;
+    let id;
+      let name;
+      let amount;
+      let interval;
+      let status;
+      let service = null;
 
-    //Gather data first
+    // Gather data first
     if (self.props.service) {
       service = self.props.service;
       id = service.id;
@@ -132,7 +138,7 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onApproveClose}
           />
         );
-      } else if (self.state.cancelModal) {
+      } if (self.state.cancelModal) {
         return (
           <ModalRequestCancellation
             myInstance={service}
@@ -140,7 +146,7 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onCancelClose}
           />
         );
-      } else if (self.state.undoCancelModal) {
+      } if (self.state.undoCancelModal) {
         return (
           <ModalManageCancellation
             myInstance={service}
@@ -148,7 +154,7 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onUndoCancelClose}
           />
         );
-      } else if (self.state.payChargeModal) {
+      } if (self.state.payChargeModal) {
         return (
           <ModalPayAllCharges
             myInstance={service}
@@ -157,10 +163,10 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onPayChargesClose}
           />
         );
-      } else if (self.state.fundModal) {
+      } if (self.state.fundModal) {
         return (
           <ModalPaymentSetup
-            justPayment={true}
+            justPayment
             modalCallback={self.onAddFundClose}
             ownerId={service.user_id}
             show={self.state.handleAddFund}
@@ -171,30 +177,30 @@ class DashboardServiceListItem extends React.Component {
     };
 
     if (self.props.service && self.props.service != null) {
-      let myService = self.props.service;
-      let serType = myService.type;
+      const myService = self.props.service;
+      const serType = myService.type;
 
-      let getTotalCharges = () => {
+      const getTotalCharges = () => {
         if (myService.outstanding_charges_total) {
           return <Price value={myService.outstanding_charges_total} />;
         }
       };
 
-      let getSubscriptionPrice = () => {
+      const getSubscriptionPrice = () => {
         if (serType == "subscription") {
           return (
             <span>
               <Price value={myService.payment_plan.amount} />
               {myService.payment_plan.interval_count == 1
                 ? "/"
-                : "/" + myService.payment_plan.interval_count}
+                : `/${  myService.payment_plan.interval_count}`}
               {myService.payment_plan.interval}
             </span>
           );
         }
       };
 
-      let getPrice = () => {
+      const getPrice = () => {
         if (
           myService.status === "requested" &&
           myService.payment_plan.amount > 0 &&
@@ -210,20 +216,23 @@ class DashboardServiceListItem extends React.Component {
               )}
             </div>
           );
-        } else {
+        } 
           return (
             <div>
               {getTotalCharges() && (
                 <div className="xaas-price red m-l-5">
-                  <span> {getTotalCharges()}</span>
+                  <span> 
+                    {' '}
+                    {getTotalCharges()}
+                  </span>
                 </div>
               )}
             </div>
           );
-        }
+        
       };
 
-      let getActionButton = () => {
+      const getActionButton = () => {
         if (
           status === "requested" &&
           (myService.payment_plan.amount > 0 ||
@@ -234,25 +243,29 @@ class DashboardServiceListItem extends React.Component {
               className="btn btn-default btn-rounded btn-sm"
               onClick={self.handleApprove}
             >
-              <i className="fa fa-credit-card" /> Pay Now
+              <i className="fa fa-credit-card" />
+              {' '}
+Pay Now
             </button>
           );
-        } else if (myService.outstanding_charges_total) {
+        } if (myService.outstanding_charges_total) {
           return (
             <button
               className="btn btn-default btn-rounded btn-sm"
               onClick={self.handlePayCharges}
             >
-              <i className="fa fa-credit-card" /> Pay Now
+              <i className="fa fa-credit-card" />
+              {' '}
+Pay Now
             </button>
           );
-        } else if (
+        } if (
           status === "requested" &&
           myService.payment_plan.amount === 0 &&
           !myService.outstanding_charges_total
         ) {
           return null;
-        } else if (status === "waiting_cancellation") {
+        } if (status === "waiting_cancellation") {
           return (
             <button
               to=""
@@ -262,17 +275,17 @@ class DashboardServiceListItem extends React.Component {
               Undo Cancellation
             </button>
           );
-        } else if (status === "cancelled") {
+        } if (status === "cancelled") {
           return null;
-        } else {
-          //Taking out the cancellation request for now.
-          //return (<button to="" className="btn btn-default btn-rounded btn-sm" onClick={self.handleCancel}>Request Cancellation</button>);
+        } 
+          // Taking out the cancellation request for now.
+          // return (<button to="" className="btn btn-default btn-rounded btn-sm" onClick={self.handleCancel}>Request Cancellation</button>);
           return null;
-        }
+        
       };
 
-      let getLinkActionButton = () => {
-        let websiteLink = myService.references.service_instance_properties.filter(
+      const getLinkActionButton = () => {
+        const websiteLink = myService.references.service_instance_properties.filter(
           link => link.name === "url",
         )[0];
         if (status !== "cancelled" && websiteLink) {
@@ -285,7 +298,7 @@ class DashboardServiceListItem extends React.Component {
         }
       };
 
-      let getTrialActionButton = () => {
+      const getTrialActionButton = () => {
         if (self.props.userFunds) {
           return (
             <TrialActionButton
@@ -294,9 +307,9 @@ class DashboardServiceListItem extends React.Component {
               modalCallback={this.handleAddFund}
             />
           );
-        } else {
+        } 
           return null;
-        }
+        
       };
 
       return (
@@ -312,7 +325,7 @@ class DashboardServiceListItem extends React.Component {
                 <h5>{name}</h5>
               </div>
               {getPrice()}
-              {/*<div className="xaas-data xaas-interval"><h5>{interval}</h5></div>*/}
+              {/* <div className="xaas-data xaas-interval"><h5>{interval}</h5></div> */}
               <div className="xaas-data xaas-action">
                 {getLinkActionButton()}
                 {getActionButton()}
@@ -324,9 +337,9 @@ class DashboardServiceListItem extends React.Component {
           {currentModal()}
         </div>
       );
-    } else {
+    } 
       return <p className="help-block">service not defined</p>;
-    }
+    
   }
 }
 

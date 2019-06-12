@@ -20,13 +20,13 @@ class Dropdown extends React.Component {
   }
 
   processDropDownButtons(link, id) {
-    let myLink = _.isFunction(link) ? link(this.props.active) : link;
+    const myLink = _.isFunction(link) ? link(this.props.active) : link;
 
     if (myLink) {
-      let linkArray = myLink.split("/");
+      const linkArray = myLink.split("/");
       if (linkArray.indexOf(":id") > -1) {
         linkArray[linkArray.indexOf(":id")] = id;
-        let resultLink = linkArray.join("/");
+        const resultLink = linkArray.join("/");
 
         return resultLink;
       }
@@ -35,10 +35,10 @@ class Dropdown extends React.Component {
   }
 
   processLink(button) {
-    let self = this;
+    const self = this;
     if (_.isFunction(button.onClick)) {
-      let myFunction = button.onClick;
-      let myData = self.state.dataObject;
+      const myFunction = button.onClick;
+      const myData = self.state.dataObject;
 
       return (
         <Link
@@ -49,7 +49,7 @@ class Dropdown extends React.Component {
           {_.isFunction(button.name) ? button.name(myData) : button.name}
         </Link>
       );
-    } else {
+    } 
       return (
         <Link
           to={this.processDropDownButtons(button.link, this.props.id)}
@@ -60,11 +60,11 @@ class Dropdown extends React.Component {
             : button.name}
         </Link>
       );
-    }
+    
   }
 
   getButton(button) {
-    let self = this;
+    const self = this;
 
     if (button.name === "divider") {
       if (button.permission) {
@@ -76,10 +76,10 @@ class Dropdown extends React.Component {
               className="divider"
             />
           );
-        } else {
+        } 
           return null;
-        }
-      } else {
+        
+      } 
         return (
           <li
             key={`${self.props.id}-separator`}
@@ -87,8 +87,8 @@ class Dropdown extends React.Component {
             className="divider"
           />
         );
-      }
-    } else {
+      
+    } 
       if (button.permission) {
         if (isAuthorized({ permissions: button.permission })) {
           return (
@@ -99,17 +99,17 @@ class Dropdown extends React.Component {
               {self.processLink(button)}
             </li>
           );
-        } else {
+        } 
           return null;
-        }
-      } else {
+        
+      } 
         return (
           <li key={`button-${button.id}-${self.props.id}`} style={button.style}>
             {self.processLink(button)}
           </li>
         );
-      }
-    }
+      
+    
   }
 
   render() {
@@ -123,7 +123,9 @@ class Dropdown extends React.Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {this.props.name} <span className="caret" />
+          {this.props.name} 
+          {' '}
+          <span className="caret" />
         </button>
         <ul
           className={`dropdown-menu ${

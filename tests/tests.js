@@ -1,29 +1,33 @@
-var test = require("tape");
-var string = "";
-let stream = test.createStream();
+const test = require("tape");
+
+let string = "";
+const stream = test.createStream();
 stream.on("data", function(buffer) {
-  var part = buffer.toString();
+  const part = buffer.toString();
   string += part;
 });
 
 stream.on("end", function() {
-  console.log("final output " + string);
+  console.log(`final output ${  string}`);
 });
 
-var request = require("supertest");
+let request = require("supertest");
+
 request = request("http://localhost:3001");
-let _ = require("lodash");
-let enableDestroy = require("server-destroy");
-let initConfig = {
+const _ = require("lodash");
+const enableDestroy = require("server-destroy");
+
+const initConfig = {
   stripe_public: "pk_test_Ax20edZBpZW9YEpHeZoQqaKA",
   stripe_secret: "sk_test_43eiOmKqQMwG3zjZp1PPERiH",
 };
 require("dotenv").config({
   path: require("path").join(__dirname, "../env/.env"),
 });
-let log = console.log;
 
-var config = {
+const {log} = console;
+
+const config = {
   host: process.env.POSTGRES_DB_HOST,
   user: process.env.POSTGRES_DB_USER,
   password: process.env.POSTGRES_DB_PASSWORD,
@@ -31,13 +35,13 @@ var config = {
   multipleStatements: true,
 };
 
-var knex = require("knex")({
+const knex = require("knex")({
   client: "pg",
   connection: config,
 });
 
-let fs = require("fs");
-let Promise = require("bluebird");
+const fs = require("fs");
+const Promise = require("bluebird");
 
 const before = test;
 
@@ -46,11 +50,11 @@ let baseHeaders = null;
 let app = null;
 let server = null;
 
-let reset = function(callback) {
+const reset = function(callback) {
   if (app && server) {
     server.destroy();
   }
-  //todo: don't do this.. but the pool b draining
+  // todo: don't do this.. but the pool b draining
   setTimeout(function() {
     require("../config/db")
       .destroy()
@@ -75,9 +79,9 @@ let reset = function(callback) {
       });
   }, 500);
 };
-let stripDates = function(body) {
-  let newObj = body;
-  for (var i in body) {
+const stripDates = function(body) {
+  const newObj = body;
+  for (const i in body) {
     if (i == "updated_at" || i == "created_at") {
       delete newObj[i];
     } else if (newObj[i] === Object(newObj[i])) {
@@ -87,14 +91,14 @@ let stripDates = function(body) {
 
   return newObj;
 };
-let responseHandler = function(assert, expected, test, callback) {
+const responseHandler = function(assert, expected, test, callback) {
   return function(err, res) {
     if (err || (!res || !res.body)) {
       assert.error(err, "error");
       callback(err, res);
     } else {
-      let body = stripDates(res.body);
-      let strippedExpected = stripDates(expected);
+      const body = stripDates(res.body);
+      const strippedExpected = stripDates(expected);
       assert.same(body, strippedExpected, test);
       callback(null, res);
     }
@@ -113,7 +117,7 @@ before("before", function(assert) {
         baseHeaders = {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: "JWT " + token,
+          Authorization: `JWT ${  token}`,
         };
         assert.end();
       });
@@ -121,7 +125,7 @@ before("before", function(assert) {
 });
 
 test("GET /api/v1/users", function(assert) {
-  let sampleUsers = [
+  const sampleUsers = [
     {
       customer_id: null,
       email: "admin",
@@ -172,7 +176,7 @@ test("GET /api/v1/users", function(assert) {
 });
 
 test("GET all roles - /api/v1/roles", function(assert) {
-  let sampleRoles = [
+  const sampleRoles = [
     { id: 1, role_name: "admin" },
     { id: 2, role_name: "staff" },
     { id: 3, role_name: "user" },
@@ -194,7 +198,7 @@ test("GET all roles - /api/v1/roles", function(assert) {
 });
 
 test("GET Specific role -  /api/v1/roles/1", function(assert) {
-  let sampleRoles = { id: 1, role_name: "admin" };
+  const sampleRoles = { id: 1, role_name: "admin" };
 
   request
     .get("/api/v1/roles/1")
@@ -212,7 +216,7 @@ test("GET Specific role -  /api/v1/roles/1", function(assert) {
 });
 
 test("GET all permissions -  /api/v1/permissions", function(assert) {
-  let sampleRoles = [
+  const sampleRoles = [
     { id: 1, permission_name: "get_users" },
     { id: 2, permission_name: "get_users_search" },
     { id: 3, permission_name: "get_users_id" },
@@ -370,7 +374,7 @@ test("GET Analytics", function(assert) {
 });
 
 test("GET /api/v1/service-instance-properties", function(assert) {
-  let sampleData = [
+  const sampleData = [
     {
       id: 1,
       name: "service_instance_property_1",
@@ -427,7 +431,7 @@ test("GET /api/v1/service-instance-properties", function(assert) {
 });
 
 test("GET /api/v1/service-template-properties", function(assert) {
-  let sampleData = [
+  const sampleData = [
     {
       id: 1,
       name: "service_template_property_1",
@@ -504,7 +508,7 @@ test("GET /api/v1/service-template-properties", function(assert) {
 });
 
 test("GET /api/v1/service-templates", function(assert) {
-  let data = [
+  const data = [
     {
       amount: null,
       category_id: null,
@@ -713,7 +717,7 @@ test("GET /api/v1/service-templates", function(assert) {
 });
 
 test("GET /api/v1/service-instances", function(assert) {
-  let data = [
+  const data = [
     {
       description: "demo service instance 1",
       id: 1,
@@ -853,7 +857,7 @@ test("GET /api/v1/service-instances", function(assert) {
     );
 });
 test("GET /api/v1/service-instance-messages", function(assert) {
-  let data = [
+  const data = [
     {
       description: "demo service instance 1",
       id: 1,
@@ -994,7 +998,7 @@ test("GET /api/v1/service-instance-messages", function(assert) {
 });
 
 test("GET /api/v1/roles/manage-permissions", function(assert) {
-  let sampleData = [
+  const sampleData = [
     {
       permission_ids: [
         1,
@@ -1274,7 +1278,7 @@ test("GET /api/v1/roles/manage-permissions", function(assert) {
 });
 
 test("GET /api/v1/email-templates", function(assert) {
-  let sampleRoles = [
+  const sampleRoles = [
     { id: 1, role_name: "admin" },
     { id: 2, role_name: "staff" },
     { id: 3, role_name: "user" },
@@ -1291,7 +1295,7 @@ test("GET /api/v1/email-templates", function(assert) {
 });
 
 test("GET /api/v1/system-options", function(assert) {
-  let data = [
+  const data = [
     { option: "background_color", value: "#30468a" },
     { option: "action_button_color", value: "#30468a" },
     { option: "cancel_button_color", value: "#30468a" },
@@ -1323,7 +1327,7 @@ test("GET /api/v1/system-options", function(assert) {
 });
 
 test("GET /api/v1/invoices", function(assert) {
-  let data = [
+  const data = [
     {
       amount: null,
       category_id: null,
@@ -1532,7 +1536,7 @@ test("GET /api/v1/invoices", function(assert) {
 });
 
 test("GET /api/v1/service-categories", function(assert) {
-  let data = [
+  const data = [
     {
       amount: null,
       category_id: null,
@@ -1744,7 +1748,7 @@ test("POST /api/v1/roles/manage-permissions", function(assert) {
   reset(function(res) {
     assert.same(res, true, "reset worked");
     console.log(res);
-    let expected = [
+    const expected = [
       [
         { id: 245, permission_id: 1, role_id: 1 },
         { id: 246, permission_id: 2, role_id: 1 },
@@ -1905,7 +1909,7 @@ test("POST /api/v1/roles/manage-permissions", function(assert) {
         { id: 397, permission_id: 112, role_id: 3 },
       ],
     ];
-    let newData = [
+    const newData = [
       {
         permission_ids: [
           1,
@@ -2090,7 +2094,7 @@ test("POST /api/v1/roles/manage-permissions", function(assert) {
 
 test("POST /api/v1/service-templates", function(assert) {
   reset(function(result) {
-    let data = {
+    const data = {
       amount: null,
       category_id: null,
       currency: "usd",
@@ -2122,7 +2126,7 @@ test("POST /api/v1/service-templates", function(assert) {
       subscription_prorate: true,
       trial_period_days: null,
     };
-    let expected = {
+    const expected = {
       amount: null,
       category_id: null,
       created_by: 1,
@@ -2176,7 +2180,7 @@ test("POST /api/v1/service-templates", function(assert) {
 
 test("PUT /api/v1/service-templates/1", function(assert) {
   reset(function(result) {
-    let data = {
+    const data = {
       amount: null,
       category_id: null,
       currency: "usd",
@@ -2208,7 +2212,7 @@ test("PUT /api/v1/service-templates/1", function(assert) {
       subscription_prorate: true,
       trial_period_days: null,
     };
-    let expected = {
+    const expected = {
       amount: null,
       category_id: null,
       created_by: 1,

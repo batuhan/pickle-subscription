@@ -23,7 +23,7 @@ class FileInputForm extends Component {
           uploadButton={false}
           handleSuccess={this.props.handleImageUploadSuccess}
           onChange={this.onImageChanged}
-          imageRemovable={true}
+          imageRemovable
           name={this.props.name}
         />
       </div>

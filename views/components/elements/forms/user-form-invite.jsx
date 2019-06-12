@@ -1,6 +1,8 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { Link, browserHistory } from "react-router";
+import { connect } from "react-redux";
+import cookie from "react-cookie";
+import Load from "../../utilities/load.jsx";
 import { DataForm } from "../../utilities/data-form.jsx";
 import {
   setUid,
@@ -8,17 +10,15 @@ import {
   setUser,
   setPermissions,
 } from "../../utilities/actions";
-import { connect } from "react-redux";
-import cookie from "react-cookie";
 import Inputs from "../../utilities/inputs.jsx";
 import Alerts from "../alerts.jsx";
 
 class UserFormInvite extends React.Component {
   constructor(props) {
     super(props);
-    let token = this.props.token;
+    const {token} = this.props;
     this.state = {
-      token: token,
+      token,
       url: `/api/v1/users/register?token=${token}`,
       loading: false,
       success: false,
@@ -28,11 +28,11 @@ class UserFormInvite extends React.Component {
   }
 
   handleResponse(response) {
-    let self = this;
+    const self = this;
     self.setState({
       loading: true,
     });
-    //Get the response
+    // Get the response
     if (!response.error) {
       localStorage.setItem("permissions", response.permissions);
       this.props.setPermissions(response.permissions);
@@ -47,7 +47,7 @@ class UserFormInvite extends React.Component {
           message: "You have successfully completed your account creation.",
         },
       });
-      //If the user has admin rights, forward to dashboard, else to my services
+      // If the user has admin rights, forward to dashboard, else to my services
       if (
         response.permissions.includes("can_adminstrate") ||
         response.permissions.includes("can_manage")
@@ -69,15 +69,15 @@ class UserFormInvite extends React.Component {
   }
 
   getValidators() {
-    let validateName = val => {
+    const validateName = val => {
       return val ? true : { error: "Enter Full Name" };
     };
-    let validatePassword = val => {
+    const validatePassword = val => {
       return val && val.length >= 4
         ? true
         : { error: "Password must be at least 4 characters" };
     };
-    let validatorJSON = {
+    const validatorJSON = {
       name: validateName,
       password: validatePassword,
     };
@@ -85,8 +85,8 @@ class UserFormInvite extends React.Component {
   }
 
   render() {
-    let self = this;
-    let getAlerts = () => {
+    const self = this;
+    const getAlerts = () => {
       if (self.state.alerts) {
         return (
           <Alerts
@@ -100,8 +100,8 @@ class UserFormInvite extends React.Component {
     };
     if (this.state.loading) {
       return <Load />;
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="sign-up">
           {getAlerts()}
@@ -109,7 +109,7 @@ class UserFormInvite extends React.Component {
             validators={this.getValidators()}
             handleResponse={this.handleResponse}
             url={this.state.url}
-            method={"POST"}
+            method="POST"
           >
             <div>
               <h3 className="m-b-20">Finish Your Invitation</h3>
@@ -144,7 +144,7 @@ class UserFormInvite extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

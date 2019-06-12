@@ -1,19 +1,20 @@
 import React from "react";
 import { Field, FormSection } from "redux-form";
 import TagsInput from "react-tagsinput";
+import consume from "pluginbot-react/dist/consume";
 import {
   inputField,
   selectField,
   priceField,
 } from "../elements/forms/servicebot-base-field.jsx";
-import consume from "pluginbot-react/dist/consume";
 
 const values = require("object.values");
+
 if (!Object.values) {
   values.shim();
 }
-let PriceOperation = props => {
-  let { input } = props;
+const PriceOperation = props => {
+  const { input } = props;
   return (
     <select {...input}>
       <option value="add">Add</option>
@@ -44,10 +45,10 @@ let RenderWidget = props => {
   return (
     <div>
       <FormSection name={`${member}.config`}>
-        {widget.config && <Field name={`value`} component={widget.config} />}
+        {widget.config && <Field name="value" component={widget.config} />}
         {widget.pricing && showPrice && (
           <div className="addon-widget-has-pricing">
-            <FormSection name={`pricing`}>
+            <FormSection name="pricing">
               <Field
                 name="operation"
                 component={selectField}
@@ -65,7 +66,7 @@ let RenderWidget = props => {
                   Add-On Pricing
                 </label>
                 <Field
-                  name={`value`}
+                  name="value"
                   configValue={configValue}
                   component={widget.pricing}
                 />
@@ -92,7 +93,7 @@ let RenderWidget = props => {
 
 let PriceBreakdown = props => {
   const { inputs } = props;
-  let widgets =
+  const widgets =
     props.services &&
     props.services.widget &&
     props.services.widget.reduce((acc, widget) => {
@@ -108,7 +109,12 @@ let PriceBreakdown = props => {
     ) {
       acc.push(
         <div>
-          {input.prop_label} - {input.config.pricing.operation}-{" "}
+          {input.prop_label}
+          {' '}
+-
+          {input.config.pricing.operation}
+-
+          {" "}
           {widgets[input.type].handler.priceHandler(input.data, input.config)}
         </div>,
       );

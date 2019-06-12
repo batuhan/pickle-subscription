@@ -1,8 +1,8 @@
 import React from "react";
 import cookie from "react-cookie";
 import { Link } from "react-router";
-import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import { connect } from "react-redux";
+import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 
 class SlideNavLinks extends React.Component {
   constructor(props) {
@@ -160,7 +160,7 @@ class SlideNavLinks extends React.Component {
   }
 
   render() {
-    let myLinks = this.getLinksByPermission();
+    const myLinks = this.getLinksByPermission();
 
     if (myLinks) {
       return (
@@ -201,9 +201,9 @@ class SlideNavLinks extends React.Component {
           ))}
         </ul>
       );
-    } else {
+    } 
       return <span>no links</span>;
-    }
+    
   }
 }
 
@@ -228,10 +228,10 @@ class SideNav extends React.Component {
       }
     }
 
-    let uid = cookie.load("uid");
-    let email = cookie.load("username");
+    const uid = cookie.load("uid");
+    const email = cookie.load("username");
 
-    let logout = () => {
+    const logout = () => {
       this.props.toggleSidebar();
       this.props.sidebarLogout();
     };
@@ -240,19 +240,19 @@ class SideNav extends React.Component {
       <div className="left-sidebar-1">
         <div className="wrapper">
           <div className="content">
-            {/*<div className="logo">*/}
-            {/*<Link to="/" className="navbar-brand nav-logo"><img src="/api/v1/system-options/file/brand_logo"/></Link>*/}
-            {/*</div>*/}
-            {/*<div className="left-sidebar-search">*/}
-            {/*<form className="form-inline form-custom">*/}
-            {/*<i className="material-icons">search</i>*/}
-            {/*<div className="form-group">*/}
-            {/*<label htmlFor="search" className="bmd-label-floating">Search</label>*/}
-            {/*<input type="text" className="form-control" id="search" />*/}
-            {/*</div>*/}
-            {/*</form>*/}
-            {/*</div>*/}
-            {/* User Information: Name, Role, Thumbnail*/}
+            {/* <div className="logo"> */}
+            {/* <Link to="/" className="navbar-brand nav-logo"><img src="/api/v1/system-options/file/brand_logo"/></Link> */}
+            {/* </div> */}
+            {/* <div className="left-sidebar-search"> */}
+            {/* <form className="form-inline form-custom"> */}
+            {/* <i className="material-icons">search</i> */}
+            {/* <div className="form-group"> */}
+            {/* <label htmlFor="search" className="bmd-label-floating">Search</label> */}
+            {/* <input type="text" className="form-control" id="search" /> */}
+            {/* </div> */}
+            {/* </form> */}
+            {/* </div> */}
+            {/* User Information: Name, Role, Thumbnail */}
             <Authorizer>
               <div className="sidebar-heading" style={style}>
                 <div className="sidebar-image">
@@ -268,7 +268,8 @@ class SideNav extends React.Component {
                       className="btn btn-primary btn-raised dropdown-toggle"
                       data-toggle="dropdown"
                     >
-                      {email}{" "}
+                      {email}
+                      {" "}
                     </Link>
                     <button
                       className="btn btn-link btn-signout"

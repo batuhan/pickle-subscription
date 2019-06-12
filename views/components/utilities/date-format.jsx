@@ -5,7 +5,7 @@ function getFormattedDate(dateString, options = {}) {
   if (date == "Invalid Date") {
     date = new Date(dateString);
   }
-  let dayNames = [
+  const dayNames = [
     "Monday",
     "Tuesday",
     "Wednesday",
@@ -14,7 +14,7 @@ function getFormattedDate(dateString, options = {}) {
     "Saturday",
     "Sunday",
   ];
-  let monthNames = [
+  const monthNames = [
     "January",
     "February",
     "March",
@@ -29,18 +29,18 @@ function getFormattedDate(dateString, options = {}) {
     "December",
   ];
 
-  let dayOfWeek = date.getDay();
-  let day = date.getDate();
-  let month = date.getMonth();
-  let year = date.getFullYear();
+  const dayOfWeek = date.getDay();
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
   let hour = date.getHours();
   let min = date.getMinutes();
 
   if (hour < 10) {
-    hour = "0" + hour;
+    hour = `0${  hour}`;
   }
   if (min < 10) {
-    min = "0" + min;
+    min = `0${  min}`;
   }
 
   let myDate = `${monthNames[month]} ${day}, ${year}`;

@@ -1,26 +1,26 @@
-//let Announcement = require("../../../models/base/entity")("announcements");
+// let Announcement = require("../../../models/base/entity")("announcements");
 
-let async = require("async");
-let Logger = require("../models/logger");
-let User = require("../../../models/user");
-let ServiceInstance = require("../../../models/service-instance");
-let Invoice = require("../../../models/invoice");
+const async = require("async");
+const Logger = require("../models/logger");
+const User = require("../../../models/user");
+const ServiceInstance = require("../../../models/service-instance");
+const Invoice = require("../../../models/invoice");
 
 module.exports = function(knex) {
-  let stripe = require("../../../config/stripe");
-  let store = require("../../../config/redux/store");
+  const stripe = require("../../../config/stripe");
+  const store = require("../../../config/redux/store");
 
   /**
    * This function will retrieve an event from Stripe using the event id to validate post request
    * @param event_id - ID of the event coming from Stripe
    */
-  let validateStripeEvent = function(event_id, callback) {
+  const validateStripeEvent = function(event_id, callback) {
     stripe().connection.events.retrieve(event_id, function(err, event) {
       callback(err, event);
     });
   };
 
-  let invoiceCreatedEvent = function(event, callback) {
+  const invoiceCreatedEvent = function(event, callback) {
     User.findOne("customer_id", event.data.object.customer, function(user) {
       if (user.data) {
         Invoice.findOne("invoice_id", event.data.object.id, function(invoice) {
@@ -51,7 +51,7 @@ module.exports = function(knex) {
     });
   };
 
-  let invoiceUpdatedEvent = function(event, callback) {
+  const invoiceUpdatedEvent = function(event, callback) {
     Invoice.findOne("invoice_id", event.data.object.id, function(invoice) {
       if (invoice.data) {
         invoice
@@ -77,7 +77,7 @@ module.exports = function(knex) {
     });
   };
 
-  let invoiceFailedEvent = function(event, callback) {
+  const invoiceFailedEvent = function(event, callback) {
     async.series([
       function(callback) {
         User.findOne("customer_id", event.data.object.customer, function(user) {
@@ -95,7 +95,7 @@ module.exports = function(knex) {
     ]);
   };
 
-  let customerDeletedEvent = function(event, callback) {
+  const customerDeletedEvent = function(event, callback) {
     User.findOne("customer_id", event.data.object.id, function(user) {
       if (user.data) {
         user.purgeData(false, function(result) {
@@ -115,7 +115,7 @@ module.exports = function(knex) {
     });
   };
 
-  let subscriptionDeletedEvent = function(event, callback) {
+  const subscriptionDeletedEvent = function(event, callback) {
     ServiceInstance.findOne("subscription_id", event.data.object.id, function(
       service,
     ) {
@@ -142,8 +142,8 @@ module.exports = function(knex) {
   // invoice.updated [Sync the invoice]
   // ping
 
-  let webhook = function(req, res, next) {
-    let event_id = req.body.id;
+  const webhook = function(req, res, next) {
+    const event_id = req.body.id;
     async.waterfall([
       function(callback) {
         validateStripeEvent(event_id, function(err, result) {
@@ -156,7 +156,7 @@ module.exports = function(knex) {
       },
       function(event, callback) {
         if (event) {
-          //Check if the database has not processed this event before
+          // Check if the database has not processed this event before
           Logger.findOne("event_id", event.id, function(found_event) {
             if (!found_event.data) {
               callback(null, true, event);
@@ -164,7 +164,7 @@ module.exports = function(knex) {
               res.status(200).send("Event already processed");
             }
           });
-          //Logger.log(event.id,'Im ready!');
+          // Logger.log(event.id,'Im ready!');
         }
       },
       function(valid, event, callback) {
@@ -202,7 +202,7 @@ module.exports = function(knex) {
               );
           }
         }
-        //Send the response prior to processes
+        // Send the response prior to processes
         res.sendStatus(200);
       },
     ]);

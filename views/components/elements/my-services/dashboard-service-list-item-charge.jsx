@@ -6,7 +6,7 @@ import { Price } from "../../utilities/price.jsx";
 class DashboardServiceListItemCharge extends React.Component {
   constructor(props) {
     super(props);
-    let serviceInstanceId = this.props.serviceInstanceId;
+    const {serviceInstanceId} = this.props;
     this.state = {
       chargeItems: [],
       url: `/api/v1/service-instances/${serviceInstanceId}/awaiting-charges`,
@@ -15,7 +15,7 @@ class DashboardServiceListItemCharge extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
         self.setState({ chargeItems: response });
@@ -44,7 +44,7 @@ class DashboardServiceListItemCharge extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return (
         <div className="xaas-body">
           {this.state.chargeItems.map(chargeItem => (
@@ -70,7 +70,7 @@ class DashboardServiceListItemCharge extends React.Component {
           ))}
         </div>
       );
-    }
+    
   }
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 
 class ModalPublishingTemplate extends React.Component {
   constructor(props) {
     super(props);
-    let templateObject = this.props.templateObject;
+    const {templateObject} = this.props;
     this.state = {
       loading: true,
       template: templateObject,
@@ -26,7 +26,7 @@ class ModalPublishingTemplate extends React.Component {
   }
 
   fetchTemplate() {
-    let self = this;
+    const self = this;
     Fetcher(
       `/api/v1/service-templates/${self.state.template_id}`,
       "GET",
@@ -41,7 +41,7 @@ class ModalPublishingTemplate extends React.Component {
 
   onUnpublish(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.unpublish_url, "PUT", { published: "false" }).then(
@@ -59,7 +59,7 @@ class ModalPublishingTemplate extends React.Component {
 
   onPublish(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.unpublish_url, "PUT", { published: "true" }).then(
@@ -82,16 +82,16 @@ class ModalPublishingTemplate extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
-      let self = this;
+    } 
+      const self = this;
       let pageName = "";
       let pageMessage = "";
       let publishingFunction = false;
-      let currentModal = self.state.current_modal;
-      let template = self.state.template;
-      let name = template.name;
-      let description = template.description;
-      let status = template.published;
+      const currentModal = self.state.current_modal;
+      const {template} = self.state;
+      const {name} = template;
+      const {description} = template;
+      const status = template.published;
       if (status) {
         pageName = "Unpublish a Service";
         pageMessage = "unpublish";
@@ -108,7 +108,7 @@ class ModalPublishingTemplate extends React.Component {
             modalTitle={pageName}
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -118,18 +118,31 @@ class ModalPublishingTemplate extends React.Component {
                   <div className="col-xs-12">
                     <p>
                       <strong>
-                        You are about to {pageMessage} the following service.
+                        You are about to 
+                        {' '}
+                        {pageMessage}
+                        {' '}
+the following service.
                       </strong>
                     </p>
                     <ul>
-                      <li>Service: {name}</li>
-                      <li>Description: {description}</li>
-                      <li>Status: {status ? "Published" : "Unpublished"}</li>
+                      <li>
+Service:
+                        {name}
+                      </li>
+                      <li>
+Description:
+                        {description}
+                      </li>
+                      <li>
+Status:
+                        {status ? "Published" : "Unpublished"}
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-primary btn-rounded"
                   onClick={publishingFunction}
@@ -146,7 +159,7 @@ class ModalPublishingTemplate extends React.Component {
             </div>
           </Modal>
         );
-      } else if (currentModal == "model_publishing_action_success") {
+      } if (currentModal == "model_publishing_action_success") {
         return (
           <Modal
             modalTitle={pageName}
@@ -159,7 +172,11 @@ class ModalPublishingTemplate extends React.Component {
                   <div className="col-xs-12">
                     <p>
                       <strong>
-                        You have successfully {pageMessage} {name}
+                        You have successfully 
+                        {' '}
+                        {pageMessage} 
+                        {' '}
+                        {name}
                       </strong>
                     </p>
                   </div>
@@ -169,7 +186,7 @@ class ModalPublishingTemplate extends React.Component {
           </Modal>
         );
       }
-    }
+    
   }
 }
 

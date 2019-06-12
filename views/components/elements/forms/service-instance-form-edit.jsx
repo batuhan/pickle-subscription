@@ -4,18 +4,19 @@ import Fetcher from "../../utilities/fetcher.jsx";
 import Inputs from "../../utilities/inputs.jsx";
 import { DataForm, DataChild } from "../../utilities/data-form.jsx";
 import Buttons from "../buttons.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ServiceInstanceFormEdit extends React.Component {
   constructor(props) {
     super(props);
-    let templateId = this.props.templateId;
-    let instance = this.props.myInstance;
+    const {templateId} = this.props;
+    const instance = this.props.myInstance;
     this.state = {
-      instance: instance,
-      templateId: templateId,
+      instance,
+      templateId,
       template: false,
-      url: "/api/v1/service-templates/" + templateId + "/request",
+      url: `/api/v1/service-templates/${  templateId  }/request`,
       loading: true,
       success: false,
       countDown: 5,
@@ -26,7 +27,7 @@ class ServiceInstanceFormEdit extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     // Fetcher(self.state.url).then(function(response){
@@ -55,24 +56,24 @@ class ServiceInstanceFormEdit extends React.Component {
   }
 
   getValidators() {
-    //This function dynamically generates validators depending on what custom properties the instance has.
-    //requires references: the service template's references.service_template_properties
-    //Defining general validators
-    let validateRequired = val => {
+    // This function dynamically generates validators depending on what custom properties the instance has.
+    // requires references: the service template's references.service_template_properties
+    // Defining general validators
+    const validateRequired = val => {
       return val === 0 || val === false || (val != "" && val != null);
     };
-    let validateEmptyString = val => {
+    const validateEmptyString = val => {
       return val.trim() != "";
     };
-    //Defining validators
-    let validateName = val => {
+    // Defining validators
+    const validateName = val => {
       return (
         (validateRequired(val) && validateEmptyString(val)) || {
           error: "Field service name is required.",
         }
       );
     };
-    let validateDescription = val => {
+    const validateDescription = val => {
       return (
         (validateRequired(val) && validateEmptyString(val)) || {
           error: "field service description is required",
@@ -80,7 +81,7 @@ class ServiceInstanceFormEdit extends React.Component {
       );
     };
 
-    let validatorJSON = {
+    const validatorJSON = {
       name: validateName,
       description: validateDescription,
       // 'references'        : {
@@ -107,8 +108,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
-      let self = this;
+    } if (this.state.success) {
+      const self = this;
 
       setTimeout(function() {
         self.handleCountDownClose();
@@ -130,14 +131,14 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } else {
-      const instance = this.state.instance;
+    } 
+      const {instance} = this.state;
       const instance_props = this.state.instance.references
         .service_instance_properties;
       // const references = this.state.template.references.service_template_properties.length > 0 ? this.state.template.references.service_template_properties : false;
 
-      //TODO: Add validation functions and pass into DataForm as props
-      //** Stripe limits the trial days to 2 years
+      // TODO: Add validation functions and pass into DataForm as props
+      //* * Stripe limits the trial days to 2 years
       const myValidators = this.getValidators();
 
       return (
@@ -146,7 +147,7 @@ class ServiceInstanceFormEdit extends React.Component {
             validators={myValidators}
             handleResponse={this.handleResponse}
             url={`/api/v1/service-instances/${instance.id}`}
-            method={"PUT"}
+            method="PUT"
           >
             <div className="p-20">
               <div className="row">
@@ -159,8 +160,8 @@ class ServiceInstanceFormEdit extends React.Component {
                     name="name"
                     defaultValue={instance.name}
                     onChange={function() {}}
-                    receiveOnChange={true}
-                    receiveValue={true}
+                    receiveOnChange
+                    receiveValue
                   />
 
                   <Inputs
@@ -169,34 +170,34 @@ class ServiceInstanceFormEdit extends React.Component {
                     name="description"
                     defaultValue={instance.description}
                     onChange={function() {}}
-                    receiveOnChange={true}
-                    receiveValue={true}
+                    receiveOnChange
+                    receiveValue
                   />
                 </div>
               </div>
-              {/*{references ?*/}
-              {/*<div className="row">*/}
-              {/*<div className="col-md-12">*/}
-              {/*<h3 className="p-b-20">Service Fields</h3>*/}
-              {/*{references.map( reference => (*/}
-              {/*<div key={`custom-fields-${reference.prop_label}`}>*/}
-              {/*<DataChild modelName="service_instance_properties" objectName={reference.name}>*/}
-              {/*<Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{console.log("im so weird", _.filter(instance_props, {name: reference.name}))}}*/}
-              {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
-              {/*<Inputs type="hidden" name="name" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].name : ''}*/}
-              {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
-              {/*<Inputs type={reference.type}*/}
-              {/*label={reference.prop_label || 'No label'}*/}
-              {/*name="value"*/}
-              {/*defaultValue={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].value : ''}*/}
-              {/*options={reference.prop_values}*/}
-              {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
-              {/*</DataChild>*/}
-              {/*</div>*/}
-              {/*))}*/}
-              {/*</div>*/}
-              {/*</div> : <div/>*/}
-              {/*}*/}
+              {/* {references ? */}
+              {/* <div className="row"> */}
+              {/* <div className="col-md-12"> */}
+              {/* <h3 className="p-b-20">Service Fields</h3> */}
+              {/* {references.map( reference => ( */}
+              {/* <div key={`custom-fields-${reference.prop_label}`}> */}
+              {/* <DataChild modelName="service_instance_properties" objectName={reference.name}> */}
+              {/* <Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{console.log("im so weird", _.filter(instance_props, {name: reference.name}))}} */}
+              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+              {/* <Inputs type="hidden" name="name" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].name : ''} */}
+              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+              {/* <Inputs type={reference.type} */}
+              {/* label={reference.prop_label || 'No label'} */}
+              {/* name="value" */}
+              {/* defaultValue={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].value : ''} */}
+              {/* options={reference.prop_values} */}
+              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+              {/* </DataChild> */}
+              {/* </div> */}
+              {/* ))} */}
+              {/* </div> */}
+              {/* </div> : <div/> */}
+              {/* } */}
             </div>
 
             <div
@@ -220,7 +221,7 @@ class ServiceInstanceFormEdit extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

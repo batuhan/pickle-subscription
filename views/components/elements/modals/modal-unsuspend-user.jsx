@@ -12,16 +12,16 @@ class ModalUnsuspendUser extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Activate User";
+    const self = this;
+    const pageName = "Activate User";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <UnsuspendUserForm uid={this.props.uid} hide={self.props.hide} />

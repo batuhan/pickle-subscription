@@ -2,9 +2,10 @@ import React from "react";
 import Load from "../../utilities/load.jsx";
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
-import Buttons from "../../elements/buttons.jsx";
+import Buttons from "../buttons.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 const FORM_NAME = "userEditRoleForm";
 
@@ -26,7 +27,7 @@ class UserFormEditRole extends React.Component {
   }
 
   fetchRoles() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/roles", "GET").then(function(response) {
       if (!response.error) {
         self.setState({ loading: false, roles: response });
@@ -36,8 +37,8 @@ class UserFormEditRole extends React.Component {
   }
 
   handleSubmission() {
-    let self = this;
-    let payload = self.props.formData;
+    const self = this;
+    const payload = self.props.formData;
     self.setState({ ajaxLoad: false });
     Fetcher(this.state.formURL, "PUT", payload).then(function(response) {
       if (!response.error) {
@@ -56,19 +57,19 @@ class UserFormEditRole extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load type="modal" />;
-    } else {
+    } 
       const sortedRoles = _.sortBy(this.state.roles, ["id"]);
-      let userOptions = userList => {
+      const userOptions = userList => {
         return _.map(userList, role => {
           return new Object({ [role.role_name]: role.id });
         });
       };
-      let roleOptionList = userOptions(sortedRoles);
+      const roleOptionList = userOptions(sortedRoles);
 
-      let self = this;
+      const self = this;
 
       if (this.state.success) {
-        let newRoleName = _.filter(self.state.roles, {
+        const newRoleName = _.filter(self.state.roles, {
           id: self.state.updatedUser.role_id,
         })[0].role_name;
         return (
@@ -76,12 +77,16 @@ class UserFormEditRole extends React.Component {
             <div className="p-20">
               <p>
                 <strong>
-                  User {this.props.user.email}'s role has been changed to{" "}
+                  User 
+                  {' '}
+                  {this.props.user.email}
+'s role has been changed to
+                  {" "}
                   {newRoleName}
                 </strong>
               </p>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <Buttons
                 containerClass="inline"
                 size="md"
@@ -92,11 +97,15 @@ class UserFormEditRole extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         return (
           <div className="edit-user-role-form">
             <div className="p-20">
-              <p>Change user {this.props.user.email}'s role.</p>
+              <p>
+Change user
+                {this.props.user.email}
+'s role.
+              </p>
               <Inputs
                 type="select"
                 label="User role"
@@ -105,7 +114,7 @@ class UserFormEditRole extends React.Component {
                 options={roleOptionList}
               />
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <Buttons
                 containerClass="inline"
                 size="md"
@@ -125,8 +134,8 @@ class UserFormEditRole extends React.Component {
             </div>
           </div>
         );
-      }
-    }
+      
+    
   }
 }
 

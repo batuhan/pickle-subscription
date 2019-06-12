@@ -5,7 +5,7 @@ class SearchDashboard extends React.Component {
     return (
       <div className="top-navigation-search">
         <form className="form-inline form-custom">
-          {/*<i className="material-icons">search</i>*/}
+          {/* <i className="material-icons">search</i> */}
           <div className="form-group bmd-form-group">
             <label className="dashboard-search-label">Search</label>
             <input

@@ -1,14 +1,14 @@
 import React from "react";
+import { required, url } from "redux-form-validators";
+import { Field } from "redux-form";
+import Collapsible from "react-collapsible";
 import Fetcher from "../../../views/components/utilities/fetcher.jsx";
 import ServiceBotBaseForm from "../../../views/components/elements/forms/servicebot-base-form.jsx";
 import { inputField } from "../../../views/components/elements/forms/servicebot-base-field.jsx";
 import Alerts from "../../../views/components/elements/alerts.jsx";
-import { required, url } from "redux-form-validators";
-import { Field } from "redux-form";
 import Buttons from "../../../views/components/elements/buttons.jsx";
 import Modal from "../../../views/components/utilities/modal.jsx";
 import Jumbotron from "../../../views/components/layouts/jumbotron.jsx";
-import Collapsible from "react-collapsible";
 import "../stylesheets/webhooks.css";
 import cookie from "react-cookie";
 
@@ -99,7 +99,7 @@ userToken = generateJWT(user[:email], SECRET_KEY)
     default:
       break;
   }
-  let clientCode = `<div id="servicebot-management-form"></div>
+  const clientCode = `<div id="servicebot-management-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://servicebot.io/js/servicebot-embed.js" type="text/javascript"></script>
 <script  type="text/javascript">
@@ -133,9 +133,10 @@ userToken = generateJWT(user[:email], SECRET_KEY)
           <option value="ruby">Rails/Ruby</option>
           <option value="other">Other</option>
         </select>
-        <pre class="sbi--code-sample">{server}</pre>
+        <pre className="sbi--code-sample">{server}</pre>
         <span>
-          <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>, make sure
+          <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>
+, make sure
           not to commit it into version control or send under insecure channels
           or expose to client
         </span>
@@ -146,7 +147,7 @@ userToken = generateJWT(user[:email], SECRET_KEY)
           With the token generated on the server, use this HTML on the
           client...(with the proper token)
         </span>
-        <pre class="sbi--code-sample">{clientCode}</pre>
+        <pre className="sbi--code-sample">{clientCode}</pre>
       </div>
     </div>
   );
@@ -162,7 +163,7 @@ function WebhookForm(props) {
         component={inputField}
         placeholder="Endpoint URL: https://"
       />
-      {/*<Field name="async_lifecycle" type="select" component={inputField} placeholder="Asynchronous"/>*/}
+      {/* <Field name="async_lifecycle" type="select" component={inputField} placeholder="Asynchronous"/> */}
       <Field className="form-control" name="async_lifecycle" component="select">
         <option value="True">Asynchronous</option>
         <option value="False">Synchronous</option>
@@ -181,21 +182,21 @@ function WebhookForm(props) {
 }
 
 function WebhookModal(props) {
-  let {
+  const {
     show,
     hide,
     hook,
     handleSuccessResponse,
     handleFailureResponse,
   } = props;
-  let submissionRequest = {
+  const submissionRequest = {
     method: hook.id ? "PUT" : "POST",
     url: hook.id ? `/api/v1/webhooks/${hook.id}` : `/api/v1/webhooks`,
   };
 
   return (
     <Modal
-      modalTitle={"Add endpoint"}
+      modalTitle="Add endpoint"
       icon="fa-plus"
       hideCloseBtn={false}
       show={show}
@@ -207,10 +208,10 @@ function WebhookModal(props) {
           form={WebhookForm}
           initialValues={{ ...hook }}
           submissionRequest={submissionRequest}
-          successMessage={"Fund added successfully"}
+          successMessage="Fund added successfully"
           handleResponse={handleSuccessResponse}
           handleFailure={handleFailureResponse}
-          reShowForm={true}
+          reShowForm
         />
       </div>
     </Modal>
@@ -218,12 +219,18 @@ function WebhookModal(props) {
 }
 
 function Webhook(props) {
-  let hook = props.hook;
+  const {hook} = props;
   return (
     <div>
-      Endpoint: {hook.endpoint_url}
-      Is Async: {hook.async_lifecycle}
-      Health: {hook.health}
+      Endpoint: 
+      {' '}
+      {hook.endpoint_url}
+      Is Async: 
+      {' '}
+      {hook.async_lifecycle}
+      Health: 
+      {' '}
+      {hook.health}
     </div>
   );
 }
@@ -260,10 +267,10 @@ class Webhooks extends React.Component {
   }
 
   async componentDidMount() {
-    let self = this;
-    let hooks = await Fetcher(`/api/v1/webhooks/`);
-    let templates = await Fetcher(`/api/v1/service-templates/`);
-    let secretKey = (await Fetcher(`/api/v1/system-options/secret`)).secret;
+    const self = this;
+    const hooks = await Fetcher(`/api/v1/webhooks/`);
+    const templates = await Fetcher(`/api/v1/service-templates/`);
+    const secretKey = (await Fetcher(`/api/v1/system-options/secret`)).secret;
 
     self.setState({ hooks, templates, secretKey, loading: false });
   }
@@ -273,7 +280,7 @@ class Webhooks extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
+    const self = this;
     return Fetcher("/api/v1/webhooks").then(function(response) {
       if (!response.error) {
         self.setState({ hooks: response });
@@ -288,8 +295,8 @@ class Webhooks extends React.Component {
    */
 
   deleteHook(hook) {
-    let self = this;
-    Fetcher("/api/v1/webhooks/" + hook.id, "DELETE").then(function(response) {
+    const self = this;
+    Fetcher(`/api/v1/webhooks/${  hook.id}`, "DELETE").then(function(response) {
       if (!response.error) {
         self.fetchData();
       }
@@ -307,7 +314,7 @@ class Webhooks extends React.Component {
 
   async testHooks() {
     this.setState({ loading: true });
-    let result = await Fetcher("/api/v1/webhooks/test", "POST");
+    const result = await Fetcher("/api/v1/webhooks/test", "POST");
     return await this.fetchData();
   }
 
@@ -332,7 +339,7 @@ class Webhooks extends React.Component {
         message: "Your card has been updated.",
       },
     });
-    //re-render
+    // re-render
     this.fetchData();
   }
 
@@ -373,12 +380,12 @@ class Webhooks extends React.Component {
   }
 
   render() {
-    let self = this;
-    let { openHook, hook, hooks, loading } = this.state;
-    let pageName = "Integrations";
-    let subtitle = "Integrate apps with Servicebot";
+    const self = this;
+    const { openHook, hook, hooks, loading } = this.state;
+    const pageName = "Integrations";
+    const subtitle = "Integrate apps with Servicebot";
 
-    let getAlerts = () => {
+    const getAlerts = () => {
       if (this.state.alerts) {
         return (
           <Alerts
@@ -402,9 +409,9 @@ class Webhooks extends React.Component {
             hide={this.closeHookForm}
           />
         );
-      } else {
+      } 
         return null;
-      }
+      
     };
     let formHTML;
     if (
@@ -431,22 +438,25 @@ Servicebot.init({
 })
 </script>`;
     }
-    let formEmbed = (
+    const formEmbed = (
       <div className="sbi--wrapper">
         <h2>Customer account management embed</h2>
         <div className="sbi--client-side">
-          <span class="sbi--subtitle">
+          <span className="sbi--subtitle">
             Paste the generated HTML on the page you want to embed a request
-            form. <br />
-            You can find more detailed in our{" "}
+            form. 
+            {' '}
+            <br />
+            You can find more detailed in our
+            {" "}
             <a href="https://docs.servicebot.io/embed">documentation</a>
           </span>
           <br />
           <strong>
-            <span class="sbi--dropdown-label">Select a service to embed: </span>
+            <span className="sbi--dropdown-label">Select a service to embed: </span>
           </strong>
           <select onChange={this.changeTemplate}>
-            <option key={"default-0"} value="0">
+            <option key="default-0" value="0">
               Select a template
             </option>
             {this.state.templates.map(template => {
@@ -547,7 +557,9 @@ Servicebot.init({
               type="submit"
               value="submit"
             >
-              <i className="fa fa-plus" /> Add endpoint
+              <i className="fa fa-plus" />
+              {' '}
+Add endpoint
             </button>
             <button
               className="sbi--webhook-button sbi--wb--retest"
@@ -559,7 +571,8 @@ Servicebot.init({
                 <i className="fa fa-refresh fa-spin" />
               ) : (
                 <i className="fa fa-refresh" />
-              )}{" "}
+              )}
+              {" "}
               Re-test endpoints
             </button>
           </div>
@@ -596,29 +609,41 @@ Servicebot.init({
                 </a>
                 <ul>
                   <li>
-                    <b>Pre-subscription:</b> This event happens right after the
+                    <b>Pre-subscription:</b>
+                    {' '}
+This event happens right after the
                     customer subscribes to your service, prior to the
                     subscription request completion.
                   </li>
                   <li>
-                    <b>Post-subscription:</b> This event happens after the
+                    <b>Post-subscription:</b>
+                    {' '}
+This event happens after the
                     subscription has been successfully completed.
                   </li>
                   <li>
-                    <b>Pre-trial expiration:</b> This event happens right after
+                    <b>Pre-trial expiration:</b>
+                    {' '}
+This event happens right after
                     the trial expires, prior to any expiration processes.
                   </li>
                   <li>
-                    <b>Post-trial expiration:</b> This event happens after the
+                    <b>Post-trial expiration:</b>
+                    {' '}
+This event happens after the
                     trial expiration has been completed.
                   </li>
                   <li>
-                    <b>Pre-reactivation:</b> This event happens right after the
+                    <b>Pre-reactivation:</b>
+                    {' '}
+This event happens right after the
                     reactivation event happens, prior to any reactivation
                     processes.
                   </li>
                   <li>
-                    <b>Post-reactivation:</b> This event happens after
+                    <b>Post-reactivation:</b>
+                    {' '}
+This event happens after
                     eactivation event has been completed.
                   </li>
                 </ul>
@@ -627,12 +652,13 @@ Servicebot.init({
           </div>
           <div className="form-row">
             {hooks.map((hook, index) => {
-              //Set health check
+              // Set health check
               let health = (
                 <span>
                   <span className="status-badge red">
-                    <i className="fa fa-times"></i>
-                  </span>{" "}
+                    <i className="fa fa-times" />
+                  </span>
+                  {" "}
                   {hook.health}
                 </span>
               );
@@ -643,11 +669,11 @@ Servicebot.init({
               } else if (hook.health === "OK") {
                 health = (
                   <span className="status-badge green">
-                    <i className="fa fa-check"></i>
+                    <i className="fa fa-check" />
                   </span>
                 );
               }
-              //Set Type
+              // Set Type
               let type = (
                 <span className="status-badge blue m-r-5">Asynchronous</span>
               );
@@ -657,7 +683,7 @@ Servicebot.init({
                 );
               }
               return (
-                <div className="hook" key={"hook-" + index}>
+                <div className="hook" key={`hook-${  index}`}>
                   <div className="url">{hook.endpoint_url}</div>
                   <div className="row">
                     <div className="col-md-8">
@@ -673,7 +699,9 @@ Servicebot.init({
                         type="submit"
                         value="submit"
                       >
-                        <i className="fa fa-pencil"></i> Edit
+                        <i className="fa fa-pencil" />
+                        {' '}
+Edit
                       </button>
                       <button
                         className="btn-xs"
@@ -683,7 +711,9 @@ Servicebot.init({
                         type="submit"
                         value="submit"
                       >
-                        <i className="fa fa-times"></i> Delete
+                        <i className="fa fa-times" />
+                        {' '}
+Delete
                       </button>
                     </div>
                   </div>
@@ -698,12 +728,12 @@ Servicebot.init({
   }
 }
 
-let RouteDefinition = {
+const RouteDefinition = {
   component: Webhooks,
   name: "Integrations",
   path: "/webhooks",
-  isVisible: function(user) {
-    //todo: this is dirty, need to do permission based...
+  isVisible(user) {
+    // todo: this is dirty, need to do permission based...
     return user.role_id === 1;
   },
 };

@@ -2,7 +2,8 @@ import React from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { connect } from "react-redux";
 import { hideModal } from "./actions";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class Modal extends React.Component {
   constructor(props) {
@@ -17,44 +18,47 @@ class Modal extends React.Component {
       this.props.hideModal();
     }
   }
+
   componentDidMount() {
     document.addEventListener("keydown", this.escFunction, false);
   }
+
   componentWillUnmount() {
     document.removeEventListener("keydown", this.escFunction, false);
   }
+
   hide(event) {
     this.props.hide && this.props.hide(event);
     this.props.hideModal();
   }
 
   render() {
-    let top = this.props.top || "50%";
-    let left = this.props.left || "50%";
-    let position = this.props.position || "fixed";
-    let transform = this.props.transform || "translate(-50%, -50%)";
-    let width = this.props.width || "";
-    let height = this.props.height || "";
-    let transition = this.props.transition || "transition: all 200ms ease-out";
-    let buttonAlign = this.props.buttonAlign || "right";
+    const top = this.props.top || "50%";
+    const left = this.props.left || "50%";
+    const position = this.props.position || "fixed";
+    const transform = this.props.transform || "translate(-50%, -50%)";
+    const width = this.props.width || "";
+    const height = this.props.height || "";
+    const transition = this.props.transition || "transition: all 200ms ease-out";
+    const buttonAlign = this.props.buttonAlign || "right";
 
-    let modalDialogStyle = {
+    const modalDialogStyle = {
       maxWidth: "90%",
       margin: "0px",
-      top: top,
-      position: position,
-      left: left,
-      transform: transform,
-      transition: transition,
-      width: width,
-      height: height,
+      top,
+      position,
+      left,
+      transform,
+      transition,
+      width,
+      height,
       maxHeight: "90vh",
       overflowY: "scroll",
     };
 
-    let modalBarStyle = {};
+    const modalBarStyle = {};
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       modalBarStyle.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -68,7 +72,7 @@ class Modal extends React.Component {
     }
 
     return (
-      <div className={`modal-wrapper`}>
+      <div className="modal-wrapper">
         <div
           className={`modal ${
             this.props.titleColor ? this.props.titleColor : "modal-primary"
@@ -79,9 +83,9 @@ class Modal extends React.Component {
         >
           <ReactCSSTransitionGroup
             component="div"
-            transitionAppear={true}
+            transitionAppear
             transitionAppearTimeout={1000}
-            transitionName={"modal"}
+            transitionName="modal"
             transitionEnterTimeout={1000}
             transitionLeaveTimeout={1000}
           >
@@ -135,10 +139,10 @@ class Modal extends React.Component {
     );
   }
 }
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return { options: state.options };
 };
-let mapDispatchtoProps = dispatch => {
+const mapDispatchtoProps = dispatch => {
   return { hideModal: () => dispatch(hideModal()) };
 };
 export default connect(

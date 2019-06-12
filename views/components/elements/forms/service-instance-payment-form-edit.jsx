@@ -8,9 +8,9 @@ import Alerts from "../alerts.jsx";
 class ServiceInstanceFormEdit extends React.Component {
   constructor(props) {
     super(props);
-    let instance = this.props.myInstance;
+    const instance = this.props.myInstance;
     this.state = {
-      instance: instance,
+      instance,
       loading: false,
       success: false,
       alert: {},
@@ -24,8 +24,7 @@ class ServiceInstanceFormEdit extends React.Component {
   handleResponse(response) {
     if (!response.error && response.type != "StripeInvalidRequestError") {
       this.setState({ success: true, submitting: false });
-    } else {
-      if (response.type == "StripeInvalidRequestError") {
+    } else if (response.type == "StripeInvalidRequestError") {
         if (
           response.message == "This customer has no attached payment source"
         ) {
@@ -46,7 +45,6 @@ class ServiceInstanceFormEdit extends React.Component {
           });
         }
       }
-    }
   }
 
   handleCountDownClose() {
@@ -58,20 +56,20 @@ class ServiceInstanceFormEdit extends React.Component {
   }
 
   getValidators(references = null) {
-    //This function dynamically generates validators depending on what custom properties the instance has.
-    //optional references: the service template's references.service_template_properties
-    //Defining general validators
-    let validateRequired = val => {
+    // This function dynamically generates validators depending on what custom properties the instance has.
+    // optional references: the service template's references.service_template_properties
+    // Defining general validators
+    const validateRequired = val => {
       return val === 0 || val === false || (val != "" && val != null);
     };
-    let validateEmptyString = val => {
+    const validateEmptyString = val => {
       return val.trim() != "";
     };
-    let validateNumber = val => {
+    const validateNumber = val => {
       return !isNaN(parseFloat(val)) && isFinite(val);
     };
-    //Defining validators
-    let validateTrialDay = val => {
+    // Defining validators
+    const validateTrialDay = val => {
       return (
         (validateRequired(val) && validateNumber(val) && val >= 0) || {
           error:
@@ -79,7 +77,7 @@ class ServiceInstanceFormEdit extends React.Component {
         }
       );
     };
-    let validateAmount = val => {
+    const validateAmount = val => {
       return (
         (validateRequired(val) && validateNumber(val) && val >= 0) || {
           error:
@@ -87,7 +85,7 @@ class ServiceInstanceFormEdit extends React.Component {
         }
       );
     };
-    let validateInterval = val => {
+    const validateInterval = val => {
       return (
         (validateRequired(val) &&
           (val == "day" ||
@@ -98,7 +96,7 @@ class ServiceInstanceFormEdit extends React.Component {
         }
       );
     };
-    let validateIntervalCount = val => {
+    const validateIntervalCount = val => {
       return (
         (validateRequired(val) && validateNumber(val) && val >= 1) || {
           error:
@@ -107,7 +105,7 @@ class ServiceInstanceFormEdit extends React.Component {
       );
     };
 
-    let validatorJSON = {
+    const validatorJSON = {
       trial_period_days: validateTrialDay,
       amount: validateAmount,
       interval: validateInterval,
@@ -120,8 +118,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
-      let self = this;
+    } if (this.state.success) {
+      const self = this;
 
       setTimeout(function() {
         self.handleCountDownClose();
@@ -143,13 +141,13 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } else {
-      const instance = this.state.instance;
+    } 
+      const {instance} = this.state;
 
       if (this.state.instance.payment_plan != null) {
         const paymentPlan = this.state.instance.payment_plan;
 
-        let getAlerts = () => {
+        const getAlerts = () => {
           if (this.state.alert.message) {
             return (
               <Alerts
@@ -169,13 +167,16 @@ class ServiceInstanceFormEdit extends React.Component {
               validators={this.getValidators(null)}
               handleResponse={this.handleResponse}
               url={`/api/v1/service-instances/${instance.id}/change-price`}
-              method={"POST"}
+              method="POST"
             >
               <div className="p-20">
                 <div className="row">
                   <div className="basic-info col-md-12">
                     <p>
-                      <strong>Payment Plan For {instance.name}</strong>
+                      <strong>
+Payment Plan For
+                        {instance.name}
+                      </strong>
                     </p>
                     <p>{instance.description}</p>
 
@@ -184,8 +185,8 @@ class ServiceInstanceFormEdit extends React.Component {
                       name="name"
                       value={paymentPlan.name}
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
 
                     <Inputs
@@ -195,8 +196,8 @@ class ServiceInstanceFormEdit extends React.Component {
                       label="Statement Descriptor"
                       defaultValue={paymentPlan.statement_descriptor}
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
 
                     <Inputs
@@ -209,8 +210,8 @@ class ServiceInstanceFormEdit extends React.Component {
                           : 0
                       }
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
 
                     <Inputs
@@ -219,8 +220,8 @@ class ServiceInstanceFormEdit extends React.Component {
                       label="Amount"
                       defaultValue={paymentPlan.amount}
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
 
                     <Inputs
@@ -235,19 +236,19 @@ class ServiceInstanceFormEdit extends React.Component {
                         { Yearly: "year" },
                       ]}
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
 
-                    {/*TODO: Stripe limits interval count to be 2 years*/}
+                    {/* TODO: Stripe limits interval count to be 2 years */}
                     <Inputs
                       type="number"
                       name="interval_count"
                       label="Interval Count"
                       defaultValue={paymentPlan.interval_count}
                       onChange={function() {}}
-                      receiveOnChange={true}
-                      receiveValue={true}
+                      receiveOnChange
+                      receiveValue
                     />
                   </div>
                 </div>
@@ -274,7 +275,7 @@ class ServiceInstanceFormEdit extends React.Component {
             </DataForm>
           </div>
         );
-      } else {
+      } 
         return (
           <div>
             <div className="p-20">
@@ -294,8 +295,8 @@ class ServiceInstanceFormEdit extends React.Component {
             </div>
           </div>
         );
-      }
-    }
+      
+    
   }
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { browserHistory } from "react-router";
-import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Load from "../utilities/load.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
 import Dropdown from "../elements/dropdown.jsx";
-import { getFormattedDate } from "../utilities/date-format.jsx";
-import DateFormat from "../utilities/date-format.jsx";
+import DateFormat, { getFormattedDate } from "../utilities/date-format.jsx";
+
 import ModalAddCategory from "../elements/modals/modal-add-category.jsx";
 import ModalDeleteCategory from "../elements/modals/modal-delete-category.jsx";
 import { ServiceBotTableBase } from "../elements/bootstrap-tables/servicebot-table-base.jsx";
@@ -50,8 +50,8 @@ class ManageCategories2 extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
-    let url = "/api/v1/service-categories";
+    const self = this;
+    const url = "/api/v1/service-categories";
     Fetcher(url).then(function(response) {
       if (!response.error) {
         self.setState({ rows: response });
@@ -108,7 +108,7 @@ class ManageCategories2 extends React.Component {
   }
 
   rowActionsFormatter(cell, row) {
-    let self = this;
+    const self = this;
 
     return (
       <Dropdown
@@ -135,11 +135,11 @@ class ManageCategories2 extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let subtitle =
+    const pageName = this.props.route.name;
+    const subtitle =
       "Categorize your offerings. Once a category is created, an offering can be placed on that category.";
 
-    let renderModals = () => {
+    const renderModals = () => {
       if (this.state.openAddCategoryModal) {
         return (
           <ModalAddCategory
@@ -170,7 +170,7 @@ class ManageCategories2 extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <Authorizer permissions="can_administrate">
           <Jumbotron pageName={pageName} subtitle={subtitle} />
@@ -181,26 +181,26 @@ class ManageCategories2 extends React.Component {
                   <ServiceBotTableBase
                     rows={this.state.rows}
                     createItemAction={this.openAddCategoryModal}
-                    createItemLabel={"Create Category"}
+                    createItemLabel="Create Category"
                     fetchRows={this.fetchData}
                   >
                     <TableHeaderColumn
                       isKey
                       dataField="name"
-                      dataSort={true}
+                      dataSort
                       width={350}
                     >
                       Category Name
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataSort={true}
+                      dataSort
                       dataField="description"
                       width={300}
                     >
                       Description
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataSort={true}
+                      dataSort
                       dataField="created_at"
                       filterFormatted
                       dataFormat={this.createdFormatter}
@@ -211,13 +211,13 @@ class ManageCategories2 extends React.Component {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                       dataField="Actions"
-                      className={"action-column-header"}
-                      columnClassName={"action-column"}
+                      className="action-column-header"
+                      columnClassName="action-column"
                       dataFormat={this.rowActionsFormatter}
                       searchable={false}
                       width={100}
                       filter={false}
-                    ></TableHeaderColumn>
+                    />
                   </ServiceBotTableBase>
                 </div>
               </div>
@@ -226,7 +226,7 @@ class ManageCategories2 extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

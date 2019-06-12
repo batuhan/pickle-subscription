@@ -12,24 +12,26 @@ class ToolTip extends React.Component {
   }
 
   render() {
-    let self = this;
-    let text = self.props.text || "-";
-    let style = self.props.style || {};
-    let placement = self.props.placement || "left";
-    let title = self.props.title || "tooltip";
-    let cssClass = self.props.cssClass || "btn-default";
-    let clickAction = self.props.onClick || null;
+    const self = this;
+    const text = self.props.text || "-";
+    const style = self.props.style || {};
+    const placement = self.props.placement || "left";
+    const title = self.props.title || "tooltip";
+    const cssClass = self.props.cssClass || "btn-default";
+    const clickAction = self.props.onClick || null;
 
-    let getText = () => {
+    const getText = () => {
       if (self.props.icon) {
         return (
           <div>
-            <i className={`fa ${self.props.icon}`} /> {text}
+            <i className={`fa ${self.props.icon}`} /> 
+            {' '}
+            {text}
           </div>
         );
-      } else {
+      } 
         return null;
-      }
+      
     };
 
     // let delay = this.props.delay || 0;

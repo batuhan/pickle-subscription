@@ -6,8 +6,9 @@ class SearchServiceBar extends React.Component {
     super(props);
     this.state = { value: "aa", categories: false };
   }
+
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/service-categories").then(function(response) {
       if (!response.error) {
         self.setState({ categories: response });
@@ -20,7 +21,7 @@ class SearchServiceBar extends React.Component {
   render() {
     return (
       <div className="featured-area">
-        <div className="side-columns col-xs-1 col-sm-2 col-md-3"></div>
+        <div className="side-columns col-xs-1 col-sm-2 col-md-3" />
         <div id="middle-column" className="col-xs-10 col-sm-8 col-md-6">
           <h1 className="text-center uppercase white p-b-40">Get started!</h1>
           <form id="search-service-form" className="search">
@@ -54,10 +55,10 @@ class SearchServiceBar extends React.Component {
                   ))}
               </select>
             </div>
-            {/*<i id="search-category-caret" className="fa fa-caret-down"/>*/}
+            {/* <i id="search-category-caret" className="fa fa-caret-down"/> */}
           </form>
         </div>
-        <div className="side-columns col-xs-1 col-sm-2 col-md-3"></div>
+        <div className="side-columns col-xs-1 col-sm-2 col-md-3" />
       </div>
     );
   }

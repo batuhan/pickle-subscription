@@ -1,15 +1,15 @@
-let consume = require("pluginbot/effects/consume");
-let { call, put, takeEvery, all, fork } = require("redux-saga/effects");
-let setOptions = require("../../config/redux/actions").setOptions;
+const consume = require("pluginbot/effects/consume");
+const { call, put, takeEvery, all, fork } = require("redux-saga/effects");
+const {setOptions} = require("../../config/redux/actions");
 
 function getNotificationSagas() {
-  //todo move table to be managed by THIS plugin
-  let NotificationTemplate = require("../../models/notification-template");
+  // todo move table to be managed by THIS plugin
+  const NotificationTemplate = require("../../models/notification-template");
   return new Promise(function(resolve, reject) {
     NotificationTemplate.findAll(true, true, function(templates) {
       resolve(
         templates.map(template => {
-          let callCreateNotification = function(action) {
+          const callCreateNotification = function(action) {
             return template.createNotification(action.event_object);
           };
 
@@ -25,7 +25,7 @@ function getNotificationSagas() {
   });
 }
 
-let setOptionSaga = function*(action) {
+const setOptionSaga = function*(action) {
   yield put(setOptions(action.event_object));
 };
 let sagaEventPattern = function(event_name) {
@@ -35,11 +35,11 @@ let sagaEventPattern = function(event_name) {
 };
 
 module.exports = {
-  run: function*(config, provide, services) {
-    let database = yield consume(services.database);
-    let notificationSagas = yield call(getNotificationSagas);
-    let notificationTask = yield fork(all, notificationSagas);
-    let optionTask = yield takeEvery(
+  *run(config, provide, services) {
+    const database = yield consume(services.database);
+    const notificationSagas = yield call(getNotificationSagas);
+    const notificationTask = yield fork(all, notificationSagas);
+    const optionTask = yield takeEvery(
       sagaEventPattern("system_options_updated"),
       setOptionSaga,
     );

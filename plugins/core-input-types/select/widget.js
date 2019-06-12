@@ -1,14 +1,14 @@
 import React from "react";
 import TagsInput from "react-tagsinput";
 
-//todo: all the imports from the main app will result in duplicate code.... need to fix this!
+// todo: all the imports from the main app will result in duplicate code.... need to fix this!
+import CurrencyInput from "react-currency-input";
 import { priceField } from "../../../views/components/elements/forms/servicebot-base-field.jsx";
 import handler from "./widgetHandler";
-import CurrencyInput from "react-currency-input";
 import WidgetPricingInput from "../../../views/components/utilities/widget-inputs/WidgetPricingInput.jsx";
 import PriceAdjustment from "../../../views/components/utilities/widget-inputs/WidgetPriceAdjustment";
 
-let Tags = props => {
+const Tags = props => {
   return (
     <div className="form-group form-group-flex addon-options-widget-config-input-wrapper">
       <label className="control-label form-label-flex-md addon-options-widget-config-input-label">
@@ -40,16 +40,16 @@ class SelectPricing extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let self = this;
+    const self = this;
     if (
       prevProps.configValue &&
       prevProps.configValue.value &&
       prevProps.configValue.value.length > this.props.configValue.value.length
     ) {
-      let propsToRemove = prevProps.configValue.value.filter(
+      const propsToRemove = prevProps.configValue.value.filter(
         prop => self.props.configValue.value.indexOf(prop) < 0,
       );
-      let newState = propsToRemove.reduce((acc, prop) => {
+      const newState = propsToRemove.reduce((acc, prop) => {
         acc[prop] = undefined;
         return acc;
       }, {});
@@ -60,7 +60,7 @@ class SelectPricing extends React.Component {
   }
 
   handleChange(name) {
-    let self = this;
+    const self = this;
     return function(floatvalue) {
       self.setState({ [name]: floatvalue }, () => {
         self.props.input.onChange(self.state);
@@ -69,26 +69,26 @@ class SelectPricing extends React.Component {
   }
 
   handlePercentPriceChange(e, maskedValue, floatvalue) {
-    let name = e.target.name;
-    let self = this;
+    const {name} = e.target;
+    const self = this;
     this.setState({ [name]: floatvalue }, () => {
       self.props.input.onChange(self.state);
     });
   }
 
   render() {
-    let { input, configValue } = this.props;
-    let self = this;
-    let operation =
+    const { input, configValue } = this.props;
+    const self = this;
+    const operation =
       configValue && configValue.pricing && configValue.pricing.operation;
-    let pricingValue =
+    const pricingValue =
       configValue && configValue.pricing && configValue.pricing.value;
     return (
-      <div className={`addon-options-widget-price-inputs-wrapper`}>
+      <div className="addon-options-widget-price-inputs-wrapper">
         {configValue ? (
           configValue.value &&
           configValue.value.map((option, index) => {
-            let input = {
+            const input = {
               onChange: self.handleChange(option),
               name: option,
               value: pricingValue && pricingValue[option],
@@ -96,7 +96,10 @@ class SelectPricing extends React.Component {
 
             return (
               <div>
-                {option} :{" "}
+                {option}
+                {' '}
+:
+                {" "}
                 <WidgetPricingInput input={input} operation={operation} />
               </div>
             );
@@ -111,8 +114,8 @@ class SelectPricing extends React.Component {
   }
 }
 
-let SelectWidget = props => {
-  let { input, configValue, label } = props;
+const SelectWidget = props => {
+  const { input, configValue, label } = props;
   console.log(input);
   return (
     <div className="form-group form-group-flex addon-options-widget-default-value-wrapper">
@@ -132,7 +135,7 @@ let SelectWidget = props => {
           {configValue &&
             configValue.value &&
             configValue.value.map((option, index) => {
-              let price =
+              const price =
                 configValue.pricing &&
                 configValue.pricing.value &&
                 configValue.pricing.value[option];
@@ -158,13 +161,13 @@ let SelectWidget = props => {
   );
 };
 
-let widget = {
+const widget = {
   widget: SelectWidget,
   type: "select",
   label: "Select",
   config: Tags,
   pricing: SelectPricing,
-  handler: handler,
+  handler,
 };
 
 export default widget;

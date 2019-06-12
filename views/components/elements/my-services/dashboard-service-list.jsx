@@ -1,17 +1,17 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import cookie from "react-cookie";
+import _ from "lodash";
+import Collapsible from "react-collapsible";
+import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import DashboardPageHeading from "./dashboard-page-heading.jsx";
 import DashboardServiceListItem from "./dashboard-service-list-item.jsx";
 import DashboardServiceListItemCharge from "./dashboard-service-list-item-charge.jsx";
-import _ from "lodash";
-import Collapsible from "react-collapsible";
 
 class DashboardServiceList extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
+    const uid = cookie.load("uid");
     this.state = {
       services: this.props.services,
       url: `/api/v1/service-instances/own`,
@@ -24,7 +24,7 @@ class DashboardServiceList extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     self.fetchUserFund();
   }
 
@@ -40,7 +40,7 @@ class DashboardServiceList extends React.Component {
   }
 
   fetchUserFund() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.fundUrl).then(function(response) {
       if (!response.error) {
         if (response.references.funds.length > 0) {
@@ -55,14 +55,17 @@ class DashboardServiceList extends React.Component {
     return (
       <div>
         <i className={icon} />
-        <span> {title}</span>
+        <span> 
+          {' '}
+          {title}
+        </span>
       </div>
     );
   }
 
   getUserServices() {
-    let services = this.state.services;
-    let purchasedItems = {};
+    const {services} = this.state;
+    const purchasedItems = {};
     (purchasedItems.actionItems = []),
       (purchasedItems.quoteItems = []),
       (purchasedItems.pendingItems = []),
@@ -71,9 +74,9 @@ class DashboardServiceList extends React.Component {
     purchasedItems.trialItems = [];
 
     services.forEach(service => {
-      //Get service outstanding charges
+      // Get service outstanding charges
       if (service.references.charge_items.length > 0) {
-        let charges = service.references.charge_items.filter(charge => {
+        const charges = service.references.charge_items.filter(charge => {
           return !charge.approved;
         });
         if (charges.length > 0) {
@@ -85,19 +88,19 @@ class DashboardServiceList extends React.Component {
           service.outstanding_charges = charges;
         }
       }
-      //Get service trial status
-      let trial = service.payment_plan.trial_period_days;
+      // Get service trial status
+      const trial = service.payment_plan.trial_period_days;
       if (service.status === "running" && trial > 0) {
-        let currentDate = new Date(service.subscribed_at * 1000);
-        let trialEnd = new Date(service.trial_end * 1000);
-        //Service is trialing if the expiration is after current date
+        const currentDate = new Date(service.subscribed_at * 1000);
+        const trialEnd = new Date(service.trial_end * 1000);
+        // Service is trialing if the expiration is after current date
         if (currentDate < trialEnd) {
           service.intrial = true;
         }
       } else {
         service.intrial = false;
       }
-      //If a service has a charge item, its an action item
+      // If a service has a charge item, its an action item
       if (
         (service.status !== "waiting_cancellation" &&
           service.status !== "cancelled" &&
@@ -139,7 +142,7 @@ class DashboardServiceList extends React.Component {
               "fa-chevron-right",
               "View Items Waiting for Payment Approval",
             )}
-            open={true}
+            open
             openedClassName="red"
             className="red"
           >
@@ -150,7 +153,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.actionItems.map(service => (
                 <DashboardServiceListItem
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -167,7 +170,7 @@ class DashboardServiceList extends React.Component {
               "Items in Trial",
             )}
             trigger={this.getTrigger("fa-chevron-right", "View Items in Trial")}
-            open={true}
+            open
             openedClassName="navy"
             className="navy"
           >
@@ -181,7 +184,7 @@ class DashboardServiceList extends React.Component {
                 <DashboardServiceListItem
                   userFunds={this.state.userFunds}
                   fetchFunds={this.fetchUserFund}
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -198,7 +201,7 @@ class DashboardServiceList extends React.Component {
               "Pending Quotes",
             )}
             trigger={this.getTrigger("fa-chevron-right", "View Pending Quotes")}
-            open={true}
+            open
             openedClassName="blue"
             className="blue"
           >
@@ -210,7 +213,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.quoteItems.map(service => (
                 <DashboardServiceListItem
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -230,7 +233,7 @@ class DashboardServiceList extends React.Component {
               "fa-chevron-right",
               "View Pending Cancellations",
             )}
-            open={true}
+            open
             openedClassName="yellow"
             className="yellow"
           >
@@ -240,7 +243,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.pendingItems.map(service => (
                 <DashboardServiceListItem
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -254,7 +257,7 @@ class DashboardServiceList extends React.Component {
           <Collapsible
             triggerWhenOpen={this.getTrigger("fa-chevron-down", "Active Items")}
             trigger={this.getTrigger("fa-chevron-right", "View Active Items")}
-            open={true}
+            open
             openedClassName="green"
             className="green"
           >
@@ -265,7 +268,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.activeItems.map(service => (
                 <DashboardServiceListItem
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -292,7 +295,7 @@ class DashboardServiceList extends React.Component {
               <p>These are your completed and cancelled services.</p>
               {purchasedItems.archivedItems.map(service => (
                 <DashboardServiceListItem
-                  key={"service-" + service.id}
+                  key={`service-${  service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                 />
@@ -305,7 +308,7 @@ class DashboardServiceList extends React.Component {
   }
 
   getActiveItems() {
-    let services = this.state.services;
+    const {services} = this.state;
   }
 
   getArchiveItems() {}
@@ -326,15 +329,15 @@ class DashboardServiceList extends React.Component {
           </p>
         </div>
       );
-    } else {
-      //grouping services by their status for displaying in groups
+    } 
+      // grouping services by their status for displaying in groups
       const grouped = _.groupBy(this.state.services, "status");
       return (
         <div className="col-md-10 col-lg-8 col-sm-12 col-md-offset-1 col-lg-offset-2">
           {this.getUserServices()}
         </div>
       );
-    }
+    
   }
 }
 

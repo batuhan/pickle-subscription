@@ -1,8 +1,8 @@
 import React from "react";
 import cookie from "react-cookie";
 import Link from "react-router";
-import Authorizer from "../utilities/authorizer.jsx";
 import { connect } from "react-redux";
+import Authorizer from "../utilities/authorizer.jsx";
 
 class Avatar extends React.Component {
   constructor(props) {

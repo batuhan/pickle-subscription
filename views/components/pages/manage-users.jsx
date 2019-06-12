@@ -21,7 +21,7 @@ import Modal from "../utilities/modal.jsx";
 import { connect } from "react-redux";
 import ReactTooltip from "react-tooltip";
 
-let _ = require("lodash");
+const _ = require("lodash");
 
 class ManageUsers extends React.Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class ManageUsers extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/users").then(function(response) {
       if (!response.error) {
         self.setState({ rows: response });
@@ -87,6 +87,7 @@ class ManageUsers extends React.Component {
   openEditCreditCard(dataObject) {
     this.setState({ openEditCreditCard: true, currentDataObject: dataObject });
   }
+
   closeEditCreditCard() {
     this.fetchData();
     this.setState({
@@ -99,6 +100,7 @@ class ManageUsers extends React.Component {
   openInviteUserModal(userObject) {
     this.setState({ openInviteUserModal: true, reinviteUser: userObject });
   }
+
   closeInviteUserModal() {
     this.fetchData();
     this.setState({
@@ -108,6 +110,7 @@ class ManageUsers extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   openSuspendUser(dataObject) {
     if (dataObject.id == this.props.user.id) {
       this.setState({
@@ -117,7 +120,7 @@ class ManageUsers extends React.Component {
         },
       });
     } else {
-      let status = dataObject.status;
+      const {status} = dataObject;
       const statusString = _.toLower(status);
       if (statusString == "suspended") {
         this.setState({
@@ -132,6 +135,7 @@ class ManageUsers extends React.Component {
       }
     }
   }
+
   closeSuspendUser() {
     this.fetchData();
     this.setState({
@@ -149,8 +153,9 @@ class ManageUsers extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   openEditRole(dataObject) {
-    let self = this;
+    const self = this;
     if (dataObject.id == self.props.user.id) {
       self.setState({
         openMessageModal: {
@@ -162,6 +167,7 @@ class ManageUsers extends React.Component {
       self.setState({ openEditRole: true, currentDataObject: dataObject });
     }
   }
+
   closeEditRole() {
     this.fetchData();
     this.setState({
@@ -170,6 +176,7 @@ class ManageUsers extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   openDeleteUser(dataObject) {
     if (dataObject.id == this.props.user.id) {
       this.setState({
@@ -185,6 +192,7 @@ class ManageUsers extends React.Component {
       });
     }
   }
+
   closeDeleteUser() {
     this.fetchData();
     this.setState({
@@ -193,16 +201,20 @@ class ManageUsers extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   openMessageModal(title, message) {
-    this.setState({ openMessageModal: { title: title, message: message } });
+    this.setState({ openMessageModal: { title, message } });
   }
+
   closeMessageModal() {
     this.fetchData();
     this.setState({ openMessageModal: null });
   }
+
   viewUser(dataObject) {
     browserHistory.push(`/manage-users/${dataObject.id}`);
   }
+
   viewUserServices(dataObject) {
     browserHistory.push(`/manage-subscriptions/?uid=${dataObject.id}`);
   }
@@ -218,22 +230,24 @@ class ManageUsers extends React.Component {
       </div>
     );
   }
+
   fundFormatter(cell) {
-    //check if user has funds
+    // check if user has funds
     if (cell.funds.length > 0) {
       return (
         <span className="status-badge green">
           <i className="fa fa-check" />
         </span>
       );
-    } else {
+    } 
       return (
         <span className="status-badge red">
           <i className="fa fa-times" />
         </span>
       );
-    }
+    
   }
+
   statusFormatter(cell, row) {
     let color = "status-badge ";
     switch (cell.toLowerCase()) {
@@ -252,43 +266,48 @@ class ManageUsers extends React.Component {
       default:
         color += "grey";
     }
-    //If the customer_id from Stripe doesn't exist, mark user as disconnected
+    // If the customer_id from Stripe doesn't exist, mark user as disconnected
     if (!row.customer_id) {
       return <span className="status-badge grey">Disconnected</span>;
-    } else {
+    } 
       return <span className={color}>{cell}</span>;
-    }
+    
   }
+
   roleFormatter(cell) {
     return cell.user_roles[0].role_name;
   }
 
   dropdownStatus(dataObject) {
-    let status = dataObject.status;
+    const {status} = dataObject;
     const statusString = _.toLower(status);
     if (statusString == "suspended") {
       return "Activate User";
-    } else {
+    } 
       return "Suspend User";
-    }
+    
     return "Error";
   }
+
   lastLoginFormatter(cell, row) {
     if (row.last_login != null) {
-      return <DateFormat time={true} date={row.last_login} />;
-    } else {
+      return <DateFormat time date={row.last_login} />;
+    } 
       return "Never";
-    }
+    
   }
+
   createdAtFormatter(cell, row) {
-    return <DateFormat date={row.created_at} time={true} />;
+    return <DateFormat date={row.created_at} time />;
   }
+
   profileLinkFormatter(cell, row) {
     return <Link to={`/manage-users/${row.id}`}>{cell}</Link>;
   }
+
   rowActionsFormatter(cell, row) {
-    let self = this;
-    let dropdownOptions = [
+    const self = this;
+    const dropdownOptions = [
       {
         type: "button",
         label: "Re-invite User",
@@ -367,10 +386,10 @@ class ManageUsers extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let subtitle = "View, invite, edit, and manage users";
+    const pageName = this.props.route.name;
+    const subtitle = "View, invite, edit, and manage users";
 
-    let getModals = () => {
+    const getModals = () => {
       if (this.state.openInviteUserModal) {
         if (this.state.reinviteUser) {
           return (
@@ -380,14 +399,14 @@ class ManageUsers extends React.Component {
               reinviteUser={this.state.reinviteUser.email}
             />
           );
-        } else {
+        } 
           return (
             <ModalInviteUser
               show={this.state.openInviteUserModal}
               hide={this.closeInviteUserModal}
             />
           );
-        }
+        
       }
       if (this.state.openSuspendUserModal) {
         return (
@@ -440,11 +459,11 @@ class ManageUsers extends React.Component {
         return (
           <Modal
             modalTitle={this.state.openMessageModal.title}
-            hideCloseBtn={true}
+            hideCloseBtn
             icon="fa-exclamation-triangle"
             show={this.state.openMessageModal}
             hide={this.closeMessageModal}
-            hideFooter={true}
+            hideFooter
           >
             <div className="p-20">
               <span>{this.state.openMessageModal.message}</span>
@@ -456,7 +475,7 @@ class ManageUsers extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <Authorizer permissions="can_administrate">
           <Jumbotron pageName={pageName} subtitle={subtitle} />
@@ -507,7 +526,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="email"
                       dataFormat={this.profileLinkFormatter}
-                      dataSort={true}
+                      dataSort
                       width="150"
                     >
                       Email
@@ -515,7 +534,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="name"
                       dataFormat={this.profileLinkFormatter}
-                      dataSort={true}
+                      dataSort
                       width="80"
                     >
                       name
@@ -523,7 +542,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="status"
                       dataFormat={this.statusFormatter}
-                      dataSort={true}
+                      dataSort
                       width="80"
                     >
                       Status
@@ -531,7 +550,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="references"
                       dataFormat={this.fundFormatter}
-                      dataSort={true}
+                      dataSort
                       width="80"
                     >
                       Fund?
@@ -539,7 +558,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="references"
                       dataFormat={this.roleFormatter}
-                      dataSort={true}
+                      dataSort
                       filterValue={this.roleFormatter}
                       width="80"
                     >
@@ -548,7 +567,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="last_login"
                       dataFormat={this.lastLoginFormatter}
-                      dataSort={true}
+                      dataSort
                       searchable={false}
                       width="100"
                     >
@@ -557,7 +576,7 @@ class ManageUsers extends React.Component {
                     <TableHeaderColumn
                       dataField="created_at"
                       dataFormat={this.createdAtFormatter}
-                      dataSort={true}
+                      dataSort
                       searchable={false}
                       width="100"
                     >
@@ -565,13 +584,13 @@ class ManageUsers extends React.Component {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                       dataField="Actions"
-                      className={"action-column-header"}
-                      columnClassName={"action-column"}
+                      className="action-column-header"
+                      columnClassName="action-column"
                       dataFormat={this.rowActionsFormatter}
                       searchable={false}
                       width="80"
                       filter={false}
-                    ></TableHeaderColumn>
+                    />
                   </ServiceBotTableBase>
                 </div>
               </div>
@@ -580,7 +599,7 @@ class ManageUsers extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

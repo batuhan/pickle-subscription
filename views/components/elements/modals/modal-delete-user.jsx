@@ -12,16 +12,16 @@ class DeleteUser extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Delete User";
+    const self = this;
+    const pageName = "Delete User";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <DeleteUserForm uid={this.props.uid} hide={self.props.hide} />

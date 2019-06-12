@@ -1,10 +1,10 @@
 import React from "react";
-import Fetcher from "../../utilities/fetcher.jsx";
 import { get, has } from "lodash";
-import ServiceBotBaseForm from "./servicebot-base-form.jsx";
-import { inputField } from "./servicebot-base-field.jsx";
 import { Field } from "redux-form";
 import { required, email, numericality, length } from "redux-form-validators";
+import Fetcher from "../../utilities/fetcher.jsx";
+import ServiceBotBaseForm from "./servicebot-base-form.jsx";
+import { inputField } from "./servicebot-base-field.jsx";
 
 class AddCategoryForm extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class AddCategoryForm extends React.Component {
   }
 
   render() {
-    let submissionRequest = {
+    const submissionRequest = {
       method: "POST",
       url: `/api/v1/service-categories`,
     };
@@ -30,7 +30,7 @@ class AddCategoryForm extends React.Component {
           // submissionPrep={this.submissionPrep}
           submissionRequest={submissionRequest}
           // handleResponse={this.props.handleResponse}
-          successMessage={"Card added successfully"}
+          successMessage="Card added successfully"
         />
       </div>
     );

@@ -1,14 +1,14 @@
 function handleLogin() {
-  var e = [],
-    o =
+  const e = [];
+    const o =
       window.swaggerUiAuth.authSchemes ||
       window.swaggerUiAuth.securityDefinitions;
   if (o) {
-    var i,
-      n = o;
+    let i;
+      const n = o;
     for (i in n) {
-      var a = n[i];
-      if ("oauth2" === a.type && a.scopes) {
+      const a = n[i];
+      if (a.type === "oauth2" && a.scopes) {
         var t;
         if (Array.isArray(a.scopes)) {
           var p;
@@ -32,9 +32,9 @@ function handleLogin() {
           "<p>Scopes are used to grant an application different levels of access to data on behalf of the end user. Each API may declare one or more scopes.",
           '<a href="#">Learn how to use</a>',
           "</p>",
-          "<p><strong>" +
-            appName +
-            "</strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>",
+          `<p><strong>${ 
+            appName 
+            }</strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>`,
           '<ul class="api-popup-scopes">',
           "</ul>",
           '<p class="error-msg"></p>',
@@ -51,43 +51,43 @@ function handleLogin() {
   )
     (t = e[p]),
       (str =
-        '<li><input type="checkbox" id="scope_' +
-        p +
-        '" scope="' +
-        t.scope +
-        '"" oauthtype="' +
-        t.OAuthSchemeKey +
-        '"/><label for="scope_' +
-        p +
-        '">' +
-        t.scope),
+        `<li><input type="checkbox" id="scope_${ 
+        p 
+        }" scope="${ 
+        t.scope 
+        }"" oauthtype="${ 
+        t.OAuthSchemeKey 
+        }"/><label for="scope_${ 
+        p 
+        }">${ 
+        t.scope}`),
       t.description &&
         ($.map(o, function(e, o) {
           return o;
         }).length > 1
           ? (str +=
-              '<br/><span class="api-scope-desc">' +
-              t.description +
-              " (" +
-              t.OAuthSchemeKey +
-              ")</span>")
+              `<br/><span class="api-scope-desc">${ 
+              t.description 
+              } (${ 
+              t.OAuthSchemeKey 
+              })</span>`)
           : (str +=
-              '<br/><span class="api-scope-desc">' +
-              t.description +
-              "</span>")),
+              `<br/><span class="api-scope-desc">${ 
+              t.description 
+              }</span>`)),
       (str += "</label></li>"),
       popup.append(str);
-  var r = $(window),
-    s = r.width(),
-    c = r.height(),
-    l = r.scrollTop(),
-    d = popupDialog.outerWidth(),
-    u = popupDialog.outerHeight(),
-    h = (c - u) / 2 + l,
-    g = (s - d) / 2;
+  const r = $(window);
+    const s = r.width();
+    const c = r.height();
+    const l = r.scrollTop();
+    const d = popupDialog.outerWidth();
+    const u = popupDialog.outerHeight();
+    const h = (c - u) / 2 + l;
+    const g = (s - d) / 2;
   popupDialog.css({
-    top: (h < 0 ? 0 : h) + "px",
-    left: (g < 0 ? 0 : g) + "px",
+    top: `${h < 0 ? 0 : h  }px`,
+    left: `${g < 0 ? 0 : g  }px`,
   }),
     popupDialog.find("button.api-popup-cancel").click(function() {
       popupMask.hide(),
@@ -101,32 +101,32 @@ function handleLogin() {
         return e.vendorExtensions["x-tokenName"] || e.tokenName;
       }
       popupMask.hide(), popupDialog.hide();
-      var o,
-        i = window.swaggerUi.api.authSchemes,
-        n = window.location,
-        a = location.pathname.substring(0, location.pathname.lastIndexOf("/")),
-        t = n.protocol + "//" + n.host + a + "/o2c.html",
-        p = window.oAuthRedirectUrl || t,
-        r = null,
-        s = [],
-        c = popup.find("input:checked"),
-        l = [];
+      let o;
+        const i = window.swaggerUi.api.authSchemes;
+        const n = window.location;
+        const a = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
+        const t = `${n.protocol  }//${  n.host  }${a  }/o2c.html`;
+        const p = window.oAuthRedirectUrl || t;
+        let r = null;
+        const s = [];
+        var c = popup.find("input:checked");
+        const l = [];
       for (k = 0; k < c.length; k++) {
-        var d = $(c[k]).attr("scope");
+        const d = $(c[k]).attr("scope");
         s.indexOf(d) === -1 && s.push(d);
-        var u = $(c[k]).attr("oauthtype");
+        const u = $(c[k]).attr("oauthtype");
         l.indexOf(u) === -1 && l.push(u);
       }
       window.enabledScopes = s;
       for (var h in i)
         if (i.hasOwnProperty(h) && l.indexOf(h) != -1) {
-          var g = i[h].flow;
+          const g = i[h].flow;
           if (
-            "oauth2" !== i[h].type ||
+            i[h].type !== "oauth2" ||
             !g ||
-            ("implicit" !== g && "accessCode" !== g)
+            (g !== "implicit" && g !== "accessCode")
           ) {
-            if ("oauth2" === i[h].type && g && "application" === g) {
+            if (i[h].type === "oauth2" && g && g === "application") {
               var w = i[h];
               return (
                 (window.swaggerUi.tokenName = e(w) || "access_token"),
@@ -135,39 +135,39 @@ function handleLogin() {
             }
             if (i[h].grantTypes) {
               var c = i[h].grantTypes;
-              for (var f in c)
-                if (c.hasOwnProperty(f) && "implicit" === f) {
+              for (const f in c)
+                if (c.hasOwnProperty(f) && f === "implicit") {
                   var w = c[f];
                   w.loginEndpoint.url;
-                  (r = w.loginEndpoint.url + "?response_type=token"),
+                  (r = `${w.loginEndpoint.url  }?response_type=token`),
                     (window.swaggerUi.tokenName = e(w));
-                } else if (c.hasOwnProperty(f) && "accessCode" === f) {
+                } else if (c.hasOwnProperty(f) && f === "accessCode") {
                   var w = c[f];
                   w.tokenRequestEndpoint.url;
-                  (r = w.tokenRequestEndpoint.url + "?response_type=code"),
+                  (r = `${w.tokenRequestEndpoint.url  }?response_type=code`),
                     (window.swaggerUi.tokenName = e(w));
                 }
             }
           } else {
             var w = i[h];
             (r =
-              w.authorizationUrl +
-              "?response_type=" +
-              ("implicit" === g ? "token" : "code")),
+              `${w.authorizationUrl 
+              }?response_type=${ 
+              g === "implicit" ? "token" : "code"}`),
               (window.swaggerUi.tokenName = e(w) || "access_token"),
               (window.swaggerUi.tokenUrl =
-                "accessCode" === g ? w.tokenUrl : null),
+                g === "accessCode" ? w.tokenUrl : null),
               (o = h);
           }
         }
       (redirect_uri = p),
-        (r += "&redirect_uri=" + encodeURIComponent(p)),
-        (r += "&realm=" + encodeURIComponent(realm)),
-        (r += "&client_id=" + encodeURIComponent(clientId)),
-        (r += "&scope=" + encodeURIComponent(s.join(scopeSeparator))),
-        (r += "&state=" + encodeURIComponent(o));
+        (r += `&redirect_uri=${  encodeURIComponent(p)}`),
+        (r += `&realm=${  encodeURIComponent(realm)}`),
+        (r += `&client_id=${  encodeURIComponent(clientId)}`),
+        (r += `&scope=${  encodeURIComponent(s.join(scopeSeparator))}`),
+        (r += `&state=${  encodeURIComponent(o)}`);
       for (var h in additionalQueryStringParams)
-        r += "&" + h + "=" + encodeURIComponent(additionalQueryStringParams[h]);
+        r += `&${  h  }=${  encodeURIComponent(additionalQueryStringParams[h])}`;
       window.open(r);
     }),
     popupMask.show(),
@@ -183,8 +183,8 @@ function handleLogout() {
     $(".api-ic.ic-warning").removeClass("ic-warning");
 }
 function initOAuth(e) {
-  var o = e || {},
-    i = [];
+  const o = e || {};
+    const i = [];
   return (
     (appName = o.appName || i.push("missing appName")),
     (popupMask = o.popupMask || $("#api-common-mask")),
@@ -195,7 +195,7 @@ function initOAuth(e) {
     (scopeSeparator = o.scopeSeparator || " "),
     (additionalQueryStringParams = o.additionalQueryStringParams || {}),
     i.length > 0
-      ? void log("auth unable initialize oauth: " + i)
+      ? void log(`auth unable initialize oauth: ${  i}`)
       : ($("pre code").each(function(e, o) {
           hljs.highlightBlock(o);
         }),
@@ -206,7 +206,7 @@ function initOAuth(e) {
   );
 }
 function clientCredentialsFlow(e, o, i) {
-  var n = {
+  const n = {
     client_id: clientId,
     client_secret: clientSecret,
     scope: e.join(" "),
@@ -216,30 +216,30 @@ function clientCredentialsFlow(e, o, i) {
     url: o,
     type: "POST",
     data: n,
-    success: function(e, o, n) {
+    success(e, o, n) {
       onOAuthComplete(e, i);
     },
-    error: function(e, o, i) {
+    error(e, o, i) {
       onOAuthComplete("");
     },
   });
 }
-var appName,
-  popupMask,
-  popupDialog,
-  clientId,
-  realm,
-  redirect_uri,
-  clientSecret,
-  scopeSeparator,
-  additionalQueryStringParams;
+let appName;
+  let popupMask;
+  let popupDialog;
+  let clientId;
+  let realm;
+  let redirect_uri;
+  let clientSecret;
+  let scopeSeparator;
+  let additionalQueryStringParams;
 (window.processOAuthCode = function(e) {
-  var o = e.state,
-    i = window.location,
-    n = location.pathname.substring(0, location.pathname.lastIndexOf("/")),
-    a = i.protocol + "//" + i.host + n + "/o2c.html",
-    t = window.oAuthRedirectUrl || a,
-    p = {
+  const o = e.state;
+    const i = window.location;
+    const n = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
+    const a = `${i.protocol  }//${  i.host  }${n  }/o2c.html`;
+    const t = window.oAuthRedirectUrl || a;
+    const p = {
       client_id: clientId,
       code: e.code,
       grant_type: "authorization_code",
@@ -250,10 +250,10 @@ var appName,
       url: window.swaggerUiAuth.tokenUrl,
       type: "POST",
       data: p,
-      success: function(e, i, n) {
+      success(e, i, n) {
         onOAuthComplete(e, o);
       },
-      error: function(e, o, i) {
+      error(e, o, i) {
         onOAuthComplete("");
       },
     });
@@ -261,25 +261,25 @@ var appName,
   (window.onOAuthComplete = function(e, o) {
     if (e)
       if (e.error) {
-        var i = $("input[type=checkbox],.secured");
+        const i = $("input[type=checkbox],.secured");
         i.each(function(e) {
           i[e].checked = !1;
         }),
           alert(e.error);
       } else {
-        var n = e[window.swaggerUiAuth.tokenName];
+        const n = e[window.swaggerUiAuth.tokenName];
         if ((o || (o = e.state), n)) {
-          var a = null;
+          let a = null;
           $.each($(".auth .api-ic .api_information_panel"), function(e, o) {
-            var i = o;
+            const i = o;
             if (i && i.childNodes) {
-              var n = [];
+              const n = [];
               $.each(i.childNodes, function(e, o) {
-                var i = o.innerHTML;
+                const i = o.innerHTML;
                 i && n.push(i);
               });
               for (var t = [], p = 0; p < n.length; p++) {
-                var r = n[p];
+                const r = n[p];
                 window.enabledScopes &&
                   window.enabledScopes.indexOf(r) == -1 &&
                   t.push(r);
@@ -316,12 +316,12 @@ var appName,
                     .removeClass("ic-error"));
             }
           }),
-            "undefined" != typeof window.swaggerUi &&
+            typeof window.swaggerUi !== "undefined" &&
               (window.swaggerUi.api.clientAuthorizations.add(
                 window.swaggerUiAuth.OAuthSchemeKey,
                 new SwaggerClient.ApiKeyAuthorization(
                   "Authorization",
-                  "Bearer " + n,
+                  `Bearer ${  n}`,
                   "header",
                 ),
               ),

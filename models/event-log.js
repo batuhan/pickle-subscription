@@ -1,4 +1,4 @@
-let EventLog = require("./base/entity")("event_logs");
+const EventLog = require("./base/entity")("event_logs");
 
 EventLog.getLogObj = function(userId, logMessage, logType, logLevel) {
   eventData = {
@@ -16,8 +16,8 @@ EventLog.logEvent = function(
   logType = "CORE",
   logLevel = "INFO",
 ) {
-  let eventData = EventLog.getLogObj(userId, logMessage, logType, logLevel);
-  let newEvent = new EventLog(eventData);
+  const eventData = EventLog.getLogObj(userId, logMessage, logType, logLevel);
+  const newEvent = new EventLog(eventData);
   newEvent.create(function(err, result) {
     console.log("log created: ");
     console.log(result.data);

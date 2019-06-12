@@ -17,8 +17,8 @@ class ManagePermission extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let subtitle = "Manage user permissions based on their roles";
+    const pageName = this.props.route.name;
+    const subtitle = "Manage user permissions based on their roles";
 
     if (isAuthorized({ permissions: ["can_administrate"] })) {
       return (
@@ -33,7 +33,7 @@ class ManagePermission extends React.Component {
           </div>
         </div>
       );
-    } else if (isAuthorized({ permissions: ["can_manage"] })) {
+    } if (isAuthorized({ permissions: ["can_manage"] })) {
       return (
         <div>
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -46,7 +46,7 @@ class ManagePermission extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return (
         <div>
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -59,7 +59,7 @@ class ManagePermission extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

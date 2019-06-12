@@ -5,14 +5,14 @@ import {
   CardElement,
   StripeProvider,
 } from "react-stripe-elements";
-import Fetcher from "../../utilities/fetcher.jsx";
 import { get, has } from "lodash";
-import ServiceBotBaseForm from "./servicebot-base-form.jsx";
-import { inputField } from "./servicebot-base-field.jsx";
-import Alerts from "../alerts.jsx";
 import { required } from "redux-form-validators";
 import { Field } from "redux-form";
 import Collapsible from "react-collapsible";
+import Fetcher from "../../utilities/fetcher.jsx";
+import ServiceBotBaseForm from "./servicebot-base-form.jsx";
+import { inputField } from "./servicebot-base-field.jsx";
+import Alerts from "../alerts.jsx";
 import Buttons from "../buttons.jsx";
 
 class CardSection extends React.Component {
@@ -85,7 +85,7 @@ function BillingInfo(props) {
         component={inputField}
         placeholder="State"
       />
-      {/*<button type="submit">Submit</button>*/}
+      {/* <button type="submit">Submit</button> */}
       <div className="text-right">
         <Buttons
           btnType="primary"
@@ -118,18 +118,18 @@ class CreditCardForm extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     if (self.props.uid) {
       self.checkIfUserHasCard();
     } else if (self.props.userFund) {
-      let fund = self.props.userFund;
-      let card = fund.source.card;
+      const fund = self.props.userFund;
+      const {card} = fund.source;
       self.setState(
         {
           loading: false,
           hasCard: true,
-          fund: fund,
-          card: card,
+          fund,
+          card,
           personalInformation: {
             name: card.name,
             address_line1: card.address_line1,
@@ -149,7 +149,7 @@ class CreditCardForm extends React.Component {
   }
 
   async submissionPrep(values) {
-    let token = await this.props.stripe.createToken({ ...values });
+    const token = await this.props.stripe.createToken({ ...values });
     console.log(token);
     if (token.error) {
       let message = token.error;
@@ -160,7 +160,7 @@ class CreditCardForm extends React.Component {
         alerts: {
           type: "danger",
           icon: "times",
-          message: message,
+          message,
         },
       });
       throw token.error;
@@ -169,22 +169,22 @@ class CreditCardForm extends React.Component {
   }
 
   checkIfUserHasCard() {
-    let self = this;
+    const self = this;
     Fetcher(`/api/v1/users/${self.props.uid}`).then(function(response) {
       if (!response.error) {
         if (
           has(response, "references.funds[0]") &&
           has(response, "references.funds[0].source.card")
         ) {
-          let fund = get(response, "references.funds[0]");
-          let card = get(response, "references.funds[0].source.card");
+          const fund = get(response, "references.funds[0]");
+          const card = get(response, "references.funds[0].source.card");
           self.setState(
             {
               loading: false,
               displayName: response.name || response.email || "You",
               hasCard: true,
-              fund: fund,
-              card: card,
+              fund,
+              card,
               personalInformation: {
                 name: card.name || "",
                 address_line1: card.address_line1 || "",
@@ -207,10 +207,10 @@ class CreditCardForm extends React.Component {
   }
 
   handleSuccessResponse(response) {
-    //If the billing form is passed in a callback, call it.
+    // If the billing form is passed in a callback, call it.
     if (this.props.handleResponse) {
       this.props.handleResponse(response);
-      //Otherwise, set own alert.
+      // Otherwise, set own alert.
     } else {
       this.setState({
         alerts: {
@@ -219,7 +219,7 @@ class CreditCardForm extends React.Component {
           message: "Your card has been updated.",
         },
       });
-      //re-render
+      // re-render
       this.checkIfUserHasCard();
     }
   }
@@ -245,7 +245,7 @@ class CreditCardForm extends React.Component {
   }
 
   render() {
-    let submissionRequest = {
+    const submissionRequest = {
       method: "POST",
       url: `/api/v1/funds`,
     };
@@ -254,33 +254,38 @@ class CreditCardForm extends React.Component {
       submissionRequest.url = this.props.submitAPI;
     }
 
-    let {
+    const {
       hasCard,
       displayName,
       card: { brand, last4, exp_month, exp_year },
     } = this.state;
 
-    let getBrandIcon = () => {
+    const getBrandIcon = () => {
       if (brand === "American Express") {
         return "fa fa-cc-amex";
-      } else {
+      } 
         return `fa fa-cc-${brand.replace(/\s+/g, "-").toLowerCase()}`;
-      }
+      
     };
 
-    let getCard = () => {
+    const getCard = () => {
       if (hasCard) {
         return (
           <div className="card-accordion">
             <p>
               <i className={getBrandIcon()} />
-              {brand} ending in <span className="last4">{last4}</span>
-              <span className="exp_month">{exp_month}</span> /
+              {brand}
+              {' '}
+ending in
+              <span className="last4">{last4}</span>
+              <span className="exp_month">{exp_month}</span>
+              {' '}
+/
               <span className="exp_year">{exp_year}</span>
             </p>
           </div>
         );
-      } else {
+      } 
         return (
           <div className="card-accordion">
             <p>
@@ -289,10 +294,10 @@ class CreditCardForm extends React.Component {
             </p>
           </div>
         );
-      }
+      
     };
 
-    let getAlerts = () => {
+    const getAlerts = () => {
       if (this.state.alerts) {
         return (
           <Alerts
@@ -347,10 +352,10 @@ class CreditCardForm extends React.Component {
                   initialValues={{ ...this.state.personalInformation }}
                   submissionPrep={this.submissionPrep}
                   submissionRequest={submissionRequest}
-                  successMessage={"Fund added successfully"}
+                  successMessage="Fund added successfully"
                   handleResponse={this.handleSuccessResponse}
                   handleFailure={this.handleFailureResponse}
-                  reShowForm={true}
+                  reShowForm
                 />
               </div>
             )}

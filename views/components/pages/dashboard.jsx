@@ -1,5 +1,6 @@
 import React from "react";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import Load from "../utilities/load.jsx";
@@ -9,7 +10,6 @@ import ContentTitle from "../layouts/content-title.jsx";
 import { DashboardWidgets } from "../elements/dashboard/dashboard-widgets.jsx";
 import ServiceTemplateFormLite from "../elements/forms/service-template-form-lite.jsx";
 import StripeSettingsForm from "../elements/forms/stripe-settings-form.jsx";
-import { connect } from "react-redux";
 import OfferingsStatsWidgets from "../elements/dashboard/offerings-stats-widgets.jsx";
 import OverallStatsWidgets from "../elements/dashboard/overall-stats-widgets.jsx";
 import { setupComplete } from "../utilities/actions";
@@ -30,13 +30,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
       return browserHistory.push("/login");
-    } else {
+    } 
       this.fetchAnalytics();
-    }
+    
   }
 
   fetchAnalytics() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/analytics/data")
       .then(function(response) {
         self.setState({ analytics: response });
@@ -47,29 +47,29 @@ class Dashboard extends React.Component {
   }
 
   updateOfferingStat() {
-    let self = this;
-    let { analytics } = this.state;
+    const self = this;
+    const { analytics } = this.state;
     analytics.offeringStats.total = 1;
     self.setState({
-      analytics: analytics,
+      analytics,
     });
   }
 
   updateStripeStat() {
-    let self = this;
-    let { analytics } = this.state;
+    const self = this;
+    const { analytics } = this.state;
     analytics.hasStripeKeys = true;
     self.setState({
-      analytics: analytics,
+      analytics,
     });
-    //After Stripe keys have been entered, set-up is complete so dispatching action
+    // After Stripe keys have been entered, set-up is complete so dispatching action
     this.props.setupComplete(true);
   }
 
   render() {
     let pageName = this.props.route.name;
     let sub = "";
-    let { analytics } = this.state;
+    const { analytics } = this.state;
     let showSteps = false;
     let step1 = "";
     let step2 = "";
@@ -97,7 +97,7 @@ class Dashboard extends React.Component {
           </Content>
         </div>
       );
-    } else {
+    } 
       return (
         <Authorizer permissions={["can_administrate", "can_manage"]}>
           <Jumbotron pageName={pageName} subtitle={sub} />
@@ -124,7 +124,7 @@ class Dashboard extends React.Component {
                     {analytics.offeringStats.total > 0 && (
                       <StripeSettingsForm
                         postResponse={this.updateStripeStat}
-                        initialize={true}
+                        initialize
                       />
                     )}
                   </div>
@@ -141,7 +141,7 @@ class Dashboard extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

@@ -1,15 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
 import { DataForm, DataChild } from "../../utilities/data-form.jsx";
 import Inputs from "../../utilities/inputs.jsx";
 import Buttons from "../buttons.jsx";
 import ModalConfirm from "../modals/modal-stripe-reconfigure.jsx";
 import Alerts from "../alerts.jsx";
-import { connect } from "react-redux";
 import { setOption } from "../../utilities/actions";
-import StripeImportForm from "../../elements/forms/stripe-import-form.jsx";
+import StripeImportForm from "./stripe-import-form.jsx";
+
+const _ = require("lodash");
 
 class SystemSettingsForm extends React.Component {
   constructor(props) {
@@ -37,10 +38,10 @@ class SystemSettingsForm extends React.Component {
   }
 
   fetchSettings() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.stripe_get_keys).then(function(response) {
       if (!response.error) {
-        //If this is the initialization, don't show the confirm modal
+        // If this is the initialization, don't show the confirm modal
         if (response.secret_key === "" || !response.secret_key) {
           self.setState({ stripe_initialize: true });
         }
@@ -52,12 +53,12 @@ class SystemSettingsForm extends React.Component {
   }
 
   handleResponse(response) {
-    let self = this;
+    const self = this;
     if (!response.error) {
       if (response.do_migration && !self.state.stripe_initialize) {
         this.setState({ confirm_modal: true });
       } else {
-        //Skip confirmation and apply keys
+        // Skip confirmation and apply keys
         self.handleConfirm(false);
       }
     } else {
@@ -77,7 +78,7 @@ class SystemSettingsForm extends React.Component {
   }
 
   handleConfirm() {
-    let self = this;
+    const self = this;
     self.setState({
       loading: true,
     });
@@ -115,6 +116,7 @@ class SystemSettingsForm extends React.Component {
       }
     });
   }
+
   onConfirmClose() {
     this.setState({ confirm_modal: false });
   }
@@ -124,8 +126,8 @@ class SystemSettingsForm extends React.Component {
   }
 
   render() {
-    let self = this;
-    let getAlerts = () => {
+    const self = this;
+    const getAlerts = () => {
       if (self.state.alerts) {
         return (
           <Alerts
@@ -140,7 +142,7 @@ class SystemSettingsForm extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success && false) {
+    } if (this.state.success && false) {
       return (
         // this is disabled
         <div>
@@ -151,7 +153,7 @@ class SystemSettingsForm extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       const confirm_reconfigure = () => {
         if (self.state.confirm_modal) {
           return (
@@ -173,7 +175,8 @@ class SystemSettingsForm extends React.Component {
                   <h3>Reconfigure your Stripe API Keys</h3>
                   <p>
                     You can update your Stripe API keys. You can retrieve your
-                    Stripe keys{" "}
+                    Stripe keys
+                    {" "}
                     <a
                       className="intext-link"
                       href="https://dashboard.stripe.com/account/apikeys"
@@ -193,14 +196,16 @@ class SystemSettingsForm extends React.Component {
                 <div className="title">
                   <h3>Add your Stripe API Keys</h3>
                   <p>
-                    Copy your Standard API keys{" "}
+                    Copy your Standard API keys
+                    {" "}
                     <a
                       className="intext-link"
                       href="https://dashboard.stripe.com/account/apikeys"
                       target="_blank"
                     >
                       from Stripe
-                    </a>{" "}
+                    </a>
+                    {" "}
                     and paste them in the Secret key and Publishable key below.
                     Once you enter your keys, you can import your Stripe account
                     to your Servicebot.
@@ -216,7 +221,7 @@ class SystemSettingsForm extends React.Component {
                       handleResponse={this.handleResponse}
                       onUpdate={this.onUpdate}
                       url={this.state.stripe_preconfigure}
-                      method={"POST"}
+                      method="POST"
                     >
                       <div className="col-md-12">
                         <Inputs
@@ -225,8 +230,8 @@ class SystemSettingsForm extends React.Component {
                           name="stripe_public"
                           value={self.state.stripe_settings.publishable_key}
                           onChange={function() {}}
-                          receiveOnChange={true}
-                          receiveValue={true}
+                          receiveOnChange
+                          receiveValue
                         />
 
                         <Inputs
@@ -235,13 +240,13 @@ class SystemSettingsForm extends React.Component {
                           name="stripe_secret"
                           value={self.state.stripe_settings.secret_key}
                           onChange={function() {}}
-                          receiveOnChange={true}
-                          receiveValue={true}
+                          receiveOnChange
+                          receiveValue
                         />
                         {self.state.stripe_settings.secret_key && (
                           <Inputs
                             defaultValue="true"
-                            hideValue={true}
+                            hideValue
                             type="select"
                             label="Do you want to import existing customers to the new Stripe account? This option only applies if the new keys are related to a different Stripe account or if you are switching between Test/Live mode."
                             name="full_removal"
@@ -254,8 +259,8 @@ class SystemSettingsForm extends React.Component {
                               },
                             ]}
                             onChange={function() {}}
-                            receiveOnChange={true}
-                            receiveValue={true}
+                            receiveOnChange
+                            receiveValue
                           />
                         )}
                       </div>
@@ -280,14 +285,16 @@ class SystemSettingsForm extends React.Component {
                       <h3>Connect to Stripe Webhooks</h3>
                       <p>
                         Copy your Servicebot webhook URL below and paste it as a
-                        new{" "}
+                        new
+                        {" "}
                         <a
                           className="intext-link"
                           href="https://dashboard.stripe.com/account/webhooks"
                           target="_blank"
                         >
                           Stripe endpoint
-                        </a>{" "}
+                        </a>
+                        {" "}
                         in your Stripe account.
                       </p>
                       <div className="stripe-webhook">{`https://${window.location.hostname}/api/v1/stripe/webhook`}</div>
@@ -301,7 +308,7 @@ class SystemSettingsForm extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

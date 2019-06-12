@@ -1,6 +1,6 @@
-let NotificationTemplate = require("../models/notification-template");
-let validate = require("../middleware/validate");
-let auth = require("../middleware/auth");
+const NotificationTemplate = require("../models/notification-template");
+const validate = require("../middleware/validate");
+const auth = require("../middleware/auth");
 
 module.exports = function(router) {
   router.get(
@@ -8,11 +8,11 @@ module.exports = function(router) {
     validate(NotificationTemplate),
     auth(),
     function(req, res, next) {
-      let modelName = res.locals.valid_object.get("model");
-      let model = require("../models/" + modelName);
+      const modelName = res.locals.valid_object.get("model");
+      const model = require(`../models/${  modelName}`);
       model.getSchema(true, false, function(result) {
-        let template = res.locals.valid_object;
-        template["schema"] = result;
+        const template = res.locals.valid_object;
+        template.schema = result;
         res.json(template);
       });
     },

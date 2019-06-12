@@ -9,21 +9,21 @@ import Modal from "../../utilities/modal.jsx";
 class ModalAddChargeItem extends React.Component {
   constructor(props) {
     super(props);
-    let instance = this.props.myInstance;
-    this.state = { instance: instance };
+    const instance = this.props.myInstance;
+    this.state = { instance };
   }
 
   render() {
-    let self = this;
-    let pageName = "Add A Line Item";
+    const self = this;
+    const pageName = "Add A Line Item";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <div className="row">

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Content from "../layouts/content.jsx";
 import ServiceRequestForm from "../elements/forms/service-instance-form-request.jsx";
@@ -10,10 +11,10 @@ import {
 } from "../layouts/admin-sidebar.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import { Price, getPrice } from "../utilities/price.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
 import IconHeading from "../layouts/icon-heading.jsx";
 import InfoToolTip from "../elements/tooltips/info-tooltip.jsx";
+
+const _ = require("lodash");
 
 class ServiceRequest extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class ServiceRequest extends React.Component {
   }
 
   getService() {
-    let self = this;
+    const self = this;
     Fetcher(`/api/v1/service-templates/${this.state.id}/request`).then(function(
       response,
     ) {
@@ -49,14 +50,14 @@ class ServiceRequest extends React.Component {
   render() {
     if (this.state.loading) {
       return <span>loading</span>;
-    } else {
-      let { options } = this.props;
-      let service_request_title_description = _.get(
+    } 
+      const { options } = this.props;
+      const service_request_title_description = _.get(
         options,
         "service_request_title_description.value",
         "What you are getting",
       );
-      let service_request_title_form = _.get(
+      const service_request_title_form = _.get(
         options,
         "service_request_title_form.value",
         "Get Your Service",
@@ -99,7 +100,7 @@ class ServiceRequest extends React.Component {
           </Content>
         </div>
       );
-    }
+    
   }
 }
 
@@ -126,8 +127,8 @@ class RequestPageFeatured extends React.Component {
   }
 
   getCoverImage() {
-    let self = this;
-    let imageURL = `/api/v1/service-templates/${this.state.id}/image`;
+    const self = this;
+    const imageURL = `/api/v1/service-templates/${this.state.id}/image`;
     fetch(imageURL)
       .then(function(response) {
         if (response.ok) {
@@ -136,14 +137,14 @@ class RequestPageFeatured extends React.Component {
         throw new Error("Network response was not ok.", response);
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ image: objectURL });
       })
       .catch(function(error) {});
   }
 
   getIcon() {
-    let self = this;
+    const self = this;
     fetch(`/api/v1/service-templates/${this.state.id}/icon`)
       .then(function(response) {
         if (response.ok) {
@@ -152,7 +153,7 @@ class RequestPageFeatured extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ icon: objectURL });
       })
       .catch(function(error) {});
@@ -165,15 +166,17 @@ class RequestPageFeatured extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   render() {
-    let {
+    const {
       templateData,
       templateData: { id, name, amount, trial_period_days, description },
       options,
@@ -248,7 +251,9 @@ class RequestPageFeatured extends React.Component {
             </p>
             {trial_period_days > 0 ? (
               <h1 className="featured-price" style={featuredTextStyle}>
-                {trial_period_days} Day Free Trial
+                {trial_period_days}
+                {' '}
+Day Free Trial
                 <span className="free-trial" style={featuredTextStyle}>
                   {getPrice(templateData)}
                 </span>

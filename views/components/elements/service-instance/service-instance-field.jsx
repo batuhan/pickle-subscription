@@ -1,12 +1,12 @@
 import React from "react";
-import { isAuthorized } from "../../utilities/authorizer.jsx";
 import consume from "pluginbot-react/dist/consume";
+import { isAuthorized } from "../../utilities/authorizer.jsx";
 
-let ServiceInstanceField = function(props) {
+const ServiceInstanceField = function(props) {
   // let widgets = this.props.services.widget.reduce((acc, widget) =>  ({...acc, [widget.type] : widget}), {});
-  let type = props.field.type || "text";
-  let widget = props.services.widget.find(widget => widget.type === type);
-  let config = props.field.config;
+  const type = props.field.type || "text";
+  const widget = props.services.widget.find(widget => widget.type === type);
+  const {config} = props.field;
   // if(config && config.pricing){
   //     delete config.pricing;
   // }
@@ -22,9 +22,9 @@ let ServiceInstanceField = function(props) {
         />
       </div>
     );
-  } else {
+  } 
     return <div />;
-  }
+  
 };
 
 export default consume("widget")(ServiceInstanceField);

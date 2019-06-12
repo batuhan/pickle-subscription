@@ -1,4 +1,4 @@
-let {
+const {
   call,
   put,
   all,
@@ -7,21 +7,21 @@ let {
   spawn,
   take,
 } = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let sagaMiddleware = require("../../middleware/express-saga-middleware");
+const consume = require("pluginbot/effects/consume");
+const sagaMiddleware = require("../../middleware/express-saga-middleware");
 
 function* run(config, provide, channels) {
-  let configurationManager = yield consume(channels.configurationManager);
-  let css = yield call(configurationManager.getConfiguration, "extra_css");
+  const configurationManager = yield consume(channels.configurationManager);
+  const css = yield call(configurationManager.getConfiguration, "extra_css");
 
   function* getCssMiddleware(req, res, next) {
-    let css = yield call(configurationManager.getConfiguration, "extra_css");
+    const css = yield call(configurationManager.getConfiguration, "extra_css");
     res.set("Content-Type", "text/css");
     yield call([res, "send"], css.value);
   }
 
-  //todo: maybe api gateway can make saga middleware?
-  let middleware = yield call(sagaMiddleware, getCssMiddleware);
+  // todo: maybe api gateway can make saga middleware?
+  const middleware = yield call(sagaMiddleware, getCssMiddleware);
   yield provide({
     routeDefinition: [
       {

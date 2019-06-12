@@ -21,13 +21,13 @@ class UserEdit extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
       return browserHistory.push("/login");
-    } else {
+    } 
       this.fetchUser();
-    }
+    
   }
 
   fetchUser() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url)
       .then(function(response) {
         if (!response.error) {
@@ -42,7 +42,7 @@ class UserEdit extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
+    const pageName = this.props.route.name;
 
     if (this.state.loading) {
       return (
@@ -60,7 +60,7 @@ class UserEdit extends React.Component {
           </div>
         </Authorizer>
       );
-    } else {
+    } 
       return (
         <Authorizer permissions="can_administrate">
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -75,7 +75,7 @@ class UserEdit extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

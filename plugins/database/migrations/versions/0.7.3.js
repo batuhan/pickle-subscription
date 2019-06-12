@@ -1,5 +1,5 @@
 module.exports = {
-  up: function(knex) {
+  up(knex) {
     console.log("migrating database to version 0.7.3");
     return knex.schema.alterTable("user_invoices", t => {
       t.dropForeign("service_instance_id");
@@ -9,7 +9,7 @@ module.exports = {
         .alter();
     });
   },
-  down: function(knex) {
+  down(knex) {
     console.log("rolling back version 0.7.3 migration");
     return knex.schema.alterTable("user_invoices", t => {
       t.dropForeign("service_instance_id");

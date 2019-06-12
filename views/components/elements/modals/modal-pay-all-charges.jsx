@@ -1,14 +1,15 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
+import { connect } from "react-redux";
+import getSymbolFromCurrency from "currency-symbol-map";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import ModalPaymentSetup from "./modal-payment-setup.jsx";
 import { Price } from "../../utilities/price.jsx";
-import { connect } from "react-redux";
-import getSymbolFromCurrency from "currency-symbol-map";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalPayAllCharges extends React.Component {
   constructor(props) {
@@ -18,15 +19,15 @@ class ModalPayAllCharges extends React.Component {
       uid = this.props.ownerId;
     }
 
-    let username = cookie.load("username");
-    let service = this.props.myInstance;
+    const username = cookie.load("username");
+    const service = this.props.myInstance;
 
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
       pay_all_charges_url: `/api/v1/service-instances/${service.id}/approve-charges`,
-      service: service,
+      service,
       paid: false,
       current_modal: "model_pay_charge",
       hasCard: false,
@@ -40,29 +41,29 @@ class ModalPayAllCharges extends React.Component {
   }
 
   componentWillMount() {
-    //checks if user has a card before mount
+    // checks if user has a card before mount
     this.fetcherUserPaymentInfo();
   }
 
   fetcherUserPaymentInfo() {
-    let self = this;
-    //try and fetch user's card info from our database
+    const self = this;
+    // try and fetch user's card info from our database
     Fetcher(`/api/v1/users/${self.state.uid}`).then(function(response) {
       if (!response.error) {
-        //if user has card on record
+        // if user has card on record
         if (
           _.has(response, "references.funds[0]") &&
           _.has(response, "references.funds[0].source.card")
         ) {
-          let fund = _.get(response, "references.funds[0]");
-          let card = _.get(response, "references.funds[0].source.card");
+          const fund = _.get(response, "references.funds[0]");
+          const card = _.get(response, "references.funds[0].source.card");
           self.setState({
             loading: false,
             hasCard: true,
             paymentSetupModal: false,
             current_modal: "model_pay_charge",
-            fund: fund,
-            card: card,
+            fund,
+            card,
           });
         }
       } else {
@@ -74,6 +75,7 @@ class ModalPayAllCharges extends React.Component {
   handlePaymentSetup() {
     this.setState({ current_modal: "payment_setup", paymentSetupModal: true });
   }
+
   onPaymentSetupClose() {
     this.fetcherUserPaymentInfo();
     this.setState({
@@ -84,7 +86,7 @@ class ModalPayAllCharges extends React.Component {
 
   onPay(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
     if (!self.state.hasCard) {
       self.handlePaymentSetup();
@@ -93,11 +95,11 @@ class ModalPayAllCharges extends React.Component {
         response,
       ) {
         if (!response.error) {
-          //check stripe response for error
+          // check stripe response for error
           if (response.type == "StripeInvalidRequestError") {
-            //check what error it is
+            // check what error it is
             console.error("Strip Error", response);
-            //make sure stripe has card and db has card
+            // make sure stripe has card and db has card
             if (
               response.message == "This customer has no attached payment source"
             ) {
@@ -118,17 +120,17 @@ class ModalPayAllCharges extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Pay Charges";
-    let currentModal = this.state.current_modal;
-    let serviceName = this.state.service.name;
-    let charges = this.state.service.references.charge_items;
-    let unpaidCharges = _.filter(charges, item => {
+    const self = this;
+    const pageName = "Pay Charges";
+    const currentModal = this.state.current_modal;
+    const serviceName = this.state.service.name;
+    const charges = this.state.service.references.charge_items;
+    const unpaidCharges = _.filter(charges, item => {
       return !item.approved;
     });
     let totalCharges = 0;
-    let { options } = this.props;
-    let prefix = options.currency
+    const { options } = this.props;
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
     unpaidCharges.map(charge => {
@@ -142,7 +144,7 @@ class ModalPayAllCharges extends React.Component {
           icon="fa-credit-card-alt"
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="550px"
         >
@@ -156,17 +158,21 @@ class ModalPayAllCharges extends React.Component {
                       item:
                     </strong>
                   </p>
-                  <p>Item Name: {serviceName}</p>
+                  <p>
+Item Name:
+                    {serviceName}
+                  </p>
                   <p>
                     <strong>
-                      Total Charges:{" "}
+                      Total Charges:
+                      {" "}
                       <Price value={totalCharges} prefix={prefix} />
                     </strong>
                   </p>
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-default btn-rounded"
                 onClick={self.props.hide}
@@ -177,20 +183,22 @@ class ModalPayAllCharges extends React.Component {
                 className="btn btn-primary btn-rounded"
                 onClick={self.onPay}
               >
-                <i className="fa fa-credit-card" /> Confirm Payment
+                <i className="fa fa-credit-card" />
+                {' '}
+Confirm Payment
               </button>
             </div>
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_pay_charge" && self.state.paid) {
+    } if (currentModal == "model_pay_charge" && self.state.paid) {
       return (
         <Modal
           modalTitle={pageName}
           icon="fa-credit-card-alt"
           show={self.props.show}
           hide={self.props.hide}
-          hideFooter={true}
+          hideFooter
           top="40%"
           width="550px"
         >
@@ -200,8 +208,10 @@ class ModalPayAllCharges extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Thank you! You have paid{" "}
-                      <Price value={totalCharges} prefix={prefix} />.
+                      Thank you! You have paid
+                      {" "}
+                      <Price value={totalCharges} prefix={prefix} />
+.
                     </strong>
                   </p>
                   <p>
@@ -210,7 +220,7 @@ class ModalPayAllCharges extends React.Component {
                 </div>
               </div>
             </div>
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <button
                 className="btn btn-default btn-rounded"
                 onClick={self.props.hide}
@@ -221,7 +231,7 @@ class ModalPayAllCharges extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "payment_setup") {
+    } if (currentModal == "payment_setup") {
       return (
         <ModalPaymentSetup
           ownerId={self.state.uid}

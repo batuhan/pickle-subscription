@@ -12,17 +12,17 @@ class ModalRefund extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Issue Refund";
+    const self = this;
+    const pageName = "Issue Refund";
 
     return (
       <Modal
         modalTitle={pageName}
         icon="fa-money"
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <RefundForm hide={self.props.hide} invoice={this.props.invoice} />

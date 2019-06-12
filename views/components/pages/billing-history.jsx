@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, hashHistory, browserHistory } from "react-router";
+import cookie from "react-cookie";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
-import cookie from "react-cookie";
 import BillingHistoryList from "./billing-history-list.jsx";
 
 class BillingHistory extends React.Component {
@@ -16,10 +16,11 @@ class BillingHistory extends React.Component {
       return browserHistory.push("/login");
     }
   }
+
   render() {
-    var self = this;
-    let pageName = self.props.route.name;
-    let uid = cookie.load("uid");
+    const self = this;
+    const pageName = self.props.route.name;
+    const uid = cookie.load("uid");
     return (
       <Authorizer>
         <Jumbotron pageName={pageName} location={this.props.location} />

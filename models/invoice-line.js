@@ -1,3 +1,3 @@
-let InvoiceLines = require("./base/entity")("user_invoice_lines");
+const InvoiceLines = require("./base/entity")("user_invoice_lines");
 
 module.exports = InvoiceLines;

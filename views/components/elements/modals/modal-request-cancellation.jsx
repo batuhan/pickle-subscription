@@ -1,22 +1,22 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import { Price } from "../../utilities/price.jsx";
 
 class ModalRequestCancellation extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let username = cookie.load("username");
-    let serviceInstance = this.props.myInstance;
+    const uid = cookie.load("uid");
+    const username = cookie.load("username");
+    const serviceInstance = this.props.myInstance;
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
-      serviceInstance: serviceInstance,
+      serviceInstance,
       cancel_url: `/api/v1/service-instances/${serviceInstance.id}/cancel`,
       cancel_request_url: `/api/v1/service-instances/${serviceInstance.id}/request-cancellation`,
       current_modal: "model_cancel_request",
@@ -27,7 +27,7 @@ class ModalRequestCancellation extends React.Component {
 
   onCancel(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.cancel_url, "POST", {}).then(function(response) {
@@ -43,7 +43,7 @@ class ModalRequestCancellation extends React.Component {
 
   onCancelRequest(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.cancel_request_url, "POST", {}).then(function(response) {
@@ -62,13 +62,13 @@ class ModalRequestCancellation extends React.Component {
   }
 
   render() {
-    let self = this;
-    let currentModal = this.state.current_modal;
+    const self = this;
+    const currentModal = this.state.current_modal;
     // let id = this.state.service_id;
-    let instance = self.state.serviceInstance;
-    let name = instance.name;
-    let price = instance.payment_plan.amount;
-    let interval = instance.payment_plan.interval;
+    const instance = self.state.serviceInstance;
+    const {name} = instance;
+    const price = instance.payment_plan.amount;
+    const {interval} = instance.payment_plan;
 
     if (currentModal == "model_cancel_request") {
       if (isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
@@ -78,7 +78,7 @@ class ModalRequestCancellation extends React.Component {
             icon="fa-ban"
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -93,12 +93,14 @@ class ModalRequestCancellation extends React.Component {
                     </p>
                     <p>Cancelling the service will stop all future payments.</p>
                     <p>
-                      Service Name: <b>{name}</b>
+                      Service Name: 
+                      {' '}
+                      <b>{name}</b>
                     </p>
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-default btn-rounded"
                   onClick={self.props.hide}
@@ -115,14 +117,14 @@ class ModalRequestCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } else {
+      } 
         return (
           <Modal
             modalTitle="Request Service Cancellation"
             icon="fa-ban"
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="650px"
           >
@@ -144,12 +146,14 @@ class ModalRequestCancellation extends React.Component {
                       </i>
                     </p>
                     <p>
-                      Service Name: <b>{name}</b>
+                      Service Name: 
+                      {' '}
+                      <b>{name}</b>
                     </p>
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-default btn-rounded"
                   onClick={self.props.hide}
@@ -166,8 +170,8 @@ class ModalRequestCancellation extends React.Component {
             </div>
           </Modal>
         );
-      }
-    } else if (currentModal == "model_cancel_request_success") {
+      
+    } if (currentModal == "model_cancel_request_success") {
       return (
         <Modal
           modalTitle="Cancellation Request Sent"
@@ -181,7 +185,11 @@ class ModalRequestCancellation extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Your cancellation request to cancel {name} has been sent
+                      Your cancellation request to cancel 
+                      {' '}
+                      {name}
+                      {' '}
+has been sent
                       successfully.
                     </strong>
                   </p>
@@ -191,7 +199,7 @@ class ModalRequestCancellation extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_cancel_success") {
+    } if (currentModal == "model_cancel_success") {
       return (
         <Modal
           modalTitle="Service Cancellation Successful"
@@ -205,7 +213,10 @@ class ModalRequestCancellation extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Service {name}, has been successfully cancelled.
+                      Service 
+                      {' '}
+                      {name}
+, has been successfully cancelled.
                     </strong>
                   </p>
                 </div>

@@ -1,9 +1,9 @@
 import React from "react";
+import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import Fetcher from "./utilities/fetcher.jsx";
 import NavBootstrap from "./layouts/nav-bootstrap.jsx";
 import Footer from "./layouts/footer.jsx";
-import { browserHistory } from "react-router";
-import { connect } from "react-redux";
 import {
   setUid,
   setUser,
@@ -22,7 +22,7 @@ class App extends React.Component {
   componentDidMount() {}
 
   handleLogout() {
-    let that = this;
+    const that = this;
 
     Fetcher("/api/v1/auth/session/clear").then(function(result) {
       localStorage.removeItem("permissions");
@@ -32,8 +32,8 @@ class App extends React.Component {
   }
 
   render() {
-    let self = this;
-    let background =
+    const self = this;
+    const background =
       this.props.options && this.props.options.background_color
         ? this.props.options.background_color.value
         : "#ff0400";
@@ -51,15 +51,15 @@ class App extends React.Component {
     );
   }
 }
-let mapStateToProps = function(state) {
+const mapStateToProps = function(state) {
   return {
     options: state.options,
     modal: state.modal,
   };
 };
-let mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = function(dispatch) {
   return {
-    logout: function() {
+    logout() {
       dispatch(setUid(null));
       dispatch(dismissAlert([]));
       dispatch(setUser(null));

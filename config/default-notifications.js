@@ -1,4 +1,4 @@
-let default_notifications = {};
+const default_notifications = {};
 default_notifications.templates = [
   {
     name: "request_service_instance_admin",
@@ -155,7 +155,7 @@ default_notifications.templates = [
     send_email: true,
   },
 ];
-//Setting the registration_admin role to admin
+// Setting the registration_admin role to admin
 default_notifications.templates_to_roles = [
   {
     notification_template_id: 12,

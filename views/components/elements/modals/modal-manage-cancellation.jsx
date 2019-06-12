@@ -1,23 +1,24 @@
 import React from "react";
 import cookie from "react-cookie";
+import { browserHistory } from "react-router";
 import Fetcher from "../../utilities/fetcher.jsx";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import { Price } from "../../utilities/price.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalManageCancellation extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let username = cookie.load("username");
-    let serviceInstance = this.props.myInstance;
+    const uid = cookie.load("uid");
+    const username = cookie.load("username");
+    const serviceInstance = this.props.myInstance;
     this.state = {
       loading: false,
-      uid: uid,
+      uid,
       email: username,
-      serviceInstance: serviceInstance,
+      serviceInstance,
       undo_cancel_url: false,
       confirm_cancel_url: false,
       reject_cancel_url: false,
@@ -29,10 +30,10 @@ class ModalManageCancellation extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
-    let service_instance = self.props.myInstance;
+    const self = this;
+    const service_instance = self.props.myInstance;
     if (service_instance.references.service_instance_cancellations.length > 0) {
-      let cancellationID =
+      const cancellationID =
         service_instance.references.service_instance_cancellations[0].id;
       self.setState({
         undo_cancel_url: `/api/v1/service-instance-cancellations/${cancellationID}/undo`,
@@ -44,7 +45,7 @@ class ModalManageCancellation extends React.Component {
 
   onUndoCancel(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.undo_cancel_url, "POST", {}).then(function(response) {
@@ -60,7 +61,7 @@ class ModalManageCancellation extends React.Component {
 
   onConfirmCancel(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.confirm_cancel_url, "POST", {}).then(function(response) {
@@ -76,7 +77,7 @@ class ModalManageCancellation extends React.Component {
 
   onRejectCancel(event) {
     event.preventDefault();
-    let self = this;
+    const self = this;
     self.setState({ loading: false });
 
     Fetcher(self.state.reject_cancel_url, "POST", {}).then(function(response) {
@@ -95,13 +96,13 @@ class ModalManageCancellation extends React.Component {
   }
 
   render() {
-    let self = this;
-    let currentModal = this.state.current_modal;
-    let instance = self.state.serviceInstance;
-    let name = instance.name;
-    let price = instance.payment_plan.amount;
-    let interval = instance.payment_plan.interval;
-    let success_icon = "fa-check";
+    const self = this;
+    const currentModal = this.state.current_modal;
+    const instance = self.state.serviceInstance;
+    const {name} = instance;
+    const price = instance.payment_plan.amount;
+    const {interval} = instance.payment_plan;
+    const success_icon = "fa-check";
 
     if (currentModal == "model_undo_cancel") {
       if (isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
@@ -110,7 +111,7 @@ class ModalManageCancellation extends React.Component {
             modalTitle="Manage Cancellation Request"
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -135,7 +136,7 @@ class ModalManageCancellation extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-default btn-rounded"
                   onClick={self.props.hide}
@@ -158,14 +159,14 @@ class ModalManageCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } else {
+      } 
         return (
           <Modal
             modalTitle="Service Cancellation Request"
             icon="fa-flag"
             show={self.props.show}
             hide={self.props.hide}
-            hideFooter={true}
+            hideFooter
             top="40%"
             width="490px"
           >
@@ -186,7 +187,7 @@ class ModalManageCancellation extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <button
                   className="btn btn-default btn-rounded"
                   onClick={self.props.hide}
@@ -203,8 +204,8 @@ class ModalManageCancellation extends React.Component {
             </div>
           </Modal>
         );
-      }
-    } else if (currentModal == "model_undo_cancel_success") {
+      
+    } if (currentModal == "model_undo_cancel_success") {
       return (
         <Modal
           modalTitle="Reverted Cancellation Request"
@@ -228,7 +229,7 @@ class ModalManageCancellation extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_reject_cancel_success") {
+    } if (currentModal == "model_reject_cancel_success") {
       return (
         <Modal
           modalTitle="Cancellation Request is Rejected"
@@ -252,7 +253,7 @@ class ModalManageCancellation extends React.Component {
           </div>
         </Modal>
       );
-    } else if (currentModal == "model_confirm_cancel_success") {
+    } if (currentModal == "model_confirm_cancel_success") {
       return (
         <Modal
           modalTitle="Cancellation Request is Approved"

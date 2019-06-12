@@ -1,8 +1,8 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
-import Fetcher from "../../utilities/fetcher.jsx";
 import { reduxForm, SubmissionError, stopSubmit } from "redux-form";
 import { Link, browserHistory } from "react-router";
+import Load from "../../utilities/load.jsx";
+import Fetcher from "../../utilities/fetcher.jsx";
 
 /*
 To use ServiceBot Base Form:
@@ -64,11 +64,11 @@ class ServiceBotBaseForm extends React.Component {
   }
 
   async submitForm(values) {
-    let self = this;
+    const self = this;
     try {
       self.setState({ loading: true });
       if (self.props.submissionPrep) {
-        let prepResults = await self.props.submissionPrep(values);
+        const prepResults = await self.props.submissionPrep(values);
         await self.makeCall(prepResults);
       } else {
         await self.makeCall(values);
@@ -81,7 +81,7 @@ class ServiceBotBaseForm extends React.Component {
   }
 
   async makeCall(values) {
-    let self = this;
+    const self = this;
     let result = null;
     try {
       result = await Fetcher(
@@ -123,26 +123,26 @@ class ServiceBotBaseForm extends React.Component {
 
   validate(values) {
     if (this.props.validations) return this.props.validations(values);
-    else return;
+    
   }
 
   componentDidMount() {
-    let self = this;
-    let initialRequests = self.state.initialRequests;
+    const self = this;
+    const {initialRequests} = self.state;
     console.log("We got our initial requests", initialRequests);
     if (initialRequests && initialRequests.length > 0) {
-      let allRequests = initialRequests.map(async requestInfo => {
-        let response = await Fetcher(requestInfo.url, requestInfo.method);
+      const allRequests = initialRequests.map(async requestInfo => {
+        const response = await Fetcher(requestInfo.url, requestInfo.method);
         if (requestInfo.name) {
           response._name = requestInfo.name;
         }
         return response;
       });
       Promise.all(allRequests).then(values => {
-        //Check for errors and unauthenticated!
-        let error = values.find(value => value.error);
+        // Check for errors and unauthenticated!
+        const error = values.find(value => value.error);
         if (!error) {
-          let requestValues = values.reduce(
+          const requestValues = values.reduce(
             (acc, value, currentIndex) =>
               value._name
                 ? { ...acc, [value._name]: value }
@@ -150,7 +150,7 @@ class ServiceBotBaseForm extends React.Component {
             self.state.initialValues,
           );
 
-          let initialForm = reduxForm({
+          const initialForm = reduxForm({
             form: self.props.formName || "servicebotForm",
             initialValues: requestValues,
             validate: self.validate,
@@ -163,8 +163,8 @@ class ServiceBotBaseForm extends React.Component {
         }
       });
     } else {
-      //todo: clean this whole function to not duplicate this code.
-      let initialForm = reduxForm({
+      // todo: clean this whole function to not duplicate this code.
+      const initialForm = reduxForm({
         form: self.props.formName || "servicebotForm",
         initialValues: self.state.initialValues,
         validate: self.validate,
@@ -187,8 +187,8 @@ class ServiceBotBaseForm extends React.Component {
           </p>
         </div>
       );
-    } else {
-      let ReduxFormWrapper = this.state.reduxForm;
+    } 
+      const ReduxFormWrapper = this.state.reduxForm;
 
       return (
         <div>
@@ -200,7 +200,7 @@ class ServiceBotBaseForm extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 

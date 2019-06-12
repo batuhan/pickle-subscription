@@ -1,10 +1,10 @@
-let handleConfig = {
-  priceHandler: function(data, config) {
+const handleConfig = {
+  priceHandler(data, config) {
     return data && data.value && config.pricing ? config.pricing.value : 0;
   },
-  validator: function(data, config) {
+  validator(data, config) {
     if (config.value.indexOf(data.value) < 0) {
-      return "Selected value: " + data.value + " not a valid choice";
+      return `Selected value: ${  data.value  } not a valid choice`;
     }
     return true;
   },

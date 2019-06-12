@@ -1,10 +1,11 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
-import Fetcher from "../../utilities/fetcher.jsx";
 import RC2 from "react-chartjs2";
 import { browserHistory } from "react-router";
+import Load from "../../utilities/load.jsx";
+import Fetcher from "../../utilities/fetcher.jsx";
 import "./css/charts.css";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ServiceOverTimeChart extends React.Component {
   constructor(props) {
@@ -25,12 +26,12 @@ class ServiceOverTimeChart extends React.Component {
   }
 
   fetchInstances() {
-    let self = this;
-    let url = "/api/v1/service-instances";
+    const self = this;
+    const url = "/api/v1/service-instances";
     Fetcher(url).then(function(response) {
       if (!response.error) {
-        let servicesRunning = _.filter(response, { status: "running" });
-        let servicesCancelled = _.filter(response, { status: "cancelled" });
+        const servicesRunning = _.filter(response, { status: "running" });
+        const servicesCancelled = _.filter(response, { status: "cancelled" });
 
         let months = _.uniq(
           _.map(servicesRunning, instance =>
@@ -44,39 +45,39 @@ class ServiceOverTimeChart extends React.Component {
           ),
         ]);
 
-        let groupByMonthRunning = _.groupBy(servicesRunning, instance => {
+        const groupByMonthRunning = _.groupBy(servicesRunning, instance => {
           return instance.created_at.substring(0, 7);
         });
-        let groupByMonthCancelled = _.groupBy(servicesCancelled, instance => {
+        const groupByMonthCancelled = _.groupBy(servicesCancelled, instance => {
           return instance.updated_at.substring(0, 7);
         });
-        let sortMonthsRunning = months.sort(function(a, b) {
+        const sortMonthsRunning = months.sort(function(a, b) {
           if (a > b) {
             return 1;
-          } else if (a < b) {
+          } if (a < b) {
             return -1;
-          } else {
+          } 
             return 0;
-          }
+          
         });
-        let sortedGroups = sortMonthsRunning.map(month => {
+        const sortedGroups = sortMonthsRunning.map(month => {
           return groupByMonthRunning[month] || [];
         });
-        let serviceCountByMonthRunning = _.map(sortedGroups, group => {
+        const serviceCountByMonthRunning = _.map(sortedGroups, group => {
           return group.length;
         });
 
-        let sortedCancelledGroups = sortMonthsRunning.map(month => {
+        const sortedCancelledGroups = sortMonthsRunning.map(month => {
           return groupByMonthCancelled[month] || [];
         });
 
-        let serviceCountByMonthCancelled = _.map(
+        const serviceCountByMonthCancelled = _.map(
           sortedCancelledGroups,
           group => {
             return group.length;
           },
         );
-        let data = {
+        const data = {
           labels: months,
           datasets: [
             {
@@ -95,7 +96,7 @@ class ServiceOverTimeChart extends React.Component {
             },
           ],
         };
-        let options = {
+        const options = {
           animation: {
             animateRotate: true,
             animateScale: true,
@@ -126,10 +127,11 @@ class ServiceOverTimeChart extends React.Component {
       return (
         <div>
           {" "}
-          <Load />{" "}
+          <Load />
+          {" "}
         </div>
       );
-    } else {
+    } 
       return (
         <div
           className={`service-created-cancelled-overtime-chart ${this.props.className}`}
@@ -141,7 +143,7 @@ class ServiceOverTimeChart extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 
@@ -164,19 +166,19 @@ class ServiceStatusChart extends React.Component {
   }
 
   fetchInstances() {
-    let self = this;
-    let url = "/api/v1/service-instances";
+    const self = this;
+    const url = "/api/v1/service-instances";
     Fetcher(url).then(function(response) {
       if (!response.error) {
-        let statuses = _.uniq(_.map(response, instance => instance.status));
-        let groupByStatus = _.groupBy(response, instance => {
+        const statuses = _.uniq(_.map(response, instance => instance.status));
+        const groupByStatus = _.groupBy(response, instance => {
           return instance.status ? instance.status : other;
         });
-        let serviceCountByStatus = _.map(groupByStatus, group => {
+        const serviceCountByStatus = _.map(groupByStatus, group => {
           return group.length;
         });
 
-        let data = {
+        const data = {
           labels: statuses,
           datasets: [
             {
@@ -191,7 +193,7 @@ class ServiceStatusChart extends React.Component {
             },
           ],
         };
-        let options = {
+        const options = {
           animation: {
             animateRotate: true,
             animateScale: true,
@@ -217,7 +219,7 @@ class ServiceStatusChart extends React.Component {
           <Load />
         </div>
       );
-    } else {
+    } 
       return (
         <div className={`service-by-status-chart ${this.props.className}`}>
           <h3 className="chart-title">Services by Status</h3>
@@ -228,7 +230,7 @@ class ServiceStatusChart extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 
@@ -251,7 +253,7 @@ class BuildChart extends React.Component {
           <Load />
         </div>
       );
-    } else {
+    } 
       return (
         <div className={`customer-status-chart ${this.props.className}`}>
           <RC2
@@ -261,7 +263,7 @@ class BuildChart extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 

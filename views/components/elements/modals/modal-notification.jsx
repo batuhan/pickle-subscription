@@ -1,13 +1,14 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { browserHistory } from "react-router";
 import cookie from "react-cookie";
+import { connect } from "react-redux";
+import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Modal from "../../utilities/modal.jsx";
 import DateFormat from "../../utilities/date-format.jsx";
 import { Price } from "../../utilities/price.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ModalNotification extends React.Component {
   constructor(props) {
@@ -19,8 +20,8 @@ class ModalNotification extends React.Component {
   }
 
   render() {
-    let pageName = "Notification Message";
-    let notification = this.props.notification;
+    const pageName = "Notification Message";
+    const {notification} = this.props;
 
     return (
       <Modal modalTitle={pageName} hide={this.props.hide} icon="fa-bell">

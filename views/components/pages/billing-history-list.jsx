@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, browserHistory } from "react-router";
+import getSymbolFromCurrency from "currency-symbol-map";
 import DataTable from "../elements/datatable/datatable.jsx";
 import ContentTitle from "../layouts/content-title.jsx";
 import { Price } from "../utilities/price.jsx";
 import DateFormat from "../utilities/date-format.jsx";
 import { isAuthorized } from "../utilities/authorizer.jsx";
 import ModalRefund from "../elements/modals/modal-refund.jsx";
-import getSymbolFromCurrency from "currency-symbol-map";
 
 class BillingHistoryList extends React.Component {
   constructor(props) {
@@ -31,10 +31,12 @@ class BillingHistoryList extends React.Component {
       </Link>
     );
   }
+
   modAmountDue(data, resObj) {
-    let prefix = getSymbolFromCurrency(resObj.currency);
+    const prefix = getSymbolFromCurrency(resObj.currency);
     return <Price value={data} prefix={prefix} />;
   }
+
   modDate(data) {
     return <DateFormat date={data} />;
   }
@@ -45,6 +47,7 @@ class BillingHistoryList extends React.Component {
       browserHistory.push(`/billing-history/invoice/${dataObject.id}`);
     };
   }
+
   onViewInstance(dataObject) {
     return function(e) {
       e.preventDefault();
@@ -57,20 +60,21 @@ class BillingHistoryList extends React.Component {
   }
 
   openRefundModal(dataObject) {
-    let self = this;
+    const self = this;
     return function(e) {
       e.preventDefault();
       self.setState({ refundModal: true, invoice: dataObject });
     };
   }
+
   closeRefundModal() {
     this.setState({ refundModal: false });
   }
 
   render() {
-    let self = this;
+    const self = this;
 
-    let currentModal = () => {
+    const currentModal = () => {
       if (self.state.refundModal) {
         return (
           <ModalRefund

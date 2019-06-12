@@ -4,6 +4,7 @@ import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
 import { store, initializedState } from "../../store";
+
 class GenericNotFound extends React.Component {
   constructor(props) {
     super(props);

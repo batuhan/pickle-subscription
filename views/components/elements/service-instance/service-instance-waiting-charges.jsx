@@ -1,9 +1,9 @@
 import React from "react";
-import ServiceInstanceWaitingChargesItem from "./service-instance-waiting-charges-item.jsx";
-import Buttons from "../../elements/buttons.jsx";
-import { Price } from "../../utilities/price.jsx";
 import { connect } from "react-redux";
 import getSymbolFromCurrency from "currency-symbol-map";
+import ServiceInstanceWaitingChargesItem from "./service-instance-waiting-charges-item.jsx";
+import Buttons from "../buttons.jsx";
+import { Price } from "../../utilities/price.jsx";
 
 class ServiceInstanceWaitingCharges extends React.Component {
   constructor(props) {
@@ -16,22 +16,24 @@ class ServiceInstanceWaitingCharges extends React.Component {
   onPayCharge(id) {
     this.props.handlePayChargeItem(id);
   }
+
   onCancelCharge(id) {
     this.props.handleCancelChargeItem(id);
   }
+
   onPayAllCharges() {
     this.props.handlePayAllCharges();
   }
 
   render() {
-    let self = this;
-    let title = "Outstanding charges to be paid";
-    let { options } = this.props;
-    let prefix = options.currency
+    const self = this;
+    const title = "Outstanding charges to be paid";
+    const { options } = this.props;
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
 
-    let getTotalCharges = () => {
+    const getTotalCharges = () => {
       let totalCharges = 0;
       this.props.instanceWaitingItems.map(charge => {
         totalCharges += charge.amount;
@@ -55,7 +57,7 @@ class ServiceInstanceWaitingCharges extends React.Component {
               <div className="service-instance-box-content">
                 {this.props.instanceWaitingItems.map(item => (
                   <ServiceInstanceWaitingChargesItem
-                    key={"item-" + item.id}
+                    key={`item-${  item.id}`}
                     handleCancelChargeItem={self.onCancelCharge}
                     chargeItem={item}
                     prefix={prefix}
@@ -80,9 +82,9 @@ class ServiceInstanceWaitingCharges extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return null;
-    }
+    
   }
 }
 

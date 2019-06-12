@@ -1,17 +1,17 @@
 import React from "react";
-import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import { Link, browserHistory } from "react-router";
+import cookie from "react-cookie";
+import _ from "lodash";
+import { connect } from "react-redux";
+import getSymbolFromCurrency from "currency-symbol-map";
+import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import ContentTitle from "../layouts/content-title.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
-import cookie from "react-cookie";
 import Load from "../utilities/load.jsx";
 import DataTable from "../elements/datatable/datatable.jsx";
 import { Price } from "../utilities/price.jsx";
 import DateFormat from "../utilities/date-format.jsx";
-import _ from "lodash";
-import { connect } from "react-redux";
 import ModalRefund from "../elements/modals/modal-refund.jsx";
-import getSymbolFromCurrency from "currency-symbol-map";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -24,12 +24,12 @@ const mapStateToProps = (state, ownProps) => {
 class BillingInvoiceList extends React.Component {
   constructor(props) {
     super(props);
-    let invoiceId = this.props.invoiceId;
-    let uid = cookie.load("uid");
+    const {invoiceId} = this.props;
+    const uid = cookie.load("uid");
     this.state = {
       loading: true,
       url: `/api/v1/invoices/${invoiceId}`,
-      invoiceId: invoiceId,
+      invoiceId,
       invoice: {},
       invoiceOwner: {},
       currentUser: uid,
@@ -50,28 +50,28 @@ class BillingInvoiceList extends React.Component {
   }
 
   fetchInvoice() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url)
       .then(function(response) {
         if (!response.error) {
           self.setState({ invoice: response });
           return response;
-        } else {
+        } 
           console.error(response.error);
           self.setState({ loading: false });
-        }
+        
       })
       .then(function(response) {
         self.fetchUser(response);
       })
       .catch(function(err) {
-        //If the user is unauthorized force them to 404 page
+        // If the user is unauthorized force them to 404 page
         return browserHistory.push("/404");
       });
   }
 
   fetchUser(data) {
-    let self = this;
+    const self = this;
     if (self.state.currentUser == data.user_id) {
       Fetcher("/api/v1/users/own").then(function(response) {
         if (!response.error) {
@@ -92,7 +92,7 @@ class BillingInvoiceList extends React.Component {
   }
 
   openRefundModal() {
-    let self = this;
+    const self = this;
     return function(e) {
       e.preventDefault();
       self.setState({ refundModal: true });
@@ -105,26 +105,27 @@ class BillingInvoiceList extends React.Component {
 
   getRefundDetail(transactions) {
     if (transactions.length > 0 && transactions[0].amount_refunded > 0) {
-      let refunded = transactions[0].amount_refunded;
-      let prefix = getSymbolFromCurrency(transactions[0].currency);
+      const refunded = transactions[0].amount_refunded;
+      const prefix = getSymbolFromCurrency(transactions[0].currency);
       return (
         <li>
-          <span className="status-label">Refunded:</span>{" "}
+          <span className="status-label">Refunded:</span>
+          {" "}
           <span>
             <Price value={refunded} prefix={prefix} />
           </span>
         </li>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 
   getRefunds(transactions) {
-    //If there is a transaction for this invoice
+    // If there is a transaction for this invoice
     if (transactions.length > 0 && transactions[0].refunds.data.length > 0) {
-      let refunds = transactions[0].refunds.data;
-      let prefix = getSymbolFromCurrency(transactions[0].currency);
+      const refunds = transactions[0].refunds.data;
+      const prefix = getSymbolFromCurrency(transactions[0].currency);
       return (
         <div className="xaas-dashboard">
           <div className="xaas-row waiting">
@@ -135,7 +136,7 @@ class BillingInvoiceList extends React.Component {
             </div>
             <div className="xaas-body">
               {refunds.map((refund, index) => (
-                <div key={"refund-" + index} className="xaas-body-row">
+                <div key={`refund-${  index}`} className="xaas-body-row">
                   <div className="xaas-data xaas-price">
                     <b>
                       <Price value={refund.amount} prefix={prefix} />
@@ -153,13 +154,13 @@ class BillingInvoiceList extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 
   getActionButtons() {
-    let self = this;
+    const self = this;
     return (
       <Authorizer permissions="can_administrate">
         <button className="btn btn-danger" onClick={self.openRefundModal()}>
@@ -170,16 +171,16 @@ class BillingInvoiceList extends React.Component {
   }
 
   render() {
-    let options = this.props.options;
+    const {options} = this.props;
 
     if (this.state.loading) {
       return <Load type="content" />;
-    } else {
-      let invoice = this.state.invoice;
-      let prefix = getSymbolFromCurrency(invoice.currency);
-      let invoiceOwner = this.state.invoiceOwner;
+    } 
+      const {invoice} = this.state;
+      const prefix = getSymbolFromCurrency(invoice.currency);
+      const {invoiceOwner} = this.state;
 
-      let currentModal = () => {
+      const currentModal = () => {
         if (this.state.refundModal) {
           return (
             <ModalRefund
@@ -244,13 +245,15 @@ class BillingInvoiceList extends React.Component {
                       </li>
                       {options.company_email && (
                         <li>
-                          <i className="fa fa-envelope" />{" "}
+                          <i className="fa fa-envelope" />
+                          {" "}
                           {options.company_email.value}
                         </li>
                       )}
                       {options.company_phone_number && (
                         <li>
-                          <i className="fa fa-phone" />{" "}
+                          <i className="fa fa-phone" />
+                          {" "}
                           {options.company_phone_number.value}
                         </li>
                       )}
@@ -265,17 +268,23 @@ class BillingInvoiceList extends React.Component {
                     <ul>
                       {invoiceOwner.name && (
                         <li className="entity-name">
-                          <i className="fa fa-user" /> {invoiceOwner.name}
+                          <i className="fa fa-user" /> 
+                          {' '}
+                          {invoiceOwner.name}
                         </li>
                       )}
                       {invoiceOwner.email && (
                         <li>
-                          <i className="fa fa-envelope" /> {invoiceOwner.email}
+                          <i className="fa fa-envelope" /> 
+                          {' '}
+                          {invoiceOwner.email}
                         </li>
                       )}
                       {invoiceOwner.phone && (
                         <li>
-                          <i className="fa fa-phone" /> {invoiceOwner.phone}
+                          <i className="fa fa-phone" /> 
+                          {' '}
+                          {invoiceOwner.phone}
                         </li>
                       )}
                     </ul>
@@ -288,7 +297,8 @@ class BillingInvoiceList extends React.Component {
                   <div className="invoice-status-body">
                     <ul>
                       <li>
-                        <span className="status-label">Invoice Total:</span>{" "}
+                        <span className="status-label">Invoice Total:</span>
+                        {" "}
                         {_.has(invoice, "references.transactions[0].amount") ? (
                           <Price
                             value={invoice.references.transactions[0].amount}
@@ -302,12 +312,14 @@ class BillingInvoiceList extends React.Component {
                       {this.getRefundDetail(invoice.references.transactions)}
 
                       <li>
-                        <span className="status-label">Status:</span>{" "}
+                        <span className="status-label">Status:</span>
+                        {" "}
                         <span>{invoice.paid ? "Paid" : "Not Charged"}</span>
                       </li>
                       {invoice.next_attempt != null && (
                         <li>
-                          <span className="status-label">Next Attempt:</span>{" "}
+                          <span className="status-label">Next Attempt:</span>
+                          {" "}
                           <DateFormat date={invoice.next_attempt} />
                         </li>
                       )}
@@ -369,12 +381,12 @@ class BillingInvoiceList extends React.Component {
                 </tfoot>
               </table>
             </div>
-            <div className="invoice-footer"></div>
+            <div className="invoice-footer" />
           </div>
           {currentModal()}
         </div>
       );
-    }
+    
   }
 }
 

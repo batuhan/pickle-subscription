@@ -5,7 +5,8 @@ import { DataForm } from "../../utilities/data-form.jsx";
 import Alerts from "../alerts.jsx";
 import Buttons from "../buttons.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class InviteUserForm extends React.Component {
   constructor(props) {
@@ -23,16 +24,16 @@ class InviteUserForm extends React.Component {
 
   handleResponse(response) {
     if (!response.error) {
-      this.setState({ success: true, response: response });
+      this.setState({ success: true, response });
     } else {
       this.setState({ alerts: { type: "danger", message: response.error } });
     }
   }
 
   reinviteUser() {
-    let self = this;
-    let email = self.props.reinviteEmail;
-    Fetcher(self.state.url, "POST", { email: email }).then(function(response) {
+    const self = this;
+    const email = self.props.reinviteEmail;
+    Fetcher(self.state.url, "POST", { email }).then(function(response) {
       self.handleResponse(response);
     });
   }
@@ -40,7 +41,7 @@ class InviteUserForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return (
         <div className="p-20">
           <p>
@@ -54,18 +55,18 @@ class InviteUserForm extends React.Component {
           </div>
         </div>
       );
-    } else {
-      //If the reinvite UID props is passed, just run the invite
+    } 
+      // If the reinvite UID props is passed, just run the invite
       if (this.props.reinviteEmail) {
         this.reinviteUser();
         return null;
-      } else {
+      } 
         return (
           <div className="invite-user-form">
             <DataForm
               handleResponse={this.handleResponse}
               url={this.state.url}
-              method={"POST"}
+              method="POST"
             >
               {this.state.alerts && this.state.alerts.message && (
                 <div>
@@ -87,12 +88,12 @@ class InviteUserForm extends React.Component {
                   name="email"
                   label="Email Address"
                   onChange={function() {}}
-                  receiveOnChange={true}
-                  receiveValue={true}
+                  receiveOnChange
+                  receiveValue
                 />
               </div>
 
-              <div className={`modal-footer text-right p-b-20`}>
+              <div className="modal-footer text-right p-b-20">
                 <Buttons
                   containerClass="inline"
                   btnType="primary"
@@ -111,8 +112,8 @@ class InviteUserForm extends React.Component {
             </DataForm>
           </div>
         );
-      }
-    }
+      
+    
   }
 }
 

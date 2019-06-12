@@ -16,7 +16,7 @@ class DataFormReview extends React.Component {
 
   render() {
     if (this.state.reviewJSON) {
-      let reviewJSON = this.state.reviewJSON.form;
+      const reviewJSON = this.state.reviewJSON.form;
       let templateProps = null;
       if (reviewJSON.references.service_template_properties) {
         templateProps = reviewJSON.references.service_template_properties;
@@ -139,9 +139,9 @@ class DataFormReview extends React.Component {
 
               {templateProps &&
                 Object.entries(templateProps).map(propEntry => {
-                  let propItem = propEntry[1];
+                  const propItem = propEntry[1];
                   {
-                    /*console.log("prop item: ", propItem);*/
+                    /* console.log("prop item: ", propItem); */
                   }
                   return (
                     <div
@@ -161,7 +161,7 @@ class DataFormReview extends React.Component {
                       </div>
                       <div>
                         <span className="label">Default Value: </span>
-                        {typeof propItem.value == "boolean" ? (
+                        {typeof propItem.value === "boolean" ? (
                           <span className="value">
                             {propItem.value ? "True" : "False"}
                           </span>
@@ -216,9 +216,9 @@ class DataFormReview extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return <p>You don't have information to review yet.</p>;
-    }
+    
   }
 }
 

@@ -7,9 +7,9 @@ import Buttons from "../buttons.jsx";
 class ServiceInstanceFormEdit extends React.Component {
   constructor(props) {
     super(props);
-    let instance = this.props.myInstance;
+    const instance = this.props.myInstance;
     this.state = {
-      instance: instance,
+      instance,
       loading: false,
       success: false,
       ajaxLoad: false,
@@ -38,27 +38,27 @@ class ServiceInstanceFormEdit extends React.Component {
   }
 
   getValidators(references = null) {
-    //This function dynamically generates validators depending on what custom properties the instance has.
-    //optional references: the service template's references.service_template_properties
-    //Defining general validators
-    let validateRequired = val => {
+    // This function dynamically generates validators depending on what custom properties the instance has.
+    // optional references: the service template's references.service_template_properties
+    // Defining general validators
+    const validateRequired = val => {
       return val === 0 || val === false || (val != "" && val != null);
     };
-    let validateEmptyString = val => {
+    const validateEmptyString = val => {
       return val.trim() != "";
     };
-    let validateNumber = val => {
+    const validateNumber = val => {
       return !isNaN(parseFloat(val)) && isFinite(val);
     };
-    //Defining validators
-    let validateDescription = val => {
+    // Defining validators
+    const validateDescription = val => {
       return (
         (validateRequired(val) && validateEmptyString(val)) || {
           error: "Field Description is required",
         }
       );
     };
-    let validateAmount = val => {
+    const validateAmount = val => {
       return (
         (validateRequired(val) &&
           validateEmptyString(val) &&
@@ -70,7 +70,7 @@ class ServiceInstanceFormEdit extends React.Component {
       );
     };
 
-    let validatorJSON = {
+    const validatorJSON = {
       description: validateDescription,
     };
 
@@ -84,8 +84,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
-      let self = this;
+    } if (this.state.success) {
+      const self = this;
 
       setTimeout(function() {
         self.handleCountDownClose();
@@ -107,10 +107,10 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } else {
-      const instance = this.state.instance;
+    } 
+      const {instance} = this.state;
 
-      //TODO: Add validation functions and pass into DataForm as props
+      // TODO: Add validation functions and pass into DataForm as props
 
       return (
         <div>
@@ -118,13 +118,16 @@ class ServiceInstanceFormEdit extends React.Component {
             validators={this.getValidators(null)}
             handleResponse={this.handleResponse}
             url={`/api/v1/service-instances/${instance.id}/add-charge`}
-            method={"POST"}
+            method="POST"
           >
             <div className="p-20">
               <div className="row">
                 <div className="basic-info col-md-12">
                   <p>
-                    <strong>Add A Line Item For {instance.name}</strong>
+                    <strong>
+Add A Line Item For
+                      {instance.name}
+                    </strong>
                   </p>
                   <p>{instance.description}</p>
 
@@ -132,10 +135,10 @@ class ServiceInstanceFormEdit extends React.Component {
                     type="text"
                     name="description"
                     label="Description"
-                    defaultValue={""}
+                    defaultValue=""
                     onChange={function() {}}
-                    receiveOnChange={true}
-                    receiveValue={true}
+                    receiveOnChange
+                    receiveValue
                   />
 
                   <Inputs
@@ -144,8 +147,8 @@ class ServiceInstanceFormEdit extends React.Component {
                     label="Price"
                     defaultValue={0}
                     onChange={function() {}}
-                    receiveOnChange={true}
-                    receiveValue={true}
+                    receiveOnChange
+                    receiveValue
                   />
                 </div>
               </div>
@@ -174,7 +177,7 @@ class ServiceInstanceFormEdit extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

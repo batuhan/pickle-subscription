@@ -1,10 +1,10 @@
 import React from "react";
 import "./css/style.css";
-import { Widget } from "../../elements/dashboard/dashboard-widgets.jsx";
+import { Widget } from "./dashboard-widgets.jsx";
 import {
   BuildChart,
   ServiceOverTimeChart,
-} from "../../elements/dashboard/dashboard-chart.jsx";
+} from "./dashboard-chart.jsx";
 
 class OverallStatsWidgets extends React.Component {
   constructor(props) {
@@ -12,10 +12,10 @@ class OverallStatsWidgets extends React.Component {
   }
 
   render() {
-    let self = this;
-    let analytics = self.props.data;
-    //Sales Stats
-    let saleStat = [];
+    const self = this;
+    const analytics = self.props.data;
+    // Sales Stats
+    const saleStat = [];
     saleStat.push({
       label: "Total Sales",
       value: analytics.salesStats.overall.total,
@@ -40,8 +40,8 @@ class OverallStatsWidgets extends React.Component {
       label: "Cancelled Sales",
       value: analytics.salesStats.overall.cancelled,
     });
-    //Subscription Stats
-    let subStat = [];
+    // Subscription Stats
+    const subStat = [];
     subStat.push({
       label: "Active Subscriptions",
       value: analytics.salesStats.subscriptionStats.active,
@@ -71,8 +71,8 @@ class OverallStatsWidgets extends React.Component {
       value: analytics.salesStats.subscriptionStats.totalRemainingCharges,
       type: "price",
     });
-    //Scheduled Payments Stats
-    let scheduledStat = [];
+    // Scheduled Payments Stats
+    const scheduledStat = [];
     scheduledStat.push({
       label: "Active Schedules",
       value: analytics.salesStats.split.active,
@@ -92,8 +92,8 @@ class OverallStatsWidgets extends React.Component {
       value: analytics.salesStats.split.splitRemainingAmt,
       type: "price",
     });
-    //One Time Stats
-    let onetimeStat = [];
+    // One Time Stats
+    const onetimeStat = [];
     onetimeStat.push({
       label: "Active One Times",
       value: analytics.salesStats.oneTimeStats.active,
@@ -113,8 +113,8 @@ class OverallStatsWidgets extends React.Component {
       value: analytics.salesStats.oneTimeStats.singleWaiting,
       type: "price",
     });
-    //Quote Stats
-    let quoteStat = [];
+    // Quote Stats
+    const quoteStat = [];
     quoteStat.push({
       label: "Active Quotes",
       value: analytics.salesStats.quote.active,
@@ -134,8 +134,8 @@ class OverallStatsWidgets extends React.Component {
       value: analytics.salesStats.quote.customTotalRemaining,
       type: "price",
     });
-    //System Stats
-    let systemStat = [];
+    // System Stats
+    const systemStat = [];
     let stripeConnection = "No";
     let themeChanged = "No";
     let hadOfferings = "No";
@@ -152,20 +152,20 @@ class OverallStatsWidgets extends React.Component {
     systemStat.push({ label: "Customized Theme", value: themeChanged });
     systemStat.push({ label: "Created Offering", value: hadOfferings });
     systemStat.push({ label: "Had Sales", value: hadSales });
-    //Customer Chart
-    let customerStatusLabels = [
+    // Customer Chart
+    const customerStatusLabels = [
       "Active Customers",
       "Customers with Fund",
       "Flagged Customers",
       "Invited Customers",
     ];
-    let customerStatusData = [
+    const customerStatusData = [
       analytics.customerStats.active,
       analytics.customerStats.fundsTotal,
       analytics.customerStats.flagged,
       analytics.customerStats.invited,
     ];
-    let chartData = {
+    const chartData = {
       labels: customerStatusLabels,
       datasets: [
         {
@@ -175,7 +175,7 @@ class OverallStatsWidgets extends React.Component {
         },
       ],
     };
-    let chartOption = {
+    const chartOption = {
       animation: {
         animateRotate: true,
         animateScale: true,
@@ -198,8 +198,8 @@ class OverallStatsWidgets extends React.Component {
                 data={{
                   label: "Customer Stats",
                   chart: BuildChart,
-                  chartData: chartData,
-                  chartOption: chartOption,
+                  chartData,
+                  chartOption,
                 }}
                 bodyClass="full-height p-b-15"
                 wcolor="grey"

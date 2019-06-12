@@ -1,8 +1,8 @@
 import React from "react";
+import Collapsible from "react-collapsible";
 import DateFormat from "../../utilities/date-format.jsx";
 import { Price } from "../../utilities/price.jsx";
-import Datatable from "../../elements/datatable/datatable.jsx";
-import Collapsible from "react-collapsible";
+import Datatable from "../datatable/datatable.jsx";
 
 class ServiceInstanceApprovedCharges extends React.Component {
   constructor(props) {
@@ -31,12 +31,12 @@ class ServiceInstanceApprovedCharges extends React.Component {
   }
 
   getChargeHistory() {
-    let currentTime = Math.round(new Date().getTime() / 1000);
-    //Only get charges for previous billing cycles
-    let approveItems = this.props.instanceApprovedItems.filter(item => {
+    const currentTime = Math.round(new Date().getTime() / 1000);
+    // Only get charges for previous billing cycles
+    const approveItems = this.props.instanceApprovedItems.filter(item => {
       return item.period_end < currentTime;
     });
-    //Get total amount
+    // Get total amount
     let totalCharges = 0;
     approveItems.map(charge => {
       totalCharges += charge.amount;
@@ -71,7 +71,9 @@ class ServiceInstanceApprovedCharges extends React.Component {
               <div className="xaas-data xaas-charge">
                 <span>
                   <strong>
-                    Total Approved: <Price value={totalCharges} />
+                    Total Approved: 
+                    {' '}
+                    <Price value={totalCharges} />
                   </strong>
                 </span>
               </div>
@@ -79,18 +81,18 @@ class ServiceInstanceApprovedCharges extends React.Component {
           </div>
         </Collapsible>
       );
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   getChargeCurrent() {
-    let currentTime = Math.round(new Date().getTime() / 1000);
-    //Only get charges for current billing cycles
-    let approveItems = this.props.instanceApprovedItems.filter(item => {
+    const currentTime = Math.round(new Date().getTime() / 1000);
+    // Only get charges for current billing cycles
+    const approveItems = this.props.instanceApprovedItems.filter(item => {
       return item.period_end > currentTime;
     });
-    //Get total amount
+    // Get total amount
     let totalCharges = 0;
     approveItems.map(charge => {
       totalCharges += charge.amount;
@@ -124,7 +126,9 @@ class ServiceInstanceApprovedCharges extends React.Component {
               <div className="xaas-data xaas-charge">
                 <span>
                   <strong>
-                    Total Approved: <Price value={totalCharges} />
+                    Total Approved: 
+                    {' '}
+                    <Price value={totalCharges} />
                   </strong>
                 </span>
               </div>
@@ -132,9 +136,9 @@ class ServiceInstanceApprovedCharges extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   render() {

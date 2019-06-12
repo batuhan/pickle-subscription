@@ -10,7 +10,7 @@ class Message extends React.Component {
   }
 
   componentDidMount() {
-    let {
+    const {
       alert,
       dismiss,
       alert: { id, alertType, message, show, autoDismiss },
@@ -23,12 +23,12 @@ class Message extends React.Component {
   }
 
   dismiss() {
-    let { alert, dismiss } = this.props;
+    const { alert, dismiss } = this.props;
     dismiss(alert);
   }
 
   render() {
-    let {
+    const {
       alert: { alertType, message, id },
     } = this.props;
     return (
@@ -66,7 +66,7 @@ class AppMessage extends React.Component {
   }
 
   render() {
-    let { alerts } = this.props;
+    const { alerts } = this.props;
     if (alerts.length) {
       return (
         <div className="app-messages">
@@ -75,9 +75,9 @@ class AppMessage extends React.Component {
           ))}
         </div>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 }
 

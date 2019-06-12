@@ -1,5 +1,6 @@
 import React from "react";
 import { browserHistory } from "react-router";
+import TagsInput from "react-tagsinput";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
@@ -7,7 +8,6 @@ import Jumbotron from "../../layouts/jumbotron.jsx";
 import Content from "../../layouts/content.jsx";
 import { DataForm, DataChild, DataInput } from "../../utilities/data-form.jsx";
 import { Wysiwyg, WysiwygTemplater } from "../wysiwyg.jsx";
-import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import Buttons from "../buttons.jsx";
 
@@ -17,7 +17,7 @@ class NotificationTemplateForm extends React.Component {
     this.state = {
       loading: true,
       template: {},
-      url: "/api/v1/notification-templates/" + props.params.id,
+      url: `/api/v1/notification-templates/${  props.params.id}`,
       roleUrl: "/api/v1/roles",
       roles: [],
       success: false,
@@ -33,31 +33,31 @@ class NotificationTemplateForm extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: "can_administrate" })) {
       return browserHistory.push("/login");
-    } else {
+    } 
       this.fetchData();
-    }
+    
   }
 
   fetchData() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url)
       .then(function(response) {
         if (!response.error) {
           return response;
         }
-        //then get the roles
+        // then get the roles
       })
       .then(function(r) {
         if (r) {
-          Fetcher(self.state.url + "/roles").then(function(roles) {
+          Fetcher(`${self.state.url  }/roles`).then(function(roles) {
             if (!roles.error) {
               Fetcher(self.state.roleUrl).then(function(allRoles) {
-                let roleIds = roles.map(role => role.data.id);
+                const roleIds = roles.map(role => role.data.id);
                 self.setState({
                   loading: false,
                   template: r,
                   templateRoles: roles,
-                  allRoles: allRoles,
+                  allRoles,
                   roles: roleIds,
                 });
               });
@@ -66,10 +66,11 @@ class NotificationTemplateForm extends React.Component {
         }
       });
   }
+
   handleRole(id) {
-    let self = this;
+    const self = this;
     return function(e) {
-      const target = e.target;
+      const {target} = e;
       if (target.checked) {
         if (!self.state.roles.includes(id)) {
           self.setState({ roles: self.state.roles.concat(id) });
@@ -79,13 +80,14 @@ class NotificationTemplateForm extends React.Component {
       }
     };
   }
+
   handleFiles(e) {
     e.preventDefault();
   }
 
   handleResponse(response) {
-    let self = this;
-    Fetcher(this.state.url + "/roles", "PUT", this.state.roles).then(function(
+    const self = this;
+    Fetcher(`${this.state.url  }/roles`, "PUT", this.state.roles).then(function(
       response2,
     ) {
       self.setState({ success: true });
@@ -93,17 +95,17 @@ class NotificationTemplateForm extends React.Component {
   }
 
   handleResetSuccess() {
-    let self = this;
+    const self = this;
     self.setState({ success: false });
   }
 
   handleImage(url, id) {
-    //This function is unused
-    var self = this;
+    // This function is unused
+    const self = this;
   }
 
   insertString(html) {
-    let self = this;
+    const self = this;
     return function(e) {
       e.preventDefault();
       self.refs.wysiwygTemplater.refs.wysiwyg.insert(html);
@@ -117,12 +119,12 @@ class NotificationTemplateForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
-      let pageName = this.state.template.data.name || this.props.route.name;
-      let template = this.state.template;
-      let roles = this.state.templateRoles;
-      let allRoles = this.state.allRoles;
-      let references = template.schema.references;
+    } 
+      const pageName = this.state.template.data.name || this.props.route.name;
+      const {template} = this.state;
+      const roles = this.state.templateRoles;
+      const {allRoles} = this.state;
+      const {references} = template.schema;
 
       return (
         <div>
@@ -149,7 +151,7 @@ class NotificationTemplateForm extends React.Component {
                         roles.
                       </span>
                       {allRoles.map(role => {
-                        let checked = roles.some(function(checkedRole) {
+                        const checked = roles.some(function(checkedRole) {
                           return role.id == checkedRole.data.id;
                         });
 
@@ -160,7 +162,10 @@ class NotificationTemplateForm extends React.Component {
                               type="checkbox"
                               defaultChecked={checked}
                             />
-                            <span> {role.role_name}</span>
+                            <span> 
+                              {' '}
+                              {role.role_name}
+                            </span>
                             <span>
                               {role.role_name == "user" &&
                                 " - email will be sent to all users"}
@@ -182,28 +187,31 @@ class NotificationTemplateForm extends React.Component {
                           name="create_notification"
                           type="checkbox"
                           defaultChecked={template.data.create_notification}
-                        />{" "}
+                        />
+                        {" "}
                         <span>Create Notification</span>
                         <br />
                         <input
                           name="send_email"
                           type="checkbox"
                           defaultChecked={template.data.send_email}
-                        />{" "}
+                        />
+                        {" "}
                         <span className="inline"> Send Email</span>
                         <br />
                         <input
                           name="send_to_owner"
                           type="checkbox"
                           defaultChecked={template.data.send_to_owner}
-                        />{" "}
+                        />
+                        {" "}
                         <span className="inline"> Send Email To Owner</span>
                       </div>
-                      {/*<div className="service-instance-section">*/}
-                      {/*<span className="service-instance-section-label"><strong>Additional Recipients</strong></span>*/}
-                      {/*<span className="help-block">Add recipients directly, these will be people who will also get this email notification for this event.</span>*/}
-                      {/*<TagsInput  name="additional_recipients" receiveOnChange={true} receiveValue={true} defaultValue={template.data.additional_recipients || []}/>*/}
-                      {/*</div>*/}
+                      {/* <div className="service-instance-section"> */}
+                      {/* <span className="service-instance-section-label"><strong>Additional Recipients</strong></span> */}
+                      {/* <span className="help-block">Add recipients directly, these will be people who will also get this email notification for this event.</span> */}
+                      {/* <TagsInput  name="additional_recipients" receiveOnChange={true} receiveValue={true} defaultValue={template.data.additional_recipients || []}/> */}
+                      {/* </div> */}
                       <div className="service-instance-section">
                         <span className="service-instance-section-label">
                           <strong>Description</strong>
@@ -225,8 +233,8 @@ class NotificationTemplateForm extends React.Component {
                           <strong>Body</strong>
                         </span>
                         <WysiwygTemplater
-                          receiveValue={true}
-                          receiveOnChange={true}
+                          receiveValue
+                          receiveOnChange
                           name="message"
                           defaultValue={template.data.message}
                           ref="wysiwygTemplater"
@@ -254,12 +262,15 @@ class NotificationTemplateForm extends React.Component {
                       <span className="help-block">
                         Available data fields, you can insert data fields
                         related to this event (
-                        {this.humanString(template.data.name)}) into the body of
+                        {this.humanString(template.data.name)}
+) into the body of
                         your notification.
                       </span>
                       <ul className="templateList">
                         <span className="help-block text-capitalize">
-                          {this.humanString(template.data.name)} Fields
+                          {this.humanString(template.data.name)}
+                          {' '}
+Fields
                         </span>
                         {Object.keys(template.schema).map(field => {
                           if (field == "references") {
@@ -270,7 +281,9 @@ class NotificationTemplateForm extends React.Component {
                                   className="referenceList list-group"
                                 >
                                   <span className="help-block text-capitalize">
-                                    {this.humanString(reference)} Fields
+                                    {this.humanString(reference)}
+                                    {' '}
+Fields
                                   </span>
                                   {Object.keys(references[reference]).map(
                                     referenceColumn => {
@@ -294,7 +307,7 @@ class NotificationTemplateForm extends React.Component {
                                 </ul>
                               );
                             });
-                          } else {
+                          } 
                             return (
                               <div>
                                 <li
@@ -310,7 +323,7 @@ class NotificationTemplateForm extends React.Component {
                                 </li>
                               </div>
                             );
-                          }
+                          
                         })}
                       </ul>
                     </div>
@@ -321,7 +334,7 @@ class NotificationTemplateForm extends React.Component {
           </Authorizer>
         </div>
       );
-    }
+    
   }
 }
 

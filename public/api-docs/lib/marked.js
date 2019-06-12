@@ -46,10 +46,10 @@
     return e.replace(/&([#\w]+);/g, function(e, t) {
       return (
         (t = t.toLowerCase()),
-        "colon" === t
+        t === "colon"
           ? ":"
-          : "#" === t.charAt(0)
-          ? "x" === t.charAt(1)
+          : t.charAt(0) === "#"
+          ? t.charAt(1) === "x"
             ? String.fromCharCode(parseInt(t.substring(2), 16))
             : String.fromCharCode(+t.substring(1))
           : ""
@@ -79,21 +79,21 @@
     return e;
   }
   function a(t, n, i) {
-    if (i || "function" == typeof n) {
+    if (i || typeof n === "function") {
       i || ((i = n), (n = null)), (n = h({}, a.defaults, n || {}));
-      var l,
-        o,
-        p = n.highlight,
-        u = 0;
+      let l;
+        let o;
+        const p = n.highlight;
+        let u = 0;
       try {
         l = e.lex(t, n);
       } catch (c) {
         return i(c);
       }
       o = l.length;
-      var g = function(e) {
+      const g = function(e) {
         if (e) return (n.highlight = p), i(e);
-        var t;
+        let t;
         try {
           t = r.parse(l, n);
         } catch (s) {
@@ -105,12 +105,12 @@
       if ((delete n.highlight, !o)) return g();
       for (; u < l.length; u++)
         !(function(e) {
-          return "code" !== e.type
+          return e.type !== "code"
             ? --o || g()
             : p(e.text, e.lang, function(t, n) {
                 return t
                   ? g(t)
-                  : null == n || n === e.text
+                  : n == null || n === e.text
                   ? --o || g()
                   : ((e.text = n), (e.escaped = !0), void (--o || g()));
               });
@@ -125,7 +125,7 @@
           (n || a.defaults).silent)
         )
           return (
-            "<p>An error occured:</p><pre>" + s(c.message + "", !0) + "</pre>"
+            `<p>An error occured:</p><pre>${  s(`${c.message  }`, !0)  }</pre>`
           );
         throw c;
       }
@@ -152,7 +152,7 @@
     (p.list = l(p.list)(/bull/g, p.bullet)(
       "hr",
       "\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))",
-    )("def", "\\n+(?=" + p.def.source + ")")()),
+    )("def", `\\n+(?=${  p.def.source  })`)()),
     (p.blockquote = l(p.blockquote)("def", p.def)()),
     (p._tag =
       "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b"),
@@ -163,7 +163,7 @@
     (p.paragraph = l(p.paragraph)("hr", p.hr)("heading", p.heading)(
       "lheading",
       p.lheading,
-    )("blockquote", p.blockquote)("tag", "<" + p._tag)("def", p.def)()),
+    )("blockquote", p.blockquote)("tag", `<${  p._tag}`)("def", p.def)()),
     (p.normal = h({}, p)),
     (p.gfm = h({}, p.normal, {
       fences: /^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,
@@ -171,11 +171,11 @@
     })),
     (p.gfm.paragraph = l(p.paragraph)(
       "(?!",
-      "(?!" +
-        p.gfm.fences.source.replace("\\1", "\\2") +
-        "|" +
-        p.list.source.replace("\\1", "\\3") +
-        "|",
+      `(?!${ 
+        p.gfm.fences.source.replace("\\1", "\\2") 
+        }|${ 
+        p.list.source.replace("\\1", "\\3") 
+        }|`,
     )()),
     (p.tables = h({}, p.gfm, {
       nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
@@ -183,7 +183,7 @@
     })),
     (e.rules = p),
     (e.lex = function(t, n) {
-      var r = new e(n);
+      const r = new e(n);
       return r.lex(t);
     }),
     (e.prototype.lex = function(e) {
@@ -247,7 +247,7 @@
           (e = e.substring(i[0].length)),
             this.tokens.push({
               type: "heading",
-              depth: "=" === i[2] ? 1 : 2,
+              depth: i[2] === "=" ? 1 : 2,
               text: i[1],
             });
         else if ((i = this.rules.hr.exec(e)))
@@ -277,7 +277,7 @@
                 ((a -= h.length),
                 (h = this.options.pedantic
                   ? h.replace(/^ {1,4}/gm, "")
-                  : h.replace(new RegExp("^ {1," + a + "}", "gm"), ""))),
+                  : h.replace(new RegExp(`^ {1,${  a  }}`, "gm"), ""))),
               this.options.smartLists &&
                 u !== c - 1 &&
                 ((o = p.bullet.exec(i[u + 1])[0]),
@@ -286,7 +286,7 @@
                   ((e = i.slice(u + 1).join("\n") + e), (u = c - 1))),
               (s = r || /\n\n(?!\s*$)/.test(h)),
               u !== c - 1 &&
-                ((r = "\n" === h.charAt(h.length - 1)), s || (s = r)),
+                ((r = h.charAt(h.length - 1) === "\n"), s || (s = r)),
               this.tokens.push({
                 type: s ? "loose_item_start" : "list_item_start",
               }),
@@ -297,7 +297,7 @@
           (e = e.substring(i[0].length)),
             this.tokens.push({
               type: this.options.sanitize ? "paragraph" : "html",
-              pre: "pre" === i[1] || "script" === i[1] || "style" === i[1],
+              pre: i[1] === "pre" || i[1] === "script" || i[1] === "style",
               text: i[0],
             });
         else if (!n && t && (i = this.rules.def.exec(e)))
@@ -336,7 +336,7 @@
             this.tokens.push({
               type: "paragraph",
               text:
-                "\n" === i[1].charAt(i[1].length - 1)
+                i[1].charAt(i[1].length - 1) === "\n"
                   ? i[1].slice(0, -1)
                   : i[1],
             });
@@ -344,7 +344,7 @@
           (e = e.substring(i[0].length)),
             this.tokens.push({ type: "text", text: i[0] });
         else if (e)
-          throw new Error("Infinite loop on byte: " + e.charCodeAt(0));
+          throw new Error(`Infinite loop on byte: ${  e.charCodeAt(0)}`);
       return this.tokens;
     });
   var u = {
@@ -383,7 +383,7 @@
     })),
     (t.rules = u),
     (t.output = function(e, n, r) {
-      var s = new t(n, r);
+      const s = new t(n, r);
       return s.output(e);
     }),
     (t.prototype.output = function(e) {
@@ -392,9 +392,9 @@
           (e = e.substring(i[0].length)), (l += i[1]);
         else if ((i = this.rules.autolink.exec(e)))
           (e = e.substring(i[0].length)),
-            "@" === i[2]
+            i[2] === "@"
               ? ((n =
-                  ":" === i[1].charAt(6)
+                  i[1].charAt(6) === ":"
                     ? this.mangle(i[1].substring(7))
                     : this.mangle(i[1])),
                 (r = this.mangle("mailto:") + n))
@@ -445,7 +445,7 @@
           else if ((i = this.rules.text.exec(e)))
             (e = e.substring(i[0].length)), (l += s(this.smartypants(i[0])));
           else if (e)
-            throw new Error("Infinite loop on byte: " + e.charCodeAt(0));
+            throw new Error(`Infinite loop on byte: ${  e.charCodeAt(0)}`);
         } else
           (e = e.substring(i[0].length)),
             (n = s(i[1])),
@@ -454,9 +454,9 @@
       return l;
     }),
     (t.prototype.outputLink = function(e, t) {
-      var n = s(t.href),
-        r = t.title ? s(t.title) : null;
-      return "!" !== e[0].charAt(0)
+      const n = s(t.href);
+        const r = t.title ? s(t.title) : null;
+      return e[0].charAt(0) !== "!"
         ? this.renderer.link(n, r, this.output(e[1]))
         : this.renderer.image(n, r, s(e[1]));
     }),
@@ -474,90 +474,90 @@
     (t.prototype.mangle = function(e) {
       for (var t, n = "", r = e.length, s = 0; s < r; s++)
         (t = e.charCodeAt(s)),
-          Math.random() > 0.5 && (t = "x" + t.toString(16)),
-          (n += "&#" + t + ";");
+          Math.random() > 0.5 && (t = `x${  t.toString(16)}`),
+          (n += `&#${  t  };`);
       return n;
     }),
     (n.prototype.code = function(e, t, n) {
       if (this.options.highlight) {
-        var r = this.options.highlight(e, t);
-        null != r && r !== e && ((n = !0), (e = r));
+        const r = this.options.highlight(e, t);
+        r != null && r !== e && ((n = !0), (e = r));
       }
       return t
-        ? '<pre><code class="' +
-            this.options.langPrefix +
-            s(t, !0) +
-            '">' +
-            (n ? e : s(e, !0)) +
-            "\n</code></pre>\n"
-        : "<pre><code>" + (n ? e : s(e, !0)) + "\n</code></pre>";
+        ? `<pre><code class="${ 
+            this.options.langPrefix 
+            }${s(t, !0) 
+            }">${ 
+            n ? e : s(e, !0) 
+            }\n</code></pre>\n`
+        : `<pre><code>${  n ? e : s(e, !0)  }\n</code></pre>`;
     }),
     (n.prototype.blockquote = function(e) {
-      return "<blockquote>\n" + e + "</blockquote>\n";
+      return `<blockquote>\n${  e  }</blockquote>\n`;
     }),
     (n.prototype.html = function(e) {
       return e;
     }),
     (n.prototype.heading = function(e, t, n) {
       return (
-        "<h" +
-        t +
-        ' id="' +
-        this.options.headerPrefix +
-        n.toLowerCase().replace(/[^\w]+/g, "-") +
-        '">' +
-        e +
-        "</h" +
-        t +
-        ">\n"
+        `<h${ 
+        t 
+        } id="${ 
+        this.options.headerPrefix 
+        }${n.toLowerCase().replace(/[^\w]+/g, "-") 
+        }">${ 
+        e 
+        }</h${ 
+        t 
+        }>\n`
       );
     }),
     (n.prototype.hr = function() {
       return this.options.xhtml ? "<hr/>\n" : "<hr>\n";
     }),
     (n.prototype.list = function(e, t) {
-      var n = t ? "ol" : "ul";
-      return "<" + n + ">\n" + e + "</" + n + ">\n";
+      const n = t ? "ol" : "ul";
+      return `<${  n  }>\n${  e  }</${  n  }>\n`;
     }),
     (n.prototype.listitem = function(e) {
-      return "<li>" + e + "</li>\n";
+      return `<li>${  e  }</li>\n`;
     }),
     (n.prototype.paragraph = function(e) {
-      return "<p>" + e + "</p>\n";
+      return `<p>${  e  }</p>\n`;
     }),
     (n.prototype.table = function(e, t) {
       return (
-        "<table>\n<thead>\n" +
-        e +
-        "</thead>\n<tbody>\n" +
-        t +
-        "</tbody>\n</table>\n"
+        `<table>\n<thead>\n${ 
+        e 
+        }</thead>\n<tbody>\n${ 
+        t 
+        }</tbody>\n</table>\n`
       );
     }),
     (n.prototype.tablerow = function(e) {
-      return "<tr>\n" + e + "</tr>\n";
+      return `<tr>\n${  e  }</tr>\n`;
     }),
     (n.prototype.tablecell = function(e, t) {
-      var n = t.header ? "th" : "td",
-        r = t.align
-          ? "<" + n + ' style="text-align:' + t.align + '">'
-          : "<" + n + ">";
-      return r + e + "</" + n + ">\n";
+      const n = t.header ? "th" : "td";
+        const r = t.align
+          ? `<${  n  } style="text-align:${  t.align  }">`
+          : `<${  n  }>`;
+      return `${r + e  }</${  n  }>\n`;
     }),
     (n.prototype.strong = function(e) {
-      return "<strong>" + e + "</strong>";
+      return `<strong>${  e  }</strong>`;
     }),
     (n.prototype.em = function(e) {
-      return "<em>" + e + "</em>";
+      return `<em>${  e  }</em>`;
     }),
     (n.prototype.codespan = function(e) {
-      return "<code>" + e + "</code>";
+      return `<code>${  e  }</code>`;
     }),
     (n.prototype.br = function() {
       return this.options.xhtml ? "<br/>" : "<br>";
     }),
     (n.prototype.del = function(e) {
-      return "<del>" + e + "</del>";
+      return `<del>${  e  }</del>`;
     }),
     (n.prototype.link = function(e, t, n) {
       if (this.options.sanitize) {
@@ -568,19 +568,19 @@
         } catch (s) {
           return "";
         }
-        if (0 === r.indexOf("javascript:")) return "";
+        if (r.indexOf("javascript:") === 0) return "";
       }
-      var l = '<a href="' + e + '"';
-      return t && (l += ' title="' + t + '"'), (l += ">" + n + "</a>");
+      let l = `<a href="${  e  }"`;
+      return t && (l += ` title="${  t  }"`), (l += `>${  n  }</a>`);
     }),
     (n.prototype.image = function(e, t, n) {
-      var r = '<img src="' + e + '" alt="' + n + '"';
+      let r = `<img src="${  e  }" alt="${  n  }"`;
       return (
-        t && (r += ' title="' + t + '"'), (r += this.options.xhtml ? "/>" : ">")
+        t && (r += ` title="${  t  }"`), (r += this.options.xhtml ? "/>" : ">")
       );
     }),
     (r.parse = function(e, t, n) {
-      var s = new r(t, n);
+      const s = new r(t, n);
       return s.parse(e);
     }),
     (r.prototype.parse = function(e) {
@@ -596,8 +596,8 @@
       return this.tokens[this.tokens.length - 1] || 0;
     }),
     (r.prototype.parseText = function() {
-      for (var e = this.token.text; "text" === this.peek().type; )
-        e += "\n" + this.next().text;
+      for (var e = this.token.text; this.peek().type === "text"; )
+        e += `\n${  this.next().text}`;
       return this.inline.output(e);
     }),
     (r.prototype.tok = function() {
@@ -619,13 +619,13 @@
             this.token.escaped,
           );
         case "table":
-          var e,
-            t,
-            n,
-            r,
-            s,
-            i = "",
-            l = "";
+          var e;
+            var t;
+            var n;
+            var r;
+            var s;
+            var i = "";
+            var l = "";
           for (n = "", e = 0; e < this.token.header.length; e++)
             (r = { header: !0, align: this.token.align[e] }),
               (n += this.renderer.tablecell(
@@ -646,23 +646,23 @@
           }
           return this.renderer.table(i, l);
         case "blockquote_start":
-          for (var l = ""; "blockquote_end" !== this.next().type; )
+          for (var l = ""; this.next().type !== "blockquote_end"; )
             l += this.tok();
           return this.renderer.blockquote(l);
         case "list_start":
           for (
             var l = "", o = this.token.ordered;
-            "list_end" !== this.next().type;
+            this.next().type !== "list_end";
 
           )
             l += this.tok();
           return this.renderer.list(l, o);
         case "list_item_start":
-          for (var l = ""; "list_item_end" !== this.next().type; )
-            l += "text" === this.token.type ? this.parseText() : this.tok();
+          for (var l = ""; this.next().type !== "list_item_end"; )
+            l += this.token.type === "text" ? this.parseText() : this.tok();
           return this.renderer.listitem(l);
         case "loose_item_start":
-          for (var l = ""; "list_item_end" !== this.next().type; )
+          for (var l = ""; this.next().type !== "list_item_end"; )
             l += this.tok();
           return this.renderer.listitem(l);
         case "html":
@@ -704,15 +704,15 @@
     (a.InlineLexer = t),
     (a.inlineLexer = t.output),
     (a.parse = a),
-    "undefined" != typeof module && "object" == typeof exports
+    typeof module !== "undefined" && typeof exports === "object"
       ? (module.exports = a)
-      : "function" == typeof define && define.amd
+      : typeof define === "function" && define.amd
       ? define(function() {
           return a;
         })
       : (this.marked = a);
 }.call(
   (function() {
-    return this || ("undefined" != typeof window ? window : global);
+    return this || (typeof window !== "undefined" ? window : global);
   })(),
 ));

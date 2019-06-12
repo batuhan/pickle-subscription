@@ -24,7 +24,7 @@ class Alerts extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let self = this;
+    const self = this;
     if (
       nextProps.message != this.state.alert.message ||
       !this.state.alert.message
@@ -48,10 +48,10 @@ class Alerts extends React.Component {
 
   render() {
     if (this.state.alert.message) {
-      let type = this.state.alert.type;
-      let message = this.state.alert.message;
-      let icon = this.state.alert.icon;
-      let style = {};
+      const {type} = this.state.alert;
+      const {message} = this.state.alert;
+      const {icon} = this.state.alert;
+      const style = {};
       if (this.state.position && this.state.position.position == "fixed") {
         style.position = "fixed";
         style.left = "0px";

@@ -3,12 +3,13 @@ import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Alerts from "../alerts.jsx";
 import Buttons from "../buttons.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class SuspendUserForm extends React.Component {
   constructor(props) {
     super(props);
-    let uid = this.props.uid;
+    const {uid} = this.props;
     this.state = {
       url: `/api/v1/users/${uid}/suspend`,
       response: {},
@@ -21,10 +22,10 @@ class SuspendUserForm extends React.Component {
   }
 
   fetchSuspendUser() {
-    let self = this;
+    const self = this;
     Fetcher(this.state.url, "POST").then(function(response) {
       if (!response.error) {
-        self.setState({ success: true, response: response });
+        self.setState({ success: true, response });
       } else {
         console.error("error suspending user", response);
       }
@@ -34,7 +35,7 @@ class SuspendUserForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return (
         <div>
           <div className="p-20">
@@ -42,7 +43,7 @@ class SuspendUserForm extends React.Component {
               <strong>Suspend User Success!</strong>
             </p>
           </div>
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="default"
@@ -52,8 +53,8 @@ class SuspendUserForm extends React.Component {
           </div>
         </div>
       );
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="suspend-user-form">
           {this.state.alerts && this.state.alerts.message && (
@@ -71,7 +72,7 @@ class SuspendUserForm extends React.Component {
             </p>
           </div>
 
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="primary"
@@ -88,7 +89,7 @@ class SuspendUserForm extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

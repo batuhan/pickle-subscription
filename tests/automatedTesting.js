@@ -1,28 +1,28 @@
-var http = require("http");
-var request = require("request");
-var FormData = require("form-data");
+const http = require("http");
+const request = require("request");
+const FormData = require("form-data");
 
-var form = new FormData();
+const form = new FormData();
 form.append("email", "admin");
 form.append("password", "1234");
 form.submit("http://localhost:3000/user/login", function(err, res) {
   // res – response object (http.IncomingMessage)  //
-  console.log(res.statusCode + " : " + res.statusMessage);
-  var headers = res["headers"];
-  var cookie = res.headers["set-cookie"][0];
-  console.log("tootie: " + typeof cookie);
+  console.log(`${res.statusCode  } : ${  res.statusMessage}`);
+  const {headers} = res;
+  const cookie = res.headers["set-cookie"][0];
+  console.log(`tootie: ${  typeof cookie}`);
   res.resume();
   request(
     {
       url: "http://localhost:3000/service-instance/1",
       method: "GET",
       headers: { Cookie: cookie },
-      //json: true,   // <--Very important!!!
-      //body: myJSONObject
+      // json: true,   // <--Very important!!!
+      // body: myJSONObject
     },
     function(error, response, body) {
       console.log(response);
-      console.log("body: " + body);
+      console.log(`body: ${  body}`);
     },
   );
 });
@@ -35,7 +35,7 @@ request({
     body: myJSONObject
 }, function (error, response, body){
     console.log(response);
-});*/
+}); */
 
 /*
 var loginJSON = {

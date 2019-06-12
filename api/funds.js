@@ -1,14 +1,14 @@
-let async = require("async");
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let Funds = require("../models/fund");
+const async = require("async");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const Funds = require("../models/fund");
 
 module.exports = function(router) {
   router.post("/funds", auth(), function(req, res) {
     return new Promise(function(resolve, reject) {
-      //Always set the user to the current requests user id
+      // Always set the user to the current requests user id
       let user_id = req.user.get("id");
-      //But if the user is admin, they can create funds for the users
+      // But if the user is admin, they can create funds for the users
       if (
         res.locals.permissions.some(
           p =>
@@ -45,7 +45,7 @@ module.exports = function(router) {
     //         res.json({'err':err});
     //     }
     // });
-    //New method has been developed on the POST call. No need for this.
+    // New method has been developed on the POST call. No need for this.
     res.sendStatus(404);
   });
 

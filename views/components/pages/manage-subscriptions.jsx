@@ -15,7 +15,8 @@ import ModalRequestCancellation from "../elements/modals/modal-request-cancellat
 import ModalManageCancellation from "../elements/modals/modal-manage-cancellation.jsx";
 import ModalDeleteInstance from "../elements/modals/modal-delete-instance.jsx";
 import getSymbolFromCurrency from "currency-symbol-map";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class ManageSubscriptions extends React.Component {
   constructor(props) {
@@ -51,8 +52,8 @@ class ManageSubscriptions extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
-    let {
+    const self = this;
+    const {
       params,
       params: { status },
       location: {
@@ -89,7 +90,7 @@ class ManageSubscriptions extends React.Component {
    * Fetches Other Data
    */
   fetchAllUsers() {
-    let self = this;
+    const self = this;
     Fetcher("/api/v1/users").then(function(response) {
       if (!response.error) {
         self.setState({ loading: false, allUsers: response });
@@ -106,6 +107,7 @@ class ManageSubscriptions extends React.Component {
   onOpenActionModal(dataObject) {
     this.setState({ actionModal: true, currentDataObject: dataObject });
   }
+
   onCloseActionModal() {
     this.fetchData();
     this.setState({
@@ -127,6 +129,7 @@ class ManageSubscriptions extends React.Component {
       </div>
     );
   }
+
   nameFormatter(cell, row) {
     return (
       <Link to={`/service-instance/${row.id}`}>
@@ -134,6 +137,7 @@ class ManageSubscriptions extends React.Component {
       </Link>
     );
   }
+
   emailFormatter(cell, row) {
     return (
       <div>
@@ -144,15 +148,17 @@ class ManageSubscriptions extends React.Component {
           />
         </div>
         <span className="customer-email">
-          &nbsp;&nbsp;{cell.users[0].email}
+          &nbsp;&nbsp;
+          {cell.users[0].email}
         </span>
       </div>
     );
   }
+
   typeFormatter(cell, row) {
-    //null check for the payment plan
+    // null check for the payment plan
     if (cell) {
-      let interval = cell.interval;
+      let {interval} = cell;
       if (interval == "day") {
         interval = "Daily";
       } else if (interval == "week") {
@@ -163,10 +169,10 @@ class ManageSubscriptions extends React.Component {
         interval = "Yearly";
       }
 
-      let type = row.type.toLowerCase();
+      const type = row.type.toLowerCase();
       switch (type) {
         case "subscription":
-          //return ( <div><span className="status-badge neutral" >{getBillingType(row)}</span> <span className="status-badge black" >{interval}</span></div> );
+          // return ( <div><span className="status-badge neutral" >{getBillingType(row)}</span> <span className="status-badge black" >{interval}</span></div> );
           return (
             <div>
               <span className="status-badge black">{interval}</span>
@@ -193,24 +199,28 @@ class ManageSubscriptions extends React.Component {
       return <span className="status-badge grey">Missing</span>;
     }
   }
+
   typeDataValue(cell, row) {
     if (cell) {
       return row.type;
-    } else {
+    } 
       return "N/A";
-    }
+    
   }
+
   amountFormatter(cell, row) {
     if (cell) {
-      let prefix = getSymbolFromCurrency(cell.currency);
+      const prefix = getSymbolFromCurrency(cell.currency);
       return <Price value={cell.amount} prefix={prefix} />;
-    } else {
+    } 
       return <span className="status-badge red">No Plan</span>;
-    }
+    
   }
+
   emailDataValue(cell) {
     return cell.users[0].email;
   }
+
   statusFormatter(cell) {
     switch (cell) {
       case "requested":
@@ -227,12 +237,14 @@ class ManageSubscriptions extends React.Component {
         return <span className="status-badge grey">{cell}</span>;
     }
   }
+
   createdFormatter(cell) {
     return <DateFormat date={cell} time />;
   }
+
   requestedByFormatter(cell) {
     if (cell && cell != null) {
-      let user = _.find(this.state.allUsers, function(user) {
+      const user = _.find(this.state.allUsers, function(user) {
         return user.id == cell;
       });
       if (user != undefined) {
@@ -241,10 +253,11 @@ class ManageSubscriptions extends React.Component {
       return cell;
     }
   }
+
   rowActionsFormatter(cell, row) {
-    let self = this;
-    let status = row.status;
-    let customAction = {
+    const self = this;
+    const {status} = row;
+    const customAction = {
       type: "button",
       label: this.dropdownStatusFormatter(row),
       action: () => {
@@ -278,22 +291,22 @@ class ManageSubscriptions extends React.Component {
   }
 
   dropdownStatusFormatter(dataObject) {
-    let status = dataObject.status;
+    const {status} = dataObject;
     const statusString = _.toLower(status);
     if (statusString === "waiting_cancellation") {
       return "Manage Cancellation";
-    } else if (statusString === "cancelled" || !dataObject.payment_plan) {
+    } if (statusString === "cancelled" || !dataObject.payment_plan) {
       return "Delete Service";
-    } else {
+    } 
       return "Cancel Service";
-    }
+    
   }
 
   render() {
-    let self = this;
+    const self = this;
     let pageName = this.props.route.name;
     let pageTitle = "Manage your services here";
-    let subtitle = "View, edit, and manage your subscriptions";
+    const subtitle = "View, edit, and manage your subscriptions";
 
     if (this.props.params.status) {
       if (this.props.params.status == "running") {
@@ -308,18 +321,18 @@ class ManageSubscriptions extends React.Component {
       }
     }
     if (_.has(this.props, "location.query.uid")) {
-      let uid = this.props.location.query.uid;
+      const {uid} = this.props.location.query;
       pageName = `Services for user ${uid}`;
       pageTitle = `Manage user ${uid} services here.`;
     }
 
-    let renderModals = () => {
-      //change the status to cancelled if no payment plan is detected
-      let status = self.state.currentDataObject.status;
+    const renderModals = () => {
+      // change the status to cancelled if no payment plan is detected
+      let {status} = self.state.currentDataObject;
       if (!self.state.currentDataObject.payment_plan) {
         status = "cancelled";
       }
-      //Show the proper cancellation modal
+      // Show the proper cancellation modal
       if (self.state.actionModal) {
         switch (status) {
           case "waiting_cancellation":
@@ -357,7 +370,7 @@ class ManageSubscriptions extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       const qualityType = {
         0: "good",
         1: "bad",
@@ -381,7 +394,7 @@ class ManageSubscriptions extends React.Component {
                       isKey
                       dataField="name"
                       dataFormat={this.nameFormatter}
-                      dataSort={true}
+                      dataSort
                       width="130"
                     >
                       Offering
@@ -389,7 +402,7 @@ class ManageSubscriptions extends React.Component {
                     <TableHeaderColumn
                       dataField="references"
                       dataFormat={this.emailFormatter}
-                      dataSort={true}
+                      dataSort
                       filterValue={this.emailDataValue}
                       width="150"
                     >
@@ -398,7 +411,7 @@ class ManageSubscriptions extends React.Component {
                     <TableHeaderColumn
                       dataField="payment_plan"
                       dataFormat={this.amountFormatter}
-                      dataSort={true}
+                      dataSort
                       searchable={false}
                       width="80"
                     >
@@ -407,7 +420,7 @@ class ManageSubscriptions extends React.Component {
                     <TableHeaderColumn
                       dataField="payment_plan"
                       dataFormat={this.typeFormatter}
-                      dataSort={true}
+                      dataSort
                       filterValue={this.typeDataValue}
                       width="100"
                     >
@@ -416,7 +429,7 @@ class ManageSubscriptions extends React.Component {
                     <TableHeaderColumn
                       dataField="status"
                       dataFormat={this.statusFormatter}
-                      dataSort={true}
+                      dataSort
                       width="100"
                     >
                       Status
@@ -424,7 +437,7 @@ class ManageSubscriptions extends React.Component {
                     <TableHeaderColumn
                       dataField="updated_at"
                       dataFormat={this.createdFormatter}
-                      dataSort={true}
+                      dataSort
                       searchable={false}
                       width="140"
                     >
@@ -432,12 +445,12 @@ class ManageSubscriptions extends React.Component {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                       dataField="Actions"
-                      className={"action-column-header"}
-                      columnClassName={"action-column"}
+                      className="action-column-header"
+                      columnClassName="action-column"
                       dataFormat={this.rowActionsFormatter}
                       width="80"
                       searchable={false}
-                    ></TableHeaderColumn>
+                    />
                   </ServiceBotTableBase>
                 </div>
               </div>
@@ -446,7 +459,7 @@ class ManageSubscriptions extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

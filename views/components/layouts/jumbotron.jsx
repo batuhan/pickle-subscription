@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import SearchDashboard from "../elements/my-services/dashboard-search.jsx";
 import Breadcrumbs from "../utilities/breadcrumbs.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class Jumbotron extends React.Component {
   constructor(props) {
@@ -19,10 +20,10 @@ class Jumbotron extends React.Component {
   }
 
   render() {
-    let style = { jumbotron: {}, breadcrumbs: {} };
+    const style = { jumbotron: {}, breadcrumbs: {} };
 
     if (this.state.systemOptions) {
-      let options = this.state.systemOptions;
+      const options = this.state.systemOptions;
       style.jumbotron.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -56,7 +57,7 @@ class Jumbotron extends React.Component {
                 />
               )}
             </div>
-            {/*<SearchDashboard/>*/}
+            {/* <SearchDashboard/> */}
           </div>
         </div>
         {this.props.children}

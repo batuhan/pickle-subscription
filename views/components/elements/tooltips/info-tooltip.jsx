@@ -3,9 +3,9 @@ import ToolTip from "./tooltip.jsx";
 
 class InfoToolTip extends React.Component {
   render() {
-    let text = this.props.text || "?";
-    let placement = this.props.placement || "left";
-    let title = this.props.title || "tooltip";
+    const text = this.props.text || "?";
+    const placement = this.props.placement || "left";
+    const title = this.props.title || "tooltip";
 
     return (
       <ToolTip

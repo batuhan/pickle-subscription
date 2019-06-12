@@ -1,5 +1,5 @@
 import React from "react";
-import Buttons from "../../../components/elements/buttons.jsx";
+import Buttons from "../buttons.jsx";
 
 class Multistep extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class Multistep extends React.Component {
       currentStep: props.initialStep || 0,
     };
   }
+
   step(nextStep = "next") {
     let step = this.state.currentStep;
     if (nextStep == "next") {
@@ -25,15 +26,16 @@ class Multistep extends React.Component {
     }
     this.setState({ currentStep: step });
   }
+
   stepForward(e) {
     e.preventDefault();
-    let onNext = this.props.steps[this.state.currentStep].onNext;
+    const {onNext} = this.props.steps[this.state.currentStep];
     if (onNext) {
       onNext(this.step);
     } else {
       this.step();
     }
-    //validate here!!!!!!
+    // validate here!!!!!!
   }
 
   stepBackward(e) {
@@ -42,13 +44,13 @@ class Multistep extends React.Component {
   }
 
   render() {
-    var self = this;
+    const self = this;
 
-    let currentStep = this.state.currentStep;
+    const {currentStep} = this.state;
 
-    let stepToRender = this.props.steps[currentStep];
-    let stepName = stepToRender.name;
-    let stepComponent = stepToRender.component;
+    const stepToRender = this.props.steps[currentStep];
+    const stepName = stepToRender.name;
+    const stepComponent = stepToRender.component;
     let nextButton = (
       <button
         className="btn btn-rounded btn-default"
@@ -67,7 +69,7 @@ class Multistep extends React.Component {
 
     return (
       <div>
-        <h4>{currentStep + 1 + " : " + stepName}</h4>
+        <h4>{`${currentStep + 1  } : ${  stepName}`}</h4>
         <hr />
         {stepComponent}
         <div className="control-btns">

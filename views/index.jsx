@@ -1,8 +1,8 @@
 import React from "react";
-import { render } from "react-dom";
-import AppRouter from "./router.jsx";
+import ReactDOM, { render } from "react-dom";
 import { AppContainer } from "react-hot-loader";
-import ReactDOM from "react-dom";
+import AppRouter from "./router.jsx";
+
 
 render(
   <AppContainer>

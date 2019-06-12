@@ -1,7 +1,7 @@
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let Charge = require("../models/charge");
-let EventLogs = require("../models/event-log");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const Charge = require("../models/charge");
+const EventLogs = require("../models/event-log");
 
 module.exports = function(router) {
   /**
@@ -12,7 +12,7 @@ module.exports = function(router) {
     validate(Charge, "id"),
     auth(null, Charge),
     function(req, res) {
-      let charge_item = res.locals.valid_object;
+      const charge_item = res.locals.valid_object;
       charge_item.approve(function(err, result) {
         if (!err) {
           EventLogs.logEvent(
@@ -37,7 +37,7 @@ module.exports = function(router) {
     validate(Charge, "id"),
     auth(null, Charge),
     function(req, res) {
-      let charge_item = res.locals.valid_object;
+      const charge_item = res.locals.valid_object;
       charge_item.cancel(function(result) {
         EventLogs.logEvent(
           req.user.get("id"),

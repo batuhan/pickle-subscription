@@ -11,27 +11,27 @@ import {
 import consume from "pluginbot/effects/consume";
 import ReactGA from "react-ga";
 
-let actionHandler = function(action, state) {
+const actionHandler = function(action, state) {
   switch (action.type) {
     case "@@redux-form/SET_SUBMIT_SUCCEEDED":
       return {
         category: "Forms",
-        action: "Successfully submitted " + action.meta.form,
+        action: `Successfully submitted ${  action.meta.form}`,
       };
     case "@@redux-form/START_SUBMIT":
       return {
         category: "Forms",
-        action: "Start Submit " + action.meta.form,
+        action: `Start Submit ${  action.meta.form}`,
       };
     case "@@redux-form/SET_SUBMIT_FAILED":
       if (!state) {
         return true;
       }
-      let form = state.form[action.meta.form];
-      let label = form.error || JSON.stringify(form.syncErrors);
+      const form = state.form[action.meta.form];
+      const label = form.error || JSON.stringify(form.syncErrors);
       return {
         category: "Forms",
-        action: "Submit Failed " + action.meta.form,
+        action: `Submit Failed ${  action.meta.form}`,
         label,
       };
     default:
@@ -40,8 +40,8 @@ let actionHandler = function(action, state) {
 };
 
 function* run(config, provide, channels) {
-  //todo pull initialize from channel?
-  let { initialState } = yield take("INITIALIZE");
+  // todo pull initialize from channel?
+  const { initialState } = yield take("INITIALIZE");
   if (
     initialState.options.google_analytics &&
     initialState.options.google_analytics.value
@@ -51,7 +51,7 @@ function* run(config, provide, channels) {
       ReactGA.set({ userId: initialState.uid });
     }
     yield takeEvery(actionHandler, function*(action) {
-      let state = yield select();
+      const state = yield select();
       ReactGA.event(actionHandler(action, state));
     });
     yield takeEvery("@@router/LOCATION_CHANGE", function*(action) {

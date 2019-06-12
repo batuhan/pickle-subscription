@@ -1,7 +1,7 @@
 import React from "react";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import Modal from "../../utilities/modal.jsx";
 import ServiceInstanceFormEdit from "../forms/service-instance-form-edit.jsx";
 
@@ -16,16 +16,16 @@ class ModalEditInstance extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Edit Service Instance";
+    const self = this;
+    const pageName = "Edit Service Instance";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <div className="row">

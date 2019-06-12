@@ -2,9 +2,10 @@ import React from "react";
 import Load from "../../utilities/load.jsx";
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
-import Buttons from "../../elements/buttons.jsx";
+import Buttons from "../buttons.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class UserRegisterForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class UserRegisterForm extends React.Component {
     this.state = {
       loading: true,
       roles: null,
-      formURL: `/api/v1/users/${this.props.user.id}`, //change the URL
+      formURL: `/api/v1/users/${this.props.user.id}`, // change the URL
     };
 
     this.fetchRoles = this.fetchRoles.bind(this);
@@ -20,8 +21,8 @@ class UserRegisterForm extends React.Component {
   }
 
   handleSubmission() {
-    let self = this;
-    let payload = self.props.formData; // this formData object came from Redux store
+    const self = this;
+    const payload = self.props.formData; // this formData object came from Redux store
     self.setState({ ajaxLoad: false });
     Fetcher(this.state.formURL, "PUT", payload).then(function(response) {
       if (!response.error) {
@@ -29,7 +30,7 @@ class UserRegisterForm extends React.Component {
           ajaxLoad: false,
           success: true,
           updatedUser: response.results.data,
-        }); //change the last one to what u are doing
+        }); // change the last one to what u are doing
       } else {
         console.error(`Server Error:`, response.error);
         self.setState({ ajaxLoad: false });
@@ -40,7 +41,7 @@ class UserRegisterForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <div className="edit-user-role-form">
           <div className="p-20">
@@ -65,7 +66,7 @@ class UserRegisterForm extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 

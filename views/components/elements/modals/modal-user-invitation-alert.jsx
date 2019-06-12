@@ -15,16 +15,16 @@ class ModalUserInvitaionAlert extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Email Confirmation Needed";
+    const self = this;
+    const pageName = "Email Confirmation Needed";
 
     return (
       <Modal
         modalTitle={pageName}
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
         width={this.props.width}
       >
         <div className="table-responsive">

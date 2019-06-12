@@ -15,13 +15,15 @@ import {
   Form,
 } from "redux-form";
 import { connect } from "react-redux";
+import { required, email, numericality, length } from "redux-form-validators";
+import slug from "slug";
 import {
   RenderWidget,
   WidgetList,
   PriceBreakdown,
   widgets,
 } from "../../utilities/widgets";
-import { WysiwygRedux } from "../../elements/wysiwyg.jsx";
+import { WysiwygRedux } from "../wysiwyg.jsx";
 import FileUploadForm from "./file-upload-form.jsx";
 import {
   inputField,
@@ -36,9 +38,7 @@ import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import SVGIcons from "../../utilities/svg-icons.jsx";
 import Load from "../../utilities/load.jsx";
 
-let _ = require("lodash");
-import { required, email, numericality, length } from "redux-form-validators";
-import slug from "slug";
+const _ = require("lodash");
 
 const TEMPLATE_FORM_NAME = "serviceTemplateForm";
 const selector = formValueSelector(TEMPLATE_FORM_NAME); // <-- same as form name
@@ -46,7 +46,7 @@ const selector = formValueSelector(TEMPLATE_FORM_NAME); // <-- same as form name
 function renderSplits({ fields, meta: { error, submitFailed } }) {
   function onAdd(e) {
     e.preventDefault();
-    let number_of_payments = e.target.value;
+    const number_of_payments = e.target.value;
     let number_of_fields = fields.length;
 
     while (number_of_fields < number_of_payments) {
@@ -92,7 +92,10 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
               </span>
             </button>
 
-            <h4>Payment #{index + 1}</h4>
+            <h4>
+Payment #
+              {index + 1}
+            </h4>
             <label>Days to charge customer after subscribed</label>
             <Field
               name={`${member}.charge_day`}
@@ -104,7 +107,7 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
               name={`${member}.amount`}
               type="number"
               component={priceField}
-              isCents={true}
+              isCents
               label="Amount"
               validate={numericality({ ">=": 0.0 })}
             />
@@ -121,7 +124,7 @@ class CustomField extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let props = this.props;
+    const {props} = this;
     if (nextProps.myValues.type !== props.myValues.type) {
       props.clearConfig();
       props.clearValue();
@@ -132,7 +135,7 @@ class CustomField extends React.Component {
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
     let {
       willAutoFocus,
       index,
@@ -182,7 +185,7 @@ class CustomField extends React.Component {
               name={`${member}.prompt_user`}
               type="checkbox"
               label={promptValue ? "Prompt User" : "Set Prompt User"}
-              defaultValue={true}
+              defaultValue
               color="#0091EA"
               faIcon="eye"
               component={iconToggleField}
@@ -438,7 +441,7 @@ CustomField = connect(
   },
 )(CustomField);
 
-//Custom property
+// Custom property
 class renderCustomProperty extends React.Component {
   constructor(props) {
     super(props);
@@ -461,7 +464,7 @@ class renderCustomProperty extends React.Component {
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
     const {
       templateType,
       privateValue,
@@ -474,9 +477,9 @@ class renderCustomProperty extends React.Component {
           {fields.map((customProperty, index) => (
             <li className="custom-field-item" key={index}>
               <div className="custom-field-name">
-                {/*{fields.get(index).prop_label ?*/}
-                {/*<p>{fields.get(index).prop_label}</p> : <p>Field #{index + 1}</p>*/}
-                {/*}*/}
+                {/* {fields.get(index).prop_label ? */}
+                {/* <p>{fields.get(index).prop_label}</p> : <p>Field #{index + 1}</p> */}
+                {/* } */}
                 <button
                   className="btn btn-rounded custom-field-button iconToggleField"
                   id="custom-field-delete-button"
@@ -506,7 +509,7 @@ class renderCustomProperty extends React.Component {
                 onClick={this.onAdd}
               />
             </div>
-            {/*<button className="btn btn-rounded" type="button" onClick={this.onAdd}>Add Field</button>*/}
+            {/* <button className="btn btn-rounded" type="button" onClick={this.onAdd}>Add Field</button> */}
             {touched && error && <span>{error}</span>}
           </li>
         </ul>
@@ -515,7 +518,7 @@ class renderCustomProperty extends React.Component {
   }
 }
 
-//The full form
+// The full form
 
 class TemplateForm extends React.Component {
   constructor(props) {
@@ -523,7 +526,7 @@ class TemplateForm extends React.Component {
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
 
     const changeServiceType = (event, newValue) => {
       if (newValue === "one_time") {
@@ -609,7 +612,7 @@ class TemplateForm extends React.Component {
             <Field
               name="published"
               type="checkbox"
-              defaultValue={true}
+              defaultValue
               color="#0091EA"
               faIcon="check"
               component={OnOffToggleField}
@@ -691,7 +694,7 @@ class TemplateForm extends React.Component {
                     name="amount"
                     type="number"
                     component={priceField}
-                    isCents={true}
+                    isCents
                     label="Amount"
                     validate={numericality({ ">=": 0.0 })}
                   />
@@ -778,7 +781,7 @@ class TemplateForm extends React.Component {
                     <path d="m269.47 309.89h-161.68c-14.82 0-26.948 12.126-26.948 26.948v40.421c0 14.82 12.126 26.947 26.948 26.947h161.68c14.82 0 26.948-12.126 26.948-26.947v-40.421c0-14.822-12.127-26.948-26.947-26.948zm0 74.105h-161.68c-3.651 0-6.737-3.086-6.737-6.737v-40.421c0-3.651 3.086-6.737 6.737-6.737h161.68c3.651 0 6.737 3.086 6.737 6.737v40.421h1e-3c-1e-3 3.651-3.086 6.737-6.737 6.737z" />
                     <path d="m485.05 26.947h-53.895v13.473c0 7.445-6.036 13.473-13.473 13.473-7.438 0-13.473-6.03-13.473-13.473v-13.473h-53.895v13.473c0 7.445-6.036 13.473-13.473 13.473s-13.473-6.03-13.473-13.473v-13.473h-53.895v13.473c0 7.445-6.036 13.473-13.473 13.473s-13.473-6.03-13.473-13.473v-13.473h-53.895v13.473c0 7.445-6.036 13.473-13.473 13.473-7.438 0-13.473-6.03-13.473-13.473v-13.473h-53.899v13.473c0 7.445-6.036 13.473-13.473 13.473s-13.473-6.03-13.473-13.473v-13.473h-53.895c-14.822 0-26.948 12.126-26.948 26.948v404.21c0 14.82 12.126 26.948 26.948 26.948h458.1c14.82 0 26.947-12.126 26.947-26.948v-404.21c0-14.822-12.127-26.948-26.948-26.948zm0 437.9h-458.1c-3.651 0-6.737-3.086-6.737-6.737v-404.21c0-3.651 3.086-6.737 6.737-6.737h34.364c3.126 15.353 16.742 26.947 33.004 26.947s29.884-11.594 33.004-26.947h14.828c3.126 15.353 16.742 26.947 33.004 26.947s29.884-11.594 33.004-26.947h14.828c3.126 15.353 16.742 26.947 33.004 26.947s29.884-11.594 33.004-26.947h14.828c3.126 15.353 16.742 26.947 33.004 26.947s29.884-11.594 33.004-26.947h14.828c3.126 15.353 16.742 26.947 33.004 26.947s29.884-11.594 33.004-26.947h34.391c3.651 0 6.737 3.086 6.737 6.737v404.21h1e-3c-4e-3 3.651-3.09 6.737-6.741 6.737z" />
                   </SVGIcons>
-                  {/*<img id="custom-fields-svg" src="/assets/custom_icons/custom_fields.svg"/>*/}
+                  {/* <img id="custom-fields-svg" src="/assets/custom_icons/custom_fields.svg"/> */}
                 </div>
                 <p className="help-block">
                   Setup payment details. This will be how your customers will be
@@ -804,14 +807,14 @@ class TemplateForm extends React.Component {
                     component={renderCustomProperty}
                   />
                 </FormSection>
-                {/*{props.formJSON.references && props.formJSON.references.service_template_properties &&*/}
-                {/*<PriceBreakdown*/}
-                {/*inputs={props.formJSON.references.service_template_properties}/>*/}
-                {/*}*/}
+                {/* {props.formJSON.references && props.formJSON.references.service_template_properties && */}
+                {/* <PriceBreakdown */}
+                {/* inputs={props.formJSON.references.service_template_properties}/> */}
+                {/* } */}
                 <div id="service-submission-box" className="button-box right">
                   <Link
                     className="btn btn-rounded btn-default"
-                    to={"/manage-catalog/list"}
+                    to="/manage-catalog/list"
                   >
                     Go Back
                   </Link>
@@ -899,7 +902,7 @@ class ServiceTemplateForm extends React.Component {
       newTemplateId: response.id,
       success: true,
     });
-    let successMessage = {
+    const successMessage = {
       id: Date.now(),
       alertType: "success",
       message: `${response.name} was saved successfully`,
@@ -911,7 +914,7 @@ class ServiceTemplateForm extends React.Component {
   }
 
   submissionPrep(values) {
-    //remove id's for duplicate template operation
+    // remove id's for duplicate template operation
     if (this.props.params.duplicate) {
       console.log("We have a duplicate and we want to remove id");
       delete values.id;
@@ -928,12 +931,12 @@ class ServiceTemplateForm extends React.Component {
   }
 
   render() {
-    //Todo change this. this is how we are currently making sure the redux store is populated
+    // Todo change this. this is how we are currently making sure the redux store is populated
     if (!this.props.company_name) {
       return <Load />;
-    } else {
+    } 
       let initialValues = {};
-      let initialRequests = [];
+      const initialRequests = [];
       let submissionRequest = {};
       let successMessage = "Template Updated";
       let imageUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/image`;
@@ -1033,7 +1036,7 @@ class ServiceTemplateForm extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

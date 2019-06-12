@@ -11,6 +11,11 @@ import {
   getFormValues,
 } from "redux-form";
 import { connect } from "react-redux";
+import getSymbolFromCurrency from "currency-symbol-map";
+import { required, email, numericality, length } from "redux-form-validators";
+import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
+import cookie from "react-cookie";
+import values from "object.values";
 import {
   RenderWidget,
   WidgetList,
@@ -24,22 +29,17 @@ import {
   widgetField,
   priceField,
 } from "./servicebot-base-field.jsx";
-import { CardSection } from "../../elements/forms/billing-settings-form.jsx";
-import getSymbolFromCurrency from "currency-symbol-map";
+import { CardSection } from "./billing-settings-form.jsx";
 
 import { Price } from "../../utilities/price.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import ModalUserLogin from "../modals/modal-user-login.jsx";
 import { setUid, fetchUsers, setUser } from "../../utilities/actions";
-import { required, email, numericality, length } from "redux-form-validators";
-import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
-import cookie from "react-cookie";
-
-let _ = require("lodash");
 
 import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import { getPrice } from "../../../../lib/handleInputs";
-import values from "object.values";
+
+const _ = require("lodash");
 
 if (!Object.values) {
   values.shim();
@@ -47,7 +47,7 @@ if (!Object.values) {
 
 const selector = formValueSelector("serviceInstanceRequestForm"); // <-- same as form name
 
-//Custom property
+// Custom property
 let renderCustomProperty = props => {
   const {
     fields,
@@ -55,15 +55,15 @@ let renderCustomProperty = props => {
     meta: { touched, error },
     services: { widget },
   } = props;
-  let widgets = widget.reduce((acc, widget) => {
+  const widgets = widget.reduce((acc, widget) => {
     acc[widget.type] = widget;
     return acc;
   }, {});
   return (
     <div>
       {fields.map((customProperty, index) => {
-        let property = widgets[formJSON[index].type];
-        let validate = [];
+        const property = widgets[formJSON[index].type];
+        const validate = [];
         if (formJSON[index].required) {
           validate.push(required());
         }
@@ -82,10 +82,10 @@ let renderCustomProperty = props => {
               validate={validate}
             />
           );
-        } else {
+        } 
           if (formJSON[index].data && formJSON[index].data.value) {
             return (
-              <div className={`form-group form-group-flex`}>
+              <div className="form-group form-group-flex">
                 {formJSON[index].prop_label &&
                   formJSON[index].type !== "hidden" && (
                     <label className="control-label form-label-flex-md">
@@ -97,10 +97,10 @@ let renderCustomProperty = props => {
                 </div>
               </div>
             );
-          } else {
+          } 
             return <span />;
-          }
-        }
+          
+        
       })}
     </div>
   );
@@ -108,14 +108,14 @@ let renderCustomProperty = props => {
 
 renderCustomProperty = consume("widget")(renderCustomProperty);
 
-//The full form
+// The full form
 class ServiceRequestForm extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
     const {
       handleSubmit,
       formJSON,
@@ -123,7 +123,7 @@ class ServiceRequestForm extends React.Component {
       error,
       services: { widget },
     } = props;
-    let handlers = widget.reduce((acc, widget) => {
+    const handlers = widget.reduce((acc, widget) => {
       acc[widget.type] = widget.handler;
       return acc;
     }, {});
@@ -139,13 +139,13 @@ class ServiceRequestForm extends React.Component {
       console.error(e);
     }
 
-    let getRequestText = () => {
-      let serType = formJSON.type;
-      let trial = formJSON.trial_period_days !== 0;
-      let prefix = getSymbolFromCurrency(formJSON.currency);
+    const getRequestText = () => {
+      const serType = formJSON.type;
+      const trial = formJSON.trial_period_days !== 0;
+      const prefix = getSymbolFromCurrency(formJSON.currency);
       if (trial) {
         return "Get your Free Trial";
-      } else {
+      } 
         if (serType === "subscription") {
           return (
             <span>
@@ -153,31 +153,34 @@ class ServiceRequestForm extends React.Component {
               <Price value={newPrice} prefix={prefix} />
               {formJSON.interval_count == 1
                 ? " /"
-                : " / " + formJSON.interval_count}{" "}
-              {" " + formJSON.interval}
+                : ` / ${  formJSON.interval_count}`}
+              {" "}
+              {` ${  formJSON.interval}`}
             </span>
           );
-        } else if (serType === "one_time") {
+        } if (serType === "one_time") {
           return (
             <span>
-              {"Buy Now"} <Price value={newPrice} prefix={prefix} />
+              {"Buy Now"} 
+              {' '}
+              <Price value={newPrice} prefix={prefix} />
             </span>
           );
-        } else if (serType === "custom") {
+        } if (serType === "custom") {
           return "Request";
-        } else if (serType === "split") {
+        } if (serType === "split") {
           return "Buy Now";
-        } else {
+        } 
           return (
             <span>
               <Price value={newPrice} prefix={prefix} />
             </span>
           );
-        }
-      }
+        
+      
     };
-    //Sort users and if user does not have name set, set it to the email value which will always be there
-    let users = _.map(helpers.usersData, user => {
+    // Sort users and if user does not have name set, set it to the email value which will always be there
+    const users = _.map(helpers.usersData, user => {
       user.name = user.name || user.email;
       return user;
     });
@@ -190,7 +193,7 @@ class ServiceRequestForm extends React.Component {
                  <pre className="" style={{maxHeight: '300px', overflowY: 'scroll'}}>
                  {JSON.stringify(formJSON, null, 2)}
                  </pre>
-                 </div>*/}
+                 </div> */}
         <form onSubmit={handleSubmit}>
           <Authorizer permissions="can_administrate">
             <Field
@@ -205,7 +208,7 @@ class ServiceRequestForm extends React.Component {
                 name="amount"
                 type="number"
                 component={priceField}
-                isCents={true}
+                isCents
                 label="Override Amount"
                 validate={numericality({ ">=": 0.0 })}
               />
@@ -217,18 +220,31 @@ class ServiceRequestForm extends React.Component {
               {helpers.stripToken ? (
                 <div>
                   <p className="help-block">
-                    You {helpers.card.funding} card in your account ending in:{" "}
-                    {helpers.card.last4} will be used.
+                    You 
+                    {' '}
+                    {helpers.card.funding}
+                    {' '}
+card in your account ending in:
+                    {" "}
+                    {helpers.card.last4}
+                    {' '}
+will be used.
                   </p>
                   <span className="help-block">
                     If you wish to use a different card, you can update your
-                    card under{" "}
+                    card under
+                    {" "}
                     <Link to="/billing-settings">billing settings.</Link>
                   </span>
                 </div>
               ) : (
                 <p className="help-block">
-                  Using {helpers.card.funding} card ending in:{" "}
+                  Using 
+                  {' '}
+                  {helpers.card.funding}
+                  {' '}
+card ending in:
+                  {" "}
                   {helpers.card.last4}
                 </p>
               )}
@@ -291,14 +307,14 @@ class ServiceInstanceForm extends React.Component {
   constructor(props) {
     super(props);
 
-    let templateId = this.props.templateId || 1;
+    const templateId = this.props.templateId || 1;
     this.state = {
       uid: this.props.uid,
       stripToken: null,
-      templateId: templateId,
+      templateId,
       templateData: this.props.service,
       formData: this.props.service,
-      formURL: "/api/v1/service-templates/" + templateId + "/request",
+      formURL: `/api/v1/service-templates/${  templateId  }/request`,
       formResponseData: null,
       formResponseError: null,
       serviceCreated: null,
@@ -316,13 +332,13 @@ class ServiceInstanceForm extends React.Component {
   }
 
   componentWillMount() {
-    let self = this;
+    const self = this;
 
-    //get the users for the client select list if current user is Admin
+    // get the users for the client select list if current user is Admin
     if (isAuthorized({ permissions: "can_administrate" })) {
       Fetcher(self.state.usersURL).then(function(response) {
         if (!response.error) {
-          let userRoleList = response.filter(function(user) {
+          const userRoleList = response.filter(function(user) {
             return (
               user.references.user_roles[0].role_name === "user" &&
               user.status !== "suspended"
@@ -334,7 +350,7 @@ class ServiceInstanceForm extends React.Component {
       });
     }
 
-    //try getting user's fund if current user is NOT Admin
+    // try getting user's fund if current user is NOT Admin
     if (!isAuthorized({ permissions: "can_administrate" })) {
       Fetcher("/api/v1/funds/own").then(function(response) {
         if (!response.error && response.length == 0) {
@@ -345,7 +361,7 @@ class ServiceInstanceForm extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.formURL)
       .then(function(response) {
         if (!response.error) {
@@ -378,7 +394,7 @@ class ServiceInstanceForm extends React.Component {
   }
 
   updatePrice(newPrice) {
-    let self = this;
+    const self = this;
     self.setState({ servicePrice: newPrice });
   }
 
@@ -387,21 +403,21 @@ class ServiceInstanceForm extends React.Component {
   }
 
   checkIfUserHasCard() {
-    let self = this;
+    const self = this;
     Fetcher(`/api/v1/users/${self.props.uid}`).then(function(response) {
       if (!response.error) {
         if (
           _.has(response, "references.funds[0]") &&
           _.has(response, "references.funds[0].source.card")
         ) {
-          let fund = _.get(response, "references.funds[0]");
-          let card = _.get(response, "references.funds[0].source.card");
+          const fund = _.get(response, "references.funds[0]");
+          const card = _.get(response, "references.funds[0].source.card");
           self.setState(
             {
               loading: false,
               hasCard: true,
-              fund: fund,
-              card: card,
+              fund,
+              card,
               personalInformation: {
                 name: card.name,
                 address_line1: card.address_line1,
@@ -423,7 +439,7 @@ class ServiceInstanceForm extends React.Component {
   }
 
   async submissionPrep(values) {
-    let token = await this.props.stripe.createToken();
+    const token = await this.props.stripe.createToken();
     if (token.error) {
       throw token.error.message;
     }
@@ -439,17 +455,17 @@ class ServiceInstanceForm extends React.Component {
   }
 
   formValidation(values) {
-    let props =
+    const props =
       values.references && values.references.service_template_properties
         ? values.references.service_template_properties
         : [];
-    let re = props.reduce((acc, prop, index) => {
+    const re = props.reduce((acc, prop, index) => {
       if (prop.required && (!prop.data || !prop.data.value)) {
         acc[index] = { data: { value: "is required" } };
       }
       return acc;
     }, {});
-    let validation = { references: { service_template_properties: re } };
+    const validation = { references: { service_template_properties: re } };
 
     if (Object.keys(re).length === 0) {
       delete validation.references;
@@ -458,24 +474,24 @@ class ServiceInstanceForm extends React.Component {
   }
 
   render() {
-    let self = this;
-    let initialValues = this.props.service;
-    let initialRequests = [];
+    const self = this;
+    const initialValues = this.props.service;
+    const initialRequests = [];
     let submissionPrep;
-    let submissionRequest = {
+    const submissionRequest = {
       method: "POST",
       url: `/api/v1/service-templates/${this.props.templateId}/request`,
     };
-    let successMessage = "Service Requested";
+    const successMessage = "Service Requested";
     let successRoute = "/my-services";
-    //If admin requested, redirect to the manage subscription page
+    // If admin requested, redirect to the manage subscription page
     if (isAuthorized({ permissions: "can_administrate" })) {
       successRoute = "/manage-subscriptions";
     }
 
-    let helpers = Object.assign(this.state, this.props);
+    const helpers = Object.assign(this.state, this.props);
     helpers.updatePrice = self.updatePrice;
-    //Gets a token to populate token_id for instance request
+    // Gets a token to populate token_id for instance request
     if (
       !isAuthorized({ permissions: "can_administrate" }) &&
       this.state.servicePrice > 0 &&
@@ -516,7 +532,7 @@ ServiceInstanceForm = injectStripe(ServiceInstanceForm);
 
 class FormWrapper extends React.Component {
   render() {
-    let spk = cookie.load("spk");
+    const spk = cookie.load("spk");
     return (
       <StripeProvider apiKey={spk || "no_public_token"}>
         <Elements>

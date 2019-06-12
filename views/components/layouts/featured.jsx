@@ -1,8 +1,9 @@
 import React from "react";
-import FeaturedImage from "./featured-elements/featured-image.jsx";
 import { connect } from "react-redux";
-let _ = require("lodash");
+import FeaturedImage from "./featured-elements/featured-image.jsx";
 import { AdminEditingGear, AdminEditingSidebar } from "./admin-sidebar.jsx";
+
+const _ = require("lodash");
 
 class Featured extends React.Component {
   constructor(props) {
@@ -32,16 +33,18 @@ class Featured extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   render() {
-    let featuredBackgroundColor = {};
-    let { options, className, style, children, overlay } = this.props;
+    const featuredBackgroundColor = {};
+    const { options, className, style, children, overlay } = this.props;
     featuredBackgroundColor.backgroundColor = _.get(
       options,
       "primary_theme_background_color.value",

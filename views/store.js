@@ -1,5 +1,13 @@
 import React from "react";
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import cookie from "react-cookie";
+import thunk from "redux-thunk";
+import { reducer as formReducer } from "redux-form";
+import PluginbotClient from "pluginbot-react";
+import { syncHistoryWithStore, routerReducer } from "react-router-redux";
+import { browserHistory } from "react-router";
+import Fetcher from "./components/utilities/fetcher.jsx";
+import { isAuthorized } from "./components/utilities/authorizer.jsx";
 import {
   SET_FORM_DATA,
   SET_OPTIONS,
@@ -23,15 +31,8 @@ import {
   HIDE_MODAL,
   initializeState,
 } from "./components/utilities/actions";
-import cookie from "react-cookie";
-import thunk from "redux-thunk";
-import { isAuthorized } from "./components/utilities/authorizer.jsx";
-import Fetcher from "./components/utilities/fetcher.jsx";
-import { reducer as formReducer } from "redux-form";
-import PluginbotClient from "pluginbot-react";
-import { syncHistoryWithStore, routerReducer } from "react-router-redux";
-import { browserHistory } from "react-router";
 import Modal from "./components/utilities/modal.jsx";
+
 let DELETETHISCODELATERUID = cookie.load("uid");
 
 function oldFormReducer(state = {}, action) {
@@ -92,9 +93,9 @@ function notificationsReducer(state = [], action) {
       return state.map(notification => {
         if (notification.id == action.notification.id) {
           return action.notification;
-        } else {
+        } 
           return notification;
-        }
+        
       });
     default:
       return state;
@@ -127,9 +128,9 @@ function systemNotificationReducer(state = [], action) {
       return state.map(notification => {
         if (notification.id == action.notification.id) {
           return action.notification;
-        } else {
+        } 
           return notification;
-        }
+        
       });
     default:
       return state;
@@ -165,10 +166,10 @@ function uidReducer(state = cookie.load("uid") || null, action) {
     case INITIALIZE:
       if (action.initialState.uid == undefined) {
         return null;
-      } else {
+      } 
         DELETETHISCODELATERUID = action.initialState.uid;
         return action.initialState.uid;
-      }
+      
     case SET_UID:
       DELETETHISCODELATERUID = action.uid;
       return action.uid;
@@ -182,26 +183,26 @@ function userReducer(state = {}, action) {
     case INITIALIZE:
       if (action.initialState.user == undefined) {
         return {};
-      } else {
+      } 
         return action.initialState.user;
-      }
+      
     case SET_USER:
       if (action.user == undefined) {
         return {};
-      } else {
+      } 
         return action.user;
-      }
+      
     default:
       return state;
   }
 }
 
-function modalReducer(state = <div></div>, action) {
+function modalReducer(state = <div />, action) {
   switch (action.type) {
     case SHOW_MODAL:
       return <Modal {...action.modalProps} />;
     case HIDE_MODAL:
-      return <div></div>;
+      return <div />;
     default:
       return state;
   }
@@ -234,10 +235,10 @@ const rootReducer = {
 //     console.log("store changed", store.getState());
 // });
 
-let initializedState = function(initialOptions = null) {
+const initializedState = function(initialOptions = null) {
   return async function(dispatch) {
     console.log(cookie.load("uid"));
-    let initialState = {
+    const initialState = {
       allForms: {},
       options: {},
       notifications: [],
@@ -251,8 +252,8 @@ let initializedState = function(initialOptions = null) {
       if (cookie.load("uid")) {
         // if user is logged in
         initialState.user = (await Fetcher("/api/v1/users/own"))[0];
-        //Set the version of the application if the user is logged in
-        let version = await Fetcher("/api/v1/system-options/version");
+        // Set the version of the application if the user is logged in
+        const version = await Fetcher("/api/v1/system-options/version");
         initialState.options = {
           ...initialState.options,
           version: version.version,
@@ -285,9 +286,9 @@ let initializedState = function(initialOptions = null) {
   };
 };
 
-let initialize = async function() {
-  let app = await PluginbotClient.createPluginbot();
-  let middleware = [rootReducer, thunk];
+const initialize = async function() {
+  const app = await PluginbotClient.createPluginbot();
+  const middleware = [rootReducer, thunk];
   // if(process.env.NODE_ENV === "development"){
   const { logger } = require(`redux-logger`);
   middleware.push(logger);
@@ -296,5 +297,5 @@ let initialize = async function() {
   return app;
 };
 
-let pluginbot = initialize();
+const pluginbot = initialize();
 export { pluginbot, initializedState, DELETETHISCODELATERUID };

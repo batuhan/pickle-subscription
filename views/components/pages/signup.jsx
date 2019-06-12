@@ -1,11 +1,11 @@
 import React from "react";
 import { browserHistory } from "react-router";
+import update from "immutability-helper";
+import { connect } from "react-redux";
 import Content from "../layouts/content.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
-import update from "immutability-helper";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import UserFormRegister from "../elements/forms/user-form-register.jsx";
-import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -27,7 +27,7 @@ class SignUp extends React.Component {
 
   handleLogin(e) {
     e.preventDefault();
-    var that = this;
+    const that = this;
 
     Fetcher("/api/v1/auth/session", "POST", that.state.form).then(function(
       result,
@@ -39,9 +39,9 @@ class SignUp extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const {target} = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const {name} = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -53,6 +53,7 @@ class SignUp extends React.Component {
   componentWillUnmount() {
     document.body.classList.remove("login");
   }
+
   componentDidMount() {
     if (!isAuthorized({ anonymous: true })) {
       return browserHistory.push("/");
@@ -61,7 +62,7 @@ class SignUp extends React.Component {
   }
 
   CheckRegistrationPermission() {
-    //If registration is not allowed, redirect to the 404 page
+    // If registration is not allowed, redirect to the 404 page
     if (
       this.props.options.allow_registration &&
       this.props.options.allow_registration.value == "false"
@@ -75,8 +76,8 @@ class SignUp extends React.Component {
       this.CheckRegistrationPermission();
     }
     return (
-      <Authorizer anonymous={true}>
-        <Content primary={true}>
+      <Authorizer anonymous>
+        <Content primary>
           <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
             <UserFormRegister
               location={this.props.location}

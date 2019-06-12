@@ -9,11 +9,11 @@ class ModalEmbedTemplate extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Embed a request form";
-    let pageMessage = "embed";
-    let currentModal = self.state.current_modal;
-    let embedHTML = `<div id="servicebot-request-form"></div>
+    const self = this;
+    const pageName = "Embed a request form";
+    const pageMessage = "embed";
+    const currentModal = self.state.current_modal;
+    const embedHTML = `<div id="servicebot-request-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://servicebot.io/js/servicebot-embed.js" type="text/javascript"></script>
 <script  type="text/javascript">
@@ -33,7 +33,7 @@ Servicebot.init({
         modalTitle={pageName}
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
         top="40%"
         width="800px"
       >

@@ -2,7 +2,7 @@ import React from "react";
 
 class PageSection extends React.Component {
   render() {
-    let { onMouseEnter, onMouseLeave, className, style, type } = this.props;
+    const { onMouseEnter, onMouseLeave, className, style, type } = this.props;
     return (
       <div
         className={`section ${className}`}
@@ -10,7 +10,7 @@ class PageSection extends React.Component {
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <div className={type ? type : "container"}>{this.props.children}</div>
+        <div className={type || "container"}>{this.props.children}</div>
       </div>
     );
   }

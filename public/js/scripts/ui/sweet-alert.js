@@ -1,15 +1,15 @@
-"use strict";
+
 /**
  * @author Batch Themes Ltd.
  */
 (function() {
   $(function() {
-    var config = $.localStorage.get("config");
-    var colors = config.colors;
+    const config = $.localStorage.get("config");
+    const {colors} = config;
     $(".btn-swal").on("click", function() {
-      var action = $(this).data("action");
-      var service = $(this).data("service");
-      var actionName = $(this).data("action-name");
+      const action = $(this).data("action");
+      const service = $(this).data("service");
+      const actionName = $(this).data("action-name");
       if (action === "basic") {
         swal({
           title: "The Internet?",

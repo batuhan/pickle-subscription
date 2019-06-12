@@ -17,12 +17,13 @@ class Wysiwyg extends React.Component {
   }
 
   componentDidMount() {
-    var self = this;
+    const self = this;
     $(this.refs.wysiwygArea).redactor();
     $(this.refs.wysiwygArea).on("change.callback.redactor", function(e, data) {
       self.props.onChange(e);
     });
   }
+
   render() {
     return (
       <textarea
@@ -31,7 +32,7 @@ class Wysiwyg extends React.Component {
         id="editor"
         ref="wysiwygArea"
         value={this.props.value}
-      ></textarea>
+      />
     );
   }
 }
@@ -48,7 +49,7 @@ class WysiwygRedux extends React.Component {
   }
 
   componentDidMount() {
-    var self = this;
+    const self = this;
     $(this.refs[`wysiwyg_${this.props.name}`]).redactor();
     $(this.refs[`wysiwyg_${this.props.name}`]).on(
       "change.callback.redactor",
@@ -57,13 +58,14 @@ class WysiwygRedux extends React.Component {
       },
     );
   }
+
   render() {
-    let {
+    const {
       label,
       type,
       meta: { touched, error, warning },
     } = this.props;
-    let formControlClass = `form-control ${touched &&
+    const formControlClass = `form-control ${touched &&
       error &&
       "has-error"} ${touched && warning && "has-warning"}`;
 
@@ -76,7 +78,7 @@ class WysiwygRedux extends React.Component {
           onChange={this.props.onChange}
           name={this.props.name}
           id="editor"
-          ref={"wysiwyg_" + this.props.name}
+          ref={`wysiwyg_${  this.props.name}`}
           value={this.props.input.value}
         />
         {touched &&

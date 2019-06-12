@@ -1,7 +1,7 @@
 import React from "react";
+import { browserHistory } from "react-router";
 import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-import { browserHistory } from "react-router";
 import ServiceInstancePaymentFormEdit from "../forms/service-instance-payment-form-edit.jsx";
 import Modal from "../../utilities/modal.jsx";
 
@@ -12,22 +12,22 @@ import Modal from "../../utilities/modal.jsx";
 class ModalEditPaymentPlan extends React.Component {
   constructor(props) {
     super(props);
-    let instance = this.props.myInstance;
-    this.state = { instance: instance };
+    const instance = this.props.myInstance;
+    this.state = { instance };
   }
 
   render() {
-    let self = this;
-    let pageName = "Edit Payment Plan";
+    const self = this;
+    const pageName = "Edit Payment Plan";
 
     return (
       <Modal
         modalTitle={pageName}
         icon="fa-credit-card-alt"
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <div className="row">

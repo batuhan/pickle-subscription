@@ -1,7 +1,7 @@
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let Invoice = require("../models/invoice");
-let User = require("../models/user");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const Invoice = require("../models/invoice");
+const User = require("../models/user");
 
 module.exports = function(router) {
   /**
@@ -17,7 +17,7 @@ module.exports = function(router) {
       .catch(function(err) {
         console.error(err);
         next();
-        //res.status(400).json({error: err});
+        // res.status(400).json({error: err});
       });
   });
 
@@ -26,10 +26,10 @@ module.exports = function(router) {
    * Update the user invoices prior to rendering it if the request has user_id
    */
   router.get("/invoices", auth(), function(req, res, next) {
-    let key = req.query.key;
-    //Only update the user invoices
+    const {key} = req.query;
+    // Only update the user invoices
     if (key == "user_id") {
-      let value = req.query.value;
+      const {value} = req.query;
       User.findOne("id", value, function(user) {
         Invoice.fetchUserInvoices(user)
           .then(function(result) {
@@ -38,7 +38,7 @@ module.exports = function(router) {
           .catch(function(err) {
             console.error(err);
             next();
-            //res.status(400).json({error: err});
+            // res.status(400).json({error: err});
           });
       });
     } else {
@@ -54,7 +54,7 @@ module.exports = function(router) {
     validate(User, "id"),
     auth(null, User, "id"),
     function(req, res) {
-      let user = res.locals.valid_object;
+      const user = res.locals.valid_object;
       Invoice.getUpcomingInvoice(user, function(upcoming_invoice) {
         res.json(upcoming_invoice);
       });
@@ -68,9 +68,9 @@ module.exports = function(router) {
     req,
     res,
   ) {
-    let amount = req.body.amount;
-    let reason = req.body.reason;
-    let invoice = res.locals.valid_object;
+    const {amount} = req.body;
+    const {reason} = req.body;
+    const invoice = res.locals.valid_object;
     invoice.refund(amount, reason, function(err, refund) {
       if (!err) {
         res.status(200).json(refund);
@@ -80,17 +80,17 @@ module.exports = function(router) {
     });
   });
 
-  //Override post route to hide adding invoices
+  // Override post route to hide adding invoices
   router.post(`/invoices`, function(req, res, next) {
     res.sendStatus(404);
   });
 
-  //Override post route to hide deleting invoices
+  // Override post route to hide deleting invoices
   router.delete(`/invoices/:id(\\d+)`, function(req, res, next) {
     res.sendStatus(404);
   });
 
-  //Override post route to hide updating invoices
+  // Override post route to hide updating invoices
   router.put(`/invoices/:id(\\d+)`, function(req, res, next) {
     res.sendStatus(404);
   });

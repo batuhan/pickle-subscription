@@ -1,4 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { formValueSelector, getFormValues } from "redux-form";
+import consume from "pluginbot-react/dist/consume"; // <-- same as form name
+import { StickyContainer, Sticky } from "react-sticky";
+import getSymbolFromCurrency from "currency-symbol-map";
 import ServiceRequestForm from "../elements/forms/service-instance-form-request.jsx";
 import {
   AdminEditingGear,
@@ -10,15 +15,12 @@ import {
   getPrice as getTotalPrice,
   getPriceAdjustments,
 } from "../../../lib/handleInputs";
-import { connect } from "react-redux";
-let _ = require("lodash");
-import { formValueSelector, getFormValues } from "redux-form";
-import consume from "pluginbot-react/dist/consume";
-const REQUEST_FORM_NAME = "serviceInstanceRequestForm";
-const selector = formValueSelector(REQUEST_FORM_NAME); // <-- same as form name
 import { setNavClass, resetNavClass } from "../utilities/actions";
-import { StickyContainer, Sticky } from "react-sticky";
-import getSymbolFromCurrency from "currency-symbol-map";
+
+const _ = require("lodash");
+
+const REQUEST_FORM_NAME = "serviceInstanceRequestForm";
+const selector = formValueSelector(REQUEST_FORM_NAME);
 
 class ServiceRequest extends React.Component {
   constructor(props) {
@@ -45,7 +47,7 @@ class ServiceRequest extends React.Component {
   componentDidMount() {
     this.props.setNavClass("frontEnd");
     this.getService();
-    //this.getCoverImage();
+    // this.getCoverImage();
     this.getIcon();
   }
 
@@ -54,8 +56,8 @@ class ServiceRequest extends React.Component {
   }
 
   getCoverImage() {
-    let self = this;
-    let imageURL = `/api/v1/service-templates/${this.state.id}/image`;
+    const self = this;
+    const imageURL = `/api/v1/service-templates/${this.state.id}/image`;
     fetch(imageURL)
       .then(function(response) {
         if (response.ok) {
@@ -64,14 +66,14 @@ class ServiceRequest extends React.Component {
         throw new Error("Network response was not ok.", response);
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ image: objectURL });
       })
       .catch(function(error) {});
   }
 
   getIcon() {
-    let self = this;
+    const self = this;
     fetch(`/api/v1/service-templates/${this.state.id}/icon`)
       .then(function(response) {
         if (response.ok) {
@@ -80,7 +82,7 @@ class ServiceRequest extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(function(myBlob) {
-        let objectURL = URL.createObjectURL(myBlob);
+        const objectURL = URL.createObjectURL(myBlob);
         self.setState({ icon: objectURL });
       })
       .catch(function(error) {});
@@ -93,21 +95,23 @@ class ServiceRequest extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   getPriceData() {
-    let {
+    const {
       formJSON,
       services: { widget },
     } = this.props;
     if (formJSON) {
       console.error(formJSON);
-      let handlers = widget.reduce((acc, widget) => {
+      const handlers = widget.reduce((acc, widget) => {
         acc[widget.type] = widget.handler;
         return acc;
       }, {});
@@ -127,13 +131,13 @@ class ServiceRequest extends React.Component {
         console.error(e);
       }
       return { total: newPrice, adjustments };
-    } else {
+    } 
       return { total: 0, adjustments: [] };
-    }
+    
   }
 
   getService() {
-    let self = this;
+    const self = this;
     Fetcher(`/api/v1/service-templates/${this.state.id}/request`).then(function(
       response,
     ) {
@@ -151,20 +155,34 @@ class ServiceRequest extends React.Component {
       case "subtract":
         return (
           <span>
-            - <Price value={adjustment.value} prefix={prefix} />
+            - 
+            {' '}
+            <Price value={adjustment.value} prefix={prefix} />
           </span>
         );
         break;
       case "multiply":
-        return <span>+ %{adjustment.value}</span>;
+        return (
+          <span>
++ %
+            {adjustment.value}
+          </span>
+);
         break;
       case "divide":
-        return <span>- %{adjustment.value}</span>;
+        return (
+          <span>
+- %
+            {adjustment.value}
+          </span>
+);
         break;
       default:
         return (
           <span>
-            + <Price value={adjustment.value} prefix={prefix} />
+            + 
+            {' '}
+            <Price value={adjustment.value} prefix={prefix} />
           </span>
         );
     }
@@ -172,11 +190,11 @@ class ServiceRequest extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <span></span>;
-    } else {
-      let { formJSON, options } = this.props;
-      let { service } = this.state;
-      let prefix = getSymbolFromCurrency(service.currency);
+      return <span />;
+    } 
+      const { formJSON, options } = this.props;
+      const { service } = this.state;
+      const prefix = getSymbolFromCurrency(service.currency);
 
       const featuredStyle = {
         height: _.get(
@@ -222,23 +240,23 @@ class ServiceRequest extends React.Component {
         ),
       };
 
-      //const {formJSON, options} = this.props;
-      let service_request_title_description = _.get(
+      // const {formJSON, options} = this.props;
+      const service_request_title_description = _.get(
         options,
         "service_request_title_description.value",
         "What you are getting",
       );
-      let service_request_title_form = _.get(
+      const service_request_title_form = _.get(
         options,
         "service_request_title_form.value",
         "Get Your Service",
       );
-      let formAmount = _.get(formJSON, "amount", "N/A");
-      let { total, adjustments } = this.getPriceData();
-      let filteredAdjustments = adjustments.filter(
+      const formAmount = _.get(formJSON, "amount", "N/A");
+      const { total, adjustments } = this.getPriceData();
+      const filteredAdjustments = adjustments.filter(
         adjustment => adjustment.value > 0,
       );
-      let splitPricing = service.split_configuration;
+      const splitPricing = service.split_configuration;
       let splitTotal = 0;
 
       let rightHeading = "Plan Summary";
@@ -263,7 +281,7 @@ class ServiceRequest extends React.Component {
 
       return (
         <div className="request-wrap">
-          {/*{JSON.stringify(this.getPriceData())}*/}
+          {/* {JSON.stringify(this.getPriceData())} */}
           <div className="request-content col-lg-offset-1 col-xl-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-8">
             <div className="request-user-form col-xs-12 col-sm-12 col-md-8 col-lg-8">
               <div className="request-form-heading">
@@ -312,7 +330,9 @@ class ServiceRequest extends React.Component {
                         <div className="request-summary-content">
                           {service.trial_period_days > 0 ? (
                             <div className="free-trial-content">
-                              {service.trial_period_days} Day Free Trial
+                              {service.trial_period_days}
+                              {' '}
+Day Free Trial
                             </div>
                           ) : null}
                           {service.type === "subscription" ||
@@ -337,7 +357,7 @@ class ServiceRequest extends React.Component {
                               </div>
                               {filteredAdjustments.map((lineItem, index) => (
                                 <div
-                                  key={"line-" + index}
+                                  key={`line-${  index}`}
                                   className="pricing-wrapper"
                                 >
                                   <div className="subscription-pricing row m-r-0 m-l-0">
@@ -378,7 +398,7 @@ class ServiceRequest extends React.Component {
                             <div>
                               {splitPricing.splits.map((splitItem, index) => (
                                 <div
-                                  key={"split-" + index}
+                                  key={`split-${  index}`}
                                   className="split-wrapper"
                                 >
                                   <div className="subscription-pricing row m-r-0 m-l-0">
@@ -387,7 +407,11 @@ class ServiceRequest extends React.Component {
                                         <span>Right Now</span>
                                       ) : (
                                         <span>
-                                          After {splitItem.charge_day} Days
+                                          After 
+                                          {' '}
+                                          {splitItem.charge_day}
+                                          {' '}
+Days
                                         </span>
                                       )}
                                     </div>
@@ -451,7 +475,7 @@ class ServiceRequest extends React.Component {
           )}
         </div>
       );
-    }
+    
   }
 }
 
@@ -464,10 +488,10 @@ function mapStateToProps(state) {
 
 function mapDispatch(dispatch) {
   return {
-    setNavClass: function(className) {
+    setNavClass(className) {
       dispatch(setNavClass(className));
     },
-    resetNavClass: function() {
+    resetNavClass() {
       dispatch(resetNavClass());
     },
   };

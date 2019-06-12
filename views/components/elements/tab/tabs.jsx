@@ -1,6 +1,6 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { Link, hashHistory, browserHistory } from "react-router";
+import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import Tab from "./tab.jsx";
 import TabContent from "./tab-content.jsx";
@@ -21,7 +21,7 @@ class Tabs extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
         self.setState({ tabs: response });
@@ -46,10 +46,10 @@ class Tabs extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
-      //Gather data first
-      let tabs = this.state.tabs;
-      let activeTabId = this.state.activeTabId;
+    } 
+      // Gather data first
+      const {tabs} = this.state;
+      const {activeTabId} = this.state;
 
       if (tabs.length > 0) {
         return (
@@ -70,7 +70,7 @@ class Tabs extends React.Component {
                 <TabContent
                   contentTitle={this.state.contentTitle}
                   contentUrl={
-                    this.state.contentUrl + "" + this.state.activeTabId
+                    `${this.state.contentUrl  }${  this.state.activeTabId}`
                   }
                   imgUrl={this.props.imgUrl}
                 />
@@ -80,16 +80,16 @@ class Tabs extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         return (
           <div className="tab-container">
             <div className="tabs">
               <Tab
                 key={`tab-${-1}`}
-                active={true}
+                active
                 handleClick={() => null}
                 id={-1}
-                name={"Other"}
+                name="Other"
               />
             </div>
             <div className="tab-content">
@@ -97,15 +97,16 @@ class Tabs extends React.Component {
                 You don't have any services yet. Go ahead and
                 <Link clssName="color-info" to="/manage-catalog/create">
                   {" "}
-                  create{" "}
+                  create
+                  {" "}
                 </Link>
                 one now.
               </p>
             </div>
           </div>
         );
-      }
-    }
+      
+    
   }
 }
 

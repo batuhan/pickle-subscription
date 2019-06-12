@@ -1,12 +1,12 @@
 const express = require("express");
-let Entity = require("../models/base/entity");
-let EntityRoutes = require("../api/entity");
+const Entity = require("../models/base/entity");
+const EntityRoutes = require("../api/entity");
 
 class ResourceDefinition {
   constructor(modelConfig, routeConfig, database) {
-    let newRouter = express.Router();
-    let { tableName, references, primaryKey } = modelConfig;
-    let { resourceName, userCorrelator } = routeConfig;
+    const newRouter = express.Router();
+    const { tableName, references, primaryKey } = modelConfig;
+    const { resourceName, userCorrelator } = routeConfig;
     this.model = Entity(
       tableName,
       references || [],

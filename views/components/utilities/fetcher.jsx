@@ -4,13 +4,13 @@ import Alert from "react-s-alert";
 import Alerts from "../elements/alerts.jsx";
 import "whatwg-fetch";
 
-let Fetcher = function(path, method = "GET", body, init = null) {
+const Fetcher = function(path, method = "GET", body, init = null) {
   if (!init) {
-    let headers = new Headers({
+    const headers = new Headers({
       "Content-Type": "application/json",
     });
 
-    init = { method: method, headers: headers, credentials: "include" };
+    init = { method, headers, credentials: "include" };
 
     if (method == "POST" || method == "PUT") {
       init.body = JSON.stringify(body);

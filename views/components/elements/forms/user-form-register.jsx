@@ -1,6 +1,8 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { Link, browserHistory } from "react-router";
+import { connect } from "react-redux";
+import cookie from "react-cookie";
+import Load from "../../utilities/load.jsx";
 import { DataForm } from "../../utilities/data-form.jsx";
 import {
   setUid,
@@ -8,17 +10,16 @@ import {
   setUser,
   setPermissions,
 } from "../../utilities/actions";
-import { connect } from "react-redux";
-import cookie from "react-cookie";
 import Inputs from "../../utilities/inputs.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class UserFormRegister extends React.Component {
   constructor(props) {
     super(props);
-    let token = this.props.token;
+    const {token} = this.props;
     this.state = {
-      token: token,
+      token,
       url: token
         ? `/api/v1/users/register?token=${token}`
         : `/api/v1/users/register`,
@@ -46,45 +47,45 @@ class UserFormRegister extends React.Component {
   }
 
   getValidators() {
-    //optional references: the service template's references.service_template_properties
-    //Defining general validators
-    let isEmpty = val => {
+    // optional references: the service template's references.service_template_properties
+    // Defining general validators
+    const isEmpty = val => {
       return val === "" || typeof val === "undefined";
     };
-    //Defining field validators
-    let validateEmail = val => {
-      let mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // Defining field validators
+    const validateEmail = val => {
+      const mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (isEmpty(val)) {
         return { error: "Email is required!" };
-      } else if (!val.match(mailFormat)) {
+      } if (!val.match(mailFormat)) {
         return { error: "Invalid email format!" };
-      } else {
+      } 
         return true;
-      }
+      
     };
-    let validateName = val => {
+    const validateName = val => {
       if (isEmpty(val)) {
         return { error: "Name is required!" };
-      } else {
+      } 
         return true;
-      }
+      
     };
-    let validatePhone = val => {
+    const validatePhone = val => {
       if (isEmpty(val)) {
         return { error: "Phone is required!" };
-      } else {
+      } 
         return true;
-      }
+      
     };
-    let validatePassword = val => {
+    const validatePassword = val => {
       if (isEmpty(val)) {
         return { error: "Password is required!" };
-      } else {
+      } 
         return true;
-      }
+      
     };
 
-    let validatorJSON = {
+    const validatorJSON = {
       name: validateName,
       phone: validatePhone,
       email: validateEmail,
@@ -96,19 +97,19 @@ class UserFormRegister extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return browserHistory.push("/my-services");
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="sign-up">
           <DataForm
             validators={this.getValidators()}
             handleResponse={this.handleResponse}
             url={this.state.url}
-            method={"POST"}
+            method="POST"
           >
-            {/*<img className="login-brand" src="/assets/logos/brand-logo-dark.png"/>*/}
+            {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
             {this.state.token ? (
               <div>
                 <h3 className="m-b-20">Finish Your Invitation</h3>
@@ -128,21 +129,21 @@ class UserFormRegister extends React.Component {
               type="text"
               name="name"
               placeholder="Name"
-              hideLabel={true}
+              hideLabel
               onChange={function() {}}
-              receiveOnChange={true}
-              receiveValue={true}
+              receiveOnChange
+              receiveValue
             />
 
             {!this.state.token && (
               <Inputs
                 type="email"
                 name="email"
-                hideLabel={true}
+                hideLabel
                 placeholder="Email Address"
                 onChange={function() {}}
-                receiveOnChange={true}
-                receiveValue={true}
+                receiveOnChange
+                receiveValue
               />
             )}
 
@@ -150,10 +151,10 @@ class UserFormRegister extends React.Component {
               type="password"
               name="password"
               placeholder="Password"
-              hideLabel={true}
+              hideLabel
               onChange={function() {}}
-              receiveOnChange={true}
-              receiveValue={true}
+              receiveOnChange
+              receiveValue
             />
 
             {!this.state.token ? (
@@ -166,7 +167,8 @@ class UserFormRegister extends React.Component {
                   Sign Up
                 </button>
                 <p className="sign-up-link p-t-15">
-                  I have an account{" "}
+                  I have an account
+                  {" "}
                   <Link
                     className="sign-up-link"
                     to={{
@@ -190,7 +192,7 @@ class UserFormRegister extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

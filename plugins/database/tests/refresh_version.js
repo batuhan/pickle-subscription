@@ -1,9 +1,9 @@
-let path = require("path");
+const path = require("path");
 require("dotenv").config({
   path: require("path").join(__dirname, "../../../env/.env"),
 });
 
-let knex = require("../../../config/db");
+const knex = require("../../../config/db");
 
-//require("../migrations/versions/0.9.0").down(knex);
+// require("../migrations/versions/0.9.0").down(knex);
 require("../migrations/versions/0.9.0").up(knex);

@@ -7,7 +7,8 @@ import Alerts from "../alerts.jsx";
 import { Price } from "../../utilities/price.jsx";
 import DateFormat from "../../utilities/date-format.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class RefundForm extends React.Component {
   constructor(props) {
@@ -50,8 +51,7 @@ class RefundForm extends React.Component {
           message: "Refund succeeded!",
         },
       });
-    } else {
-      if (response.type == "StripeInvalidRequestError") {
+    } else if (response.type == "StripeInvalidRequestError") {
         this.setState({
           alerts: {
             type: "danger",
@@ -84,13 +84,12 @@ class RefundForm extends React.Component {
           },
         });
       }
-    }
   }
 
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success) {
+    } if (this.state.success) {
       return (
         <div>
           <div className="p-20">
@@ -138,7 +137,7 @@ class RefundForm extends React.Component {
               </tr>
             </tfoot>
           </table>
-          <div className={`modal-footer text-right p-b-20`}>
+          <div className="modal-footer text-right p-b-20">
             <Buttons
               containerClass="inline"
               btnType="default"
@@ -148,8 +147,8 @@ class RefundForm extends React.Component {
           </div>
         </div>
       );
-    } else {
-      //TODO: Add validation functions and pass into DataForm as props
+    } 
+      // TODO: Add validation functions and pass into DataForm as props
       return (
         <div className="refund-form">
           {this.state.alerts && (
@@ -165,7 +164,7 @@ class RefundForm extends React.Component {
           <DataForm
             handleResponse={this.handleResponse}
             url={this.state.refundURL}
-            method={"POST"}
+            method="POST"
           >
             <div className="p-20">
               <p>
@@ -181,8 +180,8 @@ class RefundForm extends React.Component {
                 label="Refund Amount"
                 defaultValue={0}
                 onChange={function() {}}
-                receiveOnChange={true}
-                receiveValue={true}
+                receiveOnChange
+                receiveValue
               />
               <Inputs
                 type="select"
@@ -195,12 +194,12 @@ class RefundForm extends React.Component {
                   { Fraudulent: "fraudulent" },
                 ]}
                 onChange={function() {}}
-                receiveOnChange={true}
-                receiveValue={true}
+                receiveOnChange
+                receiveValue
               />
             </div>
 
-            <div className={`modal-footer text-right p-b-20`}>
+            <div className="modal-footer text-right p-b-20">
               <Buttons
                 containerClass="inline"
                 btnType="primary"
@@ -219,7 +218,7 @@ class RefundForm extends React.Component {
           </DataForm>
         </div>
       );
-    }
+    
   }
 }
 

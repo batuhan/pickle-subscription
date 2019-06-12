@@ -1,25 +1,26 @@
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let User = require("../models/user");
-let Invitation = require("../models/invitation");
-let EventLogs = require("../models/event-log");
-let multer = require("multer");
-let File = require("../models/file");
-let path = require("path");
-let mkdirp = require("mkdirp");
-let bcrypt = require("bcryptjs");
-let jwt = require("jsonwebtoken");
-let Role = require("../models/role");
-//todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
-let avatarFilePath = "uploads/avatars";
-let store = require("../config/redux/store");
-let fileManager = store.getState(true).pluginbot.services.fileManager[0];
+const multer = require("multer");
+const path = require("path");
+const mkdirp = require("mkdirp");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const User = require("../models/user");
+const Invitation = require("../models/invitation");
+const EventLogs = require("../models/event-log");
+const File = require("../models/file");
+const Role = require("../models/role");
+// todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
+const avatarFilePath = "uploads/avatars";
+const store = require("../config/redux/store");
 
-let uploadLimit = function() {
+const fileManager = store.getState(true).pluginbot.services.fileManager[0];
+
+const uploadLimit = function() {
   return store.getState().options.upload_limit * 1000000;
 };
 
-let upload = () => {
+const upload = () => {
   return multer({
     storage: fileManager.storage(avatarFilePath),
     limits: { fileSize: uploadLimit() },
@@ -33,23 +34,23 @@ module.exports = function(router, passport) {
     Invitation.findOne("token", req.params.invitation_id, function(result) {
       if (result.data) {
         return res.json({ status: "valid token" });
-      } else {
+      } 
         return res.status(404).json({ status: "bad token" });
-      }
+      
     });
   });
 
   router.get("/users/:id/avatar", validate(), auth(), function(req, res, next) {
-    let id = req.params.id;
+    const {id} = req.params;
     File.findFile(avatarFilePath, id, function(avatar) {
       if (avatar.length > 0) {
-        let file = avatar[0];
+        const file = avatar[0];
         fileManager.sendFile(file, res);
       } else {
-        //todo: default avatar logic goes here
-        let defaultAvatar = path.resolve(
+        // todo: default avatar logic goes here
+        const defaultAvatar = path.resolve(
           __dirname,
-          "../public/assets/default/avatar-" + (id % 4) + ".png",
+          `../public/assets/default/avatar-${  id % 4  }.png`,
         );
         res.sendFile(defaultAvatar);
       }
@@ -60,27 +61,27 @@ module.exports = function(router, passport) {
     res,
     next,
   ) {
-    let file = req.file;
+    const {file} = req;
     file.user_id = req.params.id;
     file.name = file.originalname;
     File.findFile(avatarFilePath, req.params.id, function(avatar) {
       if (avatar.length > 0) {
-        let avatarToDelete = avatar[0];
+        const avatarToDelete = avatar[0];
         fileManager.deleteFile(avatarToDelete);
       }
-      let avatarToCreate = new File(file);
+      const avatarToCreate = new File(file);
       avatarToCreate.create(function(err, result) {
         result.message = "Avatar Upload!";
         res.json(result);
       });
     });
   });
-  //TODO better error handling
-  //TODO use next
+  // TODO better error handling
+  // TODO use next
   router.post(
     "/users/register",
     function(req, res, next) {
-      let token = req.query.token;
+      const {token} = req.query;
       if (token) {
         Invitation.findOne("token", token, function(foundInvitation) {
           if (!foundInvitation.data) {
@@ -112,7 +113,7 @@ module.exports = function(router, passport) {
           if (!req.body.email.match(mailRegex)) {
             res.status(400).json({ error: "Invalid email format" });
           } else {
-            let newUser = new User(req.body);
+            const newUser = new User(req.body);
             newUser.set("password", bcrypt.hashSync(req.body.password, 10));
             newUser.createWithStripe(function(err, result) {
               if (err) {
@@ -145,9 +146,9 @@ module.exports = function(router, passport) {
     },
     require("../middleware/role-session")(),
     function(req, res, next) {
-      let user_role = new Role({ id: req.user.data.role_id });
+      const user_role = new Role({ id: req.user.data.role_id });
       user_role.getPermissions(function(perms) {
-        let permission_names = perms.map(perm => perm.data.permission_name);
+        const permission_names = perms.map(perm => perm.data.permission_name);
         res.locals.json = {
           message: "successful signup",
           permissions: permission_names,
@@ -158,24 +159,24 @@ module.exports = function(router, passport) {
     },
   );
 
-  //TODO add the registration url to the email
+  // TODO add the registration url to the email
   router.post("/users/invite", auth(), function(req, res, next) {
     function reinviteUser(user) {
-      let invite = new Invitation({ user_id: user.get("id") });
+      const invite = new Invitation({ user_id: user.get("id") });
       invite.create(function(err, result) {
         if (!err) {
-          let apiUrl =
-            req.protocol +
-            "://" +
-            req.get("host") +
-            "/api/v1/users/register?token=" +
-            result.get("token");
-          let frontEndUrl =
-            req.protocol +
-            "://" +
-            req.get("host") +
-            "/invitation/" +
-            result.get("token");
+          const apiUrl =
+            `${req.protocol 
+            }://${ 
+            req.get("host") 
+            }/api/v1/users/register?token=${ 
+            result.get("token")}`;
+          const frontEndUrl =
+            `${req.protocol 
+            }://${ 
+            req.get("host") 
+            }/invitation/${ 
+            result.get("token")}`;
           EventLogs.logEvent(
             req.user.get("id"),
             `users ${req.body.email} was reinvited by user ${req.user.get(
@@ -201,11 +202,11 @@ module.exports = function(router, passport) {
       if (!req.body.email.match(mailRegex)) {
         res.status(400).json({ error: "Invalid email format" });
       } else {
-        //get default_user_role
-        let store = require("../config/redux/store");
-        let globalProps = store.getState().options;
-        let roleId = globalProps["default_user_role"];
-        let newUser = new User({
+        // get default_user_role
+        const store = require("../config/redux/store");
+        const globalProps = store.getState().options;
+        const roleId = globalProps.default_user_role;
+        const newUser = new User({
           email: req.body.email,
           role_id: roleId,
           status: "invited",
@@ -226,21 +227,21 @@ module.exports = function(router, passport) {
           } else {
             newUser.createWithStripe(function(err, resultUser) {
               if (!err) {
-                let invite = new Invitation({ user_id: resultUser.get("id") });
+                const invite = new Invitation({ user_id: resultUser.get("id") });
                 invite.create(function(err, result) {
                   if (!err) {
-                    let apiUrl =
-                      req.protocol +
-                      "://" +
-                      req.get("host") +
-                      "/api/v1/users/register?token=" +
-                      result.get("token");
-                    let frontEndUrl =
-                      req.protocol +
-                      "://" +
-                      req.get("host") +
-                      "/invitation/" +
-                      result.get("token");
+                    const apiUrl =
+                      `${req.protocol 
+                      }://${ 
+                      req.get("host") 
+                      }/api/v1/users/register?token=${ 
+                      result.get("token")}`;
+                    const frontEndUrl =
+                      `${req.protocol 
+                      }://${ 
+                      req.get("host") 
+                      }/invitation/${ 
+                      result.get("token")}`;
                     EventLogs.logEvent(
                       req.user.get("id"),
                       `users ${
@@ -273,7 +274,7 @@ module.exports = function(router, passport) {
     }
   });
 
-  //Override post route to hide adding users
+  // Override post route to hide adding users
   router.post(`/users`, function(req, res, next) {
     res.sendStatus(404);
   });
@@ -283,13 +284,13 @@ module.exports = function(router, passport) {
     validate(User),
     auth(null, User, "id"),
     async function(req, res, next) {
-      //todo: this is dirty dirty way of getting plugin services... i want this code to be in plugin eventually
-      let userManager = store.getState(true).pluginbot.services.userManager[0];
+      // todo: this is dirty dirty way of getting plugin services... i want this code to be in plugin eventually
+      const userManager = store.getState(true).pluginbot.services.userManager[0];
       if (!userManager) {
         console.error("User manager not defined...");
       }
-      let oldUser = res.locals.valid_object;
-      let newUserData = req.body;
+      const oldUser = res.locals.valid_object;
+      const newUserData = req.body;
       if (oldUser.get("id") === req.user.get("id")) {
         delete oldUser.data.role_id;
         delete newUserData.role_id;
@@ -298,7 +299,7 @@ module.exports = function(router, passport) {
         newUserData.status = "active";
       }
 
-      let updatedUser = await userManager.update(oldUser, newUserData);
+      const updatedUser = await userManager.update(oldUser, newUserData);
       res.json(updatedUser);
     },
   );
@@ -308,9 +309,9 @@ module.exports = function(router, passport) {
     validate(User),
     auth(null, User, "id"),
     async function(req, res) {
-      let user = res.locals.valid_object;
+      const user = res.locals.valid_object;
       try {
-        let updatedUser = await user.suspend();
+        const updatedUser = await user.suspend();
         store.dispatchEvent("user_suspended", updatedUser);
         res.status(200).json(updatedUser);
       } catch (e) {
@@ -324,11 +325,11 @@ module.exports = function(router, passport) {
     validate(User),
     auth(null, User, "id"),
     function(req, res) {
-      let user = res.locals.valid_object;
+      const user = res.locals.valid_object;
 
       user.unsuspend(function(err, updated_user) {
         if (!err) {
-          //dispatchEvent("user_unsuspended", user);
+          // dispatchEvent("user_unsuspended", user);
           res.status(200).json(updated_user);
         } else {
           res.status(400).json({ error: err });
@@ -342,11 +343,11 @@ module.exports = function(router, passport) {
     validate(User),
     auth(null, User, "id"),
     function(req, res) {
-      let user = res.locals.valid_object;
-      let token = jwt.sign({ uid: user.data.id }, process.env.SECRET_KEY, {
+      const user = res.locals.valid_object;
+      const token = jwt.sign({ uid: user.data.id }, process.env.SECRET_KEY, {
         expiresIn: "3h",
       });
-      res.json({ token: token });
+      res.json({ token });
     },
   );
 
@@ -355,7 +356,7 @@ module.exports = function(router, passport) {
     validate(User),
     auth(null, User, "id"),
     function(req, res, next) {
-      let user = res.locals.valid_object;
+      const user = res.locals.valid_object;
       user.deleteWithStripe(function(err, completed_msg) {
         if (!err) {
           res.status(200).json({ message: completed_msg });
@@ -367,10 +368,10 @@ module.exports = function(router, passport) {
     },
   );
 
-  //Extend Entity
+  // Extend Entity
   require("./entity")(router, User, "users", "id");
 
-  //Strip passwords from all user things
+  // Strip passwords from all user things
   router.all("*", function(req, res, next) {
     if (res.locals.json) {
       if (res.locals.json.password) {

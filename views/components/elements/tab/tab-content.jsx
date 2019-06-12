@@ -17,7 +17,7 @@ class TabContent extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
         self.setState({ tabContent: response });
@@ -27,11 +27,11 @@ class TabContent extends React.Component {
   }
 
   reFetch(url) {
-    let self = this;
+    const self = this;
     // self.setState({loading: true});
     Fetcher(url).then(function(response) {
       if (!response.error) {
-        self.setState({ url: url, tabContent: response });
+        self.setState({ url, tabContent: response });
       }
       self.setState({ loading: false });
     });
@@ -40,7 +40,7 @@ class TabContent extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <div
           className={
@@ -59,7 +59,7 @@ class TabContent extends React.Component {
                   amount={content.amount}
                   interval={content.interval}
                   imgUrl={this.props.imgUrl}
-                  color={"#4ca6cf"}
+                  color="#4ca6cf"
                 />
               ))
             ) : (
@@ -68,7 +68,7 @@ class TabContent extends React.Component {
           </div>
         </div>
       );
-    }
+    
   }
 }
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, browserHistory } from "react-router";
-import Fetcher from "../../utilities/fetcher.jsx";
 import update from "immutability-helper";
+import { connect } from "react-redux";
+import Fetcher from "../../utilities/fetcher.jsx";
 import { Authorizer, isAuthorized } from "../../utilities/authorizer.jsx";
 import { setPermissions } from "../../utilities/actions";
-import { connect } from "react-redux";
 
 import Content from "../../layouts/content.jsx";
 
@@ -22,7 +22,7 @@ class ForgotPassword extends React.Component {
 
   handleReset(e) {
     e.preventDefault();
-    let self = this;
+    const self = this;
     if (!self.state.form.email) {
       this.setState({ submitted: self.state.submitted + 1 });
     } else {
@@ -39,9 +39,9 @@ class ForgotPassword extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const {target} = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const {name} = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -61,15 +61,18 @@ class ForgotPassword extends React.Component {
 
     document.body.classList.add("login");
   }
+
   render() {
     if (this.state.success) {
       return (
-        <Content primary={true}>
+        <Content primary>
           <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
             <div className="sign-in">
               <p>
                 Email Sent! You will receive an email with instructions to reset
-                your password at <b>{this.state.form.email}</b>
+                your password at 
+                {' '}
+                <b>{this.state.form.email}</b>
               </p>
               <button
                 onClick={() => {
@@ -84,10 +87,10 @@ class ForgotPassword extends React.Component {
           </div>
         </Content>
       );
-    } else {
+    } 
       return (
-        <Authorizer anonymous={true}>
-          <Content primary={true}>
+        <Authorizer anonymous>
+          <Content primary>
             <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
               <form className="sign-in">
                 <h3>Forgot Password?</h3>
@@ -127,7 +130,8 @@ class ForgotPassword extends React.Component {
                   Reset Password
                 </button>
                 <p className="sign-up-link">
-                  Back to{" "}
+                  Back to
+                  {" "}
                   <Link to={{ pathname: "/login", state: { fromLogin: true } }}>
                     Login
                   </Link>
@@ -137,7 +141,7 @@ class ForgotPassword extends React.Component {
           </Content>
         </Authorizer>
       );
-    }
+    
   }
 }
 

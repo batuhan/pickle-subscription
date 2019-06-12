@@ -8,7 +8,7 @@ class ManageCatalogCreate extends React.Component {
   }
 
   render() {
-    let self = this;
+    const self = this;
     return (
       <div className="form-box col-xs-12">
         <div className="offering-title">Create a new offering</div>

@@ -5,8 +5,9 @@ class FeaturedImage extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    let style = {
+    const style = {
       backgroundSize: "cover",
       backgroundPosition: "center",
       height: "100%",
@@ -18,7 +19,7 @@ class FeaturedImage extends React.Component {
 
     return (
       <div className="featured-image">
-        <div className="featured-bg" style={style}></div>
+        <div className="featured-bg" style={style} />
       </div>
     );
   }

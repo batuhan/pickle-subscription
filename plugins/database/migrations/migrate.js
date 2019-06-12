@@ -1,24 +1,24 @@
-let semver = require("semver");
-let semver_sort = require("semver-sort");
-let glob = require("glob");
-let Promise = require("bluebird");
+const semver = require("semver");
+const semver_sort = require("semver-sort");
+const glob = require("glob");
+const Promise = require("bluebird");
 
 async function migrate(knex) {
-  let SystemOptions = require("../../../models/system-options");
+  const SystemOptions = require("../../../models/system-options");
   console.log(process.env.npm_package_version);
-  let migrations = await getMigrations();
-  let appVersion = (await SystemOptions.getOptions()).app_version;
+  const migrations = await getMigrations();
+  const appVersion = (await SystemOptions.getOptions()).app_version;
   console.log(migrations);
   console.log(appVersion);
-  let order = semver_sort.asc(Object.keys(migrations));
-  let migrationStart = order.findIndex(migrationVersion => {
+  const order = semver_sort.asc(Object.keys(migrations));
+  const migrationStart = order.findIndex(migrationVersion => {
     return semver.gt(migrationVersion, appVersion);
   });
   if (migrationStart == -1) {
     console.log("db current - no migrations needed");
     return Promise.resolve();
   }
-  let migrationsToPerform = order.slice(migrationStart);
+  const migrationsToPerform = order.slice(migrationStart);
   return knex
     .transaction(trx => {
       return Promise.mapSeries(migrationsToPerform, migration => {
@@ -44,9 +44,9 @@ async function migrate(knex) {
 function getMigrations() {
   return new Promise((resolve, reject) => {
     glob(require("path").join(__dirname, "./versions/*.js"), (err, files) => {
-      let migrationVersions = files.reduce((acc, file) => {
+      const migrationVersions = files.reduce((acc, file) => {
         console.log(file);
-        let version = file
+        const version = file
           .split("/")
           .pop()
           .slice(0, -3);

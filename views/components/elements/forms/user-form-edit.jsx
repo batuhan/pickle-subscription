@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
+import { Field } from "redux-form";
+import { required, email, numericality, length } from "redux-form-validators";
 import Load from "../../utilities/load.jsx";
 import Authorizer from "../../utilities/authorizer.jsx";
 import Inputs from "../../utilities/inputs.jsx";
@@ -9,15 +11,13 @@ import DateFormat from "../../utilities/date-format.jsx";
 import ImageUploader from "../../utilities/image-uploader.jsx";
 import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import { inputField } from "./servicebot-base-field.jsx";
-import { Field } from "redux-form";
-import { required, email, numericality, length } from "redux-form-validators";
 
 class UserFormEdit extends React.Component {
   constructor(props) {
     super(props);
-    let user = this.props.myUser;
+    const user = this.props.myUser;
     this.state = {
-      user: user,
+      user,
       url: `/api/v1/users/${user.id}`,
       profileImage: `/api/v1/users/${user.id}/avatar`,
       currentAction: "_VIEW",
@@ -57,6 +57,7 @@ class UserFormEdit extends React.Component {
   onStartEdit() {
     this.setState({ currentAction: "_EDITING", success: false });
   }
+
   onStopEdit() {
     this.setState({ currentAction: "_VIEW" });
   }
@@ -87,16 +88,16 @@ class UserFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (!this.state.loading && this.state.currentAction === "_EDITING") {
-      let user = this.state.user;
+    } if (!this.state.loading && this.state.currentAction === "_EDITING") {
+      const {user} = this.state;
 
-      let initialRequests = [{ method: "GET", url: this.state.url }];
-      let submissionRequest = {
+      const initialRequests = [{ method: "GET", url: this.state.url }];
+      const submissionRequest = {
         method: "PUT",
         url: this.state.url,
       };
 
-      let validations = values => {
+      const validations = values => {
         const errors = {};
         if (values.password !== values.password2) {
           errors.password2 = "Password must match";
@@ -111,19 +112,26 @@ class UserFormEdit extends React.Component {
             <div className="basic-info col-md-6 col-md-offset-3">
               <div className="profile-header">
                 <div>
-                  <h3 className="p-b-20">Editing {user.email}</h3>
+                  <h3 className="p-b-20">
+Editing
+                    {user.email}
+                  </h3>
                 </div>
                 <div>
                   <small>
-                    Last Login:{" "}
+                    Last Login:
+                    {" "}
                     {user.last_login !== null ? (
-                      <DateFormat time={true} date={user.last_login} />
+                      <DateFormat time date={user.last_login} />
                     ) : (
                       "Never"
                     )}
                   </small>
                   <br />
-                  <small>User Status: {user.status}</small>
+                  <small>
+User Status:
+                    {user.status}
+                  </small>
                 </div>
               </div>
               <div className="row">
@@ -135,7 +143,7 @@ class UserFormEdit extends React.Component {
                     imageStyle="badge badge-xl"
                     imageURL={`${this.state.url}/avatar`}
                     imageGETURL={`${this.state.url}/avatar`}
-                    uploadButton={true}
+                    uploadButton
                     reloadNotice="Please reload the application."
                   />
                 </div>
@@ -154,7 +162,7 @@ class UserFormEdit extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         return (
           <div>
             <p>Unable to load your user profile</p>
@@ -165,9 +173,9 @@ class UserFormEdit extends React.Component {
             />
           </div>
         );
-      }
-    } else if (!this.state.loading && this.state.currentAction === "_VIEW") {
-      let user = this.state.user;
+      
+    } if (!this.state.loading && this.state.currentAction === "_VIEW") {
+      const {user} = this.state;
 
       if (user) {
         return (
@@ -181,16 +189,19 @@ class UserFormEdit extends React.Component {
                   </div>
                   <div>
                     <small>
-                      Last Login:{" "}
+                      Last Login:
+                      {" "}
                       {user.last_login != null ? (
-                        <DateFormat time={true} date={user.last_login} />
+                        <DateFormat time date={user.last_login} />
                       ) : (
                         "Never"
                       )}
                     </small>
                     <br />
                     <small className="text-capitalize">
-                      User Status: {user.status}
+                      User Status: 
+                      {' '}
+                      {user.status}
                     </small>
                   </div>
                 </div>
@@ -231,7 +242,7 @@ class UserFormEdit extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         return (
           <div>
             <p>Unable to load your user profile</p>
@@ -242,7 +253,7 @@ class UserFormEdit extends React.Component {
             />
           </div>
         );
-      }
+      
     }
   }
 }

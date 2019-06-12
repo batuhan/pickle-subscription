@@ -1,12 +1,13 @@
 import React from "react";
+import update from "immutability-helper";
+import { connect } from "react-redux";
 import Load from "./load.jsx";
 import Fetcher from "./fetcher.jsx";
 import { Authorizer, isAuthorized } from "./authorizer.jsx";
 import Inputs from "./inputs.jsx";
-import update from "immutability-helper";
 import Buttons from "../elements/buttons.jsx";
-import { connect } from "react-redux";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 class DataSubmit extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class DataSubmit extends React.Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.formURL)
       .then(function(response) {
         if (!response.error) {
@@ -40,7 +41,7 @@ class DataSubmit extends React.Component {
 
   buildFormData(name, value, refName = null, refID = null) {
     if (refName && refID) {
-      let refIndex = _.findIndex(this.state.formData.references[refName], [
+      const refIndex = _.findIndex(this.state.formData.references[refName], [
         "id",
         refID,
       ]);
@@ -72,8 +73,8 @@ class DataSubmit extends React.Component {
   }
 
   handleSubmission() {
-    let self = this;
-    let payload = self.state.formData;
+    const self = this;
+    const payload = self.state.formData;
 
     self.setState({ ajaxLoad: true });
 
@@ -89,7 +90,7 @@ class DataSubmit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <div>
           {React.cloneElement(this.props.children, {
@@ -97,7 +98,7 @@ class DataSubmit extends React.Component {
           })}
         </div>
       );
-    }
+    
   }
 }
 

@@ -1,11 +1,12 @@
-let consume = require("pluginbot/effects/consume");
-let { call } = require("redux-saga/effects");
-let PluginOption = require("../../models/services/pluginOption");
-let run = function*(config, provide, services) {
-  let database = yield consume(services.database);
-  //todo: move this to some installation script when it's more fleshed out
+const consume = require("pluginbot/effects/consume");
+const { call } = require("redux-saga/effects");
+const PluginOption = require("../../models/services/pluginOption");
 
-  let routeDefinition = [
+const run = function*(config, provide, services) {
+  const database = yield consume(services.database);
+  // todo: move this to some installation script when it's more fleshed out
+
+  const routeDefinition = [
     require("./api/webhook")(database),
     ...require("./api/reconfigure")(database),
     require("./api/import")(database),
@@ -21,13 +22,13 @@ let run = function*(config, provide, services) {
 
   yield provide({ routeDefinition });
 
-  //Update customer invoices every hour
+  // Update customer invoices every hour
   setInterval(async () => {
-    let User = require("../../models/user");
-    let Invoice = require("../../models/invoice");
-    let users = await User.find();
+    const User = require("../../models/user");
+    const Invoice = require("../../models/invoice");
+    const users = await User.find();
     users.map(user => {
-      //Fetch all invoices
+      // Fetch all invoices
       Invoice.fetchUserInvoices(user)
         .then(function(updated_invoices) {
           console.log(`Invoices Updated for user: ${user.data.email}`);

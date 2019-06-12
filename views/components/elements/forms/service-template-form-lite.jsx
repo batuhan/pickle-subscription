@@ -15,13 +15,14 @@ import {
   Form,
 } from "redux-form";
 import { connect } from "react-redux";
+import { required, email, numericality, length } from "redux-form-validators";
 import {
   RenderWidget,
   WidgetList,
   PriceBreakdown,
   widgets,
 } from "../../utilities/widgets";
-import { WysiwygRedux } from "../../elements/wysiwyg.jsx";
+import { WysiwygRedux } from "../wysiwyg.jsx";
 import {
   inputField,
   selectField,
@@ -34,8 +35,7 @@ import { addAlert, dismissAlert } from "../../utilities/actions";
 import ServiceBotBaseForm from "./servicebot-base-form.jsx";
 import Load from "../../utilities/load.jsx";
 
-let _ = require("lodash");
-import { required, email, numericality, length } from "redux-form-validators";
+const _ = require("lodash");
 
 const TEMPLATE_FORM_NAME = "serviceTemplateForm";
 const selector = formValueSelector(TEMPLATE_FORM_NAME); // <-- same as form name
@@ -43,7 +43,7 @@ const selector = formValueSelector(TEMPLATE_FORM_NAME); // <-- same as form name
 function renderSplits({ fields, meta: { error, submitFailed } }) {
   function onAdd(e) {
     e.preventDefault();
-    let number_of_payments = e.target.value;
+    const number_of_payments = e.target.value;
     let number_of_fields = fields.length;
 
     while (number_of_fields < number_of_payments) {
@@ -89,7 +89,10 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
               </span>
             </button>
 
-            <h4>Payment #{index + 1}</h4>
+            <h4>
+Payment #
+              {index + 1}
+            </h4>
             <label>Days to charge customer after subscribed</label>
             <Field
               name={`${member}.charge_day`}
@@ -101,7 +104,7 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
               name={`${member}.amount`}
               type="number"
               component={priceField}
-              isCents={true}
+              isCents
               label="Amount"
               validate={numericality({ ">=": 0.0 })}
             />
@@ -112,7 +115,7 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
   );
 }
 
-//The full form
+// The full form
 
 class TemplateForm extends React.Component {
   constructor(props) {
@@ -120,7 +123,7 @@ class TemplateForm extends React.Component {
   }
 
   render() {
-    let props = this.props;
+    const {props} = this;
 
     const changeServiceType = (event, newValue) => {
       if (newValue === "one_time") {
@@ -221,7 +224,7 @@ class TemplateForm extends React.Component {
                     name="amount"
                     type="number"
                     component={priceField}
-                    isCents={true}
+                    isCents
                     label="Amount"
                     validate={numericality({ ">=": 0.0 })}
                   />
@@ -336,7 +339,7 @@ class ServiceTemplateForm extends React.Component {
       newTemplateId: response.id,
       success: true,
     });
-    let successMessage = {
+    const successMessage = {
       id: Date.now(),
       alertType: "success",
       message: `${response.name} was saved successfully`,
@@ -351,7 +354,7 @@ class ServiceTemplateForm extends React.Component {
   }
 
   submissionPrep(values) {
-    //remove id's for duplicate template operation
+    // remove id's for duplicate template operation
     if (this.props.params.duplicate) {
       console.log("We have a duplicate and we want to remove id");
       delete values.id;
@@ -368,12 +371,12 @@ class ServiceTemplateForm extends React.Component {
   }
 
   render() {
-    //Todo change this. this is how we are currently making sure the redux store is populated
+    // Todo change this. this is how we are currently making sure the redux store is populated
     if (!this.props.company_name) {
       return <Load />;
-    } else {
+    } 
       let initialValues = {};
-      let initialRequests = [];
+      const initialRequests = [];
       let submissionRequest = {};
       let successMessage = "Template Updated";
       let imageUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/image`;
@@ -447,7 +450,7 @@ class ServiceTemplateForm extends React.Component {
           />
         </div>
       );
-    }
+    
   }
 }
 

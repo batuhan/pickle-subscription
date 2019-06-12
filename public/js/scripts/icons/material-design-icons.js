@@ -1,4 +1,4 @@
-"use strict";
+
 /**
  * @author Batch Themes Ltd.
  */
@@ -7,18 +7,18 @@
     if (!element_exists("#icons-material-design-icons")) {
       return false;
     }
-    var icons = [];
+    let icons = [];
     $(".material-design-icons .icon").each(function() {
       icons.push($(this).data("icon"));
     });
     icons = _.uniq(icons);
     $("#search-icons").on("keyup", function() {
-      var val = $(this).val();
-      var results = icons.filter(function(value) {
+      const val = $(this).val();
+      const results = icons.filter(function(value) {
         return value.match(val);
       });
       $(".material-design-icons .icon").each(function() {
-        var icon = $(this).data("icon");
+        const icon = $(this).data("icon");
         if (results.indexOf(icon) == -1) {
           $(this).addClass("hidden");
         } else {

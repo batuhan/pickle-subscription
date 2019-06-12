@@ -1,30 +1,30 @@
 import React from "react";
-import Load from "../utilities/load.jsx";
 import { browserHistory } from "react-router";
+import cookie from "react-cookie";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import _ from "lodash";
+import { connect } from "react-redux";
+import Load from "../utilities/load.jsx";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";
-import cookie from "react-cookie";
 import DashboardWidget from "../elements/my-services/dashboard-widget.jsx";
 import DashboardServiceList from "../elements/my-services/dashboard-service-list.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import _ from "lodash";
 import ModalInvoice from "../elements/modals/modal-invoice.jsx";
 import { Price } from "../utilities/price.jsx";
-import { connect } from "react-redux";
 
 class MyServices extends React.Component {
   constructor(props) {
     super(props);
-    let uid = cookie.load("uid");
-    let username = cookie.load("username");
+    const uid = cookie.load("uid");
+    const username = cookie.load("username");
     this.state = {
       services: [],
       url: `/api/v1/service-instances/own`,
       nextInvoice: false,
       invoiceUrl: `/api/v1/invoices/upcoming/${uid}`,
-      uid: uid,
+      uid,
       email: username,
       loading: true,
       invoiceModal: false,
@@ -44,7 +44,7 @@ class MyServices extends React.Component {
   }
 
   fetchServiceInstances() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (response != null) {
         if (!response.error) {
@@ -55,8 +55,9 @@ class MyServices extends React.Component {
       self.setState({ loading: false });
     });
   }
+
   fetchNextInvoice() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.invoiceUrl).then(function(response) {
       if (!response.error) {
         self.setState({ nextInvoice: response });
@@ -72,14 +73,15 @@ class MyServices extends React.Component {
   onOpenInvoiceModal() {
     this.setState({ InvoiceModal: true });
   }
+
   onCloseInvoiceModal() {
     this.setState({ InvoiceModal: false });
   }
 
   render() {
-    let self = this;
-    let pageName = self.props.route.name;
-    let breadcrumbs = [
+    const self = this;
+    const pageName = self.props.route.name;
+    const breadcrumbs = [
       { name: "Home", link: "home" },
       { name: "My Account", link: null },
     ];
@@ -92,8 +94,8 @@ class MyServices extends React.Component {
             <Content>
               <ReactCSSTransitionGroup
                 component="div"
-                transitionName={"fade"}
-                transitionAppear={true}
+                transitionName="fade"
+                transitionAppear
                 transitionAppearTimeout={1000}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}
@@ -104,20 +106,20 @@ class MyServices extends React.Component {
           </div>
         </div>
       );
-    } else {
-      let allServices = self.state.services;
-      let grouped = _.groupBy(allServices, "status");
-      let runningServiceCount = grouped.running
+    } 
+      const allServices = self.state.services;
+      const grouped = _.groupBy(allServices, "status");
+      const runningServiceCount = grouped.running
         ? grouped.running.length
         : false;
-      let requestedServiceCount = grouped.requested
+      const requestedServiceCount = grouped.requested
         ? grouped.requested.length
         : false;
-      let nextInvoiceAmountDue = self.state.nextInvoice
+      const nextInvoiceAmountDue = self.state.nextInvoice
         ? self.state.nextInvoice.amount_due
         : 0;
-      let userStatus = this.props.user.status;
-      let widgetColor = () => {
+      const userStatus = this.props.user.status;
+      const widgetColor = () => {
         switch (self.props.user.status) {
           case "active":
             return "#27ae60";
@@ -134,7 +136,7 @@ class MyServices extends React.Component {
         }
       };
 
-      let widgetIcon = () => {
+      const widgetIcon = () => {
         switch (self.props.user.status) {
           case "active":
             return "check";
@@ -169,8 +171,8 @@ class MyServices extends React.Component {
             <Content>
               <ReactCSSTransitionGroup
                 component="div"
-                transitionName={"fade"}
-                transitionAppear={true}
+                transitionName="fade"
+                transitionAppear
                 transitionAppearTimeout={1000}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}
@@ -202,11 +204,11 @@ class MyServices extends React.Component {
               </ReactCSSTransitionGroup>
             </Content>
             <ReactCSSTransitionGroup
-              component={"div"}
-              transitionName={"fade"}
-              transitionAppear={true}
-              transitionEnter={true}
-              transitionLeave={true}
+              component="div"
+              transitionName="fade"
+              transitionAppear
+              transitionEnter
+              transitionLeave
               transitionAppearTimeout={1000}
               transitionEnterTimeout={1000}
               transitionLeaveTimeout={1000}
@@ -216,7 +218,7 @@ class MyServices extends React.Component {
           </div>
         </Authorizer>
       );
-    }
+    
   }
 }
 

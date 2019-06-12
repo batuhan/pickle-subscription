@@ -1,4 +1,4 @@
-"use strict";
+
 /**
  * @author Batch Themes Ltd.
  */
@@ -7,19 +7,19 @@
     if (!element_exists("#icons-flags")) {
       return false;
     }
-    var icons = [];
+    let icons = [];
     $(".flag-icons .icon").each(function() {
       icons.push($(this).data("icon"));
     });
     icons = _.uniq(icons);
     $("#search-icons").on("keyup", function() {
-      var val = $(this).val();
-      var results = icons.filter(function(value) {
-        var regex = new RegExp(val, "gi");
+      const val = $(this).val();
+      const results = icons.filter(function(value) {
+        const regex = new RegExp(val, "gi");
         return value.match(regex);
       });
       $(".flag-icons .icon").each(function() {
-        var icon = $(this).data("icon");
+        const icon = $(this).data("icon");
         if (results.indexOf(icon) == -1) {
           $(this).addClass("hidden");
         } else {

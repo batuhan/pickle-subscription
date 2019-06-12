@@ -13,17 +13,17 @@ class ModalAddFund extends React.Component {
   }
 
   render() {
-    let self = this;
-    let pageName = "Add Credit Card For User";
-    let spk = cookie.load("spk");
+    const self = this;
+    const pageName = "Add Credit Card For User";
+    const spk = cookie.load("spk");
     return (
       <Modal
         modalTitle={pageName}
         icon="fa-credit-card-alt"
-        hideCloseBtn={true}
+        hideCloseBtn
         show={self.props.show}
         hide={self.props.hide}
-        hideFooter={true}
+        hideFooter
       >
         <div className="table-responsive">
           <div className="p-20">

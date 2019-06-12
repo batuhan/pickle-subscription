@@ -1,10 +1,10 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
 import { Link, browserHistory } from "react-router";
 import Alert from "react-s-alert";
+import update from "immutability-helper";
+import Load from "../../utilities/load.jsx";
 import Fetcher from "../../utilities/fetcher.jsx";
 import { DataForm, DataChild } from "../../utilities/data-form.jsx";
-import update from "immutability-helper";
 
 class ServiceInstanceForm extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class ServiceInstanceForm extends React.Component {
     this.state = {
       files: [],
       template: {},
-      url: "/api/v1/service-instances/" + props.params.instanceId,
+      url: `/api/v1/service-instances/${  props.params.instanceId}`,
       loading: true,
     };
     this.handleFiles = this.handleFiles.bind(this);
@@ -20,12 +20,12 @@ class ServiceInstanceForm extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
+    const that = this;
     Fetcher(that.state.url).then(function(response) {
       if (!response.error) {
-        Fetcher(that.state.url + "/files").then(function(files) {
+        Fetcher(`${that.state.url  }/files`).then(function(files) {
           if (!response.error) {
-            that.setState({ loading: false, template: response, files: files });
+            that.setState({ loading: false, template: response, files });
           } else {
             that.setState({ loading: false });
           }
@@ -37,10 +37,10 @@ class ServiceInstanceForm extends React.Component {
   }
 
   handleDelete(id) {
-    let self = this;
+    const self = this;
     return function(e) {
       e.preventDefault();
-      let url = self.state.url + "/files/" + id;
+      const url = `${self.state.url  }/files/${  id}`;
 
       Fetcher(url, "DELETE").then(function() {
         self.setState({
@@ -52,17 +52,17 @@ class ServiceInstanceForm extends React.Component {
 
   handleFiles(e) {
     e.preventDefault();
-    let self = this;
-    let url = this.state.url + "/files";
+    const self = this;
+    const url = `${this.state.url  }/files`;
 
-    let init = {
+    const init = {
       method: "POST",
       credentials: "include",
       body: new FormData(document.getElementById("instance-files-form")),
     };
 
     Fetcher(url, null, null, init).then(function(result) {
-      let updated = result.concat(self.state.files);
+      const updated = result.concat(self.state.files);
       self.setState({ files: updated });
     });
   }
@@ -71,8 +71,8 @@ class ServiceInstanceForm extends React.Component {
     if (this.state.loading) return <Load />;
     if (this.state.template == {}) {
       return <p className="help-block center-align">There is no template</p>;
-    } else {
-      let template = this.state.template;
+    } 
+      const {template} = this.state;
       return (
         <div>
           {/* handle file upload */}
@@ -152,13 +152,15 @@ class ServiceInstanceForm extends React.Component {
                 <div>{template.name}</div>
               </div>
               <div className="article-item-description">
-                Created {new Date(template.created).toDateString()}
+                Created 
+                {' '}
+                {new Date(template.created).toDateString()}
               </div>
             </div>
           </div>
         </div>
       );
-    }
+    
   }
 }
 

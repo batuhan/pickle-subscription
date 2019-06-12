@@ -2,9 +2,9 @@
  * Equal height - by Lewi Hussey
  */
 
-let matchHeight = (function() {
+const matchHeight = (function() {
   let initialized = false;
-  let untilFound = intervalTrigger();
+  const untilFound = intervalTrigger();
 
   function init() {
     eventListeners();
@@ -31,12 +31,12 @@ let matchHeight = (function() {
   function matchHeight() {
     $(document).ready(function() {
       // console.log('matchHeight called');
-      let groupName = $(".card");
+      const groupName = $(".card");
       if (groupName.length > 0) {
         initialized = true;
       }
       // console.log('cards', groupName);
-      let groupHeights = [];
+      const groupHeights = [];
 
       groupName.css("min-height", "auto");
 
@@ -45,17 +45,17 @@ let matchHeight = (function() {
         // console.log("each height:", $(this).outerHeight());
       });
 
-      let maxHeight = Math.max.apply(null, groupHeights);
+      const maxHeight = Math.max.apply(null, groupHeights);
       groupName.css("min-height", maxHeight);
     });
   }
 
   return {
-    init: init,
+    init,
   };
 })();
 
 $(document).ready(function() {
   matchHeight.init();
-  //TODO: fix on load height match
+  // TODO: fix on load height match
 });

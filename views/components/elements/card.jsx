@@ -17,11 +17,11 @@ class Card extends React.Component {
           >
             <img
               src={
-                this.props.imgUrl +
-                "/" +
-                this.props.id +
-                "/image?" +
-                new Date().getTime()
+                `${this.props.imgUrl 
+                }/${ 
+                this.props.id 
+                }/image?${ 
+                new Date().getTime()}`
               }
             />
           </div>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, browserHistory } from "react-router";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import Load from "../utilities/load.jsx";
 import Fetcher from "../utilities/fetcher.jsx";
 import Dropdown from "../elements/dropdown.jsx";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { Price, serviceTypeFormatter } from "../utilities/price.jsx";
 import { getFormattedDate } from "../utilities/date-format.jsx";
 import { ServiceBotTableBase } from "../elements/bootstrap-tables/servicebot-table-base.jsx";
@@ -54,8 +54,8 @@ class ManageCatalogList extends React.Component {
    * Sets the state with the fetched data for use in ServiceBotTableBase's props.row
    */
   fetchData() {
-    let self = this;
-    let url = "/api/v1/service-templates";
+    const self = this;
+    const url = "/api/v1/service-templates";
     Fetcher(url).then(function(response) {
       if (!response.error) {
         self.setState({ rows: response });
@@ -80,9 +80,11 @@ class ManageCatalogList extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   onOpenDeleteModal(row) {
     this.setState({ deleteModal: true, currentDataObject: row });
   }
+
   onCloseDeleteModal() {
     this.fetchData();
     this.setState({
@@ -91,6 +93,7 @@ class ManageCatalogList extends React.Component {
       lastFetch: Date.now(),
     });
   }
+
   onCloseEmbedModal() {
     this.setState({
       embedModal: false,
@@ -110,16 +113,20 @@ class ManageCatalogList extends React.Component {
   nameFormatter(cell, row) {
     return <Link to={`/manage-catalog/${row.id}`}>{cell}</Link>;
   }
+
   priceFormatter(cell, row) {
-    let prefix = getSymbolFromCurrency(row.currency);
+    const prefix = getSymbolFromCurrency(row.currency);
     return <Price value={cell} prefix={prefix} />;
   }
+
   paymentTypeFormatter(cell, row) {
     return serviceTypeFormatter(row);
   }
+
   categoryFormatter(cell) {
     return cell.service_categories[0].name;
   }
+
   publishedFormatter(cell) {
     let color_class = "status-badge ";
     color_class += cell ? "green" : "red";
@@ -128,11 +135,13 @@ class ManageCatalogList extends React.Component {
     }</span>`;
     // return ( cell ? 'Published' : 'Unpublished' );
   }
+
   createdFormatter(cell) {
     return getFormattedDate(cell, { time: true });
   }
+
   rowActionsFormatter(cell, row) {
-    let self = this;
+    const self = this;
     return (
       <Dropdown
         direction="right"
@@ -197,8 +206,8 @@ class ManageCatalogList extends React.Component {
   }
 
   render() {
-    let pageName = this.props.route.name;
-    let renderModals = () => {
+    const pageName = this.props.route.name;
+    const renderModals = () => {
       if (this.state.embedModal) {
         return (
           <ModalEmbedTemplate
@@ -231,7 +240,7 @@ class ManageCatalogList extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } else {
+    } 
       return (
         <div className="row m-b-20">
           <div className="col-xs-12">
@@ -240,7 +249,7 @@ class ManageCatalogList extends React.Component {
               createItemAction={() => {
                 browserHistory.push("/manage-catalog/create");
               }}
-              createItemLabel={"Create Product / Service"}
+              createItemLabel="Create Product / Service"
               fetchRows={this.fetchData}
               sortColumn="updated_at"
               sortOrder="desc"
@@ -248,7 +257,7 @@ class ManageCatalogList extends React.Component {
               <TableHeaderColumn
                 isKey
                 dataField="name"
-                dataSort={true}
+                dataSort
                 dataFormat={this.nameFormatter}
                 width={200}
               >
@@ -256,7 +265,7 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="amount"
-                dataSort={true}
+                dataSort
                 dataFormat={this.priceFormatter}
                 searchable={false}
                 width={100}
@@ -265,7 +274,7 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="type"
-                dataSort={true}
+                dataSort
                 dataFormat={this.paymentTypeFormatter}
                 searchable={false}
                 width={100}
@@ -274,7 +283,7 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="references"
-                dataSort={true}
+                dataSort
                 dataFormat={this.categoryFormatter}
                 filterFormatted
                 width={120}
@@ -283,7 +292,7 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="published"
-                dataSort={true}
+                dataSort
                 dataFormat={this.publishedFormatter}
                 searchable={false}
                 filterFormatted
@@ -293,7 +302,7 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="updated_at"
-                dataSort={true}
+                dataSort
                 dataFormat={this.createdFormatter}
                 searchable={false}
                 filterFormatted
@@ -303,18 +312,18 @@ class ManageCatalogList extends React.Component {
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField="Actions"
-                className={"action-column-header"}
-                columnClassName={"action-column"}
+                className="action-column-header"
+                columnClassName="action-column"
                 dataFormat={this.rowActionsFormatter}
                 searchable={false}
                 width={100}
-              ></TableHeaderColumn>
+              />
             </ServiceBotTableBase>
             {renderModals()}
           </div>
         </div>
       );
-    }
+    
   }
 }
 

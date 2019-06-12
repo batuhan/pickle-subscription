@@ -1,19 +1,20 @@
 import React from "react";
 import cookie from "react-cookie";
 import { Link } from "react-router";
+import ReactTooltip from "react-tooltip";
+import consume from "pluginbot-react/dist/consume";
+import { connect } from "react-redux";
 import { Authorizer, isAuthorized } from "../utilities/authorizer.jsx";
 import ModalInvoice from "../elements/modals/modal-invoice.jsx";
 import { AdminEditingGear, AdminEditingSidebar } from "./admin-sidebar.jsx";
 import { NavNotification } from "../pages/notifications.jsx";
-import SideNav from "../layouts//side-nav.jsx";
+import SideNav from "./side-nav.jsx";
 import { AppMessage } from "../elements/app-message.jsx";
-import ReactTooltip from "react-tooltip";
-import consume from "pluginbot-react/dist/consume";
 
-import { connect } from "react-redux";
 import "../../../public/js/bootstrap-3.3.7-dist/js/bootstrap.js";
 import $ from "jquery";
-let _ = require("lodash");
+
+const _ = require("lodash");
 
 const AnonymousLinks = ({ signUpEnabled }) => (
   <ul className="nav navbar-nav navbar-right">
@@ -88,15 +89,17 @@ class NavBootstrap extends React.Component {
       this.setState({ editingMode: true });
     }
   }
+
   toggleOnEditingGear() {
     this.setState({ editingGear: true });
   }
+
   toggleOffEditingGear() {
     this.setState({ editingGear: false });
   }
 
   toggleSideBar() {
-    let self = this;
+    const self = this;
     this.setState({ sidebar: !this.state.sidebar }, function() {
       if (self.state.sidebar) {
         document.body.classList.add("layout-collapsed");
@@ -105,8 +108,9 @@ class NavBootstrap extends React.Component {
       }
     });
   }
+
   getPluginItems() {
-    let user = this.props.user;
+    const {user} = this.props;
     return (
       this.props.services.routeDefinition &&
       this.props.services.routeDefinition.reduce((acc, route, index) => {
@@ -130,10 +134,11 @@ class NavBootstrap extends React.Component {
         <ul className="nav navbar-nav">
           <li>
             <Link to="/dashboard" style={style}>
-              Dashboard<span className="sr-only">(current)</span>
+              Dashboard
+              <span className="sr-only">(current)</span>
             </Link>
           </li>
-          {/*<li><Link to="/service-catalog">Service Catalog</Link></li>*/}
+          {/* <li><Link to="/service-catalog">Service Catalog</Link></li> */}
           <li className="dropdown">
             <a
               href="#"
@@ -195,12 +200,13 @@ class NavBootstrap extends React.Component {
           {this.getPluginItems()}
         </ul>
       );
-    } else {
+    } 
       return (
         <ul className="nav navbar-nav">
           <li>
             <Link to="/my-services" style={style}>
-              My Account<span className="sr-only">(current)</span>
+              My Account
+              <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li>
@@ -213,24 +219,24 @@ class NavBootstrap extends React.Component {
               Payment Method
             </Link>
           </li>
-          {/*<li className="dropdown">*/}
-          {/*<a href="#" className="dropdown-toggle" ref="dropdownToggle" data-toggle="dropdown"*/}
-          {/*role="button" aria-haspopup="true" aria-expanded="false" style={style}>Billing <span className="caret"/></a>*/}
-          {/*<ul className="dropdown-menu">*/}
-          {/*<li><Link onClick={this.onOpenInvoiceModal}>Upcoming Invoice</Link></li>*/}
-          {/*<li><Link to={`/billing-history/${this.props.uid}`}>Billing History</Link></li>*/}
-          {/*<li><Link to={`/billing-settings/${this.props.uid}`}>Billing Settings</Link></li>*/}
-          {/*</ul>*/}
-          {/*</li>*/}
+          {/* <li className="dropdown"> */}
+          {/* <a href="#" className="dropdown-toggle" ref="dropdownToggle" data-toggle="dropdown" */}
+          {/* role="button" aria-haspopup="true" aria-expanded="false" style={style}>Billing <span className="caret"/></a> */}
+          {/* <ul className="dropdown-menu"> */}
+          {/* <li><Link onClick={this.onOpenInvoiceModal}>Upcoming Invoice</Link></li> */}
+          {/* <li><Link to={`/billing-history/${this.props.uid}`}>Billing History</Link></li> */}
+          {/* <li><Link to={`/billing-settings/${this.props.uid}`}>Billing Settings</Link></li> */}
+          {/* </ul> */}
+          {/* </li> */}
           {this.getPluginItems()}
         </ul>
       );
-    }
+    
   }
 
   getLivemode() {
-    let pk = cookie.load("spk");
-    let livemode = pk ? pk.substring(3, 7) : "";
+    const pk = cookie.load("spk");
+    const livemode = pk ? pk.substring(3, 7) : "";
     if (pk === undefined) {
       return (
         <span
@@ -273,13 +279,13 @@ class NavBootstrap extends React.Component {
           <strong>Test Mode</strong>
         </span>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 
   render() {
-    let self = this;
+    const self = this;
     const currentModal = () => {
       if (self.state.InvoiceModal) {
         return (
@@ -292,10 +298,10 @@ class NavBootstrap extends React.Component {
       }
     };
 
-    let navigationBarStyle = {};
-    let linkTextStyle = {};
+    const navigationBarStyle = {};
+    const linkTextStyle = {};
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       navigationBarStyle.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -328,7 +334,7 @@ class NavBootstrap extends React.Component {
                   <Link to="/" className="navbar-brand nav-logo">
                     <img src="/api/v1/system-options/file/brand_logo" />
                   </Link>
-                  <Authorizer anonymous={true}>
+                  <Authorizer anonymous>
                     <Link className="mobile-login-button" to="/login">
                       Login
                     </Link>
@@ -356,7 +362,7 @@ class NavBootstrap extends React.Component {
                   <div className="nav navbar-nav navbar-right navvbar-badge">
                     {this.getLivemode()}
                   </div>
-                  <Authorizer anonymous={true}>
+                  <Authorizer anonymous>
                     <VisibleAnonymousLinks />
                   </Authorizer>
                   <Authorizer>

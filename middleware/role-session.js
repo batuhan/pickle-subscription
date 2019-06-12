@@ -1,9 +1,10 @@
-let Role = require("../models/role");
-let role_session = function() {
+const Role = require("../models/role");
+
+const role_session = function() {
   return function(req, res, next) {
     if (req.isAuthenticated()) {
       console.log("set cookie");
-      let user_role = new Role({ id: req.user.data.role_id });
+      const user_role = new Role({ id: req.user.data.role_id });
       user_role.getPermissions(function(perms) {
         // let permission_names = perms.map(perm => perm.data.permission_name);
         res.cookie("username", req.user.get("email"));

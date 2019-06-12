@@ -8,7 +8,7 @@ class Content extends React.Component {
   }
 
   render() {
-    let style = {};
+    const style = {};
     if (this.props.primary && this.props.bgColor) {
       style.backgroundColor = this.props.bgColor.value;
     }

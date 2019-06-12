@@ -1,9 +1,9 @@
 import React from "react";
 import "./css/style.css";
 import { browserHistory } from "react-router";
-import { Price } from "../../utilities/price.jsx";
 import { connect } from "react-redux";
-let _ = require("lodash");
+import getSymbolFromCurrency from "currency-symbol-map";
+import { Price } from "../../utilities/price.jsx";
 import {
   hexToRgb,
   rgbToHex,
@@ -11,7 +11,8 @@ import {
   getThemeHeaderRGB,
   getThemeContentRGB,
 } from "../../utilities/color-converter.js";
-import getSymbolFromCurrency from "currency-symbol-map";
+
+const _ = require("lodash");
 
 class Widget extends React.Component {
   constructor(props) {
@@ -36,8 +37,8 @@ class Widget extends React.Component {
   getFormatted(value) {
     if (this.props.type) {
       if (this.props.type === "price") {
-        let { options } = this.props;
-        let prefix = options.currency
+        const { options } = this.props;
+        const prefix = options.currency
           ? getSymbolFromCurrency(options.currency.value)
           : "";
         return <Price value={value} prefix={prefix} />;
@@ -48,27 +49,27 @@ class Widget extends React.Component {
   }
 
   render() {
-    let style = { widgetData: {}, widgetLabel: {} };
-    let { options } = this.props;
-    let prefix = options.currency
+    const style = { widgetData: {}, widgetLabel: {} };
+    const { options } = this.props;
+    const prefix = options.currency
       ? getSymbolFromCurrency(options.currency.value)
       : "";
     if (this.props.options) {
-      let options = this.props.options;
+      const {options} = this.props;
       style.widgetData.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
         "#000000",
       );
 
-      let darkened = getDarkenedRGB(
+      const darkened = getDarkenedRGB(
         hexToRgb(
           _.get(options, "primary_theme_background_color.value", "#000000"),
         ),
       );
-      let darkenedHex = rgbToHex(darkened.r, darkened.g, darkened.b);
-      let greenHeader = rgbToHex(44, 212, 130);
-      let greenContent = rgbToHex(2, 191, 99);
+      const darkenedHex = rgbToHex(darkened.r, darkened.g, darkened.b);
+      const greenHeader = rgbToHex(44, 212, 130);
+      const greenContent = rgbToHex(2, 191, 99);
       style.widgetLabel.backgroundColor = darkenedHex;
       style.widgetLabel.color = _.get(
         options,
@@ -82,12 +83,12 @@ class Widget extends React.Component {
         style.widgetData.backgroundColor = rgbToHex(230, 158, 26);
         style.widgetLabel.backgroundColor = rgbToHex(230, 177, 26);
       } else if (this.props.wcolor === "purple") {
-        let newColor = getThemeHeaderRGB(
+        const newColor = getThemeHeaderRGB(
           hexToRgb(
             _.get(options, "primary_theme_background_color.value", "#000000"),
           ),
         );
-        let newColorContent = getThemeContentRGB(
+        const newColorContent = getThemeContentRGB(
           hexToRgb(
             _.get(options, "primary_theme_background_color.value", "#000000"),
           ),
@@ -107,7 +108,7 @@ class Widget extends React.Component {
         style.widgetLabel.backgroundColor = "none";
         style.widgetLabel.color = rgbToHex(0, 0, 0);
       } else if (this.props.wcolor === "grey") {
-        let newColor = getThemeContentRGB(
+        const newColor = getThemeContentRGB(
           hexToRgb(
             _.get(options, "primary_theme_background_color.value", "#000000"),
           ),
@@ -120,13 +121,13 @@ class Widget extends React.Component {
         );
         style.widgetData.color = rgbToHex(0, 0, 0);
       } else if (this.props.wcolor === "theme-clear") {
-        //The label is based on the theme
+        // The label is based on the theme
         style.widgetData.backgroundColor = rgbToHex(255, 255, 255);
         style.widgetData.color = rgbToHex(0, 0, 0);
       }
     }
 
-    let bodyClass = this.props.bodyClass;
+    const {bodyClass} = this.props;
 
     return (
       <div
@@ -147,7 +148,7 @@ class Widget extends React.Component {
           <div className="p-t-10 p-b-10">
             {this.state.data.list.map((listing, index) => (
               <div
-                key={"price-" + index}
+                key={`price-${  index}`}
                 className="dash-widget-list row p-l-20 p-r-20 p-t-5 p-b-5"
               >
                 <div className="col-md-8 col-lg-9">{listing.label}</div>
@@ -185,7 +186,7 @@ class DashboardWidgets extends React.Component {
   }
 
   render() {
-    //Unpaid charge logic
+    // Unpaid charge logic
     let unpaidwcolor = "green";
 
     if (this.state.data.salesStats.overall.remainingCharges > 0) {

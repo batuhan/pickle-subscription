@@ -1,14 +1,15 @@
 import React from "react";
-import Load from "../../utilities/load.jsx";
-import Fetcher from "../../utilities/fetcher.jsx";
-let _ = require("lodash");
-import Inputs from "../../utilities/inputs.jsx";
-import ContentTitle from "../../layouts/content-title.jsx";
 import update from "immutability-helper";
 import { connect } from "react-redux";
+import Load from "../../utilities/load.jsx";
+import Fetcher from "../../utilities/fetcher.jsx";
+import Inputs from "../../utilities/inputs.jsx";
+import ContentTitle from "../../layouts/content-title.jsx";
 import Buttons from "../buttons.jsx";
 import ImageUploader from "../../utilities/image-uploader.jsx";
 import { setOptions } from "../../utilities/actions";
+
+const _ = require("lodash");
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -48,7 +49,7 @@ class SystemSettingsForm extends React.Component {
   }
 
   fetchSettings() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.url).then(function(response) {
       if (!response.error) {
         self.setState({ loading: false, system_settings: response });
@@ -60,12 +61,12 @@ class SystemSettingsForm extends React.Component {
   }
 
   fetchRoles() {
-    let self = this;
+    const self = this;
     Fetcher(self.state.rolesUrl).then(function(response) {
       if (!response.error) {
-        let userRoles = response.map(role => {
-          let roleKey = role.id;
-          let value = role.role_name;
+        const userRoles = response.map(role => {
+          const roleKey = role.id;
+          const value = role.role_name;
           return { [value]: roleKey };
         });
         self.setState({ loading: false, roles: userRoles });
@@ -83,9 +84,9 @@ class SystemSettingsForm extends React.Component {
   }
 
   handleOnChange(e) {
-    let self = this;
-    let name = e.currentTarget.name;
-    let value = e.currentTarget.value;
+    const self = this;
+    const {name} = e.currentTarget;
+    const {value} = e.currentTarget;
 
     const newData = update(self.state, {
       system_settings: {
@@ -96,9 +97,9 @@ class SystemSettingsForm extends React.Component {
   }
 
   handleUpdateSettings() {
-    let self = this;
+    const self = this;
     self.setState({ ajaxLoad: true });
-    let payload = _.toArray(self.state.system_settings);
+    const payload = _.toArray(self.state.system_settings);
     Fetcher("/api/v1/system-options", "PUT", payload).then(function(response) {
       if (!response.error) {
         self.setState({ ajaxLoad: false, success: true });
@@ -120,23 +121,25 @@ class SystemSettingsForm extends React.Component {
   }
 
   getAppVersion() {
-    let version = this.props.options.version;
+    const {version} = this.props.options;
     if (version) {
       return (
         <div className="alert alert-info">
-          <i className="fa fa-info-circle"></i>
-          ServiceBot Version: {version}
+          <i className="fa fa-info-circle" />
+          ServiceBot Version: 
+          {' '}
+          {version}
         </div>
       );
-    } else {
+    } 
       return <span />;
-    }
+    
   }
 
   render() {
     if (this.state.loading) {
       return <Load />;
-    } else if (this.state.success && false) {
+    } if (this.state.success && false) {
       return (
         // this is disabled
         <div>
@@ -152,12 +155,12 @@ class SystemSettingsForm extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       let self = this;
-      let group = _.groupBy(this.state.system_settings, setting => {
+      const group = _.groupBy(this.state.system_settings, setting => {
         return setting.type ? setting.type : "other";
       });
-      let types = _.uniq(
+      const types = _.uniq(
         _.map(this.state.system_settings, setting => setting.type),
       );
       let colorSettings = _.map(this.state.system_settings, s => {
@@ -167,9 +170,9 @@ class SystemSettingsForm extends React.Component {
           s.value != undefined
         ) {
           return s.value;
-        } else {
+        } 
           return null;
-        }
+        
       });
       colorSettings = _.remove(colorSettings, null);
       colorSettings = _.union(colorSettings, [
@@ -184,7 +187,7 @@ class SystemSettingsForm extends React.Component {
         "#F78DA7",
         "#9900EF",
       ]);
-      //for side panel settings
+      // for side panel settings
       if (this.props.filter) {
         return (
           <div>
@@ -196,7 +199,7 @@ class SystemSettingsForm extends React.Component {
                   elementID="brand-logo"
                   imageURL="/api/v1/system-options/file/brand_logo"
                   imageStyle="badge badge-lg"
-                  uploadButton={true}
+                  uploadButton
                   reloadNotice="Please reload the application."
                 />
               </div>
@@ -210,7 +213,7 @@ class SystemSettingsForm extends React.Component {
                   elementID="front-page-image"
                   imageURL="/api/v1/system-options/file/front_page_image"
                   imageStyle="badge badge-lg"
-                  uploadButton={true}
+                  uploadButton
                   reloadNotice="Please reload the application."
                 />
               </div>
@@ -240,7 +243,7 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      } else {
+                      } 
                         return (
                           <div key={`option_${group.option}`}>
                             <Inputs
@@ -252,7 +255,7 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      }
+                      
                     }
                   })}
                   <div className="clearfix" />
@@ -270,16 +273,16 @@ class SystemSettingsForm extends React.Component {
             </div>
           </div>
         );
-      } else {
+      } 
         // for system settings page
 
-        let tabStyle = type => {
-          let tabColor = this.props.options.button_primary_color.value;
+        const tabStyle = type => {
+          const tabColor = this.props.options.button_primary_color.value;
           if (type == self.state.currentTabType) {
             return { borderColor: tabColor };
-          } else {
+          } 
             return {};
-          }
+          
         };
 
         return (
@@ -290,7 +293,7 @@ class SystemSettingsForm extends React.Component {
                 <h4 className="text-capitalize">Setting Types</h4>
                 <ul className="tabs">
                   <li
-                    key={`settings-type-tab-branding`}
+                    key="settings-type-tab-branding"
                     className={`tab text-capitalize ${
                       self.state.currentTabType == "branding" ? "active" : ""
                     }`}
@@ -336,7 +339,7 @@ class SystemSettingsForm extends React.Component {
                           elementID="brand-logo"
                           imageURL="/api/v1/system-options/file/brand_logo"
                           imageStyle="badge badge-lg"
-                          uploadButton={true}
+                          uploadButton
                         />
                       </div>
                       <div className="col-md-4 form-group-flex column centered">
@@ -346,7 +349,7 @@ class SystemSettingsForm extends React.Component {
                           elementID="front-page-image"
                           imageURL="/api/v1/system-options/file/front_page_image"
                           imageStyle="badge badge-lg"
-                          uploadButton={true}
+                          uploadButton
                         />
                       </div>
                       <div className="col-md-4 form-group-flex column centered">
@@ -356,7 +359,7 @@ class SystemSettingsForm extends React.Component {
                           elementID="loader-logo"
                           imageURL="/api/v1/system-options/file/loader_logo"
                           imageStyle="badge badge-lg"
-                          uploadButton={true}
+                          uploadButton
                         />
                       </div>
                     </div>
@@ -383,9 +386,9 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      } else if (group.data_type == "user_role") {
+                      } if (group.data_type == "user_role") {
                         return (
-                          //this is special case
+                          // this is special case
                           <div key={`option_${group.option}`}>
                             <Inputs
                               type="select"
@@ -397,9 +400,9 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      } else if (group.data_type == "currency") {
+                      } if (group.data_type == "currency") {
                         return (
-                          //this is special case for currency
+                          // this is special case for currency
                           <div key={`option_${group.option}`}>
                             <Inputs
                               type="select"
@@ -411,7 +414,7 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      } else {
+                      } 
                         return (
                           <div key={`option_${group.option}`}>
                             <Inputs
@@ -423,7 +426,7 @@ class SystemSettingsForm extends React.Component {
                             />
                           </div>
                         );
-                      }
+                      
                     })}
                     <div className="clearfix" />
                   </div>
@@ -442,12 +445,12 @@ class SystemSettingsForm extends React.Component {
             </div>
           </div>
         );
-      }
-    }
+      
+    
   }
 }
 
-let mapDispatch = function(dispatch) {
+const mapDispatch = function(dispatch) {
   return {
     onUpdateSettings: () => {
       Fetcher("/api/v1/system-options/public").then(options => {

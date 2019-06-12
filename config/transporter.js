@@ -1,9 +1,9 @@
-var nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
 // create reusable transporter object using the default SMTP transport
 
 //todo: handle certs n stufff
-let smtpConfig = {
+const smtpConfig = {
   name: process.env.VIRTUAL_HOST,
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
@@ -18,10 +18,10 @@ let smtpConfig = {
   },
 };
 
-var transporter = nodemailer.createTransport(smtpConfig);
+const transporter = nodemailer.createTransport(smtpConfig);
 
 // verify connection configuration
-transporter.verify(function(error, success) {
+transporter.verify(function(error) {
   if (error) {
     console.log(error);
   } else {

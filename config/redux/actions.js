@@ -1,7 +1,7 @@
 /*
  * action types
  */
-let actions = {};
+const actions = {};
 
 actions.SET_EVENT_REDUCER = "SET_EVENT_REDUCER";
 actions.SET_EVENT_SAGAS = "SET_EVENT_SAGAS";

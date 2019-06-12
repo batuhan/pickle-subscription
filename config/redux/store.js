@@ -1,4 +1,4 @@
-let { triggerEvent } = require("./actions");
+const { triggerEvent } = require("./actions");
 
 class Store {
   constructor() {}

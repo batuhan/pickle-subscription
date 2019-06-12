@@ -13,9 +13,9 @@
 //  setup plugin waits for api to come
 //  when api inserts the data.... put it in env and provide environment
 //  initialization plugin consumes environment and checks database
-let fs = require("fs");
-let path = require("path");
-let dotenv = require("dotenv");
+const fs = require("fs");
+const path = require("path");
+const dotenv = require("dotenv");
 //todo: move this into plugin
 const PLUGIN_DIRECTORY = path.resolve(__dirname, "../plugins");
 const PLUGIN_TABLE = "plugins";
@@ -27,7 +27,7 @@ module.exports = async function() {
   } else {
     //bring in environment variables
 
-    let envPath = path.resolve(__dirname, "../env/.env");
+    const envPath = path.resolve(__dirname, "../env/.env");
     dotenv.config({ path: envPath });
 
     // let db = require('knex')({
@@ -72,18 +72,11 @@ module.exports = async function() {
   };
 };
 
-let envExists = function() {
+const envExists = function() {
   return fs.existsSync(path.join(__dirname, "../env/.env"));
 };
 
-let getEnabledPlugins = async function(db) {
-  let pluginTableExists = await db.schema.hasTable(PLUGIN_TABLE);
-  return await (pluginTableExists
-    ? db(PLUGIN_TABLE).where("enabled", true)
-    : basePlugins());
-};
-
-let basePlugins = function() {
+const basePlugins = function() {
   return [
     { path: `${PLUGIN_DIRECTORY}/database`, dbConfig: getDBConf() },
     {
@@ -114,7 +107,7 @@ let basePlugins = function() {
   ];
 };
 
-let getInitialConfig = function() {
+const getInitialConfig = function() {
   return {
     admin_user: process.env.ADMIN_USER,
     admin_password: process.env.ADMIN_PASSWORD,
@@ -126,7 +119,7 @@ let getInitialConfig = function() {
   };
 };
 
-let getAppConf = function() {
+const getAppConf = function() {
   return {
     configPath: __dirname + "/pluginbot.config.js",
     port: process.env.PORT || 3000,
@@ -136,8 +129,8 @@ let getAppConf = function() {
   };
 };
 
-let getDBConf = function() {
-  let conf = {
+const getDBConf = function() {
+  const conf = {
     host: process.env.POSTGRES_DB_HOST,
     user: process.env.POSTGRES_DB_USER,
     database: process.env.POSTGRES_DB_NAME,

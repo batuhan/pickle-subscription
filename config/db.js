@@ -1,4 +1,4 @@
-var config = {
+const config = {
   host: process.env.POSTGRES_DB_HOST,
   user: process.env.POSTGRES_DB_USER,
   database: process.env.POSTGRES_DB_NAME,
@@ -6,7 +6,7 @@ var config = {
   port: process.env.POSTGRES_DB_PORT,
 };
 
-var knex = require("knex")({
+const knex = require("knex")({
   client: "pg",
   connection: config,
   pool: { min: 0, max: 10 },

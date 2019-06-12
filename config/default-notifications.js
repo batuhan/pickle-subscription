@@ -1,4 +1,4 @@
-let default_notifications = {};
+const default_notifications = {};
 default_notifications.templates = [
   {
     name: "request_service_instance_admin",

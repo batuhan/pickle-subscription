@@ -1,21 +1,19 @@
-var webpack = require("webpack");
-var path = require("path");
-var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require("webpack");
+const path = require("path");
 
-var BUILD_DIR = path.resolve(__dirname, "public/build");
-var APP_DIR = path.resolve(__dirname, "views");
+const BUILD_DIR = path.resolve(__dirname, "public/build");
+const APP_DIR = path.resolve(__dirname, "views");
 const CONFIG_PATH =
   process.env.CONFIG_PATH ||
   path.resolve(__dirname, "./config/pluginbot.config.js");
 const PLUGIN_DIR = path.resolve(__dirname, "./plugins");
-const MODULES = path.resolve(__dirname, "node_modules");
-var APP_DIR2 = path.resolve(__dirname, ".");
+const APP_DIR2 = path.resolve(__dirname, ".");
 
-var config = async function() {
-  let configBuilder = require("pluginbot/config");
-  let pluginConfigs = await configBuilder.buildClientConfig(CONFIG_PATH);
-  let pluginMap = await configBuilder.buildClientPluginMap(CONFIG_PATH);
-  let plugins = {
+const config = async function() {
+  const configBuilder = require("pluginbot/config");
+  const pluginConfigs = await configBuilder.buildClientConfig(CONFIG_PATH);
+  const pluginMap = await configBuilder.buildClientPluginMap(CONFIG_PATH);
+  const plugins = {
     entry: {
       ...pluginMap,
     },
@@ -52,7 +50,7 @@ var config = async function() {
     ],
   };
 
-  let app = {
+  const app = {
     entry: {
       bundle: ["react-hot-loader/patch", APP_DIR + "/index.jsx"],
     },
@@ -105,7 +103,7 @@ var config = async function() {
           loader: "style-loader!css-loader",
         },
         {
-          test: /js[\/\\].+\.(jsx|js)$/,
+          test: /js[/\\].+\.(jsx|js)$/,
           loader: "imports-loader?jQuery=jquery,$=jquery,this=>window",
         },
       ],

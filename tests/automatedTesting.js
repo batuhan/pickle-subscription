@@ -7,10 +7,10 @@ form.append("email", "admin");
 form.append("password", "1234");
 form.submit("http://localhost:3000/user/login", function(err, res) {
   // res – response object (http.IncomingMessage)  //
-  console.log(`${res.statusCode  } : ${  res.statusMessage}`);
-  const {headers} = res;
+  console.log(`${res.statusCode} : ${res.statusMessage}`);
+  const { headers } = res;
   const cookie = res.headers["set-cookie"][0];
-  console.log(`tootie: ${  typeof cookie}`);
+  console.log(`tootie: ${typeof cookie}`);
   res.resume();
   request(
     {
@@ -22,7 +22,7 @@ form.submit("http://localhost:3000/user/login", function(err, res) {
     },
     function(error, response, body) {
       console.log(response);
-      console.log(`body: ${  body}`);
+      console.log(`body: ${body}`);
     },
   );
 });

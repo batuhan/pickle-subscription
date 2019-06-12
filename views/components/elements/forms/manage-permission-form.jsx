@@ -137,7 +137,10 @@ class ManagePermissionForm extends React.Component {
       const removePermissions = _.remove(currentPermissions, function(pid) {
         return pid == data.permission;
       });
-      const newPermissions = _.difference(currentPermissions, removePermissions);
+      const newPermissions = _.difference(
+        currentPermissions,
+        removePermissions,
+      );
       const newPermissionMap = self.state.permissionMap;
       newPermissionMap[index].permission_ids = newPermissions;
       self.setState({ changed: true, permissionMap: newPermissionMap });
@@ -169,79 +172,78 @@ class ManagePermissionForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      const {roles} = this.state;
-      const {permissions} = this.state;
-      const permissionMap = this.state.managePermissions;
+    }
+    const { roles } = this.state;
+    const { permissions } = this.state;
+    const permissionMap = this.state.managePermissions;
 
-      const renderRoles = () => {
-        return roles.map(role => (
-          <th key={`role-${role.id}`} className={`capitalize role-${role.id}`}>
-            {role.role_name}
-          </th>
-        ));
-      };
+    const renderRoles = () => {
+      return roles.map(role => (
+        <th key={`role-${role.id}`} className={`capitalize role-${role.id}`}>
+          {role.role_name}
+        </th>
+      ));
+    };
 
-      const renderPermissions = () => {
-        return permissions.map(permission => (
-          <tr
-            key={`permission-${permission.id}`}
-            className={`permission-${permission.id}`}
-          >
-            <td className={`capitalize permission-${permission.id}`}>
-              {permission.permission_name.replace(/_/g, " ")}
+    const renderPermissions = () => {
+      return permissions.map(permission => (
+        <tr
+          key={`permission-${permission.id}`}
+          className={`permission-${permission.id}`}
+        >
+          <td className={`capitalize permission-${permission.id}`}>
+            {permission.permission_name.replace(/_/g, " ")}
+          </td>
+          {roles.map(role => (
+            <td
+              key={`role${role.id}-permission${permission.id}`}
+              className={`role${role.id}-permission${permission.id}`}
+            >
+              {_.indexOf(this.getRolePermissions(role.id), permission.id) >
+              -1 ? (
+                <RoleToggle
+                  role={role.id}
+                  permission={permission.id}
+                  onChange={this.handleTogglePermission}
+                  checked
+                />
+              ) : (
+                <RoleToggle
+                  role={role.id}
+                  permission={permission.id}
+                  onChange={this.handleTogglePermission}
+                  checked={false}
+                />
+              )}
             </td>
-            {roles.map(role => (
-              <td
-                key={`role${role.id}-permission${permission.id}`}
-                className={`role${role.id}-permission${permission.id}`}
-              >
-                {_.indexOf(this.getRolePermissions(role.id), permission.id) >
-                -1 ? (
-                  <RoleToggle
-                    role={role.id}
-                    permission={permission.id}
-                    onChange={this.handleTogglePermission}
-                    checked
-                  />
-                ) : (
-                  <RoleToggle
-                    role={role.id}
-                    permission={permission.id}
-                    onChange={this.handleTogglePermission}
-                    checked={false}
-                  />
-                )}
-              </td>
-            ))}
-          </tr>
-        ));
-      };
+          ))}
+        </tr>
+      ));
+    };
 
-      return (
-        <div className="col-xs-12">
-          <ContentTitle icon="cog" title="Manage all your permissions here" />
+    return (
+      <div className="col-xs-12">
+        <ContentTitle icon="cog" title="Manage all your permissions here" />
 
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Permissions</th>
-                {renderRoles()}
-              </tr>
-            </thead>
-            <tbody>{renderPermissions()}</tbody>
-          </table>
-          <Buttons
-            btnType="primary"
-            text="Save Permissions"
-            onClick={this.savePermissions}
-            disabled={!this.state.changed}
-            success={this.state.success}
-            loading={this.state.ajaxLoad}
-          />
-        </div>
-      );
-    
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Permissions</th>
+              {renderRoles()}
+            </tr>
+          </thead>
+          <tbody>{renderPermissions()}</tbody>
+        </table>
+        <Buttons
+          btnType="primary"
+          text="Save Permissions"
+          onClick={this.savePermissions}
+          disabled={!this.state.changed}
+          success={this.state.success}
+          loading={this.state.ajaxLoad}
+        />
+      </div>
+    );
   }
 }
 

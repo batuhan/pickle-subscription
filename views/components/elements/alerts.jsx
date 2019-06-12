@@ -48,9 +48,9 @@ class Alerts extends React.Component {
 
   render() {
     if (this.state.alert.message) {
-      const {type} = this.state.alert;
-      const {message} = this.state.alert;
-      const {icon} = this.state.alert;
+      const { type } = this.state.alert;
+      const { message } = this.state.alert;
+      const { icon } = this.state.alert;
       const style = {};
       if (this.state.position && this.state.position.position == "fixed") {
         style.position = "fixed";

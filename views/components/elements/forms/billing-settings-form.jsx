@@ -123,7 +123,7 @@ class CreditCardForm extends React.Component {
       self.checkIfUserHasCard();
     } else if (self.props.userFund) {
       const fund = self.props.userFund;
-      const {card} = fund.source;
+      const { card } = fund.source;
       self.setState(
         {
           loading: false,
@@ -263,9 +263,8 @@ class CreditCardForm extends React.Component {
     const getBrandIcon = () => {
       if (brand === "American Express") {
         return "fa fa-cc-amex";
-      } 
-        return `fa fa-cc-${brand.replace(/\s+/g, "-").toLowerCase()}`;
-      
+      }
+      return `fa fa-cc-${brand.replace(/\s+/g, "-").toLowerCase()}`;
     };
 
     const getCard = () => {
@@ -274,27 +273,22 @@ class CreditCardForm extends React.Component {
           <div className="card-accordion">
             <p>
               <i className={getBrandIcon()} />
-              {brand}
-              {' '}
-ending in
+              {brand} ending in
               <span className="last4">{last4}</span>
-              <span className="exp_month">{exp_month}</span>
-              {' '}
-/
+              <span className="exp_month">{exp_month}</span> /
               <span className="exp_year">{exp_year}</span>
             </p>
           </div>
         );
-      } 
-        return (
-          <div className="card-accordion">
-            <p>
-              <i className="fa fa-plus" />
-              <span>Add your card</span>
-            </p>
-          </div>
-        );
-      
+      }
+      return (
+        <div className="card-accordion">
+          <p>
+            <i className="fa fa-plus" />
+            <span>Add your card</span>
+          </p>
+        </div>
+      );
     };
 
     const getAlerts = () => {

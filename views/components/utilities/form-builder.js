@@ -9,9 +9,8 @@ const mapStateToProps = function(name, mapState) {
   return function(state, ownProps) {
     if (state.allForms[name]) {
       return { ...mapState(state), formData: state.allForms[name] };
-    } 
-      return {};
-    
+    }
+    return {};
   };
 };
 
@@ -132,13 +131,12 @@ const buildFormData = function(
         },
       });
       return update(formData, { $set: newData });
-    } 
-      const newData = update(formData, {
-        [name]: { $set: value },
-        validators: { $set: [{ [name]: validator }] },
-      });
-      return update(formData, { $set: newData });
-    
+    }
+    const newData = update(formData, {
+      [name]: { $set: value },
+      validators: { $set: [{ [name]: validator }] },
+    });
+    return update(formData, { $set: newData });
   };
 };
 

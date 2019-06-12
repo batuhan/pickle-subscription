@@ -20,7 +20,7 @@ function formatMoney(price, c, d, t) {
   return (
     s +
     (j ? i.substr(0, j) + tNew : "") +
-    i.substr(j).replace(/(\d{3})(?=\d)/g, `$1${  tNew}`) +
+    i.substr(j).replace(/(\d{3})(?=\d)/g, `$1${tNew}`) +
     (cNew
       ? dNew +
         Math.abs(n - i)
@@ -46,26 +46,26 @@ const getPrice = (myService, serviceType = null) => {
         <Price value={myService.amount} prefix={prefix} />
         {myService.interval_count === 1
           ? " /"
-          : ` / ${  myService.interval_count}`}
-        {" "}
-        {` ${  myService.interval}`}
+          : ` / ${myService.interval_count}`}{" "}
+        {` ${myService.interval}`}
       </span>
     );
-  } if (serType === "one_time") {
+  }
+  if (serType === "one_time") {
     return (
       <span>
         <Price value={myService.amount} prefix={prefix} />
       </span>
     );
-  } if (serType === "custom") {
+  }
+  if (serType === "custom") {
     return false;
-  } 
-    return (
-      <span>
-        <Price value={myService.amount} prefix={prefix} />
-      </span>
-    );
-  
+  }
+  return (
+    <span>
+      <Price value={myService.amount} prefix={prefix} />
+    </span>
+  );
 };
 /**
  * To be deprecated after refactoring all code
@@ -77,15 +77,17 @@ const getBillingType = myService => {
 
   if (serType === "subscription") {
     return "Subscription";
-  } if (serType === "one_time") {
+  }
+  if (serType === "one_time") {
     return "One-time";
-  } if (serType === "custom") {
+  }
+  if (serType === "custom") {
     return "Ongoing";
-  } if (serType === "split") {
+  }
+  if (serType === "split") {
     return "Scheduled";
-  } 
-    return "Other";
-  
+  }
+  return "Other";
 };
 
 /**
@@ -94,7 +96,7 @@ const getBillingType = myService => {
  * @returns {string}
  */
 const serviceTypeFormatter = row => {
-  const {type} = row;
+  const { type } = row;
 
   const text = type.replace(/_/g, " ");
   return text.charAt(0).toUpperCase() + text.slice(1);

@@ -69,7 +69,7 @@ class SelectPricing extends React.Component {
   }
 
   handlePercentPriceChange(e, maskedValue, floatvalue) {
-    const {name} = e.target;
+    const { name } = e.target;
     const self = this;
     this.setState({ [name]: floatvalue }, () => {
       self.props.input.onChange(self.state);
@@ -96,10 +96,7 @@ class SelectPricing extends React.Component {
 
             return (
               <div>
-                {option}
-                {' '}
-:
-                {" "}
+                {option} :{" "}
                 <WidgetPricingInput input={input} operation={operation} />
               </div>
             );

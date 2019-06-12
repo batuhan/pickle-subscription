@@ -26,7 +26,7 @@ function* run(config, provide, channels) {
       },
       filename(req, file, cb) {
         require("crypto").pseudoRandomBytes(8, function(err, raw) {
-          cb(err, err ? undefined : `${req.params.id  }-${  raw.toString("hex")}`);
+          cb(err, err ? undefined : `${req.params.id}-${raw.toString("hex")}`);
         });
       },
     });
@@ -46,10 +46,10 @@ function* run(config, provide, channels) {
     sendFile(file, res) {
       const options = {
         headers: {
-          "Content-Disposition": `inline; filename=${  file.get("name")}`,
+          "Content-Disposition": `inline; filename=${file.get("name")}`,
         },
       };
-      const abs = path.resolve(__dirname, `../../${  file.get("path")}`);
+      const abs = path.resolve(__dirname, `../../${file.get("path")}`);
 
       res.sendFile(abs, options, err => {
         if (err) {
@@ -65,7 +65,7 @@ function* run(config, provide, channels) {
       const filePath = file.get("path");
       fs.unlink(filePath, err => {
         if (err) {
-          console.log(`error deleting file ${  err}`);
+          console.log(`error deleting file ${err}`);
         } else {
           console.log(`deleted file ${file.get("id")} with path ${filePath}`);
         }

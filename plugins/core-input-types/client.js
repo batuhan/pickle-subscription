@@ -7,9 +7,8 @@ module.exports = {
       const widget = require(`./${input}/widget`).default;
       if (widget) {
         return widget;
-      } 
-        throw `${input  } has no widget defined`;
-      
+      }
+      throw `${input} has no widget defined`;
     });
     yield provide({ widget: widgets });
   },

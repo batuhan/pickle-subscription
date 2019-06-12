@@ -42,7 +42,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
   }
 
   getServiceType() {
-    const {serviceType} = this.state;
+    const { serviceType } = this.state;
     let serviceTypeAttribute = "";
     if (serviceType == "_SUBSCRIPTION") {
       serviceTypeAttribute = "subscription";
@@ -63,7 +63,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
     if (!_.isObject(e)) {
       return;
     }
-    const {serviceType} = this.state;
+    const { serviceType } = this.state;
     const set = { data: {} };
     let serviceTypeAttribute = "";
     if (serviceType == "_SUBSCRIPTION") {
@@ -101,7 +101,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
   render() {
     const defaultData = this.state.data;
 
-    const {serviceType} = this.state;
+    const { serviceType } = this.state;
     const serviceFields = () => {
       if (serviceType == "_SUBSCRIPTION") {
         return (
@@ -120,8 +120,7 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
             </div>
             <div className="form-group">
               <label className="control-label">
-                Bill Customer Every
-                {" "}
+                Bill Customer Every{" "}
                 <InfoToolTip
                   title={
                     'If selected "Month" for billing cycle, and interval is 3, the customer will be charged every three months.'
@@ -171,7 +170,8 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
             {/* </div> */}
           </div>
         );
-      } if (serviceType == "_ONE_TIME") {
+      }
+      if (serviceType == "_ONE_TIME") {
         return (
           <div className="service-fields">
             <div className="form-group">
@@ -221,7 +221,8 @@ class ServiceTemplateFormSubscriptionFields extends React.Component {
             </div>
           </div>
         );
-      } if (serviceType == "_CUSTOM") {
+      }
+      if (serviceType == "_CUSTOM") {
         return (
           <div className="service-fields">
             <p className="help-block">

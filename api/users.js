@@ -34,14 +34,13 @@ module.exports = function(router, passport) {
     Invitation.findOne("token", req.params.invitation_id, function(result) {
       if (result.data) {
         return res.json({ status: "valid token" });
-      } 
-        return res.status(404).json({ status: "bad token" });
-      
+      }
+      return res.status(404).json({ status: "bad token" });
     });
   });
 
   router.get("/users/:id/avatar", validate(), auth(), function(req, res, next) {
-    const {id} = req.params;
+    const { id } = req.params;
     File.findFile(avatarFilePath, id, function(avatar) {
       if (avatar.length > 0) {
         const file = avatar[0];
@@ -50,7 +49,7 @@ module.exports = function(router, passport) {
         // todo: default avatar logic goes here
         const defaultAvatar = path.resolve(
           __dirname,
-          `../public/assets/default/avatar-${  id % 4  }.png`,
+          `../public/assets/default/avatar-${id % 4}.png`,
         );
         res.sendFile(defaultAvatar);
       }
@@ -61,7 +60,7 @@ module.exports = function(router, passport) {
     res,
     next,
   ) {
-    const {file} = req;
+    const { file } = req;
     file.user_id = req.params.id;
     file.name = file.originalname;
     File.findFile(avatarFilePath, req.params.id, function(avatar) {
@@ -81,7 +80,7 @@ module.exports = function(router, passport) {
   router.post(
     "/users/register",
     function(req, res, next) {
-      const {token} = req.query;
+      const { token } = req.query;
       if (token) {
         Invitation.findOne("token", token, function(foundInvitation) {
           if (!foundInvitation.data) {
@@ -165,18 +164,12 @@ module.exports = function(router, passport) {
       const invite = new Invitation({ user_id: user.get("id") });
       invite.create(function(err, result) {
         if (!err) {
-          const apiUrl =
-            `${req.protocol 
-            }://${ 
-            req.get("host") 
-            }/api/v1/users/register?token=${ 
-            result.get("token")}`;
-          const frontEndUrl =
-            `${req.protocol 
-            }://${ 
-            req.get("host") 
-            }/invitation/${ 
-            result.get("token")}`;
+          const apiUrl = `${req.protocol}://${req.get(
+            "host",
+          )}/api/v1/users/register?token=${result.get("token")}`;
+          const frontEndUrl = `${req.protocol}://${req.get(
+            "host",
+          )}/invitation/${result.get("token")}`;
           EventLogs.logEvent(
             req.user.get("id"),
             `users ${req.body.email} was reinvited by user ${req.user.get(
@@ -227,21 +220,17 @@ module.exports = function(router, passport) {
           } else {
             newUser.createWithStripe(function(err, resultUser) {
               if (!err) {
-                const invite = new Invitation({ user_id: resultUser.get("id") });
+                const invite = new Invitation({
+                  user_id: resultUser.get("id"),
+                });
                 invite.create(function(err, result) {
                   if (!err) {
-                    const apiUrl =
-                      `${req.protocol 
-                      }://${ 
-                      req.get("host") 
-                      }/api/v1/users/register?token=${ 
-                      result.get("token")}`;
-                    const frontEndUrl =
-                      `${req.protocol 
-                      }://${ 
-                      req.get("host") 
-                      }/invitation/${ 
-                      result.get("token")}`;
+                    const apiUrl = `${req.protocol}://${req.get(
+                      "host",
+                    )}/api/v1/users/register?token=${result.get("token")}`;
+                    const frontEndUrl = `${req.protocol}://${req.get(
+                      "host",
+                    )}/invitation/${result.get("token")}`;
                     EventLogs.logEvent(
                       req.user.get("id"),
                       `users ${
@@ -285,7 +274,8 @@ module.exports = function(router, passport) {
     auth(null, User, "id"),
     async function(req, res, next) {
       // todo: this is dirty dirty way of getting plugin services... i want this code to be in plugin eventually
-      const userManager = store.getState(true).pluginbot.services.userManager[0];
+      const userManager = store.getState(true).pluginbot.services
+        .userManager[0];
       if (!userManager) {
         console.error("User manager not defined...");
       }

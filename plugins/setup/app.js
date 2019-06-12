@@ -120,7 +120,7 @@ module.exports = function*(appConfig, initialConfig, dbConfig, app) {
         .catch(function(err) {
           res
             .status(400)
-            .json({ error: `Invalid Database: ${  err.toString()}` });
+            .json({ error: `Invalid Database: ${err.toString()}` });
         });
     });
 
@@ -139,9 +139,8 @@ module.exports = function*(appConfig, initialConfig, dbConfig, app) {
       ) {
         if (err) {
           return res.status(400).json({ error: err });
-        } 
-          return res.status(200).json({ message: result });
-        
+        }
+        return res.status(200).json({ message: result });
       });
     });
 
@@ -188,7 +187,7 @@ module.exports = function*(appConfig, initialConfig, dbConfig, app) {
             emitter(END);
           });
         } catch (e) {
-          res.json({ error: `Error - ${  e}` });
+          res.json({ error: `Error - ${e}` });
         }
       });
     });

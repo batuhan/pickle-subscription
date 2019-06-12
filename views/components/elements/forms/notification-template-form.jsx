@@ -17,7 +17,7 @@ class NotificationTemplateForm extends React.Component {
     this.state = {
       loading: true,
       template: {},
-      url: `/api/v1/notification-templates/${  props.params.id}`,
+      url: `/api/v1/notification-templates/${props.params.id}`,
       roleUrl: "/api/v1/roles",
       roles: [],
       success: false,
@@ -33,9 +33,8 @@ class NotificationTemplateForm extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: "can_administrate" })) {
       return browserHistory.push("/login");
-    } 
-      this.fetchData();
-    
+    }
+    this.fetchData();
   }
 
   fetchData() {
@@ -49,7 +48,7 @@ class NotificationTemplateForm extends React.Component {
       })
       .then(function(r) {
         if (r) {
-          Fetcher(`${self.state.url  }/roles`).then(function(roles) {
+          Fetcher(`${self.state.url}/roles`).then(function(roles) {
             if (!roles.error) {
               Fetcher(self.state.roleUrl).then(function(allRoles) {
                 const roleIds = roles.map(role => role.data.id);
@@ -70,7 +69,7 @@ class NotificationTemplateForm extends React.Component {
   handleRole(id) {
     const self = this;
     return function(e) {
-      const {target} = e;
+      const { target } = e;
       if (target.checked) {
         if (!self.state.roles.includes(id)) {
           self.setState({ roles: self.state.roles.concat(id) });
@@ -87,7 +86,7 @@ class NotificationTemplateForm extends React.Component {
 
   handleResponse(response) {
     const self = this;
-    Fetcher(`${this.state.url  }/roles`, "PUT", this.state.roles).then(function(
+    Fetcher(`${this.state.url}/roles`, "PUT", this.state.roles).then(function(
       response2,
     ) {
       self.setState({ success: true });
@@ -119,222 +118,204 @@ class NotificationTemplateForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      const pageName = this.state.template.data.name || this.props.route.name;
-      const {template} = this.state;
-      const roles = this.state.templateRoles;
-      const {allRoles} = this.state;
-      const {references} = template.schema;
+    }
+    const pageName = this.state.template.data.name || this.props.route.name;
+    const { template } = this.state;
+    const roles = this.state.templateRoles;
+    const { allRoles } = this.state;
+    const { references } = template.schema;
 
-      return (
-        <div>
-          <Authorizer permissions={["can_administrate", "can_manage"]}>
-            <Jumbotron pageName={pageName} location={this.props.location} />
-            <div className="page-service-instance">
-              <Content>
-                <div className="row m-b-20">
-                  <div className="col-sm-8 col-md-9">
+    return (
+      <div>
+        <Authorizer permissions={["can_administrate", "can_manage"]}>
+          <Jumbotron pageName={pageName} location={this.props.location} />
+          <div className="page-service-instance">
+            <Content>
+              <div className="row m-b-20">
+                <div className="col-sm-8 col-md-9">
+                  <div className="service-instance-section">
+                    <span className="service-instance-section-label">
+                      <strong>Editing Notification Template</strong>
+                    </span>
+                    <h4>{template.data.name}</h4>
+                  </div>
+                  <div className="service-instance-section">
+                    <span className="service-instance-section-label">
+                      <strong>
+                        Select the roles you want this email to be sent to
+                      </strong>
+                    </span>
+                    <span className="help-block">
+                      The notification will be sent to all users with the roles.
+                    </span>
+                    {allRoles.map(role => {
+                      const checked = roles.some(function(checkedRole) {
+                        return role.id == checkedRole.data.id;
+                      });
+
+                      return (
+                        <div key={role.id}>
+                          <input
+                            onChange={this.handleRole(role.id)}
+                            type="checkbox"
+                            defaultChecked={checked}
+                          />
+                          <span> {role.role_name}</span>
+                          <span>
+                            {role.role_name == "user" &&
+                              " - email will be sent to all users"}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <DataForm
+                    handleResponse={this.handleResponse}
+                    url={this.state.url}
+                    method="PUT"
+                  >
+                    <div className="service-instance-section notification-settings-section">
+                      <span className="service-instance-section-label">
+                        <strong>Notification Settings</strong>
+                      </span>
+                      <input
+                        name="create_notification"
+                        type="checkbox"
+                        defaultChecked={template.data.create_notification}
+                      />{" "}
+                      <span>Create Notification</span>
+                      <br />
+                      <input
+                        name="send_email"
+                        type="checkbox"
+                        defaultChecked={template.data.send_email}
+                      />{" "}
+                      <span className="inline"> Send Email</span>
+                      <br />
+                      <input
+                        name="send_to_owner"
+                        type="checkbox"
+                        defaultChecked={template.data.send_to_owner}
+                      />{" "}
+                      <span className="inline"> Send Email To Owner</span>
+                    </div>
+                    {/* <div className="service-instance-section"> */}
+                    {/* <span className="service-instance-section-label"><strong>Additional Recipients</strong></span> */}
+                    {/* <span className="help-block">Add recipients directly, these will be people who will also get this email notification for this event.</span> */}
+                    {/* <TagsInput  name="additional_recipients" receiveOnChange={true} receiveValue={true} defaultValue={template.data.additional_recipients || []}/> */}
+                    {/* </div> */}
                     <div className="service-instance-section">
                       <span className="service-instance-section-label">
-                        <strong>Editing Notification Template</strong>
+                        <strong>Description</strong>
                       </span>
-                      <h4>{template.data.name}</h4>
+                      <p>{template.data.description}</p>
                     </div>
                     <div className="service-instance-section">
                       <span className="service-instance-section-label">
-                        <strong>
-                          Select the roles you want this email to be sent to
-                        </strong>
+                        <strong>Subject</strong>
                       </span>
-                      <span className="help-block">
-                        The notification will be sent to all users with the
-                        roles.
+                      <input
+                        type="text"
+                        name="subject"
+                        defaultValue={template.data.subject}
+                      />
+                    </div>
+                    <div className="service-instance-section">
+                      <span className="service-instance-section-label">
+                        <strong>Body</strong>
                       </span>
-                      {allRoles.map(role => {
-                        const checked = roles.some(function(checkedRole) {
-                          return role.id == checkedRole.data.id;
-                        });
-
+                      <WysiwygTemplater
+                        receiveValue
+                        receiveOnChange
+                        name="message"
+                        defaultValue={template.data.message}
+                        ref="wysiwygTemplater"
+                        schema={template.schema}
+                      />
+                      <div className="p-t-15">
+                        <Buttons
+                          btnType="primary"
+                          text="Save Notification Template"
+                          type="submit"
+                          loading={this.state.ajaxLoad}
+                          success={this.state.success}
+                          reset={this.handleResetSuccess}
+                        />
+                        <div className="clearfix" />
+                      </div>
+                    </div>
+                  </DataForm>
+                </div>
+                <div className="col-sm-4 col-md-3">
+                  <div className="service-instance-section">
+                    <span className="service-instance-section-label">
+                      <strong>Data Fields</strong>
+                    </span>
+                    <span className="help-block">
+                      Available data fields, you can insert data fields related
+                      to this event ({this.humanString(template.data.name)})
+                      into the body of your notification.
+                    </span>
+                    <ul className="templateList">
+                      <span className="help-block text-capitalize">
+                        {this.humanString(template.data.name)} Fields
+                      </span>
+                      {Object.keys(template.schema).map(field => {
+                        if (field == "references") {
+                          return Object.keys(references).map(reference => {
+                            return (
+                              <ul
+                                key={reference}
+                                className="referenceList list-group"
+                              >
+                                <span className="help-block text-capitalize">
+                                  {this.humanString(reference)} Fields
+                                </span>
+                                {Object.keys(references[reference]).map(
+                                  referenceColumn => {
+                                    return (
+                                      <li
+                                        key={referenceColumn}
+                                        className="column reference-column list-unstyled"
+                                      >
+                                        <button
+                                          className="btn btn-sm btn-info"
+                                          onClick={this.insertString(
+                                            `[[references.${reference}.${referenceColumn}]]`,
+                                          )}
+                                        >
+                                          {referenceColumn}
+                                        </button>
+                                      </li>
+                                    );
+                                  },
+                                )}
+                              </ul>
+                            );
+                          });
+                        }
                         return (
-                          <div key={role.id}>
-                            <input
-                              onChange={this.handleRole(role.id)}
-                              type="checkbox"
-                              defaultChecked={checked}
-                            />
-                            <span> 
-                              {' '}
-                              {role.role_name}
-                            </span>
-                            <span>
-                              {role.role_name == "user" &&
-                                " - email will be sent to all users"}
-                            </span>
+                          <div>
+                            <li key={field} className="column list-unstyled">
+                              <button
+                                className="btn btn-sm btn-info"
+                                onClick={this.insertString(`[[${field}]]`)}
+                              >
+                                {field}
+                              </button>
+                            </li>
                           </div>
                         );
                       })}
-                    </div>
-                    <DataForm
-                      handleResponse={this.handleResponse}
-                      url={this.state.url}
-                      method="PUT"
-                    >
-                      <div className="service-instance-section notification-settings-section">
-                        <span className="service-instance-section-label">
-                          <strong>Notification Settings</strong>
-                        </span>
-                        <input
-                          name="create_notification"
-                          type="checkbox"
-                          defaultChecked={template.data.create_notification}
-                        />
-                        {" "}
-                        <span>Create Notification</span>
-                        <br />
-                        <input
-                          name="send_email"
-                          type="checkbox"
-                          defaultChecked={template.data.send_email}
-                        />
-                        {" "}
-                        <span className="inline"> Send Email</span>
-                        <br />
-                        <input
-                          name="send_to_owner"
-                          type="checkbox"
-                          defaultChecked={template.data.send_to_owner}
-                        />
-                        {" "}
-                        <span className="inline"> Send Email To Owner</span>
-                      </div>
-                      {/* <div className="service-instance-section"> */}
-                      {/* <span className="service-instance-section-label"><strong>Additional Recipients</strong></span> */}
-                      {/* <span className="help-block">Add recipients directly, these will be people who will also get this email notification for this event.</span> */}
-                      {/* <TagsInput  name="additional_recipients" receiveOnChange={true} receiveValue={true} defaultValue={template.data.additional_recipients || []}/> */}
-                      {/* </div> */}
-                      <div className="service-instance-section">
-                        <span className="service-instance-section-label">
-                          <strong>Description</strong>
-                        </span>
-                        <p>{template.data.description}</p>
-                      </div>
-                      <div className="service-instance-section">
-                        <span className="service-instance-section-label">
-                          <strong>Subject</strong>
-                        </span>
-                        <input
-                          type="text"
-                          name="subject"
-                          defaultValue={template.data.subject}
-                        />
-                      </div>
-                      <div className="service-instance-section">
-                        <span className="service-instance-section-label">
-                          <strong>Body</strong>
-                        </span>
-                        <WysiwygTemplater
-                          receiveValue
-                          receiveOnChange
-                          name="message"
-                          defaultValue={template.data.message}
-                          ref="wysiwygTemplater"
-                          schema={template.schema}
-                        />
-                        <div className="p-t-15">
-                          <Buttons
-                            btnType="primary"
-                            text="Save Notification Template"
-                            type="submit"
-                            loading={this.state.ajaxLoad}
-                            success={this.state.success}
-                            reset={this.handleResetSuccess}
-                          />
-                          <div className="clearfix" />
-                        </div>
-                      </div>
-                    </DataForm>
-                  </div>
-                  <div className="col-sm-4 col-md-3">
-                    <div className="service-instance-section">
-                      <span className="service-instance-section-label">
-                        <strong>Data Fields</strong>
-                      </span>
-                      <span className="help-block">
-                        Available data fields, you can insert data fields
-                        related to this event (
-                        {this.humanString(template.data.name)}
-) into the body of
-                        your notification.
-                      </span>
-                      <ul className="templateList">
-                        <span className="help-block text-capitalize">
-                          {this.humanString(template.data.name)}
-                          {' '}
-Fields
-                        </span>
-                        {Object.keys(template.schema).map(field => {
-                          if (field == "references") {
-                            return Object.keys(references).map(reference => {
-                              return (
-                                <ul
-                                  key={reference}
-                                  className="referenceList list-group"
-                                >
-                                  <span className="help-block text-capitalize">
-                                    {this.humanString(reference)}
-                                    {' '}
-Fields
-                                  </span>
-                                  {Object.keys(references[reference]).map(
-                                    referenceColumn => {
-                                      return (
-                                        <li
-                                          key={referenceColumn}
-                                          className="column reference-column list-unstyled"
-                                        >
-                                          <button
-                                            className="btn btn-sm btn-info"
-                                            onClick={this.insertString(
-                                              `[[references.${reference}.${referenceColumn}]]`,
-                                            )}
-                                          >
-                                            {referenceColumn}
-                                          </button>
-                                        </li>
-                                      );
-                                    },
-                                  )}
-                                </ul>
-                              );
-                            });
-                          } 
-                            return (
-                              <div>
-                                <li
-                                  key={field}
-                                  className="column list-unstyled"
-                                >
-                                  <button
-                                    className="btn btn-sm btn-info"
-                                    onClick={this.insertString(`[[${field}]]`)}
-                                  >
-                                    {field}
-                                  </button>
-                                </li>
-                              </div>
-                            );
-                          
-                        })}
-                      </ul>
-                    </div>
+                    </ul>
                   </div>
                 </div>
-              </Content>
-            </div>
-          </Authorizer>
-        </div>
-      );
-    
+              </div>
+            </Content>
+          </div>
+        </Authorizer>
+      </div>
+    );
   }
 }
 

@@ -55,16 +55,13 @@ class DashboardServiceList extends React.Component {
     return (
       <div>
         <i className={icon} />
-        <span> 
-          {' '}
-          {title}
-        </span>
+        <span> {title}</span>
       </div>
     );
   }
 
   getUserServices() {
-    const {services} = this.state;
+    const { services } = this.state;
     const purchasedItems = {};
     (purchasedItems.actionItems = []),
       (purchasedItems.quoteItems = []),
@@ -153,7 +150,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.actionItems.map(service => (
                 <DashboardServiceListItem
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -184,7 +181,7 @@ class DashboardServiceList extends React.Component {
                 <DashboardServiceListItem
                   userFunds={this.state.userFunds}
                   fetchFunds={this.fetchUserFund}
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -213,7 +210,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.quoteItems.map(service => (
                 <DashboardServiceListItem
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -243,7 +240,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.pendingItems.map(service => (
                 <DashboardServiceListItem
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -268,7 +265,7 @@ class DashboardServiceList extends React.Component {
               </p>
               {purchasedItems.activeItems.map(service => (
                 <DashboardServiceListItem
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                   handleComponentUpdating={this.handleComponentUpdating}
@@ -295,7 +292,7 @@ class DashboardServiceList extends React.Component {
               <p>These are your completed and cancelled services.</p>
               {purchasedItems.archivedItems.map(service => (
                 <DashboardServiceListItem
-                  key={`service-${  service.id}`}
+                  key={`service-${service.id}`}
                   service={service}
                   viewPath={`/service-instance/${service.id}`}
                 />
@@ -308,7 +305,7 @@ class DashboardServiceList extends React.Component {
   }
 
   getActiveItems() {
-    const {services} = this.state;
+    const { services } = this.state;
   }
 
   getArchiveItems() {}
@@ -329,15 +326,14 @@ class DashboardServiceList extends React.Component {
           </p>
         </div>
       );
-    } 
-      // grouping services by their status for displaying in groups
-      const grouped = _.groupBy(this.state.services, "status");
-      return (
-        <div className="col-md-10 col-lg-8 col-sm-12 col-md-offset-1 col-lg-offset-2">
-          {this.getUserServices()}
-        </div>
-      );
-    
+    }
+    // grouping services by their status for displaying in groups
+    const grouped = _.groupBy(this.state.services, "status");
+    return (
+      <div className="col-md-10 col-lg-8 col-sm-12 col-md-offset-1 col-lg-offset-2">
+        {this.getUserServices()}
+      </div>
+    );
   }
 }
 

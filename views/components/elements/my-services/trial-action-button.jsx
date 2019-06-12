@@ -64,31 +64,27 @@ class TrialFundAddition extends React.Component {
               </div>
             </div>
           );
-        } 
-          return (
-            <ToolTip
-              text="Add Fund"
-              title={trialExpires}
-              icon="fa-credit-card-alt"
-              cssClass="btn-default btn-rounded btn-sm"
-              onClick={self.props.modalCallback}
-            />
-          );
-        
-      } 
-        if (self.props.large) {
-          return (
-            <div className="text-center">
-              <strong>{trialExpires}</strong>
-            </div>
-          );
-        } 
-          return null;
-        
-      
-    } 
+        }
+        return (
+          <ToolTip
+            text="Add Fund"
+            title={trialExpires}
+            icon="fa-credit-card-alt"
+            cssClass="btn-default btn-rounded btn-sm"
+            onClick={self.props.modalCallback}
+          />
+        );
+      }
+      if (self.props.large) {
+        return (
+          <div className="text-center">
+            <strong>{trialExpires}</strong>
+          </div>
+        );
+      }
       return null;
-    
+    }
+    return null;
   }
 }
 

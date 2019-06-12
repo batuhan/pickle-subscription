@@ -29,7 +29,7 @@ Invoice.prototype.refund = function(amount = null, reason = null, callback) {
 
 Invoice.prototype.sync = function(new_invoice) {
   const self = this;
-  const {user_id} = self.data;
+  const { user_id } = self.data;
   // Remove the transaction item
   return new Promise(function(resolve, reject) {
     if (self.data.charge) {
@@ -38,9 +38,8 @@ Invoice.prototype.sync = function(new_invoice) {
           trans.delete(function(err, result) {
             if (!err) {
               return resolve(result);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         } else {
           return resolve("No charge was found");
@@ -62,9 +61,8 @@ Invoice.prototype.sync = function(new_invoice) {
                 invoice_line.delete(function(err, result) {
                   if (!err) {
                     return resolve(result);
-                  } 
-                    return reject(err);
-                  
+                  }
+                  return reject(err);
                 });
               });
             }),
@@ -89,9 +87,8 @@ Invoice.prototype.sync = function(new_invoice) {
           self.delete(function(err, result) {
             if (!err) {
               return Invoice.insertInvoice(new_invoice, user);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         });
       });
@@ -130,9 +127,8 @@ Invoice.fetchUserInvoices = function(user_object) {
         Stripe().connection.invoices.list(invoice_obj, function(err, invoices) {
           if (!err) {
             return resolve(invoices);
-          } 
-            return reject(err);
-          
+          }
+          return reject(err);
         });
       });
     })
@@ -171,13 +167,11 @@ Invoice.insertInvoice = function(raw_invoice, user) {
               return reject(
                 "Invoice belogs to a non-subscription service and has no value. Not imported!",
               );
-            } 
-              raw_invoice.service_instance_id = service.data.id;
-              return resolve(raw_invoice);
-            
-          } 
-            return reject("Invoice does not belong to a ServiceBot service!");
-          
+            }
+            raw_invoice.service_instance_id = service.data.id;
+            return resolve(raw_invoice);
+          }
+          return reject("Invoice does not belong to a ServiceBot service!");
         },
       );
     } else {
@@ -195,9 +189,8 @@ Invoice.insertInvoice = function(raw_invoice, user) {
           if (!err) {
             created_invoice.data.references = {};
             return resolve(created_invoice);
-          } 
-            return reject(err);
-          
+          }
+          return reject(err);
         });
       });
     })
@@ -212,9 +205,8 @@ Invoice.insertInvoice = function(raw_invoice, user) {
             }
             invoice.data.references.transactions = transaction_array;
             return resolve(invoice);
-          } 
-            return reject(err);
-          
+          }
+          return reject(err);
         });
       });
     })

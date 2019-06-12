@@ -151,9 +151,9 @@ class ModalApprove extends React.Component {
     const icon = "fa-credit-card-alt";
     const currentModal = this.state.current_modal;
     const instance = this.state.serviceInstance;
-    const {name} = instance;
+    const { name } = instance;
     const price = instance.payment_plan.amount;
-    const {interval} = instance.payment_plan;
+    const { interval } = instance.payment_plan;
     const charges = instance.references.charge_items;
     const unpaidCharges = _.filter(charges, item => {
       return !item.approved;
@@ -178,16 +178,15 @@ class ModalApprove extends React.Component {
               icon="exclamation-circle"
             />
           );
-        } 
-          return (
-            <Alerts
-              type={self.state.alerts.type}
-              message="System Error: Please contact admin for assistance."
-              position={{ position: "fixed", bottom: true }}
-              icon="exclamation-circle"
-            />
-          );
-        
+        }
+        return (
+          <Alerts
+            type={self.state.alerts.type}
+            message="System Error: Please contact admin for assistance."
+            position={{ position: "fixed", bottom: true }}
+            icon="exclamation-circle"
+          />
+        );
       }
     };
 
@@ -219,7 +218,7 @@ class ModalApprove extends React.Component {
                     </strong>
                   </p>
                   <p>
-Item Name:
+                    Item Name:
                     {name}
                   </p>
                   <p>
@@ -229,10 +228,7 @@ Item Name:
                         <li>
                           {instance.payment_plan.amount > 0 && (
                             <span>
-                              <Price value={price} prefix={prefix} />
-                              {' '}
-/
-                              {" "}
+                              <Price value={price} prefix={prefix} /> /{" "}
                               {interval}
                             </span>
                           )}
@@ -268,7 +264,8 @@ Item Name:
           </div>
         </Modal>
       );
-    } if (currentModal === "model_approve" && self.state.approved) {
+    }
+    if (currentModal === "model_approve" && self.state.approved) {
       return (
         <Modal
           modalTitle={pageName}
@@ -288,7 +285,7 @@ Item Name:
                     </strong>
                   </p>
                   <p>
-Service Name:
+                    Service Name:
                     {name}
                   </p>
                 </div>
@@ -297,7 +294,8 @@ Service Name:
           </div>
         </Modal>
       );
-    } if (currentModal == "payment_setup") {
+    }
+    if (currentModal == "payment_setup") {
       return (
         <ModalPaymentSetup
           modalCallback={self.onPaymentSetupClose}

@@ -39,7 +39,8 @@ class Modal extends React.Component {
     const transform = this.props.transform || "translate(-50%, -50%)";
     const width = this.props.width || "";
     const height = this.props.height || "";
-    const transition = this.props.transition || "transition: all 200ms ease-out";
+    const transition =
+      this.props.transition || "transition: all 200ms ease-out";
     const buttonAlign = this.props.buttonAlign || "right";
 
     const modalDialogStyle = {
@@ -58,7 +59,7 @@ class Modal extends React.Component {
 
     const modalBarStyle = {};
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       modalBarStyle.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",

@@ -1,5 +1,7 @@
 // let ServiceInstances = require("./service-instance");
-const InstanceProperty = require("./base/entity")("service_instance_properties");
+const InstanceProperty = require("./base/entity")(
+  "service_instance_properties",
+);
 const knex = require("../config/db.js");
 
 InstanceProperty.getByTemplateId = function(templateId, callback) {

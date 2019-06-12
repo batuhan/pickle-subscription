@@ -12,7 +12,7 @@ class ServiceInstanceForm extends React.Component {
     this.state = {
       files: [],
       template: {},
-      url: `/api/v1/service-instances/${  props.params.instanceId}`,
+      url: `/api/v1/service-instances/${props.params.instanceId}`,
       loading: true,
     };
     this.handleFiles = this.handleFiles.bind(this);
@@ -23,7 +23,7 @@ class ServiceInstanceForm extends React.Component {
     const that = this;
     Fetcher(that.state.url).then(function(response) {
       if (!response.error) {
-        Fetcher(`${that.state.url  }/files`).then(function(files) {
+        Fetcher(`${that.state.url}/files`).then(function(files) {
           if (!response.error) {
             that.setState({ loading: false, template: response, files });
           } else {
@@ -40,7 +40,7 @@ class ServiceInstanceForm extends React.Component {
     const self = this;
     return function(e) {
       e.preventDefault();
-      const url = `${self.state.url  }/files/${  id}`;
+      const url = `${self.state.url}/files/${id}`;
 
       Fetcher(url, "DELETE").then(function() {
         self.setState({
@@ -53,7 +53,7 @@ class ServiceInstanceForm extends React.Component {
   handleFiles(e) {
     e.preventDefault();
     const self = this;
-    const url = `${this.state.url  }/files`;
+    const url = `${this.state.url}/files`;
 
     const init = {
       method: "POST",
@@ -71,96 +71,84 @@ class ServiceInstanceForm extends React.Component {
     if (this.state.loading) return <Load />;
     if (this.state.template == {}) {
       return <p className="help-block center-align">There is no template</p>;
-    } 
-      const {template} = this.state;
-      return (
-        <div>
-          {/* handle file upload */}
-          {JSON.stringify(this.state.files)}
-          {/* display files */}
-          {this.state.files.map(file => (
-            <div key={file.id}>
-              <a href={`${this.state.url}/files/${file.id}`}>{file.name}</a>
-              <button onClick={this.handleDelete(file.id)}>X</button>
-            </div>
-          ))}
-          {/* file upload form */}
-          <form id="instance-files-form" encType="multipart/form-data">
-            <input id="instance-files" type="file" name="files" multiple />
-          </form>
-          <button type="submit" onClick={this.handleFiles}>
-            Submiot
-          </button>
+    }
+    const { template } = this.state;
+    return (
+      <div>
+        {/* handle file upload */}
+        {JSON.stringify(this.state.files)}
+        {/* display files */}
+        {this.state.files.map(file => (
+          <div key={file.id}>
+            <a href={`${this.state.url}/files/${file.id}`}>{file.name}</a>
+            <button onClick={this.handleDelete(file.id)}>X</button>
+          </div>
+        ))}
+        {/* file upload form */}
+        <form id="instance-files-form" encType="multipart/form-data">
+          <input id="instance-files" type="file" name="files" multiple />
+        </form>
+        <button type="submit" onClick={this.handleFiles}>
+          Submiot
+        </button>
 
-          {/* template default form */}
-          <DataForm
-            handleResponse={this.handleResponse}
-            url="/api/v1/service-instances"
-          >
-            <DataChild
-              modelName="service_instance_properties"
-              objectName="prop1"
-            >
-              <input name="name" />
-              Prop Name
-              <div>
-                <input name="value" />
-                Prop Value
-              </div>
-            </DataChild>
-            <DataChild
-              modelName="service_instance_properties"
-              objectName="prop2"
-            >
-              <input name="name" />
-              Prop Name
-              <div>
-                <input name="value" />
-                Prop Value
-              </div>
-            </DataChild>
-            <DataChild
-              modelName="service_instance_properties"
-              objectName="prop3"
-            >
-              <input name="name" />
-              Prop Name
-              <div>
-                <input name="value" defaultValue="testdefault" />
-                Prop Value
-              </div>
-            </DataChild>
+        {/* template default form */}
+        <DataForm
+          handleResponse={this.handleResponse}
+          url="/api/v1/service-instances"
+        >
+          <DataChild modelName="service_instance_properties" objectName="prop1">
             <input name="name" />
-            Name
-            <br />
-            <input name="description" />
-            Description
-            <button type="submit" value="submit">
-              Submit
-            </button>
-            <input name="service_id" type="hidden" value={1} />
-            <input name="requested_by" type="hidden" value={1} />
-            <input name="user_id" type="hidden" value={1} />
-          </DataForm>
+            Prop Name
+            <div>
+              <input name="value" />
+              Prop Value
+            </div>
+          </DataChild>
+          <DataChild modelName="service_instance_properties" objectName="prop2">
+            <input name="name" />
+            Prop Name
+            <div>
+              <input name="value" />
+              Prop Value
+            </div>
+          </DataChild>
+          <DataChild modelName="service_instance_properties" objectName="prop3">
+            <input name="name" />
+            Prop Name
+            <div>
+              <input name="value" defaultValue="testdefault" />
+              Prop Value
+            </div>
+          </DataChild>
+          <input name="name" />
+          Name
+          <br />
+          <input name="description" />
+          Description
+          <button type="submit" value="submit">
+            Submit
+          </button>
+          <input name="service_id" type="hidden" value={1} />
+          <input name="requested_by" type="hidden" value={1} />
+          <input name="user_id" type="hidden" value={1} />
+        </DataForm>
 
-          {/* template test data */}
-          <div className="yo">
-            <h3>MY USER</h3>
+        {/* template test data */}
+        <div className="yo">
+          <h3>MY USER</h3>
 
-            <div key={template.id} className="article-item">
-              <div className="article-item-title">
-                <div>{template.name}</div>
-              </div>
-              <div className="article-item-description">
-                Created 
-                {' '}
-                {new Date(template.created).toDateString()}
-              </div>
+          <div key={template.id} className="article-item">
+            <div className="article-item-title">
+              <div>{template.name}</div>
+            </div>
+            <div className="article-item-description">
+              Created {new Date(template.created).toDateString()}
             </div>
           </div>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

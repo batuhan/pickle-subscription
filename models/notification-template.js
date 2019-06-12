@@ -86,21 +86,19 @@ const createNotifications = function(
           const newNotification = new Notification(notificationAttributes);
           newNotification.create(function(err, notification) {
             if (!err) {
-              console.log(`notification created: ${  notification.get("id")}`);
+              console.log(`notification created: ${notification.get("id")}`);
               return resolve(notification);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         }).catch(e => {
           console.log("error when creating notification: ", e);
         });
       }),
     );
-  } 
-    console.log("no notifications to create");
-    return true;
-  
+  }
+  console.log("no notifications to create");
+  return true;
 };
 
 const createEmailNotifications = function(
@@ -127,14 +125,15 @@ const createEmailNotifications = function(
     ).catch(e => {
       console.log("error sending email notifications", e);
     });
-  } 
-    console.log("no emails to send");
-    return true;
-  
+  }
+  console.log("no emails to send");
+  return true;
 };
 
 NotificationTemplate.prototype.createNotification = function*(object) {
-  const self = (yield call(NotificationTemplate.find, { id: this.get("id") }))[0];
+  const self = (yield call(NotificationTemplate.find, {
+    id: this.get("id"),
+  }))[0];
   const notificationContent = yield call(getNotificationContents, self, object);
   const usersToNotify = yield call(getRoleUsers, self);
 
@@ -175,7 +174,7 @@ let getNotificationContents = function(template, targetObject) {
       const globalProps = store.getState().options;
       const map = { ...updatedObject.data };
       Object.keys(globalProps).forEach(
-        key => (map[`_${  key}`] = globalProps[key]),
+        key => (map[`_${key}`] = globalProps[key]),
       );
       return resolve(map);
     });

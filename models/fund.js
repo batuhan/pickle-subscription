@@ -8,9 +8,8 @@ Fund.prototype.renewFund = function(token, callback) {
     Stripe().connection.tokens.retrieve(token, function(err, token_obj) {
       if (!err) {
         return resolve(token_obj);
-      } 
-        return reject(err.message);
-      
+      }
+      return reject(err.message);
     });
   })
     .then(function(token_obj) {
@@ -26,9 +25,8 @@ Fund.prototype.renewFund = function(token, callback) {
               function(err, customer) {
                 if (!err) {
                   return resolve(token_obj);
-                } 
-                  return reject(err.message);
-                
+                }
+                return reject(err.message);
               },
             );
           } else {
@@ -45,9 +43,8 @@ Fund.prototype.renewFund = function(token, callback) {
         self.update(function(err, result) {
           if (!err) {
             return resolve(result);
-          } 
-            return reject(err);
-          
+          }
+          return reject(err);
         });
       });
     })
@@ -86,9 +83,8 @@ Fund.promiseFundCreateOrUpdate = function(user_id, token_id) {
         Fund.findOne("user_id", user_id, function(result) {
           if (!result.data) {
             return resolve(false);
-          } 
-            return resolve(result);
-          
+          }
+          return resolve(result);
         });
       });
     })
@@ -103,9 +99,8 @@ Fund.promiseFundCreateOrUpdate = function(user_id, token_id) {
           fund.create(function(err, new_fund) {
             if (!err) {
               return resolve(new_fund);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         } else {
           return resolve(fund);
@@ -119,9 +114,8 @@ Fund.promiseFundCreateOrUpdate = function(user_id, token_id) {
           fund.renewFund(token_id, function(err, result) {
             if (!err) {
               return resolve(result);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         } else {
           return reject("token_id is not passed!");
@@ -137,9 +131,8 @@ Fund.promiseFundCreateOrUpdate = function(user_id, token_id) {
           tmpUser.update((err, result) => {
             if (!err) {
               return resolve(fund);
-            } 
-              return reject(err);
-            
+            }
+            return reject(err);
           });
         } else {
           resolve(fund);

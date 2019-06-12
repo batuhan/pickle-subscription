@@ -1,4 +1,3 @@
-
 /**
  * @author Batch Themes Ltd.
  */

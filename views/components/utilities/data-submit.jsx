@@ -90,15 +90,14 @@ class DataSubmit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <div>
-          {React.cloneElement(this.props.children, {
-            haha: this.handleInputsChange,
-          })}
-        </div>
-      );
-    
+    }
+    return (
+      <div>
+        {React.cloneElement(this.props.children, {
+          haha: this.handleInputsChange,
+        })}
+      </div>
+    );
   }
 }
 

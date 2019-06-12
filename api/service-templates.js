@@ -18,10 +18,10 @@ const Role = require("../models/role");
 const User = require("../models/user");
 const store = require("../config/redux/store");
 // todo: generify single file upload for icon, image, avatar, right now duplicate code
-const {iconFilePath} = ServiceTemplate;
-const {imageFilePath} = ServiceTemplate;
+const { iconFilePath } = ServiceTemplate;
+const { imageFilePath } = ServiceTemplate;
 const slug = require("slug");
-const {validateProperties} = require("../lib/handleInputs");
+const { validateProperties } = require("../lib/handleInputs");
 
 const fileManager = store.getState(true).pluginbot.services.fileManager[0];
 const jwt = require("jsonwebtoken");
@@ -89,7 +89,7 @@ module.exports = function(router) {
     "/service-templates/:id(\\d+)/icon",
     validate(ServiceTemplate),
     function(req, res, next) {
-      const {id} = req.params;
+      const { id } = req.params;
       File.findFile(iconFilePath, id, function(icon) {
         if (icon.length > 0) {
           const file = icon[0];
@@ -107,7 +107,7 @@ module.exports = function(router) {
     auth(null, ServiceTemplate, "created_by"),
     upload(iconFilePath).single("template-icon"),
     function(req, res, next) {
-      const {file} = req;
+      const { file } = req;
       file.user_id = req.user.get("id");
       file.name = file.originalname;
       File.findFile(iconFilePath, req.params.id, function(templateIcon) {
@@ -153,7 +153,7 @@ module.exports = function(router) {
     "/service-templates/:id(\\d+)/image",
     validate(ServiceTemplate),
     function(req, res, next) {
-      const {id} = req.params;
+      const { id } = req.params;
       File.findFile(imageFilePath, id, function(image) {
         if (image.length > 0) {
           const file = image[0];
@@ -172,7 +172,7 @@ module.exports = function(router) {
     auth(null, ServiceTemplate, "created_by"),
     upload(imageFilePath).single("template-image"),
     function(req, res, next) {
-      const {file} = req;
+      const { file } = req;
       file.user_id = req.user.get("id");
       file.name = file.originalname;
       File.findFile(imageFilePath, req.params.id, function(image) {
@@ -301,7 +301,9 @@ module.exports = function(router) {
 
       // todo: less looping later
       const mergedProps = props.map(prop => {
-        const propToMerge = reqProps.find(reqProp => reqProp.id === prop.data.id);
+        const propToMerge = reqProps.find(
+          reqProp => reqProp.id === prop.data.id,
+        );
         return propToMerge ? { ...prop.data, data: propToMerge.data } : prop;
       });
       if (props) {
@@ -340,14 +342,16 @@ module.exports = function(router) {
 
         const user = await User.findOne("email", req_body.email);
         if (user.data) {
-          const invitation = await Invitation.findOne("user_id", user.get("id"));
+          const invitation = await Invitation.findOne(
+            "user_id",
+            user.get("id"),
+          );
           if (invitation.data) {
             return res
               .status(400)
               .json({ error: "User has already been invited" });
-          } 
-            return res.status(400).json({ error: "Email already exists" });
-          
+          }
+          return res.status(400).json({ error: "Email already exists" });
         }
       }
       return next();
@@ -373,8 +377,10 @@ module.exports = function(router) {
     async function(req, res, next) {
       try {
         const serviceTemplate = res.locals.valid_object;
-        const {references} = serviceTemplate;
-        const props = references ? references.service_template_properties : null;
+        const { references } = serviceTemplate;
+        const props = references
+          ? references.service_template_properties
+          : null;
         const req_body = req.body;
         req_body.references.service_template_properties =
           res.locals.merged_props;
@@ -388,14 +394,14 @@ module.exports = function(router) {
 
         const responseJSON = {};
         // using promiseProxy for non-standard callbacks
-        let {user} = req;
+        let { user } = req;
 
         // is the user authenticated (are they logged in)?
         const isNew = !req.isAuthenticated();
         const store = require("../config/redux/store");
 
         // todo: once in plugin this code needs big changes
-        let {lifecycleManager} = store.getState(true).pluginbot.services;
+        let { lifecycleManager } = store.getState(true).pluginbot.services;
         if (lifecycleManager) {
           lifecycleManager = lifecycleManager[0];
           try {
@@ -418,7 +424,10 @@ module.exports = function(router) {
             status: "invited",
           });
           if (req_body.password) {
-            const password = require("bcryptjs").hashSync(req_body.password, 10);
+            const password = require("bcryptjs").hashSync(
+              req_body.password,
+              10,
+            );
 
             newUser.set("password", password);
             newUser.set("status", "active");
@@ -437,18 +446,12 @@ module.exports = function(router) {
             });
             // create the invitation for the user.
             const createdInvite = await createInvite();
-            responseJSON.api =
-              `${req.protocol 
-              }://${ 
-              req.get("host") 
-              }/api/v1/users/register?token=${ 
-              createdInvite.get("token")}`;
-            responseJSON.url =
-              `${req.protocol 
-              }://${ 
-              req.get("host") 
-              }/invitation/${ 
-              createdInvite.get("token")}`;
+            responseJSON.api = `${req.protocol}://${req.get(
+              "host",
+            )}/api/v1/users/register?token=${createdInvite.get("token")}`;
+            responseJSON.url = `${req.protocol}://${req.get(
+              "host",
+            )}/invitation/${createdInvite.get("token")}`;
           }
           responseJSON.token = jwt.sign(
             { uid: createdUser.get("id") },

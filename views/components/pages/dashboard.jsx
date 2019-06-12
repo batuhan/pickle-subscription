@@ -30,9 +30,8 @@ class Dashboard extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
       return browserHistory.push("/login");
-    } 
-      this.fetchAnalytics();
-    
+    }
+    this.fetchAnalytics();
   }
 
   fetchAnalytics() {
@@ -97,51 +96,50 @@ class Dashboard extends React.Component {
           </Content>
         </div>
       );
-    } 
-      return (
-        <Authorizer permissions={["can_administrate", "can_manage"]}>
-          <Jumbotron pageName={pageName} subtitle={sub} />
-          <div className="page-service-instance">
-            <Content>
-              {showSteps ? (
+    }
+    return (
+      <Authorizer permissions={["can_administrate", "can_manage"]}>
+        <Jumbotron pageName={pageName} subtitle={sub} />
+        <div className="page-service-instance">
+          <Content>
+            {showSteps ? (
+              <div>
                 <div>
-                  <div>
-                    <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-md-offset-2 col-lg-offset-3 col-xl-offset-3">
-                      <ul className="progressbar">
-                        <li className={step1}>Create an Offering</li>
-                        <li className={step2}>Connect to Stripe</li>
-                        <li>Done!</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="dash-tour col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-md-offset-2 col-lg-offset-3 col-xl-offset-3">
-                    {analytics.offeringStats.total === 0 && (
-                      <ServiceTemplateFormLite
-                        params={{ templateId: null }}
-                        postResponse={this.updateOfferingStat}
-                      />
-                    )}
-                    {analytics.offeringStats.total > 0 && (
-                      <StripeSettingsForm
-                        postResponse={this.updateStripeStat}
-                        initialize
-                      />
-                    )}
+                  <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-md-offset-2 col-lg-offset-3 col-xl-offset-3">
+                    <ul className="progressbar">
+                      <li className={step1}>Create an Offering</li>
+                      <li className={step2}>Connect to Stripe</li>
+                      <li>Done!</li>
+                    </ul>
                   </div>
                 </div>
-              ) : (
-                <div>
-                  <ContentTitle title="Welcome to your dashboard" />
-                  <DashboardWidgets data={this.state.analytics} />
-                  <OfferingsStatsWidgets data={this.state.analytics} />
-                  <OverallStatsWidgets data={this.state.analytics} />
+                <div className="dash-tour col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-md-offset-2 col-lg-offset-3 col-xl-offset-3">
+                  {analytics.offeringStats.total === 0 && (
+                    <ServiceTemplateFormLite
+                      params={{ templateId: null }}
+                      postResponse={this.updateOfferingStat}
+                    />
+                  )}
+                  {analytics.offeringStats.total > 0 && (
+                    <StripeSettingsForm
+                      postResponse={this.updateStripeStat}
+                      initialize
+                    />
+                  )}
                 </div>
-              )}
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+              </div>
+            ) : (
+              <div>
+                <ContentTitle title="Welcome to your dashboard" />
+                <DashboardWidgets data={this.state.analytics} />
+                <OfferingsStatsWidgets data={this.state.analytics} />
+                <OverallStatsWidgets data={this.state.analytics} />
+              </div>
+            )}
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

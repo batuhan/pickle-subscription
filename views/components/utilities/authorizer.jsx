@@ -25,19 +25,17 @@ const isAuthorized = function(props) {
     ) {
       // renders inner content if authorized
       return true;
-    } 
-    
+    }
 
     // logic goes here for unauthorized component
     return false;
-  } 
-    if (props.anonymous) {
-      return true;
-    }
+  }
+  if (props.anonymous) {
+    return true;
+  }
 
-    // logic goes here for logged out
-    return false;
-  
+  // logic goes here for logged out
+  return false;
 };
 /**
  *
@@ -74,28 +72,26 @@ let Authorizer = function(props) {
         return <span>{props.children}</span>;
       }
       return props.children;
-    } 
-      if (props.handleUnauthorized) {
-        props.handleUnauthorized();
-      }
-
-      // logic goes here for unauthorized component
-      return null;
-    
-  } 
-    if (props.anonymous) {
-      if (Array.isArray(props.children)) {
-        return <span>{props.children}</span>;
-      }
-      return props.children;
     }
     if (props.handleUnauthorized) {
       props.handleUnauthorized();
     }
 
-    // logic goes here for logged out
+    // logic goes here for unauthorized component
     return null;
-  
+  }
+  if (props.anonymous) {
+    if (Array.isArray(props.children)) {
+      return <span>{props.children}</span>;
+    }
+    return props.children;
+  }
+  if (props.handleUnauthorized) {
+    props.handleUnauthorized();
+  }
+
+  // logic goes here for logged out
+  return null;
 };
 const mapStateToProps = (state, ownProps) => {
   return {

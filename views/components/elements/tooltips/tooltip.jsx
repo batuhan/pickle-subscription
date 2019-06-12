@@ -24,14 +24,11 @@ class ToolTip extends React.Component {
       if (self.props.icon) {
         return (
           <div>
-            <i className={`fa ${self.props.icon}`} /> 
-            {' '}
-            {text}
+            <i className={`fa ${self.props.icon}`} /> {text}
           </div>
         );
-      } 
-        return null;
-      
+      }
+      return null;
     };
 
     // let delay = this.props.delay || 0;

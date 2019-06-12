@@ -6,6 +6,6 @@ const CONFIG_PATH =
 
 module.exports = require("../app")(CONFIG_PATH).then(app => {
   // todo: this can be removed when we refactor app.
-  const {store} = app;
+  const { store } = app;
   require("../config/redux/store").setStore(store);
 });

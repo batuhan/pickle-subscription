@@ -37,10 +37,10 @@ function getFormattedDate(dateString, options = {}) {
   let min = date.getMinutes();
 
   if (hour < 10) {
-    hour = `0${  hour}`;
+    hour = `0${hour}`;
   }
   if (min < 10) {
-    min = `0${  min}`;
+    min = `0${min}`;
   }
 
   let myDate = `${monthNames[month]} ${day}, ${year}`;

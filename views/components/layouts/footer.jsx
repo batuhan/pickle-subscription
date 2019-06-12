@@ -44,7 +44,7 @@ class Footer extends React.Component {
         </p>
         {this.props.services.footerComponent &&
           this.props.services.footerComponent.map((comp, index) => {
-            return <div key={`footer-${  index}`}>{comp}</div>;
+            return <div key={`footer-${index}`}>{comp}</div>;
           })}
       </div>
     );

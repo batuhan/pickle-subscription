@@ -9,8 +9,8 @@
   } else t.Backbone = e(t, {}, t._, t.jQuery || t.Zepto || t.ender || t.$);
 })(this, function(t, e, i, n) {
   const s = t.Backbone;
-    const r = [];
-    const a = (r.push, r.slice);
+  const r = [];
+  const a = (r.push, r.slice);
   r.splice;
   (e.VERSION = "1.1.2"),
     (e.$ = n),
@@ -20,105 +20,107 @@
     (e.emulateHTTP = !1),
     (e.emulateJSON = !1);
   const o = (e.Events = {
-      on(t, e, i) {
-        if (!c(this, "on", t, [e, i]) || !e) return this;
-        this._events || (this._events = {});
-        const n = this._events[t] || (this._events[t] = []);
-        return n.push({ callback: e, context: i, ctx: i || this }), this;
-      },
-      once(t, e, n) {
-        if (!c(this, "once", t, [e, n]) || !e) return this;
-        const s = this;
-          var r = i.once(function() {
-            s.off(t, r), e.apply(this, arguments);
-          });
-        return (r._callback = e), this.on(t, r, n);
-      },
-      off(t, e, n) {
-        let s; let r; let a; let o; let h; let u; let l; let d;
-        if (!this._events || !c(this, "off", t, [e, n])) return this;
-        if (!t && !e && !n) return (this._events = void 0), this;
-        for (
-          o = t ? [t] : i.keys(this._events), h = 0, u = o.length;
-          h < u;
-          h++
-        )
-          if (((t = o[h]), (a = this._events[t]))) {
-            if (((this._events[t] = s = []), e || n))
-              for (l = 0, d = a.length; l < d; l++)
-                (r = a[l]),
-                  ((e && e !== r.callback && e !== r.callback._callback) ||
-                    (n && n !== r.context)) &&
-                    s.push(r);
-            s.length || delete this._events[t];
-          }
-        return this;
-      },
-      trigger(t) {
-        if (!this._events) return this;
-        const e = a.call(arguments, 1);
-        if (!c(this, "trigger", t, e)) return this;
-        const i = this._events[t];
-          const n = this._events.all;
-        return i && u(i, e), n && u(n, arguments), this;
-      },
-      stopListening(t, e, n) {
-        let s = this._listeningTo;
-        if (!s) return this;
-        const r = !e && !n;
-        n || typeof e !== "object" || (n = this),
-          t && ((s = {})[t._listenId] = t);
-        for (const a in s)
-          (t = s[a]),
-            t.off(e, n, this),
-            (r || i.isEmpty(t._events)) && delete this._listeningTo[a];
-        return this;
-      },
-    });
-    const h = /\s+/;
-    var c = function(t, e, i, n) {
-      if (!i) return !0;
-      if (typeof i === "object") {
-        for (const s in i) t[e].apply(t, [s, i[s]].concat(n));
-        return !1;
-      }
-      if (h.test(i)) {
-        for (let r = i.split(h), a = 0, o = r.length; a < o; a++)
-          t[e].apply(t, [r[a]].concat(n));
-        return !1;
-      }
-      return !0;
-    };
-    var u = function(t, e) {
-      let i;
-        let n = -1;
-        const s = t.length;
-        const r = e[0];
-        const a = e[1];
-        const o = e[2];
-      switch (e.length) {
-        case 0:
-          for (; ++n < s; ) (i = t[n]).callback.call(i.ctx);
-          return;
-        case 1:
-          for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r);
-          return;
-        case 2:
-          for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r, a);
-          return;
-        case 3:
-          for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r, a, o);
-          return;
-        default:
-          for (; ++n < s; ) (i = t[n]).callback.apply(i.ctx, e);
-          
-      }
-    };
-    const l = { listenTo: "on", listenToOnce: "once" };
+    on(t, e, i) {
+      if (!c(this, "on", t, [e, i]) || !e) return this;
+      this._events || (this._events = {});
+      const n = this._events[t] || (this._events[t] = []);
+      return n.push({ callback: e, context: i, ctx: i || this }), this;
+    },
+    once(t, e, n) {
+      if (!c(this, "once", t, [e, n]) || !e) return this;
+      const s = this;
+      var r = i.once(function() {
+        s.off(t, r), e.apply(this, arguments);
+      });
+      return (r._callback = e), this.on(t, r, n);
+    },
+    off(t, e, n) {
+      let s;
+      let r;
+      let a;
+      let o;
+      let h;
+      let u;
+      let l;
+      let d;
+      if (!this._events || !c(this, "off", t, [e, n])) return this;
+      if (!t && !e && !n) return (this._events = void 0), this;
+      for (o = t ? [t] : i.keys(this._events), h = 0, u = o.length; h < u; h++)
+        if (((t = o[h]), (a = this._events[t]))) {
+          if (((this._events[t] = s = []), e || n))
+            for (l = 0, d = a.length; l < d; l++)
+              (r = a[l]),
+                ((e && e !== r.callback && e !== r.callback._callback) ||
+                  (n && n !== r.context)) &&
+                  s.push(r);
+          s.length || delete this._events[t];
+        }
+      return this;
+    },
+    trigger(t) {
+      if (!this._events) return this;
+      const e = a.call(arguments, 1);
+      if (!c(this, "trigger", t, e)) return this;
+      const i = this._events[t];
+      const n = this._events.all;
+      return i && u(i, e), n && u(n, arguments), this;
+    },
+    stopListening(t, e, n) {
+      let s = this._listeningTo;
+      if (!s) return this;
+      const r = !e && !n;
+      n || typeof e !== "object" || (n = this),
+        t && ((s = {})[t._listenId] = t);
+      for (const a in s)
+        (t = s[a]),
+          t.off(e, n, this),
+          (r || i.isEmpty(t._events)) && delete this._listeningTo[a];
+      return this;
+    },
+  });
+  const h = /\s+/;
+  var c = function(t, e, i, n) {
+    if (!i) return !0;
+    if (typeof i === "object") {
+      for (const s in i) t[e].apply(t, [s, i[s]].concat(n));
+      return !1;
+    }
+    if (h.test(i)) {
+      for (let r = i.split(h), a = 0, o = r.length; a < o; a++)
+        t[e].apply(t, [r[a]].concat(n));
+      return !1;
+    }
+    return !0;
+  };
+  var u = function(t, e) {
+    let i;
+    let n = -1;
+    const s = t.length;
+    const r = e[0];
+    const a = e[1];
+    const o = e[2];
+    switch (e.length) {
+      case 0:
+        for (; ++n < s; ) (i = t[n]).callback.call(i.ctx);
+        return;
+      case 1:
+        for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r);
+        return;
+      case 2:
+        for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r, a);
+        return;
+      case 3:
+        for (; ++n < s; ) (i = t[n]).callback.call(i.ctx, r, a, o);
+        return;
+      default:
+        for (; ++n < s; ) (i = t[n]).callback.apply(i.ctx, e);
+    }
+  };
+  const l = { listenTo: "on", listenToOnce: "once" };
   i.each(l, function(t, e) {
     o[e] = function(e, n, s) {
       const r = this._listeningTo || (this._listeningTo = {});
-        const a = e._listenId || (e._listenId = i.uniqueId("l"));
+      const a = e._listenId || (e._listenId = i.uniqueId("l"));
       return (
         (r[a] = e),
         s || typeof n !== "object" || (s = this),
@@ -163,7 +165,14 @@
       return this.get(t) != null;
     },
     set(t, e, n) {
-      let s; let r; let a; let o; let h; let c; let u; let l;
+      let s;
+      let r;
+      let a;
+      let o;
+      let h;
+      let c;
+      let u;
+      let l;
       if (t == null) return this;
       if (
         (typeof t === "object" ? ((r = t), (n = e)) : ((r = {})[t] = e),
@@ -190,7 +199,7 @@
       if (!h) {
         o.length && (this._pending = n);
         for (let d = 0, f = o.length; d < f; d++)
-          this.trigger(`change:${  o[d]}`, this, l[o[d]], n);
+          this.trigger(`change:${o[d]}`, this, l[o[d]], n);
       }
       if (c) return this;
       if (!h)
@@ -214,9 +223,10 @@
     changedAttributes(t) {
       if (!t) return !!this.hasChanged() && i.clone(this.changed);
       let e;
-        let n = !1;
-        const s = this._changing ? this._previousAttributes : this.attributes;
-      for (const r in t) i.isEqual(s[r], (e = t[r])) || ((n || (n = {}))[r] = e);
+      let n = !1;
+      const s = this._changing ? this._previousAttributes : this.attributes;
+      for (const r in t)
+        i.isEqual(s[r], (e = t[r])) || ((n || (n = {}))[r] = e);
       return n;
     },
     previous(t) {
@@ -230,7 +240,7 @@
     fetch(t) {
       (t = t ? i.clone(t) : {}), void 0 === t.parse && (t.parse = !0);
       const e = this;
-        const n = t.success;
+      const n = t.success;
       return (
         (t.success = function(i) {
           return (
@@ -244,9 +254,9 @@
     },
     save(t, e, n) {
       let s;
-        let r;
-        let a;
-        const o = this.attributes;
+      let r;
+      let a;
+      const o = this.attributes;
       if (
         (t == null || typeof t === "object"
           ? ((s = t), (n = e))
@@ -259,7 +269,7 @@
       s && n.wait && (this.attributes = i.extend({}, o, s)),
         void 0 === n.parse && (n.parse = !0);
       const h = this;
-        const c = n.success;
+      const c = n.success;
       return (
         (n.success = function(t) {
           h.attributes = o;
@@ -281,10 +291,10 @@
     destroy(t) {
       t = t ? i.clone(t) : {};
       const e = this;
-        const n = t.success;
-        const s = function() {
-          e.trigger("destroy", e, e.collection, t);
-        };
+      const n = t.success;
+      const s = function() {
+        e.trigger("destroy", e, e.collection, t);
+      };
       if (
         ((t.success = function(i) {
           (t.wait || e.isNew()) && s(),
@@ -336,15 +346,15 @@
     };
   });
   const p = (e.Collection = function(t, e) {
-      e || (e = {}),
-        e.model && (this.model = e.model),
-        void 0 !== e.comparator && (this.comparator = e.comparator),
-        this._reset(),
-        this.initialize.apply(this, arguments),
-        t && this.reset(t, i.extend({ silent: !0 }, e));
-    });
-    const g = { add: !0, remove: !0, merge: !0 };
-    const v = { add: !0, remove: !1 };
+    e || (e = {}),
+      e.model && (this.model = e.model),
+      void 0 !== e.comparator && (this.comparator = e.comparator),
+      this._reset(),
+      this.initialize.apply(this, arguments),
+      t && this.reset(t, i.extend({ silent: !0 }, e));
+  });
+  const g = { add: !0, remove: !0, merge: !0 };
+  const v = { add: !0, remove: !1 };
   i.extend(p.prototype, o, {
     model: d,
     initialize() {},
@@ -362,7 +372,10 @@
     remove(t, e) {
       const n = !i.isArray(t);
       (t = n ? [t] : i.clone(t)), e || (e = {});
-      let s; let r; let a; let o;
+      let s;
+      let r;
+      let a;
+      let o;
       for (s = 0, r = t.length; s < r; s++)
         (o = t[s] = this.get(t[s])),
           o &&
@@ -380,23 +393,23 @@
       const n = !i.isArray(t);
       t = n ? (t ? [t] : []) : i.clone(t);
       let s;
-        let r;
-        let a;
-        let o;
-        let h;
-        let c;
-        let u;
-        const l = e.at;
-        const f = this.model;
-        const p = this.comparator && l == null && e.sort !== !1;
-        const v = i.isString(this.comparator) ? this.comparator : null;
-        const m = [];
-        const y = [];
-        const _ = {};
-        const b = e.add;
-        const w = e.merge;
-        const x = e.remove;
-        const E = !(p || !b || !x) && [];
+      let r;
+      let a;
+      let o;
+      let h;
+      let c;
+      let u;
+      const l = e.at;
+      const f = this.model;
+      const p = this.comparator && l == null && e.sort !== !1;
+      const v = i.isString(this.comparator) ? this.comparator : null;
+      const m = [];
+      const y = [];
+      const _ = {};
+      const b = e.add;
+      const w = e.merge;
+      const x = e.remove;
+      const E = !(p || !b || !x) && [];
       for (s = 0, r = t.length; s < r; s++) {
         if (
           ((h = t[s] || {}),
@@ -506,7 +519,7 @@
     fetch(t) {
       (t = t ? i.clone(t) : {}), void 0 === t.parse && (t.parse = !0);
       const e = t.success;
-        const n = this;
+      const n = this;
       return (
         (t.success = function(i) {
           const s = t.reset ? "reset" : "set";
@@ -521,7 +534,7 @@
         return !1;
       e.wait || this.add(t, e);
       const n = this;
-        const s = e.success;
+      const s = e.success;
       return (
         (e.success = function(t, i) {
           e.wait && n.add(t, e), s && s(t, i, e);
@@ -561,7 +574,7 @@
       ((t !== "add" && t !== "remove") || i === this) &&
         (t === "destroy" && this.remove(e, n),
         e &&
-          t === `change:${  e.idAttribute}` &&
+          t === `change:${e.idAttribute}` &&
           (delete this._byId[e.previous(e.idAttribute)],
           e.id != null && (this._byId[e.id] = e)),
         this.trigger.apply(this, arguments));
@@ -628,24 +641,24 @@
     };
   });
   const _ = (e.View = function(t) {
-      (this.cid = i.uniqueId("view")),
-        t || (t = {}),
-        i.extend(this, i.pick(t, w)),
-        this._ensureElement(),
-        this.initialize.apply(this, arguments),
-        this.delegateEvents();
-    });
-    const b = /^(\S+)\s*(.*)$/;
-    var w = [
-      "model",
-      "collection",
-      "el",
-      "id",
-      "attributes",
-      "className",
-      "tagName",
-      "events",
-    ];
+    (this.cid = i.uniqueId("view")),
+      t || (t = {}),
+      i.extend(this, i.pick(t, w)),
+      this._ensureElement(),
+      this.initialize.apply(this, arguments),
+      this.delegateEvents();
+  });
+  const b = /^(\S+)\s*(.*)$/;
+  var w = [
+    "model",
+    "collection",
+    "el",
+    "id",
+    "attributes",
+    "className",
+    "tagName",
+    "events",
+  ];
   i.extend(_.prototype, o, {
     tagName: "div",
     $(t) {
@@ -674,17 +687,17 @@
         let n = t[e];
         if ((i.isFunction(n) || (n = this[t[e]]), n)) {
           const s = e.match(b);
-            let r = s[1];
-            const a = s[2];
+          let r = s[1];
+          const a = s[2];
           (n = i.bind(n, this)),
-            (r += `.delegateEvents${  this.cid}`),
+            (r += `.delegateEvents${this.cid}`),
             a === "" ? this.$el.on(r, n) : this.$el.on(r, a, n);
         }
       }
       return this;
     },
     undelegateEvents() {
-      return this.$el.off(`.delegateEvents${  this.cid}`), this;
+      return this.$el.off(`.delegateEvents${this.cid}`), this;
     },
     _ensureElement() {
       if (this.el) this.setElement(i.result(this, "el"), !1);
@@ -692,7 +705,7 @@
         const t = i.extend({}, i.result(this, "attributes"));
         this.id && (t.id = i.result(this, "id")),
           this.className && (t.class = i.result(this, "className"));
-        const n = e.$(`<${  i.result(this, "tagName")  }>`).attr(t);
+        const n = e.$(`<${i.result(this, "tagName")}>`).attr(t);
         this.setElement(n, !1);
       }
     },
@@ -733,30 +746,30 @@
       return n.trigger("request", n, h, s), h;
     });
   var x = !(
-      typeof window === "undefined" ||
-      !window.ActiveXObject ||
-      (window.XMLHttpRequest && new XMLHttpRequest().dispatchEvent)
-    );
-    var E = {
-      create: "POST",
-      update: "PUT",
-      patch: "PATCH",
-      delete: "DELETE",
-      read: "GET",
-    };
+    typeof window === "undefined" ||
+    !window.ActiveXObject ||
+    (window.XMLHttpRequest && new XMLHttpRequest().dispatchEvent)
+  );
+  var E = {
+    create: "POST",
+    update: "PUT",
+    patch: "PATCH",
+    delete: "DELETE",
+    read: "GET",
+  };
   e.ajax = function() {
     return e.$.ajax.apply(e.$, arguments);
   };
   const k = (e.Router = function(t) {
-      t || (t = {}),
-        t.routes && (this.routes = t.routes),
-        this._bindRoutes(),
-        this.initialize.apply(this, arguments);
-    });
-    const T = /\((.*?)\)/g;
-    const $ = /(\(\?)?:\w+/g;
-    const S = /\*\w+/g;
-    const H = /[\-{}\[\]+?.,\\\^$|#\s]/g;
+    t || (t = {}),
+      t.routes && (this.routes = t.routes),
+      this._bindRoutes(),
+      this.initialize.apply(this, arguments);
+  });
+  const T = /\((.*?)\)/g;
+  const $ = /(\(\?)?:\w+/g;
+  const S = /\*\w+/g;
+  const H = /[\-{}\[\]+?.,\\\^$|#\s]/g;
   i.extend(k.prototype, o, {
     initialize() {},
     route(t, n, s) {
@@ -768,7 +781,7 @@
         e.history.route(t, function(i) {
           const a = r._extractParameters(t, i);
           r.execute(s, a),
-            r.trigger.apply(r, [`route:${  n}`].concat(a)),
+            r.trigger.apply(r, [`route:${n}`].concat(a)),
             r.trigger("route", n, a),
             e.history.trigger("route", r, n, a);
         }),
@@ -797,7 +810,7 @@
             return e ? t : "([^/?]+)";
           })
           .replace(S, "([^?]*?)")),
-        new RegExp(`^${  t  }(?:\\?([\\s\\S]*))?$`)
+        new RegExp(`^${t}(?:\\?([\\s\\S]*))?$`)
       );
     },
     _extractParameters(t, e) {
@@ -812,16 +825,16 @@
     },
   });
   const A = (e.History = function() {
-      (this.handlers = []),
-        i.bindAll(this, "checkUrl"),
-        typeof window !== "undefined" &&
-          ((this.location = window.location), (this.history = window.history));
-    });
-    const I = /^[#\/]|\s+$/g;
-    const N = /^\/+|\/+$/g;
-    const R = /msie [\w.]+/;
-    const O = /\/$/;
-    const P = /#.*$/;
+    (this.handlers = []),
+      i.bindAll(this, "checkUrl"),
+      typeof window !== "undefined" &&
+        ((this.location = window.location), (this.history = window.history));
+  });
+  const I = /^[#\/]|\s+$/g;
+  const N = /^\/+|\/+$/g;
+  const R = /msie [\w.]+/;
+  const O = /\/$/;
+  const P = /#.*$/;
   (A.started = !1),
     i.extend(A.prototype, o, {
       interval: 50,
@@ -855,10 +868,10 @@
             this.history.pushState
           ));
         const n = this.getFragment();
-          const s = document.documentMode;
-          const r = R.exec(navigator.userAgent.toLowerCase()) && (!s || s <= 7);
+        const s = document.documentMode;
+        const r = R.exec(navigator.userAgent.toLowerCase()) && (!s || s <= 7);
         if (
-          ((this.root = (`/${  this.root  }/`).replace(N, "/")),
+          ((this.root = `/${this.root}/`.replace(N, "/")),
           r && this._wantsHashChange)
         ) {
           const a = e.$('<iframe src="javascript:0" tabindex="-1">');
@@ -880,7 +893,7 @@
           if (!this._hasPushState && !this.atRoot())
             return (
               (this.fragment = this.getFragment(null, !0)),
-              this.location.replace(`${this.root  }#${  this.fragment}`),
+              this.location.replace(`${this.root}#${this.fragment}`),
               !0
             );
           this._hasPushState &&
@@ -953,14 +966,14 @@
       _updateHash(t, e, i) {
         if (i) {
           const n = t.href.replace(/(javascript:|#).*$/, "");
-          t.replace(`${n  }#${  e}`);
-        } else t.hash = `#${  e}`;
+          t.replace(`${n}#${e}`);
+        } else t.hash = `#${e}`;
       },
     }),
     (e.history = new A());
   const C = function(t, e) {
     let n;
-      const s = this;
+    const s = this;
     (n =
       t && i.has(t, "constructor")
         ? t.constructor
@@ -981,14 +994,14 @@
   };
   d.extend = p.extend = k.extend = _.extend = A.extend = C;
   var j = function() {
-      throw new Error('A "url" property or function must be specified');
+    throw new Error('A "url" property or function must be specified');
+  };
+  var U = function(t, e) {
+    const i = e.error;
+    e.error = function(n) {
+      i && i(t, n, e), t.trigger("error", t, n, e);
     };
-    var U = function(t, e) {
-      const i = e.error;
-      e.error = function(n) {
-        i && i(t, n, e), t.trigger("error", t, n, e);
-      };
-    };
+  };
   return e;
 }),
   (Backbone.View = (function(t) {

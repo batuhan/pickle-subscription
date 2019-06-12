@@ -109,12 +109,7 @@ let PriceBreakdown = props => {
     ) {
       acc.push(
         <div>
-          {input.prop_label}
-          {' '}
--
-          {input.config.pricing.operation}
--
-          {" "}
+          {input.prop_label} -{input.config.pricing.operation}-{" "}
           {widgets[input.type].handler.priceHandler(input.data, input.config)}
         </div>,
       );

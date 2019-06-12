@@ -32,10 +32,9 @@ class ServiceInstanceDescription extends React.Component {
     if (!this.state.opened && this.state.descriptionHeight > 315) {
       const style = { height: 315, overflow: "hidden" };
       return style;
-    } 
-      const style = { height: "auto" };
-      return style;
-    
+    }
+    const style = { height: "auto" };
+    return style;
   }
 
   render() {

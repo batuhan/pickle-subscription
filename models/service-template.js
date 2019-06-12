@@ -25,7 +25,10 @@ const references = [
     readOnly: true,
   },
 ];
-const ServiceTemplate = require("./base/entity")("service_templates", references);
+const ServiceTemplate = require("./base/entity")(
+  "service_templates",
+  references,
+);
 
 ServiceTemplate.iconFilePath = "uploads/templates/icons";
 ServiceTemplate.imageFilePath = "uploads/templates/images";

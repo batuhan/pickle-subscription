@@ -5,10 +5,10 @@ const https = require("https");
 module.exports = function(appConfig, app) {
   let certConfig = {};
   if (appConfig.certificate_path) {
-    const key = fs.readFileSync(`${appConfig.certificate_path  }servicebot.key`);
-    const cert = fs.readFileSync(`${appConfig.certificate_path  }servicebot.crt`);
+    const key = fs.readFileSync(`${appConfig.certificate_path}servicebot.key`);
+    const cert = fs.readFileSync(`${appConfig.certificate_path}servicebot.crt`);
     const ca = fs.readFileSync(
-      `${appConfig.certificate_path  }servicebot_bundle.crt`,
+      `${appConfig.certificate_path}servicebot_bundle.crt`,
     );
     certConfig = { key, cert, ca };
   }

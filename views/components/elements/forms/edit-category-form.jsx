@@ -12,7 +12,7 @@ class EditCategoryForm extends React.Component {
     super(props);
     const categoryId = this.props.id;
     this.state = {
-      url: `/api/v1/service-categories/${  categoryId}`,
+      url: `/api/v1/service-categories/${categoryId}`,
       response: {},
       loading: true,
       success: false,
@@ -41,7 +41,8 @@ class EditCategoryForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       return (
         <div className="p-20">
           <p>
@@ -50,59 +51,58 @@ class EditCategoryForm extends React.Component {
           <p>{this.state.response.name || "something went wrong."}</p>
         </div>
       );
-    } 
-      // TODO: Add validation functions and pass into DataForm as props
-      return (
-        <div className="invite-user-form">
-          <DataForm
-            handleResponse={this.handleResponse}
-            url={this.state.url}
-            method="PUT"
-          >
-            <div className="p-20">
-              <p>
-                <strong>Enter the category name you would like to add.</strong>
-              </p>
-              <Inputs
-                type="text"
-                name="name"
-                label="Name"
-                defaultValue={this.state.category.name}
-                onChange={function() {}}
-                receiveOnChange
-                receiveValue
-              />
-              <Inputs
-                type="text"
-                name="description"
-                label="Description (Optional)"
-                defaultValue={this.state.category.description}
-                onChange={function() {}}
-                receiveOnChange
-                receiveValue
-              />
-            </div>
+    }
+    // TODO: Add validation functions and pass into DataForm as props
+    return (
+      <div className="invite-user-form">
+        <DataForm
+          handleResponse={this.handleResponse}
+          url={this.state.url}
+          method="PUT"
+        >
+          <div className="p-20">
+            <p>
+              <strong>Enter the category name you would like to add.</strong>
+            </p>
+            <Inputs
+              type="text"
+              name="name"
+              label="Name"
+              defaultValue={this.state.category.name}
+              onChange={function() {}}
+              receiveOnChange
+              receiveValue
+            />
+            <Inputs
+              type="text"
+              name="description"
+              label="Description (Optional)"
+              defaultValue={this.state.category.description}
+              onChange={function() {}}
+              receiveOnChange
+              receiveValue
+            />
+          </div>
 
-            <div className="modal-footer text-right p-b-20">
-              <Buttons
-                containerClass="inline"
-                btnType="primary"
-                type="submit"
-                value="submit"
-                text="Update Category"
-                success={this.state.success}
-              />
-              <Buttons
-                containerClass="inline"
-                btnType="default"
-                text="Later"
-                onClick={this.props.hide}
-              />
-            </div>
-          </DataForm>
-        </div>
-      );
-    
+          <div className="modal-footer text-right p-b-20">
+            <Buttons
+              containerClass="inline"
+              btnType="primary"
+              type="submit"
+              value="submit"
+              text="Update Category"
+              success={this.state.success}
+            />
+            <Buttons
+              containerClass="inline"
+              btnType="default"
+              text="Later"
+              onClick={this.props.hide}
+            />
+          </div>
+        </DataForm>
+      </div>
+    );
   }
 }
 

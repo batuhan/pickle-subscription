@@ -1,10 +1,7 @@
 import React from "react";
 import "./css/style.css";
 import { Widget } from "./dashboard-widgets.jsx";
-import {
-  BuildChart,
-  ServiceOverTimeChart,
-} from "./dashboard-chart.jsx";
+import { BuildChart, ServiceOverTimeChart } from "./dashboard-chart.jsx";
 
 class OverallStatsWidgets extends React.Component {
   constructor(props) {

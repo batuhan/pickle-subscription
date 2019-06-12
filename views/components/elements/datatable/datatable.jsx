@@ -76,7 +76,7 @@ class DataTable extends React.Component {
 
   fetchData() {
     const self = this;
-    const {url} = self.state;
+    const { url } = self.state;
     // todo: Can refactgor to reuse a fetch function as for the search
     Fetcher(url).then(function(response) {
       if (!response.error) {
@@ -100,14 +100,12 @@ class DataTable extends React.Component {
         return obj[accessArray[0]];
       }
       return "null";
-    } 
-      const newObj = obj[accessArray.shift()];
-      if (typeof newObj !== "undefined" && newObj !== null) {
-        return self.recursiveAccess(accessArray, newObj);
-      } 
-        return "null";
-      
-    
+    }
+    const newObj = obj[accessArray.shift()];
+    if (typeof newObj !== "undefined" && newObj !== null) {
+      return self.recursiveAccess(accessArray, newObj);
+    }
+    return "null";
   }
 
   handleSort(column) {
@@ -130,7 +128,7 @@ class DataTable extends React.Component {
 
   handleSearch(event) {
     const self = this;
-    const {target} = event;
+    const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const searchURL = `${this.state.url}/search?key=name&value=${value}`;
 
@@ -158,105 +156,101 @@ class DataTable extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      if (this.state.resObjs.length) {
-        return (
-          <div
-            id="tables-datatable"
-            className={`table-responsive ${this.props.className}`}
-          >
-            {this.state.headingText && <h3>{this.state.headingText}</h3>}
-            {this.state.descriptionText && <p>{this.state.descriptionText}</p>}
-            {this.state.searchbar && (
-              <div className="data-table-search">
-                <label>Quick Search: </label>
-                <input className="form-control" onChange={this.handleSearch} />
-              </div>
-            )}
-            <table className="table datatable table-striped table-hover">
-              <thead>
-                <tr>
-                  {this.state.colNames.map((column, index) => (
-                    <th
-                      key={`column-${  index}`}
-                      onClick={() => this.handleSort(column)}
-                      className={
-                        this.state.sortedBy == column &&
-                        (this.state.sortOrder == "asc"
-                          ? "sorted"
-                          : "sorted desc")
-                      }
-                    >
-                      {column}
-                    </th>
+    }
+    if (this.state.resObjs.length) {
+      return (
+        <div
+          id="tables-datatable"
+          className={`table-responsive ${this.props.className}`}
+        >
+          {this.state.headingText && <h3>{this.state.headingText}</h3>}
+          {this.state.descriptionText && <p>{this.state.descriptionText}</p>}
+          {this.state.searchbar && (
+            <div className="data-table-search">
+              <label>Quick Search: </label>
+              <input className="form-control" onChange={this.handleSearch} />
+            </div>
+          )}
+          <table className="table datatable table-striped table-hover">
+            <thead>
+              <tr>
+                {this.state.colNames.map((column, index) => (
+                  <th
+                    key={`column-${index}`}
+                    onClick={() => this.handleSort(column)}
+                    className={
+                      this.state.sortedBy == column &&
+                      (this.state.sortOrder == "asc" ? "sorted" : "sorted desc")
+                    }
+                  >
+                    {column}
+                  </th>
+                ))}
+                {/* render the action column if parent passed in an action Object */}
+                {(this.props.dropdown || this.props.buttons) && (
+                  <th key="dropdown-column" />
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.resObjs.map((resObj, index) => (
+                <tr
+                  key={`row-${index}`}
+                  className={this.rowClasses(resObj) || ""}
+                >
+                  {/* {console.log("The resObj: ", resObj)} */}
+                  {this.state.col.map(column => (
+                    <td key={`row-${index}-cell-${column}`}>
+                      {/* dynamic function call from props based on column name,
+                                                if column is accessed using a dot, replace the . with a - then call the function */}
+                      {this.props[`mod_${column.replace(".", "-")}`]
+                        ? this.props[`mod_${column.replace(".", "-")}`](
+                            this.recursiveAccess(column.split("."), resObj),
+                            resObj,
+                          )
+                        : this.recursiveAccess(column.split("."), resObj)}
+                    </td>
                   ))}
-                  {/* render the action column if parent passed in an action Object */}
                   {(this.props.dropdown || this.props.buttons) && (
-                    <th key="dropdown-column" />
+                    <td>
+                      {this.props.dropdown &&
+                        this.props.dropdown.map(dd => (
+                          <Dropdown
+                            key={`dropdown-${index}-${dd.name}-${resObj.id}`}
+                            dataObject={resObj}
+                            name={dd.name}
+                            direction={dd.direction}
+                            dropdown={dd.buttons}
+                            id={resObj.id}
+                            active={resObj[this.props.statusCol]}
+                          />
+                        ))}
+                      {this.props.buttons &&
+                        this.props.buttons.map(b => (
+                          <Buttons
+                            key={`button-${b.name}`}
+                            dataObject={resObj}
+                            name={b.name}
+                            link={b.link}
+                            id={index}
+                            active={resObj[this.props.statusCol]}
+                            onClick={b.onClick}
+                          />
+                        ))}
+                    </td>
                   )}
                 </tr>
-              </thead>
-              <tbody>
-                {this.state.resObjs.map((resObj, index) => (
-                  <tr
-                    key={`row-${  index}`}
-                    className={this.rowClasses(resObj) || ""}
-                  >
-                    {/* {console.log("The resObj: ", resObj)} */}
-                    {this.state.col.map(column => (
-                      <td key={`row-${index}-cell-${column}`}>
-                        {/* dynamic function call from props based on column name,
-                                                if column is accessed using a dot, replace the . with a - then call the function */}
-                        {this.props[`mod_${column.replace(".", "-")}`]
-                          ? this.props[`mod_${column.replace(".", "-")}`](
-                              this.recursiveAccess(column.split("."), resObj),
-                              resObj,
-                            )
-                          : this.recursiveAccess(column.split("."), resObj)}
-                      </td>
-                    ))}
-                    {(this.props.dropdown || this.props.buttons) && (
-                      <td>
-                        {this.props.dropdown &&
-                          this.props.dropdown.map(dd => (
-                            <Dropdown
-                              key={`dropdown-${index}-${dd.name}-${resObj.id}`}
-                              dataObject={resObj}
-                              name={dd.name}
-                              direction={dd.direction}
-                              dropdown={dd.buttons}
-                              id={resObj.id}
-                              active={resObj[this.props.statusCol]}
-                            />
-                          ))}
-                        {this.props.buttons &&
-                          this.props.buttons.map(b => (
-                            <Buttons
-                              key={`button-${b.name}`}
-                              dataObject={resObj}
-                              name={b.name}
-                              link={b.link}
-                              id={index}
-                              active={resObj[this.props.statusCol]}
-                              onClick={b.onClick}
-                            />
-                          ))}
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-      } 
-        return this.props.nullMessage ? (
-          <p className="help-block">{this.props.nullMessage}</p>
-        ) : (
-          <p>No record</p>
-        );
-      
-    
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+    return this.props.nullMessage ? (
+      <p className="help-block">{this.props.nullMessage}</p>
+    ) : (
+      <p>No record</p>
+    );
   }
 }
 

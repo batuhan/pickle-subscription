@@ -50,57 +50,56 @@ class ServiceRequest extends React.Component {
   render() {
     if (this.state.loading) {
       return <span>loading</span>;
-    } 
-      const { options } = this.props;
-      const service_request_title_description = _.get(
-        options,
-        "service_request_title_description.value",
-        "What you are getting",
-      );
-      const service_request_title_form = _.get(
-        options,
-        "service_request_title_form.value",
-        "Get Your Service",
-      );
+    }
+    const { options } = this.props;
+    const service_request_title_description = _.get(
+      options,
+      "service_request_title_description.value",
+      "What you are getting",
+    );
+    const service_request_title_form = _.get(
+      options,
+      "service_request_title_form.value",
+      "Get Your Service",
+    );
 
-      return (
-        <div className="page-service-request">
-          <RequestPageFeatured
-            templateId={this.state.id}
-            templateData={this.state.service}
-          />
-          <Content>
-            <PageSection>
-              <div className="basic-info col-md-6">
-                <div className="service-request-details">
-                  <IconHeading
-                    imgIcon="/assets/custom_icons/what_you_are_getting_icon.png"
-                    title={service_request_title_description}
-                  />
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: this.state.service.details,
-                    }}
-                  />
-                </div>
+    return (
+      <div className="page-service-request">
+        <RequestPageFeatured
+          templateId={this.state.id}
+          templateData={this.state.service}
+        />
+        <Content>
+          <PageSection>
+            <div className="basic-info col-md-6">
+              <div className="service-request-details">
+                <IconHeading
+                  imgIcon="/assets/custom_icons/what_you_are_getting_icon.png"
+                  title={service_request_title_description}
+                />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.service.details,
+                  }}
+                />
               </div>
-              <div className="basic-info col-md-6">
-                <div className="service-request-form">
-                  <IconHeading
-                    imgIcon="/assets/custom_icons/what_you_are_getting_icon.png"
-                    title={service_request_title_form}
-                  />
-                  <ServiceRequestForm
-                    templateId={this.state.id}
-                    service={this.state.service}
-                  />
-                </div>
+            </div>
+            <div className="basic-info col-md-6">
+              <div className="service-request-form">
+                <IconHeading
+                  imgIcon="/assets/custom_icons/what_you_are_getting_icon.png"
+                  title={service_request_title_form}
+                />
+                <ServiceRequestForm
+                  templateId={this.state.id}
+                  service={this.state.service}
+                />
               </div>
-            </PageSection>
-          </Content>
-        </div>
-      );
-    
+            </div>
+          </PageSection>
+        </Content>
+      </div>
+    );
   }
 }
 
@@ -251,9 +250,7 @@ class RequestPageFeatured extends React.Component {
             </p>
             {trial_period_days > 0 ? (
               <h1 className="featured-price" style={featuredTextStyle}>
-                {trial_period_days}
-                {' '}
-Day Free Trial
+                {trial_period_days} Day Free Trial
                 <span className="free-trial" style={featuredTextStyle}>
                   {getPrice(templateData)}
                 </span>

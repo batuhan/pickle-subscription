@@ -1,5 +1,4 @@
 !(function(t, e) {
-  
   typeof define === "function" && define.amd
     ? define(e)
     : typeof exports === "object"
@@ -7,81 +6,82 @@
     : (t.returnExports = e());
 })(this, function() {
   var t;
-    let e;
-    const r = Array;
-    const n = r.prototype;
-    const o = Object;
-    const i = o.prototype;
-    const a = Function;
-    const u = a.prototype;
-    const f = String;
-    const s = f.prototype;
-    const l = Number;
-    const c = l.prototype;
-    const h = n.slice;
-    const p = n.splice;
-    const y = n.push;
-    const d = n.unshift;
-    const g = n.concat;
-    const v = n.join;
-    const b = u.call;
-    const w = u.apply;
-    const T = Math.max;
-    const m = Math.min;
-    const D = i.toString;
-    const x = typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol";
-    const S = Function.prototype.toString;
-    const O = /^\s*class /;
-    const j = function(t) {
-      try {
-        const e = S.call(t);
-          const r = e.replace(/\/\/.*\n/g, "");
-          const n = r.replace(/\/\*[.\s\S]*\*\//g, "");
-          const o = n.replace(/\n/gm, " ").replace(/ {2}/g, " ");
-        return O.test(o);
-      } catch (i) {
-        return !1;
-      }
-    };
-    const E = function(t) {
-      try {
-        return !j(t) && (S.call(t), !0);
-      } catch (e) {
-        return !1;
-      }
-    };
-    const M = "[object Function]";
-    const I = "[object GeneratorFunction]";
-    var t = function(t) {
-      if (!t) return !1;
-      if (typeof t !== "function" && typeof t !== "object") return !1;
-      if (x) return E(t);
-      if (j(t)) return !1;
-      const e = D.call(t);
-      return e === M || e === I;
-    };
-    const U = RegExp.prototype.exec;
-    const F = function(t) {
-      try {
-        return U.call(t), !0;
-      } catch (e) {
-        return !1;
-      }
-    };
-    const N = "[object RegExp]";
+  let e;
+  const r = Array;
+  const n = r.prototype;
+  const o = Object;
+  const i = o.prototype;
+  const a = Function;
+  const u = a.prototype;
+  const f = String;
+  const s = f.prototype;
+  const l = Number;
+  const c = l.prototype;
+  const h = n.slice;
+  const p = n.splice;
+  const y = n.push;
+  const d = n.unshift;
+  const g = n.concat;
+  const v = n.join;
+  const b = u.call;
+  const w = u.apply;
+  const T = Math.max;
+  const m = Math.min;
+  const D = i.toString;
+  const x =
+    typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol";
+  const S = Function.prototype.toString;
+  const O = /^\s*class /;
+  const j = function(t) {
+    try {
+      const e = S.call(t);
+      const r = e.replace(/\/\/.*\n/g, "");
+      const n = r.replace(/\/\*[.\s\S]*\*\//g, "");
+      const o = n.replace(/\n/gm, " ").replace(/ {2}/g, " ");
+      return O.test(o);
+    } catch (i) {
+      return !1;
+    }
+  };
+  const E = function(t) {
+    try {
+      return !j(t) && (S.call(t), !0);
+    } catch (e) {
+      return !1;
+    }
+  };
+  const M = "[object Function]";
+  const I = "[object GeneratorFunction]";
+  var t = function(t) {
+    if (!t) return !1;
+    if (typeof t !== "function" && typeof t !== "object") return !1;
+    if (x) return E(t);
+    if (j(t)) return !1;
+    const e = D.call(t);
+    return e === M || e === I;
+  };
+  const U = RegExp.prototype.exec;
+  const F = function(t) {
+    try {
+      return U.call(t), !0;
+    } catch (e) {
+      return !1;
+    }
+  };
+  const N = "[object RegExp]";
   e = function(t) {
     return typeof t === "object" && (x ? F(t) : D.call(t) === N);
   };
   let k;
-    const C = String.prototype.valueOf;
-    const R = function(t) {
-      try {
-        return C.call(t), !0;
-      } catch (e) {
-        return !1;
-      }
-    };
-    const A = "[object String]";
+  const C = String.prototype.valueOf;
+  const R = function(t) {
+    try {
+      return C.call(t), !0;
+    } catch (e) {
+      return !1;
+    }
+  };
+  const A = "[object String]";
   k = function(t) {
     return (
       typeof t === "string" ||
@@ -89,82 +89,84 @@
     );
   };
   const $ =
-      o.defineProperty &&
-      (function() {
-        try {
-          const t = {};
-          o.defineProperty(t, "x", { enumerable: !1, value: t });
-          for (const e in t) return !1;
-          return t.x === t;
-        } catch (r) {
-          return !1;
-        }
-      })();
-    const P = (function(t) {
-      let e;
+    o.defineProperty &&
+    (function() {
+      try {
+        const t = {};
+        o.defineProperty(t, "x", { enumerable: !1, value: t });
+        for (const e in t) return !1;
+        return t.x === t;
+      } catch (r) {
+        return !1;
+      }
+    })();
+  const P = (function(t) {
+    let e;
+    return (
+      (e = $
+        ? function(t, e, r, n) {
+            (!n && e in t) ||
+              o.defineProperty(t, e, {
+                configurable: !0,
+                enumerable: !1,
+                writable: !0,
+                value: r,
+              });
+          }
+        : function(t, e, r, n) {
+            (!n && e in t) || (t[e] = r);
+          }),
+      function(r, n, o) {
+        for (const i in n) t.call(n, i) && e(r, i, n[i], o);
+      }
+    );
+  })(i.hasOwnProperty);
+  const J = function(t) {
+    const e = typeof t;
+    return t === null || (e !== "object" && e !== "function");
+  };
+  const Z =
+    l.isNaN ||
+    function(t) {
+      return t !== t;
+    };
+  const z = {
+    ToInteger(t) {
+      let e = +t;
       return (
-        (e = $
-          ? function(t, e, r, n) {
-              (!n && e in t) ||
-                o.defineProperty(t, e, {
-                  configurable: !0,
-                  enumerable: !1,
-                  writable: !0,
-                  value: r,
-                });
-            }
-          : function(t, e, r, n) {
-              (!n && e in t) || (t[e] = r);
-            }),
-        function(r, n, o) {
-          for (const i in n) t.call(n, i) && e(r, i, n[i], o);
-        }
+        Z(e)
+          ? (e = 0)
+          : e !== 0 &&
+            e !== 1 / 0 &&
+            e !== -(1 / 0) &&
+            (e = (e > 0 || -1) * Math.floor(Math.abs(e))),
+        e
       );
-    })(i.hasOwnProperty);
-    const J = function(t) {
-      const e = typeof t;
-      return t === null || (e !== "object" && e !== "function");
-    };
-    const Z =
-      l.isNaN ||
-      function(t) {
-        return t !== t;
-      };
-    const z = {
-      ToInteger(t) {
-        let e = +t;
-        return (
-          Z(e)
-            ? (e = 0)
-            : e !== 0 &&
-              e !== 1 / 0 &&
-              e !== -(1 / 0) &&
-              (e = (e > 0 || -1) * Math.floor(Math.abs(e))),
-          e
-        );
-      },
-      ToPrimitive(e) {
-        let r; let n; let o;
-        if (J(e)) return e;
-        if (((n = e.valueOf), t(n) && ((r = n.call(e)), J(r)))) return r;
-        if (((o = e.toString), t(o) && ((r = o.call(e)), J(r)))) return r;
-        throw new TypeError();
-      },
-      ToObject(t) {
-        if (t == null) throw new TypeError(`can't convert ${  t  } to object`);
-        return o(t);
-      },
-      ToUint32(t) {
-        return t >>> 0;
-      },
-    };
-    const G = function() {};
+    },
+    ToPrimitive(e) {
+      let r;
+      let n;
+      let o;
+      if (J(e)) return e;
+      if (((n = e.valueOf), t(n) && ((r = n.call(e)), J(r)))) return r;
+      if (((o = e.toString), t(o) && ((r = o.call(e)), J(r)))) return r;
+      throw new TypeError();
+    },
+    ToObject(t) {
+      if (t == null) throw new TypeError(`can't convert ${t} to object`);
+      return o(t);
+    },
+    ToUint32(t) {
+      return t >>> 0;
+    },
+  };
+  const G = function() {};
   P(u, {
     bind(e) {
       const r = this;
       if (!t(r))
         throw new TypeError(
-          `Function.prototype.bind called on incompatible ${  r}`,
+          `Function.prototype.bind called on incompatible ${r}`,
         );
       for (
         var n,
@@ -182,13 +184,14 @@
         l < f;
         l++
       )
-        y.call(s, `$${  l}`);
+        y.call(s, `$${l}`);
       return (
         (n = a(
           "binder",
-          `return function (${ 
-            v.call(s, ",") 
-            }){ return binder.apply(this, arguments); }`,
+          `return function (${v.call(
+            s,
+            ",",
+          )}){ return binder.apply(this, arguments); }`,
         )(u)),
         r.prototype &&
           ((G.prototype = r.prototype),
@@ -199,21 +202,21 @@
     },
   });
   const Y = b.bind(i.hasOwnProperty);
-    const B = b.bind(i.toString);
-    const H = b.bind(h);
-    const W = w.bind(h);
-    const L = b.bind(s.slice);
-    const X = b.bind(s.split);
-    const q = b.bind(s.indexOf);
-    const K = b.bind(y);
-    const Q = b.bind(i.propertyIsEnumerable);
-    const V = b.bind(n.sort);
-    const _ =
-      r.isArray ||
-      function(t) {
-        return B(t) === "[object Array]";
-      };
-    const tt = [].unshift(0) !== 1;
+  const B = b.bind(i.toString);
+  const H = b.bind(h);
+  const W = w.bind(h);
+  const L = b.bind(s.slice);
+  const X = b.bind(s.split);
+  const q = b.bind(s.indexOf);
+  const K = b.bind(y);
+  const Q = b.bind(i.propertyIsEnumerable);
+  const V = b.bind(n.sort);
+  const _ =
+    r.isArray ||
+    function(t) {
+      return B(t) === "[object Array]";
+    };
+  const tt = [].unshift(0) !== 1;
   P(
     n,
     {
@@ -225,38 +228,37 @@
   ),
     P(r, { isArray: _ });
   const et = o("a");
-    const rt = et[0] !== "a" || !(0 in et);
-    const nt = function(t) {
-      let e = !0;
-        let r = !0;
-        let n = !1;
-      if (t)
-        try {
-          t.call("foo", function(t, r, n) {
-            typeof n !== "object" && (e = !1);
-          }),
-            t.call(
-              [1],
-              function() {
-                
-                r = typeof this === "string";
-              },
-              "x",
-            );
-        } catch (o) {
-          n = !0;
-        }
-      return !!t && !n && e && r;
-    };
+  const rt = et[0] !== "a" || !(0 in et);
+  const nt = function(t) {
+    let e = !0;
+    let r = !0;
+    let n = !1;
+    if (t)
+      try {
+        t.call("foo", function(t, r, n) {
+          typeof n !== "object" && (e = !1);
+        }),
+          t.call(
+            [1],
+            function() {
+              r = typeof this === "string";
+            },
+            "x",
+          );
+      } catch (o) {
+        n = !0;
+      }
+    return !!t && !n && e && r;
+  };
   P(
     n,
     {
       forEach(e) {
         let r;
-          const n = z.ToObject(this);
-          const o = rt && k(this) ? X(this, "") : n;
-          let i = -1;
-          const a = z.ToUint32(o.length);
+        const n = z.ToObject(this);
+        const o = rt && k(this) ? X(this, "") : n;
+        let i = -1;
+        const a = z.ToUint32(o.length);
         if ((arguments.length > 1 && (r = arguments[1]), !t(e)))
           throw new TypeError(
             "Array.prototype.forEach callback must be a function",
@@ -273,10 +275,10 @@
       {
         map(e) {
           let n;
-            const o = z.ToObject(this);
-            const i = rt && k(this) ? X(this, "") : o;
-            const a = z.ToUint32(i.length);
-            const u = r(a);
+          const o = z.ToObject(this);
+          const i = rt && k(this) ? X(this, "") : o;
+          const a = z.ToUint32(i.length);
+          const u = r(a);
           if ((arguments.length > 1 && (n = arguments[1]), !t(e)))
             throw new TypeError(
               "Array.prototype.map callback must be a function",
@@ -296,11 +298,11 @@
       {
         filter(e) {
           let r;
-            let n;
-            const o = z.ToObject(this);
-            const i = rt && k(this) ? X(this, "") : o;
-            const a = z.ToUint32(i.length);
-            const u = [];
+          let n;
+          const o = z.ToObject(this);
+          const i = rt && k(this) ? X(this, "") : o;
+          const a = z.ToUint32(i.length);
+          const u = [];
           if ((arguments.length > 1 && (n = arguments[1]), !t(e)))
             throw new TypeError(
               "Array.prototype.filter callback must be a function",
@@ -320,9 +322,9 @@
       {
         every(e) {
           let r;
-            const n = z.ToObject(this);
-            const o = rt && k(this) ? X(this, "") : n;
-            const i = z.ToUint32(o.length);
+          const n = z.ToObject(this);
+          const o = rt && k(this) ? X(this, "") : n;
+          const i = z.ToUint32(o.length);
           if ((arguments.length > 1 && (r = arguments[1]), !t(e)))
             throw new TypeError(
               "Array.prototype.every callback must be a function",
@@ -330,7 +332,9 @@
           for (let a = 0; a < i; a++)
             if (
               a in o &&
-              !(typeof r === "undefined" ? e(o[a], a, n) : e.call(r, o[a], a, n))
+              !(typeof r === "undefined"
+                ? e(o[a], a, n)
+                : e.call(r, o[a], a, n))
             )
               return !1;
           return !0;
@@ -343,9 +347,9 @@
       {
         some(e) {
           let r;
-            const n = z.ToObject(this);
-            const o = rt && k(this) ? X(this, "") : n;
-            const i = z.ToUint32(o.length);
+          const n = z.ToObject(this);
+          const o = rt && k(this) ? X(this, "") : n;
+          const i = z.ToUint32(o.length);
           if ((arguments.length > 1 && (r = arguments[1]), !t(e)))
             throw new TypeError(
               "Array.prototype.some callback must be a function",
@@ -366,15 +370,14 @@
     (ot =
       typeof n.reduce.call("es5", function(t, e, r, n) {
         return n;
-      }) ===
-      "object"),
+      }) === "object"),
     P(
       n,
       {
         reduce(e) {
           const r = z.ToObject(this);
-            const n = rt && k(this) ? X(this, "") : r;
-            const o = z.ToUint32(n.length);
+          const n = rt && k(this) ? X(this, "") : r;
+          const o = z.ToUint32(n.length);
           if (!t(e))
             throw new TypeError(
               "Array.prototype.reduce callback must be a function",
@@ -382,7 +385,7 @@
           if (o === 0 && arguments.length === 1)
             throw new TypeError("reduce of empty array with no initial value");
           let i;
-            let a = 0;
+          let a = 0;
           if (arguments.length >= 2) i = arguments[1];
           else
             for (;;) {
@@ -406,15 +409,14 @@
     (it =
       typeof n.reduceRight.call("es5", function(t, e, r, n) {
         return n;
-      }) ===
-      "object"),
+      }) === "object"),
     P(
       n,
       {
         reduceRight(e) {
           const r = z.ToObject(this);
-            const n = rt && k(this) ? X(this, "") : r;
-            const o = z.ToUint32(n.length);
+          const n = rt && k(this) ? X(this, "") : r;
+          const o = z.ToUint32(n.length);
           if (!t(e))
             throw new TypeError(
               "Array.prototype.reduceRight callback must be a function",
@@ -424,7 +426,7 @@
               "reduceRight of empty array with no initial value",
             );
           let i;
-            let a = o - 1;
+          let a = o - 1;
           if (arguments.length >= 2) i = arguments[1];
           else
             for (;;) {
@@ -451,7 +453,7 @@
     {
       indexOf(t) {
         const e = rt && k(this) ? X(this, "") : z.ToObject(this);
-          const r = z.ToUint32(e.length);
+        const r = z.ToUint32(e.length);
         if (r === 0) return -1;
         let n = 0;
         for (
@@ -472,7 +474,7 @@
     {
       lastIndexOf(t) {
         const e = rt && k(this) ? X(this, "") : z.ToObject(this);
-          const r = z.ToUint32(e.length);
+        const r = z.ToUint32(e.length);
         if (r === 0) return -1;
         let n = r - 1;
         for (
@@ -489,7 +491,7 @@
   );
   const ft = (function() {
     const t = [1, 2];
-      const e = t.splice();
+    const e = t.splice();
     return t.length === 2 && _(e) && e.length === 0;
   })();
   P(
@@ -524,14 +526,14 @@
     !st,
   );
   const lt = (function() {
-      const t = new r(1e5);
-      return (t[8] = "x"), t.splice(1, 1), t.indexOf("x") === 7;
-    })();
-    const ct = (function() {
-      const t = 256;
-        const e = [];
-      return (e[t] = "a"), e.splice(t + 1, 0, "b"), e[t] === "a";
-    })();
+    const t = new r(1e5);
+    return (t[8] = "x"), t.splice(1, 1), t.indexOf("x") === 7;
+  })();
+  const ct = (function() {
+    const t = 256;
+    const e = [];
+    return (e[t] = "a"), e.splice(t + 1, 0, "b"), e[t] === "a";
+  })();
   P(
     n,
     {
@@ -550,8 +552,8 @@
         )
           (r = f(u + l)), Y(n, r) && (o[l] = n[r]), (l += 1);
         let c;
-          const h = H(arguments, 2);
-          const p = h.length;
+        const h = H(arguments, 2);
+        const p = h.length;
         if (p < s) {
           l = u;
           for (let y = i - s; l < y; )
@@ -575,7 +577,7 @@
     !lt || !ct,
   );
   let ht;
-    const pt = n.join;
+  const pt = n.join;
   try {
     ht = Array.prototype.join.call("123", ",") !== "1,2,3";
   } catch (yt) {
@@ -605,21 +607,19 @@
       dt,
     );
   const gt = function(t) {
-      for (
-        var e = z.ToObject(this), r = z.ToUint32(e.length), n = 0;
-        n < arguments.length;
+    for (
+      var e = z.ToObject(this), r = z.ToUint32(e.length), n = 0;
+      n < arguments.length;
 
-      )
-        (e[r + n] = arguments[n]), (n += 1);
-      return (e.length = r + n), r + n;
-    };
-    const vt = (function() {
-      const t = {};
-        const e = Array.prototype.push.call(t, void 0);
-      return (
-        e !== 1 || t.length !== 1 || typeof t[0] !== "undefined" || !Y(t, 0)
-      );
-    })();
+    )
+      (e[r + n] = arguments[n]), (n += 1);
+    return (e.length = r + n), r + n;
+  };
+  const vt = (function() {
+    const t = {};
+    const e = Array.prototype.push.call(t, void 0);
+    return e !== 1 || t.length !== 1 || typeof t[0] !== "undefined" || !Y(t, 0);
+  })();
   P(
     n,
     {
@@ -631,7 +631,7 @@
   );
   const bt = (function() {
     const t = [];
-      const e = t.push(void 0);
+    const e = t.push(void 0);
     return e !== 1 || t.length !== 1 || typeof t[0] !== "undefined" || !Y(t, 0);
   })();
   P(n, { push: gt }, bt),
@@ -646,23 +646,23 @@
       rt,
     );
   const wt = (function() {
-      try {
-        return [1, 2].sort(null), [1, 2].sort({}), !0;
-      } catch (t) {}
-      return !1;
-    })();
-    const Tt = (function() {
-      try {
-        return [1, 2].sort(/a/), !1;
-      } catch (t) {}
-      return !0;
-    })();
-    const mt = (function() {
-      try {
-        return [1, 2].sort(void 0), !0;
-      } catch (t) {}
-      return !1;
-    })();
+    try {
+      return [1, 2].sort(null), [1, 2].sort({}), !0;
+    } catch (t) {}
+    return !1;
+  })();
+  const Tt = (function() {
+    try {
+      return [1, 2].sort(/a/), !1;
+    } catch (t) {}
+    return !0;
+  })();
+  const mt = (function() {
+    try {
+      return [1, 2].sort(void 0), !0;
+    } catch (t) {}
+    return !1;
+  })();
   P(
     n,
     {
@@ -678,80 +678,80 @@
     wt || !mt || !Tt,
   );
   const Dt = !Q({ toString: null }, "toString");
-    const xt = Q(function() {}, "prototype");
-    const St = !Y("x", "0");
-    const Ot = function(t) {
-      const e = t.constructor;
-      return e && e.prototype === t;
-    };
-    const jt = {
-      $window: !0,
-      $console: !0,
-      $parent: !0,
-      $self: !0,
-      $frame: !0,
-      $frames: !0,
-      $frameElement: !0,
-      $webkitIndexedDB: !0,
-      $webkitStorageInfo: !0,
-      $external: !0,
-    };
-    const Et = (function() {
-      if (typeof window === "undefined") return !1;
-      for (const t in window)
-        try {
-          !jt[`$${  t}`] &&
-            Y(window, t) &&
-            window[t] !== null &&
-            typeof window[t] === "object" &&
-            Ot(window[t]);
-        } catch (e) {
-          return !0;
-        }
-      return !1;
-    })();
-    const Mt = function(t) {
-      if (typeof window === "undefined" || !Et) return Ot(t);
+  const xt = Q(function() {}, "prototype");
+  const St = !Y("x", "0");
+  const Ot = function(t) {
+    const e = t.constructor;
+    return e && e.prototype === t;
+  };
+  const jt = {
+    $window: !0,
+    $console: !0,
+    $parent: !0,
+    $self: !0,
+    $frame: !0,
+    $frames: !0,
+    $frameElement: !0,
+    $webkitIndexedDB: !0,
+    $webkitStorageInfo: !0,
+    $external: !0,
+  };
+  const Et = (function() {
+    if (typeof window === "undefined") return !1;
+    for (const t in window)
       try {
-        return Ot(t);
+        !jt[`$${t}`] &&
+          Y(window, t) &&
+          window[t] !== null &&
+          typeof window[t] === "object" &&
+          Ot(window[t]);
       } catch (e) {
-        return !1;
+        return !0;
       }
-    };
-    const It = [
-      "toString",
-      "toLocaleString",
-      "valueOf",
-      "hasOwnProperty",
-      "isPrototypeOf",
-      "propertyIsEnumerable",
-      "constructor",
-    ];
-    const Ut = It.length;
-    const Ft = function(t) {
-      return B(t) === "[object Arguments]";
-    };
-    const Nt = function(e) {
-      return (
-        e !== null &&
-        typeof e === "object" &&
-        typeof e.length === "number" &&
-        e.length >= 0 &&
-        !_(e) &&
-        t(e.callee)
-      );
-    };
-    const kt = Ft(arguments) ? Ft : Nt;
+    return !1;
+  })();
+  const Mt = function(t) {
+    if (typeof window === "undefined" || !Et) return Ot(t);
+    try {
+      return Ot(t);
+    } catch (e) {
+      return !1;
+    }
+  };
+  const It = [
+    "toString",
+    "toLocaleString",
+    "valueOf",
+    "hasOwnProperty",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "constructor",
+  ];
+  const Ut = It.length;
+  const Ft = function(t) {
+    return B(t) === "[object Arguments]";
+  };
+  const Nt = function(e) {
+    return (
+      e !== null &&
+      typeof e === "object" &&
+      typeof e.length === "number" &&
+      e.length >= 0 &&
+      !_(e) &&
+      t(e.callee)
+    );
+  };
+  const kt = Ft(arguments) ? Ft : Nt;
   P(o, {
     keys(e) {
       const r = t(e);
-        const n = kt(e);
-        const o = e !== null && typeof e === "object";
-        const i = o && k(e);
+      const n = kt(e);
+      const o = e !== null && typeof e === "object";
+      const i = o && k(e);
       if (!o && !r && !n)
         throw new TypeError("Object.keys called on a non-object");
       const a = [];
-        const u = xt && r;
+      const u = xt && r;
       if ((i && St) || n) for (let s = 0; s < e.length; ++s) K(a, f(s));
       if (!n)
         for (const l in e) (u && l === "prototype") || !Y(e, l) || K(a, f(l));
@@ -764,17 +764,17 @@
     },
   });
   const Ct =
-      o.keys &&
-      (function() {
-        return o.keys(arguments).length === 2;
-      })(1, 2);
-    const Rt =
-      o.keys &&
-      (function() {
-        const t = o.keys(arguments);
-        return arguments.length !== 1 || t.length !== 1 || t[0] !== 1;
-      })(1);
-    const At = o.keys;
+    o.keys &&
+    (function() {
+      return o.keys(arguments).length === 2;
+    })(1, 2);
+  const Rt =
+    o.keys &&
+    (function() {
+      const t = o.keys(arguments);
+      return arguments.length !== 1 || t.length !== 1 || t[0] !== 1;
+    })(1);
+  const At = o.keys;
   P(
     o,
     {
@@ -785,12 +785,12 @@
     !Ct || Rt,
   );
   let $t;
-    let Pt;
-    const Jt = new Date(-0xc782b5b342b24).getUTCMonth() !== 0;
-    const Zt = new Date(-0x55d318d56a724);
-    const zt = new Date(14496624e5);
-    const Gt = Zt.toUTCString() !== "Mon, 01 Jan -45875 11:59:59 GMT";
-    const Yt = Zt.getTimezoneOffset();
+  let Pt;
+  const Jt = new Date(-0xc782b5b342b24).getUTCMonth() !== 0;
+  const Zt = new Date(-0x55d318d56a724);
+  const zt = new Date(14496624e5);
+  const Gt = Zt.toUTCString() !== "Mon, 01 Jan -45875 11:59:59 GMT";
+  const Yt = Zt.getTimezoneOffset();
   Yt < -720
     ? (($t = Zt.toDateString() !== "Tue Jan 02 -45875"),
       (Pt = !/^Thu Dec 10 2015 \d\d:\d\d:\d\d GMT[-\+]\d\d\d\d(?: |$)/.test(
@@ -801,34 +801,34 @@
         zt.toString(),
       )));
   const Bt = b.bind(Date.prototype.getFullYear);
-    const Ht = b.bind(Date.prototype.getMonth);
-    const Wt = b.bind(Date.prototype.getDate);
-    const Lt = b.bind(Date.prototype.getUTCFullYear);
-    const Xt = b.bind(Date.prototype.getUTCMonth);
-    const qt = b.bind(Date.prototype.getUTCDate);
-    const Kt = b.bind(Date.prototype.getUTCDay);
-    const Qt = b.bind(Date.prototype.getUTCHours);
-    const Vt = b.bind(Date.prototype.getUTCMinutes);
-    const _t = b.bind(Date.prototype.getUTCSeconds);
-    const te = b.bind(Date.prototype.getUTCMilliseconds);
-    const ee = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const re = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const ne = function(t, e) {
-      return Wt(new Date(e, t, 0));
-    };
+  const Ht = b.bind(Date.prototype.getMonth);
+  const Wt = b.bind(Date.prototype.getDate);
+  const Lt = b.bind(Date.prototype.getUTCFullYear);
+  const Xt = b.bind(Date.prototype.getUTCMonth);
+  const qt = b.bind(Date.prototype.getUTCDate);
+  const Kt = b.bind(Date.prototype.getUTCDay);
+  const Qt = b.bind(Date.prototype.getUTCHours);
+  const Vt = b.bind(Date.prototype.getUTCMinutes);
+  const _t = b.bind(Date.prototype.getUTCSeconds);
+  const te = b.bind(Date.prototype.getUTCMilliseconds);
+  const ee = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const re = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const ne = function(t, e) {
+    return Wt(new Date(e, t, 0));
+  };
   P(
     Date.prototype,
     {
@@ -842,15 +842,15 @@
         if (!(this && this instanceof Date))
           throw new TypeError("this is not a Date object.");
         const t = Bt(this);
-          const e = Ht(this);
+        const e = Ht(this);
         return t < 0 && e > 11 ? 0 : e;
       },
       getDate() {
         if (!(this && this instanceof Date))
           throw new TypeError("this is not a Date object.");
         const t = Bt(this);
-          const e = Ht(this);
-          const r = Wt(this);
+        const e = Ht(this);
+        const r = Wt(this);
         if (t < 0 && e > 11) {
           if (e === 12) return r;
           const n = ne(0, t + 1);
@@ -868,15 +868,15 @@
         if (!(this && this instanceof Date))
           throw new TypeError("this is not a Date object.");
         const t = Lt(this);
-          const e = Xt(this);
+        const e = Xt(this);
         return t < 0 && e > 11 ? 0 : e;
       },
       getUTCDate() {
         if (!(this && this instanceof Date))
           throw new TypeError("this is not a Date object.");
         const t = Lt(this);
-          const e = Xt(this);
-          const r = qt(this);
+        const e = Xt(this);
+        const r = qt(this);
         if (t < 0 && e > 11) {
           if (e === 12) return r;
           const n = ne(0, t + 1);
@@ -894,28 +894,15 @@
           if (!(this && this instanceof Date))
             throw new TypeError("this is not a Date object.");
           const t = Kt(this);
-            const e = qt(this);
-            const r = Xt(this);
-            const n = Lt(this);
-            const o = Qt(this);
-            const i = Vt(this);
-            const a = _t(this);
-          return (
-            `${ee[t] 
-            }, ${ 
-            e < 10 ? `0${  e}` : e 
-            } ${ 
-            re[r] 
-            } ${ 
-            n 
-            } ${ 
-            o < 10 ? `0${  o}` : o 
-            }:${ 
-            i < 10 ? `0${  i}` : i 
-            }:${ 
-            a < 10 ? `0${  a}` : a 
-            } GMT`
-          );
+          const e = qt(this);
+          const r = Xt(this);
+          const n = Lt(this);
+          const o = Qt(this);
+          const i = Vt(this);
+          const a = _t(this);
+          return `${ee[t]}, ${e < 10 ? `0${e}` : e} ${re[r]} ${n} ${
+            o < 10 ? `0${o}` : o
+          }:${i < 10 ? `0${i}` : i}:${a < 10 ? `0${a}` : a} GMT`;
         },
       },
       Jt || Gt,
@@ -927,10 +914,10 @@
           if (!(this && this instanceof Date))
             throw new TypeError("this is not a Date object.");
           const t = this.getDay();
-            const e = this.getDate();
-            const r = this.getMonth();
-            const n = this.getFullYear();
-          return `${ee[t]  } ${  re[r]  } ${  e < 10 ? `0${  e}` : e  } ${  n}`;
+          const e = this.getDate();
+          const r = this.getMonth();
+          const n = this.getFullYear();
+          return `${ee[t]} ${re[r]} ${e < 10 ? `0${e}` : e} ${n}`;
         },
       },
       Jt || $t,
@@ -940,34 +927,20 @@
         if (!(this && this instanceof Date))
           throw new TypeError("this is not a Date object.");
         const t = this.getDay();
-          const e = this.getDate();
-          const r = this.getMonth();
-          const n = this.getFullYear();
-          const o = this.getHours();
-          const i = this.getMinutes();
-          const a = this.getSeconds();
-          const u = this.getTimezoneOffset();
-          const f = Math.floor(Math.abs(u) / 60);
-          const s = Math.floor(Math.abs(u) % 60);
-        return (
-          `${ee[t] 
-          } ${ 
-          re[r] 
-          } ${ 
-          e < 10 ? `0${  e}` : e 
-          } ${ 
-          n 
-          } ${ 
-          o < 10 ? `0${  o}` : o 
-          }:${ 
-          i < 10 ? `0${  i}` : i 
-          }:${ 
-          a < 10 ? `0${  a}` : a 
-          } GMT${ 
-          u > 0 ? "-" : "+" 
-          }${f < 10 ? `0${  f}` : f 
-          }${s < 10 ? `0${  s}` : s}`
-        );
+        const e = this.getDate();
+        const r = this.getMonth();
+        const n = this.getFullYear();
+        const o = this.getHours();
+        const i = this.getMinutes();
+        const a = this.getSeconds();
+        const u = this.getTimezoneOffset();
+        const f = Math.floor(Math.abs(u) / 60);
+        const s = Math.floor(Math.abs(u) % 60);
+        return `${ee[t]} ${re[r]} ${e < 10 ? `0${e}` : e} ${n} ${
+          o < 10 ? `0${o}` : o
+        }:${i < 10 ? `0${i}` : i}:${a < 10 ? `0${a}` : a} GMT${
+          u > 0 ? "-" : "+"
+        }${f < 10 ? `0${f}` : f}${s < 10 ? `0${s}` : s}`;
       }),
       $ &&
         o.defineProperty(Date.prototype, "toString", {
@@ -976,14 +949,13 @@
           writable: !0,
         }));
   const oe = -621987552e5;
-    const ie = "-000001";
-    const ae =
-      Date.prototype.toISOString &&
-      new Date(oe).toISOString().indexOf(ie) === -1;
-    const ue =
-      Date.prototype.toISOString &&
-      new Date(-1).toISOString() !== "1969-12-31T23:59:59.999Z";
-    const fe = b.bind(Date.prototype.getTime);
+  const ie = "-000001";
+  const ae =
+    Date.prototype.toISOString && new Date(oe).toISOString().indexOf(ie) === -1;
+  const ue =
+    Date.prototype.toISOString &&
+    new Date(-1).toISOString() !== "1969-12-31T23:59:59.999Z";
+  const fe = b.bind(Date.prototype.getTime);
   P(
     Date.prototype,
     {
@@ -993,23 +965,17 @@
             "Date.prototype.toISOString called on non-finite value.",
           );
         let t = Lt(this);
-          let e = Xt(this);
+        let e = Xt(this);
         (t += Math.floor(e / 12)), (e = ((e % 12) + 12) % 12);
         const r = [e + 1, qt(this), Qt(this), Vt(this), _t(this)];
         t =
           (t < 0 ? "-" : t > 9999 ? "+" : "") +
-          L(`00000${  Math.abs(t)}`, t >= 0 && t <= 9999 ? -4 : -6);
-        for (let n = 0; n < r.length; ++n) r[n] = L(`00${  r[n]}`, -2);
-        return (
-          `${t 
-          }-${ 
-          H(r, 0, 2).join("-") 
-          }T${ 
-          H(r, 2).join(":") 
-          }.${ 
-          L(`000${  te(this)}`, -3) 
-          }Z`
-        );
+          L(`00000${Math.abs(t)}`, t >= 0 && t <= 9999 ? -4 : -6);
+        for (let n = 0; n < r.length; ++n) r[n] = L(`00${r[n]}`, -2);
+        return `${t}-${H(r, 0, 2).join("-")}T${H(r, 2).join(":")}.${L(
+          `000${te(this)}`,
+          -3,
+        )}Z`;
       },
     },
     ae || ue,
@@ -1033,78 +999,78 @@
   se ||
     (Date.prototype.toJSON = function(e) {
       const r = o(this);
-        const n = z.ToPrimitive(r);
+      const n = z.ToPrimitive(r);
       if (typeof n === "number" && !isFinite(n)) return null;
       const i = r.toISOString;
       if (!t(i)) throw new TypeError("toISOString property is not callable");
       return i.call(r);
     });
   const le = Date.parse("+033658-09-27T01:46:40.000Z") === 1e15;
-    const ce =
-      !isNaN(Date.parse("2012-04-04T24:00:00.500Z")) ||
-      !isNaN(Date.parse("2012-11-31T23:59:59.000Z")) ||
-      !isNaN(Date.parse("2012-12-31T23:59:60.000Z"));
-    const he = isNaN(Date.parse("2000-01-01T00:00:00.000Z"));
+  const ce =
+    !isNaN(Date.parse("2012-04-04T24:00:00.500Z")) ||
+    !isNaN(Date.parse("2012-11-31T23:59:59.000Z")) ||
+    !isNaN(Date.parse("2012-12-31T23:59:60.000Z"));
+  const he = isNaN(Date.parse("2000-01-01T00:00:00.000Z"));
   if (he || ce || !le) {
     const pe = Math.pow(2, 31) - 1;
-      const ye = Z(new Date(1970, 0, 1, 0, 0, 0, pe + 1).getTime());
+    const ye = Z(new Date(1970, 0, 1, 0, 0, 0, pe + 1).getTime());
     Date = (function(t) {
       var e = function(r, n, o, i, a, u, s) {
-          let l;
-            const c = arguments.length;
-          if (this instanceof t) {
-            let h = u;
-              let p = s;
-            if (ye && c >= 7 && s > pe) {
-              const y = Math.floor(s / pe) * pe;
-                const d = Math.floor(y / 1e3);
-              (h += d), (p -= 1e3 * d);
-            }
-            l =
-              c === 1 && f(r) === r
-                ? new t(e.parse(r))
-                : c >= 7
-                ? new t(r, n, o, i, a, h, p)
-                : c >= 6
-                ? new t(r, n, o, i, a, h)
-                : c >= 5
-                ? new t(r, n, o, i, a)
-                : c >= 4
-                ? new t(r, n, o, i)
-                : c >= 3
-                ? new t(r, n, o)
-                : c >= 2
-                ? new t(r, n)
-                : c >= 1
-                ? new t(r instanceof t ? +r : r)
-                : new t();
-          } else l = t.apply(this, arguments);
-          return J(l) || P(l, { constructor: e }, !0), l;
-        };
-        const r = new RegExp(
-          "^(\\d{4}|[+-]\\d{6})(?:-(\\d{2})(?:-(\\d{2})(?:T(\\d{2}):(\\d{2})(?::(\\d{2})(?:(\\.\\d{1,}))?)?(Z|(?:([-+])(\\d{2}):(\\d{2})))?)?)?)?$",
-        );
-        const n = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
-        const o = function(t, e) {
-          const r = e > 1 ? 1 : 0;
-          return (
-            n[e] +
-            Math.floor((t - 1969 + r) / 4) -
-            Math.floor((t - 1901 + r) / 100) +
-            Math.floor((t - 1601 + r) / 400) +
-            365 * (t - 1970)
-          );
-        };
-        const i = function(e) {
-          let r = 0;
-            let n = e;
-          if (ye && n > pe) {
-            const o = Math.floor(n / pe) * pe;
-              const i = Math.floor(o / 1e3);
-            (r += i), (n -= 1e3 * i);
+        let l;
+        const c = arguments.length;
+        if (this instanceof t) {
+          let h = u;
+          let p = s;
+          if (ye && c >= 7 && s > pe) {
+            const y = Math.floor(s / pe) * pe;
+            const d = Math.floor(y / 1e3);
+            (h += d), (p -= 1e3 * d);
           }
-          return l(new t(1970, 0, 1, 0, 0, r, n));
-        };
+          l =
+            c === 1 && f(r) === r
+              ? new t(e.parse(r))
+              : c >= 7
+              ? new t(r, n, o, i, a, h, p)
+              : c >= 6
+              ? new t(r, n, o, i, a, h)
+              : c >= 5
+              ? new t(r, n, o, i, a)
+              : c >= 4
+              ? new t(r, n, o, i)
+              : c >= 3
+              ? new t(r, n, o)
+              : c >= 2
+              ? new t(r, n)
+              : c >= 1
+              ? new t(r instanceof t ? +r : r)
+              : new t();
+        } else l = t.apply(this, arguments);
+        return J(l) || P(l, { constructor: e }, !0), l;
+      };
+      const r = new RegExp(
+        "^(\\d{4}|[+-]\\d{6})(?:-(\\d{2})(?:-(\\d{2})(?:T(\\d{2}):(\\d{2})(?::(\\d{2})(?:(\\.\\d{1,}))?)?(Z|(?:([-+])(\\d{2}):(\\d{2})))?)?)?)?$",
+      );
+      const n = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+      const o = function(t, e) {
+        const r = e > 1 ? 1 : 0;
+        return (
+          n[e] +
+          Math.floor((t - 1969 + r) / 4) -
+          Math.floor((t - 1901 + r) / 100) +
+          Math.floor((t - 1601 + r) / 400) +
+          365 * (t - 1970)
+        );
+      };
+      const i = function(e) {
+        let r = 0;
+        let n = e;
+        if (ye && n > pe) {
+          const o = Math.floor(n / pe) * pe;
+          const i = Math.floor(o / 1e3);
+          (r += i), (n -= 1e3 * i);
+        }
+        return l(new t(1970, 0, 1, 0, 0, r, n));
+      };
       for (const a in t) Y(t, a) && (e[a] = t[a]);
       P(e, { now: t.now, UTC: t.UTC }, !0),
         (e.prototype = t.prototype),
@@ -1113,18 +1079,18 @@
         const n = r.exec(e);
         if (n) {
           let a;
-            const u = l(n[1]);
-            const f = l(n[2] || 1) - 1;
-            const s = l(n[3] || 1) - 1;
-            const c = l(n[4] || 0);
-            const h = l(n[5] || 0);
-            const p = l(n[6] || 0);
-            const y = Math.floor(1e3 * l(n[7] || 0));
-            const d = Boolean(n[4] && !n[8]);
-            const g = n[9] === "-" ? 1 : -1;
-            const v = l(n[10] || 0);
-            const b = l(n[11] || 0);
-            const w = h > 0 || p > 0 || y > 0;
+          const u = l(n[1]);
+          const f = l(n[2] || 1) - 1;
+          const s = l(n[3] || 1) - 1;
+          const c = l(n[4] || 0);
+          const h = l(n[5] || 0);
+          const p = l(n[6] || 0);
+          const y = Math.floor(1e3 * l(n[7] || 0));
+          const d = Boolean(n[4] && !n[8]);
+          const g = n[9] === "-" ? 1 : -1;
+          const v = l(n[10] || 0);
+          const b = l(n[11] || 0);
+          const w = h > 0 || p > 0 || y > 0;
           return c < (w ? 24 : 25) &&
             h < 60 &&
             p < 60 &&
@@ -1152,96 +1118,102 @@
       return new Date().getTime();
     });
   const de =
-      c.toFixed &&
-      ((8e-5).toFixed(3) !== "0.000" ||
-        (0.9).toFixed(0) !== "1" ||
-        (1.255).toFixed(2) !== "1.25" ||
-        (0xde0b6b3a7640080).toFixed(0) !== "1000000000000000128");
-    var ge = {
-      base: 1e7,
-      size: 6,
-      data: [0, 0, 0, 0, 0, 0],
-      multiply(t, e) {
-        for (let r = -1, n = e; ++r < ge.size; )
-          (n += t * ge.data[r]),
-            (ge.data[r] = n % ge.base),
-            (n = Math.floor(n / ge.base));
-      },
-      divide(t) {
-        for (let e = ge.size, r = 0; --e >= 0; )
-          (r += ge.data[e]),
-            (ge.data[e] = Math.floor(r / t)),
-            (r = (r % t) * ge.base);
-      },
-      numToString() {
-        for (var t = ge.size, e = ""; --t >= 0; )
-          if (e !== "" || t === 0 || ge.data[t] !== 0) {
-            const r = f(ge.data[t]);
-            e === "" ? (e = r) : (e += L("0000000", 0, 7 - r.length) + r);
-          }
-        return e;
-      },
-      pow: function Ae(t, e, r) {
-        return e === 0
-          ? r
-          : e % 2 === 1
-          ? Ae(t, e - 1, r * t)
-          : Ae(t * t, e / 2, r);
-      },
-      log(t) {
-        for (var e = 0, r = t; r >= 4096; ) (e += 12), (r /= 4096);
-        for (; r >= 2; ) (e += 1), (r /= 2);
-        return e;
-      },
-    };
-    const ve = function(t) {
-      let e; let r; let n; let o; let i; let a; let u; let s;
-      if (((e = l(t)), (e = Z(e) ? 0 : Math.floor(e)), e < 0 || e > 20))
-        throw new RangeError(
-          "Number.toFixed called with invalid number of decimals",
-        );
-      if (((r = l(this)), Z(r))) return "NaN";
-      if (r <= -1e21 || r >= 1e21) return f(r);
-      if (((n = ""), r < 0 && ((n = "-"), (r = -r)), (o = "0"), r > 1e-21))
-        if (
-          ((i = ge.log(r * ge.pow(2, 69, 1)) - 69),
-          (a = i < 0 ? r * ge.pow(2, -i, 1) : r / ge.pow(2, i, 1)),
-          (a *= 4503599627370496),
-          (i = 52 - i),
-          i > 0)
-        ) {
-          for (ge.multiply(0, a), u = e; u >= 7; )
-            ge.multiply(1e7, 0), (u -= 7);
-          for (ge.multiply(ge.pow(10, u, 1), 0), u = i - 1; u >= 23; )
-            ge.divide(1 << 23), (u -= 23);
-          ge.divide(1 << u),
-            ge.multiply(1, 1),
-            ge.divide(2),
-            (o = ge.numToString());
-        } else
-          ge.multiply(0, a),
-            ge.multiply(1 << -i, 0),
-            (o = ge.numToString() + L("0.00000000000000000000", 2, 2 + e));
-      return (
-        e > 0
-          ? ((s = o.length),
-            (o =
-              s <= e
-                ? n + L("0.0000000000000000000", 0, e - s + 2) + o
-                : `${n + L(o, 0, s - e)  }.${  L(o, s - e)}`))
-          : (o = n + o),
-        o
+    c.toFixed &&
+    ((8e-5).toFixed(3) !== "0.000" ||
+      (0.9).toFixed(0) !== "1" ||
+      (1.255).toFixed(2) !== "1.25" ||
+      (0xde0b6b3a7640080).toFixed(0) !== "1000000000000000128");
+  var ge = {
+    base: 1e7,
+    size: 6,
+    data: [0, 0, 0, 0, 0, 0],
+    multiply(t, e) {
+      for (let r = -1, n = e; ++r < ge.size; )
+        (n += t * ge.data[r]),
+          (ge.data[r] = n % ge.base),
+          (n = Math.floor(n / ge.base));
+    },
+    divide(t) {
+      for (let e = ge.size, r = 0; --e >= 0; )
+        (r += ge.data[e]),
+          (ge.data[e] = Math.floor(r / t)),
+          (r = (r % t) * ge.base);
+    },
+    numToString() {
+      for (var t = ge.size, e = ""; --t >= 0; )
+        if (e !== "" || t === 0 || ge.data[t] !== 0) {
+          const r = f(ge.data[t]);
+          e === "" ? (e = r) : (e += L("0000000", 0, 7 - r.length) + r);
+        }
+      return e;
+    },
+    pow: function Ae(t, e, r) {
+      return e === 0
+        ? r
+        : e % 2 === 1
+        ? Ae(t, e - 1, r * t)
+        : Ae(t * t, e / 2, r);
+    },
+    log(t) {
+      for (var e = 0, r = t; r >= 4096; ) (e += 12), (r /= 4096);
+      for (; r >= 2; ) (e += 1), (r /= 2);
+      return e;
+    },
+  };
+  const ve = function(t) {
+    let e;
+    let r;
+    let n;
+    let o;
+    let i;
+    let a;
+    let u;
+    let s;
+    if (((e = l(t)), (e = Z(e) ? 0 : Math.floor(e)), e < 0 || e > 20))
+      throw new RangeError(
+        "Number.toFixed called with invalid number of decimals",
       );
-    };
+    if (((r = l(this)), Z(r))) return "NaN";
+    if (r <= -1e21 || r >= 1e21) return f(r);
+    if (((n = ""), r < 0 && ((n = "-"), (r = -r)), (o = "0"), r > 1e-21))
+      if (
+        ((i = ge.log(r * ge.pow(2, 69, 1)) - 69),
+        (a = i < 0 ? r * ge.pow(2, -i, 1) : r / ge.pow(2, i, 1)),
+        (a *= 4503599627370496),
+        (i = 52 - i),
+        i > 0)
+      ) {
+        for (ge.multiply(0, a), u = e; u >= 7; ) ge.multiply(1e7, 0), (u -= 7);
+        for (ge.multiply(ge.pow(10, u, 1), 0), u = i - 1; u >= 23; )
+          ge.divide(1 << 23), (u -= 23);
+        ge.divide(1 << u),
+          ge.multiply(1, 1),
+          ge.divide(2),
+          (o = ge.numToString());
+      } else
+        ge.multiply(0, a),
+          ge.multiply(1 << -i, 0),
+          (o = ge.numToString() + L("0.00000000000000000000", 2, 2 + e));
+    return (
+      e > 0
+        ? ((s = o.length),
+          (o =
+            s <= e
+              ? n + L("0.0000000000000000000", 0, e - s + 2) + o
+              : `${n + L(o, 0, s - e)}.${L(o, s - e)}`))
+        : (o = n + o),
+      o
+    );
+  };
   P(c, { toFixed: ve }, de);
   const be = (function() {
-      try {
-        return (1).toPrecision(void 0) === "1";
-      } catch (t) {
-        return !0;
-      }
-    })();
-    const we = c.toPrecision;
+    try {
+      return (1).toPrecision(void 0) === "1";
+    } catch (t) {
+      return !0;
+    }
+  })();
+  const we = c.toPrecision;
   P(
     c,
     {
@@ -1259,24 +1231,24 @@
     ".".split(/()()/).length > 1
       ? !(function() {
           const t = typeof /()??/.exec("")[1] === "undefined";
-            const r = Math.pow(2, 32) - 1;
+          const r = Math.pow(2, 32) - 1;
           s.split = function(n, o) {
             const i = String(this);
             if (typeof n === "undefined" && o === 0) return [];
             if (!e(n)) return X(this, n, o);
             let a;
-              let u;
-              let f;
-              let s;
-              const l = [];
-              const c =
-                (n.ignoreCase ? "i" : "") +
-                (n.multiline ? "m" : "") +
-                (n.unicode ? "u" : "") +
-                (n.sticky ? "y" : "");
-              let h = 0;
-              const p = new RegExp(n.source, `${c  }g`);
-            t || (a = new RegExp(`^${  p.source  }$(?!\\s)`, c));
+            let u;
+            let f;
+            let s;
+            const l = [];
+            const c =
+              (n.ignoreCase ? "i" : "") +
+              (n.multiline ? "m" : "") +
+              (n.unicode ? "u" : "") +
+              (n.sticky ? "y" : "");
+            let h = 0;
+            const p = new RegExp(n.source, `${c}g`);
+            t || (a = new RegExp(`^${p.source}$(?!\\s)`, c));
             const d = typeof o === "undefined" ? r : z.ToUint32(o);
             for (
               u = p.exec(i);
@@ -1310,23 +1282,23 @@
           return typeof t === "undefined" && e === 0 ? [] : X(this, t, e);
         });
   const Te = s.replace;
-    const me = (function() {
-      const t = [];
-      return (
-        "x".replace(/x(.)?/g, function(e, r) {
-          K(t, r);
-        }),
-        t.length === 1 && typeof t[0] === "undefined"
-      );
-    })();
+  const me = (function() {
+    const t = [];
+    return (
+      "x".replace(/x(.)?/g, function(e, r) {
+        K(t, r);
+      }),
+      t.length === 1 && typeof t[0] === "undefined"
+    );
+  })();
   me ||
     (s.replace = function(r, n) {
       const o = t(n);
-        const i = e(r) && /\)[*?]/.test(r.source);
+      const i = e(r) && /\)[*?]/.test(r.source);
       if (o && i) {
         const a = function(t) {
           const e = arguments.length;
-            const o = r.lastIndex;
+          const o = r.lastIndex;
           r.lastIndex = 0;
           const i = r.exec(t) || [];
           return (
@@ -1340,7 +1312,7 @@
       return Te.call(this, r, n);
     });
   const De = s.substr;
-    const xe = "".substr && "0b".substr(-1) !== "b";
+  const xe = "".substr && "0b".substr(-1) !== "b";
   P(
     s,
     {
@@ -1352,17 +1324,17 @@
     xe,
   );
   const Se = "\t\n\x0B\f\r   ᠎             　\u2028\u2029\ufeff";
-    const Oe = "​";
-    const je = `[${  Se  }]`;
-    const Ee = new RegExp(`^${  je  }${je  }*`);
-    const Me = new RegExp(`${je + je  }*$`);
-    const Ie = s.trim && (Se.trim() || !Oe.trim());
+  const Oe = "​";
+  const je = `[${Se}]`;
+  const Ee = new RegExp(`^${je}${je}*`);
+  const Me = new RegExp(`${je + je}*$`);
+  const Ie = s.trim && (Se.trim() || !Oe.trim());
   P(
     s,
     {
       trim() {
         if (typeof this === "undefined" || this === null)
-          throw new TypeError(`can't convert ${  this  } to object`);
+          throw new TypeError(`can't convert ${this} to object`);
         return f(this)
           .replace(Ee, "")
           .replace(Me, "");
@@ -1371,13 +1343,13 @@
     Ie,
   );
   const Ue = b.bind(String.prototype.trim);
-    const Fe = s.lastIndexOf && "abcあい".lastIndexOf("あい", 2) !== -1;
+  const Fe = s.lastIndexOf && "abcあい".lastIndexOf("あい", 2) !== -1;
   P(
     s,
     {
       lastIndexOf(t) {
         if (typeof this === "undefined" || this === null)
-          throw new TypeError(`can't convert ${  this  } to object`);
+          throw new TypeError(`can't convert ${this} to object`);
         for (
           let e = f(this),
             r = f(t),
@@ -1409,12 +1381,12 @@
       },
       s.lastIndexOf.length !== 1,
     ),
-    (parseInt(`${Se  }08`) === 8 && parseInt(`${Se  }0x16`) === 22) ||
+    (parseInt(`${Se}08`) === 8 && parseInt(`${Se}0x16`) === 22) ||
       (parseInt = (function(t) {
         const e = /^[\-+]?0[xX]/;
         return function(r, n) {
           const o = Ue(String(r));
-            const i = l(n) || (e.test(o) ? 16 : 10);
+          const i = l(n) || (e.test(o) ? 16 : 10);
           return t(o, i);
         };
       })(parseInt)),
@@ -1422,7 +1394,7 @@
       (parseFloat = (function(t) {
         return function(e) {
           const r = Ue(String(e));
-            const n = t(r);
+          const n = t(r);
           return n === 0 && L(r, 0, 1) === "-" ? -0 : n;
         };
       })(parseFloat)),
@@ -1430,15 +1402,17 @@
   ) {
     const ke = function() {
       if (typeof this === "undefined" || this === null)
-        throw new TypeError(`can't convert ${  this  } to object`);
+        throw new TypeError(`can't convert ${this} to object`);
       let t = this.name;
       typeof t === "undefined"
         ? (t = "Error")
         : typeof t !== "string" && (t = f(t));
       let e = this.message;
       return (
-        typeof e === "undefined" ? (e = "") : typeof e !== "string" && (e = f(e)),
-        t ? (e ? `${t  }: ${  e}` : t) : e
+        typeof e === "undefined"
+          ? (e = "")
+          : typeof e !== "string" && (e = f(e)),
+        t ? (e ? `${t}: ${e}` : t) : e
       );
     };
     Error.prototype.toString = ke;
@@ -1456,7 +1430,7 @@
   }
   if (String(/a/gim) !== "/a/gim") {
     const Re = function() {
-      let t = `/${  this.source  }/`;
+      let t = `/${this.source}/`;
       return (
         this.global && (t += "g"),
         this.ignoreCase && (t += "i"),

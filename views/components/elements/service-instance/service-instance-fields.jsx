@@ -20,7 +20,7 @@ class ServiceInstanceFields extends React.Component {
                 return (
                   <div className="form-group form-group-flex">
                     <ServiceInstanceField
-                      key={`item-${  field.id}`}
+                      key={`item-${field.id}`}
                       field={field}
                     />
                   </div>

@@ -1,5 +1,3 @@
-
-
 /**
  * Translator for documentation pages.
  *

@@ -17,13 +17,15 @@ class Dropdown extends React.Component {
   getButton(item) {
     if (item.type == "divider") {
       return <li role="separator" className="divider" />;
-    } if (item.type == "button") {
+    }
+    if (item.type == "button") {
       return (
         <li>
           <a onClick={item.action}>{item.label}</a>
         </li>
       );
-    } if (item.type == "link") {
+    }
+    if (item.type == "link") {
       return (
         <li>
           <a href={item.action}>{item.label}</a>

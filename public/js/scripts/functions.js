@@ -1,5 +1,3 @@
-
-
 function isError(element, message) {
   const el = $(element);
   el.parent()
@@ -131,15 +129,8 @@ function animatedLineChart(id, color) {
       formatter(params) {
         params = params[0];
         const date = new Date(params.name);
-        return (
-          `${date.getDate() 
-          }/${ 
-          date.getMonth() + 1 
-          }/${ 
-          date.getFullYear() 
-          } : ${ 
-          params.value[1]}`
-        );
+        return `${date.getDate()}/${date.getMonth() +
+          1}/${date.getFullYear()} : ${params.value[1]}`;
       },
       axisPointer: {
         animation: false,
@@ -237,12 +228,12 @@ function colorLuminance(hex, lum) {
   lum = lum || 0;
   // convert to decimal and change luminosity
   let rgb = "#";
-    let c;
-    let i;
+  let c;
+  let i;
   for (i = 0; i < 3; i++) {
     c = parseInt(hex.substr(i * 2, 2), 16);
     c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
-    rgb += (`00${  c}`).substr(c.length);
+    rgb += `00${c}`.substr(c.length);
   }
   return rgb;
 }
@@ -256,14 +247,8 @@ function hexToRgbA(hex, opacity) {
     if (c.length == 3) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }
-    c = `0x${  c.join("")}`;
-    return (
-      `rgba(${ 
-      [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") 
-      },${ 
-      o 
-      })`
-    );
+    c = `0x${c.join("")}`;
+    return `rgba(${[(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",")},${o})`;
   }
   return false;
 }
@@ -275,7 +260,7 @@ function incrementingData() {
     if (x % 2 === 0) {
       continue;
     }
-    labels.push(`Label ${  x}`);
+    labels.push(`Label ${x}`);
     series.push(Functions.random(x, x + 10));
   }
   return {
@@ -291,7 +276,7 @@ function decrementingData() {
     if (x % 2 === 0) {
       continue;
     }
-    labels.push(`Label ${  x}`);
+    labels.push(`Label ${x}`);
     series.push(Functions.random(x + 10, x));
   }
   return {
@@ -304,7 +289,7 @@ function randomData() {
   const series = [];
   const labels = [];
   for (let x = 0; x < 30; x++) {
-    labels.push(`Label ${  x}`);
+    labels.push(`Label ${x}`);
     series.push(Functions.random(20, 80));
   }
   return {

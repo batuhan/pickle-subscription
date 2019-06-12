@@ -84,64 +84,63 @@ class ManageNotificationTemplates extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <Authorizer permissions="can_administrate">
-          <Jumbotron pageName={pageName} subtitle={subtitle} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <ContentTitle
-                    icon="cog"
-                    title="Manage Notification Templates"
-                  />
-                  <ServiceBotTableBase
-                    rows={this.state.rows}
-                    fetchRows={this.fetchData}
+    }
+    return (
+      <Authorizer permissions="can_administrate">
+        <Jumbotron pageName={pageName} subtitle={subtitle} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <ContentTitle
+                  icon="cog"
+                  title="Manage Notification Templates"
+                />
+                <ServiceBotTableBase
+                  rows={this.state.rows}
+                  fetchRows={this.fetchData}
+                >
+                  <TableHeaderColumn
+                    isKey
+                    dataField="subject"
+                    dataFormat={this.subjectFormatter}
+                    dataSort
+                    width="250"
                   >
-                    <TableHeaderColumn
-                      isKey
-                      dataField="subject"
-                      dataFormat={this.subjectFormatter}
-                      dataSort
-                      width="250"
-                    >
-                      Subject
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="description"
-                      dataSort
-                      width="350"
-                    >
-                      Description
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="updated_at"
-                      dataFormat={this.updatedAtFormatter}
-                      dataSort
-                      searchable={false}
-                      width="150"
-                    >
-                      Updated At
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="Actions"
-                      className="action-column-header"
-                      columnClassName="action-column"
-                      dataFormat={this.rowActionsFormatter}
-                      searchable={false}
-                      width="80"
-                      filter={false}
-                    />
-                  </ServiceBotTableBase>
-                </div>
+                    Subject
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="description"
+                    dataSort
+                    width="350"
+                  >
+                    Description
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="updated_at"
+                    dataFormat={this.updatedAtFormatter}
+                    dataSort
+                    searchable={false}
+                    width="150"
+                  >
+                    Updated At
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="Actions"
+                    className="action-column-header"
+                    columnClassName="action-column"
+                    dataFormat={this.rowActionsFormatter}
+                    searchable={false}
+                    width="80"
+                    filter={false}
+                  />
+                </ServiceBotTableBase>
               </div>
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            </div>
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

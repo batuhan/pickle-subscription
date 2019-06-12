@@ -39,9 +39,9 @@ class SignUp extends React.Component {
   }
 
   handleInputChange(event) {
-    const {target} = event;
+    const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const {name} = target;
+    const { name } = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },

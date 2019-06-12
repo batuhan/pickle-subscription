@@ -1,6 +1,6 @@
-
 !(function() {
-  let h; let l;
+  let h;
+  let l;
   (h = hljs.configure),
     (hljs.configure = function(l) {
       const i = l.highlightSizeThreshold;
@@ -9,7 +9,7 @@
     (l = hljs.highlightBlock),
     (hljs.highlightBlock = function(h) {
       const i = h.innerHTML;
-        const g = hljs.highlightSizeThreshold;
+      const g = hljs.highlightSizeThreshold;
       (g == null || g > i.length) && l.call(hljs, h);
     });
 })();

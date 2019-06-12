@@ -82,25 +82,23 @@ let renderCustomProperty = props => {
               validate={validate}
             />
           );
-        } 
-          if (formJSON[index].data && formJSON[index].data.value) {
-            return (
-              <div className="form-group form-group-flex">
-                {formJSON[index].prop_label &&
-                  formJSON[index].type !== "hidden" && (
-                    <label className="control-label form-label-flex-md">
-                      {formJSON[index].prop_label}
-                    </label>
-                  )}
-                <div className="form-input-flex">
-                  <p>{formJSON[index].data.value}</p>
-                </div>
+        }
+        if (formJSON[index].data && formJSON[index].data.value) {
+          return (
+            <div className="form-group form-group-flex">
+              {formJSON[index].prop_label &&
+                formJSON[index].type !== "hidden" && (
+                  <label className="control-label form-label-flex-md">
+                    {formJSON[index].prop_label}
+                  </label>
+                )}
+              <div className="form-input-flex">
+                <p>{formJSON[index].data.value}</p>
               </div>
-            );
-          } 
-            return <span />;
-          
-        
+            </div>
+          );
+        }
+        return <span />;
       })}
     </div>
   );
@@ -115,7 +113,7 @@ class ServiceRequestForm extends React.Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     const {
       handleSubmit,
       formJSON,
@@ -145,39 +143,37 @@ class ServiceRequestForm extends React.Component {
       const prefix = getSymbolFromCurrency(formJSON.currency);
       if (trial) {
         return "Get your Free Trial";
-      } 
-        if (serType === "subscription") {
-          return (
-            <span>
-              {"Subscribe "}
-              <Price value={newPrice} prefix={prefix} />
-              {formJSON.interval_count == 1
-                ? " /"
-                : ` / ${  formJSON.interval_count}`}
-              {" "}
-              {` ${  formJSON.interval}`}
-            </span>
-          );
-        } if (serType === "one_time") {
-          return (
-            <span>
-              {"Buy Now"} 
-              {' '}
-              <Price value={newPrice} prefix={prefix} />
-            </span>
-          );
-        } if (serType === "custom") {
-          return "Request";
-        } if (serType === "split") {
-          return "Buy Now";
-        } 
-          return (
-            <span>
-              <Price value={newPrice} prefix={prefix} />
-            </span>
-          );
-        
-      
+      }
+      if (serType === "subscription") {
+        return (
+          <span>
+            {"Subscribe "}
+            <Price value={newPrice} prefix={prefix} />
+            {formJSON.interval_count == 1
+              ? " /"
+              : ` / ${formJSON.interval_count}`}{" "}
+            {` ${formJSON.interval}`}
+          </span>
+        );
+      }
+      if (serType === "one_time") {
+        return (
+          <span>
+            {"Buy Now"} <Price value={newPrice} prefix={prefix} />
+          </span>
+        );
+      }
+      if (serType === "custom") {
+        return "Request";
+      }
+      if (serType === "split") {
+        return "Buy Now";
+      }
+      return (
+        <span>
+          <Price value={newPrice} prefix={prefix} />
+        </span>
+      );
     };
     // Sort users and if user does not have name set, set it to the email value which will always be there
     const users = _.map(helpers.usersData, user => {
@@ -220,31 +216,18 @@ class ServiceRequestForm extends React.Component {
               {helpers.stripToken ? (
                 <div>
                   <p className="help-block">
-                    You 
-                    {' '}
-                    {helpers.card.funding}
-                    {' '}
-card in your account ending in:
-                    {" "}
-                    {helpers.card.last4}
-                    {' '}
-will be used.
+                    You {helpers.card.funding} card in your account ending in:{" "}
+                    {helpers.card.last4} will be used.
                   </p>
                   <span className="help-block">
                     If you wish to use a different card, you can update your
-                    card under
-                    {" "}
+                    card under{" "}
                     <Link to="/billing-settings">billing settings.</Link>
                   </span>
                 </div>
               ) : (
                 <p className="help-block">
-                  Using 
-                  {' '}
-                  {helpers.card.funding}
-                  {' '}
-card ending in:
-                  {" "}
+                  Using {helpers.card.funding} card ending in:{" "}
                   {helpers.card.last4}
                 </p>
               )}
@@ -314,7 +297,7 @@ class ServiceInstanceForm extends React.Component {
       templateId,
       templateData: this.props.service,
       formData: this.props.service,
-      formURL: `/api/v1/service-templates/${  templateId  }/request`,
+      formURL: `/api/v1/service-templates/${templateId}/request`,
       formResponseData: null,
       formResponseError: null,
       serviceCreated: null,

@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const Promise = require("bluebird");
 const promiseProxy = require("../../lib/promiseProxy");
-const {whereFilter} = require("knex-filter-loopback");
+const { whereFilter } = require("knex-filter-loopback");
 const knex = require("../../config/db.js");
 
 // TODO - BIG TASK - relationship system, allow to define relationships in model and relationship tables - would autodelete rel rows
@@ -75,7 +75,7 @@ module.exports = function(
       return;
     }
     const referenceModel = reference.model;
-    const {referenceField} = reference;
+    const { referenceField } = reference;
     if (reference.direction === "from") {
       referenceModel.findOnRelative(referenceField, self.get("id"), function(
         results,
@@ -247,7 +247,9 @@ module.exports = function(
         not: { id: { in: ids } },
         [reference.referenceField]: self.get(primaryKey),
       });
-      const upsertedReferences = await reference.model.batchUpdate(referenceData);
+      const upsertedReferences = await reference.model.batchUpdate(
+        referenceData,
+      );
 
       return upsertedReferences;
     }
@@ -369,9 +371,9 @@ module.exports = function(
   // gets results that contain the value
 
   Entity.search = function(key, value, callback) {
-    let query = `LOWER(${  key  }) LIKE '%' || LOWER(?) || '%' `;
+    let query = `LOWER(${key}) LIKE '%' || LOWER(?) || '%' `;
     if (value % 1 === 0) {
-      query = `${key  } = ?`;
+      query = `${key} = ?`;
     }
     Entity.database(Entity.table)
       .whereRaw(query, value)
@@ -435,7 +437,7 @@ module.exports = function(
 
   async function getReferences(reference, filter = {}) {
     const refTable = reference.model.table;
-    const {referenceField} = reference;
+    const { referenceField } = reference;
     const join = [refTable];
 
     if (reference.direction === "from") {
@@ -458,7 +460,7 @@ module.exports = function(
       .leftJoin(...join)
       .where(whereFilter(filter));
     return results.reduce((acc, row) => {
-      const {parent_key} = row;
+      const { parent_key } = row;
       delete row.parent_key;
       if (row[reference.model.primaryKey]) {
         acc[parent_key] = (acc[parent_key] || []).concat(row);
@@ -541,12 +543,11 @@ module.exports = function(
                   .where(Entity.primaryKey, entityData[Entity.primaryKey])
                   .update(entityData)
                   .returning("*");
-              } 
-                return trx
-                  .from(Entity.table)
-                  .insert(entityData)
-                  .returning("*");
-              
+              }
+              return trx
+                .from(Entity.table)
+                .insert(entityData)
+                .returning("*");
             });
           })
           .then(function(result) {

@@ -15,7 +15,7 @@ class WidgetPricingInput extends React.Component {
   handleChange(isCents) {
     const self = this;
     return function(e, maskedValue, floatvalue) {
-      const {name} = e.target;
+      const { name } = e.target;
       const value = isCents ? toCents(floatvalue) : floatvalue;
       self.setState({ [name]: value }, () => {
         self.props.input.onChange(self.state[name]);
@@ -26,7 +26,7 @@ class WidgetPricingInput extends React.Component {
   render() {
     // renders a number input or a currency input based on the operation type
     const self = this;
-    const {props} = this;
+    const { props } = this;
     const {
       options,
       operation,
@@ -50,7 +50,8 @@ class WidgetPricingInput extends React.Component {
           value={price}
         />
       );
-    } if (operation == "divide" || operation == "multiply") {
+    }
+    if (operation == "divide" || operation == "multiply") {
       return (
         <CurrencyInput
           className="form-control addon-checkbox-widget-price-input"
@@ -63,11 +64,10 @@ class WidgetPricingInput extends React.Component {
         />
         // <input {...props.input} type="number" className="form-control addon-checkbox-widget-price-input"/>
       );
-    } 
-      return (
-        <span className="addon-widget-price-tip">Select a pricing type</span>
-      );
-    
+    }
+    return (
+      <span className="addon-widget-price-tip">Select a pricing type</span>
+    );
   }
 }
 

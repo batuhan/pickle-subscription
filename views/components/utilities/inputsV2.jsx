@@ -142,13 +142,13 @@ class Inputs extends React.Component {
 
   render() {
     // initializing data
-    const {type} = this.state;
+    const { type } = this.state;
     const maxLength = this.props.maxLength ? this.props.maxLength : false;
     const name = this.props.name ? this.props.name : false;
     const label = this.props.label ? this.props.label : false;
     const defaultValue = this.props.value || this.props.defaultValue;
-    const {placeholder} = this.props;
-    const {disabled} = this.props;
+    const { placeholder } = this.props;
+    const { disabled } = this.props;
     let error =
       (this.props.errors &&
         this.props.errors.length &&
@@ -186,7 +186,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } if (type == "price") {
+    }
+    if (type == "price") {
       // TODO: Handle on load, change the price mask for editing forms
       return (
         <div
@@ -218,7 +219,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } if (type == "textarea") {
+    }
+    if (type == "textarea") {
       const row = this.props.row ? this.props.row : 4;
       return (
         <div
@@ -239,7 +241,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } if (type == "select") {
+    }
+    if (type == "select") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -286,7 +289,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } if (type == "bool" || type == "boolean") {
+    }
+    if (type == "bool" || type == "boolean") {
       return (
         <div
           className={`form-group ${warning ? "has-warning" : ""} ${
@@ -309,7 +313,8 @@ class Inputs extends React.Component {
           {error && <span className="help-block">{error}</span>}
         </div>
       );
-    } if (type == "checkbox") {
+    }
+    if (type == "checkbox") {
       return (
         <div className={`form-group ${error ? "has-error" : ""}`}>
           {label && <label className="control-label">{label}</label>}
@@ -325,7 +330,8 @@ class Inputs extends React.Component {
           )}
         </div>
       );
-    } if (type == "color_picker") {
+    }
+    if (type == "color_picker") {
       console.log("color picker color:", this.state.value);
       return (
         <div
@@ -342,10 +348,10 @@ class Inputs extends React.Component {
             className="ColorPickerPreview"
             style={{
               backgroundColor: this.state.value,
-              width: `${50  }px`,
-              height: `${50  }px`,
+              width: `${50}px`,
+              height: `${50}px`,
               cursor: "pointer",
-              borderRadius: `${5  }px`,
+              borderRadius: `${5}px`,
             }}
             onClick={this.handleShowPicker}
           />

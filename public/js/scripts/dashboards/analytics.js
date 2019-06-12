@@ -1,4 +1,3 @@
-
 /**
  * @author Batch Themes Ltd.
  */
@@ -8,7 +7,7 @@
       return false;
     }
     const config = $.localStorage.get("config");
-    const {colors} = config;
+    const { colors } = config;
     const loaderTime = 3200;
   });
 })();

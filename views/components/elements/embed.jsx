@@ -77,18 +77,16 @@ class Embed extends React.Component {
   }
 
   render() {
-    const {service} = this.state;
+    const { service } = this.state;
     const urlQuery = this.props.location.query;
 
     const boxColor = { h: 0, s: 0, l: 100 };
     const boxColor2 = { h: boxColor.h, s: boxColor.s, l: boxColor.l };
     let cardStyle = {
-      backgroundColor:
-        `hsl(${  boxColor.h  }, ${  boxColor.s  }%, ${  boxColor.l  }%)`,
+      backgroundColor: `hsl(${boxColor.h}, ${boxColor.s}%, ${boxColor.l}%)`,
     };
     let cardFooterStyle = {
-      backgroundColor:
-        `hsl(${  boxColor2.h  }, ${  boxColor2.s  }%, ${  boxColor2.l  }%)`,
+      backgroundColor: `hsl(${boxColor2.h}, ${boxColor2.s}%, ${boxColor2.l}%)`,
     };
 
     const isColor = new RegExp("(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)", "i");
@@ -146,79 +144,76 @@ class Embed extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <div id="embed">
+    }
+    return (
+      <div id="embed">
+        <div
+          id={`service-${service.id}`}
+          className="card service dark"
+          style={cardStyle}
+        >
           <div
-            id={`service-${service.id}`}
-            className="card service dark"
-            style={cardStyle}
+            className={`card-image-holder ${
+              this.state.image ? "image" : "no-image"
+            }`}
+            style={headerStyle}
           >
-            <div
-              className={`card-image-holder ${
-                this.state.image ? "image" : "no-image"
-              }`}
-              style={headerStyle}
-            >
-              {/* service.references.service_categories[0].name */}
-            </div>
+            {/* service.references.service_categories[0].name */}
+          </div>
 
-            <div
-              className={`card-block ${typeof urlQuery.icon === true &&
-                "with-icon"}`}
-            >
-              {/* {(typeof(urlQuery.noIcon) === 'undefined') && */}
-              {/* <img className="service-icon" src={`/api/v1/service-templates/${this.props.params.serviceId}/image?${new Date().getTime()}`}/> */}
-              {/* } */}
+          <div
+            className={`card-block ${typeof urlQuery.icon === true &&
+              "with-icon"}`}
+          >
+            {/* {(typeof(urlQuery.noIcon) === 'undefined') && */}
+            {/* <img className="service-icon" src={`/api/v1/service-templates/${this.props.params.serviceId}/image?${new Date().getTime()}`}/> */}
+            {/* } */}
 
-              <div className="card-title-holder">
-                <h4 className="card-title" style={textColor}>
-                  {service.name}
-                </h4>
+            <div className="card-title-holder">
+              <h4 className="card-title" style={textColor}>
+                {service.name}
+              </h4>
 
-                {typeof urlQuery.noDate === "undefined" && (
-                  <small className="meta" style={textColor}>
-                    Published on: 
-                    {' '}
-                    {<DateFormat date={service.created_at} />}
-                  </small>
-                )}
-              </div>
-
-              <div className="clearfix" />
-            </div>
-            <div className="card-body">
-              {typeof urlQuery.fullDescription === "undefined" ? (
-                <p style={textColor}>
-                  {_.truncate(service.description, {
-                    length: 200,
-                    omission: "...",
-                  })}
-                </p>
-              ) : (
-                <p style={textColor}>{service.description}</p>
+              {typeof urlQuery.noDate === "undefined" && (
+                <small className="meta" style={textColor}>
+                  Published on: {<DateFormat date={service.created_at} />}
+                </small>
               )}
             </div>
-            <div className="card-footer" style={cardFooterStyle}>
-              {typeof urlQuery.noCost === "undefined" && (
-                <span className="seller pull-left" style={textColor}>
-                  <span className="price">{getPrice(service)}</span>
-                </span>
-              )}
 
-              <Link
-                style={textColor}
-                to={`/service-catalog/${this.props.params.serviceId}/request`}
-                className="btn btn-white btn-flat pull-right"
-                target="_blank"
-              >
-                {requestButton}
-              </Link>
-            </div>
+            <div className="clearfix" />
+          </div>
+          <div className="card-body">
+            {typeof urlQuery.fullDescription === "undefined" ? (
+              <p style={textColor}>
+                {_.truncate(service.description, {
+                  length: 200,
+                  omission: "...",
+                })}
+              </p>
+            ) : (
+              <p style={textColor}>{service.description}</p>
+            )}
+          </div>
+          <div className="card-footer" style={cardFooterStyle}>
+            {typeof urlQuery.noCost === "undefined" && (
+              <span className="seller pull-left" style={textColor}>
+                <span className="price">{getPrice(service)}</span>
+              </span>
+            )}
+
+            <Link
+              style={textColor}
+              to={`/service-catalog/${this.props.params.serviceId}/request`}
+              className="btn btn-white btn-flat pull-right"
+              target="_blank"
+            >
+              {requestButton}
+            </Link>
           </div>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

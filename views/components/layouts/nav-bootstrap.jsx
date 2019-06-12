@@ -110,7 +110,7 @@ class NavBootstrap extends React.Component {
   }
 
   getPluginItems() {
-    const {user} = this.props;
+    const { user } = this.props;
     return (
       this.props.services.routeDefinition &&
       this.props.services.routeDefinition.reduce((acc, route, index) => {
@@ -200,38 +200,33 @@ class NavBootstrap extends React.Component {
           {this.getPluginItems()}
         </ul>
       );
-    } 
-      return (
-        <ul className="nav navbar-nav">
-          <li>
-            <Link to="/my-services" style={style}>
-              My Account
-              <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-          <li>
-            <Link to={`/billing-history/${this.props.uid}`}>
-              Billing History
-            </Link>
-          </li>
-          <li>
-            <Link to={`/billing-settings/${this.props.uid}`}>
-              Payment Method
-            </Link>
-          </li>
-          {/* <li className="dropdown"> */}
-          {/* <a href="#" className="dropdown-toggle" ref="dropdownToggle" data-toggle="dropdown" */}
-          {/* role="button" aria-haspopup="true" aria-expanded="false" style={style}>Billing <span className="caret"/></a> */}
-          {/* <ul className="dropdown-menu"> */}
-          {/* <li><Link onClick={this.onOpenInvoiceModal}>Upcoming Invoice</Link></li> */}
-          {/* <li><Link to={`/billing-history/${this.props.uid}`}>Billing History</Link></li> */}
-          {/* <li><Link to={`/billing-settings/${this.props.uid}`}>Billing Settings</Link></li> */}
-          {/* </ul> */}
-          {/* </li> */}
-          {this.getPluginItems()}
-        </ul>
-      );
-    
+    }
+    return (
+      <ul className="nav navbar-nav">
+        <li>
+          <Link to="/my-services" style={style}>
+            My Account
+            <span className="sr-only">(current)</span>
+          </Link>
+        </li>
+        <li>
+          <Link to={`/billing-history/${this.props.uid}`}>Billing History</Link>
+        </li>
+        <li>
+          <Link to={`/billing-settings/${this.props.uid}`}>Payment Method</Link>
+        </li>
+        {/* <li className="dropdown"> */}
+        {/* <a href="#" className="dropdown-toggle" ref="dropdownToggle" data-toggle="dropdown" */}
+        {/* role="button" aria-haspopup="true" aria-expanded="false" style={style}>Billing <span className="caret"/></a> */}
+        {/* <ul className="dropdown-menu"> */}
+        {/* <li><Link onClick={this.onOpenInvoiceModal}>Upcoming Invoice</Link></li> */}
+        {/* <li><Link to={`/billing-history/${this.props.uid}`}>Billing History</Link></li> */}
+        {/* <li><Link to={`/billing-settings/${this.props.uid}`}>Billing Settings</Link></li> */}
+        {/* </ul> */}
+        {/* </li> */}
+        {this.getPluginItems()}
+      </ul>
+    );
   }
 
   getLivemode() {
@@ -279,9 +274,8 @@ class NavBootstrap extends React.Component {
           <strong>Test Mode</strong>
         </span>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 
   render() {
@@ -301,7 +295,7 @@ class NavBootstrap extends React.Component {
     const navigationBarStyle = {};
     const linkTextStyle = {};
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       navigationBarStyle.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",

@@ -66,9 +66,9 @@ class ModalRequestCancellation extends React.Component {
     const currentModal = this.state.current_modal;
     // let id = this.state.service_id;
     const instance = self.state.serviceInstance;
-    const {name} = instance;
+    const { name } = instance;
     const price = instance.payment_plan.amount;
-    const {interval} = instance.payment_plan;
+    const { interval } = instance.payment_plan;
 
     if (currentModal == "model_cancel_request") {
       if (isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
@@ -93,9 +93,7 @@ class ModalRequestCancellation extends React.Component {
                     </p>
                     <p>Cancelling the service will stop all future payments.</p>
                     <p>
-                      Service Name: 
-                      {' '}
-                      <b>{name}</b>
+                      Service Name: <b>{name}</b>
                     </p>
                   </div>
                 </div>
@@ -117,61 +115,59 @@ class ModalRequestCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } 
-        return (
-          <Modal
-            modalTitle="Request Service Cancellation"
-            icon="fa-ban"
-            show={self.props.show}
-            hide={self.props.hide}
-            hideFooter
-            top="40%"
-            width="650px"
-          >
-            <div className="table-responsive">
-              <div className="p-20">
-                <div className="row">
-                  <div className="col-xs-12">
-                    <p>
-                      <strong>
-                        Are you sure you would like to cancel your service?
-                      </strong>
-                    </p>
-                    <p>
-                      After requesting a cancellation, a staff member will
-                      review and complete your cancellation.
-                      <i>
-                        Your payment will stop after the cancellation has been
-                        approved.
-                      </i>
-                    </p>
-                    <p>
-                      Service Name: 
-                      {' '}
-                      <b>{name}</b>
-                    </p>
-                  </div>
+      }
+      return (
+        <Modal
+          modalTitle="Request Service Cancellation"
+          icon="fa-ban"
+          show={self.props.show}
+          hide={self.props.hide}
+          hideFooter
+          top="40%"
+          width="650px"
+        >
+          <div className="table-responsive">
+            <div className="p-20">
+              <div className="row">
+                <div className="col-xs-12">
+                  <p>
+                    <strong>
+                      Are you sure you would like to cancel your service?
+                    </strong>
+                  </p>
+                  <p>
+                    After requesting a cancellation, a staff member will review
+                    and complete your cancellation.
+                    <i>
+                      Your payment will stop after the cancellation has been
+                      approved.
+                    </i>
+                  </p>
+                  <p>
+                    Service Name: <b>{name}</b>
+                  </p>
                 </div>
               </div>
-              <div className="modal-footer text-right p-b-20">
-                <button
-                  className="btn btn-default btn-rounded"
-                  onClick={self.props.hide}
-                >
-                  Nevermind
-                </button>
-                <button
-                  className="btn btn-danger btn-rounded"
-                  onClick={self.onCancelRequest}
-                >
-                  Request Cancellation
-                </button>
-              </div>
             </div>
-          </Modal>
-        );
-      
-    } if (currentModal == "model_cancel_request_success") {
+            <div className="modal-footer text-right p-b-20">
+              <button
+                className="btn btn-default btn-rounded"
+                onClick={self.props.hide}
+              >
+                Nevermind
+              </button>
+              <button
+                className="btn btn-danger btn-rounded"
+                onClick={self.onCancelRequest}
+              >
+                Request Cancellation
+              </button>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
+    if (currentModal == "model_cancel_request_success") {
       return (
         <Modal
           modalTitle="Cancellation Request Sent"
@@ -185,11 +181,7 @@ class ModalRequestCancellation extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Your cancellation request to cancel 
-                      {' '}
-                      {name}
-                      {' '}
-has been sent
+                      Your cancellation request to cancel {name} has been sent
                       successfully.
                     </strong>
                   </p>
@@ -199,7 +191,8 @@ has been sent
           </div>
         </Modal>
       );
-    } if (currentModal == "model_cancel_success") {
+    }
+    if (currentModal == "model_cancel_success") {
       return (
         <Modal
           modalTitle="Service Cancellation Successful"
@@ -213,10 +206,7 @@ has been sent
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Service 
-                      {' '}
-                      {name}
-, has been successfully cancelled.
+                      Service {name}, has been successfully cancelled.
                     </strong>
                   </p>
                 </div>

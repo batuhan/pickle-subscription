@@ -84,7 +84,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       const self = this;
 
       setTimeout(function() {
@@ -107,77 +108,73 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } 
-      const {instance} = this.state;
+    }
+    const { instance } = this.state;
 
-      // TODO: Add validation functions and pass into DataForm as props
+    // TODO: Add validation functions and pass into DataForm as props
 
-      return (
-        <div>
-          <DataForm
-            validators={this.getValidators(null)}
-            handleResponse={this.handleResponse}
-            url={`/api/v1/service-instances/${instance.id}/add-charge`}
-            method="POST"
-          >
-            <div className="p-20">
-              <div className="row">
-                <div className="basic-info col-md-12">
-                  <p>
-                    <strong>
-Add A Line Item For
-                      {instance.name}
-                    </strong>
-                  </p>
-                  <p>{instance.description}</p>
+    return (
+      <div>
+        <DataForm
+          validators={this.getValidators(null)}
+          handleResponse={this.handleResponse}
+          url={`/api/v1/service-instances/${instance.id}/add-charge`}
+          method="POST"
+        >
+          <div className="p-20">
+            <div className="row">
+              <div className="basic-info col-md-12">
+                <p>
+                  <strong>
+                    Add A Line Item For
+                    {instance.name}
+                  </strong>
+                </p>
+                <p>{instance.description}</p>
 
-                  <Inputs
-                    type="text"
-                    name="description"
-                    label="Description"
-                    defaultValue=""
-                    onChange={function() {}}
-                    receiveOnChange
-                    receiveValue
-                  />
+                <Inputs
+                  type="text"
+                  name="description"
+                  label="Description"
+                  defaultValue=""
+                  onChange={function() {}}
+                  receiveOnChange
+                  receiveValue
+                />
 
-                  <Inputs
-                    type="price"
-                    name="amount"
-                    label="Price"
-                    defaultValue={0}
-                    onChange={function() {}}
-                    receiveOnChange
-                    receiveValue
-                  />
-                </div>
+                <Inputs
+                  type="price"
+                  name="amount"
+                  label="Price"
+                  defaultValue={0}
+                  onChange={function() {}}
+                  receiveOnChange
+                  receiveValue
+                />
               </div>
             </div>
+          </div>
 
-            <div
-              id="request-submission-box"
-              className="modal-footer text-right"
-            >
-              <Buttons
-                containerClass="inline"
-                btnType="primary"
-                text="Submit"
-                onClick={this.loading}
-                type="submit"
-                value="submit"
-                loading={this.state.ajaxLoad}
-              />
-              <Buttons
-                containerClass="inline"
-                btnType="default"
-                text="Close"
-                onClick={this.props.onHide}
-              />
-            </div>
-          </DataForm>
-        </div>
-      );
-    
+          <div id="request-submission-box" className="modal-footer text-right">
+            <Buttons
+              containerClass="inline"
+              btnType="primary"
+              text="Submit"
+              onClick={this.loading}
+              type="submit"
+              value="submit"
+              loading={this.state.ajaxLoad}
+            />
+            <Buttons
+              containerClass="inline"
+              btnType="default"
+              text="Close"
+              onClick={this.props.onHide}
+            />
+          </div>
+        </DataForm>
+      </div>
+    );
   }
 }
 

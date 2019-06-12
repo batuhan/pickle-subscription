@@ -62,17 +62,15 @@ class Login extends React.Component {
               self.props.location.state.fromSignup
             ) {
               return browserHistory.go(-2);
-            } if (
-              result.permissions.includes("can_administrate", "can_manage")
-            ) {
+            }
+            if (result.permissions.includes("can_administrate", "can_manage")) {
               return browserHistory.push("/dashboard");
-            } 
-              return browserHistory.push("/my-services");
-            
+            }
+            return browserHistory.push("/my-services");
+
             // browserHistory.goBack();
-          } 
-            self.props.hide();
-          
+          }
+          self.props.hide();
 
           // if there was an alert in the state and store, dismiss it
           if (self.state.alerts.length) {
@@ -99,9 +97,9 @@ class Login extends React.Component {
   }
 
   handleInputChange(event) {
-    const {target} = event;
+    const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const {name} = target;
+    const { name } = target;
     const formState = update(this.state, { form: { [name]: { $set: value } } });
     this.setState(formState);
   }
@@ -134,108 +132,46 @@ class Login extends React.Component {
   render() {
     if (!this.props.options.allow_registration) {
       return <Load />;
-    } 
-      if (this.props.modal && this.props.email) {
-        return (
-          <Content primary>
-            <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-              <form className="sign-in">
-                {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
-                {this.state.invitationExists && (
-                  <div>
-                    <h3 className="text-center">
-                      Account confirmation email is sent to 
-                      {' '}
-                      {this.props.email}
-?
-                    </h3>
-                    <p>
-                      Please check your email to complete your account before
-                      continue.
-                    </p>
-                    <Buttons
-                      buttonClass="btn btn-link"
-                      size="md"
-                      position="center"
-                      btnType="link"
-                      value="submit"
-                      onClick={this.goToLogin}
-                    >
-                      <span>I already confirmed my account, continue.</span>
-                    </Buttons>
-                  </div>
-                )}
+    }
+    if (this.props.modal && this.props.email) {
+      return (
+        <Content primary>
+          <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+            <form className="sign-in">
+              {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
+              {this.state.invitationExists && (
+                <div>
+                  <h3 className="text-center">
+                    Account confirmation email is sent to {this.props.email}?
+                  </h3>
+                  <p>
+                    Please check your email to complete your account before
+                    continue.
+                  </p>
+                  <Buttons
+                    buttonClass="btn btn-link"
+                    size="md"
+                    position="center"
+                    btnType="link"
+                    value="submit"
+                    onClick={this.goToLogin}
+                  >
+                    <span>I already confirmed my account, continue.</span>
+                  </Buttons>
+                </div>
+              )}
 
-                {!this.state.invitationExists && (
-                  <div>
-                    <h3>
-Login as:
-                      {this.props.email}
-                    </h3>
-                    <p>Please login to continue</p>
-                    <div
-                      className={`form-group ${this.state.errors &&
-                        "has-error   "}`}
-                    >
-                      <input
-                        onChange={this.handleInputChange}
-                        id="password"
-                        type="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Password"
-                      />
-                      {this.state.errors && (
-                        <span className="help-block">{this.state.errors}</span>
-                      )}
-                    </div>
-                    <button
-                      onClick={this.handleLogin}
-                      type="submit"
-                      className="btn btn-raised btn-lg btn-primary btn-block"
-                    >
-                      Sign in
-                    </button>
-                    <p className="sign-up-link">
-                      <Link
-                        to={{
-                          pathname: "/forgot-password",
-                          state: { fromLogin: false },
-                        }}
-                      >
-                        {" "}
-                        Forgot Password
-                      </Link>
-                    </p>
-                  </div>
-                )}
-              </form>
-            </div>
-          </Content>
-        );
-      } 
-        return (
-          <Authorizer anonymous>
-            <Content primary>
-              {/* <div className="left-panel col-md-6">adsf</div> */}
-              <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-                <form className="sign-in">
-                  {/* <Alert stack={{limit: 3}} position='bottom'/> */}
-                  {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
-                  <h3>Login</h3>
-
-                  <div className="form-group">
-                    <input
-                      onChange={this.handleInputChange}
-                      id="email"
-                      type="text"
-                      name="email"
-                      defaultValue={this.props.email || ""}
-                      className="form-control"
-                      placeholder="Email Address"
-                    />
-                  </div>
-                  <div className="form-group">
+              {!this.state.invitationExists && (
+                <div>
+                  <h3>
+                    Login as:
+                    {this.props.email}
+                  </h3>
+                  <p>Please login to continue</p>
+                  <div
+                    className={`form-group ${this.state.errors &&
+                      "has-error   "}`}
+                  >
                     <input
                       onChange={this.handleInputChange}
                       id="password"
@@ -244,6 +180,9 @@ Login as:
                       className="form-control"
                       placeholder="Password"
                     />
+                    {this.state.errors && (
+                      <span className="help-block">{this.state.errors}</span>
+                    )}
                   </div>
                   <button
                     onClick={this.handleLogin}
@@ -263,30 +202,84 @@ Login as:
                       Forgot Password
                     </Link>
                   </p>
-                  {this.props.options &&
-                    this.props.options.allow_registration.value == "true" && (
-                      <p className="sign-up-link">
-                        Don't have an account?
-                        <span>
-                          <Link
-                            to={{
-                              pathname: "/signup",
-                              state: { fromLogin: true },
-                            }}
-                          >
-                            {" "}
-                            Sign up here
-                          </Link>
-                        </span>
-                      </p>
-                    )}
-                </form>
+                </div>
+              )}
+            </form>
+          </div>
+        </Content>
+      );
+    }
+    return (
+      <Authorizer anonymous>
+        <Content primary>
+          {/* <div className="left-panel col-md-6">adsf</div> */}
+          <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+            <form className="sign-in">
+              {/* <Alert stack={{limit: 3}} position='bottom'/> */}
+              {/* <img className="login-brand" src="/assets/logos/brand-logo-dark.png"/> */}
+              <h3>Login</h3>
+
+              <div className="form-group">
+                <input
+                  onChange={this.handleInputChange}
+                  id="email"
+                  type="text"
+                  name="email"
+                  defaultValue={this.props.email || ""}
+                  className="form-control"
+                  placeholder="Email Address"
+                />
               </div>
-            </Content>
-          </Authorizer>
-        );
-      
-    
+              <div className="form-group">
+                <input
+                  onChange={this.handleInputChange}
+                  id="password"
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="Password"
+                />
+              </div>
+              <button
+                onClick={this.handleLogin}
+                type="submit"
+                className="btn btn-raised btn-lg btn-primary btn-block"
+              >
+                Sign in
+              </button>
+              <p className="sign-up-link">
+                <Link
+                  to={{
+                    pathname: "/forgot-password",
+                    state: { fromLogin: false },
+                  }}
+                >
+                  {" "}
+                  Forgot Password
+                </Link>
+              </p>
+              {this.props.options &&
+                this.props.options.allow_registration.value == "true" && (
+                  <p className="sign-up-link">
+                    Don't have an account?
+                    <span>
+                      <Link
+                        to={{
+                          pathname: "/signup",
+                          state: { fromLogin: true },
+                        }}
+                      >
+                        {" "}
+                        Sign up here
+                      </Link>
+                    </span>
+                  </p>
+                )}
+            </form>
+          </div>
+        </Content>
+      </Authorizer>
+    );
   }
 }
 

@@ -138,11 +138,16 @@ async function scheduleSplitsForInstance(instance) {
 function trialExpiration(instance) {
   return async function() {
     const ServiceInstance = require("../../models/service-instance");
-    const currentInstance = (await ServiceInstance.find({ id: instance.id }))[0];
+    const currentInstance = (await ServiceInstance.find({
+      id: instance.id,
+    }))[0];
     const trialEnd = getTrialEnd(currentInstance);
     if (trialEnd <= new Date()) {
       const Fund = require("../../models/fund");
-      const fund = await Fund.findOne("user_id", currentInstance.get("user_id"));
+      const fund = await Fund.findOne(
+        "user_id",
+        currentInstance.get("user_id"),
+      );
 
       if (!fund.data) {
         console.log("TRIAL EXPIRED AND NO FUNDS, UNSUBSCRIBE!");

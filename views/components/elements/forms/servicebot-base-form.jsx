@@ -123,12 +123,11 @@ class ServiceBotBaseForm extends React.Component {
 
   validate(values) {
     if (this.props.validations) return this.props.validations(values);
-    
   }
 
   componentDidMount() {
     const self = this;
-    const {initialRequests} = self.state;
+    const { initialRequests } = self.state;
     console.log("We got our initial requests", initialRequests);
     if (initialRequests && initialRequests.length > 0) {
       const allRequests = initialRequests.map(async requestInfo => {
@@ -187,20 +186,19 @@ class ServiceBotBaseForm extends React.Component {
           </p>
         </div>
       );
-    } 
-      const ReduxFormWrapper = this.state.reduxForm;
+    }
+    const ReduxFormWrapper = this.state.reduxForm;
 
-      return (
-        <div>
-          {this.state.loading && <Load timeout={this.props.loaderTimeout} />}
-          <ReduxFormWrapper
-            {...this.props.formProps}
-            helpers={this.props.helpers}
-            onSubmit={this.submitForm}
-          />
-        </div>
-      );
-    
+    return (
+      <div>
+        {this.state.loading && <Load timeout={this.props.loaderTimeout} />}
+        <ReduxFormWrapper
+          {...this.props.formProps}
+          helpers={this.props.helpers}
+          onSubmit={this.submitForm}
+        />
+      </div>
+    );
   }
 }
 

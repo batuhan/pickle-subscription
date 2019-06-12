@@ -5,7 +5,7 @@ const Stripe = require("../config/stripe");
 const injectProperties = function() {
   return function(req, res, next) {
     const store = require("../config/redux/store");
-    const {options} = store.getState();
+    const { options } = store.getState();
     Object.defineProperty(res.locals, "sysprops", {
       get() {
         return store.getState().options;

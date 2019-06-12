@@ -29,7 +29,7 @@ class Multistep extends React.Component {
 
   stepForward(e) {
     e.preventDefault();
-    const {onNext} = this.props.steps[this.state.currentStep];
+    const { onNext } = this.props.steps[this.state.currentStep];
     if (onNext) {
       onNext(this.step);
     } else {
@@ -46,7 +46,7 @@ class Multistep extends React.Component {
   render() {
     const self = this;
 
-    const {currentStep} = this.state;
+    const { currentStep } = this.state;
 
     const stepToRender = this.props.steps[currentStep];
     const stepName = stepToRender.name;
@@ -69,7 +69,7 @@ class Multistep extends React.Component {
 
     return (
       <div>
-        <h4>{`${currentStep + 1  } : ${  stepName}`}</h4>
+        <h4>{`${currentStep + 1} : ${stepName}`}</h4>
         <hr />
         {stepComponent}
         <div className="control-btns">

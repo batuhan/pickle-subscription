@@ -54,11 +54,11 @@ class ServiceOverTimeChart extends React.Component {
         const sortMonthsRunning = months.sort(function(a, b) {
           if (a > b) {
             return 1;
-          } if (a < b) {
+          }
+          if (a < b) {
             return -1;
-          } 
-            return 0;
-          
+          }
+          return 0;
         });
         const sortedGroups = sortMonthsRunning.map(month => {
           return groupByMonthRunning[month] || [];
@@ -127,23 +127,21 @@ class ServiceOverTimeChart extends React.Component {
       return (
         <div>
           {" "}
-          <Load />
-          {" "}
+          <Load />{" "}
         </div>
       );
-    } 
-      return (
-        <div
-          className={`service-created-cancelled-overtime-chart ${this.props.className}`}
-        >
-          <RC2
-            data={this.state.chartData}
-            options={this.state.chartOptions}
-            type="line"
-          />
-        </div>
-      );
-    
+    }
+    return (
+      <div
+        className={`service-created-cancelled-overtime-chart ${this.props.className}`}
+      >
+        <RC2
+          data={this.state.chartData}
+          options={this.state.chartOptions}
+          type="line"
+        />
+      </div>
+    );
   }
 }
 
@@ -219,18 +217,17 @@ class ServiceStatusChart extends React.Component {
           <Load />
         </div>
       );
-    } 
-      return (
-        <div className={`service-by-status-chart ${this.props.className}`}>
-          <h3 className="chart-title">Services by Status</h3>
-          <RC2
-            data={this.state.chartData}
-            options={this.state.chartOptions}
-            type="pie"
-          />
-        </div>
-      );
-    
+    }
+    return (
+      <div className={`service-by-status-chart ${this.props.className}`}>
+        <h3 className="chart-title">Services by Status</h3>
+        <RC2
+          data={this.state.chartData}
+          options={this.state.chartOptions}
+          type="pie"
+        />
+      </div>
+    );
   }
 }
 
@@ -253,17 +250,16 @@ class BuildChart extends React.Component {
           <Load />
         </div>
       );
-    } 
-      return (
-        <div className={`customer-status-chart ${this.props.className}`}>
-          <RC2
-            data={this.props.chartData}
-            options={this.props.chartOptions}
-            type="pie"
-          />
-        </div>
-      );
-    
+    }
+    return (
+      <div className={`customer-status-chart ${this.props.className}`}>
+        <RC2
+          data={this.props.chartData}
+          options={this.props.chartOptions}
+          type="pie"
+        />
+      </div>
+    );
   }
 }
 

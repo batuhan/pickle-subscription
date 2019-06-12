@@ -16,13 +16,9 @@ class Card extends React.Component {
             style={{ backgroundColor: this.props.color }}
           >
             <img
-              src={
-                `${this.props.imgUrl 
-                }/${ 
-                this.props.id 
-                }/image?${ 
-                new Date().getTime()}`
-              }
+              src={`${this.props.imgUrl}/${
+                this.props.id
+              }/image?${new Date().getTime()}`}
             />
           </div>
           <div className="card-block">

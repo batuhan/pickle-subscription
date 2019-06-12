@@ -108,11 +108,11 @@ class DashboardServiceListItem extends React.Component {
   render() {
     const self = this;
     let id;
-      let name;
-      let amount;
-      let interval;
-      let status;
-      let service = null;
+    let name;
+    let amount;
+    let interval;
+    let status;
+    let service = null;
 
     // Gather data first
     if (self.props.service) {
@@ -138,7 +138,8 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onApproveClose}
           />
         );
-      } if (self.state.cancelModal) {
+      }
+      if (self.state.cancelModal) {
         return (
           <ModalRequestCancellation
             myInstance={service}
@@ -146,7 +147,8 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onCancelClose}
           />
         );
-      } if (self.state.undoCancelModal) {
+      }
+      if (self.state.undoCancelModal) {
         return (
           <ModalManageCancellation
             myInstance={service}
@@ -154,7 +156,8 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onUndoCancelClose}
           />
         );
-      } if (self.state.payChargeModal) {
+      }
+      if (self.state.payChargeModal) {
         return (
           <ModalPayAllCharges
             myInstance={service}
@@ -163,7 +166,8 @@ class DashboardServiceListItem extends React.Component {
             hide={self.onPayChargesClose}
           />
         );
-      } if (self.state.fundModal) {
+      }
+      if (self.state.fundModal) {
         return (
           <ModalPaymentSetup
             justPayment
@@ -193,7 +197,7 @@ class DashboardServiceListItem extends React.Component {
               <Price value={myService.payment_plan.amount} />
               {myService.payment_plan.interval_count == 1
                 ? "/"
-                : `/${  myService.payment_plan.interval_count}`}
+                : `/${myService.payment_plan.interval_count}`}
               {myService.payment_plan.interval}
             </span>
           );
@@ -216,20 +220,16 @@ class DashboardServiceListItem extends React.Component {
               )}
             </div>
           );
-        } 
-          return (
-            <div>
-              {getTotalCharges() && (
-                <div className="xaas-price red m-l-5">
-                  <span> 
-                    {' '}
-                    {getTotalCharges()}
-                  </span>
-                </div>
-              )}
-            </div>
-          );
-        
+        }
+        return (
+          <div>
+            {getTotalCharges() && (
+              <div className="xaas-price red m-l-5">
+                <span> {getTotalCharges()}</span>
+              </div>
+            )}
+          </div>
+        );
       };
 
       const getActionButton = () => {
@@ -243,29 +243,28 @@ class DashboardServiceListItem extends React.Component {
               className="btn btn-default btn-rounded btn-sm"
               onClick={self.handleApprove}
             >
-              <i className="fa fa-credit-card" />
-              {' '}
-Pay Now
+              <i className="fa fa-credit-card" /> Pay Now
             </button>
           );
-        } if (myService.outstanding_charges_total) {
+        }
+        if (myService.outstanding_charges_total) {
           return (
             <button
               className="btn btn-default btn-rounded btn-sm"
               onClick={self.handlePayCharges}
             >
-              <i className="fa fa-credit-card" />
-              {' '}
-Pay Now
+              <i className="fa fa-credit-card" /> Pay Now
             </button>
           );
-        } if (
+        }
+        if (
           status === "requested" &&
           myService.payment_plan.amount === 0 &&
           !myService.outstanding_charges_total
         ) {
           return null;
-        } if (status === "waiting_cancellation") {
+        }
+        if (status === "waiting_cancellation") {
           return (
             <button
               to=""
@@ -275,13 +274,13 @@ Pay Now
               Undo Cancellation
             </button>
           );
-        } if (status === "cancelled") {
+        }
+        if (status === "cancelled") {
           return null;
-        } 
-          // Taking out the cancellation request for now.
-          // return (<button to="" className="btn btn-default btn-rounded btn-sm" onClick={self.handleCancel}>Request Cancellation</button>);
-          return null;
-        
+        }
+        // Taking out the cancellation request for now.
+        // return (<button to="" className="btn btn-default btn-rounded btn-sm" onClick={self.handleCancel}>Request Cancellation</button>);
+        return null;
       };
 
       const getLinkActionButton = () => {
@@ -307,9 +306,8 @@ Pay Now
               modalCallback={this.handleAddFund}
             />
           );
-        } 
-          return null;
-        
+        }
+        return null;
       };
 
       return (
@@ -337,9 +335,8 @@ Pay Now
           {currentModal()}
         </div>
       );
-    } 
-      return <p className="help-block">service not defined</p>;
-    
+    }
+    return <p className="help-block">service not defined</p>;
   }
 }
 

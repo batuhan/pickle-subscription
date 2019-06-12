@@ -3,7 +3,6 @@ import ReactDOM, { render } from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import AppRouter from "./router.jsx";
 
-
 render(
   <AppContainer>
     <AppRouter />

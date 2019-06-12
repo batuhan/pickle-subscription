@@ -55,7 +55,7 @@ class Widget extends React.Component {
       ? getSymbolFromCurrency(options.currency.value)
       : "";
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       style.widgetData.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -127,7 +127,7 @@ class Widget extends React.Component {
       }
     }
 
-    const {bodyClass} = this.props;
+    const { bodyClass } = this.props;
 
     return (
       <div
@@ -148,7 +148,7 @@ class Widget extends React.Component {
           <div className="p-t-10 p-b-10">
             {this.state.data.list.map((listing, index) => (
               <div
-                key={`price-${  index}`}
+                key={`price-${index}`}
                 className="dash-widget-list row p-l-20 p-r-20 p-t-5 p-b-5"
               >
                 <div className="col-md-8 col-lg-9">{listing.label}</div>

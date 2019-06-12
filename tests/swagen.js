@@ -43,7 +43,7 @@ function generate(model) {
         for (const refProp in schema[prop]) {
           newProp.properties[refProp] = {
             type: "array",
-            items: [{ $ref: `#/definitions/${  refProp}` }],
+            items: [{ $ref: `#/definitions/${refProp}` }],
           };
         }
         json.properties[prop] = newProp;

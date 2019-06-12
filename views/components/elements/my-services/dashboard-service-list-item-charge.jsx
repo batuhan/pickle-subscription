@@ -6,7 +6,7 @@ import { Price } from "../../utilities/price.jsx";
 class DashboardServiceListItemCharge extends React.Component {
   constructor(props) {
     super(props);
-    const {serviceInstanceId} = this.props;
+    const { serviceInstanceId } = this.props;
     this.state = {
       chargeItems: [],
       url: `/api/v1/service-instances/${serviceInstanceId}/awaiting-charges`,
@@ -44,33 +44,32 @@ class DashboardServiceListItemCharge extends React.Component {
           </div>
         </div>
       );
-    } 
-      return (
-        <div className="xaas-body">
-          {this.state.chargeItems.map(chargeItem => (
-            <div
-              key={`charge-item-${chargeItem.data.id}`}
-              className="xaas-body-row"
-            >
-              <div className="xaas-data xaas-charge">
-                <span>{chargeItem.data.description}</span>
-              </div>
-              <div className="xaas-data xaas-price">
-                <span>
-                  <Price value={chargeItem.data.amount} />
-                </span>
-              </div>
-              <div className="xaas-data xaas-action">
-                <button className="btn btn-info btn-rounded btn-sm">
-                  Pay
-                  <i className="fa fa-credit-card" />
-                </button>
-              </div>
+    }
+    return (
+      <div className="xaas-body">
+        {this.state.chargeItems.map(chargeItem => (
+          <div
+            key={`charge-item-${chargeItem.data.id}`}
+            className="xaas-body-row"
+          >
+            <div className="xaas-data xaas-charge">
+              <span>{chargeItem.data.description}</span>
             </div>
-          ))}
-        </div>
-      );
-    
+            <div className="xaas-data xaas-price">
+              <span>
+                <Price value={chargeItem.data.amount} />
+              </span>
+            </div>
+            <div className="xaas-data xaas-action">
+              <button className="btn btn-info btn-rounded btn-sm">
+                Pay
+                <i className="fa fa-credit-card" />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 

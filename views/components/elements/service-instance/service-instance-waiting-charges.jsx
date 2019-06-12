@@ -57,7 +57,7 @@ class ServiceInstanceWaitingCharges extends React.Component {
               <div className="service-instance-box-content">
                 {this.props.instanceWaitingItems.map(item => (
                   <ServiceInstanceWaitingChargesItem
-                    key={`item-${  item.id}`}
+                    key={`item-${item.id}`}
                     handleCancelChargeItem={self.onCancelCharge}
                     chargeItem={item}
                     prefix={prefix}
@@ -82,9 +82,8 @@ class ServiceInstanceWaitingCharges extends React.Component {
           </div>
         </div>
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 }
 

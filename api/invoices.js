@@ -26,10 +26,10 @@ module.exports = function(router) {
    * Update the user invoices prior to rendering it if the request has user_id
    */
   router.get("/invoices", auth(), function(req, res, next) {
-    const {key} = req.query;
+    const { key } = req.query;
     // Only update the user invoices
     if (key == "user_id") {
-      const {value} = req.query;
+      const { value } = req.query;
       User.findOne("id", value, function(user) {
         Invoice.fetchUserInvoices(user)
           .then(function(result) {
@@ -68,8 +68,8 @@ module.exports = function(router) {
     req,
     res,
   ) {
-    const {amount} = req.body;
-    const {reason} = req.body;
+    const { amount } = req.body;
+    const { reason } = req.body;
     const invoice = res.locals.valid_object;
     invoice.refund(amount, reason, function(err, refund) {
       if (!err) {

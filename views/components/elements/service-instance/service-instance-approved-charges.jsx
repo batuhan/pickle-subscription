@@ -71,9 +71,7 @@ class ServiceInstanceApprovedCharges extends React.Component {
               <div className="xaas-data xaas-charge">
                 <span>
                   <strong>
-                    Total Approved: 
-                    {' '}
-                    <Price value={totalCharges} />
+                    Total Approved: <Price value={totalCharges} />
                   </strong>
                 </span>
               </div>
@@ -81,9 +79,8 @@ class ServiceInstanceApprovedCharges extends React.Component {
           </div>
         </Collapsible>
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   getChargeCurrent() {
@@ -126,9 +123,7 @@ class ServiceInstanceApprovedCharges extends React.Component {
               <div className="xaas-data xaas-charge">
                 <span>
                   <strong>
-                    Total Approved: 
-                    {' '}
-                    <Price value={totalCharges} />
+                    Total Approved: <Price value={totalCharges} />
                   </strong>
                 </span>
               </div>
@@ -136,9 +131,8 @@ class ServiceInstanceApprovedCharges extends React.Component {
           </div>
         </div>
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   render() {

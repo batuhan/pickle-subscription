@@ -135,8 +135,7 @@ userToken = generateJWT(user[:email], SECRET_KEY)
         </select>
         <pre className="sbi--code-sample">{server}</pre>
         <span>
-          <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>
-, make sure
+          <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>, make sure
           not to commit it into version control or send under insecure channels
           or expose to client
         </span>
@@ -219,18 +218,12 @@ function WebhookModal(props) {
 }
 
 function Webhook(props) {
-  const {hook} = props;
+  const { hook } = props;
   return (
     <div>
-      Endpoint: 
-      {' '}
-      {hook.endpoint_url}
-      Is Async: 
-      {' '}
-      {hook.async_lifecycle}
-      Health: 
-      {' '}
-      {hook.health}
+      Endpoint: {hook.endpoint_url}
+      Is Async: {hook.async_lifecycle}
+      Health: {hook.health}
     </div>
   );
 }
@@ -296,7 +289,7 @@ class Webhooks extends React.Component {
 
   deleteHook(hook) {
     const self = this;
-    Fetcher(`/api/v1/webhooks/${  hook.id}`, "DELETE").then(function(response) {
+    Fetcher(`/api/v1/webhooks/${hook.id}`, "DELETE").then(function(response) {
       if (!response.error) {
         self.fetchData();
       }
@@ -409,9 +402,8 @@ class Webhooks extends React.Component {
             hide={this.closeHookForm}
           />
         );
-      } 
-        return null;
-      
+      }
+      return null;
     };
     let formHTML;
     if (
@@ -444,16 +436,15 @@ Servicebot.init({
         <div className="sbi--client-side">
           <span className="sbi--subtitle">
             Paste the generated HTML on the page you want to embed a request
-            form. 
-            {' '}
-            <br />
-            You can find more detailed in our
-            {" "}
+            form. <br />
+            You can find more detailed in our{" "}
             <a href="https://docs.servicebot.io/embed">documentation</a>
           </span>
           <br />
           <strong>
-            <span className="sbi--dropdown-label">Select a service to embed: </span>
+            <span className="sbi--dropdown-label">
+              Select a service to embed:{" "}
+            </span>
           </strong>
           <select onChange={this.changeTemplate}>
             <option key="default-0" value="0">
@@ -557,9 +548,7 @@ Servicebot.init({
               type="submit"
               value="submit"
             >
-              <i className="fa fa-plus" />
-              {' '}
-Add endpoint
+              <i className="fa fa-plus" /> Add endpoint
             </button>
             <button
               className="sbi--webhook-button sbi--wb--retest"
@@ -571,8 +560,7 @@ Add endpoint
                 <i className="fa fa-refresh fa-spin" />
               ) : (
                 <i className="fa fa-refresh" />
-              )}
-              {" "}
+              )}{" "}
               Re-test endpoints
             </button>
           </div>
@@ -609,41 +597,29 @@ Add endpoint
                 </a>
                 <ul>
                   <li>
-                    <b>Pre-subscription:</b>
-                    {' '}
-This event happens right after the
+                    <b>Pre-subscription:</b> This event happens right after the
                     customer subscribes to your service, prior to the
                     subscription request completion.
                   </li>
                   <li>
-                    <b>Post-subscription:</b>
-                    {' '}
-This event happens after the
+                    <b>Post-subscription:</b> This event happens after the
                     subscription has been successfully completed.
                   </li>
                   <li>
-                    <b>Pre-trial expiration:</b>
-                    {' '}
-This event happens right after
+                    <b>Pre-trial expiration:</b> This event happens right after
                     the trial expires, prior to any expiration processes.
                   </li>
                   <li>
-                    <b>Post-trial expiration:</b>
-                    {' '}
-This event happens after the
+                    <b>Post-trial expiration:</b> This event happens after the
                     trial expiration has been completed.
                   </li>
                   <li>
-                    <b>Pre-reactivation:</b>
-                    {' '}
-This event happens right after the
+                    <b>Pre-reactivation:</b> This event happens right after the
                     reactivation event happens, prior to any reactivation
                     processes.
                   </li>
                   <li>
-                    <b>Post-reactivation:</b>
-                    {' '}
-This event happens after
+                    <b>Post-reactivation:</b> This event happens after
                     eactivation event has been completed.
                   </li>
                 </ul>
@@ -657,8 +633,7 @@ This event happens after
                 <span>
                   <span className="status-badge red">
                     <i className="fa fa-times" />
-                  </span>
-                  {" "}
+                  </span>{" "}
                   {hook.health}
                 </span>
               );
@@ -683,7 +658,7 @@ This event happens after
                 );
               }
               return (
-                <div className="hook" key={`hook-${  index}`}>
+                <div className="hook" key={`hook-${index}`}>
                   <div className="url">{hook.endpoint_url}</div>
                   <div className="row">
                     <div className="col-md-8">
@@ -699,9 +674,7 @@ This event happens after
                         type="submit"
                         value="submit"
                       >
-                        <i className="fa fa-pencil" />
-                        {' '}
-Edit
+                        <i className="fa fa-pencil" /> Edit
                       </button>
                       <button
                         className="btn-xs"
@@ -711,9 +684,7 @@ Edit
                         type="submit"
                         value="submit"
                       >
-                        <i className="fa fa-times" />
-                        {' '}
-Delete
+                        <i className="fa fa-times" /> Delete
                       </button>
                     </div>
                   </div>

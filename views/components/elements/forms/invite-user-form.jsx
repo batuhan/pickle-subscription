@@ -41,7 +41,8 @@ class InviteUserForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       return (
         <div className="p-20">
           <p>
@@ -55,65 +56,63 @@ class InviteUserForm extends React.Component {
           </div>
         </div>
       );
-    } 
-      // If the reinvite UID props is passed, just run the invite
-      if (this.props.reinviteEmail) {
-        this.reinviteUser();
-        return null;
-      } 
-        return (
-          <div className="invite-user-form">
-            <DataForm
-              handleResponse={this.handleResponse}
-              url={this.state.url}
-              method="POST"
-            >
-              {this.state.alerts && this.state.alerts.message && (
-                <div>
-                  <Alerts
-                    type={this.state.alerts.type}
-                    message={this.state.alerts.message}
-                  />
-                </div>
-              )}
+    }
+    // If the reinvite UID props is passed, just run the invite
+    if (this.props.reinviteEmail) {
+      this.reinviteUser();
+      return null;
+    }
+    return (
+      <div className="invite-user-form">
+        <DataForm
+          handleResponse={this.handleResponse}
+          url={this.state.url}
+          method="POST"
+        >
+          {this.state.alerts && this.state.alerts.message && (
+            <div>
+              <Alerts
+                type={this.state.alerts.type}
+                message={this.state.alerts.message}
+              />
+            </div>
+          )}
 
-              <div className="p-20">
-                <p>
-                  <strong>
-                    Please enter an email to invite a user to create an account
-                  </strong>
-                </p>
-                <Inputs
-                  type="text"
-                  name="email"
-                  label="Email Address"
-                  onChange={function() {}}
-                  receiveOnChange
-                  receiveValue
-                />
-              </div>
-
-              <div className="modal-footer text-right p-b-20">
-                <Buttons
-                  containerClass="inline"
-                  btnType="primary"
-                  type="submit"
-                  value="submit"
-                  text="Invite User"
-                  success={this.state.success}
-                />
-                <Buttons
-                  containerClass="inline"
-                  btnType="default"
-                  text="Later"
-                  onClick={this.props.hide}
-                />
-              </div>
-            </DataForm>
+          <div className="p-20">
+            <p>
+              <strong>
+                Please enter an email to invite a user to create an account
+              </strong>
+            </p>
+            <Inputs
+              type="text"
+              name="email"
+              label="Email Address"
+              onChange={function() {}}
+              receiveOnChange
+              receiveValue
+            />
           </div>
-        );
-      
-    
+
+          <div className="modal-footer text-right p-b-20">
+            <Buttons
+              containerClass="inline"
+              btnType="primary"
+              type="submit"
+              value="submit"
+              text="Invite User"
+              success={this.state.success}
+            />
+            <Buttons
+              containerClass="inline"
+              btnType="default"
+              text="Later"
+              onClick={this.props.hide}
+            />
+          </div>
+        </DataForm>
+      </div>
+    );
   }
 }
 

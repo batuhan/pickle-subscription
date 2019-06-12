@@ -1,5 +1,3 @@
-
-
 /* jshint quotmark: double */
 window.SwaggerTranslator.learn({
   "Warning: Deprecated": "경고：폐기예정됨",

@@ -26,9 +26,9 @@
   }
   function c(e) {
     let r;
-      let t;
-      let n;
-      let c = `${e.className  } `;
+    let t;
+    let n;
+    let c = `${e.className} `;
     if (
       ((c += e.parentNode ? e.parentNode.className : ""),
       (t = /\blang(?:uage)?-([\w-]+)\b/i.exec(c)))
@@ -39,7 +39,7 @@
   }
   function i(e, r) {
     let t;
-      const n = {};
+    const n = {};
     for (t in e) n[t] = e[t];
     if (r) for (t in r) n[t] = r[t];
     return n;
@@ -77,13 +77,12 @@
     }
     function i(e) {
       function n(e) {
-        return ` ${  e.nodeName  }="${  r(e.value)  }"`;
+        return ` ${e.nodeName}="${r(e.value)}"`;
       }
-      l +=
-        `<${  t(e)  }${Array.prototype.map.call(e.attributes, n).join("")  }>`;
+      l += `<${t(e)}${Array.prototype.map.call(e.attributes, n).join("")}>`;
     }
     function o(e) {
-      l += `</${  t(e)  }>`;
+      l += `</${t(e)}>`;
     }
     function s(e) {
       (e.event == "start" ? i : o)(e.node);
@@ -106,19 +105,19 @@
       return (e && e.source) || e;
     }
     function t(t, n) {
-      return new RegExp(r(t), `m${  e.cI ? "i" : ""  }${n ? "g" : ""}`);
+      return new RegExp(r(t), `m${e.cI ? "i" : ""}${n ? "g" : ""}`);
     }
     function n(a, c) {
       if (!a.compiled) {
         if (((a.compiled = !0), (a.k = a.k || a.bK), a.k)) {
           const o = {};
-            const s = function(r, t) {
-              e.cI && (t = t.toLowerCase()),
-                t.split(" ").forEach(function(e) {
-                  const t = e.split("|");
-                  o[t[0]] = [r, t[1] ? Number(t[1]) : 1];
-                });
-            };
+          const s = function(r, t) {
+            e.cI && (t = t.toLowerCase()),
+              t.split(" ").forEach(function(e) {
+                const t = e.split("|");
+                o[t[0]] = [r, t[1] ? Number(t[1]) : 1];
+              });
+          };
           typeof a.k === "string"
             ? s("keyword", a.k)
             : Object.keys(a.k).forEach(function(e) {
@@ -128,7 +127,7 @@
         }
         (a.lR = t(a.l || /\b\w+\b/, !0)),
           c &&
-            (a.bK && (a.b = `\\b(${  a.bK.split(" ").join("|")  })\\b`),
+            (a.bK && (a.b = `\\b(${a.bK.split(" ").join("|")})\\b`),
             a.b || (a.b = /\B|\b/),
             (a.bR = t(a.b)),
             a.e || a.eW || (a.e = /\B|\b/),
@@ -153,7 +152,7 @@
           a.starts && n(a.starts, c);
         const l = a.c
           .map(function(e) {
-            return e.bK ? `\\.?(${  e.b  })\\.?` : e.b;
+            return e.bK ? `\\.?(${e.b})\\.?` : e.b;
           })
           .concat([a.tE, a.i])
           .map(r)
@@ -189,14 +188,14 @@
     }
     function g(e, r, t, n) {
       const a = n ? "" : w.classPrefix;
-        let c = `<span class="${  a}`;
-        const i = t ? "" : "</span>";
-      return (c += `${e  }">`), c + r + i;
+      let c = `<span class="${a}`;
+      const i = t ? "" : "</span>";
+      return (c += `${e}">`), c + r + i;
     }
     function p() {
       if (!M.k) return r(B);
       let e = "";
-        let t = 0;
+      let t = 0;
       M.lR.lastIndex = 0;
       for (let n = M.lR.exec(B); n; ) {
         e += r(B.substr(t, n.index - t));
@@ -248,20 +247,20 @@
       }
       if (s(t, M))
         throw new Error(
-          `Illegal lexeme "${  t  }" for mode "${  M.cN || "<unnamed>"  }"`,
+          `Illegal lexeme "${t}" for mode "${M.cN || "<unnamed>"}"`,
         );
       return (B += t), t.length || 1;
     }
     var N = E(e);
-    if (!N) throw new Error(`Unknown language: "${  e  }"`);
+    if (!N) throw new Error(`Unknown language: "${e}"`);
     u(N);
     let C;
-      var M = c || N;
-      var R = {};
-      var x = "";
+    var M = c || N;
+    var R = {};
+    var x = "";
     for (C = M; C != N; C = C.parent) C.cN && (x = g(C.cN, "", !0) + x);
     var B = "";
-      var L = 0;
+    var L = 0;
     try {
       for (var S, A, k = 0; (M.t.lastIndex = k), (S = M.t.exec(t)), S; )
         (A = v(t.substr(k, S.index - k), S[0])), (k = S.index + A);
@@ -276,7 +275,7 @@
   function f(e, t) {
     t = t || w.languages || Object.keys(y);
     let n = { r: 0, value: r(e) };
-      let a = n;
+    let a = n;
     return (
       t.forEach(function(r) {
         if (E(r)) {
@@ -302,7 +301,7 @@
   }
   function g(e, r, t) {
     const n = r ? C[r] : t;
-      const a = [e.trim()];
+    const a = [e.trim()];
     return (
       e.match(/\bhljs\b/) || a.push("hljs"),
       e.indexOf(n) === -1 && a.push(n),
@@ -323,10 +322,13 @@
             .replace(/<br[ \/]*>/g, "\n")))
         : (t = e);
       const n = t.textContent;
-        const i = r ? l(r, n, !0) : f(n);
-        const u = o(t);
+      const i = r ? l(r, n, !0) : f(n);
+      const u = o(t);
       if (u.length) {
-        const p = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+        const p = document.createElementNS(
+          "http://www.w3.org/1999/xhtml",
+          "div",
+        );
         (p.innerHTML = i.value), (i.value = s(u, o(p), n));
       }
       (i.value = b(i.value)),
@@ -368,13 +370,13 @@
     return (e = (e || "").toLowerCase()), y[e] || y[C[e]];
   }
   var w = {
-      classPrefix: "hljs-",
-      tabReplace: null,
-      useBR: !1,
-      languages: void 0,
-    };
-    var y = {};
-    var C = {};
+    classPrefix: "hljs-",
+    tabReplace: null,
+    useBR: !1,
+    languages: void 0,
+  };
+  var y = {};
+  var C = {};
   return (
     (e.highlight = l),
     (e.highlightAuto = f),
@@ -417,9 +419,7 @@
     (e.BNM = { cN: "number", b: e.BNR, r: 0 }),
     (e.CSSNM = {
       cN: "number",
-      b:
-        `${e.NR 
-        }(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?`,
+      b: `${e.NR}(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?`,
       r: 0,
     }),
     (e.RM = {
@@ -436,51 +436,51 @@
 }),
   hljs.registerLanguage("json", function(e) {
     const r = { literal: "true false null" };
-      const t = [e.QSM, e.CNM];
-      const n = { e: ",", eW: !0, eE: !0, c: t, k: r };
-      const a = {
-        b: "{",
-        e: "}",
-        c: [
-          {
-            cN: "attr",
-            b: '\\s*"',
-            e: '"\\s*:\\s*',
-            eB: !0,
-            eE: !0,
-            c: [e.BE],
-            i: "\\n",
-            starts: n,
-          },
-        ],
-        i: "\\S",
-      };
-      const c = { b: "\\[", e: "\\]", c: [e.inherit(n)], i: "\\S" };
+    const t = [e.QSM, e.CNM];
+    const n = { e: ",", eW: !0, eE: !0, c: t, k: r };
+    const a = {
+      b: "{",
+      e: "}",
+      c: [
+        {
+          cN: "attr",
+          b: '\\s*"',
+          e: '"\\s*:\\s*',
+          eB: !0,
+          eE: !0,
+          c: [e.BE],
+          i: "\\n",
+          starts: n,
+        },
+      ],
+      i: "\\S",
+    };
+    const c = { b: "\\[", e: "\\]", c: [e.inherit(n)], i: "\\S" };
     return t.splice(t.length, 0, a, c), { c: t, k: r, i: "\\S" };
   }),
   hljs.registerLanguage("xml", function(e) {
     const r = "[A-Za-z0-9\\._:-]+";
-      const t = { b: /<\?(php)?(?!\w)/, e: /\?>/, sL: "php" };
-      const n = {
-        eW: !0,
-        i: /</,
-        r: 0,
-        c: [
-          t,
-          { cN: "attr", b: r, r: 0 },
-          {
-            b: "=",
-            r: 0,
-            c: [
-              {
-                cN: "string",
-                c: [t],
-                v: [{ b: /"/, e: /"/ }, { b: /'/, e: /'/ }, { b: /[^\s\/>]+/ }],
-              },
-            ],
-          },
-        ],
-      };
+    const t = { b: /<\?(php)?(?!\w)/, e: /\?>/, sL: "php" };
+    const n = {
+      eW: !0,
+      i: /</,
+      r: 0,
+      c: [
+        t,
+        { cN: "attr", b: r, r: 0 },
+        {
+          b: "=",
+          r: 0,
+          c: [
+            {
+              cN: "string",
+              c: [t],
+              v: [{ b: /"/, e: /"/ }, { b: /'/, e: /'/ }, { b: /[^\s\/>]+/ }],
+            },
+          ],
+        },
+      ],
+    };
     return {
       aliases: ["html", "xhtml", "rss", "atom", "xsl", "plist"],
       cI: !0,
@@ -558,7 +558,7 @@
           r: 0,
         },
         {
-          b: `(${  e.RSR  }|\\b(case|return|throw)\\b)\\s*`,
+          b: `(${e.RSR}|\\b(case|return|throw)\\b)\\s*`,
           k: "return throw case",
           c: [
             e.CLCM,
@@ -587,7 +587,7 @@
           i: /\[|%/,
         },
         { b: /\$[(.]/ },
-        { b: `\\.${  e.IR}`, r: 0 },
+        { b: `\\.${e.IR}`, r: 0 },
         {
           cN: "class",
           bK: "class",
@@ -603,37 +603,37 @@
   }),
   hljs.registerLanguage("css", function(e) {
     const r = "[a-zA-Z-][a-zA-Z0-9_-]*";
-      const t = {
-        b: /[A-Z\_\.\-]+\s*:/,
-        rB: !0,
-        e: ";",
-        eW: !0,
-        c: [
-          {
-            cN: "attribute",
-            b: /\S/,
-            e: ":",
+    const t = {
+      b: /[A-Z\_\.\-]+\s*:/,
+      rB: !0,
+      e: ";",
+      eW: !0,
+      c: [
+        {
+          cN: "attribute",
+          b: /\S/,
+          e: ":",
+          eE: !0,
+          starts: {
+            eW: !0,
             eE: !0,
-            starts: {
-              eW: !0,
-              eE: !0,
-              c: [
-                {
-                  b: /[\w-]+\s*\(/,
-                  rB: !0,
-                  c: [{ cN: "built_in", b: /[\w-]+/ }],
-                },
-                e.CSSNM,
-                e.QSM,
-                e.ASM,
-                e.CBCM,
-                { cN: "number", b: "#[0-9A-Fa-f]+" },
-                { cN: "meta", b: "!important" },
-              ],
-            },
+            c: [
+              {
+                b: /[\w-]+\s*\(/,
+                rB: !0,
+                c: [{ cN: "built_in", b: /[\w-]+/ }],
+              },
+              e.CSSNM,
+              e.QSM,
+              e.ASM,
+              e.CBCM,
+              { cN: "number", b: "#[0-9A-Fa-f]+" },
+              { cN: "meta", b: "!important" },
+            ],
           },
-        ],
-      };
+        },
+      ],
+    };
     return {
       cI: !0,
       i: /[=\/|'\$]/,

@@ -40,7 +40,7 @@ SECRET_KEY=${process.env.SECRET_KEY || secret}`;
           .catch(function(err) {
             fs.unlink(envPath);
 
-            throw `Specified Database connection error - env wiped\n${  err}`;
+            throw `Specified Database connection error - env wiped\n${err}`;
           });
       }
     });

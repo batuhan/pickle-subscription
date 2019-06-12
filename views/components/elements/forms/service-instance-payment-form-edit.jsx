@@ -25,26 +25,24 @@ class ServiceInstanceFormEdit extends React.Component {
     if (!response.error && response.type != "StripeInvalidRequestError") {
       this.setState({ success: true, submitting: false });
     } else if (response.type == "StripeInvalidRequestError") {
-        if (
-          response.message == "This customer has no attached payment source"
-        ) {
-          this.setState({
-            alert: {
-              type: "danger",
-              message: "This customer has no attached payment source.",
-              icon: "exclamation-circle",
-            },
-          });
-        } else {
-          this.setState({
-            alert: {
-              type: "danger",
-              message: "Stripe error: invalid subscription.",
-              icon: "exclamation-circle",
-            },
-          });
-        }
+      if (response.message == "This customer has no attached payment source") {
+        this.setState({
+          alert: {
+            type: "danger",
+            message: "This customer has no attached payment source.",
+            icon: "exclamation-circle",
+          },
+        });
+      } else {
+        this.setState({
+          alert: {
+            type: "danger",
+            message: "Stripe error: invalid subscription.",
+            icon: "exclamation-circle",
+          },
+        });
       }
+    }
   }
 
   handleCountDownClose() {
@@ -118,7 +116,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       const self = this;
 
       setTimeout(function() {
@@ -141,162 +140,153 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } 
-      const {instance} = this.state;
+    }
+    const { instance } = this.state;
 
-      if (this.state.instance.payment_plan != null) {
-        const paymentPlan = this.state.instance.payment_plan;
+    if (this.state.instance.payment_plan != null) {
+      const paymentPlan = this.state.instance.payment_plan;
 
-        const getAlerts = () => {
-          if (this.state.alert.message) {
-            return (
-              <Alerts
-                type={this.state.alert.type}
-                message={this.state.alert.message}
-                icon={this.state.alert.icon}
-              />
-            );
-          }
-        };
+      const getAlerts = () => {
+        if (this.state.alert.message) {
+          return (
+            <Alerts
+              type={this.state.alert.type}
+              message={this.state.alert.message}
+              icon={this.state.alert.icon}
+            />
+          );
+        }
+      };
 
-        return (
-          <div>
-            {getAlerts()}
+      return (
+        <div>
+          {getAlerts()}
 
-            <DataForm
-              validators={this.getValidators(null)}
-              handleResponse={this.handleResponse}
-              url={`/api/v1/service-instances/${instance.id}/change-price`}
-              method="POST"
-            >
-              <div className="p-20">
-                <div className="row">
-                  <div className="basic-info col-md-12">
-                    <p>
-                      <strong>
-Payment Plan For
-                        {instance.name}
-                      </strong>
-                    </p>
-                    <p>{instance.description}</p>
+          <DataForm
+            validators={this.getValidators(null)}
+            handleResponse={this.handleResponse}
+            url={`/api/v1/service-instances/${instance.id}/change-price`}
+            method="POST"
+          >
+            <div className="p-20">
+              <div className="row">
+                <div className="basic-info col-md-12">
+                  <p>
+                    <strong>
+                      Payment Plan For
+                      {instance.name}
+                    </strong>
+                  </p>
+                  <p>{instance.description}</p>
 
-                    <Inputs
-                      type="hidden"
-                      name="name"
-                      value={paymentPlan.name}
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
+                  <Inputs
+                    type="hidden"
+                    name="name"
+                    value={paymentPlan.name}
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
 
-                    <Inputs
-                      type="text"
-                      maxLength="22"
-                      name="statement_descriptor"
-                      label="Statement Descriptor"
-                      defaultValue={paymentPlan.statement_descriptor}
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
+                  <Inputs
+                    type="text"
+                    maxLength="22"
+                    name="statement_descriptor"
+                    label="Statement Descriptor"
+                    defaultValue={paymentPlan.statement_descriptor}
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
 
-                    <Inputs
-                      type="number"
-                      name="trial_period_days"
-                      label="Trial Period (Days)"
-                      defaultValue={
-                        paymentPlan.trial_period_days != null
-                          ? paymentPlan.trial_period_days
-                          : 0
-                      }
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
+                  <Inputs
+                    type="number"
+                    name="trial_period_days"
+                    label="Trial Period (Days)"
+                    defaultValue={
+                      paymentPlan.trial_period_days != null
+                        ? paymentPlan.trial_period_days
+                        : 0
+                    }
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
 
-                    <Inputs
-                      type="price"
-                      name="amount"
-                      label="Amount"
-                      defaultValue={paymentPlan.amount}
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
+                  <Inputs
+                    type="price"
+                    name="amount"
+                    label="Amount"
+                    defaultValue={paymentPlan.amount}
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
 
-                    <Inputs
-                      type="select"
-                      name="interval"
-                      label="Interval"
-                      defaultValue={paymentPlan.interval}
-                      options={[
-                        { Daily: "day" },
-                        { Weekly: "week" },
-                        { Monthly: "month" },
-                        { Yearly: "year" },
-                      ]}
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
+                  <Inputs
+                    type="select"
+                    name="interval"
+                    label="Interval"
+                    defaultValue={paymentPlan.interval}
+                    options={[
+                      { Daily: "day" },
+                      { Weekly: "week" },
+                      { Monthly: "month" },
+                      { Yearly: "year" },
+                    ]}
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
 
-                    {/* TODO: Stripe limits interval count to be 2 years */}
-                    <Inputs
-                      type="number"
-                      name="interval_count"
-                      label="Interval Count"
-                      defaultValue={paymentPlan.interval_count}
-                      onChange={function() {}}
-                      receiveOnChange
-                      receiveValue
-                    />
-                  </div>
+                  {/* TODO: Stripe limits interval count to be 2 years */}
+                  <Inputs
+                    type="number"
+                    name="interval_count"
+                    label="Interval Count"
+                    defaultValue={paymentPlan.interval_count}
+                    onChange={function() {}}
+                    receiveOnChange
+                    receiveValue
+                  />
                 </div>
               </div>
-
-              <div
-                id="request-submission-box"
-                className="modal-footer text-right"
-              >
-                <Buttons
-                  containerClass="inline"
-                  btnType="primary"
-                  text="Submit"
-                  type="submit"
-                  value="submit"
-                />
-                <Buttons
-                  containerClass="inline"
-                  btnType="default"
-                  text="Close"
-                  onClick={this.props.onHide}
-                />
-              </div>
-            </DataForm>
-          </div>
-        );
-      } 
-        return (
-          <div>
-            <div className="p-20">
-              <p>
-                <strong>You do not have a payment plan setup.</strong>
-              </p>
             </div>
+
             <div
               id="request-submission-box"
               className="modal-footer text-right"
             >
               <Buttons
+                containerClass="inline"
+                btnType="primary"
+                text="Submit"
+                type="submit"
+                value="submit"
+              />
+              <Buttons
+                containerClass="inline"
                 btnType="default"
                 text="Close"
                 onClick={this.props.onHide}
               />
             </div>
-          </div>
-        );
-      
-    
+          </DataForm>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div className="p-20">
+          <p>
+            <strong>You do not have a payment plan setup.</strong>
+          </p>
+        </div>
+        <div id="request-submission-box" className="modal-footer text-right">
+          <Buttons btnType="default" text="Close" onClick={this.props.onHide} />
+        </div>
+      </div>
+    );
   }
 }
 

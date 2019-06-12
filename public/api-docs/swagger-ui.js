@@ -9,14 +9,13 @@
 
   {
     (function() {
-      const {template} = Handlebars;
-        const templates = (Handlebars.templates = Handlebars.templates || {});
+      const { template } = Handlebars;
+      const templates = (Handlebars.templates = Handlebars.templates || {});
       templates.apikey_auth = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `                <span class="key_auth__value">${ 
+          return `                <span class="key_auth__value">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -27,9 +26,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</span>\n`
-          );
+              : ""
+          }</span>\n`;
         },
         "3": function(container, depth0, helpers, partials, data) {
           return '                <input placeholder="api_key" class="auth_input input_apiKey_entry" name="apiKey" type="text"/>\n';
@@ -37,11 +35,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<div class="key_input_container">\n    <h3 class="auth__title">Api key authorization</h3>\n    <div class="auth__description">${ 
+          return `<div class="key_input_container">\n    <h3 class="auth__title">Api key authorization</h3>\n    <div class="auth__description">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -52,8 +49,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</div>\n    <div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">name:</span>\n            <span class="key_auth__value">${ 
+              : ""
+          }</div>\n    <div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">name:</span>\n            <span class="key_auth__value">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -64,8 +61,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</span>\n        </div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">in:</span>\n            <span class="key_auth__value">${ 
+              : ""
+          }</span>\n        </div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">in:</span>\n            <span class="key_auth__value">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -76,8 +73,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</span>\n        </div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">value:</span>\n${ 
+              : ""
+          }</span>\n        </div>\n        <div class="key_auth__field">\n            <span class="key_auth__label">value:</span>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -90,9 +87,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }        </div>\n    </div>\n</div>\n`
-          );
+              : ""
+          }        </div>\n    </div>\n</div>\n`;
         },
         useData: true,
       });
@@ -113,8 +109,7 @@
         "5": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `        <ul class="authorize-scopes">\n${ 
+          return `        <ul class="authorize-scopes">\n${
             (stack1 = helpers.each.call(
               depth0 != null ? depth0 : {},
               depth0 != null ? depth0.scopes : depth0,
@@ -127,17 +122,15 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }        </ul>\n`
-          );
+              : ""
+          }        </ul>\n`;
         },
         "6": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `                <li class="authorize__scope" title="${ 
+          return `                <li class="authorize__scope" title="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -148,8 +141,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -160,17 +153,15 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</li>\n`
-          );
+              : ""
+          }</li>\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `<div class="authorize__btn authorize__btn_operation\n${ 
+          return `<div class="authorize__btn authorize__btn_operation\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -183,8 +174,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }">\n${ 
+              : ""
+          }">\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.scopes : depth0,
@@ -197,9 +188,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</div>\n`
-          );
+              : ""
+          }</div>\n`;
         },
         useData: true,
       });
@@ -213,10 +203,9 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `<div class="auth_container">\n\n    <div class="auth_inner"></div>\n    <div class="auth_submit">\n${ 
+          return `<div class="auth_container">\n\n    <div class="auth_inner"></div>\n    <div class="auth_submit">\n${
             (stack1 = helpers.unless.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -229,8 +218,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isAuthorized : depth0,
               {
@@ -242,9 +232,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    </div>\n\n</div>\n`
-          );
+              : ""
+          }    </div>\n\n</div>\n`;
         },
         useData: true,
       });
@@ -255,8 +244,7 @@
         "3": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `                <span class="basic_auth__value">${ 
+          return `                <span class="basic_auth__value">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -267,9 +255,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</span>\n`
-          );
+              : ""
+          }</span>\n`;
         },
         "5": function(container, depth0, helpers, partials, data) {
           return '                <input required placeholder="username" class="basic_auth__username auth_input" name="username" type="text"/>\n';
@@ -280,10 +267,9 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `<div class='basic_auth_container'>\n    <h3 class="auth__title">Basic authentication${ 
+          return `<div class='basic_auth_container'>\n    <h3 class="auth__title">Basic authentication${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -296,8 +282,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</h3>\n    <form class="basic_input_container">\n        <div class="auth__description">${ 
+              : ""
+          }</h3>\n    <form class="basic_input_container">\n        <div class="auth__description">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -308,8 +294,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</div>\n        <div class="auth_label">\n            <span class="basic_auth__label" data-sw-translate>username:</span>\n${ 
+              : ""
+          }</div>\n        <div class="auth_label">\n            <span class="basic_auth__label" data-sw-translate>username:</span>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -322,8 +308,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }        </div>\n${ 
+              : ""
+          }        </div>\n${
             (stack1 = helpers.unless.call(
               alias1,
               depth0 != null ? depth0.isLogout : depth0,
@@ -336,9 +322,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    </form>\n</div>\n`
-          );
+              : ""
+          }    </form>\n</div>\n`;
         },
         useData: true,
       });
@@ -362,11 +347,10 @@
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `	<option value="${ 
+          return `	<option value="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -377,8 +361,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -389,9 +373,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</option>\n`
-          );
+              : ""
+          }</option>\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           return '  <option value="application/json">application/json</option>\n';
@@ -399,11 +382,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<label data-sw-translate for="${ 
+          return `<label data-sw-translate for="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -414,8 +396,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">Response Content Type</label>\n<select name="contentType" id="${ 
+              : ""
+          }">Response Content Type</label>\n<select name="contentType" id="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -426,8 +408,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">\n${ 
+              : ""
+          }">\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.produces : depth0,
@@ -440,20 +422,18 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</select>\n`
-          );
+              : ""
+          }</select>\n`;
         },
         useData: true,
       });
       templates.main = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `  <div class="info_title">${ 
+          return `  <div class="info_title">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -466,8 +446,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</div>\n  <div class="info_description markdown">${ 
+              : ""
+          }</div>\n  <div class="info_description markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -480,8 +460,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</div>\n${ 
+              : ""
+          }</div>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.externalDocs : depth0,
@@ -494,8 +474,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }  ${ 
+              : ""
+          }  ${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 = depth0 != null ? depth0.info : depth0) != null
@@ -510,8 +490,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n  ${ 
+              : ""
+          }\n  ${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 =
@@ -529,8 +509,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n  ${ 
+              : ""
+          }\n  ${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 =
@@ -548,8 +528,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n  ${ 
+              : ""
+          }\n  ${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 =
@@ -567,8 +547,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n  ${ 
+              : ""
+          }\n  ${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 = depth0 != null ? depth0.info : depth0) != null
@@ -583,17 +563,15 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n`
-          );
+              : ""
+          }\n`;
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `  <p>${ 
+          return `  <p>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -606,8 +584,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</p>\n  <a href="${ 
+              : ""
+          }</p>\n  <a href="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -620,8 +598,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }" target="_blank">${ 
+              : ""
+          }" target="_blank">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -634,15 +612,13 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</a>\n`
-          );
+              : ""
+          }</a>\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `<div class="info_tos"><a target="_blank" href="${ 
+          return `<div class="info_tos"><a target="_blank" href="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -655,15 +631,13 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }" data-sw-translate>Terms of service</a></div>`
-          );
+              : ""
+          }" data-sw-translate>Terms of service</a></div>`;
         },
         "6": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `<div><div class='info_name' style="display: inline" data-sw-translate>Created by </div> ${ 
+          return `<div><div class='info_name' style="display: inline" data-sw-translate>Created by </div> ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -679,17 +653,15 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</div>`
-          );
+              : ""
+          }</div>`;
         },
         "8": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<div class='info_url' data-sw-translate>See more at <a href="${ 
+          return `<div class='info_url' data-sw-translate>See more at <a href="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -705,8 +677,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -722,17 +694,15 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</a></div>`
-          );
+              : ""
+          }</a></div>`;
         },
         "10": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<div class='info_email'><a target="_parent" href="mailto:${ 
+          return `<div class='info_email'><a target="_parent" href="mailto:${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -748,8 +718,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }?subject=${ 
+              : ""
+          }?subject=${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -762,17 +732,15 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }" data-sw-translate>Contact the developer</a></div>`
-          );
+              : ""
+          }" data-sw-translate>Contact the developer</a></div>`;
         },
         "12": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<div class='info_license'><a target="_blank" href='${ 
+          return `<div class='info_license'><a target="_blank" href='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -788,8 +756,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -805,15 +773,13 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</a></div>`
-          );
+              : ""
+          }</a></div>`;
         },
         "14": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `  , <span style="font-variant: small-caps" data-sw-translate>api version</span>: ${ 
+          return `  , <span style="font-variant: small-caps" data-sw-translate>api version</span>: ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -826,17 +792,15 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }\n    `
-          );
+              : ""
+          }\n    `;
         },
         "16": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `    <span style="float:right"><a target="_blank" href="${ 
+          return `    <span style="float:right"><a target="_blank" href="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -847,8 +811,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }/debug?url=${ 
+              : ""
+          }/debug?url=${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -859,8 +823,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }"><img id="validator" src="${ 
+              : ""
+          }"><img id="validator" src="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -871,8 +835,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }?url=${ 
+              : ""
+          }?url=${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -883,17 +847,15 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }"></a>\n    </span>\n`
-          );
+              : ""
+          }"></a>\n    </span>\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `<div class='info' id='api_info'>\n${ 
+          return `<div class='info' id='api_info'>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.info : depth0,
@@ -906,8 +868,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</div>\n<div class='container' id='resources_container'>\n  <div class='authorize-wrapper'></div>\n\n  <ul id='resources'></ul>\n\n  <div class="footer">\n    <h4 style="color: #999">[ <span style="font-variant: small-caps">base url</span>: ${ 
+              : ""
+          }</div>\n<div class='container' id='resources_container'>\n  <div class='authorize-wrapper'></div>\n\n  <ul id='resources'></ul>\n\n  <div class="footer">\n    <h4 style="color: #999">[ <span style="font-variant: small-caps">base url</span>: ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -918,8 +880,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }\n${ 
+              : ""
+          }\n${
             (stack1 = helpers.if.call(
               alias1,
               (stack1 = depth0 != null ? depth0.info : depth0) != null
@@ -934,8 +896,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }]\n${ 
+              : ""
+          }]\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.validatorUrl : depth0,
@@ -948,9 +910,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    </h4>\n    </div>\n</div>\n`
-          );
+              : ""
+          }    </h4>\n    </div>\n</div>\n`;
         },
         useData: true,
       });
@@ -958,8 +919,7 @@
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `<p>Authorization URL: ${ 
+          return `<p>Authorization URL: ${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -970,15 +930,13 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</p>`
-          );
+              : ""
+          }</p>`;
         },
         "3": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `<p>Token URL: ${ 
+          return `<p>Token URL: ${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -989,9 +947,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</p>`
-          );
+              : ""
+          }</p>`;
         },
         "5": function(container, depth0, helpers, partials, data) {
           return '        <p>Please input username and password for password flow authorization</p>\n        <fieldset>\n            <div><label>Username: <input class="oauth-username" type="text" name="username"></label></div>\n            <div><label>Password: <input class="oauth-password" type="password" name="password"></label></div>\n        </fieldset>\n';
@@ -999,8 +956,7 @@
         "7": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `        <p>Setup client authentication.${ 
+          return `        <p>Setup client authentication.${
             (stack1 = helpers.if.call(
               depth0 != null ? depth0 : {},
               depth0 != null ? depth0.requireClientAuthenticaiton : depth0,
@@ -1013,20 +969,18 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</p>\n        <fieldset>\n            <div><label>Type:\n                <select class="oauth-client-authentication-type" name="client-authentication-type">\n                    <option value="none" selected>None or other</option>\n                    <option value="basic">Basic auth</option>\n                    <option value="request-body">Request body</option>\n                </select>\n            </label></div>\n            <div class="oauth-client-authentication" hidden>\n                <div><label>ClientId: <input class="oauth-client-id" type="text" name="client-id"></label></div>\n                <div><label>Secret: <input class="oauth-client-secret" type="text" name="client-secret"></label></div>\n            </div>\n        </fieldset>\n`
-          );
+              : ""
+          }</p>\n        <fieldset>\n            <div><label>Type:\n                <select class="oauth-client-authentication-type" name="client-authentication-type">\n                    <option value="none" selected>None or other</option>\n                    <option value="basic">Basic auth</option>\n                    <option value="request-body">Request body</option>\n                </select>\n            </label></div>\n            <div class="oauth-client-authentication" hidden>\n                <div><label>ClientId: <input class="oauth-client-id" type="text" name="client-id"></label></div>\n                <div><label>Secret: <input class="oauth-client-secret" type="text" name="client-secret"></label></div>\n            </div>\n        </fieldset>\n`;
         },
         "8": function(container, depth0, helpers, partials, data) {
           return "(Required)";
         },
         "10": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `            <li>\n                <input class="oauth-scope" type="checkbox" data-scope="${ 
+          return `            <li>\n                <input class="oauth-scope" type="checkbox" data-scope="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1037,8 +991,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }" oauthtype="${ 
+              : ""
+          }" oauthtype="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1049,8 +1003,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }"/>\n                <label>${ 
+              : ""
+          }"/>\n                <label>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1061,8 +1015,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label><br/>\n                <span class="api-scope-desc">${ 
+              : ""
+          }</label><br/>\n                <span class="api-scope-desc">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1073,8 +1027,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }\n${ 
+              : ""
+          }\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.OAuthSchemeKey : depth0,
@@ -1087,15 +1041,13 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }                </span>\n            </li>\n`
-          );
+              : ""
+          }                </span>\n            </li>\n`;
         },
         "11": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `                        (${ 
+          return `                        (${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1106,18 +1058,16 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            })\n`
-          );
+              : ""
+          })\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<div>\n    <h3 class="auth__title">OAuth2.0</h3>\n    <p>${ 
+          return `<div>\n    <h3 class="auth__title">OAuth2.0</h3>\n    <p>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -1128,8 +1078,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</p>\n    ${ 
+              : ""
+          }</p>\n    ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.authorizationUrl : depth0,
@@ -1142,8 +1092,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n    ${ 
+              : ""
+          }\n    ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.tokenUrl : depth0,
@@ -1156,8 +1106,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n    <p>flow: ${ 
+              : ""
+          }\n    <p>flow: ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1168,8 +1118,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</p>\n${ 
+              : ""
+          }</p>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isPasswordFlow : depth0,
@@ -1182,8 +1132,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.clientAuthentication : depth0,
               {
@@ -1195,8 +1146,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    <p><strong> ${ 
+              : ""
+          }    <p><strong> ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1207,8 +1158,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            } </strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>\n    <p>Scopes are used to grant an application different levels of access to data on behalf of the end user. Each API may declare one or more scopes.\n        <a href="#">Learn how to use</a>\n    </p>\n    <ul class="api-popup-scopes">\n${ 
+              : ""
+          } </strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>\n    <p>Scopes are used to grant an application different levels of access to data on behalf of the end user. Each API may declare one or more scopes.\n        <a href="#">Learn how to use</a>\n    </p>\n    <ul class="api-popup-scopes">\n${
             (stack1 = helpers.each.call(
               alias1,
               depth0 != null ? depth0.scopes : depth0,
@@ -1221,9 +1172,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    </ul>\n</div>`
-          );
+              : ""
+          }    </ul>\n</div>`;
         },
         useData: true,
       });
@@ -1237,8 +1187,7 @@
         "5": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `        <h4><span data-sw-translate>Implementation Notes</span></h4>\n        <div class="markdown">${ 
+          return `        <h4><span data-sw-translate>Implementation Notes</span></h4>\n        <div class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -1249,19 +1198,17 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</div>\n`
-          );
+              : ""
+          }</div>\n`;
         },
         "7": function(container, depth0, helpers, partials, data) {
           return "            <div class='authorize-wrapper authorize-wrapper_operation'></div>\n";
         },
         "9": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `          <div class="response-class">\n            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> ${ 
+          return `          <div class="response-class">\n            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1272,8 +1219,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            })</h4>\n              ${ 
+              : ""
+          })</h4>\n              ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.successDescription : depth0,
@@ -1286,15 +1233,13 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n            <p><span class="model-signature" /></p>\n            <br/>\n            <div class="response-content-type" />\n            </div>\n`
-          );
+              : ""
+          }\n            <p><span class="model-signature" /></p>\n            <br/>\n            <div class="response-content-type" />\n            </div>\n`;
         },
         "10": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `<div class="markdown">${ 
+          return `<div class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -1305,15 +1250,13 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }</div>`
-          );
+              : ""
+          }</div>`;
         },
         "12": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `          <h4 data-sw-translate>Headers</h4>\n          <table class="headers">\n            <thead>\n              <tr>\n                <th style="width: 100px; max-width: 100px" data-sw-translate>Header</th>\n                <th style="width: 310px; max-width: 310px" data-sw-translate>Description</th>\n                <th style="width: 200px; max-width: 200px" data-sw-translate>Type</th>\n                <th style="width: 320px; max-width: 320px" data-sw-translate>Other</th>\n              </tr>\n            </thead>\n            <tbody>\n${ 
+          return `          <h4 data-sw-translate>Headers</h4>\n          <table class="headers">\n            <thead>\n              <tr>\n                <th style="width: 100px; max-width: 100px" data-sw-translate>Header</th>\n                <th style="width: 310px; max-width: 310px" data-sw-translate>Description</th>\n                <th style="width: 200px; max-width: 200px" data-sw-translate>Type</th>\n                <th style="width: 320px; max-width: 320px" data-sw-translate>Other</th>\n              </tr>\n            </thead>\n            <tbody>\n${
             (stack1 = helpers.each.call(
               depth0 != null ? depth0 : {},
               depth0 != null ? depth0.headers : depth0,
@@ -1326,28 +1269,24 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }            </tbody>\n          </table>\n`
-          );
+              : ""
+          }            </tbody>\n          </table>\n`;
         },
         "13": function(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          let helper;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `              <tr>\n                <td>${ 
-            container.escapeExpression(
-              ((helper =
-                (helper = helpers.key || (data && data.key)) != null
-                  ? helper
-                  : alias2),
-              typeof helper === "function"
-                ? helper.call(alias1, { name: "key", hash: {}, data })
-                : helper),
-            ) 
-            }</td>\n                <td>${ 
+          return `              <tr>\n                <td>${container.escapeExpression(
+            ((helper =
+              (helper = helpers.key || (data && data.key)) != null
+                ? helper
+                : alias2),
+            typeof helper === "function"
+              ? helper.call(alias1, { name: "key", hash: {}, data })
+              : helper),
+          )}</td>\n                <td>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -1358,8 +1297,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n                <td>${ 
+              : ""
+          }</td>\n                <td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1370,8 +1309,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n                <td>${ 
+              : ""
+          }</td>\n                <td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1382,9 +1321,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n              </tr>\n`
-          );
+              : ""
+          }</td>\n              </tr>\n`;
         },
         "15": function(container, depth0, helpers, partials, data) {
           return '          <h4 data-sw-translate>Parameters</h4>\n          <table class=\'fullwidth parameters\'>\n          <thead>\n            <tr>\n            <th style="width: 100px; max-width: 100px" data-sw-translate>Parameter</th>\n            <th style="width: 310px; max-width: 310px" data-sw-translate>Value</th>\n            <th style="width: 200px; max-width: 200px" data-sw-translate>Description</th>\n            <th style="width: 100px; max-width: 100px" data-sw-translate>Parameter Type</th>\n            <th style="width: 220px; max-width: 230px" data-sw-translate>Data Type</th>\n            </tr>\n          </thead>\n          <tbody class="operation-params">\n\n          </tbody>\n          </table>\n';
@@ -1404,12 +1342,11 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
-            const alias3 = container.escapeExpression;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
+          const alias3 = container.escapeExpression;
 
-          return (
-            `  <ul class='operations' >\n    <li class='${ 
+          return `  <ul class='operations' >\n    <li class='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1420,8 +1357,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            } operation' id='${ 
+              : ""
+          } operation' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1432,8 +1369,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }_${ 
+              : ""
+          }_${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1444,24 +1381,20 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>\n      <div class='heading'>\n        <h3>\n          <span class='http_method'>\n          <a href='#!/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.encodedParentId : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.nickname : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }' class="toggleOperation">${ 
+              : ""
+          }'>\n      <div class='heading'>\n        <h3>\n          <span class='http_method'>\n          <a href='#!/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.encodedParentId : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.nickname : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}' class="toggleOperation">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1472,24 +1405,20 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</a>\n          </span>\n          <span class='path'>\n          <a href='#!/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.encodedParentId : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.nickname : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }' class="toggleOperation ${ 
+              : ""
+          }</a>\n          </span>\n          <span class='path'>\n          <a href='#!/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.encodedParentId : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.nickname : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}' class="toggleOperation ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.deprecated : depth0,
@@ -1502,8 +1431,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1514,24 +1443,20 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</a>\n          </span>\n        </h3>\n        <ul class='options'>\n          <li>\n          <a href='#!/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.encodedParentId : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }/${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.nickname : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }' class="toggleOperation"><span class="markdown">${ 
+              : ""
+          }</a>\n          </span>\n        </h3>\n        <ul class='options'>\n          <li>\n          <a href='#!/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.encodedParentId : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}/${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.nickname : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}' class="toggleOperation"><span class="markdown">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1542,24 +1467,20 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</span></a>\n          </li>\n        </ul>\n      </div>\n      <div class='content' id='${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.encodedParentId : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }_${ 
-            alias3(
-              (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
-                alias1,
-                depth0 != null ? depth0.nickname : depth0,
-                { name: "sanitize", hash: {}, data },
-              ),
-            ) 
-            }_content' style='display:none'>\n${ 
+              : ""
+          }</span></a>\n          </li>\n        </ul>\n      </div>\n      <div class='content' id='${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.encodedParentId : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}_${alias3(
+            (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(
+              alias1,
+              depth0 != null ? depth0.nickname : depth0,
+              { name: "sanitize", hash: {}, data },
+            ),
+          )}_content' style='display:none'>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.deprecated : depth0,
@@ -1572,8 +1493,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.description : depth0,
               {
@@ -1585,8 +1507,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.security : depth0,
               {
@@ -1598,8 +1521,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.type : depth0,
               {
@@ -1611,8 +1535,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n${ 
+              : ""
+          }\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.headers : depth0,
@@ -1625,8 +1549,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n        <form accept-charset='UTF-8' class='sandbox'>\n          <div style='margin:0;padding:0;display:inline'></div>\n${ 
+              : ""
+          }\n        <form accept-charset='UTF-8' class='sandbox'>\n          <div style='margin:0;padding:0;display:inline'></div>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.parameters : depth0,
@@ -1639,8 +1563,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.responseMessages : depth0,
               {
@@ -1652,8 +1577,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isReadOnly : depth0,
               {
@@ -1665,8 +1591,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }        </form>\n        <div class='response' style='display:none'>\n          <h4 class='curl'>Curl</h4>\n          <div class='block curl'></div>\n          <h4 data-sw-translate>Request URL</h4>\n          <div class='block request_url'></div>\n${ 
+              : ""
+          }        </form>\n        <div class='response' style='display:none'>\n          <h4 class='curl'>Curl</h4>\n          <div class='block curl'></div>\n          <h4 data-sw-translate>Request URL</h4>\n          <div class='block request_url'></div>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.showRequestHeaders : depth0,
@@ -1679,9 +1605,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }          <h4 data-sw-translate>Response Body</h4>\n          <div class='block response_body'></div>\n          <h4 data-sw-translate>Response Code</h4>\n          <div class='block response_code'></div>\n          <h4 data-sw-translate>Response Headers</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n`
-          );
+              : ""
+          }          <h4 data-sw-translate>Response Body</h4>\n          <div class='block response_body'></div>\n          <h4 data-sw-translate>Response Code</h4>\n          <div class='block response_code'></div>\n          <h4 data-sw-translate>Response Headers</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n`;
         },
         useData: true,
       });
@@ -1705,11 +1630,10 @@
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `			<input type="file" name='${ 
+          return `			<input type="file" name='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1720,8 +1644,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1732,9 +1656,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'/>\n			<div class="parameter-content-type" />\n`
-          );
+              : ""
+          }'/>\n			<div class="parameter-content-type" />\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -1755,11 +1678,10 @@
         },
         "5": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `				<div class="editor_holder"></div>\n				<textarea class='body-textarea' name='${ 
+          return `				<div class="editor_holder"></div>\n				<textarea class='body-textarea' name='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1770,8 +1692,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1782,8 +1704,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1794,17 +1716,15 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</textarea>\n        <br />\n        <div class="parameter-content-type" />\n`
-          );
+              : ""
+          }</textarea>\n        <br />\n        <div class="parameter-content-type" />\n`;
         },
         "7": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `				<textarea class='body-textarea' name='${ 
+          return `				<textarea class='body-textarea' name='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1815,8 +1735,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1827,9 +1747,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'></textarea>\n				<div class="editor_holder"></div>\n				<br />\n				<div class="parameter-content-type" />\n`
-          );
+              : ""
+          }'></textarea>\n				<div class="editor_holder"></div>\n				<br />\n				<div class="parameter-content-type" />\n`;
         },
         "9": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -1871,11 +1790,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td class='code'><label for='${ 
+          return `<td class='code'><label for='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1886,8 +1804,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1898,8 +1816,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label></td>\n<td>\n\n${ 
+              : ""
+          }</label></td>\n<td>\n\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isBody : depth0,
@@ -1912,8 +1830,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n</td>\n<td class="markdown">${ 
+              : ""
+          }\n</td>\n<td class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -1924,8 +1842,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td>${ 
+              : ""
+          }</td>\n<td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -1936,9 +1854,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td>\n	<span class="model-signature"></span>\n</td>\n`
-          );
+              : ""
+          }</td>\n<td>\n	<span class="model-signature"></span>\n</td>\n`;
         },
         useData: true,
       });
@@ -1955,8 +1872,7 @@
         "7": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `      <option ${ 
+          return `      <option ${
             (stack1 = helpers.unless.call(
               depth0 != null ? depth0 : {},
               depth0 != null ? depth0.hasDefault : depth0,
@@ -1969,20 +1885,18 @@
               },
             )) != null
               ? stack1
-              : "" 
-            } value=''></option>\n`
-          );
+              : ""
+          } value=''></option>\n`;
         },
         "8": function(container, depth0, helpers, partials, data) {
           return '  selected="" ';
         },
         "10": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `\n      <option ${ 
+          return `\n      <option ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isDefault : depth0,
@@ -1995,8 +1909,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }  value='${ 
+              : ""
+          }  value='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2007,8 +1921,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'> ${ 
+              : ""
+          }'> ${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2019,8 +1933,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            } ${ 
+              : ""
+          } ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isDefault : depth0,
@@ -2033,9 +1947,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            } </option>\n\n`
-          );
+              : ""
+          } </option>\n\n`;
         },
         "11": function(container, depth0, helpers, partials, data) {
           return ' selected=""  ';
@@ -2052,12 +1965,11 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          let helper;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td class='code${ 
+          return `<td class='code${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.required : depth0,
@@ -2070,8 +1982,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }'><label for='${ 
+              : ""
+          }'><label for='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2082,8 +1994,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2094,8 +2006,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label></td>\n<td>\n  <select ${ 
+              : ""
+          }</label></td>\n<td>\n  <select ${
             (stack1 = (
               helpers.isArray ||
               (depth0 && depth0.isArray) ||
@@ -2108,8 +2020,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            } class="parameter ${ 
+              : ""
+          } class="parameter ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.required : depth0,
@@ -2122,8 +2034,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }" name="${ 
+              : ""
+          }" name="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2134,8 +2046,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }" id="${ 
+              : ""
+          }" id="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2146,8 +2058,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">\n\n${ 
+              : ""
+          }">\n\n${
             (stack1 = helpers.unless.call(
               alias1,
               depth0 != null ? depth0.required : depth0,
@@ -2160,8 +2072,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n${ 
+              : ""
+          }\n${
             (stack1 = helpers.each.call(
               alias1,
               (stack1 = depth0 != null ? depth0.allowableValues : depth0) !=
@@ -2177,8 +2089,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n  </select>\n</td>\n<td class="markdown">${ 
+              : ""
+          }\n  </select>\n</td>\n<td class="markdown">${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.required : depth0,
@@ -2191,8 +2103,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 =
+              : ""
+          }${
+            (stack1 =
               ((helper =
                 (helper =
                   helpers.description ||
@@ -2207,8 +2120,9 @@
                   })
                 : helper)) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.required : depth0,
               {
@@ -2220,8 +2134,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</td>\n<td>${ 
+              : ""
+          }</td>\n<td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2232,20 +2146,18 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td><span class="model-signature"></span></td>\n`
-          );
+              : ""
+          }</td>\n<td><span class="model-signature"></span></td>\n`;
         },
         useData: true,
       });
       templates.param_readonly = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `        <textarea class='body-textarea' readonly='readonly' name='${ 
+          return `        <textarea class='body-textarea' readonly='readonly' name='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2256,8 +2168,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2268,8 +2180,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2280,9 +2192,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</textarea>\n        <div class="parameter-content-type" />\n`
-          );
+              : ""
+          }</textarea>\n        <div class="parameter-content-type" />\n`;
         },
         "3": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -2304,8 +2215,7 @@
         "4": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `            ${ 
+          return `            ${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2316,9 +2226,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }\n`
-          );
+              : ""
+          }\n`;
         },
         "6": function(container, depth0, helpers, partials, data) {
           return "            (empty)\n";
@@ -2326,11 +2235,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td class='code'><label for='${ 
+          return `<td class='code'><label for='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2341,8 +2249,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2353,8 +2261,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label></td>\n<td>\n${ 
+              : ""
+          }</label></td>\n<td>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isBody : depth0,
@@ -2367,8 +2275,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</td>\n<td class="markdown">${ 
+              : ""
+          }</td>\n<td class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2379,8 +2287,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td>${ 
+              : ""
+          }</td>\n<td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2391,20 +2299,18 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td><span class="model-signature"></span></td>\n`
-          );
+              : ""
+          }</td>\n<td><span class="model-signature"></span></td>\n`;
         },
         useData: true,
       });
       templates.param_readonly_required = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `        <textarea class='body-textarea' readonly='readonly' placeholder='(required)' name='${ 
+          return `        <textarea class='body-textarea' readonly='readonly' placeholder='(required)' name='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2415,8 +2321,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2427,8 +2333,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2439,9 +2345,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</textarea>\n`
-          );
+              : ""
+          }</textarea>\n`;
         },
         "3": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -2463,8 +2368,7 @@
         "4": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `            ${ 
+          return `            ${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2475,9 +2379,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }\n`
-          );
+              : ""
+          }\n`;
         },
         "6": function(container, depth0, helpers, partials, data) {
           return "            (empty)\n";
@@ -2485,11 +2388,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td class='code required'><label for='${ 
+          return `<td class='code required'><label for='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2500,8 +2402,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2512,8 +2414,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label></td>\n<td>\n${ 
+              : ""
+          }</label></td>\n<td>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isBody : depth0,
@@ -2526,8 +2428,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</td>\n<td class="markdown">${ 
+              : ""
+          }</td>\n<td class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2538,8 +2440,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td>${ 
+              : ""
+          }</td>\n<td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2550,9 +2452,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td><span class="model-signature"></span></td>\n`
-          );
+              : ""
+          }</td>\n<td><span class="model-signature"></span></td>\n`;
         },
         useData: true,
       });
@@ -2576,11 +2477,10 @@
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `			<input type="file" name='${ 
+          return `			<input type="file" name='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2591,8 +2491,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2603,9 +2503,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'/>\n`
-          );
+              : ""
+          }'/>\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -2626,11 +2525,10 @@
         },
         "5": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `				<div class="editor_holder"></div>\n				<textarea class='body-textarea required' placeholder='(required)' name='${ 
+          return `				<div class="editor_holder"></div>\n				<textarea class='body-textarea required' placeholder='(required)' name='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2641,8 +2539,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id="${ 
+              : ""
+          }' id="${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2653,8 +2551,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2665,17 +2563,15 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</textarea>\n        <br />\n        <div class="parameter-content-type" />\n`
-          );
+              : ""
+          }</textarea>\n        <br />\n        <div class="parameter-content-type" />\n`;
         },
         "7": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `				<textarea class='body-textarea required' placeholder='(required)' name='${ 
+          return `				<textarea class='body-textarea required' placeholder='(required)' name='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2686,8 +2582,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2698,9 +2594,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'></textarea>\n				<div class="editor_holder"></div>\n				<br />\n				<div class="parameter-content-type" />\n`
-          );
+              : ""
+          }'></textarea>\n				<div class="editor_holder"></div>\n				<br />\n				<div class="parameter-content-type" />\n`;
         },
         "9": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -2721,11 +2616,10 @@
         },
         "10": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `			<input class='parameter required' type='file' name='${ 
+          return `			<input class='parameter required' type='file' name='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2736,8 +2630,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='${ 
+              : ""
+          }' id='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2748,9 +2642,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'/>\n`
-          );
+              : ""
+          }'/>\n`;
         },
         "12": function(container, depth0, helpers, partials, data) {
           let stack1;
@@ -2775,11 +2668,10 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td class='code required'><label for='${ 
+          return `<td class='code required'><label for='${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2790,8 +2682,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }'>${ 
+              : ""
+          }'>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2802,8 +2694,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</label></td>\n<td>\n${ 
+              : ""
+          }</label></td>\n<td>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isBody : depth0,
@@ -2816,8 +2708,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</td>\n<td>\n	<strong><span class="markdown">${ 
+              : ""
+          }</td>\n<td>\n	<strong><span class="markdown">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2828,8 +2720,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</span></strong>\n</td>\n<td>${ 
+              : ""
+          }</span></strong>\n</td>\n<td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -2840,9 +2732,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td><span class="model-signature"></span></td>\n`
-          );
+              : ""
+          }</td>\n<td><span class="model-signature"></span></td>\n`;
         },
         useData: true,
       });
@@ -2866,11 +2757,10 @@
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `  <option value="${ 
+          return `  <option value="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2881,8 +2771,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2893,9 +2783,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</option>\n`
-          );
+              : ""
+          }</option>\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           return '  <option value="application/json">application/json</option>\n';
@@ -2903,29 +2792,26 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          let helper;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<label for="${ 
-            container.escapeExpression(
-              ((helper =
-                (helper =
-                  helpers.parameterContentTypeId ||
-                  (depth0 != null ? depth0.parameterContentTypeId : depth0)) !=
-                null
-                  ? helper
-                  : alias2),
-              typeof helper === "function"
-                ? helper.call(alias1, {
-                    name: "parameterContentTypeId",
-                    hash: {},
-                    data,
-                  })
-                : helper),
-            ) 
-            }" data-sw-translate>Parameter content type:</label>\n<select name="parameterContentType" id="${ 
+          return `<label for="${container.escapeExpression(
+            ((helper =
+              (helper =
+                helpers.parameterContentTypeId ||
+                (depth0 != null ? depth0.parameterContentTypeId : depth0)) !=
+              null
+                ? helper
+                : alias2),
+            typeof helper === "function"
+              ? helper.call(alias1, {
+                  name: "parameterContentTypeId",
+                  hash: {},
+                  data,
+                })
+              : helper),
+          )}" data-sw-translate>Parameter content type:</label>\n<select name="parameterContentType" id="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -2936,8 +2822,8 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }">\n${ 
+              : ""
+          }">\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.consumes : depth0,
@@ -2950,9 +2836,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</select>\n`
-          );
+              : ""
+          }</select>\n`;
         },
         useData: true,
       });
@@ -2961,25 +2846,21 @@
         main(container, depth0, helpers, partials, data) {
           let helper;
 
-          return (
-            `<div class="api-popup-dialog-wrapper">\n    <div class="api-popup-title">${ 
-            container.escapeExpression(
-              ((helper =
-                (helper =
-                  helpers.title || (depth0 != null ? depth0.title : depth0)) !=
-                null
-                  ? helper
-                  : helpers.helperMissing),
-              typeof helper === "function"
-                ? helper.call(depth0 != null ? depth0 : {}, {
-                    name: "title",
-                    hash: {},
-                    data,
-                  })
-                : helper),
-            ) 
-            }</div>\n    <div class="api-popup-content"></div>\n    <p class="error-msg"></p>\n    <div class="api-popup-actions">\n        <button class="api-popup-cancel api-button gray" type="button">Cancel</button>\n    </div>\n</div>\n<div class="api-popup-dialog-shadow"></div>`
-          );
+          return `<div class="api-popup-dialog-wrapper">\n    <div class="api-popup-title">${container.escapeExpression(
+            ((helper =
+              (helper =
+                helpers.title || (depth0 != null ? depth0.title : depth0)) !=
+              null
+                ? helper
+                : helpers.helperMissing),
+            typeof helper === "function"
+              ? helper.call(depth0 != null ? depth0 : {}, {
+                  name: "title",
+                  hash: {},
+                  data,
+                })
+              : helper),
+          )}</div>\n    <div class="api-popup-content"></div>\n    <p class="error-msg"></p>\n    <div class="api-popup-actions">\n        <button class="api-popup-cancel api-button gray" type="button">Cancel</button>\n    </div>\n</div>\n<div class="api-popup-dialog-shadow"></div>`;
         },
         useData: true,
       });
@@ -2990,8 +2871,7 @@
         "3": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `    <li>\n      <a href='${ 
+          return `    <li>\n      <a href='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3002,55 +2882,53 @@
               { name: "sanitize", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }' data-sw-translate>Raw</a>\n    </li>\n`
-          );
+              : ""
+          }' data-sw-translate>Raw</a>\n    </li>\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            let options;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
-            let buffer =
-              `<div class='heading'>\n  <h2>\n    <a href='#!/${ 
-              (stack1 = (
-                helpers.sanitize ||
-                (depth0 && depth0.sanitize) ||
-                alias2
-              ).call(alias1, depth0 != null ? depth0.id : depth0, {
-                name: "sanitize",
-                hash: {},
-                data,
-              })) != null
-                ? stack1
-                : "" 
-              }' class="toggleEndpointList" data-id="${ 
-              (stack1 = (
-                helpers.sanitize ||
-                (depth0 && depth0.sanitize) ||
-                alias2
-              ).call(alias1, depth0 != null ? depth0.id : depth0, {
-                name: "sanitize",
-                hash: {},
-                data,
-              })) != null
-                ? stack1
-                : "" 
-              }">${ 
-              (stack1 = (
-                helpers.sanitize ||
-                (depth0 && depth0.sanitize) ||
-                alias2
-              ).call(alias1, depth0 != null ? depth0.name : depth0, {
-                name: "sanitize",
-                hash: {},
-                data,
-              })) != null
-                ? stack1
-                : "" 
-              }</a> `;
+          let helper;
+          let options;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
+          let buffer = `<div class='heading'>\n  <h2>\n    <a href='#!/${
+            (stack1 = (
+              helpers.sanitize ||
+              (depth0 && depth0.sanitize) ||
+              alias2
+            ).call(alias1, depth0 != null ? depth0.id : depth0, {
+              name: "sanitize",
+              hash: {},
+              data,
+            })) != null
+              ? stack1
+              : ""
+          }' class="toggleEndpointList" data-id="${
+            (stack1 = (
+              helpers.sanitize ||
+              (depth0 && depth0.sanitize) ||
+              alias2
+            ).call(alias1, depth0 != null ? depth0.id : depth0, {
+              name: "sanitize",
+              hash: {},
+              data,
+            })) != null
+              ? stack1
+              : ""
+          }">${
+            (stack1 = (
+              helpers.sanitize ||
+              (depth0 && depth0.sanitize) ||
+              alias2
+            ).call(alias1, depth0 != null ? depth0.name : depth0, {
+              name: "sanitize",
+              hash: {},
+              data,
+            })) != null
+              ? stack1
+              : ""
+          }</a> `;
           stack1 =
             ((helper =
               (helper =
@@ -3074,8 +2952,7 @@
           if (stack1 != null) {
             buffer += stack1;
           }
-          return (
-            `${buffer +
+          return `${buffer +
             ((stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3086,8 +2963,7 @@
               data,
             })) != null
               ? stack1
-              : "") 
-            }\n  </h2>\n  <ul class='options'>\n    <li>\n      <a href='#!/${ 
+              : "")}\n  </h2>\n  <ul class='options'>\n    <li>\n      <a href='#!/${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3098,8 +2974,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' id='endpointListTogger_${ 
+              : ""
+          }' id='endpointListTogger_${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3110,8 +2986,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }' class="toggleEndpointList" data-id="${ 
+              : ""
+          }' class="toggleEndpointList" data-id="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3122,8 +2998,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }" data-sw-translate>Show/Hide</a>\n    </li>\n    <li>\n      <a href='#' class="collapseResource" data-id="${ 
+              : ""
+          }" data-sw-translate>Show/Hide</a>\n    </li>\n    <li>\n      <a href='#' class="collapseResource" data-id="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3134,8 +3010,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }" data-sw-translate>\n        List Operations\n      </a>\n    </li>\n    <li>\n      <a href='#' class="expandResource" data-id="${ 
+              : ""
+          }" data-sw-translate>\n        List Operations\n      </a>\n    </li>\n    <li>\n      <a href='#' class="expandResource" data-id="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3146,8 +3022,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }" data-sw-translate>\n        Expand Operations\n      </a>\n    </li>\n${ 
+              : ""
+          }" data-sw-translate>\n        Expand Operations\n      </a>\n    </li>\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.url : depth0,
@@ -3160,8 +3036,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }  </ul>\n</div>\n<ul class='endpoints' id='${ 
+              : ""
+          }  </ul>\n</div>\n<ul class='endpoints' id='${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3172,9 +3048,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }_endpoint_list' style='display:none'>\n\n</ul>\n`
-          );
+              : ""
+          }_endpoint_list' style='display:none'>\n\n</ul>\n`;
         },
         useData: true,
       });
@@ -3198,11 +3073,10 @@
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `  <option value="${ 
+          return `  <option value="${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3213,8 +3087,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }">${ 
+              : ""
+          }">${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3225,9 +3099,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</option>\n`
-          );
+              : ""
+          }</option>\n`;
         },
         "4": function(container, depth0, helpers, partials, data) {
           return '  <option value="application/json">application/json</option>\n';
@@ -3235,48 +3108,43 @@
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
-            const alias3 = "function";
-            const alias4 = container.escapeExpression;
+          let helper;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
+          const alias3 = "function";
+          const alias4 = container.escapeExpression;
 
-          return (
-            `<label data-sw-translate for="${ 
-            alias4(
-              ((helper =
-                (helper =
-                  helpers.responseContentTypeId ||
-                  (depth0 != null ? depth0.responseContentTypeId : depth0)) !=
-                null
-                  ? helper
-                  : alias2),
-              typeof helper === alias3
-                ? helper.call(alias1, {
-                    name: "responseContentTypeId",
-                    hash: {},
-                    data,
-                  })
-                : helper),
-            ) 
-            }">Response Content Type</label>\n<select name="responseContentType" id="${ 
-            alias4(
-              ((helper =
-                (helper =
-                  helpers.responseContentTypeId ||
-                  (depth0 != null ? depth0.responseContentTypeId : depth0)) !=
-                null
-                  ? helper
-                  : alias2),
-              typeof helper === alias3
-                ? helper.call(alias1, {
-                    name: "responseContentTypeId",
-                    hash: {},
-                    data,
-                  })
-                : helper),
-            ) 
-            }">\n${ 
+          return `<label data-sw-translate for="${alias4(
+            ((helper =
+              (helper =
+                helpers.responseContentTypeId ||
+                (depth0 != null ? depth0.responseContentTypeId : depth0)) !=
+              null
+                ? helper
+                : alias2),
+            typeof helper === alias3
+              ? helper.call(alias1, {
+                  name: "responseContentTypeId",
+                  hash: {},
+                  data,
+                })
+              : helper),
+          )}">Response Content Type</label>\n<select name="responseContentType" id="${alias4(
+            ((helper =
+              (helper =
+                helpers.responseContentTypeId ||
+                (depth0 != null ? depth0.responseContentTypeId : depth0)) !=
+              null
+                ? helper
+                : alias2),
+            typeof helper === alias3
+              ? helper.call(alias1, {
+                  name: "responseContentTypeId",
+                  hash: {},
+                  data,
+                })
+              : helper),
+          )}">\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.produces : depth0,
@@ -3289,31 +3157,27 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }</select>\n`
-          );
+              : ""
+          }</select>\n`;
         },
         useData: true,
       });
       templates.signature = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `\n<div>\n<ul class="signature-nav">\n  <li><a class="description-link" href="#" data-sw-translate>Model</a></li>\n  <li><a class="snippet-link" href="#" data-sw-translate>Example Value</a></li>\n</ul>\n<div>\n\n<div class="signature-container">\n  <div class="description">\n      ${ 
-            container.escapeExpression(
-              (
-                helpers.sanitize ||
-                (depth0 && depth0.sanitize) ||
-                helpers.helperMissing
-              ).call(alias1, depth0 != null ? depth0.signature : depth0, {
-                name: "sanitize",
-                hash: {},
-                data,
-              }),
-            ) 
-            }\n  </div>\n\n  <div class="snippet">\n${ 
+          return `\n<div>\n<ul class="signature-nav">\n  <li><a class="description-link" href="#" data-sw-translate>Model</a></li>\n  <li><a class="snippet-link" href="#" data-sw-translate>Example Value</a></li>\n</ul>\n<div>\n\n<div class="signature-container">\n  <div class="description">\n      ${container.escapeExpression(
+            (
+              helpers.sanitize ||
+              (depth0 && depth0.sanitize) ||
+              helpers.helperMissing
+            ).call(alias1, depth0 != null ? depth0.signature : depth0, {
+              name: "sanitize",
+              hash: {},
+              data,
+            }),
+          )}\n  </div>\n\n  <div class="snippet">\n${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.sampleJSON : depth0,
@@ -3326,8 +3190,9 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }${(stack1 = helpers.if.call(
+              : ""
+          }${
+            (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.sampleXML : depth0,
               {
@@ -3339,16 +3204,14 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }  </div>\n</div>\n`
-          );
+              : ""
+          }  </div>\n</div>\n`;
         },
         "2": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `      <div class="snippet_json">\n        <pre><code>${ 
+          return `      <div class="snippet_json">\n        <pre><code>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3359,8 +3222,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</code></pre>\n        ${ 
+              : ""
+          }</code></pre>\n        ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isParam : depth0,
@@ -3373,19 +3236,17 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n      </div>\n`
-          );
+              : ""
+          }\n      </div>\n`;
         },
         "3": function(container, depth0, helpers, partials, data) {
           return '<small class="notice" data-sw-translate></small>';
         },
         "5": function(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
+          const alias1 = depth0 != null ? depth0 : {};
 
-          return (
-            `    <div class="snippet_xml">\n      <pre><code>${ 
+          return `    <div class="snippet_xml">\n      <pre><code>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3396,8 +3257,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</code></pre>\n      ${ 
+              : ""
+          }</code></pre>\n      ${
             (stack1 = helpers.if.call(
               alias1,
               depth0 != null ? depth0.isParam : depth0,
@@ -3410,15 +3271,13 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }\n    </div>\n`
-          );
+              : ""
+          }\n    </div>\n`;
         },
         "7": function(container, depth0, helpers, partials, data) {
           let stack1;
 
-          return (
-            `    ${ 
+          return `    ${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3429,9 +3288,8 @@
               { name: "escape", hash: {}, data },
             )) != null
               ? stack1
-              : "" 
-            }\n`
-          );
+              : ""
+          }\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
@@ -3462,22 +3320,19 @@
       templates.status_code = template({
         "1": function(container, depth0, helpers, partials, data) {
           let stack1;
-            let helper;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          let helper;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `      <tr>\n        <td>${ 
-            container.escapeExpression(
-              ((helper =
-                (helper = helpers.key || (data && data.key)) != null
-                  ? helper
-                  : alias2),
-              typeof helper === "function"
-                ? helper.call(alias1, { name: "key", hash: {}, data })
-                : helper),
-            ) 
-            }</td>\n        <td>${ 
+          return `      <tr>\n        <td>${container.escapeExpression(
+            ((helper =
+              (helper = helpers.key || (data && data.key)) != null
+                ? helper
+                : alias2),
+            typeof helper === "function"
+              ? helper.call(alias1, { name: "key", hash: {}, data })
+              : helper),
+          )}</td>\n        <td>${
             (stack1 = (
               helpers.sanitize ||
               (depth0 && depth0.sanitize) ||
@@ -3488,8 +3343,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n        <td>${ 
+              : ""
+          }</td>\n        <td>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3500,18 +3355,16 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n      </tr>\n`
-          );
+              : ""
+          }</td>\n      </tr>\n`;
         },
         compiler: [7, ">= 4.0.0"],
         main(container, depth0, helpers, partials, data) {
           let stack1;
-            const alias1 = depth0 != null ? depth0 : {};
-            const alias2 = helpers.helperMissing;
+          const alias1 = depth0 != null ? depth0 : {};
+          const alias2 = helpers.helperMissing;
 
-          return (
-            `<td width='15%' class='code'>${ 
+          return `<td width='15%' class='code'>${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3522,8 +3375,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td class="markdown">${ 
+              : ""
+          }</td>\n<td class="markdown">${
             (stack1 = (
               helpers.escape ||
               (depth0 && depth0.escape) ||
@@ -3534,8 +3387,8 @@
               data,
             })) != null
               ? stack1
-              : "" 
-            }</td>\n<td width='50%'><span class="model-signature" /></td>\n<td class="headers">\n  <table>\n    <tbody>\n${ 
+              : ""
+          }</td>\n<td width='50%'><span class="model-signature" /></td>\n<td class="headers">\n  <table>\n    <tbody>\n${
             (stack1 = helpers.each.call(
               alias1,
               depth0 != null ? depth0.headers : depth0,
@@ -3548,9 +3401,8 @@
               },
             )) != null
               ? stack1
-              : "" 
-            }    </tbody>\n  </table>\n</td>`
-          );
+              : ""
+          }    </tbody>\n  </table>\n</td>`;
         },
         useData: true,
       });
@@ -3680,10 +3532,10 @@
           if (fragments[0].length > 0) {
             // prevent matching "#/"
             // Expand all operations for the resource and scroll to it
-            var dom_id = `resource_${  fragments[0]}`;
+            var dom_id = `resource_${fragments[0]}`;
 
             Docs.expandEndpointListForResource(fragments[0]);
-            $(`#${  dom_id}`).slideto({ highlight: false });
+            $(`#${dom_id}`).slideto({ highlight: false });
           }
           break;
         case 2:
@@ -3691,27 +3543,27 @@
 
           // Expand Resource
           Docs.expandEndpointListForResource(fragments[0]);
-          $(`#${  dom_id}`).slideto({ highlight: false });
+          $(`#${dom_id}`).slideto({ highlight: false });
 
           // Expand operation
           var li_dom_id = fragments.join("_");
-          var li_content_dom_id = `${li_dom_id  }_content`;
+          var li_content_dom_id = `${li_dom_id}_content`;
 
-          Docs.expandOperation($(`#${  li_content_dom_id}`));
-          $(`#${  li_dom_id}`).slideto({ highlight: false });
+          Docs.expandOperation($(`#${li_content_dom_id}`));
+          $(`#${li_dom_id}`).slideto({ highlight: false });
           break;
       }
     },
 
     toggleEndpointListForResource(resource) {
       const elem = $(
-        `li#resource_${  Docs.escapeResourceName(resource)  } ul.endpoints`,
+        `li#resource_${Docs.escapeResourceName(resource)} ul.endpoints`,
       );
       if (elem.is(":visible")) {
         $.bbq.pushState("#/", 2);
         Docs.collapseEndpointListForResource(resource);
       } else {
-        $.bbq.pushState(`#/${  resource}`, 2);
+        $.bbq.pushState(`#/${resource}`, 2);
         Docs.expandEndpointListForResource(resource);
       }
     },
@@ -3724,9 +3576,9 @@
         return;
       }
 
-      $(`li#resource_${  resource}`).addClass("active");
+      $(`li#resource_${resource}`).addClass("active");
 
-      const elem = $(`li#resource_${  resource  } ul.endpoints`);
+      const elem = $(`li#resource_${resource} ul.endpoints`);
       elem.slideDown();
     },
 
@@ -3738,9 +3590,9 @@
         return;
       }
 
-      $(`li#resource_${  resource}`).removeClass("active");
+      $(`li#resource_${resource}`).removeClass("active");
 
-      const elem = $(`li#resource_${  resource  } ul.endpoints`);
+      const elem = $(`li#resource_${resource} ul.endpoints`);
       elem.slideUp();
     },
 
@@ -3754,9 +3606,9 @@
       }
 
       $(
-        `li#resource_${ 
-          Docs.escapeResourceName(resource) 
-          } li.operation div.content`,
+        `li#resource_${Docs.escapeResourceName(
+          resource,
+        )} li.operation div.content`,
       ).each(function() {
         Docs.expandOperation($(this));
       });
@@ -3772,9 +3624,9 @@
       }
 
       $(
-        `li#resource_${ 
-          Docs.escapeResourceName(resource) 
-          } li.operation div.content`,
+        `li#resource_${Docs.escapeResourceName(
+          resource,
+        )} li.operation div.content`,
       ).each(function() {
         Docs.collapseOperation($(this));
       });
@@ -3805,8 +3657,6 @@
   // UMD (Universal Module Definition)
   // see https://github.com/umdjs/umd/blob/master/templates/returnExports.js
   (function(root, factory) {
-    
-
     /* global define, exports, module */
     if (typeof define === "function" && define.amd) {
       // AMD. Register as an anonymous module.
@@ -3849,10 +3699,10 @@
     const array_unshift = ArrayPrototype.unshift;
     const array_concat = ArrayPrototype.concat;
     const array_join = ArrayPrototype.join;
-    const {call} = FunctionPrototype;
-    const {apply} = FunctionPrototype;
-    const {max} = Math;
-    const {min} = Math;
+    const { call } = FunctionPrototype;
+    const { apply } = FunctionPrototype;
+    const { max } = Math;
+    const { min } = Math;
 
     // Having a toString local variable name breaks in Opera so use to_string.
     const to_string = ObjectPrototype.toString;
@@ -3863,63 +3713,63 @@
       typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol";
     var isCallable;
     /* inlined from https://npmjs.com/is-callable */ const fnToStr =
-        Function.prototype.toString;
-      const constructorRegex = /^\s*class /;
-      const isES6ClassFn = function isES6ClassFn(value) {
-        try {
-          const fnStr = fnToStr.call(value);
-          const singleStripped = fnStr.replace(/\/\/.*\n/g, "");
-          const multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, "");
-          const spaceStripped = multiStripped
-            .replace(/\n/gm, " ")
-            .replace(/ {2}/g, " ");
-          return constructorRegex.test(spaceStripped);
-        } catch (e) {
-          return false; /* not a function */
-        }
-      };
-      const tryFunctionObject = function tryFunctionObject(value) {
-        try {
-          if (isES6ClassFn(value)) {
-            return false;
-          }
-          fnToStr.call(value);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      };
-      const fnClass = "[object Function]";
-      const genClass = "[object GeneratorFunction]";
-      var isCallable = function isCallable(value) {
-        if (!value) {
-          return false;
-        }
-        if (typeof value !== "function" && typeof value !== "object") {
-          return false;
-        }
-        if (hasToStringTag) {
-          return tryFunctionObject(value);
-        }
+      Function.prototype.toString;
+    const constructorRegex = /^\s*class /;
+    const isES6ClassFn = function isES6ClassFn(value) {
+      try {
+        const fnStr = fnToStr.call(value);
+        const singleStripped = fnStr.replace(/\/\/.*\n/g, "");
+        const multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, "");
+        const spaceStripped = multiStripped
+          .replace(/\n/gm, " ")
+          .replace(/ {2}/g, " ");
+        return constructorRegex.test(spaceStripped);
+      } catch (e) {
+        return false; /* not a function */
+      }
+    };
+    const tryFunctionObject = function tryFunctionObject(value) {
+      try {
         if (isES6ClassFn(value)) {
           return false;
         }
-        const strClass = to_string.call(value);
-        return strClass === fnClass || strClass === genClass;
-      };
+        fnToStr.call(value);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    const fnClass = "[object Function]";
+    const genClass = "[object GeneratorFunction]";
+    var isCallable = function isCallable(value) {
+      if (!value) {
+        return false;
+      }
+      if (typeof value !== "function" && typeof value !== "object") {
+        return false;
+      }
+      if (hasToStringTag) {
+        return tryFunctionObject(value);
+      }
+      if (isES6ClassFn(value)) {
+        return false;
+      }
+      const strClass = to_string.call(value);
+      return strClass === fnClass || strClass === genClass;
+    };
 
     let isRegex;
     /* inlined from https://npmjs.com/is-regex */ const regexExec =
-        RegExp.prototype.exec;
-      const tryRegexExec = function tryRegexExec(value) {
-        try {
-          regexExec.call(value);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      };
-      const regexClass = "[object RegExp]";
+      RegExp.prototype.exec;
+    const tryRegexExec = function tryRegexExec(value) {
+      try {
+        regexExec.call(value);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    const regexClass = "[object RegExp]";
     isRegex = function isRegex(value) {
       if (typeof value !== "object") {
         return false;
@@ -3930,16 +3780,16 @@
     };
     let isString;
     /* inlined from https://npmjs.com/is-string */ const strValue =
-        String.prototype.valueOf;
-      const tryStringObject = function tryStringObject(value) {
-        try {
-          strValue.call(value);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      };
-      const stringClass = "[object String]";
+      String.prototype.valueOf;
+    const tryStringObject = function tryStringObject(value) {
+      try {
+        strValue.call(value);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    const stringClass = "[object String]";
     isString = function isString(value) {
       if (typeof value === "string") {
         return true;
@@ -4037,7 +3887,9 @@
 
       /* replaceable with https://npmjs.com/package/es-abstract ES5.ToPrimitive */
       ToPrimitive: function ToPrimitive(input) {
-        let val; let valueOf; let toStr;
+        let val;
+        let valueOf;
+        let toStr;
         if (isPrimitive(input)) {
           return input;
         }
@@ -4064,7 +3916,7 @@
       ToObject(o) {
         if (o == null) {
           // this matches both null and undefined
-          throw new TypeError(`can't convert ${  o  } to object`);
+          throw new TypeError(`can't convert ${o} to object`);
         }
         return $Object(o);
       },
@@ -4093,7 +3945,7 @@
         // 2. If IsCallable(Target) is false, throw a TypeError exception.
         if (!isCallable(target)) {
           throw new TypeError(
-            `Function.prototype.bind called on incompatible ${  target}`,
+            `Function.prototype.bind called on incompatible ${target}`,
           );
         }
         // 3. Let A be a new (possibly empty) internal list of all of the
@@ -4137,32 +3989,31 @@
               return result;
             }
             return this;
-          } 
-            // 15.3.4.5.1 [[Call]]
-            // When the [[Call]] internal method of a function object, F,
-            // which was created using the bind function is called with a
-            // this value and a list of arguments ExtraArgs, the following
-            // steps are taken:
-            // 1. Let boundArgs be the value of F's [[BoundArgs]] internal
-            //   property.
-            // 2. Let boundThis be the value of F's [[BoundThis]] internal
-            //   property.
-            // 3. Let target be the value of F's [[TargetFunction]] internal
-            //   property.
-            // 4. Let args be a new list containing the same values as the
-            //   list boundArgs in the same order followed by the same
-            //   values as the list ExtraArgs in the same order.
-            // 5. Return the result of calling the [[Call]] internal method
-            //   of target providing boundThis as the this value and
-            //   providing args as the arguments.
+          }
+          // 15.3.4.5.1 [[Call]]
+          // When the [[Call]] internal method of a function object, F,
+          // which was created using the bind function is called with a
+          // this value and a list of arguments ExtraArgs, the following
+          // steps are taken:
+          // 1. Let boundArgs be the value of F's [[BoundArgs]] internal
+          //   property.
+          // 2. Let boundThis be the value of F's [[BoundThis]] internal
+          //   property.
+          // 3. Let target be the value of F's [[TargetFunction]] internal
+          //   property.
+          // 4. Let args be a new list containing the same values as the
+          //   list boundArgs in the same order followed by the same
+          //   values as the list ExtraArgs in the same order.
+          // 5. Return the result of calling the [[Call]] internal method
+          //   of target providing boundThis as the this value and
+          //   providing args as the arguments.
 
-            // equiv: target.call(this, ...boundArgs, ...args)
-            return apply.call(
-              target,
-              that,
-              array_concat.call(args, array_slice.call(arguments)),
-            );
-          
+          // equiv: target.call(this, ...boundArgs, ...args)
+          return apply.call(
+            target,
+            that,
+            array_concat.call(args, array_slice.call(arguments)),
+          );
         };
 
         // 15. If the [[Class]] internal property of Target is "Function", then
@@ -4177,7 +4028,7 @@
         //   specified in 15.3.5.1.
         const boundArgs = [];
         for (let i = 0; i < boundLength; i++) {
-          array_push.call(boundArgs, `$${  i}`);
+          array_push.call(boundArgs, `$${i}`);
         }
 
         // XXX Build a dynamic function with desired amount of arguments is the only
@@ -4188,9 +4039,10 @@
         // and so this code will never be executed.
         bound = $Function(
           "binder",
-          `return function (${ 
-            array_join.call(boundArgs, ",") 
-            }){ return binder.apply(this, arguments); }`,
+          `return function (${array_join.call(
+            boundArgs,
+            ",",
+          )}){ return binder.apply(this, arguments); }`,
         )(binder);
 
         if (target.prototype) {
@@ -4308,8 +4160,6 @@
           method.call(
             [1],
             function() {
-              
-
               properlyBoxesStrict = typeof this === "string";
             },
             "x",
@@ -4746,9 +4596,8 @@
         splice: function splice(start, deleteCount) {
           if (arguments.length === 0) {
             return [];
-          } 
-            return array_splice.apply(this, arguments);
-          
+          }
+          return array_splice.apply(this, arguments);
         },
       },
       !spliceNoopReturnsEmptyArray,
@@ -5053,7 +4902,7 @@
       for (const k in window) {
         try {
           if (
-            !blacklistedKeys[`$${  k}`] &&
+            !blacklistedKeys[`$${k}`] &&
             owns(window, k) &&
             window[k] !== null &&
             typeof window[k] === "object"
@@ -5170,9 +5019,8 @@
         keys: function keys(object) {
           if (isArguments(object)) {
             return originalKeys(arraySlice(object));
-          } 
-            return originalKeys(object);
-          
+          }
+          return originalKeys(object);
         },
       },
       !keysWorksWithArguments || keysHasArgumentsLengthBug,
@@ -5333,22 +5181,11 @@
           const hour = originalGetUTCHours(this);
           const minute = originalGetUTCMinutes(this);
           const second = originalGetUTCSeconds(this);
-          return (
-            `${dayName[day] 
-            }, ${ 
-            date < 10 ? `0${  date}` : date 
-            } ${ 
-            monthName[month] 
-            } ${ 
-            year 
-            } ${ 
-            hour < 10 ? `0${  hour}` : hour 
-            }:${ 
-            minute < 10 ? `0${  minute}` : minute 
-            }:${ 
-            second < 10 ? `0${  second}` : second 
-            } GMT`
-          );
+          return `${dayName[day]}, ${date < 10 ? `0${date}` : date} ${
+            monthName[month]
+          } ${year} ${hour < 10 ? `0${hour}` : hour}:${
+            minute < 10 ? `0${minute}` : minute
+          }:${second < 10 ? `0${second}` : second} GMT`;
         },
       },
       hasNegativeMonthYearBug || hasToUTCStringFormatBug,
@@ -5366,15 +5203,9 @@
           const date = this.getDate();
           const month = this.getMonth();
           const year = this.getFullYear();
-          return (
-            `${dayName[day] 
-            } ${ 
-            monthName[month] 
-            } ${ 
-            date < 10 ? `0${  date}` : date 
-            } ${ 
-            year}`
-          );
+          return `${dayName[day]} ${monthName[month]} ${
+            date < 10 ? `0${date}` : date
+          } ${year}`;
         },
       },
       hasNegativeMonthYearBug || hasToDateStringFormatBug,
@@ -5396,25 +5227,15 @@
         const timezoneOffset = this.getTimezoneOffset();
         const hoursOffset = Math.floor(Math.abs(timezoneOffset) / 60);
         const minutesOffset = Math.floor(Math.abs(timezoneOffset) % 60);
-        return (
-          `${dayName[day] 
-          } ${ 
-          monthName[month] 
-          } ${ 
-          date < 10 ? `0${  date}` : date 
-          } ${ 
-          year 
-          } ${ 
-          hour < 10 ? `0${  hour}` : hour 
-          }:${ 
-          minute < 10 ? `0${  minute}` : minute 
-          }:${ 
-          second < 10 ? `0${  second}` : second 
-          } GMT${ 
-          timezoneOffset > 0 ? "-" : "+" 
-          }${hoursOffset < 10 ? `0${  hoursOffset}` : hoursOffset 
-          }${minutesOffset < 10 ? `0${  minutesOffset}` : minutesOffset}`
-        );
+        return `${dayName[day]} ${monthName[month]} ${
+          date < 10 ? `0${date}` : date
+        } ${year} ${hour < 10 ? `0${hour}` : hour}:${
+          minute < 10 ? `0${minute}` : minute
+        }:${second < 10 ? `0${second}` : second} GMT${
+          timezoneOffset > 0 ? "-" : "+"
+        }${hoursOffset < 10 ? `0${hoursOffset}` : hoursOffset}${
+          minutesOffset < 10 ? `0${minutesOffset}` : minutesOffset
+        }`;
       };
       if (supportsDescriptors) {
         $Object.defineProperty(Date.prototype, "toString", {
@@ -5472,25 +5293,22 @@
           year =
             (year < 0 ? "-" : year > 9999 ? "+" : "") +
             strSlice(
-              `00000${  Math.abs(year)}`,
+              `00000${Math.abs(year)}`,
               year >= 0 && year <= 9999 ? -4 : -6,
             );
 
           for (let i = 0; i < result.length; ++i) {
             // pad months, days, hours, minutes, and seconds to have two digits.
-            result[i] = strSlice(`00${  result[i]}`, -2);
+            result[i] = strSlice(`00${result[i]}`, -2);
           }
           // pad milliseconds to have three digits.
-          return (
-            `${year 
-            }-${ 
-            arraySlice(result, 0, 2).join("-") 
-            }T${ 
-            arraySlice(result, 2).join(":") 
-            }.${ 
-            strSlice(`000${  originalGetUTCMilliseconds(this)}`, -3) 
-            }Z`
-          );
+          return `${year}-${arraySlice(result, 0, 2).join("-")}T${arraySlice(
+            result,
+            2,
+          ).join(":")}.${strSlice(
+            `000${originalGetUTCMilliseconds(this)}`,
+            -3,
+          )}Z`;
         },
       },
       hasNegativeDateBug || hasSafari51DateBug,
@@ -5563,7 +5381,9 @@
       !isNaN(Date.parse("2012-04-04T24:00:00.500Z")) ||
       !isNaN(Date.parse("2012-11-31T23:59:59.000Z")) ||
       !isNaN(Date.parse("2012-12-31T23:59:60.000Z"));
-    const doesNotParseY2KNewYear = isNaN(Date.parse("2000-01-01T00:00:00.000Z"));
+    const doesNotParseY2KNewYear = isNaN(
+      Date.parse("2000-01-01T00:00:00.000Z"),
+    );
     if (
       doesNotParseY2KNewYear ||
       acceptsInvalidDates ||
@@ -5583,7 +5403,7 @@
         /* eslint-enable no-undef */
         // Date.length === 7
         var DateShim = function Date(Y, M, D, h, m, s, ms) {
-          const {length} = arguments;
+          const { length } = arguments;
           let date;
           if (this instanceof NativeDate) {
             let seconds = s;
@@ -5730,20 +5550,20 @@
             // provide default values if necessary
             // parse the UTC offset component
             const year = $Number(match[1]);
-              const month = $Number(match[2] || 1) - 1;
-              const day = $Number(match[3] || 1) - 1;
-              const hour = $Number(match[4] || 0);
-              const minute = $Number(match[5] || 0);
-              const second = $Number(match[6] || 0);
-              const millisecond = Math.floor($Number(match[7] || 0) * 1000);
-              // When time zone is missed, local offset should be used
-              // (ES 5.1 bug)
-              // see https://bugs.ecmascript.org/show_bug.cgi?id=112
-              const isLocalTime = Boolean(match[4] && !match[8]);
-              const signOffset = match[9] === "-" ? 1 : -1;
-              const hourOffset = $Number(match[10] || 0);
-              const minuteOffset = $Number(match[11] || 0);
-              let result;
+            const month = $Number(match[2] || 1) - 1;
+            const day = $Number(match[3] || 1) - 1;
+            const hour = $Number(match[4] || 0);
+            const minute = $Number(match[5] || 0);
+            const second = $Number(match[6] || 0);
+            const millisecond = Math.floor($Number(match[7] || 0) * 1000);
+            // When time zone is missed, local offset should be used
+            // (ES 5.1 bug)
+            // see https://bugs.ecmascript.org/show_bug.cgi?id=112
+            const isLocalTime = Boolean(match[4] && !match[8]);
+            const signOffset = match[9] === "-" ? 1 : -1;
+            const hourOffset = $Number(match[10] || 0);
+            const minuteOffset = $Number(match[11] || 0);
+            let result;
             const hasMinutesOrSecondsOrMilliseconds =
               minute > 0 || second > 0 || millisecond > 0;
             if (
@@ -5867,7 +5687,14 @@
     };
 
     const toFixedShim = function toFixed(fractionDigits) {
-      let f; let x; let s; let m; let e; let z; let j; let k;
+      let f;
+      let x;
+      let s;
+      let m;
+      let e;
+      let z;
+      let j;
+      let k;
 
       // Test for NaN and round fractionDigits down
       f = $Number(fractionDigits);
@@ -5948,7 +5775,7 @@
         if (k <= f) {
           m = s + strSlice("0.0000000000000000000", 0, f - k + 2) + m;
         } else {
-          m = `${s + strSlice(m, 0, k - f)  }.${  strSlice(m, k - f)}`;
+          m = `${s + strSlice(m, 0, k - f)}.${strSlice(m, k - f)}`;
         }
       } else {
         m = s + m;
@@ -6023,23 +5850,20 @@
 
           const output = [];
           const flags =
-              (separator.ignoreCase ? "i" : "") +
-              (separator.multiline ? "m" : "") +
-              (separator.unicode ? "u" : "") + // in ES6
-              (separator.sticky ? "y" : ""); // Firefox 3+ and ES6
-            let lastLastIndex = 0;
-            // Make `global` and avoid `lastIndex` issues by working with a copy
-            let separator2;
-            let match;
-            let lastIndex;
-            let lastLength;
-          const separatorCopy = new RegExp(separator.source, `${flags  }g`);
+            (separator.ignoreCase ? "i" : "") +
+            (separator.multiline ? "m" : "") +
+            (separator.unicode ? "u" : "") + // in ES6
+            (separator.sticky ? "y" : ""); // Firefox 3+ and ES6
+          let lastLastIndex = 0;
+          // Make `global` and avoid `lastIndex` issues by working with a copy
+          let separator2;
+          let match;
+          let lastIndex;
+          let lastLength;
+          const separatorCopy = new RegExp(separator.source, `${flags}g`);
           if (!compliantExecNpcg) {
             // Doesn't need flags gy, but they don't hurt
-            separator2 = new RegExp(
-              `^${  separatorCopy.source  }$(?!\\s)`,
-              flags,
-            );
+            separator2 = new RegExp(`^${separatorCopy.source}$(?!\\s)`, flags);
           }
           /* Values for `limit`, per the spec:
            * If undefined: 4294967295 // maxSafe32BitInt
@@ -6127,18 +5951,17 @@
           isRegex(searchValue) && /\)[*?]/.test(searchValue.source);
         if (!isFn || !hasCapturingGroups) {
           return str_replace.call(this, searchValue, replaceValue);
-        } 
-          const wrappedReplaceValue = function(match) {
-            const {length} = arguments;
-            const originalLastIndex = searchValue.lastIndex;
-            searchValue.lastIndex = 0;
-            const args = searchValue.exec(match) || [];
-            searchValue.lastIndex = originalLastIndex;
-            pushCall(args, arguments[length - 2], arguments[length - 1]);
-            return replaceValue.apply(this, args);
-          };
-          return str_replace.call(this, searchValue, wrappedReplaceValue);
-        
+        }
+        const wrappedReplaceValue = function(match) {
+          const { length } = arguments;
+          const originalLastIndex = searchValue.lastIndex;
+          searchValue.lastIndex = 0;
+          const args = searchValue.exec(match) || [];
+          searchValue.lastIndex = originalLastIndex;
+          pushCall(args, arguments[length - 2], arguments[length - 1]);
+          return replaceValue.apply(this, args);
+        };
+        return str_replace.call(this, searchValue, wrappedReplaceValue);
       };
     }
 
@@ -6170,9 +5993,9 @@
       "\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028" +
       "\u2029\uFEFF";
     const zeroWidth = "\u200b";
-    const wsRegexChars = `[${  ws  }]`;
-    const trimBeginRegexp = new RegExp(`^${  wsRegexChars  }${wsRegexChars  }*`);
-    const trimEndRegexp = new RegExp(`${wsRegexChars + wsRegexChars  }*$`);
+    const wsRegexChars = `[${ws}]`;
+    const trimBeginRegexp = new RegExp(`^${wsRegexChars}${wsRegexChars}*`);
+    const trimEndRegexp = new RegExp(`${wsRegexChars + wsRegexChars}*$`);
     const hasTrimWhitespaceBug =
       StringPrototype.trim && (ws.trim() || !zeroWidth.trim());
     defineProperties(
@@ -6182,7 +6005,7 @@
         // http://perfectionkills.com/whitespace-deviations/
         trim: function trim() {
           if (typeof this === "undefined" || this === null) {
-            throw new TypeError(`can't convert ${  this  } to object`);
+            throw new TypeError(`can't convert ${this} to object`);
           }
           return $String(this)
             .replace(trimBeginRegexp, "")
@@ -6200,7 +6023,7 @@
       {
         lastIndexOf: function lastIndexOf(searchString) {
           if (typeof this === "undefined" || this === null) {
-            throw new TypeError(`can't convert ${  this  } to object`);
+            throw new TypeError(`can't convert ${this} to object`);
           }
           const S = $String(this);
           const searchStr = $String(searchString);
@@ -6238,7 +6061,7 @@
 
     // ES-5 15.1.2.2
     /* eslint-disable radix */
-    if (parseInt(`${ws  }08`) !== 8 || parseInt(`${ws  }0x16`) !== 22) {
+    if (parseInt(`${ws}08`) !== 8 || parseInt(`${ws}0x16`) !== 22) {
       /* eslint-enable radix */
       /* global parseInt: true */
       parseInt = (function(origParseInt) {
@@ -6269,9 +6092,9 @@
     if (String(new RangeError("test")) !== "RangeError: test") {
       const errorToStringShim = function toString() {
         if (typeof this === "undefined" || this === null) {
-          throw new TypeError(`can't convert ${  this  } to object`);
+          throw new TypeError(`can't convert ${this} to object`);
         }
-        let {name} = this;
+        let { name } = this;
         if (typeof name === "undefined") {
           name = "Error";
         } else if (typeof name !== "string") {
@@ -6289,7 +6112,7 @@
         if (!msg) {
           return name;
         }
-        return `${name  }: ${  msg}`;
+        return `${name}: ${msg}`;
       };
       // can't use defineProperties here because of toString enumeration issue in IE <= 8
       Error.prototype.toString = errorToStringShim;
@@ -6314,7 +6137,7 @@
 
     if (String(/a/gim) !== "/a/gim") {
       const regexToString = function toString() {
-        let str = `/${  this.source  }/`;
+        let str = `/${this.source}/`;
         if (this.global) {
           str += "g";
         }
@@ -6372,8 +6195,8 @@
 
   Handlebars.registerHelper("renderTextParam", function(param) {
     let result;
-      let type = "text";
-      let idAtt = "";
+    let type = "text";
+    let idAtt = "";
     let paramType = param.schema
       ? param.type || param.schema.type || ""
       : param.type || "";
@@ -6393,12 +6216,9 @@
       })
       .reduce(function(result, property) {
         // remove X- from property name, so it results in html attributes like data-foo='bar'
-        return (result +=
-          ` ${ 
-          property.substring(2, property.length) 
-          }='${ 
-          param[property] 
-          }'`);
+        return (result += ` ${property.substring(2, property.length)}='${
+          param[property]
+        }'`);
       }, "");
 
     if (param.format && param.format === "password") {
@@ -6406,7 +6226,7 @@
     }
 
     if (valueId) {
-      idAtt = ` id='${  valueId  }'`;
+      idAtt = ` id='${valueId}'`;
     }
 
     if (defaultValue) {
@@ -6416,39 +6236,25 @@
     }
 
     if (isArray) {
-      result =
-        `<textarea class='body-textarea${ 
-        param.required ? " required" : "" 
-        }' name='${ 
-        name 
-        }'${ 
-        idAtt 
-        }${dataVendorExtensions}`;
-      result +=
-        ` placeholder='Provide multiple values in new lines${ 
-        param.required ? " (at least one required)." : "." 
-        }'>`;
-      result += `${defaultValue  }</textarea>`;
+      result = `<textarea class='body-textarea${
+        param.required ? " required" : ""
+      }' name='${name}'${idAtt}${dataVendorExtensions}`;
+      result += ` placeholder='Provide multiple values in new lines${
+        param.required ? " (at least one required)." : "."
+      }'>`;
+      result += `${defaultValue}</textarea>`;
     } else {
       let parameterClass = "parameter";
       if (param.required) {
         parameterClass += " required";
       }
-      result =
-        `<input class='${ 
-        parameterClass 
-        }' minlength='${ 
-        param.required ? 1 : 0 
-        }'`;
-      result +=
-        ` name='${ 
-        name 
-        }' placeholder='${ 
-        param.required ? "(required)" : "" 
-        }'${ 
-        idAtt 
-        }${dataVendorExtensions}`;
-      result += ` type='${  type  }' value='${  defaultValue  }'/>`;
+      result = `<input class='${parameterClass}' minlength='${
+        param.required ? 1 : 0
+      }'`;
+      result += ` name='${name}' placeholder='${
+        param.required ? "(required)" : ""
+      }'${idAtt}${dataVendorExtensions}`;
+      result += ` type='${type}' value='${defaultValue}'/>`;
     }
     return new Handlebars.SafeString(result);
   });
@@ -6501,7 +6307,9 @@
       g.sanitizeHtml = f();
     }
   })(function() {
-    let define; let module; let exports;
+    let define;
+    let module;
+    let exports;
     return (function e(t, n, r) {
       function s(o, u) {
         if (!n[o]) {
@@ -6509,7 +6317,7 @@
             const a = typeof require === "function" && require;
             if (!u && a) return a(o, !0);
             if (i) return i(o, !0);
-            const f = new Error(`Cannot find module '${  o  }'`);
+            const f = new Error(`Cannot find module '${o}'`);
             throw ((f.code = "MODULE_NOT_FOUND"), f);
           }
           const l = (n[o] = { exports: {} });
@@ -6596,7 +6404,7 @@
                     }
                   });
                   allowedAttributesGlobMap[tag] = new RegExp(
-                    `^(${  globRegex.join("|")  })$`,
+                    `^(${globRegex.join("|")})$`,
                   );
                 });
               }
@@ -6677,7 +6485,7 @@
                     if (skip) {
                       return;
                     }
-                    result += `<${  name}`;
+                    result += `<${name}`;
                     if (
                       !allowedAttributesMap ||
                       has(allowedAttributesMap, name) ||
@@ -6711,9 +6519,9 @@
                               return;
                             }
                           }
-                          result += ` ${  a}`;
+                          result += ` ${a}`;
                           if (value.length) {
-                            result += `="${  escapeHtml(value)  }"`;
+                            result += `="${escapeHtml(value)}"`;
                           }
                         } else {
                           delete frame.attribs[a];
@@ -6792,7 +6600,7 @@
                     if (options.selfClosing.indexOf(name) !== -1) {
                       return;
                     }
-                    result += `</${  name  }>`;
+                    result += `</${name}>`;
                   },
                 },
                 options.parser,
@@ -6914,7 +6722,6 @@
         ],
         2: [
           function(require, module, exports) {
-            
             exports.toByteArray = toByteArray;
             exports.fromByteArray = fromByteArray;
             const lookup = [];
@@ -6932,7 +6739,12 @@
             }
             init();
             function toByteArray(b64) {
-              let i; let j; let l; let tmp; let placeHolders; let arr;
+              let i;
+              let j;
+              let l;
+              let tmp;
+              let placeHolders;
+              let arr;
               const len = b64.length;
               if (len % 4 > 0) {
                 throw new Error(
@@ -7028,10 +6840,9 @@
         4: [
           function(require, module, exports) {
             (function(global) {
-              
               const buffer = require("buffer");
-              const {Buffer} = buffer;
-              const {SlowBuffer} = buffer;
+              const { Buffer } = buffer;
+              const { SlowBuffer } = buffer;
               const MAX_LEN = buffer.kMaxLength || 2147483647;
               exports.alloc = function alloc(size, fill, encoding) {
                 if (typeof Buffer.alloc === "function") {
@@ -7164,7 +6975,6 @@
         5: [
           function(require, module, exports) {
             (function(global) {
-              
               const base64 = require("base64-js");
               const ieee754 = require("ieee754");
               const isArray = require("isarray");
@@ -7382,9 +7192,7 @@
                 if (length >= kMaxLength()) {
                   throw new RangeError(
                     `${"Attempt to allocate Buffer larger than maximum " +
-                      "size: 0x"}${ 
-                      kMaxLength().toString(16) 
-                      } bytes`,
+                      "size: 0x"}${kMaxLength().toString(16)} bytes`,
                   );
                 }
                 return length | 0;
@@ -7476,7 +7284,7 @@
                   return string.byteLength;
                 }
                 if (typeof string !== "string") {
-                  string = `${  string}`;
+                  string = `${string}`;
                 }
                 const len = string.length;
                 if (len === 0) return 0;
@@ -7502,7 +7310,7 @@
                       return base64ToBytes(string).length;
                     default:
                       if (loweredCase) return utf8ToBytes(string).length;
-                      encoding = (`${  encoding}`).toLowerCase();
+                      encoding = `${encoding}`.toLowerCase();
                       loweredCase = true;
                   }
                 }
@@ -7549,8 +7357,8 @@
                       return utf16leSlice(this, start, end);
                     default:
                       if (loweredCase)
-                        throw new TypeError(`Unknown encoding: ${  encoding}`);
-                      encoding = (`${encoding  }`).toLowerCase();
+                        throw new TypeError(`Unknown encoding: ${encoding}`);
+                      encoding = `${encoding}`.toLowerCase();
                       loweredCase = true;
                   }
                 }
@@ -7622,7 +7430,7 @@
                     .join(" ");
                   if (this.length > max) str += " ... ";
                 }
-                return `<Buffer ${  str  }>`;
+                return `<Buffer ${str}>`;
               };
               Buffer.prototype.compare = function compare(
                 target,
@@ -7720,7 +7528,8 @@
                     return -1;
                   }
                   return arrayIndexOf(buffer, val, byteOffset, encoding, dir);
-                } if (typeof val === "number") {
+                }
+                if (typeof val === "number") {
                   val &= 255;
                   if (
                     Buffer.TYPED_ARRAY_SUPPORT &&
@@ -7732,13 +7541,12 @@
                         val,
                         byteOffset,
                       );
-                    } 
-                      return Uint8Array.prototype.lastIndexOf.call(
-                        buffer,
-                        val,
-                        byteOffset,
-                      );
-                    
+                    }
+                    return Uint8Array.prototype.lastIndexOf.call(
+                      buffer,
+                      val,
+                      byteOffset,
+                    );
                   }
                   return arrayIndexOf(buffer, [val], byteOffset, encoding, dir);
                 }
@@ -7768,9 +7576,8 @@
                 function read(buf, i) {
                   if (indexSize === 1) {
                     return buf[i];
-                  } 
-                    return buf.readUInt16BE(i * indexSize);
-                  
+                  }
+                  return buf.readUInt16BE(i * indexSize);
                 }
                 let i;
                 if (dir) {
@@ -7947,8 +7754,8 @@
                       return ucs2Write(this, string, offset, length);
                     default:
                       if (loweredCase)
-                        throw new TypeError(`Unknown encoding: ${  encoding}`);
-                      encoding = (`${  encoding}`).toLowerCase();
+                        throw new TypeError(`Unknown encoding: ${encoding}`);
+                      encoding = `${encoding}`.toLowerCase();
                       loweredCase = true;
                   }
                 }
@@ -7962,9 +7769,8 @@
               function base64Slice(buf, start, end) {
                 if (start === 0 && end === buf.length) {
                   return base64.fromByteArray(buf);
-                } 
-                  return base64.fromByteArray(buf.slice(start, end));
-                
+                }
+                return base64.fromByteArray(buf.slice(start, end));
               }
               function utf8Slice(buf, start, end) {
                 end = Math.min(buf.length, end);
@@ -7982,7 +7788,10 @@
                       ? 2
                       : 1;
                   if (i + bytesPerSequence <= end) {
-                    var secondByte; var thirdByte; var fourthByte; var tempCodePoint;
+                    var secondByte;
+                    var thirdByte;
+                    var fourthByte;
+                    var tempCodePoint;
                     switch (bytesPerSequence) {
                       case 1:
                         if (firstByte < 128) {
@@ -8744,7 +8553,7 @@
                     typeof encoding === "string" &&
                     !Buffer.isEncoding(encoding)
                   ) {
-                    throw new TypeError(`Unknown encoding: ${  encoding}`);
+                    throw new TypeError(`Unknown encoding: ${encoding}`);
                   }
                 } else if (typeof val === "number") {
                   val &= 255;
@@ -8788,13 +8597,13 @@
                 return str.replace(/^\s+|\s+$/g, "");
               }
               function toHex(n) {
-                if (n < 16) return `0${  n.toString(16)}`;
+                if (n < 16) return `0${n.toString(16)}`;
                 return n.toString(16);
               }
               function utf8ToBytes(string, units) {
                 units = units || Infinity;
                 let codePoint;
-                const {length} = string;
+                const { length } = string;
                 let leadSurrogate = null;
                 const bytes = [];
                 for (let i = 0; i < length; ++i) {
@@ -8858,7 +8667,9 @@
                 return byteArray;
               }
               function utf16leToBytes(str, units) {
-                let c; let hi; let lo;
+                let c;
+                let hi;
+                let lo;
                 const byteArray = [];
                 for (let i = 0; i < str.length; ++i) {
                   if ((units -= 2) < 0) break;
@@ -9018,7 +8829,7 @@
             function formatAttrs(attributes, opts) {
               if (!attributes) return;
               let output = "";
-                let value;
+              let value;
               for (const key in attributes) {
                 value = attributes[key];
                 if (output) {
@@ -9027,11 +8838,9 @@
                 if (!value && booleanAttributes[key]) {
                   output += key;
                 } else {
-                  output +=
-                    `${key 
-                    }="${ 
-                    opts.decodeEntities ? entities.encodeXML(value) : value 
-                    }"`;
+                  output += `${key}="${
+                    opts.decodeEntities ? entities.encodeXML(value) : value
+                  }"`;
                 }
               }
               return output;
@@ -9080,10 +8889,10 @@
             function renderTag(elem, opts) {
               if (elem.name === "svg")
                 opts = { decodeEntities: opts.decodeEntities, xmlMode: true };
-              let tag = `<${  elem.name}`;
-                const attribs = formatAttrs(elem.attribs, opts);
+              let tag = `<${elem.name}`;
+              const attribs = formatAttrs(elem.attribs, opts);
               if (attribs) {
-                tag += ` ${  attribs}`;
+                tag += ` ${attribs}`;
               }
               if (
                 opts.xmlMode &&
@@ -9096,13 +8905,13 @@
                   tag += render(elem.children, opts);
                 }
                 if (!singleTag[elem.name] || opts.xmlMode) {
-                  tag += `</${  elem.name  }>`;
+                  tag += `</${elem.name}>`;
                 }
               }
               return tag;
             }
             function renderDirective(elem) {
-              return `<${  elem.data  }>`;
+              return `<${elem.data}>`;
             }
             function renderText(elem, opts) {
               let data = elem.data || "";
@@ -9115,10 +8924,10 @@
               return data;
             }
             function renderCdata(elem) {
-              return `<![CDATA[${  elem.children[0].data  }]]>`;
+              return `<![CDATA[${elem.children[0].data}]]>`;
             }
             function renderComment(elem) {
-              return `<!--${  elem.data  }-->`;
+              return `<!--${elem.data}-->`;
             }
           },
           { domelementtype: 8, entities: 20 },
@@ -9277,25 +9086,25 @@
                   lastTag.data += data;
                 }
               } else if (
-                  this._tagStack.length &&
-                  (lastTag = this._tagStack[this._tagStack.length - 1]) &&
-                  (lastTag = lastTag.children[lastTag.children.length - 1]) &&
-                  lastTag.type === ElementType.Text
-                ) {
-                  if (normalize) {
-                    lastTag.data = (lastTag.data + data).replace(
-                      re_whitespace,
-                      " ",
-                    );
-                  } else {
-                    lastTag.data += data;
-                  }
+                this._tagStack.length &&
+                (lastTag = this._tagStack[this._tagStack.length - 1]) &&
+                (lastTag = lastTag.children[lastTag.children.length - 1]) &&
+                lastTag.type === ElementType.Text
+              ) {
+                if (normalize) {
+                  lastTag.data = (lastTag.data + data).replace(
+                    re_whitespace,
+                    " ",
+                  );
                 } else {
-                  if (normalize) {
-                    data = data.replace(re_whitespace, " ");
-                  }
-                  this._addDomElement({ data, type: ElementType.Text });
+                  lastTag.data += data;
                 }
+              } else {
+                if (normalize) {
+                  data = data.replace(re_whitespace, " ");
+                }
+                this._addDomElement({ data, type: ElementType.Text });
+              }
             };
             DomHandler.prototype.oncomment = function(data) {
               const lastTag = this._tagStack[this._tagStack.length - 1];
@@ -9358,11 +9167,11 @@
           function(require, module, exports) {
             const NodePrototype = (module.exports = {
               get firstChild() {
-                const {children} = this;
+                const { children } = this;
                 return (children && children[0]) || null;
               },
               get lastChild() {
-                const {children} = this;
+                const { children } = this;
                 return (children && children[children.length - 1]) || null;
               },
               get nodeType() {
@@ -9422,9 +9231,9 @@
           function(require, module, exports) {
             exports.removeSubsets = function(nodes) {
               let idx = nodes.length;
-                let node;
-                let ancestor;
-                let replace;
+              let node;
+              let ancestor;
+              let replace;
               while (--idx > -1) {
                 node = ancestor = nodes[idx];
                 nodes[idx] = null;
@@ -9456,7 +9265,12 @@
             ) {
               const aParents = [];
               const bParents = [];
-              let current; let sharedParent; let siblings; let aSibling; let bSibling; let idx;
+              let current;
+              let sharedParent;
+              let siblings;
+              let aSibling;
+              let bSibling;
+              let idx;
               if (nodeA === nodeB) {
                 return 0;
               }
@@ -9486,17 +9300,16 @@
                   return POSITION.FOLLOWING | POSITION.CONTAINED_BY;
                 }
                 return POSITION.FOLLOWING;
-              } 
-                if (sharedParent === nodeA) {
-                  return POSITION.PRECEDING | POSITION.CONTAINS;
-                }
-                return POSITION.PRECEDING;
-              
+              }
+              if (sharedParent === nodeA) {
+                return POSITION.PRECEDING | POSITION.CONTAINS;
+              }
+              return POSITION.PRECEDING;
             });
             exports.uniqueSort = function(nodes) {
               let idx = nodes.length;
-                let node;
-                let position;
+              let node;
+              let position;
               nodes = nodes.slice();
               while (--idx > -1) {
                 node = nodes[idx];
@@ -9509,7 +9322,8 @@
                 const relative = comparePos(a, b);
                 if (relative & POSITION.PRECEDING) {
                   return -1;
-                } if (relative & POSITION.FOLLOWING) {
+                }
+                if (relative & POSITION.FOLLOWING) {
                   return 1;
                 }
                 return 0;
@@ -9551,35 +9365,33 @@
                   return function(elem) {
                     return isTag(elem) && name(elem.name);
                   };
-                } if (name === "*") {
+                }
+                if (name === "*") {
                   return isTag;
-                } 
-                  return function(elem) {
-                    return isTag(elem) && elem.name === name;
-                  };
-                
+                }
+                return function(elem) {
+                  return isTag(elem) && elem.name === name;
+                };
               },
               tag_type(type) {
                 if (typeof type === "function") {
                   return function(elem) {
                     return type(elem.type);
                   };
-                } 
-                  return function(elem) {
-                    return elem.type === type;
-                  };
-                
+                }
+                return function(elem) {
+                  return elem.type === type;
+                };
               },
               tag_contains(data) {
                 if (typeof data === "function") {
                   return function(elem) {
                     return !isTag(elem) && data(elem.data);
                   };
-                } 
-                  return function(elem) {
-                    return !isTag(elem) && elem.data === data;
-                  };
-                
+                }
+                return function(elem) {
+                  return !isTag(elem) && elem.data === data;
+                };
               },
             };
             function getAttribCheck(attrib, value) {
@@ -9587,11 +9399,10 @@
                 return function(elem) {
                   return elem.attribs && value(elem.attribs[attrib]);
                 };
-              } 
-                return function(elem) {
-                  return elem.attribs && elem.attribs[attrib] === value;
-                };
-              
+              }
+              return function(elem) {
+                return elem.attribs && elem.attribs[attrib] === value;
+              };
             }
             function combineFuncs(a, b) {
               return function(elem) {
@@ -9686,8 +9497,8 @@
               }
             };
             exports.append = function(elem, next) {
-              const {parent} = elem;
-                const currNext = elem.next;
+              const { parent } = elem;
+              const currNext = elem.next;
               next.next = currNext;
               next.prev = elem;
               elem.next = next;
@@ -9703,7 +9514,7 @@
               }
             };
             exports.prepend = function(elem, prev) {
-              const {parent} = elem;
+              const { parent } = elem;
               if (parent) {
                 const childs = parent.children;
                 childs.splice(childs.lastIndexOf(elem), 0, prev);
@@ -9721,7 +9532,7 @@
         ],
         17: [
           function(require, module, exports) {
-            const {isTag} = require("domelementtype");
+            const { isTag } = require("domelementtype");
             module.exports = {
               filter,
               find,
@@ -9739,7 +9550,7 @@
             }
             function find(test, elems, recurse, limit) {
               let result = [];
-                let childs;
+              let childs;
               for (let i = 0, j = elems.length; i < j; i++) {
                 if (test(elems[i])) {
                   result.push(elems[i]);
@@ -9804,8 +9615,8 @@
         18: [
           function(require, module, exports) {
             const ElementType = require("domelementtype");
-              const getOuterHTML = require("dom-serializer");
-              const {isTag} = ElementType;
+            const getOuterHTML = require("dom-serializer");
+            const { isTag } = ElementType;
             module.exports = {
               getInnerHTML,
               getOuterHTML,
@@ -9857,7 +9668,7 @@
         20: [
           function(require, module, exports) {
             const encode = require("./lib/encode.js");
-              const decode = require("./lib/decode.js");
+            const decode = require("./lib/decode.js");
             exports.decode = function(data, level) {
               return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
             };
@@ -9884,16 +9695,16 @@
         21: [
           function(require, module, exports) {
             const entityMap = require("../maps/entities.json");
-              const legacyMap = require("../maps/legacy.json");
-              const xmlMap = require("../maps/xml.json");
-              const decodeCodePoint = require("./decode_codepoint.js");
+            const legacyMap = require("../maps/legacy.json");
+            const xmlMap = require("../maps/xml.json");
+            const decodeCodePoint = require("./decode_codepoint.js");
             const decodeXMLStrict = getStrictDecoder(xmlMap);
-              const decodeHTMLStrict = getStrictDecoder(entityMap);
+            const decodeHTMLStrict = getStrictDecoder(entityMap);
             function getStrictDecoder(map) {
               let keys = Object.keys(map).join("|");
-                const replace = getReplacer(map);
+              const replace = getReplacer(map);
               keys += "|#[xX][\\da-fA-F]+|#\\d+";
-              const re = new RegExp(`&(?:${  keys  });`, "g");
+              const re = new RegExp(`&(?:${keys});`, "g");
               return function(str) {
                 return String(str).replace(re, replace);
               };
@@ -9910,10 +9721,10 @@
                 }
               }
               const re = new RegExp(
-                  `&(?:${  keys.join("|")  }|#[xX][\\da-fA-F]+;?|#\\d+;?)`,
-                  "g",
-                );
-                const replace = getReplacer(entityMap);
+                `&(?:${keys.join("|")}|#[xX][\\da-fA-F]+;?|#\\d+;?)`,
+                "g",
+              );
+              const replace = getReplacer(entityMap);
               function replacer(str) {
                 if (str.substr(-1) !== ";") str += ";";
                 return replace(str);
@@ -9980,49 +9791,45 @@
         23: [
           function(require, module, exports) {
             const inverseXML = getInverseObj(require("../maps/xml.json"));
-              const xmlReplacer = getInverseReplacer(inverseXML);
+            const xmlReplacer = getInverseReplacer(inverseXML);
             exports.XML = getInverse(inverseXML, xmlReplacer);
             const inverseHTML = getInverseObj(require("../maps/entities.json"));
-              const htmlReplacer = getInverseReplacer(inverseHTML);
+            const htmlReplacer = getInverseReplacer(inverseHTML);
             exports.HTML = getInverse(inverseHTML, htmlReplacer);
             function getInverseObj(obj) {
               return Object.keys(obj)
                 .sort()
                 .reduce(function(inverse, name) {
-                  inverse[obj[name]] = `&${  name  };`;
+                  inverse[obj[name]] = `&${name};`;
                   return inverse;
                 }, {});
             }
             function getInverseReplacer(inverse) {
               const single = [];
-                const multiple = [];
+              const multiple = [];
               Object.keys(inverse).forEach(function(k) {
                 if (k.length === 1) {
-                  single.push(`\\${  k}`);
+                  single.push(`\\${k}`);
                 } else {
                   multiple.push(k);
                 }
               });
-              multiple.unshift(`[${  single.join("")  }]`);
+              multiple.unshift(`[${single.join("")}]`);
               return new RegExp(multiple.join("|"), "g");
             }
             const re_nonASCII = /[^\0-\x7F]/g;
-              const re_astralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+            const re_astralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
             function singleCharReplacer(c) {
-              return (
-                `&#x${ 
-                c
-                  .charCodeAt(0)
-                  .toString(16)
-                  .toUpperCase() 
-                };`
-              );
+              return `&#x${c
+                .charCodeAt(0)
+                .toString(16)
+                .toUpperCase()};`;
             }
             function astralReplacer(c) {
               const high = c.charCodeAt(0);
               const low = c.charCodeAt(1);
               const codePoint = (high - 55296) * 1024 + low - 56320 + 65536;
-              return `&#x${  codePoint.toString(16).toUpperCase()  };`;
+              return `&#x${codePoint.toString(16).toUpperCase()};`;
             }
             function getInverse(inverse, re) {
               function func(name) {
@@ -12356,7 +12163,12 @@
               return this;
             };
             EventEmitter.prototype.emit = function(type) {
-              let er; let handler; let len; let args; let i; let listeners;
+              let er;
+              let handler;
+              let len;
+              let args;
+              let i;
+              let listeners;
               if (!this._events) this._events = {};
               if (type === "error") {
                 if (
@@ -12368,7 +12180,7 @@
                     throw er;
                   } else {
                     const err = new Error(
-                      `Uncaught, unspecified "error" event. (${  er  })`,
+                      `Uncaught, unspecified "error" event. (${er})`,
                     );
                     err.context = er;
                     throw err;
@@ -12453,7 +12265,10 @@
               return this;
             };
             EventEmitter.prototype.removeListener = function(type, listener) {
-              let list; let position; let length; let i;
+              let list;
+              let position;
+              let length;
+              let i;
               if (!isFunction(listener))
                 throw TypeError("listener must be a function");
               if (!this._events || !this._events[type]) return this;
@@ -12490,7 +12305,8 @@
               return this;
             };
             EventEmitter.prototype.removeAllListeners = function(type) {
-              let key; let listeners;
+              let key;
+              let listeners;
               if (!this._events) return this;
               if (!this._events.removeListener) {
                 if (arguments.length === 0) this._events = {};
@@ -12557,22 +12373,22 @@
               this._cbs = cbs || {};
               this.events = [];
             }
-            const {EVENTS} = require("./");
+            const { EVENTS } = require("./");
             Object.keys(EVENTS).forEach(function(name) {
               if (EVENTS[name] === 0) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 CollectingHandler.prototype[name] = function() {
                   this.events.push([name]);
                   if (this._cbs[name]) this._cbs[name]();
                 };
               } else if (EVENTS[name] === 1) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 CollectingHandler.prototype[name] = function(a) {
                   this.events.push([name, a]);
                   if (this._cbs[name]) this._cbs[name](a);
                 };
               } else if (EVENTS[name] === 2) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 CollectingHandler.prototype[name] = function(a, b) {
                   this.events.push([name, a, b]);
                   if (this._cbs[name]) this._cbs[name](a, b);
@@ -12609,8 +12425,8 @@
         30: [
           function(require, module, exports) {
             const index = require("./index.js");
-              const {DomHandler} = index;
-              const {DomUtils} = index;
+            const { DomHandler } = index;
+            const { DomUtils } = index;
             function FeedHandler(callback, options) {
               this.init(callback, options);
             }
@@ -12636,9 +12452,9 @@
             };
             FeedHandler.prototype.onend = function() {
               const feed = {};
-                const feedRoot = getOneElement(isValidFeed, this.dom);
-                let tmp;
-                let childs;
+              const feedRoot = getOneElement(isValidFeed, this.dom);
+              let tmp;
+              let childs;
               if (feedRoot) {
                 if (feedRoot.name === "feed") {
                   childs = feedRoot.children;
@@ -12657,7 +12473,7 @@
                   addConditionally(feed, "author", "email", childs, true);
                   feed.items = getElements("entry", childs).map(function(item) {
                     const entry = {};
-                      let tmp;
+                    let tmp;
                     item = item.children;
                     addConditionally(entry, "id", "id", item);
                     addConditionally(entry, "title", "title", item);
@@ -12694,7 +12510,7 @@
                   feed.items = getElements("item", feedRoot.children).map(
                     function(item) {
                       const entry = {};
-                        let tmp;
+                      let tmp;
                       item = item.children;
                       addConditionally(entry, "id", "guid", item);
                       addConditionally(entry, "title", "title", item);
@@ -12934,7 +12750,7 @@
             };
             Parser.prototype._getInstructionName = function(value) {
               const idx = value.search(re_nameEnd);
-                let name = idx < 0 ? value : value.substr(0, idx);
+              let name = idx < 0 ? value : value.substr(0, idx);
               if (this._lowerCaseTagNames) {
                 name = name.toLowerCase();
               }
@@ -12943,13 +12759,13 @@
             Parser.prototype.ondeclaration = function(value) {
               if (this._cbs.onprocessinginstruction) {
                 const name = this._getInstructionName(value);
-                this._cbs.onprocessinginstruction(`!${  name}`, `!${  value}`);
+                this._cbs.onprocessinginstruction(`!${name}`, `!${value}`);
               }
             };
             Parser.prototype.onprocessinginstruction = function(value) {
               if (this._cbs.onprocessinginstruction) {
                 const name = this._getInstructionName(value);
-                this._cbs.onprocessinginstruction(`?${  name}`, `?${  value}`);
+                this._cbs.onprocessinginstruction(`?${name}`, `?${value}`);
               }
             };
             Parser.prototype.oncomment = function(value) {
@@ -12964,7 +12780,7 @@
                 if (this._cbs.ontext) this._cbs.ontext(value);
                 if (this._cbs.oncdataend) this._cbs.oncdataend();
               } else {
-                this.oncomment(`[CDATA[${  value  }]]`);
+                this.oncomment(`[CDATA[${value}]]`);
               }
             };
             Parser.prototype.onerror = function(err) {
@@ -13017,20 +12833,20 @@
             function ProxyHandler(cbs) {
               this._cbs = cbs || {};
             }
-            const {EVENTS} = require("./");
+            const { EVENTS } = require("./");
             Object.keys(EVENTS).forEach(function(name) {
               if (EVENTS[name] === 0) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 ProxyHandler.prototype[name] = function() {
                   if (this._cbs[name]) this._cbs[name]();
                 };
               } else if (EVENTS[name] === 1) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 ProxyHandler.prototype[name] = function(a) {
                   if (this._cbs[name]) this._cbs[name](a);
                 };
               } else if (EVENTS[name] === 2) {
-                name = `on${  name}`;
+                name = `on${name}`;
                 ProxyHandler.prototype[name] = function(a, b) {
                   if (this._cbs[name]) this._cbs[name](a, b);
                 };
@@ -13053,18 +12869,18 @@
             function Cbs(scope) {
               this.scope = scope;
             }
-            const {EVENTS} = require("../");
+            const { EVENTS } = require("../");
             Object.keys(EVENTS).forEach(function(name) {
               if (EVENTS[name] === 0) {
-                Cbs.prototype[`on${  name}`] = function() {
+                Cbs.prototype[`on${name}`] = function() {
                   this.scope.emit(name);
                 };
               } else if (EVENTS[name] === 1) {
-                Cbs.prototype[`on${  name}`] = function(a) {
+                Cbs.prototype[`on${name}`] = function(a) {
                   this.scope.emit(name, a);
                 };
               } else if (EVENTS[name] === 2) {
-                Cbs.prototype[`on${  name}`] = function(a, b) {
+                Cbs.prototype[`on${name}`] = function(a, b) {
                   this.scope.emit(name, a, b);
                 };
               } else {
@@ -13078,69 +12894,69 @@
           function(require, module, exports) {
             module.exports = Tokenizer;
             const decodeCodePoint = require("entities/lib/decode_codepoint.js");
-              const entityMap = require("entities/maps/entities.json");
-              const legacyMap = require("entities/maps/legacy.json");
-              const xmlMap = require("entities/maps/xml.json");
-              let i = 0;
-              const TEXT = i++;
-              const BEFORE_TAG_NAME = i++;
-              const IN_TAG_NAME = i++;
-              const IN_SELF_CLOSING_TAG = i++;
-              const BEFORE_CLOSING_TAG_NAME = i++;
-              const IN_CLOSING_TAG_NAME = i++;
-              const AFTER_CLOSING_TAG_NAME = i++;
-              const BEFORE_ATTRIBUTE_NAME = i++;
-              const IN_ATTRIBUTE_NAME = i++;
-              const AFTER_ATTRIBUTE_NAME = i++;
-              const BEFORE_ATTRIBUTE_VALUE = i++;
-              const IN_ATTRIBUTE_VALUE_DQ = i++;
-              const IN_ATTRIBUTE_VALUE_SQ = i++;
-              const IN_ATTRIBUTE_VALUE_NQ = i++;
-              const BEFORE_DECLARATION = i++;
-              const IN_DECLARATION = i++;
-              const IN_PROCESSING_INSTRUCTION = i++;
-              const BEFORE_COMMENT = i++;
-              const IN_COMMENT = i++;
-              const AFTER_COMMENT_1 = i++;
-              const AFTER_COMMENT_2 = i++;
-              const BEFORE_CDATA_1 = i++;
-              const BEFORE_CDATA_2 = i++;
-              const BEFORE_CDATA_3 = i++;
-              const BEFORE_CDATA_4 = i++;
-              const BEFORE_CDATA_5 = i++;
-              const BEFORE_CDATA_6 = i++;
-              const IN_CDATA = i++;
-              const AFTER_CDATA_1 = i++;
-              const AFTER_CDATA_2 = i++;
-              const BEFORE_SPECIAL = i++;
-              const BEFORE_SPECIAL_END = i++;
-              const BEFORE_SCRIPT_1 = i++;
-              const BEFORE_SCRIPT_2 = i++;
-              const BEFORE_SCRIPT_3 = i++;
-              const BEFORE_SCRIPT_4 = i++;
-              const BEFORE_SCRIPT_5 = i++;
-              const AFTER_SCRIPT_1 = i++;
-              const AFTER_SCRIPT_2 = i++;
-              const AFTER_SCRIPT_3 = i++;
-              const AFTER_SCRIPT_4 = i++;
-              const AFTER_SCRIPT_5 = i++;
-              const BEFORE_STYLE_1 = i++;
-              const BEFORE_STYLE_2 = i++;
-              const BEFORE_STYLE_3 = i++;
-              const BEFORE_STYLE_4 = i++;
-              const AFTER_STYLE_1 = i++;
-              const AFTER_STYLE_2 = i++;
-              const AFTER_STYLE_3 = i++;
-              const AFTER_STYLE_4 = i++;
-              const BEFORE_ENTITY = i++;
-              const BEFORE_NUMERIC_ENTITY = i++;
-              const IN_NAMED_ENTITY = i++;
-              const IN_NUMERIC_ENTITY = i++;
-              const IN_HEX_ENTITY = i++;
-              let j = 0;
-              const SPECIAL_NONE = j++;
-              const SPECIAL_SCRIPT = j++;
-              const SPECIAL_STYLE = j++;
+            const entityMap = require("entities/maps/entities.json");
+            const legacyMap = require("entities/maps/legacy.json");
+            const xmlMap = require("entities/maps/xml.json");
+            let i = 0;
+            const TEXT = i++;
+            const BEFORE_TAG_NAME = i++;
+            const IN_TAG_NAME = i++;
+            const IN_SELF_CLOSING_TAG = i++;
+            const BEFORE_CLOSING_TAG_NAME = i++;
+            const IN_CLOSING_TAG_NAME = i++;
+            const AFTER_CLOSING_TAG_NAME = i++;
+            const BEFORE_ATTRIBUTE_NAME = i++;
+            const IN_ATTRIBUTE_NAME = i++;
+            const AFTER_ATTRIBUTE_NAME = i++;
+            const BEFORE_ATTRIBUTE_VALUE = i++;
+            const IN_ATTRIBUTE_VALUE_DQ = i++;
+            const IN_ATTRIBUTE_VALUE_SQ = i++;
+            const IN_ATTRIBUTE_VALUE_NQ = i++;
+            const BEFORE_DECLARATION = i++;
+            const IN_DECLARATION = i++;
+            const IN_PROCESSING_INSTRUCTION = i++;
+            const BEFORE_COMMENT = i++;
+            const IN_COMMENT = i++;
+            const AFTER_COMMENT_1 = i++;
+            const AFTER_COMMENT_2 = i++;
+            const BEFORE_CDATA_1 = i++;
+            const BEFORE_CDATA_2 = i++;
+            const BEFORE_CDATA_3 = i++;
+            const BEFORE_CDATA_4 = i++;
+            const BEFORE_CDATA_5 = i++;
+            const BEFORE_CDATA_6 = i++;
+            const IN_CDATA = i++;
+            const AFTER_CDATA_1 = i++;
+            const AFTER_CDATA_2 = i++;
+            const BEFORE_SPECIAL = i++;
+            const BEFORE_SPECIAL_END = i++;
+            const BEFORE_SCRIPT_1 = i++;
+            const BEFORE_SCRIPT_2 = i++;
+            const BEFORE_SCRIPT_3 = i++;
+            const BEFORE_SCRIPT_4 = i++;
+            const BEFORE_SCRIPT_5 = i++;
+            const AFTER_SCRIPT_1 = i++;
+            const AFTER_SCRIPT_2 = i++;
+            const AFTER_SCRIPT_3 = i++;
+            const AFTER_SCRIPT_4 = i++;
+            const AFTER_SCRIPT_5 = i++;
+            const BEFORE_STYLE_1 = i++;
+            const BEFORE_STYLE_2 = i++;
+            const BEFORE_STYLE_3 = i++;
+            const BEFORE_STYLE_4 = i++;
+            const AFTER_STYLE_1 = i++;
+            const AFTER_STYLE_2 = i++;
+            const AFTER_STYLE_3 = i++;
+            const AFTER_STYLE_4 = i++;
+            const BEFORE_ENTITY = i++;
+            const BEFORE_NUMERIC_ENTITY = i++;
+            const IN_NAMED_ENTITY = i++;
+            const IN_NUMERIC_ENTITY = i++;
+            const IN_HEX_ENTITY = i++;
+            let j = 0;
+            const SPECIAL_NONE = j++;
+            const SPECIAL_SCRIPT = j++;
+            const SPECIAL_STYLE = j++;
             function whitespace(c) {
               return (
                 c === " " ||
@@ -13166,16 +12982,15 @@
                     this._index--;
                   }
                 };
-              } 
-                return function(c) {
-                  if (c === lower || c === upper) {
-                    this._state = SUCCESS;
-                  } else {
-                    this._state = FAILURE;
-                    this._index--;
-                  }
-                };
-              
+              }
+              return function(c) {
+                if (c === lower || c === upper) {
+                  this._state = SUCCESS;
+                } else {
+                  this._state = FAILURE;
+                  this._index--;
+                }
+              };
             }
             function consumeSpecialNameChar(upper, NEXT_STATE) {
               const lower = upper.toLowerCase();
@@ -13613,10 +13428,10 @@
             Tokenizer.prototype._parseNamedEntityStrict = function() {
               if (this._sectionStart + 1 < this._index) {
                 const entity = this._buffer.substring(
-                    this._sectionStart + 1,
-                    this._index,
-                  );
-                  const map = this._xmlMode ? xmlMap : entityMap;
+                  this._sectionStart + 1,
+                  this._index,
+                );
+                const map = this._xmlMode ? xmlMap : entityMap;
                 if (map.hasOwnProperty(entity)) {
                   this._emitPartial(map[entity]);
                   this._sectionStart = this._index + 1;
@@ -13625,7 +13440,7 @@
             };
             Tokenizer.prototype._parseLegacyEntity = function() {
               const start = this._sectionStart + 1;
-                let limit = this._index - start;
+              let limit = this._index - start;
               if (limit > 6) limit = 6;
               while (limit >= 2) {
                 const entity = this._buffer.substr(start, limit);
@@ -13633,9 +13448,8 @@
                   this._emitPartial(legacyMap[entity]);
                   this._sectionStart += limit + 1;
                   return;
-                } 
-                  limit--;
-                
+                }
+                limit--;
               }
             };
             Tokenizer.prototype._stateInNamedEntity = function(c) {
@@ -13666,7 +13480,10 @@
             Tokenizer.prototype._decodeNumericEntity = function(offset, base) {
               const sectionStart = this._sectionStart + offset;
               if (sectionStart !== this._index) {
-                const entity = this._buffer.substring(sectionStart, this._index);
+                const entity = this._buffer.substring(
+                  sectionStart,
+                  this._index,
+                );
                 const parsed = parseInt(entity, base);
                 this._emitPartial(decodeCodePoint(parsed));
                 this._sectionStart = this._index;
@@ -13964,11 +13781,10 @@
           function(require, module, exports) {
             module.exports = Stream;
             const Parser = require("./Parser.js");
-              const WritableStream =
-                require("stream").Writable ||
-                require("readable-stream").Writable;
-              const {StringDecoder} = require("string_decoder");
-              const {Buffer} = require("buffer");
+            const WritableStream =
+              require("stream").Writable || require("readable-stream").Writable;
+            const { StringDecoder } = require("string_decoder");
+            const { Buffer } = require("buffer");
             function Stream(cbs, options) {
               const parser = (this._parser = new Parser(cbs, options));
               const decoder = (this._decoder = new StringDecoder());
@@ -13996,7 +13812,7 @@
         36: [
           function(require, module, exports) {
             const Parser = require("./Parser.js");
-              const DomHandler = require("domhandler");
+            const DomHandler = require("domhandler");
             function defineProp(name, value) {
               delete module.exports[name];
               module.exports[name] = value;
@@ -14081,7 +13897,8 @@
         37: [
           function(require, module, exports) {
             exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-              let e; let m;
+              let e;
+              let m;
               const eLen = nBytes * 8 - mLen - 1;
               const eMax = (1 << eLen) - 1;
               const eBias = eMax >> 1;
@@ -14124,7 +13941,9 @@
               mLen,
               nBytes,
             ) {
-              let e; let m; let c;
+              let e;
+              let m;
+              let c;
               let eLen = nBytes * 8 - mLen - 1;
               const eMax = (1 << eLen) - 1;
               const eBias = eMax >> 1;
@@ -14232,7 +14051,7 @@
         ],
         40: [
           function(require, module, exports) {
-            const {toString} = {};
+            const { toString } = {};
             module.exports =
               Array.isArray ||
               function(arr) {
@@ -14244,7 +14063,6 @@
         41: [
           function(require, module, exports) {
             (function(process) {
-              
               if (
                 !process.version ||
                 process.version.indexOf("v0.") === 0 ||
@@ -14260,7 +14078,8 @@
                   throw new TypeError('"callback" argument must be a function');
                 }
                 const len = arguments.length;
-                let args; let i;
+                let args;
+                let i;
                 switch (len) {
                   case 0:
                   case 1:
@@ -14462,7 +14281,6 @@
         ],
         44: [
           function(require, module, exports) {
-            
             const objectKeys =
               Object.keys ||
               function(obj) {
@@ -14519,7 +14337,6 @@
         ],
         45: [
           function(require, module, exports) {
-            
             module.exports = PassThrough;
             const Transform = require("./_stream_transform");
             const util = require("core-util-is");
@@ -14539,7 +14356,6 @@
         46: [
           function(require, module, exports) {
             (function(process) {
-              
               module.exports = Readable;
               const processNextTick = require("process-nextick-args");
               const isArray = require("isarray");
@@ -14557,7 +14373,7 @@
                   if (!Stream) Stream = require("events").EventEmitter;
                 }
               })();
-              const {Buffer} = require("buffer");
+              const { Buffer } = require("buffer");
               const bufferShim = require("buffer-shims");
               const util = require("core-util-is");
               util.inherits = require("inherits");
@@ -14574,13 +14390,12 @@
               function prependListener(emitter, event, fn) {
                 if (typeof emitter.prependListener === "function") {
                   return emitter.prependListener(event, fn);
-                } 
-                  if (!emitter._events || !emitter._events[event])
-                    emitter.on(event, fn);
-                  else if (isArray(emitter._events[event]))
-                    emitter._events[event].unshift(fn);
-                  else emitter._events[event] = [fn, emitter._events[event]];
-                
+                }
+                if (!emitter._events || !emitter._events[event])
+                  emitter.on(event, fn);
+                else if (isArray(emitter._events[event]))
+                  emitter._events[event].unshift(fn);
+                else emitter._events[event] = [fn, emitter._events[event]];
               }
               var Duplex;
               function ReadableState(options, stream) {
@@ -15094,8 +14909,7 @@
                     (chunk === null || chunk === undefined)
                   )
                     return;
-                  if (!state.objectMode && (!chunk || !chunk.length))
-                    return;
+                  if (!state.objectMode && (!chunk || !chunk.length)) return;
                   const ret = self.push(chunk);
                   if (!ret) {
                     paused = true;
@@ -15257,7 +15071,6 @@
         ],
         47: [
           function(require, module, exports) {
-            
             module.exports = Transform;
             const Duplex = require("./_stream_duplex");
             const util = require("core-util-is");
@@ -15366,7 +15179,6 @@
         48: [
           function(require, module, exports) {
             (function(process) {
-              
               module.exports = Writable;
               const processNextTick = require("process-nextick-args");
               const asyncWrite =
@@ -15387,7 +15199,7 @@
                   if (!Stream) Stream = require("events").EventEmitter;
                 }
               })();
-              const {Buffer} = require("buffer");
+              const { Buffer } = require("buffer");
               const bufferShim = require("buffer-shims");
               util.inherits(Writable, Stream);
               function nop() {}
@@ -15550,10 +15362,10 @@
                       "utf16le",
                       "utf-16le",
                       "raw",
-                    ].indexOf((`${encoding  }`).toLowerCase()) > -1
+                    ].indexOf(`${encoding}`.toLowerCase()) > -1
                   )
                 )
-                  throw new TypeError(`Unknown encoding: ${  encoding}`);
+                  throw new TypeError(`Unknown encoding: ${encoding}`);
                 this._writableState.defaultEncoding = encoding;
                 return this;
               };
@@ -15620,7 +15432,7 @@
               }
               function onwrite(stream, er) {
                 const state = stream._writableState;
-                const {sync} = state;
+                const { sync } = state;
                 const cb = state.writecb;
                 onwriteStateUpdate(state);
                 if (er) onwriteError(stream, state, sync, er, cb);
@@ -15686,8 +15498,8 @@
                   }
                 } else {
                   while (entry) {
-                    const {chunk} = entry;
-                    const {encoding} = entry;
+                    const { chunk } = entry;
+                    const { encoding } = entry;
                     const cb = entry.callback;
                     const len = state.objectMode ? 1 : chunk.length;
                     doWrite(stream, state, false, len, chunk, encoding, cb);
@@ -15768,7 +15580,7 @@
                 this.next = null;
                 this.entry = null;
                 this.finish = function(err) {
-                  let {entry} = _this;
+                  let { entry } = _this;
                   _this.entry = null;
                   while (entry) {
                     const cb = entry.callback;
@@ -15799,8 +15611,7 @@
         ],
         49: [
           function(require, module, exports) {
-            
-            const {Buffer} = require("buffer");
+            const { Buffer } = require("buffer");
             const bufferShim = require("buffer-shims");
             module.exports = BufferList;
             function BufferList() {
@@ -15836,7 +15647,7 @@
             BufferList.prototype.join = function(s) {
               if (this.length === 0) return "";
               let p = this.head;
-              let ret = `${  p.data}`;
+              let ret = `${p.data}`;
               while ((p = p.next)) {
                 ret += s + p.data;
               }
@@ -16001,7 +15812,7 @@
         ],
         56: [
           function(require, module, exports) {
-            const {Buffer} = require("buffer");
+            const { Buffer } = require("buffer");
             const isBufferEncoding =
               Buffer.isEncoding ||
               function(encoding) {
@@ -16024,7 +15835,7 @@
               };
             function assertEncoding(encoding) {
               if (encoding && !isBufferEncoding(encoding)) {
-                throw new Error(`Unknown encoding: ${  encoding}`);
+                throw new Error(`Unknown encoding: ${encoding}`);
               }
             }
             const StringDecoder = (exports.StringDecoder = function(encoding) {
@@ -16199,7 +16010,7 @@
         58: [
           function(require, module, exports) {
             module.exports = extend;
-            const {hasOwnProperty} = Object.prototype;
+            const { hasOwnProperty } = Object.prototype;
             function extend() {
               const target = {};
               for (let i = 0; i < arguments.length; i++) {
@@ -16246,7 +16057,9 @@
       g.SwaggerClient = f();
     }
   })(function() {
-    let define; let module; let exports;
+    let define;
+    let module;
+    let exports;
     return (function e(t, n, r) {
       function s(o, u) {
         if (!n[o]) {
@@ -16254,7 +16067,7 @@
             const a = typeof require === "function" && require;
             if (!u && a) return a(o, !0);
             if (i) return i(o, !0);
-            const f = new Error(`Cannot find module '${  o  }'`);
+            const f = new Error(`Cannot find module '${o}'`);
             throw ((f.code = "MODULE_NOT_FOUND"), f);
           }
           const l = (n[o] = { exports: {} });
@@ -16281,8 +16094,6 @@
       {
         1: [
           function(require, module, exports) {
-            
-
             const auth = require("./lib/auth");
             const helpers = require("./lib/helpers");
             const SwaggerClient = require("./lib/client");
@@ -16338,11 +16149,9 @@
         ],
         2: [
           function(require, module, exports) {
-            
-
             const helpers = require("./helpers");
             const btoa = require("btoa"); // jshint ignore:line
-            const {CookieJar} = require("cookiejar");
+            const { CookieJar } = require("cookiejar");
             const _ = {
               each: require("lodash-compat/collection/each"),
               includes: require("lodash-compat/collection/includes"),
@@ -16446,13 +16255,14 @@
                 }
 
                 if (obj.url.indexOf("?") > 0) {
-                  obj.url = `${obj.url  }&${  this.name  }=${  this.value}`;
+                  obj.url = `${obj.url}&${this.name}=${this.value}`;
                 } else {
-                  obj.url = `${obj.url  }?${  this.name  }=${  this.value}`;
+                  obj.url = `${obj.url}?${this.name}=${this.value}`;
                 }
 
                 return true;
-              } if (this.type === "header") {
+              }
+              if (this.type === "header") {
                 if (typeof obj.headers[this.name] === "undefined") {
                   obj.headers[this.name] = this.value;
                 }
@@ -16494,8 +16304,9 @@
 
             PasswordAuthorization.prototype.apply = function(obj) {
               if (typeof obj.headers.Authorization === "undefined") {
-                obj.headers.Authorization =
-                  `Basic ${  btoa(`${this.username  }:${  this.password}`)}`;
+                obj.headers.Authorization = `Basic ${btoa(
+                  `${this.username}:${this.password}`,
+                )}`;
               }
 
               return true;
@@ -16513,8 +16324,6 @@
         ],
         3: [
           function(require, module, exports) {
-            
-
             const _ = {
               bind: require("lodash-compat/function/bind"),
               cloneDeep: require("lodash-compat/lang/cloneDeep"),
@@ -16630,9 +16439,8 @@
 
               if (typeof url !== "undefined") {
                 return this.initialize(url, options);
-              } 
-                return this;
-              
+              }
+              return this;
             });
 
             SwaggerClient.prototype.initialize = function(url, options) {
@@ -16737,7 +16545,7 @@
                 this.progress("fetching resource list; Please wait.");
               } else {
                 this.progress(
-                  `fetching resource list: ${  this.url  }; Please wait.`,
+                  `fetching resource list: ${this.url}; Please wait.`,
                 );
               }
 
@@ -16759,35 +16567,31 @@
                       self.url.substring(0, 4) !== "http"
                     ) {
                       return self.fail(
-                        `Please specify the protocol for ${  self.url}`,
+                        `Please specify the protocol for ${self.url}`,
                       );
-                    } if (
+                    }
+                    if (
                       response.errObj &&
                       (response.errObj.code === "ECONNABORTED" ||
                         response.errObj.message.indexOf("timeout") !== -1)
                     ) {
                       return self.fail(
-                        `Request timed out after ${ 
-                          self.fetchSpecTimeout 
-                          }ms`,
+                        `Request timed out after ${self.fetchSpecTimeout}ms`,
                       );
-                    } if (response.status === 0) {
+                    }
+                    if (response.status === 0) {
                       return self.fail(
                         "Can't read from server.  It may not have the appropriate access-control-origin settings.",
                       );
-                    } if (response.status === 404) {
+                    }
+                    if (response.status === 404) {
                       return self.fail(
-                        `Can't read swagger JSON from ${  self.url}`,
+                        `Can't read swagger JSON from ${self.url}`,
                       );
-                    } 
-                      return self.fail(
-                        `${response.status 
-                          } : ${ 
-                          response.statusText 
-                          } ${ 
-                          self.url}`,
-                      );
-                    
+                    }
+                    return self.fail(
+                      `${response.status} : ${response.statusText} ${self.url}`,
+                    );
                   },
                   response(resp) {
                     const responseObj = resp.obj;
@@ -16885,11 +16689,11 @@
               this.title = response.title || "";
 
               let key;
-                let definedTags = {};
-                let k;
-                let location;
-                const self = this;
-                let i;
+              let definedTags = {};
+              let k;
+              let location;
+              const self = this;
+              let i;
 
               if (response.externalDocs) {
                 this.externalDocs = response.externalDocs;
@@ -16984,10 +16788,10 @@
                     } else if (this.schemes.indexOf(scheme) !== -1) {
                       this.scheme = scheme;
                     } else if (this.schemes.indexOf("https") !== -1) {
-                        this.scheme = "https";
-                      } else {
-                        this.scheme = "http";
-                      }
+                      this.scheme = "https";
+                    } else {
+                      this.scheme = "http";
+                    }
                   } else {
                     this.scheme = this.schemes[0] || location.scheme;
                   }
@@ -16997,17 +16801,17 @@
                   this.host = location.host;
 
                   if (location.port) {
-                    this.host = `${this.host  }:${  location.port}`;
+                    this.host = `${this.host}:${location.port}`;
                   }
                 }
               } else if (
-                  typeof this.schemes === "undefined" ||
-                  this.schemes.length === 0
-                ) {
-                  this.scheme = "http";
-                } else if (typeof this.scheme === "undefined") {
-                  this.scheme = this.schemes[0];
-                }
+                typeof this.schemes === "undefined" ||
+                this.schemes.length === 0
+              ) {
+                this.scheme = "http";
+              } else if (typeof this.scheme === "undefined") {
+                this.scheme = this.schemes[0];
+              }
 
               this.definitions = response.definitions;
 
@@ -17041,20 +16845,17 @@
                   if (_.isUndefined(operation)) {
                     // Operation does not exist
                     return;
-                  } if (!_.isPlainObject(operation)) {
+                  }
+                  if (!_.isPlainObject(operation)) {
                     // Operation exists but it is not an Operation Object.  Since this is invalid, log it.
                     helpers.log(
-                      `The '${ 
-                        method 
-                        }' operation for '${ 
-                        path 
-                        }' path is not an Operation Object`,
+                      `The '${method}' operation for '${path}' path is not an Operation Object`,
                     );
 
                     return;
                   }
 
-                  let {tags} = operation;
+                  let { tags } = operation;
 
                   if (
                     _.isUndefined(tags) ||
@@ -17100,55 +16901,31 @@
                   // bind self operation's execute command to the api
                   _.forEach(tags, function(tag) {
                     const clientProperty =
-                      _.indexOf(reservedClientTags, tag) > -1 ? `_${  tag}` : tag;
+                      _.indexOf(reservedClientTags, tag) > -1 ? `_${tag}` : tag;
                     const apiProperty =
-                      _.indexOf(reservedApiTags, tag) > -1 ? `_${  tag}` : tag;
+                      _.indexOf(reservedApiTags, tag) > -1 ? `_${tag}` : tag;
                     let operationGroup = self[clientProperty];
 
                     if (clientProperty !== tag) {
                       helpers.log(
-                        `The '${ 
-                          tag 
-                          }' tag conflicts with a SwaggerClient function/property name.  Use 'client.${ 
-                          clientProperty 
-                          }' or 'client.apis.${ 
-                          tag 
-                          }' instead of 'client.${ 
-                          tag 
-                          }'.`,
+                        `The '${tag}' tag conflicts with a SwaggerClient function/property name.  Use 'client.${clientProperty}' or 'client.apis.${tag}' instead of 'client.${tag}'.`,
                       );
                     }
 
                     if (apiProperty !== tag) {
                       helpers.log(
-                        `The '${ 
-                          tag 
-                          }' tag conflicts with a SwaggerClient operation function/property name.  Use ` +
-                          `'client.apis.${ 
-                          apiProperty 
-                          }' instead of 'client.apis.${ 
-                          tag 
-                          }'.`,
+                        `The '${tag}' tag conflicts with a SwaggerClient operation function/property name.  Use ` +
+                          `'client.apis.${apiProperty}' instead of 'client.apis.${tag}'.`,
                       );
                     }
 
                     if (_.indexOf(reservedApiTags, operationId) > -1) {
                       helpers.log(
-                        `The '${ 
-                          operationId 
-                          }' operationId conflicts with a SwaggerClient operation ` +
-                          `function/property name.  Use 'client.apis.${ 
-                          apiProperty 
-                          }._${ 
-                          operationId 
-                          }' instead of 'client.apis.${ 
-                          apiProperty 
-                          }.${ 
-                          operationId 
-                          }'.`,
+                        `The '${operationId}' operationId conflicts with a SwaggerClient operation ` +
+                          `function/property name.  Use 'client.apis.${apiProperty}._${operationId}' instead of 'client.apis.${apiProperty}.${operationId}'.`,
                       );
 
-                      operationId = `_${  operationId}`;
+                      operationId = `_${operationId}`;
                       operationObject.nickname = operationId; // So 'client.apis.[tag].operationId.help() works properly
                     }
 
@@ -17287,7 +17064,7 @@
                 if (!matched) {
                   return name;
                 }
-                name = `${operationId  }_${  count}`;
+                name = `${operationId}_${count}`;
                 count++;
               }
 
@@ -17312,10 +17089,10 @@
               if (this instanceof SwaggerClient) {
                 _.forEach(this.apis, function(api, name) {
                   if (_.isPlainObject(api)) {
-                    output += `operations for the '${  name  }' tag\n`;
+                    output += `operations for the '${name}' tag\n`;
 
                     _.forEach(api.operations, function(operation, name) {
-                      output += `  * ${  name  }: ${  operation.summary  }\n`;
+                      output += `  * ${name}: ${operation.summary}\n`;
                     });
                   }
                 });
@@ -17323,20 +17100,19 @@
                 this instanceof OperationGroup ||
                 _.isPlainObject(this)
               ) {
-                output += `operations for the '${  this.label  }' tag\n`;
+                output += `operations for the '${this.label}' tag\n`;
 
                 _.forEach(this.apis, function(operation, name) {
-                  output += `  * ${  name  }: ${  operation.summary  }\n`;
+                  output += `  * ${name}: ${operation.summary}\n`;
                 });
               }
 
               if (dontPrint) {
                 return output;
-              } 
-                helpers.log(output);
+              }
+              helpers.log(output);
 
-                return output;
-              
+              return output;
             };
 
             SwaggerClient.prototype.tagFromLabel = function(label) {
@@ -17346,13 +17122,13 @@
             SwaggerClient.prototype.idFromOp = function(path, httpMethod, op) {
               if (!op || !op.operationId) {
                 op = op || {};
-                op.operationId = `${httpMethod  }_${  path}`;
+                op.operationId = `${httpMethod}_${path}`;
               }
               let opId =
                 op.operationId.replace(
                   /[\s!@#$%^&*()_+=\[{\]};:<>|.\/?,\\'""-]/g,
                   "_",
-                ) || `${path.substring(1)  }_${  httpMethod}`;
+                ) || `${path.substring(1)}_${httpMethod}`;
 
               opId = opId.replace(/((_){2,})/g, "_");
               opId = opId.replace(/^(_)*/g, "");
@@ -17409,13 +17185,12 @@
               if (this.usePromise) {
                 this.deferredClient.reject(message);
                 return this.deferredClient.promise;
-              } 
-                if (this.failure) {
-                  this.failure(message);
-                } else {
-                  this.failure(message);
-                }
-              
+              }
+              if (this.failure) {
+                this.failure(message);
+              } else {
+                this.failure(message);
+              }
             };
           },
           {
@@ -17443,8 +17218,6 @@
         4: [
           function(require, module, exports) {
             (function(process) {
-              
-
               const _ = {
                 isPlainObject: require("lodash-compat/lang/isPlainObject"),
                 indexOf: require("lodash-compat/array/indexOf"),
@@ -17468,13 +17241,7 @@
               };
 
               module.exports.optionHtml = function(label, value) {
-                return (
-                  `<tr><td class="optionName">${ 
-                  label 
-                  }:</td><td>${ 
-                  value 
-                  }</td></tr>`
-                );
+                return `<tr><td class="optionName">${label}:</td><td>${value}</td></tr>`;
               };
 
               var resolveSchema = (module.exports.resolveSchema = function(
@@ -17494,9 +17261,8 @@
 
                 if (name.indexOf("#/definitions/") === 0) {
                   return name.substring("#/definitions/".length);
-                } 
-                  return name;
-                
+                }
+                return name;
               };
 
               /**
@@ -17533,8 +17299,6 @@
         5: [
           function(require, module, exports) {
             (function(Buffer) {
-              
-
               const helpers = require("./helpers");
               let request = require("superagent");
               const jsyaml = require("js-yaml");
@@ -17609,7 +17373,7 @@
                 }
 
                 const success = obj.on.response;
-                const {error} = obj.on;
+                const { error } = obj.on;
 
                 const requestInterceptor = function(data) {
                   if (opts && opts.requestInterceptor) {
@@ -17775,7 +17539,7 @@
 
               SuperagentHttpClient.prototype.execute = function(obj) {
                 let method = obj.method.toLowerCase();
-                const {timeout} = obj;
+                const { timeout } = obj;
 
                 if (method === "delete") {
                   method = "del";
@@ -17814,7 +17578,9 @@
                       if ({}.toString.apply(obj.body) === "[object FormData]") {
                         r.send(obj.body);
                       } else {
-                        let keyname; let value; let v;
+                        let keyname;
+                        let value;
+                        let v;
                         for (keyname in obj.body) {
                           value = obj.body[keyname];
                           if (Array.isArray(value)) {
@@ -17946,8 +17712,6 @@
         ],
         6: [
           function(require, module, exports) {
-            
-
             const SwaggerHttp = require("./http");
             const _ = {
               isObject: require("lodash-compat/lang/isObject"),
@@ -17973,23 +17737,25 @@
               unresolvedRefs,
               spec,
             ) {
-              let i; let location; let property;
+              let i;
+              let location;
+              let property;
 
-              definition["x-resolved-from"] = [`#/definitions/${  name}`];
-              const {allOf} = definition;
+              definition["x-resolved-from"] = [`#/definitions/${name}`];
+              const { allOf } = definition;
               // the refs go first
               allOf.sort(function(a, b) {
                 if (a.$ref && b.$ref) {
                   return 0;
-                } if (a.$ref) {
+                }
+                if (a.$ref) {
                   return -1;
-                } 
-                  return 1;
-                
+                }
+                return 1;
               });
               for (i = 0; i < allOf.length; i++) {
                 property = allOf[i];
-                location = `/definitions/${  name  }/allOf`;
+                location = `/definitions/${name}/allOf`;
                 this.resolveInline(
                   root,
                   spec,
@@ -18004,18 +17770,18 @@
             Resolver.prototype.resolve = function(spec, arg1, arg2, arg3) {
               this.spec = spec;
               let root = arg1;
-                let callback = arg2;
-                let scope = arg3;
-                const opts = {};
-                let location;
-                let i;
+              let callback = arg2;
+              let scope = arg3;
+              const opts = {};
+              let location;
+              let i;
               if (typeof arg1 === "function") {
                 root = null;
                 callback = arg1;
                 scope = arg2;
               }
               const _root = root;
-                let modelName;
+              let modelName;
               this.scope = scope || this;
               this.iteration = this.iteration || 0;
 
@@ -18030,10 +17796,16 @@
                 opts.responseInterceptor = this.scope.options.responseInterceptor;
               }
 
-              let name; let path; let property; let propertyName; let parameter; let done; let counter;
+              let name;
+              let path;
+              let property;
+              let propertyName;
+              let parameter;
+              let done;
+              let counter;
               let processedCalls = 0;
-                const resolvedRefs = {};
-                const unresolvedRefs = {};
+              const resolvedRefs = {};
+              const unresolvedRefs = {};
               const resolutionTable = []; // store objects for dereferencing
 
               spec.definitions = spec.definitions || {};
@@ -18100,12 +17872,12 @@
                         done = true;
                         break;
                       }
-                      _name = `${modelName  }_${  counter}`;
+                      _name = `${modelName}_${counter}`;
                       counter++;
                     }
                     spec.definitions[_name] = { allOf: parameter.schema.allOf };
                     delete parameter.schema.allOf;
-                    parameter.schema.$ref = `#/definitions/${  _name}`;
+                    parameter.schema.$ref = `#/definitions/${_name}`;
                     this.processAllOf(
                       root,
                       _name,
@@ -18139,7 +17911,9 @@
 
               // operations
               for (name in spec.paths) {
-                var method; var operation; var responseCode;
+                var method;
+                var operation;
+                var responseCode;
                 path = spec.paths[name];
 
                 if (typeof path === "object") {
@@ -18147,7 +17921,7 @@
                     // operation reference
                     if (method === "$ref") {
                       // location = path[method];
-                      location = `/paths${  name}`;
+                      location = `/paths${name}`;
                       this.resolveInline(
                         root,
                         spec,
@@ -18172,8 +17946,7 @@
 
                       for (i in parameters) {
                         parameter = parameters[i];
-                        location =
-                          `/paths${  name  }/${  method  }/parameters`;
+                        location = `/paths${name}/${method}/parameters`;
 
                         if (parameter.in === "body" && parameter.schema) {
                           if (_.isArray(parameter.schema.allOf)) {
@@ -18189,14 +17962,14 @@
                                 done = true;
                                 break;
                               }
-                              name = `${modelName  }_${  counter}`;
+                              name = `${modelName}_${counter}`;
                               counter++;
                             }
                             spec.definitions[name] = {
                               allOf: parameter.schema.allOf,
                             };
                             delete parameter.schema.allOf;
-                            parameter.schema.$ref = `#/definitions/${  name}`;
+                            parameter.schema.$ref = `#/definitions/${name}`;
                             this.processAllOf(
                               root,
                               name,
@@ -18230,13 +18003,7 @@
 
                       for (responseCode in operation.responses) {
                         const response = operation.responses[responseCode];
-                        location =
-                          `/paths${ 
-                          name 
-                          }/${ 
-                          method 
-                          }/responses/${ 
-                          responseCode}`;
+                        location = `/paths${name}/${method}/responses/${responseCode}`;
 
                         if (_.isObject(response)) {
                           if (response.$ref) {
@@ -18265,7 +18032,7 @@
                                   done = true;
                                   break;
                                 }
-                                name = `${modelName  }_${  counter}`;
+                                name = `${modelName}_${counter}`;
                                 counter++;
                               }
                               spec.definitions[name] = {
@@ -18273,7 +18040,7 @@
                               };
                               delete responseObj.schema.allOf;
                               delete responseObj.schema.type;
-                              responseObj.schema.$ref = `#/definitions/${  name}`;
+                              responseObj.schema.$ref = `#/definitions/${name}`;
                               this.processAllOf(
                                 root,
                                 name,
@@ -18316,7 +18083,7 @@
               }
 
               let expectedCalls = 0;
-                const toResolve = [];
+              const toResolve = [];
               // if the root is same as obj[i].root we can resolve locally
               const all = resolutionTable;
 
@@ -18326,7 +18093,7 @@
                 if (root === a.root) {
                   if (a.resolveAs === "ref") {
                     // resolve any path walking
-                    const joined = (`${a.root || ""  }/${  a.key}`).split("/");
+                    const joined = `${a.root || ""}/${a.key}`.split("/");
                     let normalized = [];
                     let url = "";
                     var k;
@@ -18382,23 +18149,23 @@
                       }
                     }
                   } else if (a.resolveAs === "inline") {
-                      if (
-                        a.key &&
-                        a.key.indexOf("#") === -1 &&
-                        a.key.charAt(0) !== "/"
-                      ) {
-                        // handle relative schema
-                        parts = a.root.split("/");
-                        location = "";
-                        for (i = 0; i < parts.length - 1; i++) {
-                          location += `${parts[i]  }/`;
-                        }
-                        location += a.key;
-                        a.root = location;
-                        a.location = "";
+                    if (
+                      a.key &&
+                      a.key.indexOf("#") === -1 &&
+                      a.key.charAt(0) !== "/"
+                    ) {
+                      // handle relative schema
+                      parts = a.root.split("/");
+                      location = "";
+                      for (i = 0; i < parts.length - 1; i++) {
+                        location += `${parts[i]}/`;
                       }
-                      toResolve.push(a);
+                      location += a.key;
+                      a.root = location;
+                      a.location = "";
                     }
+                    toResolve.push(a);
+                  }
                 } else {
                   toResolve.push(a);
                 }
@@ -18446,7 +18213,7 @@
                       on: {
                         error(error) {
                           processedCalls += 1;
-                          console.log(`failed url: ${  obj.url}`);
+                          console.log(`failed url: ${obj.url}`);
                           self.failedUrls.push(obj.url);
                           if (lock) {
                             delete lock[item.root];
@@ -18565,14 +18332,14 @@
             ) {
               const path = item.location;
               let location = spec;
-                let parts = path.split("/");
+              let parts = path.split("/");
               if (path !== "") {
                 for (let j = 0; j < parts.length; j++) {
                   let segment = parts[j];
                   if (segment.indexOf("~1") !== -1) {
                     segment = parts[j].replace(/~0/g, "~").replace(/~1/g, "/");
                     if (segment.charAt(0) !== "/") {
-                      segment = `/${  segment}`;
+                      segment = `/${segment}`;
                     }
                   }
                   if (typeof location === "undefined" || location === null) {
@@ -18624,11 +18391,12 @@
               localResolve,
             ) {
               // walk resolution table and replace with resolved refs
-              let ref; let abs;
+              let ref;
+              let abs;
               for (ref in resolutionTable) {
                 const item = resolutionTable[ref];
 
-                let {key} = item;
+                let { key } = item;
                 const resolvedTo = resolvedRefs[key];
                 if (resolvedTo) {
                   spec.definitions = spec.definitions || {};
@@ -18645,7 +18413,7 @@
                       }
                     }
                     spec.definitions[resolvedTo.name] = resolvedTo.obj;
-                    item.obj.$ref = `#/definitions/${  resolvedTo.name}`;
+                    item.obj.$ref = `#/definitions/${resolvedTo.name}`;
                   } else if (item.resolveAs === "inline") {
                     const targetObj = item.obj;
                     targetObj["x-resolved-from"] = [item.key];
@@ -18759,15 +18527,15 @@
                 result = "";
               }
               if (url.fragment !== undefined) {
-                result += `#${  url.fragment}`;
+                result += `#${url.fragment}`;
               }
               if (url.domain !== undefined) {
                 if (result.slice(0, 1) === "/") {
                   result = result.slice(1);
                 }
-                result = `//${  url.domain  }/${  result}`;
+                result = `//${url.domain}/${result}`;
                 if (url.proto !== undefined) {
-                  result = `${url.proto  }:${  result}`;
+                  result = `${url.proto}:${result}`;
                 }
               }
               return result;
@@ -18836,11 +18604,11 @@
               location,
             ) {
               const key = property.$ref;
-                let ref = property.$ref;
-                let i;
-                let p;
-                let p2;
-                let rs;
+              let ref = property.$ref;
+              let i;
+              let p;
+              let p2;
+              let rs;
               let rootTrimmed = false;
 
               root = root || ""; // Guard against .split. @fehguy, you'll need to check if this logic fits
@@ -18873,7 +18641,7 @@
                     rs = ref.split("#");
                     p = root.split("//");
                     p2 = p[1].split("/");
-                    root = `${p[0]  }//${  p2[0]  }${rs[0]}`;
+                    root = `${p[0]}//${p2[0]}${rs[0]}`;
                     location = rs[1];
                   } else {
                     rs = ref.split("#");
@@ -18889,7 +18657,7 @@
                           root += p2[k];
                         }
                       }
-                      root += `/${  ref.split("#")[0]}`;
+                      root += `/${ref.split("#")[0]}`;
                     }
                     location = rs[1];
                   }
@@ -18954,7 +18722,8 @@
               resolutionTable,
               location,
             ) {
-              let sp; let i;
+              let sp;
+              let i;
               let ref = property.$ref;
               let lroot = root;
               if (typeof ref !== "undefined" && ref !== null) {
@@ -18976,7 +18745,7 @@
                     sp = root.split("/");
                     lroot = "";
                     for (i = 0; i < sp.length - 1; i++) {
-                      lroot += `${sp[i]  }/`;
+                      lroot += `${sp[i]}/`;
                     }
                     lroot += parts[0];
                   } else {
@@ -18994,7 +18763,7 @@
                   sp = root.split("/");
                   lroot = "";
                   for (i = 0; i < sp.length - 1; i++) {
-                    lroot += `${sp[i]  }/`;
+                    lroot += `${sp[i]}/`;
                   }
                   lroot += ref;
                   location = "";
@@ -19007,22 +18776,22 @@
                   location,
                 });
               } else if (property.type === "array") {
-                const {items} = property;
+                const { items } = property;
                 this.resolveTo(root, items, resolutionTable, location);
               } else if (
-                  property &&
-                  (property.properties || property.additionalProperties)
-                ) {
-                  let name = this.uniqueName("inline_model");
-                  if (property.title) {
-                    name = this.uniqueName(property.title);
-                  }
-                  delete property.title;
-                  this.spec.definitions[name] = _.cloneDeep(property);
-                  property.$ref = `#/definitions/${  name}`;
-                  delete property.type;
-                  delete property.properties;
+                property &&
+                (property.properties || property.additionalProperties)
+              ) {
+                let name = this.uniqueName("inline_model");
+                if (property.title) {
+                  name = this.uniqueName(property.title);
                 }
+                delete property.title;
+                this.spec.definitions[name] = _.cloneDeep(property);
+                property.$ref = `#/definitions/${name}`;
+                delete property.type;
+                delete property.properties;
+              }
             };
 
             Resolver.prototype.uniqueName = function(base) {
@@ -19032,7 +18801,7 @@
                 if (!_.isObject(this.spec.definitions[name])) {
                   return name;
                 }
-                name = `${base  }_${  count}`;
+                name = `${base}_${count}`;
                 count++;
               }
             };
@@ -19048,16 +18817,14 @@
                 const item = obj[key];
                 if (item === null) {
                   throw new TypeError(
-                    `Swagger 2.0 does not support null types (${ 
-                      obj 
-                      }).  See https://github.com/swagger-api/swagger-spec/issues/229.`,
+                    `Swagger 2.0 does not support null types (${obj}).  See https://github.com/swagger-api/swagger-spec/issues/229.`,
                   );
                 }
                 if (typeof item === "object") {
                   this.resolveAllOf(spec, item, depth + 1);
                 }
                 if (item && typeof item.allOf !== "undefined") {
-                  const {allOf} = item;
+                  const { allOf } = item;
                   if (_.isArray(allOf)) {
                     const output = _.cloneDeep(item);
                     delete output.allOf;
@@ -19083,40 +18850,40 @@
                             }
                           }
                         } else if (part === "properties") {
-                            const properties = component[part];
-                            for (name in properties) {
-                              output.properties[name] = _.cloneDeep(
-                                properties[name],
-                              );
-                              let resolvedFrom =
-                                properties[name]["x-resolved-from"];
-                              if (
-                                typeof resolvedFrom === "undefined" ||
-                                resolvedFrom === "self"
-                              ) {
-                                resolvedFrom = source;
-                              }
-                              output.properties[name][
-                                "x-resolved-from"
-                              ] = resolvedFrom;
+                          const properties = component[part];
+                          for (name in properties) {
+                            output.properties[name] = _.cloneDeep(
+                              properties[name],
+                            );
+                            let resolvedFrom =
+                              properties[name]["x-resolved-from"];
+                            if (
+                              typeof resolvedFrom === "undefined" ||
+                              resolvedFrom === "self"
+                            ) {
+                              resolvedFrom = source;
                             }
-                          } else if (part === "required") {
-                            // merge & dedup the required array
-                            const a = output.required.concat(component[part]);
-                            for (let k = 0; k < a.length; ++k) {
-                              for (let j = k + 1; j < a.length; ++j) {
-                                if (a[k] === a[j]) {
-                                  a.splice(j--, 1);
-                                }
-                              }
-                            }
-                            output.required = a;
-                          } else if (part === "x-resolved-from") {
-                            output["x-resolved-from"].push(source);
-                          } else {
-                            // TODO: need to merge this property
-                            // console.log('what to do with ' + part)
+                            output.properties[name][
+                              "x-resolved-from"
+                            ] = resolvedFrom;
                           }
+                        } else if (part === "required") {
+                          // merge & dedup the required array
+                          const a = output.required.concat(component[part]);
+                          for (let k = 0; k < a.length; ++k) {
+                            for (let j = k + 1; j < a.length; ++j) {
+                              if (a[k] === a[j]) {
+                                a.splice(j--, 1);
+                              }
+                            }
+                          }
+                          output.required = a;
+                        } else if (part === "x-resolved-from") {
+                          output["x-resolved-from"].push(source);
+                        } else {
+                          // TODO: need to merge this property
+                          // console.log('what to do with ' + part)
+                        }
                       }
                     }
                     obj[key] = output;
@@ -19135,8 +18902,6 @@
         ],
         7: [
           function(require, module, exports) {
-            
-
             const Helpers = require("./helpers");
 
             const _ = {
@@ -19156,13 +18921,7 @@
               label,
               value,
             ) {
-              return (
-                `<tr><td class="optionName">${ 
-                label 
-                }:</td><td>${ 
-                value 
-                }</td></tr>`
-              );
+              return `<tr><td class="optionName">${label}:</td><td>${value}</td></tr>`;
             });
 
             module.exports.typeFromJsonSchema = function(type, format) {
@@ -19267,7 +19026,7 @@
               modelsToIgnore = modelsToIgnore || {};
 
               const type = schema.type || "object";
-              const {format} = schema;
+              const { format } = schema;
               let model;
               let output;
 
@@ -19295,10 +19054,10 @@
                       );
                       delete modelsToIgnore[model.name];
                     } else if (model.type === "array") {
-                        output = [];
-                      } else {
-                        output = {};
-                      }
+                      output = [];
+                    } else {
+                      output = {};
+                    }
                   }
                 } else if (!_.isUndefined(schema.default)) {
                   output = schema.default;
@@ -19392,7 +19151,7 @@
 
               // Return for empty object
               if (_.isEmpty(schema)) {
-                return `${strongOpen  }Empty${  strongClose}`;
+                return `${strongOpen}Empty${strongClose}`;
               }
 
               // Dereference $ref from 'models'
@@ -19400,7 +19159,7 @@
                 name = Helpers.simpleRef(schema.$ref);
                 schema = models[name];
                 if (typeof schema === "undefined") {
-                  return `${strongOpen + name  } is not defined!${  strongClose}`;
+                  return `${strongOpen + name} is not defined!${strongClose}`;
                 }
               }
 
@@ -19437,7 +19196,7 @@
                   if (!seenModel) {
                     seenModels.push(name);
 
-                    html += `<br />${  processModel(schema, name)}`;
+                    html += `<br />${processModel(schema, name)}`;
                   }
                 });
                 /* jshint ignore:end */
@@ -19455,7 +19214,7 @@
                   modelName = schema.title || Helpers.simpleRef(schema.$ref);
                   model = models[modelName];
                 } else if (_.isUndefined(name)) {
-                  modelName = schema.title || `Inline Model ${  ++inlineModels}`;
+                  modelName = schema.title || `Inline Model ${++inlineModels}`;
                   model = { definition: schema };
                 }
 
@@ -19605,7 +19364,7 @@
                     if (type === "number" || type === "integer") {
                       enumString = schema.enum.join(", ");
                     } else {
-                      enumString = `"${  schema.enum.join('", "')  }"`;
+                      enumString = `"${schema.enum.join('", "')}"`;
                     }
 
                     options += optionHtml("Enum", enumString);
@@ -19613,14 +19372,7 @@
                 }
 
                 if (options.length > 0) {
-                  html =
-                    `<span class="propWrap">${ 
-                    html 
-                    }<table class="optionsWrapper"><tr><th colspan="2">${ 
-                    type 
-                    }</th></tr>${ 
-                    options 
-                    }</table></span>`;
+                  html = `<span class="propWrap">${html}<table class="optionsWrapper"><tr><th colspan="2">${type}</th></tr>${options}</table></span>`;
                 }
 
                 return html;
@@ -19629,8 +19381,9 @@
               function processModel(schema, name) {
                 const type = schema.type || "object";
                 const isArray = schema.type === "array";
-                let html =
-                  `${strongOpen + name  } ${  isArray ? "[" : "{"  }${strongClose}`;
+                let html = `${strongOpen + name} ${
+                  isArray ? "[" : "{"
+                }${strongClose}`;
 
                 if (name) {
                   seenModels.push(name);
@@ -19638,31 +19391,23 @@
 
                 if (isArray) {
                   if (_.isArray(schema.items)) {
-                    html +=
-                      `<div>${ 
-                      _.map(schema.items, function(item) {
-                        const type = item.type || "object";
+                    html += `<div>${_.map(schema.items, function(item) {
+                      const type = item.type || "object";
 
-                        if (_.isUndefined(item.$ref)) {
-                          if (_.indexOf(["array", "object"], type) > -1) {
-                            if (
-                              type === "object" &&
-                              _.isUndefined(item.properties)
-                            ) {
-                              return "object";
-                            } 
-                              return addReference(item);
-                            
-                          } 
-                            return primitiveToOptionsHTML(item, type);
-                          
-                        } 
-                          return addReference(
-                            item,
-                            Helpers.simpleRef(item.$ref),
-                          );
-                        
-                      }).join(",</div><div>")}`;
+                      if (_.isUndefined(item.$ref)) {
+                        if (_.indexOf(["array", "object"], type) > -1) {
+                          if (
+                            type === "object" &&
+                            _.isUndefined(item.properties)
+                          ) {
+                            return "object";
+                          }
+                          return addReference(item);
+                        }
+                        return primitiveToOptionsHTML(item, type);
+                      }
+                      return addReference(item, Helpers.simpleRef(item.$ref));
+                    }).join(",</div><div>")}`;
                   } else if (_.isPlainObject(schema.items)) {
                     if (_.isUndefined(schema.items.$ref)) {
                       if (
@@ -19678,26 +19423,19 @@
                         ) {
                           html += "<div>object</div>";
                         } else {
-                          html +=
-                            `<div>${  addReference(schema.items)  }</div>`;
+                          html += `<div>${addReference(schema.items)}</div>`;
                         }
                       } else {
-                        html +=
-                          `<div>${ 
-                          primitiveToOptionsHTML(
-                            schema.items,
-                            schema.items.type,
-                          ) 
-                          }</div>`;
+                        html += `<div>${primitiveToOptionsHTML(
+                          schema.items,
+                          schema.items.type,
+                        )}</div>`;
                       }
                     } else {
-                      html +=
-                        `<div>${ 
-                        addReference(
-                          schema.items,
-                          Helpers.simpleRef(schema.items.$ref),
-                        ) 
-                        }</div>`;
+                      html += `<div>${addReference(
+                        schema.items,
+                        Helpers.simpleRef(schema.items.$ref),
+                      )}</div>`;
                     }
                   } else {
                     Helpers.log(
@@ -19706,98 +19444,84 @@
                     html += "<div>object</div>";
                   }
                 } else if (schema.$ref) {
-                    html += `<div>${  addReference(schema, name)  }</div>`;
-                  } else if (type === "object") {
-                    if (_.isPlainObject(schema.properties)) {
-                      const contents = _.map(schema.properties, function(
-                        property,
-                        name,
-                      ) {
-                        const propertyIsRequired =
-                          _.indexOf(schema.required, name) >= 0;
-                        let cProperty = _.cloneDeep(property);
+                  html += `<div>${addReference(schema, name)}</div>`;
+                } else if (type === "object") {
+                  if (_.isPlainObject(schema.properties)) {
+                    const contents = _.map(schema.properties, function(
+                      property,
+                      name,
+                    ) {
+                      const propertyIsRequired =
+                        _.indexOf(schema.required, name) >= 0;
+                      let cProperty = _.cloneDeep(property);
 
-                        const requiredClass = propertyIsRequired
-                          ? "required"
-                          : "";
-                        let html =
-                          `<span class="propName ${ 
-                          requiredClass 
-                          }">${ 
-                          name 
-                          }</span> (`;
-                        let model;
-                        let propDescription;
+                      const requiredClass = propertyIsRequired
+                        ? "required"
+                        : "";
+                      let html = `<span class="propName ${requiredClass}">${name}</span> (`;
+                      let model;
+                      let propDescription;
 
-                        // Allow macro to set the default value
-                        cProperty.default = modelPropertyMacro(cProperty);
+                      // Allow macro to set the default value
+                      cProperty.default = modelPropertyMacro(cProperty);
 
-                        // Resolve the schema (Handle nested schemas)
-                        cProperty = Helpers.resolveSchema(cProperty);
+                      // Resolve the schema (Handle nested schemas)
+                      cProperty = Helpers.resolveSchema(cProperty);
 
-                        propDescription =
-                          property.description || cProperty.description;
+                      propDescription =
+                        property.description || cProperty.description;
 
-                        // We need to handle property references to primitives (Issue 339)
-                        if (!_.isUndefined(cProperty.$ref)) {
-                          model = models[Helpers.simpleRef(cProperty.$ref)];
+                      // We need to handle property references to primitives (Issue 339)
+                      if (!_.isUndefined(cProperty.$ref)) {
+                        model = models[Helpers.simpleRef(cProperty.$ref)];
 
-                          if (
-                            !_.isUndefined(model) &&
-                            _.indexOf(
-                              [undefined, "array", "object"],
-                              model.definition.type,
-                            ) === -1
-                          ) {
-                            // Use referenced schema
-                            cProperty = Helpers.resolveSchema(model.definition);
-                          }
+                        if (
+                          !_.isUndefined(model) &&
+                          _.indexOf(
+                            [undefined, "array", "object"],
+                            model.definition.type,
+                          ) === -1
+                        ) {
+                          // Use referenced schema
+                          cProperty = Helpers.resolveSchema(model.definition);
                         }
-
-                        html += primitiveToHTML(cProperty);
-
-                        if (!propertyIsRequired) {
-                          html += ', <span class="propOptKey">optional</span>';
-                        }
-
-                        if (property.readOnly) {
-                          html +=
-                            ', <span class="propReadOnly">read only</span>';
-                        }
-
-                        html += ")";
-
-                        if (!_.isUndefined(propDescription)) {
-                          html +=
-                            `${": " +
-                            '<span class="propDesc">'}${ 
-                            propDescription 
-                            }</span>`;
-                        }
-
-                        if (cProperty.enum) {
-                          html +=
-                            ` = <span class="propVals">['${ 
-                            cProperty.enum.join("', '") 
-                            }']</span>`;
-                        }
-
-                        return (
-                          `<div${ 
-                          property.readOnly ? ' class="readOnly"' : "" 
-                          }>${ 
-                          primitiveToOptionsHTML(cProperty, html)}`
-                        );
-                      }).join(",</div>");
-
-                      if (contents) {
-                        html += `${contents  }</div>`;
                       }
+
+                      html += primitiveToHTML(cProperty);
+
+                      if (!propertyIsRequired) {
+                        html += ', <span class="propOptKey">optional</span>';
+                      }
+
+                      if (property.readOnly) {
+                        html += ', <span class="propReadOnly">read only</span>';
+                      }
+
+                      html += ")";
+
+                      if (!_.isUndefined(propDescription)) {
+                        html += `${": " +
+                          '<span class="propDesc">'}${propDescription}</span>`;
+                      }
+
+                      if (cProperty.enum) {
+                        html += ` = <span class="propVals">['${cProperty.enum.join(
+                          "', '",
+                        )}']</span>`;
+                      }
+
+                      return `<div${
+                        property.readOnly ? ' class="readOnly"' : ""
+                      }>${primitiveToOptionsHTML(cProperty, html)}`;
+                    }).join(",</div>");
+
+                    if (contents) {
+                      html += `${contents}</div>`;
                     }
-                  } else {
-                    html +=
-                      `<div>${  primitiveToOptionsHTML(schema, type)  }</div>`;
                   }
+                } else {
+                  html += `<div>${primitiveToOptionsHTML(schema, type)}</div>`;
+                }
 
                 return html + strongOpen + (isArray ? "]" : "}") + strongClose;
               }
@@ -19819,8 +19543,6 @@
         ],
         8: [
           function(require, module, exports) {
-            
-
             const SwaggerHttp = require("./http");
             const _ = {
               isObject: require("lodash-compat/lang/isObject"),
@@ -19890,7 +19612,10 @@
               obj,
               swagger,
             ) {
-              let name; let i; let p; let pos;
+              let name;
+              let i;
+              let p;
+              let pos;
               if (!obj.apis) {
                 return;
               }
@@ -19941,8 +19666,8 @@
 
               for (i = 0; i < obj.apis.length; i++) {
                 const api = obj.apis[i];
-                const {path} = api;
-                const {operations} = api;
+                const { path } = api;
+                const { operations } = api;
                 this.operations(
                   path,
                   obj.resourcePath,
@@ -19969,7 +19694,8 @@
                 const schema = { properties: {} };
                 var propertyName;
                 for (propertyName in existingModel.properties) {
-                  const existingProperty = existingModel.properties[propertyName];
+                  const existingProperty =
+                    existingModel.properties[propertyName];
                   const property = {};
                   this.dataType(existingProperty, property);
                   if (existingProperty.description) {
@@ -20154,10 +19880,10 @@
                   // Convert responseModel -> schema{$ref: responseModel}
                   if (existingResponse.responseModel) {
                     response.schema = {
-                      $ref: `#/definitions/${  existingResponse.responseModel}`,
+                      $ref: `#/definitions/${existingResponse.responseModel}`,
                     };
                   }
-                  operation.responses[`${  existingResponse.code}`] = response;
+                  operation.responses[`${existingResponse.code}`] = response;
                 }
               }
 
@@ -20171,7 +19897,6 @@
             SwaggerSpecConverter.prototype.authorizations = function(obj) {
               // TODO
               if (!_.isObject(obj)) {
-                
               }
             };
 
@@ -20284,7 +20009,8 @@
                 );
                 const jsonType = this.toJsonSchema({ type: innerType });
                 return { type: "array", items: jsonType };
-              } if (
+              }
+              if (
                 lcType === "int" ||
                 (lcType === "integer" && format === "int32")
               ) {
@@ -20343,13 +20069,12 @@
                 if (source.items) {
                   const it = this.toJsonSchema(source.items);
                   return { type: "array", items: it };
-                } 
-                  return { type: "array", items: { type: "object" } };
-                
+                }
+                return { type: "array", items: { type: "object" } };
               } else if (source.$ref) {
                 return {
                   $ref: this.modelMap[source.$ref]
-                    ? `#/definitions/${  this.modelMap[source.$ref]}`
+                    ? `#/definitions/${this.modelMap[source.$ref]}`
                     : source.$ref,
                 };
               } else if (lcType === "void" || lcType === "") {
@@ -20358,7 +20083,7 @@
                 }
               } else if (this.modelMap[source.type]) {
                 // If this a model using `type` instead of `$ref`, that's fine.
-                return { $ref: `#/definitions/${  this.modelMap[source.type]}` };
+                return { $ref: `#/definitions/${this.modelMap[source.type]}` };
               } else {
                 // Unknown model type or 'object', pass it along.
                 return { type: source.type };
@@ -20398,7 +20123,7 @@
 
               for (i = 0; i < expectedCount; i++) {
                 const api = obj.apis[i];
-                const {path} = api;
+                const { path } = api;
                 const absolutePath = this.getAbsolutePath(
                   obj.swaggerVersion,
                   this.docLocation,
@@ -20422,7 +20147,7 @@
                 /* jshint ignore:start */
                 http.on.response = function(data) {
                   processedCount += 1;
-                  const {obj} = data;
+                  const { obj } = data;
                   if (obj) {
                     self.declaration(obj, _swagger);
                   }
@@ -20512,7 +20237,7 @@
                     }
                     if (definition.grantTypes) {
                       if (definition.grantTypes.implicit) {
-                        const {implicit} = definition.grantTypes;
+                        const { implicit } = definition.grantTypes;
                         securityDefinition.flow = "implicit";
                         securityDefinition.authorizationUrl =
                           implicit.loginEndpoint;
@@ -20547,7 +20272,7 @@
             SwaggerSpecConverter.prototype.apiInfo = function(obj, swagger) {
               // info section
               if (obj.info) {
-                const {info} = obj;
+                const { info } = obj;
                 swagger.info = {};
 
                 if (info.contact) {
@@ -20585,9 +20310,7 @@
         ],
         9: [
           function(require, module, exports) {
-            
-
-            const {log} = require("../helpers");
+            const { log } = require("../helpers");
             const _ = {
               isPlainObject: require("lodash-compat/lang/isPlainObject"),
               isString: require("lodash-compat/lang/isString"),
@@ -20667,8 +20390,6 @@
         ],
         10: [
           function(require, module, exports) {
-            
-
             const _ = {
               cloneDeep: require("lodash-compat/lang/cloneDeep"),
               isUndefined: require("lodash-compat/lang/isUndefined"),
@@ -20716,7 +20437,7 @@
               this.host = parent.host;
               this.method =
                 httpMethod ||
-                errors.push(`Operation ${  operationId  } is missing method.`);
+                errors.push(`Operation ${operationId} is missing method.`);
               this.models = models || {};
               this.nickname =
                 operationId || errors.push("Operations must have a nickname.");
@@ -20726,7 +20447,7 @@
               this.parent = parent;
               this.path =
                 path ||
-                errors.push(`Operation ${  this.nickname  } is missing path.`);
+                errors.push(`Operation ${this.nickname} is missing path.`);
               this.responses = args.responses || {};
               this.scheme = scheme || parent.scheme || "http";
               this.schemes = args.schemes || parent.schemes;
@@ -20781,7 +20502,8 @@
                 }
               }
 
-              let i; let model;
+              let i;
+              let model;
 
               if (definitions) {
                 // add to global models
@@ -20803,7 +20525,7 @@
 
               for (i = 0; i < this.parameters.length; i++) {
                 var d;
-                  const param = this.parameters[i];
+                const param = this.parameters[i];
 
                 // Allow macro to set the default value
                 param.default = this.parameterMacro(this, param);
@@ -20851,12 +20573,12 @@
                   for (id = 0; id < enumValues.length; id++) {
                     const value = enumValues[id];
                     const isDefault =
-                      value === param.default || `${value  }` === param.default;
+                      value === param.default || `${value}` === param.default;
 
                     param.allowableValues.values.push(value);
                     // Always have string for descriptive values....
                     param.allowableValues.descriptiveValues.push({
-                      value: `${value  }`,
+                      value: `${value}`,
                       isDefault,
                     });
                   }
@@ -20888,9 +20610,9 @@
               }
 
               let keyname;
-                let defaultResponseCode;
-                let response;
-                const {responses} = this;
+              let defaultResponseCode;
+              let response;
+              const { responses } = this;
 
               if (responses["200"]) {
                 response = responses["200"];
@@ -20929,7 +20651,7 @@
                     typeof responseObject === "object" &&
                     typeof responseObject.headers === "object"
                   ) {
-                    const {headers} = responseObject;
+                    const { headers } = responseObject;
                     for (const headerName in headers) {
                       const header = headers[headerName];
                       if (typeof header === "object") {
@@ -21027,8 +20749,8 @@
             };
 
             Operation.prototype.getType = function(param) {
-              const {type} = param;
-              const {format} = param;
+              const { type } = param;
+              const { format } = param;
               let isArray = false;
               let str;
 
@@ -21068,7 +20790,7 @@
                 str = helpers.simpleRef(param.$ref);
               }
 
-              const {schema} = param;
+              const { schema } = param;
 
               if (schema) {
                 let ref = schema.$ref;
@@ -21078,22 +20800,19 @@
 
                   if (isArray) {
                     return [ref];
-                  } 
-                    return ref;
-                  
-                } 
-                  // If inline schema, we add it our interal hash -> which gives us it's ID (int)
-                  if (schema.type === "object") {
-                    return this.addInlineModel(schema);
                   }
-                  return this.getType(schema);
-                
+                  return ref;
+                }
+                // If inline schema, we add it our interal hash -> which gives us it's ID (int)
+                if (schema.type === "object") {
+                  return this.addInlineModel(schema);
+                }
+                return this.getType(schema);
               }
               if (isArray) {
                 return [str];
-              } 
-                return str;
-              
+              }
+              return str;
             };
 
             /**
@@ -21106,7 +20825,7 @@
               const model = this.resolveModel(schema, {});
               if (model) {
                 this.inlineModels.push(model);
-                return `Inline Model ${  len}`; // return string ref of the inline model (used with #getInlineModel)
+                return `Inline Model ${len}`; // return string ref of the inline model (used with #getInlineModel)
               }
               return null; // report errors?
             };
@@ -21163,19 +20882,13 @@
             };
 
             Operation.prototype.help = function(dontPrint) {
-              let out = `${this.nickname  }: ${  this.summary  }\n`;
+              let out = `${this.nickname}: ${this.summary}\n`;
 
               for (let i = 0; i < this.parameters.length; i++) {
                 const param = this.parameters[i];
                 const typeInfo = param.signature;
 
-                out +=
-                  `\n  * ${ 
-                  param.name 
-                  } (${ 
-                  typeInfo 
-                  }): ${ 
-                  param.description}`;
+                out += `\n  * ${param.name} (${typeInfo}): ${param.description}`;
               }
 
               if (typeof dontPrint === "undefined") {
@@ -21189,7 +20902,8 @@
               type,
               definitions,
             ) {
-              let isPrimitive; let listType;
+              let isPrimitive;
+              let listType;
 
               if (type instanceof Array) {
                 listType = true;
@@ -21214,17 +20928,14 @@
 
               if (isPrimitive) {
                 if (listType) {
-                  return `Array[${  type  }]`;
-                } 
-                  return type.toString();
-                
-              } 
-                if (listType) {
-                  return `Array[${  type.getMockSignature()  }]`;
-                } 
-                  return type.getMockSignature();
-                
-              
+                  return `Array[${type}]`;
+                }
+                return type.toString();
+              }
+              if (listType) {
+                return `Array[${type.getMockSignature()}]`;
+              }
+              return type.getMockSignature();
             };
 
             Operation.prototype.supportHeaderParams = function() {
@@ -21282,7 +20993,7 @@
                   }
 
                   if (param.in === "path") {
-                    const reg = new RegExp(`{${  param.name  }}`, "gi");
+                    const reg = new RegExp(`{${param.name}}`, "gi");
                     let value = args[param.name];
 
                     if (Array.isArray(value)) {
@@ -21293,11 +21004,11 @@
                         isPassword,
                       );
                     } else if (
-                        typeof param["x-escape"] === "undefined" ||
-                        param["x-escape"] === true
-                      ) {
-                        value = this.encodePathParam(value, isPassword);
-                      }
+                      typeof param["x-escape"] === "undefined" ||
+                      param["x-escape"] === true
+                    ) {
+                      value = this.encodePathParam(value, isPassword);
+                    }
 
                     requestUrl = requestUrl.replace(reg, value);
                   } else if (
@@ -21321,16 +21032,20 @@
                           isPassword,
                         );
                       } else {
-                        querystring +=
-                          `${this.encodeQueryKey(param.name) 
-                          }=${ 
-                          this.encodeQueryParam(args[param.name], isPassword)}`;
+                        querystring += `${this.encodeQueryKey(
+                          param.name,
+                        )}=${this.encodeQueryParam(
+                          args[param.name],
+                          isPassword,
+                        )}`;
                       }
                     } else {
-                      querystring +=
-                        `${this.encodeQueryKey(param.name) 
-                        }=${ 
-                        this.encodeQueryParam(args[param.name], isPassword)}`;
+                      querystring += `${this.encodeQueryKey(
+                        param.name,
+                      )}=${this.encodeQueryParam(
+                        args[param.name],
+                        isPassword,
+                      )}`;
                     }
                   } else if (param.in === "formData") {
                     formParams[param.name] = args[param.name];
@@ -21369,14 +21084,13 @@
                       );
                     }
                   } else {
-                    querystring +=
-                      `${this.encodeQueryKey(param.name) 
-                      }=${ 
-                      this.encodeQueryParam("", isPassword)}`;
+                    querystring += `${this.encodeQueryKey(
+                      param.name,
+                    )}=${this.encodeQueryParam("", isPassword)}`;
                   }
                 }
               }
-              let url = `${this.scheme  }://${  this.host}`;
+              let url = `${this.scheme}://${this.host}`;
 
               if (this.basePath !== "/") {
                 url += this.basePath;
@@ -21403,12 +21117,12 @@
 
             Operation.prototype.getBody = function(headers, args, opts) {
               const formParams = {};
-                let hasFormParams;
-                let param;
-                let body;
-                let key;
-                let value;
-                let hasBody = false;
+              let hasFormParams;
+              let param;
+              let body;
+              let key;
+              let value;
+              let hasBody = false;
 
               // look at each param and put form params in an object
               for (let i = 0; i < this.parameters.length; i++) {
@@ -21429,8 +21143,8 @@
                     hasFormParams = true;
                   }
                 } else if (param.in === "body") {
-                    hasBody = true;
-                  }
+                  hasBody = true;
+                }
               }
 
               // if body is null and hasBody is true, AND a JSON body is requested, send empty {}
@@ -21481,10 +21195,10 @@
                         encoded += "&";
                       }
 
-                      encoded +=
-                        `${encodeURIComponent(key) 
-                        }=${ 
-                        mask(encodeURIComponent(value), password)}`;
+                      encoded += `${encodeURIComponent(key)}=${mask(
+                        encodeURIComponent(value),
+                        password,
+                      )}`;
                     }
                   }
                 }
@@ -21507,27 +21221,27 @@
                       } else if (value.type === "file" && value.value) {
                         bodyParam.append(key, value.value);
                       } else if (Array.isArray(value)) {
-                          if (param.collectionFormat === "multi") {
-                            bodyParam.delete(key);
-                            for (const v in value) {
-                              bodyParam.append(key, value[v]);
-                            }
-                          } else {
-                            bodyParam.append(
-                              key,
-                              this.encodeQueryCollection(
-                                param.collectionFormat,
-                                key,
-                                value,
-                              )
-                                .split("=")
-                                .slice(1)
-                                .join("="),
-                            );
+                        if (param.collectionFormat === "multi") {
+                          bodyParam.delete(key);
+                          for (const v in value) {
+                            bodyParam.append(key, value[v]);
                           }
                         } else {
-                          bodyParam.append(key, value);
+                          bodyParam.append(
+                            key,
+                            this.encodeQueryCollection(
+                              param.collectionFormat,
+                              key,
+                              value,
+                            )
+                              .split("=")
+                              .slice(1)
+                              .join("="),
+                          );
                         }
+                      } else {
+                        bodyParam.append(key, value);
+                      }
                     }
                   }
                   body = bodyParam;
@@ -21576,7 +21290,9 @@
              * gets sample response for a single operation
              * */
             Operation.prototype.getModelSampleJSON = function(type, models) {
-              let listType; let sampleJson; let innerType;
+              let listType;
+              let sampleJson;
+              let innerType;
               models = models || {};
 
               listType = type instanceof Array;
@@ -21593,7 +21309,8 @@
 
                 if (typeof sampleJson === "string") {
                   return sampleJson;
-                } if (_.isObject(sampleJson)) {
+                }
+                if (_.isObject(sampleJson)) {
                   let t = sampleJson;
 
                   if (sampleJson instanceof Array && sampleJson.length > 0) {
@@ -21604,12 +21321,10 @@
                     const xmlString = new XMLSerializer().serializeToString(t);
 
                     return this.formatXml(xmlString);
-                  } 
-                    return JSON.stringify(sampleJson, null, 2);
-                  
-                } 
-                  return sampleJson;
-                
+                  }
+                  return JSON.stringify(sampleJson, null, 2);
+                }
+                return sampleJson;
               }
             };
 
@@ -21638,10 +21353,10 @@
             ) {
               const args = arg1 || {};
               let opts = {};
-                let success;
-                let error;
-                let deferred;
-                let timeout;
+              let success;
+              let error;
+              let deferred;
+              let timeout;
 
               if (_.isObject(arg2)) {
                 opts = arg2;
@@ -21700,23 +21415,22 @@
               const missingParams = this.getMissingParams(args);
 
               if (missingParams.length > 0) {
-                const message = `missing required params: ${  missingParams}`;
+                const message = `missing required params: ${missingParams}`;
 
                 helpers.fail(message);
 
                 if (this.parent.usePromise) {
                   deferred.reject(message);
                   return deferred.promise;
-                } 
-                  error(message, parent);
-                  return {};
-                
+                }
+                error(message, parent);
+                return {};
               }
 
               const allHeaders = this.getHeaderParams(args);
               const contentTypeHeaders = this.setContentTypes(args, opts);
               const headers = {};
-                let attrname;
+              let attrname;
 
               for (attrname in allHeaders) {
                 headers[attrname] = allHeaders[attrname];
@@ -21756,17 +21470,15 @@
                     if (deferred) {
                       deferred.resolve(response);
                       return deferred.promise;
-                    } 
-                      return success(response, parent);
-                    
+                    }
+                    return success(response, parent);
                   },
                   error(response) {
                     if (deferred) {
                       deferred.reject(response);
                       return deferred.promise;
-                    } 
-                      return error(response, parent);
-                    
+                    }
+                    return error(response, parent);
                   },
                 },
               };
@@ -21781,9 +21493,8 @@
                   opts.requestInterceptor.apply(obj);
                 }
                 return obj;
-              } 
-                return new SwaggerHttp().execute(obj, opts);
-              
+              }
+              return new SwaggerHttp().execute(obj, opts);
             };
 
             function itemByPriority(col, itemPriority) {
@@ -21870,18 +21581,18 @@
                     // if a file, must be multipart/form-data
                     consumes = "multipart/form-data";
                   } else if (this.consumes && this.consumes.length > 0) {
-                      // use the consumes setting
-                      for (const c in this.consumes) {
-                        const chk = this.consumes[c];
-                        if (
-                          chk.indexOf("application/x-www-form-urlencoded") ===
-                            0 ||
-                          chk.indexOf("multipart/form-data") === 0
-                        ) {
-                          consumes = chk;
-                        }
+                    // use the consumes setting
+                    for (const c in this.consumes) {
+                      const chk = this.consumes[c];
+                      if (
+                        chk.indexOf("application/x-www-form-urlencoded") ===
+                          0 ||
+                        chk.indexOf("multipart/form-data") === 0
+                      ) {
+                        consumes = chk;
                       }
                     }
+                  }
                   if (typeof consumes === "undefined") {
                     // default to x-www-from-urlencoded
                     consumes = "application/x-www-form-urlencoded";
@@ -21894,16 +21605,15 @@
               if (consumes && this.consumes) {
                 if (this.consumes.indexOf(consumes) === -1) {
                   helpers.log(
-                    `server doesn't consume ${ 
-                      consumes 
-                      }, try ${ 
-                      JSON.stringify(this.consumes)}`,
+                    `server doesn't consume ${consumes}, try ${JSON.stringify(
+                      this.consumes,
+                    )}`,
                   );
                 }
               }
 
               if (!this.matchesAccept(accepts)) {
-                helpers.log(`server can't produce ${  accepts}`);
+                helpers.log(`server can't produce ${accepts}`);
               }
 
               if (
@@ -21956,7 +21666,7 @@
 
               const results = [];
 
-              results.push(`-X ${  this.method.toUpperCase()}`);
+              results.push(`-X ${this.method.toUpperCase()}`);
 
               if (typeof obj.headers !== "undefined") {
                 let key;
@@ -21966,7 +21676,7 @@
                   if (typeof value === "string") {
                     value = value.replace(/\'/g, "\\u0027");
                   }
-                  results.push(`--header '${  key  }: ${  value  }'`);
+                  results.push(`--header '${key}: ${value}'`);
                 }
               }
               let isFormData = false;
@@ -22008,41 +21718,27 @@
                         if (paramValue) {
                           if (parameter.type === "file") {
                             if (paramValue.name) {
-                              body +=
-                                `-F ${ 
-                                parameter.name 
-                                }=@"${ 
-                                paramValue.name 
-                                }" `;
+                              body += `-F ${parameter.name}=@"${paramValue.name}" `;
                             }
                           } else if (Array.isArray(paramValue)) {
-                              if (parameter.collectionFormat === "multi") {
-                                for (const v in paramValue) {
-                                  body +=
-                                    `-F ${ 
-                                    this.encodeQueryKey(parameter.name) 
-                                    }=${ 
-                                    mask(paramValue[v], parameter.format) 
-                                    } `;
-                                }
-                              } else {
-                                body +=
-                                  `-F ${ 
-                                  this.encodeQueryCollection(
-                                    parameter.collectionFormat,
-                                    parameter.name,
-                                    mask(paramValue, parameter.format),
-                                  ) 
-                                  } `;
+                            if (parameter.collectionFormat === "multi") {
+                              for (const v in paramValue) {
+                                body += `-F ${this.encodeQueryKey(
+                                  parameter.name,
+                                )}=${mask(paramValue[v], parameter.format)} `;
                               }
                             } else {
-                              body +=
-                                `-F ${ 
-                                this.encodeQueryKey(parameter.name) 
-                                }=${ 
-                                mask(paramValue, parameter.format) 
-                                } `;
+                              body += `-F ${this.encodeQueryCollection(
+                                parameter.collectionFormat,
+                                parameter.name,
+                                mask(paramValue, parameter.format),
+                              )} `;
                             }
+                          } else {
+                            body += `-F ${this.encodeQueryKey(
+                              parameter.name,
+                            )}=${mask(paramValue, parameter.format)} `;
+                          }
                         }
                       }
                     }
@@ -22063,11 +21759,11 @@
                 if (isMultipart) {
                   results.push(body);
                 } else {
-                  results.push(`-d '${  body.replace(/@/g, "%40")  }'`);
+                  results.push(`-d '${body.replace(/@/g, "%40")}'`);
                 }
               }
 
-              return `curl ${  results.join(" ")  } '${  obj.url  }'`;
+              return `curl ${results.join(" ")} '${obj.url}'`;
             };
 
             Operation.prototype.encodePathCollection = function(
@@ -22118,10 +21814,10 @@
                     encoded += "&";
                   }
 
-                  encoded +=
-                    `${this.encodeQueryKey(name) 
-                    }=${ 
-                    mask(this.encodeQueryParam(value[i]), maskPasswords)}`;
+                  encoded += `${this.encodeQueryKey(name)}=${mask(
+                    this.encodeQueryParam(value[i]),
+                    maskPasswords,
+                  )}`;
                 }
               } else {
                 let separator = "";
@@ -22139,20 +21835,19 @@
                     if (i !== 0) {
                       encoded += "&";
                     }
-                    encoded +=
-                      `${this.encodeQueryKey(name) 
-                      }[]=${ 
-                      mask(this.encodeQueryParam(value[i]), maskPasswords)}`;
+                    encoded += `${this.encodeQueryKey(name)}[]=${mask(
+                      this.encodeQueryParam(value[i]),
+                      maskPasswords,
+                    )}`;
                   }
                 }
 
                 if (separator !== "") {
                   for (i = 0; i < value.length; i++) {
                     if (i === 0) {
-                      encoded =
-                        `${this.encodeQueryKey(name) 
-                        }=${ 
-                        this.encodeQueryParam(value[i])}`;
+                      encoded = `${this.encodeQueryKey(
+                        name,
+                      )}=${this.encodeQueryParam(value[i])}`;
                     } else {
                       encoded += separator + this.encodeQueryParam(value[i]);
                     }
@@ -22179,9 +21874,8 @@
               }
               if (arg !== undefined && arg !== null) {
                 return encodeURIComponent(arg);
-              } 
-                return "";
-              
+              }
+              return "";
             };
 
             /**
@@ -22214,8 +21908,6 @@
         ],
         11: [
           function(require, module, exports) {
-            
-
             const OperationGroup = (module.exports = function(
               tag,
               description,
@@ -22306,8 +21998,6 @@
           function(require, module, exports) {
             (function(Buffer) {
               (function() {
-                
-
                 function btoa(str) {
                   let buffer;
 
@@ -22573,9 +22263,7 @@
               if (length >= kMaxLength()) {
                 throw new RangeError(
                   `${"Attempt to allocate Buffer larger than maximum " +
-                    "size: 0x"}${ 
-                    kMaxLength().toString(16) 
-                    } bytes`,
+                    "size: 0x"}${kMaxLength().toString(16)} bytes`,
                 );
               }
               return length | 0;
@@ -22670,7 +22358,7 @@
             };
 
             function byteLength(string, encoding) {
-              if (typeof string !== "string") string = `${  string}`;
+              if (typeof string !== "string") string = `${string}`;
 
               const len = string.length;
               if (len === 0) return 0;
@@ -22699,7 +22387,7 @@
                     return base64ToBytes(string).length;
                   default:
                     if (loweredCase) return utf8ToBytes(string).length; // assume utf8
-                    encoding = (`${  encoding}`).toLowerCase();
+                    encoding = `${encoding}`.toLowerCase();
                     loweredCase = true;
                 }
               }
@@ -22748,8 +22436,8 @@
 
                   default:
                     if (loweredCase)
-                      throw new TypeError(`Unknown encoding: ${  encoding}`);
-                    encoding = (`${encoding  }`).toLowerCase();
+                      throw new TypeError(`Unknown encoding: ${encoding}`);
+                    encoding = `${encoding}`.toLowerCase();
                     loweredCase = true;
                 }
               }
@@ -22778,7 +22466,7 @@
                   .join(" ");
                 if (this.length > max) str += " ... ";
               }
-              return `<Buffer ${  str  }>`;
+              return `<Buffer ${str}>`;
             };
 
             Buffer.prototype.compare = function compare(b) {
@@ -22989,8 +22677,8 @@
 
                   default:
                     if (loweredCase)
-                      throw new TypeError(`Unknown encoding: ${  encoding}`);
-                    encoding = (`${  encoding}`).toLowerCase();
+                      throw new TypeError(`Unknown encoding: ${encoding}`);
+                    encoding = `${encoding}`.toLowerCase();
                     loweredCase = true;
                 }
               }
@@ -23006,9 +22694,8 @@
             function base64Slice(buf, start, end) {
               if (start === 0 && end === buf.length) {
                 return base64.fromByteArray(buf);
-              } 
-                return base64.fromByteArray(buf.slice(start, end));
-              
+              }
+              return base64.fromByteArray(buf.slice(start, end));
             }
 
             function utf8Slice(buf, start, end) {
@@ -23029,7 +22716,10 @@
                     : 1;
 
                 if (i + bytesPerSequence <= end) {
-                  var secondByte; var thirdByte; var fourthByte; var tempCodePoint;
+                  var secondByte;
+                  var thirdByte;
+                  var fourthByte;
+                  var tempCodePoint;
 
                   switch (bytesPerSequence) {
                     case 1:
@@ -23915,18 +23605,16 @@
               if (typeof Uint8Array !== "undefined") {
                 if (Buffer.TYPED_ARRAY_SUPPORT) {
                   return new Buffer(this).buffer;
-                } 
-                  const buf = new Uint8Array(this.length);
-                  for (let i = 0, len = buf.length; i < len; i += 1) {
-                    buf[i] = this[i];
-                  }
-                  return buf.buffer;
-                
-              } 
-                throw new TypeError(
-                  "Buffer.toArrayBuffer not supported in this browser",
-                );
-              
+                }
+                const buf = new Uint8Array(this.length);
+                for (let i = 0, len = buf.length; i < len; i += 1) {
+                  buf[i] = this[i];
+                }
+                return buf.buffer;
+              }
+              throw new TypeError(
+                "Buffer.toArrayBuffer not supported in this browser",
+              );
             };
 
             // HELPER FUNCTIONS
@@ -24020,14 +23708,14 @@
             }
 
             function toHex(n) {
-              if (n < 16) return `0${  n.toString(16)}`;
+              if (n < 16) return `0${n.toString(16)}`;
               return n.toString(16);
             }
 
             function utf8ToBytes(string, units) {
               units = units || Infinity;
               let codePoint;
-              const {length} = string;
+              const { length } = string;
               let leadSurrogate = null;
               const bytes = [];
 
@@ -24117,7 +23805,9 @@
             }
 
             function utf16leToBytes(str, units) {
-              let c; let hi; let lo;
+              let c;
+              let hi;
+              let lo;
               const byteArray = [];
               for (let i = 0; i < str.length; i++) {
                 if ((units -= 2) < 0) break;
@@ -24152,9 +23842,8 @@
               "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
             (function(exports) {
-              
-
-              const Arr = typeof Uint8Array !== "undefined" ? Uint8Array : Array;
+              const Arr =
+                typeof Uint8Array !== "undefined" ? Uint8Array : Array;
 
               const PLUS = "+".charCodeAt(0);
               const SLASH = "/".charCodeAt(0);
@@ -24175,7 +23864,12 @@
               }
 
               function b64ToByteArray(b64) {
-                let i; let j; let l; let tmp; let placeHolders; let arr;
+                let i;
+                let j;
+                let l;
+                let tmp;
+                let placeHolders;
+                let arr;
 
                 if (b64.length % 4 > 0) {
                   throw new Error(
@@ -24238,10 +23932,10 @@
 
               function uint8ToBase64(uint8) {
                 let i;
-                  const extraBytes = uint8.length % 3; // if we have 1 byte left, pad 2 bytes
-                  let output = "";
-                  let temp;
-                  let length;
+                const extraBytes = uint8.length % 3; // if we have 1 byte left, pad 2 bytes
+                let output = "";
+                let temp;
+                let length;
 
                 function encode(num) {
                   return lookup.charAt(num);
@@ -24296,7 +23990,8 @@
         16: [
           function(require, module, exports) {
             exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-              let e; let m;
+              let e;
+              let m;
               const eLen = nBytes * 8 - mLen - 1;
               const eMax = (1 << eLen) - 1;
               const eBias = eMax >> 1;
@@ -24344,7 +24039,9 @@
               mLen,
               nBytes,
             ) {
-              let e; let m; let c;
+              let e;
+              let m;
+              let c;
               let eLen = nBytes * 8 - mLen - 1;
               const eMax = (1 << eLen) - 1;
               const eBias = eMax >> 1;
@@ -24411,7 +24108,7 @@
              * isArray
              */
 
-            const {isArray} = Array;
+            const { isArray } = Array;
 
             /**
              * toString
@@ -24448,8 +24145,6 @@
           function(require, module, exports) {
             /* jshint node: true */
             (function() {
-              
-
               function CookieAccessInfo(domain, path, secure, script) {
                 if (this instanceof CookieAccessInfo) {
                   this.domain = domain || undefined;
@@ -24486,17 +24181,17 @@
               exports.Cookie = Cookie;
 
               Cookie.prototype.toString = function toString() {
-                const str = [`${this.name  }=${  this.value}`];
+                const str = [`${this.name}=${this.value}`];
                 if (this.expiration_date !== Infinity) {
                   str.push(
-                    `expires=${  new Date(this.expiration_date).toGMTString()}`,
+                    `expires=${new Date(this.expiration_date).toGMTString()}`,
                   );
                 }
                 if (this.domain) {
-                  str.push(`domain=${  this.domain}`);
+                  str.push(`domain=${this.domain}`);
                 }
                 if (this.path) {
-                  str.push(`path=${  this.path}`);
+                  str.push(`path=${this.path}`);
                 }
                 if (this.secure) {
                   str.push("secure");
@@ -24508,7 +24203,7 @@
               };
 
               Cookie.prototype.toValueString = function toValueString() {
-                return `${this.name  }=${  this.value}`;
+                return `${this.name}=${this.value}`;
               };
 
               const cookie_str_splitter = /[:](?=\s*[a-zA-Z0-9_\-]+\s*[=])/g;
@@ -24519,12 +24214,12 @@
               ) {
                 if (this instanceof Cookie) {
                   const parts = str.split(";").filter(function(value) {
-                      return !!value;
-                    });
-                    let pair = parts[0].match(/([^=]+)=([\s\S]*)/);
-                    let key = pair[1];
-                    let value = pair[2];
-                    let i;
+                    return !!value;
+                  });
+                  let pair = parts[0].match(/([^=]+)=([\s\S]*)/);
+                  let key = pair[1];
+                  let value = pair[2];
+                  let i;
                   this.name = key;
                   this.value = value;
 
@@ -24620,7 +24315,9 @@
               };
 
               function CookieJar() {
-                let cookies; let cookies_list; let collidable_cookie;
+                let cookies;
+                let cookies_list;
+                let collidable_cookie;
                 if (this instanceof CookieJar) {
                   cookies = Object.create(null); // name: [Cookie]
 
@@ -24629,7 +24326,8 @@
                     request_domain,
                     request_path,
                   ) {
-                    let remove; let i;
+                    let remove;
+                    let i;
                     cookie = new Cookie(cookie, request_domain, request_path);
                     // Delete the cookie if the set is past the current time
                     remove = cookie.expiration_date <= Date.now();
@@ -24666,7 +24364,8 @@
                     cookie_name,
                     access_info,
                   ) {
-                    let cookie; let i;
+                    let cookie;
+                    let i;
                     cookies_list = cookies[cookie_name];
                     if (!cookies_list) {
                       return;
@@ -24688,8 +24387,8 @@
                   // returns a list of cookies
                   this.getCookies = function getCookies(access_info) {
                     const matches = [];
-                      let cookie_name;
-                      let cookie;
+                    let cookie_name;
+                    let cookie;
                     for (cookie_name in cookies) {
                       cookie = this.getCookie(cookie_name, access_info);
                       if (cookie) {
@@ -24725,8 +24424,8 @@
                   ? cookies
                   : cookies.split(cookie_str_splitter);
                 const successful = [];
-                  let i;
-                  let cookie;
+                let i;
+                let cookie;
                 cookies = cookies.map(function(item) {
                   return new Cookie(item, request_domain, request_path);
                 });
@@ -24744,8 +24443,6 @@
         ],
         19: [
           function(require, module, exports) {
-            
-
             const yaml = require("./lib/js-yaml.js");
 
             module.exports = yaml;
@@ -24754,15 +24451,13 @@
         ],
         20: [
           function(require, module, exports) {
-            
-
             const loader = require("./js-yaml/loader");
             const dumper = require("./js-yaml/dumper");
 
             function deprecated(name) {
               return function() {
                 throw new Error(
-                  `Function ${  name  } is deprecated and cannot be used.`,
+                  `Function ${name} is deprecated and cannot be used.`,
                 );
               };
             }
@@ -24808,8 +24503,6 @@
         ],
         21: [
           function(require, module, exports) {
-            
-
             function isNothing(subject) {
               return typeof subject === "undefined" || subject === null;
             }
@@ -24826,7 +24519,10 @@
             }
 
             function extend(target, source) {
-              let index; let length; let key; let sourceKeys;
+              let index;
+              let length;
+              let key;
+              let sourceKeys;
 
               if (source) {
                 sourceKeys = Object.keys(source);
@@ -24846,7 +24542,7 @@
 
             function repeat(string, count) {
               let result = "";
-                let cycle;
+              let cycle;
 
               for (cycle = 0; cycle < count; cycle += 1) {
                 result += string;
@@ -24870,8 +24566,6 @@
         ],
         22: [
           function(require, module, exports) {
-            
-
             /* eslint-disable no-use-before-define */
 
             const common = require("./common");
@@ -24943,7 +24637,13 @@
             ];
 
             function compileStyleMap(schema, map) {
-              let result; let keys; let index; let length; let tag; let style; let type;
+              let result;
+              let keys;
+              let index;
+              let length;
+              let tag;
+              let style;
+              let type;
 
               if (map === null) return {};
 
@@ -24959,7 +24659,7 @@
                 style = String(map[tag]);
 
                 if (tag.slice(0, 2) === "!!") {
-                  tag = `tag:yaml.org,2002:${  tag.slice(2)}`;
+                  tag = `tag:yaml.org,2002:${tag.slice(2)}`;
                 }
 
                 type = schema.compiledTypeMap[tag];
@@ -24975,7 +24675,9 @@
             }
 
             function encodeHex(character) {
-              let string; let handle; let length;
+              let string;
+              let handle;
+              let length;
 
               string = character.toString(16).toUpperCase();
 
@@ -24994,12 +24696,10 @@
                 );
               }
 
-              return (
-                `\\${ 
-                handle 
-                }${common.repeat("0", length - string.length) 
-                }${string}`
-              );
+              return `\\${handle}${common.repeat(
+                "0",
+                length - string.length,
+              )}${string}`;
             }
 
             function State(options) {
@@ -25031,11 +24731,11 @@
             // Indents every line in a string. Empty lines (\n only) are not indented.
             function indentString(string, spaces) {
               const ind = common.repeat(" ", spaces);
-                let position = 0;
-                let next = -1;
-                let result = "";
-                let line;
-                const {length} = string;
+              let position = 0;
+              let next = -1;
+              let result = "";
+              let line;
+              const { length } = string;
 
               while (position < length) {
                 next = string.indexOf("\n", position);
@@ -25056,11 +24756,13 @@
             }
 
             function generateNextLine(state, level) {
-              return `\n${  common.repeat(" ", state.indent * level)}`;
+              return `\n${common.repeat(" ", state.indent * level)}`;
             }
 
             function testImplicitResolving(state, str) {
-              let index; let length; let type;
+              let index;
+              let length;
+              let type;
 
               for (
                 index = 0, length = state.implicitTypes.length;
@@ -25152,10 +24854,10 @@
             }
 
             const STYLE_PLAIN = 1;
-              const STYLE_SINGLE = 2;
-              const STYLE_LITERAL = 3;
-              const STYLE_FOLDED = 4;
-              const STYLE_DOUBLE = 5;
+            const STYLE_SINGLE = 2;
+            const STYLE_LITERAL = 3;
+            const STYLE_FOLDED = 4;
+            const STYLE_DOUBLE = 5;
 
             // Determines which scalar styles are possible and returns the preferred style.
             // lineWidth = -1 => no limit.
@@ -25252,7 +24954,7 @@
                   !state.noCompatMode &&
                   DEPRECATED_BOOLEANS_SYNTAX.indexOf(string) !== -1
                 ) {
-                  return `'${  string  }'`;
+                  return `'${string}'`;
                 }
 
                 const indent = state.indent * Math.max(1, level); // no 0-indent scalars
@@ -25292,23 +24994,21 @@
                   case STYLE_PLAIN:
                     return string;
                   case STYLE_SINGLE:
-                    return `'${  string.replace(/'/g, "''")  }'`;
+                    return `'${string.replace(/'/g, "''")}'`;
                   case STYLE_LITERAL:
-                    return (
-                      `|${ 
-                      blockHeader(string, state.indent) 
-                      }${dropEndingNewline(indentString(string, indent))}`
-                    );
+                    return `|${blockHeader(
+                      string,
+                      state.indent,
+                    )}${dropEndingNewline(indentString(string, indent))}`;
                   case STYLE_FOLDED:
-                    return (
-                      `>${ 
-                      blockHeader(string, state.indent) 
-                      }${dropEndingNewline(
-                        indentString(foldString(string, lineWidth), indent),
-                      )}`
-                    );
+                    return `>${blockHeader(
+                      string,
+                      state.indent,
+                    )}${dropEndingNewline(
+                      indentString(foldString(string, lineWidth), indent),
+                    )}`;
                   case STYLE_DOUBLE:
-                    return `"${  escapeString(string, lineWidth)  }"`;
+                    return `"${escapeString(string, lineWidth)}"`;
                   default:
                     throw new YAMLException(
                       "impossible error: invalid scalar style",
@@ -25328,7 +25028,7 @@
                 clip && (string[string.length - 2] === "\n" || string === "\n");
               const chomp = keep ? "+" : clip ? "" : "-";
 
-              return `${indentIndicator + chomp  }\n`;
+              return `${indentIndicator + chomp}\n`;
             }
 
             // (See the note for writeScalar.)
@@ -25362,7 +25062,7 @@
               let match;
               while ((match = lineRe.exec(string))) {
                 const prefix = match[1];
-                  const line = match[2];
+                const line = match[2];
                 moreIndented = line[0] === " ";
                 result +=
                   prefix +
@@ -25388,9 +25088,9 @@
               let match;
               // start is an inclusive index. end, curr, and next are exclusive.
               let start = 0;
-                let end;
-                let curr = 0;
-                let next = 0;
+              let end;
+              let curr = 0;
+              let next = 0;
               let result = "";
 
               // Invariants: 0 <= start <= length-1.
@@ -25402,7 +25102,7 @@
                 // maintain invariant: curr - start <= width
                 if (next - start > width) {
                   end = curr > start ? curr : next; // derive end <= length-2
-                  result += `\n${  line.slice(start, end)}`;
+                  result += `\n${line.slice(start, end)}`;
                   // skip the space that was output as \n
                   start = end + 1; // derive start <= length-1
                 }
@@ -25414,7 +25114,7 @@
               result += "\n";
               // Insert a break if the remainder is too long and there is a break available.
               if (line.length - start > width && curr > start) {
-                result += `${line.slice(start, curr)  }\n${  line.slice(curr + 1)}`;
+                result += `${line.slice(start, curr)}\n${line.slice(curr + 1)}`;
               } else {
                 result += line.slice(start);
               }
@@ -25442,9 +25142,9 @@
 
             function writeFlowSequence(state, level, object) {
               let _result = "";
-                const _tag = state.tag;
-                let index;
-                let length;
+              const _tag = state.tag;
+              let index;
+              let length;
 
               for (
                 index = 0, length = object.length;
@@ -25459,14 +25159,14 @@
               }
 
               state.tag = _tag;
-              state.dump = `[${  _result  }]`;
+              state.dump = `[${_result}]`;
             }
 
             function writeBlockSequence(state, level, object, compact) {
               let _result = "";
-                const _tag = state.tag;
-                let index;
-                let length;
+              const _tag = state.tag;
+              let index;
+              let length;
 
               for (
                 index = 0, length = object.length;
@@ -25478,7 +25178,7 @@
                   if (!compact || index !== 0) {
                     _result += generateNextLine(state, level);
                   }
-                  _result += `- ${  state.dump}`;
+                  _result += `- ${state.dump}`;
                 }
               }
 
@@ -25488,13 +25188,13 @@
 
             function writeFlowMapping(state, level, object) {
               let _result = "";
-                const _tag = state.tag;
-                const objectKeyList = Object.keys(object);
-                let index;
-                let length;
-                let objectKey;
-                let objectValue;
-                let pairBuffer;
+              const _tag = state.tag;
+              const objectKeyList = Object.keys(object);
+              let index;
+              let length;
+              let objectKey;
+              let objectValue;
+              let pairBuffer;
 
               for (
                 index = 0, length = objectKeyList.length;
@@ -25514,7 +25214,7 @@
 
                 if (state.dump.length > 1024) pairBuffer += "? ";
 
-                pairBuffer += `${state.dump  }: `;
+                pairBuffer += `${state.dump}: `;
 
                 if (!writeNode(state, level, objectValue, false, false)) {
                   continue; // Skip this pair because of invalid value.
@@ -25527,19 +25227,19 @@
               }
 
               state.tag = _tag;
-              state.dump = `{${  _result  }}`;
+              state.dump = `{${_result}}`;
             }
 
             function writeBlockMapping(state, level, object, compact) {
               let _result = "";
-                const _tag = state.tag;
-                const objectKeyList = Object.keys(object);
-                let index;
-                let length;
-                let objectKey;
-                let objectValue;
-                let explicitPair;
-                let pairBuffer;
+              const _tag = state.tag;
+              const objectKeyList = Object.keys(object);
+              let index;
+              let length;
+              let objectKey;
+              let objectValue;
+              let explicitPair;
+              let pairBuffer;
 
               // Allow sorting keys so that the output file is deterministic
               if (state.sortKeys === true) {
@@ -25617,7 +25317,12 @@
             }
 
             function detectType(state, object, explicit) {
-              let _result; let typeList; let index; let length; let type; let style;
+              let _result;
+              let typeList;
+              let index;
+              let length;
+              let type;
+              let style;
 
               typeList = explicit ? state.explicitTypes : state.implicitTypes;
 
@@ -25648,11 +25353,7 @@
                       _result = type.represent[style](object, style);
                     } else {
                       throw new YAMLException(
-                        `!<${ 
-                          type.tag 
-                          }> tag resolver accepts not "${ 
-                          style 
-                          }" style`,
+                        `!<${type.tag}> tag resolver accepts not "${style}" style`,
                       );
                     }
 
@@ -25684,9 +25385,9 @@
               }
 
               const objectOrArray =
-                  type === "[object Object]" || type === "[object Array]";
-                let duplicateIndex;
-                let duplicate;
+                type === "[object Object]" || type === "[object Array]";
+              let duplicateIndex;
+              let duplicate;
 
               if (objectOrArray) {
                 duplicateIndex = state.duplicates.indexOf(object);
@@ -25702,7 +25403,7 @@
               }
 
               if (duplicate && state.usedDuplicates[duplicateIndex]) {
-                state.dump = `*ref_${  duplicateIndex}`;
+                state.dump = `*ref_${duplicateIndex}`;
               } else {
                 if (
                   objectOrArray &&
@@ -25715,24 +25416,24 @@
                   if (block && Object.keys(state.dump).length !== 0) {
                     writeBlockMapping(state, level, state.dump, compact);
                     if (duplicate) {
-                      state.dump = `&ref_${  duplicateIndex  }${state.dump}`;
+                      state.dump = `&ref_${duplicateIndex}${state.dump}`;
                     }
                   } else {
                     writeFlowMapping(state, level, state.dump);
                     if (duplicate) {
-                      state.dump = `&ref_${  duplicateIndex  } ${  state.dump}`;
+                      state.dump = `&ref_${duplicateIndex} ${state.dump}`;
                     }
                   }
                 } else if (type === "[object Array]") {
                   if (block && state.dump.length !== 0) {
                     writeBlockSequence(state, level, state.dump, compact);
                     if (duplicate) {
-                      state.dump = `&ref_${  duplicateIndex  }${state.dump}`;
+                      state.dump = `&ref_${duplicateIndex}${state.dump}`;
                     }
                   } else {
                     writeFlowSequence(state, level, state.dump);
                     if (duplicate) {
-                      state.dump = `&ref_${  duplicateIndex  } ${  state.dump}`;
+                      state.dump = `&ref_${duplicateIndex} ${state.dump}`;
                     }
                   }
                 } else if (type === "[object String]") {
@@ -25742,12 +25443,12 @@
                 } else {
                   if (state.skipInvalid) return false;
                   throw new YAMLException(
-                    `unacceptable kind of an object to dump ${  type}`,
+                    `unacceptable kind of an object to dump ${type}`,
                   );
                 }
 
                 if (state.tag !== null && state.tag !== "?") {
-                  state.dump = `!<${  state.tag  }> ${  state.dump}`;
+                  state.dump = `!<${state.tag}> ${state.dump}`;
                 }
               }
 
@@ -25756,9 +25457,9 @@
 
             function getDuplicateReferences(object, state) {
               const objects = [];
-                const duplicatesIndexes = [];
-                let index;
-                let length;
+              const duplicatesIndexes = [];
+              let index;
+              let length;
 
               inspectNode(object, objects, duplicatesIndexes);
 
@@ -25773,7 +25474,9 @@
             }
 
             function inspectNode(object, objects, duplicatesIndexes) {
-              let objectKeyList; let index; let length;
+              let objectKeyList;
+              let index;
+              let length;
 
               if (object !== null && typeof object === "object") {
                 index = objects.indexOf(object);
@@ -25819,7 +25522,7 @@
               if (!state.noRefs) getDuplicateReferences(input, state);
 
               if (writeNode(state, 0, input, true, true))
-                return `${state.dump  }\n`;
+                return `${state.dump}\n`;
 
               return "";
             }
@@ -25845,8 +25548,6 @@
           function(require, module, exports) {
             // YAML error class. http://stackoverflow.com/questions/8458984
             //
-            
-
 
             function YAMLException(reason, mark) {
               // Super constructor
@@ -25866,7 +25567,7 @@
               this.mark = mark;
               this.message =
                 (this.reason || "(unknown reason)") +
-                (this.mark ? ` ${  this.mark.toString()}` : "");
+                (this.mark ? ` ${this.mark.toString()}` : "");
             }
 
             // Inherit from Error
@@ -25874,12 +25575,12 @@
             YAMLException.prototype.constructor = YAMLException;
 
             YAMLException.prototype.toString = function toString(compact) {
-              let result = `${this.name  }: `;
+              let result = `${this.name}: `;
 
               result += this.reason || "(unknown reason)";
 
               if (!compact && this.mark) {
-                result += ` ${  this.mark.toString()}`;
+                result += ` ${this.mark.toString()}`;
               }
 
               return result;
@@ -25891,8 +25592,6 @@
         ],
         24: [
           function(require, module, exports) {
-            
-
             /* eslint-disable max-len,no-use-before-define */
 
             const common = require("./common");
@@ -26099,7 +25798,9 @@
 
             const directiveHandlers = {
               YAML: function handleYamlDirective(state, name, args) {
-                let match; let major; let minor;
+                let match;
+                let major;
+                let minor;
 
                 if (state.version !== null) {
                   throwError(state, "duplication of %YAML directive");
@@ -26143,7 +25844,8 @@
               },
 
               TAG: function handleTagDirective(state, name, args) {
-                let handle; let prefix;
+                let handle;
+                let prefix;
 
                 if (args.length !== 2) {
                   throwError(
@@ -26165,9 +25867,7 @@
                 if (_hasOwnProperty.call(state.tagMap, handle)) {
                   throwError(
                     state,
-                    `there is a previously declared suffix for "${ 
-                      handle 
-                      }" tag handle`,
+                    `there is a previously declared suffix for "${handle}" tag handle`,
                   );
                 }
 
@@ -26183,7 +25883,10 @@
             };
 
             function captureSegment(state, start, end, checkJson) {
-              let _position; let _length; let _character; let _result;
+              let _position;
+              let _length;
+              let _character;
+              let _result;
 
               if (start < end) {
                 _result = state.input.slice(start, end);
@@ -26221,7 +25924,10 @@
               source,
               overridableKeys,
             ) {
-              let sourceKeys; let key; let index; let quantity;
+              let sourceKeys;
+              let key;
+              let index;
+              let quantity;
 
               if (!common.isObject(source)) {
                 throwError(
@@ -26254,7 +25960,8 @@
               keyNode,
               valueNode,
             ) {
-              let index; let quantity;
+              let index;
+              let quantity;
 
               keyNode = String(keyNode);
 
@@ -26316,7 +26023,7 @@
 
             function skipSeparationSpace(state, allowComments, checkIndent) {
               let lineBreaks = 0;
-                let ch = state.input.charCodeAt(state.position);
+              let ch = state.input.charCodeAt(state.position);
 
               while (ch !== 0) {
                 while (is_WHITE_SPACE(ch)) {
@@ -26362,7 +26069,7 @@
 
             function testDocumentSeparator(state) {
               let _position = state.position;
-                let ch;
+              let ch;
 
               ch = state.input.charCodeAt(_position);
 
@@ -26395,16 +26102,16 @@
 
             function readPlainScalar(state, nodeIndent, withinFlowCollection) {
               let preceding;
-                let following;
-                let captureStart;
-                let captureEnd;
-                let hasPendingContent;
-                let _line;
-                let _lineStart;
-                let _lineIndent;
-                const _kind = state.kind;
-                const _result = state.result;
-                let ch;
+              let following;
+              let captureStart;
+              let captureEnd;
+              let hasPendingContent;
+              let _line;
+              let _lineStart;
+              let _lineIndent;
+              const _kind = state.kind;
+              const _result = state.result;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -26509,7 +26216,9 @@
             }
 
             function readSingleQuotedScalar(state, nodeIndent) {
-              let ch; let captureStart; let captureEnd;
+              let ch;
+              let captureStart;
+              let captureEnd;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -26561,7 +26270,12 @@
             }
 
             function readDoubleQuotedScalar(state, nodeIndent) {
-              let captureStart; let captureEnd; let hexLength; let hexResult; let tmp; let ch;
+              let captureStart;
+              let captureEnd;
+              let hexLength;
+              let hexResult;
+              let tmp;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -26579,7 +26293,8 @@
                   captureSegment(state, captureStart, state.position, true);
                   state.position++;
                   return true;
-                } if (ch === 0x5c /* \ */) {
+                }
+                if (ch === 0x5c /* \ */) {
                   captureSegment(state, captureStart, state.position, true);
                   ch = state.input.charCodeAt(++state.position);
 
@@ -26641,20 +26356,20 @@
 
             function readFlowCollection(state, nodeIndent) {
               let readNext = true;
-                let _line;
-                const _tag = state.tag;
-                let _result;
-                const _anchor = state.anchor;
-                let following;
-                let terminator;
-                let isPair;
-                let isExplicitPair;
-                let isMapping;
-                const overridableKeys = {};
-                let keyNode;
-                let keyTag;
-                let valueNode;
-                let ch;
+              let _line;
+              const _tag = state.tag;
+              let _result;
+              const _anchor = state.anchor;
+              let following;
+              let terminator;
+              let isPair;
+              let isExplicitPair;
+              let isMapping;
+              const overridableKeys = {};
+              let keyNode;
+              let keyTag;
+              let valueNode;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -26688,7 +26403,8 @@
                   state.kind = isMapping ? "mapping" : "sequence";
                   state.result = _result;
                   return true;
-                } if (!readNext) {
+                }
+                if (!readNext) {
                   throwError(
                     state,
                     "missed comma between flow collection entries",
@@ -26771,15 +26487,15 @@
 
             function readBlockScalar(state, nodeIndent) {
               let captureStart;
-                let folding;
-                let chomping = CHOMPING_CLIP;
-                let didReadContent = false;
-                let detectedIndent = false;
-                let textIndent = nodeIndent;
-                let emptyLines = 0;
-                let atMoreIndented = false;
-                let tmp;
-                let ch;
+              let folding;
+              let chomping = CHOMPING_CLIP;
+              let didReadContent = false;
+              let detectedIndent = false;
+              let textIndent = nodeIndent;
+              let emptyLines = 0;
+              let atMoreIndented = false;
+              let tmp;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -26932,12 +26648,12 @@
 
             function readBlockSequence(state, nodeIndent) {
               let _line;
-                const _tag = state.tag;
-                const _anchor = state.anchor;
-                const _result = [];
-                let following;
-                let detected = false;
-                let ch;
+              const _tag = state.tag;
+              const _anchor = state.anchor;
+              const _result = [];
+              let following;
+              let detected = false;
+              let ch;
 
               if (state.anchor !== null) {
                 state.anchorMap[state.anchor] = _result;
@@ -26996,18 +26712,18 @@
 
             function readBlockMapping(state, nodeIndent, flowIndent) {
               let following;
-                let allowCompact;
-                let _line;
-                const _tag = state.tag;
-                const _anchor = state.anchor;
-                const _result = {};
-                const overridableKeys = {};
-                let keyTag = null;
-                let keyNode = null;
-                let valueNode = null;
-                let atExplicitKey = false;
-                let detected = false;
-                let ch;
+              let allowCompact;
+              let _line;
+              const _tag = state.tag;
+              const _anchor = state.anchor;
+              const _result = {};
+              const overridableKeys = {};
+              let keyTag = null;
+              let keyNode = null;
+              let valueNode = null;
+              let atExplicitKey = false;
+              let detected = false;
+              let ch;
 
               if (state.anchor !== null) {
                 state.anchorMap[state.anchor] = _result;
@@ -27024,7 +26740,7 @@
                 // first for the key (denoted by "?") and second for the value (denoted by ":")
                 //
                 if (
-                  (ch === 0x3f /* ? */ || ch === 0x3a /* : */) &&
+                  (ch === 0x3f /* ? */ || ch === 0x3a /*: */) &&
                   is_WS_OR_EOL(following)
                 ) {
                   if (ch === 0x3f /* ? */) {
@@ -27193,11 +26909,11 @@
 
             function readTagProperty(state) {
               let _position;
-                let isVerbatim = false;
-                let isNamed = false;
-                let tagHandle;
-                let tagName;
-                let ch;
+              let isVerbatim = false;
+              let isNamed = false;
+              let tagHandle;
+              let tagName;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -27278,7 +26994,7 @@
               if (tagName && !PATTERN_TAG_URI.test(tagName)) {
                 throwError(
                   state,
-                  `tag name cannot contain such characters: ${  tagName}`,
+                  `tag name cannot contain such characters: ${tagName}`,
                 );
               }
 
@@ -27287,18 +27003,19 @@
               } else if (_hasOwnProperty.call(state.tagMap, tagHandle)) {
                 state.tag = state.tagMap[tagHandle] + tagName;
               } else if (tagHandle === "!") {
-                state.tag = `!${  tagName}`;
+                state.tag = `!${tagName}`;
               } else if (tagHandle === "!!") {
-                state.tag = `tag:yaml.org,2002:${  tagName}`;
+                state.tag = `tag:yaml.org,2002:${tagName}`;
               } else {
-                throwError(state, `undeclared tag handle "${  tagHandle  }"`);
+                throwError(state, `undeclared tag handle "${tagHandle}"`);
               }
 
               return true;
             }
 
             function readAnchorProperty(state) {
-              let _position; let ch;
+              let _position;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -27327,7 +27044,9 @@
             }
 
             function readAlias(state) {
-              let _position; let alias; let ch;
+              let _position;
+              let alias;
+              let ch;
 
               ch = state.input.charCodeAt(state.position);
 
@@ -27350,7 +27069,7 @@
               alias = state.input.slice(_position, state.position);
 
               if (!state.anchorMap.hasOwnProperty(alias)) {
-                throwError(state, `unidentified alias "${  alias  }"`);
+                throwError(state, `unidentified alias "${alias}"`);
               }
 
               state.result = state.anchorMap[alias];
@@ -27366,16 +27085,16 @@
               allowCompact,
             ) {
               let allowBlockStyles;
-                let allowBlockScalars;
-                let allowBlockCollections;
-                let indentStatus = 1; // 1: this>parent, 0: this=parent, -1: this<parent
-                let atNewLine = false;
-                let hasContent = false;
-                let typeIndex;
-                let typeQuantity;
-                let type;
-                let flowIndent;
-                let blockIndent;
+              let allowBlockScalars;
+              let allowBlockCollections;
+              let indentStatus = 1; // 1: this>parent, 0: this=parent, -1: this<parent
+              let atNewLine = false;
+              let hasContent = false;
+              let typeIndex;
+              let typeQuantity;
+              let type;
+              let flowIndent;
+              let blockIndent;
 
               if (state.listener !== null) {
                 state.listener("open", state);
@@ -27520,13 +27239,7 @@
                   if (state.result !== null && type.kind !== state.kind) {
                     throwError(
                       state,
-                      `unacceptable node kind for !<${ 
-                        state.tag 
-                        }> tag; it should be "${ 
-                        type.kind 
-                        }", not "${ 
-                        state.kind 
-                        }"`,
+                      `unacceptable node kind for !<${state.tag}> tag; it should be "${type.kind}", not "${state.kind}"`,
                     );
                   }
 
@@ -27534,9 +27247,7 @@
                     // `state.result` updated in resolver if matched
                     throwError(
                       state,
-                      `cannot resolve a node with !<${ 
-                        state.tag 
-                        }> explicit tag`,
+                      `cannot resolve a node with !<${state.tag}> explicit tag`,
                     );
                   } else {
                     state.result = type.construct(state.result);
@@ -27545,7 +27256,7 @@
                     }
                   }
                 } else {
-                  throwError(state, `unknown tag !<${  state.tag  }>`);
+                  throwError(state, `unknown tag !<${state.tag}>`);
                 }
               }
 
@@ -27557,11 +27268,11 @@
 
             function readDocument(state) {
               const documentStart = state.position;
-                let _position;
-                let directiveName;
-                let directiveArgs;
-                let hasDirectives = false;
-                let ch;
+              let _position;
+              let directiveName;
+              let directiveArgs;
+              let hasDirectives = false;
+              let ch;
 
               state.version = null;
               state.checkLineBreaks = state.legacy;
@@ -27631,7 +27342,7 @@
                 } else {
                   throwWarning(
                     state,
-                    `unknown document directive "${  directiveName  }"`,
+                    `unknown document directive "${directiveName}"`,
                   );
                 }
               }
@@ -27690,7 +27401,6 @@
                   "end of the stream or a document separator is expected",
                 );
               } else {
-                
               }
             }
 
@@ -27734,8 +27444,8 @@
 
             function loadAll(input, iterator, options) {
               const documents = loadDocuments(input, options);
-                let index;
-                let length;
+              let index;
+              let length;
 
               for (
                 index = 0, length = documents.length;
@@ -27752,7 +27462,8 @@
               if (documents.length === 0) {
                 /* eslint-disable no-undefined */
                 return undefined;
-              } if (documents.length === 1) {
+              }
+              if (documents.length === 1) {
                 return documents[0];
               }
               throw new YAMLException(
@@ -27790,8 +27501,6 @@
         ],
         25: [
           function(require, module, exports) {
-            
-
             const common = require("./common");
 
             function Mark(name, buffer, position, line, column) {
@@ -27803,7 +27512,11 @@
             }
 
             Mark.prototype.getSnippet = function getSnippet(indent, maxLength) {
-              let head; let start; let tail; let end; let snippet;
+              let head;
+              let start;
+              let tail;
+              let end;
+              let snippet;
 
               if (!this.buffer) return null;
 
@@ -27845,36 +27558,30 @@
 
               snippet = this.buffer.slice(start, end);
 
-              return (
-                `${common.repeat(" ", indent) +
+              return `${common.repeat(" ", indent) +
                 head +
                 snippet +
-                tail 
-                }\n${ 
-                common.repeat(
-                  " ",
-                  indent + this.position - start + head.length,
-                ) 
-                }^`
-              );
+                tail}\n${common.repeat(
+                " ",
+                indent + this.position - start + head.length,
+              )}^`;
             };
 
             Mark.prototype.toString = function toString(compact) {
               let snippet;
-                let where = "";
+              let where = "";
 
               if (this.name) {
-                where += `in "${  this.name  }" `;
+                where += `in "${this.name}" `;
               }
 
-              where +=
-                `at line ${  this.line + 1  }, column ${  this.column + 1}`;
+              where += `at line ${this.line + 1}, column ${this.column + 1}`;
 
               if (!compact) {
                 snippet = this.getSnippet();
 
                 if (snippet) {
-                  where += `:\n${  snippet}`;
+                  where += `:\n${snippet}`;
                 }
               }
 
@@ -27887,8 +27594,6 @@
         ],
         26: [
           function(require, module, exports) {
-            
-
             /* eslint-disable max-len */
 
             const common = require("./common");
@@ -27919,8 +27624,8 @@
 
             function compileMap(/* lists... */) {
               const result = {};
-                let index;
-                let length;
+              let index;
+              let length;
 
               function collectType(type) {
                 result[type.tag] = type;
@@ -27961,7 +27666,8 @@
             Schema.DEFAULT = null;
 
             Schema.create = function createSchema() {
-              let schemas; let types;
+              let schemas;
+              let types;
 
               switch (arguments.length) {
                 case 1:
@@ -28021,8 +27727,6 @@
             // NOTE: JS-YAML does not support schema-specific tag resolution restrictions.
             // So, Core schema has no distinctions from JSON schema is JS-YAML.
 
-            
-
             const Schema = require("../schema");
 
             module.exports = new Schema({
@@ -28040,8 +27744,6 @@
             // JavaScript-specific types: !!js/undefined, !!js/regexp and !!js/function.
             //
             // Also this schema is used as default base schema at `Schema.create` function.
-
-            
 
             const Schema = require("../schema");
 
@@ -28069,8 +27771,6 @@
             //
             // This schema is based on standard YAML's Core schema and includes most of
             // extra types described at YAML tag repository. (http://yaml.org/type/)
-
-            
 
             const Schema = require("../schema");
 
@@ -28104,8 +27804,6 @@
             // Standard YAML's Failsafe schema.
             // http://www.yaml.org/spec/1.2/spec.html#id2802346
 
-            
-
             const Schema = require("../schema");
 
             module.exports = new Schema({
@@ -28132,8 +27830,6 @@
             // So, this schema is not such strict as defined in the YAML specification.
             // It allows numbers in binary notaion, use `Null` and `NULL` as `null`, etc.
 
-            
-
             const Schema = require("../schema");
 
             module.exports = new Schema({
@@ -28157,8 +27853,6 @@
         ],
         32: [
           function(require, module, exports) {
-            
-
             const YAMLException = require("./exception");
 
             const TYPE_CONSTRUCTOR_OPTIONS = [
@@ -28194,11 +27888,7 @@
               Object.keys(options).forEach(function(name) {
                 if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name) === -1) {
                   throw new YAMLException(
-                    `Unknown option "${ 
-                      name 
-                      }" is met in definition of "${ 
-                      tag 
-                      }" YAML type.`,
+                    `Unknown option "${name}" is met in definition of "${tag}" YAML type.`,
                   );
                 }
               });
@@ -28226,11 +27916,7 @@
 
               if (YAML_NODE_KINDS.indexOf(this.kind) === -1) {
                 throw new YAMLException(
-                  `Unknown kind "${ 
-                    this.kind 
-                    }" is specified for "${ 
-                    tag 
-                    }" YAML type.`,
+                  `Unknown kind "${this.kind}" is specified for "${tag}" YAML type.`,
                 );
               }
             }
@@ -28241,8 +27927,6 @@
         ],
         33: [
           function(require, module, exports) {
-            
-
             /* eslint-disable no-bitwise */
 
             let NodeBuffer;
@@ -28263,10 +27947,10 @@
               if (data === null) return false;
 
               let code;
-                let idx;
-                let bitlen = 0;
-                const max = data.length;
-                const map = BASE64_MAP;
+              let idx;
+              let bitlen = 0;
+              const max = data.length;
+              const map = BASE64_MAP;
 
               // Convert one by one.
               for (idx = 0; idx < max; idx++) {
@@ -28287,12 +27971,12 @@
 
             function constructYamlBinary(data) {
               let idx;
-                let tailbits;
-                const input = data.replace(/[\r\n=]/g, ""); // remove CR/LF & padding to simplify scan
-                const max = input.length;
-                const map = BASE64_MAP;
-                let bits = 0;
-                const result = [];
+              let tailbits;
+              const input = data.replace(/[\r\n=]/g, ""); // remove CR/LF & padding to simplify scan
+              const max = input.length;
+              const map = BASE64_MAP;
+              let bits = 0;
+              const result = [];
 
               // Collect by 6*4 bits (3 bytes)
 
@@ -28329,11 +28013,11 @@
 
             function representYamlBinary(object /* , style */) {
               let result = "";
-                let bits = 0;
-                let idx;
-                let tail;
-                const max = object.length;
-                const map = BASE64_MAP;
+              let bits = 0;
+              let idx;
+              let tail;
+              const max = object.length;
+              const map = BASE64_MAP;
 
               // Convert every three bytes to 4 ASCII characters.
 
@@ -28388,8 +28072,6 @@
         ],
         34: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             function resolveYamlBoolean(data) {
@@ -28438,8 +28120,6 @@
         ],
         35: [
           function(require, module, exports) {
-            
-
             const common = require("../common");
             const Type = require("../type");
 
@@ -28460,7 +28140,10 @@
             }
 
             function constructYamlFloat(data) {
-              let value; let sign; let base; let digits;
+              let value;
+              let sign;
+              let base;
+              let digits;
 
               value = data.replace(/_/g, "").toLowerCase();
               sign = value[0] === "-" ? -1 : 1;
@@ -28474,9 +28157,11 @@
                 return sign === 1
                   ? Number.POSITIVE_INFINITY
                   : Number.NEGATIVE_INFINITY;
-              } if (value === ".nan") {
+              }
+              if (value === ".nan") {
                 return NaN;
-              } if (value.indexOf(":") >= 0) {
+              }
+              if (value.indexOf(":") >= 0) {
                 value.split(":").forEach(function(v) {
                   digits.unshift(parseFloat(v, 10));
                 });
@@ -28560,8 +28245,6 @@
         ],
         36: [
           function(require, module, exports) {
-            
-
             const common = require("../common");
             const Type = require("../type");
 
@@ -28585,9 +28268,9 @@
               if (data === null) return false;
 
               const max = data.length;
-                let index = 0;
-                let hasDigits = false;
-                let ch;
+              let index = 0;
+              let hasDigits = false;
+              let ch;
 
               if (!max) return false;
 
@@ -28664,10 +28347,10 @@
 
             function constructYamlInteger(data) {
               let value = data;
-                let sign = 1;
-                let ch;
-                let base;
-                const digits = [];
+              let sign = 1;
+              let ch;
+              let base;
+              const digits = [];
 
               if (value.indexOf("_") !== -1) {
                 value = value.replace(/_/g, "");
@@ -28722,16 +28405,16 @@
               predicate: isInteger,
               represent: {
                 binary(object) {
-                  return `0b${  object.toString(2)}`;
+                  return `0b${object.toString(2)}`;
                 },
                 octal(object) {
-                  return `0${  object.toString(8)}`;
+                  return `0${object.toString(8)}`;
                 },
                 decimal(object) {
                   return object.toString(10);
                 },
                 hexadecimal(object) {
-                  return `0x${  object.toString(16).toUpperCase()}`;
+                  return `0x${object.toString(16).toUpperCase()}`;
                 },
               },
               defaultStyle: "decimal",
@@ -28747,8 +28430,6 @@
         ],
         37: [
           function(require, module, exports) {
-            
-
             let esprima;
 
             // Browserified version does not have esprima
@@ -28773,8 +28454,8 @@
               if (data === null) return false;
 
               try {
-                const source = `(${  data  })`;
-                  const ast = esprima.parse(source, { range: true });
+                const source = `(${data})`;
+                const ast = esprima.parse(source, { range: true });
 
                 if (
                   ast.type !== "Program" ||
@@ -28794,10 +28475,10 @@
             function constructJavascriptFunction(data) {
               /* jslint evil:true */
 
-              const source = `(${  data  })`;
-                const ast = esprima.parse(source, { range: true });
-                const params = [];
-                let body;
+              const source = `(${data})`;
+              const ast = esprima.parse(source, { range: true });
+              const params = [];
+              let body;
 
               if (
                 ast.type !== "Program" ||
@@ -28845,8 +28526,6 @@
         ],
         38: [
           function(require, module, exports) {
-            
-
             const Type = require("../../type");
 
             function resolveJavascriptRegExp(data) {
@@ -28854,8 +28533,8 @@
               if (data.length === 0) return false;
 
               const regexp = data;
-                const tail = /\/([gim]*)$/.exec(data);
-                let modifiers = "";
+              const tail = /\/([gim]*)$/.exec(data);
+              let modifiers = "";
 
               // if regexp starts with '/' it can have modifiers and must be properly closed
               // `/foo/gim` - modifiers tail can be maximum 3 chars
@@ -28873,8 +28552,8 @@
 
             function constructJavascriptRegExp(data) {
               let regexp = data;
-                const tail = /\/([gim]*)$/.exec(data);
-                let modifiers = "";
+              const tail = /\/([gim]*)$/.exec(data);
+              let modifiers = "";
 
               // `/foo/gim` - tail can be maximum 4 chars
               if (regexp[0] === "/") {
@@ -28886,7 +28565,7 @@
             }
 
             function representJavascriptRegExp(object /* , style */) {
-              let result = `/${  object.source  }/`;
+              let result = `/${object.source}/`;
 
               if (object.global) result += "g";
               if (object.multiline) result += "m";
@@ -28913,8 +28592,6 @@
         ],
         39: [
           function(require, module, exports) {
-            
-
             const Type = require("../../type");
 
             function resolveJavascriptUndefined() {
@@ -28946,8 +28623,6 @@
         ],
         40: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             module.exports = new Type("tag:yaml.org,2002:map", {
@@ -28961,8 +28636,6 @@
         ],
         41: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             function resolveYamlMerge(data) {
@@ -28978,8 +28651,6 @@
         ],
         42: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             function resolveYamlNull(data) {
@@ -29028,8 +28699,6 @@
         ],
         43: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             const _hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -29039,12 +28708,12 @@
               if (data === null) return true;
 
               const objectKeys = [];
-                let index;
-                let length;
-                let pair;
-                let pairKey;
-                let pairHasKey;
-                const object = data;
+              let index;
+              let length;
+              let pair;
+              let pairKey;
+              let pairHasKey;
+              const object = data;
 
               for (
                 index = 0, length = object.length;
@@ -29087,8 +28756,6 @@
         ],
         44: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             const _toString = Object.prototype.toString;
@@ -29097,11 +28764,11 @@
               if (data === null) return true;
 
               let index;
-                let length;
-                let pair;
-                let keys;
-                let result;
-                const object = data;
+              let length;
+              let pair;
+              let keys;
+              let result;
+              const object = data;
 
               result = new Array(object.length);
 
@@ -29128,11 +28795,11 @@
               if (data === null) return [];
 
               let index;
-                let length;
-                let pair;
-                let keys;
-                let result;
-                const object = data;
+              let length;
+              let pair;
+              let keys;
+              let result;
+              const object = data;
 
               result = new Array(object.length);
 
@@ -29161,8 +28828,6 @@
         ],
         45: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             module.exports = new Type("tag:yaml.org,2002:seq", {
@@ -29176,8 +28841,6 @@
         ],
         46: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             const _hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -29186,7 +28849,7 @@
               if (data === null) return true;
 
               let key;
-                const object = data;
+              const object = data;
 
               for (key in object) {
                 if (_hasOwnProperty.call(object, key)) {
@@ -29211,8 +28874,6 @@
         ],
         47: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             module.exports = new Type("tag:yaml.org,2002:str", {
@@ -29226,8 +28887,6 @@
         ],
         48: [
           function(require, module, exports) {
-            
-
             const Type = require("../type");
 
             const YAML_DATE_REGEXP = new RegExp(
@@ -29258,17 +28917,17 @@
 
             function constructYamlTimestamp(data) {
               let match;
-                let year;
-                let month;
-                let day;
-                let hour;
-                let minute;
-                let second;
-                let fraction = 0;
-                let delta = null;
-                let tz_hour;
-                let tz_minute;
-                let date;
+              let year;
+              let month;
+              let day;
+              let hour;
+              let minute;
+              let second;
+              let fraction = 0;
+              let delta = null;
+              let tz_hour;
+              let tz_minute;
+              let date;
 
               match = YAML_DATE_REGEXP.exec(data);
               if (match === null) match = YAML_TIMESTAMP_REGEXP.exec(data);
@@ -29336,7 +28995,7 @@
         49: [
           function(require, module, exports) {
             const baseIndexOf = require("../internal/baseIndexOf");
-              const binaryIndex = require("../internal/binaryIndex");
+            const binaryIndex = require("../internal/binaryIndex");
 
             /* Native method references for those with the same name as other `lodash` methods. */
             const nativeMax = Math.max;
@@ -29423,17 +29082,17 @@
         51: [
           function(require, module, exports) {
             const LazyWrapper = require("../internal/LazyWrapper");
-              const LodashWrapper = require("../internal/LodashWrapper");
-              const baseLodash = require("../internal/baseLodash");
-              const isArray = require("../lang/isArray");
-              const isObjectLike = require("../internal/isObjectLike");
-              const wrapperClone = require("../internal/wrapperClone");
+            const LodashWrapper = require("../internal/LodashWrapper");
+            const baseLodash = require("../internal/baseLodash");
+            const isArray = require("../lang/isArray");
+            const isObjectLike = require("../internal/isObjectLike");
+            const wrapperClone = require("../internal/wrapperClone");
 
             /** Used for native method references. */
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * Creates a `lodash` object which wraps `value` to enable implicit chaining.
@@ -29573,7 +29232,7 @@
         53: [
           function(require, module, exports) {
             const baseEach = require("../internal/baseEach");
-              const createFind = require("../internal/createFind");
+            const createFind = require("../internal/createFind");
 
             /**
              * Iterates over elements of `collection`, returning the first element
@@ -29634,8 +29293,8 @@
         54: [
           function(require, module, exports) {
             const arrayEach = require("../internal/arrayEach");
-              const baseEach = require("../internal/baseEach");
-              const createForEach = require("../internal/createForEach");
+            const baseEach = require("../internal/baseEach");
+            const createForEach = require("../internal/createForEach");
 
             /**
              * Iterates over elements of `collection` invoking `iteratee` for each element.
@@ -29680,12 +29339,12 @@
         55: [
           function(require, module, exports) {
             const baseIndexOf = require("../internal/baseIndexOf");
-              const getLength = require("../internal/getLength");
-              const isArray = require("../lang/isArray");
-              const isIterateeCall = require("../internal/isIterateeCall");
-              const isLength = require("../internal/isLength");
-              const isString = require("../lang/isString");
-              const values = require("../object/values");
+            const getLength = require("../internal/getLength");
+            const isArray = require("../lang/isArray");
+            const isIterateeCall = require("../internal/isIterateeCall");
+            const isLength = require("../internal/isLength");
+            const isString = require("../lang/isString");
+            const values = require("../object/values");
 
             /* Native method references for those with the same name as other `lodash` methods. */
             const nativeMax = Math.max;
@@ -29758,9 +29417,9 @@
         56: [
           function(require, module, exports) {
             const arrayMap = require("../internal/arrayMap");
-              const baseCallback = require("../internal/baseCallback");
-              const baseMap = require("../internal/baseMap");
-              const isArray = require("../lang/isArray");
+            const baseCallback = require("../internal/baseCallback");
+            const baseMap = require("../internal/baseMap");
+            const isArray = require("../lang/isArray");
 
             /**
              * Creates an array of values by running each element in `collection` through
@@ -29867,12 +29526,12 @@
         58: [
           function(require, module, exports) {
             const createWrapper = require("../internal/createWrapper");
-              const replaceHolders = require("../internal/replaceHolders");
-              const restParam = require("./restParam");
+            const replaceHolders = require("../internal/replaceHolders");
+            const restParam = require("./restParam");
 
             /** Used to compose bitmasks for wrapper metadata. */
             const BIND_FLAG = 1;
-              const PARTIAL_FLAG = 32;
+            const PARTIAL_FLAG = 32;
 
             /**
              * Creates a function that invokes `func` with the `this` binding of `thisArg`
@@ -29969,9 +29628,9 @@
               );
               return function() {
                 const args = arguments;
-                  let index = -1;
-                  const length = nativeMax(args.length - start, 0);
-                  const rest = Array(length);
+                let index = -1;
+                const length = nativeMax(args.length - start, 0);
+                const rest = Array(length);
 
                 while (++index < length) {
                   rest[index] = args[start + index];
@@ -30001,10 +29660,10 @@
         60: [
           function(require, module, exports) {
             const baseCreate = require("./baseCreate");
-              const baseLodash = require("./baseLodash");
+            const baseLodash = require("./baseLodash");
 
             /** Used as references for `-Infinity` and `Infinity`. */
-            const {POSITIVE_INFINITY} = Number;
+            const { POSITIVE_INFINITY } = Number;
 
             /**
              * Creates a lazy wrapper object which wraps `value` to enable lazy evaluation.
@@ -30032,7 +29691,7 @@
         61: [
           function(require, module, exports) {
             const baseCreate = require("./baseCreate");
-              const baseLodash = require("./baseLodash");
+            const baseLodash = require("./baseLodash");
 
             /**
              * The base constructor for creating `lodash` wrapper objects.
@@ -30067,7 +29726,7 @@
              */
             function arrayCopy(source, array) {
               let index = -1;
-                const {length} = source;
+              const { length } = source;
 
               array || (array = Array(length));
               while (++index < length) {
@@ -30093,7 +29752,7 @@
              */
             function arrayEach(array, iteratee) {
               let index = -1;
-                const {length} = array;
+              const { length } = array;
 
               while (++index < length) {
                 if (iteratee(array[index], index, array) === false) {
@@ -30120,8 +29779,8 @@
              */
             function arrayMap(array, iteratee) {
               let index = -1;
-                const {length} = array;
-                const result = Array(length);
+              const { length } = array;
+              const result = Array(length);
 
               while (++index < length) {
                 result[index] = iteratee(array[index], index, array);
@@ -30147,7 +29806,7 @@
              */
             function arraySome(array, predicate) {
               let index = -1;
-                const {length} = array;
+              const { length } = array;
 
               while (++index < length) {
                 if (predicate(array[index], index, array)) {
@@ -30164,7 +29823,7 @@
         66: [
           function(require, module, exports) {
             const baseCopy = require("./baseCopy");
-              const keys = require("../object/keys");
+            const keys = require("../object/keys");
 
             /**
              * The base implementation of `_.assign` without support for argument juggling,
@@ -30188,10 +29847,10 @@
         67: [
           function(require, module, exports) {
             const baseMatches = require("./baseMatches");
-              const baseMatchesProperty = require("./baseMatchesProperty");
-              const bindCallback = require("./bindCallback");
-              const identity = require("../utility/identity");
-              const property = require("../utility/property");
+            const baseMatchesProperty = require("./baseMatchesProperty");
+            const bindCallback = require("./bindCallback");
+            const identity = require("../utility/identity");
+            const property = require("../utility/property");
 
             /**
              * The base implementation of `_.callback` which supports specifying the
@@ -30234,41 +29893,41 @@
         68: [
           function(require, module, exports) {
             const arrayCopy = require("./arrayCopy");
-              const arrayEach = require("./arrayEach");
-              const baseAssign = require("./baseAssign");
-              const baseForOwn = require("./baseForOwn");
-              const initCloneArray = require("./initCloneArray");
-              const initCloneByTag = require("./initCloneByTag");
-              const initCloneObject = require("./initCloneObject");
-              const isArray = require("../lang/isArray");
-              const isHostObject = require("./isHostObject");
-              const isObject = require("../lang/isObject");
+            const arrayEach = require("./arrayEach");
+            const baseAssign = require("./baseAssign");
+            const baseForOwn = require("./baseForOwn");
+            const initCloneArray = require("./initCloneArray");
+            const initCloneByTag = require("./initCloneByTag");
+            const initCloneObject = require("./initCloneObject");
+            const isArray = require("../lang/isArray");
+            const isHostObject = require("./isHostObject");
+            const isObject = require("../lang/isObject");
 
             /** `Object#toString` result references. */
             const argsTag = "[object Arguments]";
-              const arrayTag = "[object Array]";
-              const boolTag = "[object Boolean]";
-              const dateTag = "[object Date]";
-              const errorTag = "[object Error]";
-              const funcTag = "[object Function]";
-              const mapTag = "[object Map]";
-              const numberTag = "[object Number]";
-              const objectTag = "[object Object]";
-              const regexpTag = "[object RegExp]";
-              const setTag = "[object Set]";
-              const stringTag = "[object String]";
-              const weakMapTag = "[object WeakMap]";
+            const arrayTag = "[object Array]";
+            const boolTag = "[object Boolean]";
+            const dateTag = "[object Date]";
+            const errorTag = "[object Error]";
+            const funcTag = "[object Function]";
+            const mapTag = "[object Map]";
+            const numberTag = "[object Number]";
+            const objectTag = "[object Object]";
+            const regexpTag = "[object RegExp]";
+            const setTag = "[object Set]";
+            const stringTag = "[object String]";
+            const weakMapTag = "[object WeakMap]";
 
             const arrayBufferTag = "[object ArrayBuffer]";
-              const float32Tag = "[object Float32Array]";
-              const float64Tag = "[object Float64Array]";
-              const int8Tag = "[object Int8Array]";
-              const int16Tag = "[object Int16Array]";
-              const int32Tag = "[object Int32Array]";
-              const uint8Tag = "[object Uint8Array]";
-              const uint8ClampedTag = "[object Uint8ClampedArray]";
-              const uint16Tag = "[object Uint16Array]";
-              const uint32Tag = "[object Uint32Array]";
+            const float32Tag = "[object Float32Array]";
+            const float64Tag = "[object Float64Array]";
+            const int8Tag = "[object Int8Array]";
+            const int16Tag = "[object Int16Array]";
+            const int32Tag = "[object Int32Array]";
+            const uint8Tag = "[object Uint8Array]";
+            const uint8ClampedTag = "[object Uint8ClampedArray]";
+            const uint16Tag = "[object Uint16Array]";
+            const uint32Tag = "[object Uint32Array]";
 
             /** Used to identify `toStringTag` values supported by `_.clone`. */
             const cloneableTags = {};
@@ -30343,7 +30002,7 @@
                 }
               } else {
                 const tag = objToString.call(value);
-                  const isFunc = tag == funcTag;
+                const isFunc = tag == funcTag;
 
                 if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
                   if (isHostObject(value)) {
@@ -30365,7 +30024,7 @@
               stackA || (stackA = []);
               stackB || (stackB = []);
 
-              let {length} = stackA;
+              let { length } = stackA;
               while (length--) {
                 if (stackA[length] == value) {
                   return stackB[length];
@@ -30420,7 +30079,7 @@
               object || (object = {});
 
               let index = -1;
-                const {length} = props;
+              const { length } = props;
 
               while (++index < length) {
                 const key = props[index];
@@ -30464,7 +30123,7 @@
         71: [
           function(require, module, exports) {
             const baseForOwn = require("./baseForOwn");
-              const createBaseEach = require("./createBaseEach");
+            const createBaseEach = require("./createBaseEach");
 
             /**
              * The base implementation of `_.forEach` without support for callback
@@ -30524,8 +30183,8 @@
              * @returns {number} Returns the index of the matched value, else `-1`.
              */
             function baseFindIndex(array, predicate, fromRight) {
-              const {length} = array;
-                let index = fromRight ? length : -1;
+              const { length } = array;
+              let index = fromRight ? length : -1;
 
               while (fromRight ? index-- : ++index < length) {
                 if (predicate(array[index], index, array)) {
@@ -30564,7 +30223,7 @@
         75: [
           function(require, module, exports) {
             const baseFor = require("./baseFor");
-              const keysIn = require("../object/keysIn");
+            const keysIn = require("../object/keysIn");
 
             /**
              * The base implementation of `_.forIn` without support for callback
@@ -30586,7 +30245,7 @@
         76: [
           function(require, module, exports) {
             const baseFor = require("./baseFor");
-              const keys = require("../object/keys");
+            const keys = require("../object/keys");
 
             /**
              * The base implementation of `_.forOwn` without support for callback
@@ -30628,7 +30287,7 @@
                 path = [pathKey];
               }
               let index = 0;
-                const {length} = path;
+              const { length } = path;
 
               while (object != null && index < length) {
                 object = toObject(object)[path[index++]];
@@ -30658,7 +30317,7 @@
                 return indexOfNaN(array, fromIndex);
               }
               let index = fromIndex - 1;
-                const {length} = array;
+              const { length } = array;
 
               while (++index < length) {
                 if (array[index] === value) {
@@ -30675,8 +30334,8 @@
         79: [
           function(require, module, exports) {
             const baseIsEqualDeep = require("./baseIsEqualDeep");
-              const isObject = require("../lang/isObject");
-              const isObjectLike = require("./isObjectLike");
+            const isObject = require("../lang/isObject");
+            const isObjectLike = require("./isObjectLike");
 
             /**
              * The base implementation of `_.isEqual` without support for `this` binding
@@ -30731,22 +30390,22 @@
         80: [
           function(require, module, exports) {
             const equalArrays = require("./equalArrays");
-              const equalByTag = require("./equalByTag");
-              const equalObjects = require("./equalObjects");
-              const isArray = require("../lang/isArray");
-              const isHostObject = require("./isHostObject");
-              const isTypedArray = require("../lang/isTypedArray");
+            const equalByTag = require("./equalByTag");
+            const equalObjects = require("./equalObjects");
+            const isArray = require("../lang/isArray");
+            const isHostObject = require("./isHostObject");
+            const isTypedArray = require("../lang/isTypedArray");
 
             /** `Object#toString` result references. */
             const argsTag = "[object Arguments]";
-              const arrayTag = "[object Array]";
-              const objectTag = "[object Object]";
+            const arrayTag = "[object Array]";
+            const objectTag = "[object Object]";
 
             /** Used for native method references. */
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -30779,9 +30438,9 @@
               stackB,
             ) {
               let objIsArr = isArray(object);
-                let othIsArr = isArray(other);
-                let objTag = arrayTag;
-                let othTag = arrayTag;
+              let othIsArr = isArray(other);
+              let objTag = arrayTag;
+              let othTag = arrayTag;
 
               if (!objIsArr) {
                 objTag = objToString.call(object);
@@ -30800,17 +30459,17 @@
                 }
               }
               const objIsObj = objTag == objectTag && !isHostObject(object);
-                const othIsObj = othTag == objectTag && !isHostObject(other);
-                const isSameTag = objTag == othTag;
+              const othIsObj = othTag == objectTag && !isHostObject(other);
+              const isSameTag = objTag == othTag;
 
               if (isSameTag && !(objIsArr || objIsObj)) {
                 return equalByTag(object, other, objTag);
               }
               if (!isLoose) {
                 const objIsWrapped =
-                    objIsObj && hasOwnProperty.call(object, "__wrapped__");
-                  const othIsWrapped =
-                    othIsObj && hasOwnProperty.call(other, "__wrapped__");
+                  objIsObj && hasOwnProperty.call(object, "__wrapped__");
+                const othIsWrapped =
+                  othIsObj && hasOwnProperty.call(other, "__wrapped__");
 
                 if (objIsWrapped || othIsWrapped) {
                   return equalFunc(
@@ -30831,7 +30490,7 @@
               stackA || (stackA = []);
               stackB || (stackB = []);
 
-              let {length} = stackA;
+              let { length } = stackA;
               while (length--) {
                 if (stackA[length] == object) {
                   return stackB[length] == other;
@@ -30871,7 +30530,7 @@
         81: [
           function(require, module, exports) {
             const baseIsEqual = require("./baseIsEqual");
-              const toObject = require("./toObject");
+            const toObject = require("./toObject");
 
             /**
              * The base implementation of `_.isMatch` without support for callback
@@ -30885,8 +30544,8 @@
              */
             function baseIsMatch(object, matchData, customizer) {
               let index = matchData.length;
-                const length = index;
-                const noCustomizer = !customizer;
+              const length = index;
+              const noCustomizer = !customizer;
 
               if (object == null) {
                 return !length;
@@ -30905,8 +30564,8 @@
               while (++index < length) {
                 data = matchData[index];
                 const key = data[0];
-                  const objValue = object[key];
-                  const srcValue = data[1];
+                const objValue = object[key];
+                const srcValue = data[1];
 
                 if (noCustomizer && data[2]) {
                   if (objValue === undefined && !(key in object)) {
@@ -30950,7 +30609,7 @@
         83: [
           function(require, module, exports) {
             const baseEach = require("./baseEach");
-              const isArrayLike = require("./isArrayLike");
+            const isArrayLike = require("./isArrayLike");
 
             /**
              * The base implementation of `_.map` without support for callback shorthands
@@ -30963,9 +30622,9 @@
              */
             function baseMap(collection, iteratee) {
               let index = -1;
-                const result = isArrayLike(collection)
-                  ? Array(collection.length)
-                  : [];
+              const result = isArrayLike(collection)
+                ? Array(collection.length)
+                : [];
 
               baseEach(collection, function(value, key, collection) {
                 result[++index] = iteratee(value, key, collection);
@@ -30980,8 +30639,8 @@
         84: [
           function(require, module, exports) {
             const baseIsMatch = require("./baseIsMatch");
-              const getMatchData = require("./getMatchData");
-              const toObject = require("./toObject");
+            const getMatchData = require("./getMatchData");
+            const toObject = require("./toObject");
 
             /**
              * The base implementation of `_.matches` which does not clone `source`.
@@ -30994,7 +30653,7 @@
               const matchData = getMatchData(source);
               if (matchData.length == 1 && matchData[0][2]) {
                 const key = matchData[0][0];
-                  const value = matchData[0][1];
+                const value = matchData[0][1];
 
                 return function(object) {
                   if (object == null) {
@@ -31019,14 +30678,14 @@
         85: [
           function(require, module, exports) {
             const baseGet = require("./baseGet");
-              const baseIsEqual = require("./baseIsEqual");
-              const baseSlice = require("./baseSlice");
-              const isArray = require("../lang/isArray");
-              const isKey = require("./isKey");
-              const isStrictComparable = require("./isStrictComparable");
-              const last = require("../array/last");
-              const toObject = require("./toObject");
-              const toPath = require("./toPath");
+            const baseIsEqual = require("./baseIsEqual");
+            const baseSlice = require("./baseSlice");
+            const isArray = require("../lang/isArray");
+            const isKey = require("./isKey");
+            const isStrictComparable = require("./isStrictComparable");
+            const last = require("../array/last");
+            const toObject = require("./toObject");
+            const toPath = require("./toPath");
 
             /**
              * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -31038,8 +30697,8 @@
              */
             function baseMatchesProperty(path, srcValue) {
               const isArr = isArray(path);
-                const isCommon = isKey(path) && isStrictComparable(srcValue);
-                const pathKey = `${path  }`;
+              const isCommon = isKey(path) && isStrictComparable(srcValue);
+              const pathKey = `${path}`;
 
               path = toPath(path);
               return function(object) {
@@ -31103,7 +30762,7 @@
         87: [
           function(require, module, exports) {
             const baseGet = require("./baseGet");
-              const toPath = require("./toPath");
+            const toPath = require("./toPath");
 
             /**
              * A specialized version of `baseProperty` which supports deep paths.
@@ -31113,7 +30772,7 @@
              * @returns {Function} Returns the new function.
              */
             function basePropertyDeep(path) {
-              const pathKey = `${path  }`;
+              const pathKey = `${path}`;
               path = toPath(path);
               return function(object) {
                 return baseGet(object, path, pathKey);
@@ -31127,7 +30786,7 @@
         88: [
           function(require, module, exports) {
             const identity = require("../utility/identity");
-              const metaMap = require("./metaMap");
+            const metaMap = require("./metaMap");
 
             /**
              * The base implementation of `setData` without support for hot loop detection.
@@ -31161,7 +30820,7 @@
              */
             function baseSlice(array, start, end) {
               let index = -1;
-                let {length} = array;
+              let { length } = array;
 
               start = start == null ? 0 : +start || 0;
               if (start < 0) {
@@ -31196,7 +30855,7 @@
              * @returns {string} Returns the string.
              */
             function baseToString(value) {
-              return value == null ? "" : `${value  }`;
+              return value == null ? "" : `${value}`;
             }
 
             module.exports = baseToString;
@@ -31217,8 +30876,8 @@
              */
             function baseValues(object, props) {
               let index = -1;
-                const {length} = props;
-                const result = Array(length);
+              const { length } = props;
+              const result = Array(length);
 
               while (++index < length) {
                 result[index] = object[props[index]];
@@ -31233,11 +30892,11 @@
         92: [
           function(require, module, exports) {
             const binaryIndexBy = require("./binaryIndexBy");
-              const identity = require("../utility/identity");
+            const identity = require("../utility/identity");
 
             /** Used as references for the maximum length and index of an array. */
             const MAX_ARRAY_LENGTH = 4294967295;
-              const HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
+            const HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
 
             /**
              * Performs a binary search of `array` to determine the index at which `value`
@@ -31252,7 +30911,7 @@
              */
             function binaryIndex(array, value, retHighest) {
               let low = 0;
-                let high = array ? array.length : low;
+              let high = array ? array.length : low;
 
               if (
                 typeof value === "number" &&
@@ -31261,7 +30920,7 @@
               ) {
                 while (low < high) {
                   const mid = (low + high) >>> 1;
-                    const computed = array[mid];
+                  const computed = array[mid];
 
                   if (
                     (retHighest ? computed <= value : computed < value) &&
@@ -31285,11 +30944,11 @@
           function(require, module, exports) {
             /* Native method references for those with the same name as other `lodash` methods. */
             const nativeFloor = Math.floor;
-              const nativeMin = Math.min;
+            const nativeMin = Math.min;
 
             /** Used as references for the maximum length and index of an array. */
             const MAX_ARRAY_LENGTH = 4294967295;
-              const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
+            const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
 
             /**
              * This function is like `binaryIndex` except that it invokes `iteratee` for
@@ -31308,16 +30967,16 @@
               value = iteratee(value);
 
               let low = 0;
-                let high = array ? array.length : 0;
-                const valIsNaN = value !== value;
-                const valIsNull = value === null;
-                const valIsUndef = value === undefined;
+              let high = array ? array.length : 0;
+              const valIsNaN = value !== value;
+              const valIsNull = value === null;
+              const valIsUndef = value === undefined;
 
               while (low < high) {
                 const mid = nativeFloor((low + high) / 2);
-                  const computed = iteratee(array[mid]);
-                  const isDef = computed !== undefined;
-                  const isReflexive = computed === computed;
+                const computed = iteratee(array[mid]);
+                const isDef = computed !== undefined;
+                const isReflexive = computed === computed;
 
                 if (valIsNaN) {
                   var setLow = isReflexive || retHighest;
@@ -31409,8 +31068,8 @@
           function(require, module, exports) {
             (function(global) {
               /** Native method references. */
-              const {ArrayBuffer} = global;
-                const {Uint8Array} = global;
+              const { ArrayBuffer } = global;
+              const { Uint8Array } = global;
 
               /**
                * Creates a clone of the given array buffer.
@@ -31421,7 +31080,7 @@
                */
               function bufferClone(buffer) {
                 const result = new ArrayBuffer(buffer.byteLength);
-                  const view = new Uint8Array(result);
+                const view = new Uint8Array(result);
 
                 view.set(new Uint8Array(buffer));
                 return result;
@@ -31458,11 +31117,11 @@
              */
             function composeArgs(args, partials, holders) {
               const holdersLength = holders.length;
-                let argsIndex = -1;
-                let argsLength = nativeMax(args.length - holdersLength, 0);
-                let leftIndex = -1;
-                const leftLength = partials.length;
-                const result = Array(leftLength + argsLength);
+              let argsIndex = -1;
+              let argsLength = nativeMax(args.length - holdersLength, 0);
+              let leftIndex = -1;
+              const leftLength = partials.length;
+              const result = Array(leftLength + argsLength);
 
               while (++leftIndex < leftLength) {
                 result[leftIndex] = partials[leftIndex];
@@ -31497,12 +31156,12 @@
              */
             function composeArgsRight(args, partials, holders) {
               let holdersIndex = -1;
-                const holdersLength = holders.length;
-                let argsIndex = -1;
-                const argsLength = nativeMax(args.length - holdersLength, 0);
-                let rightIndex = -1;
-                const rightLength = partials.length;
-                const result = Array(argsLength + rightLength);
+              const holdersLength = holders.length;
+              let argsIndex = -1;
+              const argsLength = nativeMax(args.length - holdersLength, 0);
+              let rightIndex = -1;
+              const rightLength = partials.length;
+              const result = Array(argsLength + rightLength);
 
               while (++argsIndex < argsLength) {
                 result[argsIndex] = args[argsIndex];
@@ -31524,8 +31183,8 @@
         98: [
           function(require, module, exports) {
             const getLength = require("./getLength");
-              const isLength = require("./isLength");
-              const toObject = require("./toObject");
+            const isLength = require("./isLength");
+            const toObject = require("./toObject");
 
             /**
              * Creates a `baseEach` or `baseEachRight` function.
@@ -31542,7 +31201,7 @@
                   return eachFunc(collection, iteratee);
                 }
                 let index = fromRight ? length : -1;
-                  const iterable = toObject(collection);
+                const iterable = toObject(collection);
 
                 while (fromRight ? index-- : ++index < length) {
                   if (iteratee(iterable[index], index, iterable) === false) {
@@ -31571,9 +31230,9 @@
             function createBaseFor(fromRight) {
               return function(object, iteratee, keysFunc) {
                 const iterable = toObject(object);
-                  const props = keysFunc(object);
-                  const {length} = props;
-                  let index = fromRight ? length : -1;
+                const props = keysFunc(object);
+                const { length } = props;
+                let index = fromRight ? length : -1;
 
                 while (fromRight ? index-- : ++index < length) {
                   const key = props[index];
@@ -31633,7 +31292,7 @@
         101: [
           function(require, module, exports) {
             const baseCreate = require("./baseCreate");
-              const isObject = require("../lang/isObject");
+            const isObject = require("../lang/isObject");
 
             /**
              * Creates a function that produces an instance of `Ctor` regardless of
@@ -31689,7 +31348,7 @@
                     );
                 }
                 const thisBinding = baseCreate(Ctor.prototype);
-                  const result = Ctor.apply(thisBinding, args);
+                const result = Ctor.apply(thisBinding, args);
 
                 // Mimic the constructor's `return` behavior.
                 // See https://es5.github.io/#x13.2.2 for more details.
@@ -31704,9 +31363,9 @@
         102: [
           function(require, module, exports) {
             const baseCallback = require("./baseCallback");
-              const baseFind = require("./baseFind");
-              const baseFindIndex = require("./baseFindIndex");
-              const isArray = require("../lang/isArray");
+            const baseFind = require("./baseFind");
+            const baseFindIndex = require("./baseFindIndex");
+            const isArray = require("../lang/isArray");
 
             /**
              * Creates a `_.find` or `_.findLast` function.
@@ -31739,7 +31398,7 @@
         103: [
           function(require, module, exports) {
             const bindCallback = require("./bindCallback");
-              const isArray = require("../lang/isArray");
+            const isArray = require("../lang/isArray");
 
             /**
              * Creates a function for `_.forEach` or `_.forEachRight`.
@@ -31767,23 +31426,23 @@
           function(require, module, exports) {
             (function(global) {
               const arrayCopy = require("./arrayCopy");
-                const composeArgs = require("./composeArgs");
-                const composeArgsRight = require("./composeArgsRight");
-                const createCtorWrapper = require("./createCtorWrapper");
-                const isLaziable = require("./isLaziable");
-                const reorder = require("./reorder");
-                const replaceHolders = require("./replaceHolders");
-                const setData = require("./setData");
+              const composeArgs = require("./composeArgs");
+              const composeArgsRight = require("./composeArgsRight");
+              const createCtorWrapper = require("./createCtorWrapper");
+              const isLaziable = require("./isLaziable");
+              const reorder = require("./reorder");
+              const replaceHolders = require("./replaceHolders");
+              const setData = require("./setData");
 
               /** Used to compose bitmasks for wrapper metadata. */
               const BIND_FLAG = 1;
-                const BIND_KEY_FLAG = 2;
-                const CURRY_BOUND_FLAG = 4;
-                const CURRY_FLAG = 8;
-                const CURRY_RIGHT_FLAG = 16;
-                const PARTIAL_FLAG = 32;
-                const PARTIAL_RIGHT_FLAG = 64;
-                const ARY_FLAG = 128;
+              const BIND_KEY_FLAG = 2;
+              const CURRY_BOUND_FLAG = 4;
+              const CURRY_FLAG = 8;
+              const CURRY_RIGHT_FLAG = 16;
+              const PARTIAL_FLAG = 32;
+              const PARTIAL_RIGHT_FLAG = 64;
+              const ARY_FLAG = 128;
 
               /* Native method references for those with the same name as other `lodash` methods. */
               const nativeMax = Math.max;
@@ -31818,19 +31477,19 @@
                 arity,
               ) {
                 const isAry = bitmask & ARY_FLAG;
-                  const isBind = bitmask & BIND_FLAG;
-                  const isBindKey = bitmask & BIND_KEY_FLAG;
-                  const isCurry = bitmask & CURRY_FLAG;
-                  const isCurryBound = bitmask & CURRY_BOUND_FLAG;
-                  const isCurryRight = bitmask & CURRY_RIGHT_FLAG;
-                  const Ctor = isBindKey ? undefined : createCtorWrapper(func);
+                const isBind = bitmask & BIND_FLAG;
+                const isBindKey = bitmask & BIND_KEY_FLAG;
+                const isCurry = bitmask & CURRY_FLAG;
+                const isCurryBound = bitmask & CURRY_BOUND_FLAG;
+                const isCurryRight = bitmask & CURRY_RIGHT_FLAG;
+                const Ctor = isBindKey ? undefined : createCtorWrapper(func);
 
                 function wrapper() {
                   // Avoid `arguments` object use disqualifying optimizations by
                   // converting it to an array before providing it to other functions.
-                  let {length} = arguments;
-                    let index = length;
-                    let args = Array(length);
+                  let { length } = arguments;
+                  let index = length;
+                  let args = Array(length);
 
                   while (index--) {
                     args[index] = arguments[index];
@@ -31842,17 +31501,17 @@
                     args = composeArgsRight(args, partialsRight, holdersRight);
                   }
                   if (isCurry || isCurryRight) {
-                    const {placeholder} = wrapper;
-                      const argsHolders = replaceHolders(args, placeholder);
+                    const { placeholder } = wrapper;
+                    const argsHolders = replaceHolders(args, placeholder);
 
                     length -= argsHolders.length;
                     if (length < arity) {
                       const newArgPos = argPos ? arrayCopy(argPos) : undefined;
-                        const newArity = nativeMax(arity - length, 0);
-                        const newsHolders = isCurry ? argsHolders : undefined;
-                        const newHoldersRight = isCurry ? undefined : argsHolders;
-                        const newPartials = isCurry ? args : undefined;
-                        const newPartialsRight = isCurry ? undefined : args;
+                      const newArity = nativeMax(arity - length, 0);
+                      const newsHolders = isCurry ? argsHolders : undefined;
+                      const newHoldersRight = isCurry ? undefined : argsHolders;
+                      const newPartials = isCurry ? args : undefined;
+                      const newPartialsRight = isCurry ? undefined : args;
 
                       bitmask |= isCurry ? PARTIAL_FLAG : PARTIAL_RIGHT_FLAG;
                       bitmask &= ~(isCurry ? PARTIAL_RIGHT_FLAG : PARTIAL_FLAG);
@@ -31861,18 +31520,21 @@
                         bitmask &= ~(BIND_FLAG | BIND_KEY_FLAG);
                       }
                       const newData = [
-                          func,
-                          bitmask,
-                          thisArg,
-                          newPartials,
-                          newsHolders,
-                          newPartialsRight,
-                          newHoldersRight,
-                          newArgPos,
-                          ary,
-                          newArity,
-                        ];
-                        const result = createHybridWrapper.apply(undefined, newData);
+                        func,
+                        bitmask,
+                        thisArg,
+                        newPartials,
+                        newsHolders,
+                        newPartialsRight,
+                        newHoldersRight,
+                        newArgPos,
+                        ary,
+                        newArity,
+                      ];
+                      const result = createHybridWrapper.apply(
+                        undefined,
+                        newData,
+                      );
 
                       if (isLaziable(func)) {
                         setData(result, newData);
@@ -31882,7 +31544,7 @@
                     }
                   }
                   const thisBinding = isBind ? thisArg : this;
-                    let fn = isBindKey ? thisBinding[func] : func;
+                  let fn = isBindKey ? thisBinding[func] : func;
 
                   if (argPos) {
                     args = reorder(args, argPos);
@@ -31943,16 +31605,16 @@
                */
               function createPartialWrapper(func, bitmask, thisArg, partials) {
                 const isBind = bitmask & BIND_FLAG;
-                  const Ctor = createCtorWrapper(func);
+                const Ctor = createCtorWrapper(func);
 
                 function wrapper() {
                   // Avoid `arguments` object use disqualifying optimizations by
                   // converting it to an array before providing it `func`.
                   let argsIndex = -1;
-                    let argsLength = arguments.length;
-                    let leftIndex = -1;
-                    const leftLength = partials.length;
-                    const args = Array(leftLength + argsLength);
+                  let argsLength = arguments.length;
+                  let leftIndex = -1;
+                  const leftLength = partials.length;
+                  const args = Array(leftLength + argsLength);
 
                   while (++leftIndex < leftLength) {
                     args[leftIndex] = partials[leftIndex];
@@ -31986,18 +31648,18 @@
         106: [
           function(require, module, exports) {
             const baseSetData = require("./baseSetData");
-              const createBindWrapper = require("./createBindWrapper");
-              const createHybridWrapper = require("./createHybridWrapper");
-              const createPartialWrapper = require("./createPartialWrapper");
-              const getData = require("./getData");
-              const mergeData = require("./mergeData");
-              const setData = require("./setData");
+            const createBindWrapper = require("./createBindWrapper");
+            const createHybridWrapper = require("./createHybridWrapper");
+            const createPartialWrapper = require("./createPartialWrapper");
+            const getData = require("./getData");
+            const mergeData = require("./mergeData");
+            const setData = require("./setData");
 
             /** Used to compose bitmasks for wrapper metadata. */
             const BIND_FLAG = 1;
-              const BIND_KEY_FLAG = 2;
-              const PARTIAL_FLAG = 32;
-              const PARTIAL_RIGHT_FLAG = 64;
+            const BIND_KEY_FLAG = 2;
+            const PARTIAL_FLAG = 32;
+            const PARTIAL_RIGHT_FLAG = 64;
 
             /** Used as the `TypeError` message for "Functions" methods. */
             const FUNC_ERROR_TEXT = "Expected a function";
@@ -32052,23 +31714,23 @@
               length -= holders ? holders.length : 0;
               if (bitmask & PARTIAL_RIGHT_FLAG) {
                 var partialsRight = partials;
-                  var holdersRight = holders;
+                var holdersRight = holders;
 
                 partials = holders = undefined;
               }
               const data = isBindKey ? undefined : getData(func);
-                const newData = [
-                  func,
-                  bitmask,
-                  thisArg,
-                  partials,
-                  holders,
-                  partialsRight,
-                  holdersRight,
-                  argPos,
-                  ary,
-                  arity,
-                ];
+              const newData = [
+                func,
+                bitmask,
+                thisArg,
+                partials,
+                holders,
+                partialsRight,
+                holdersRight,
+                argPos,
+                ary,
+                arity,
+              ];
 
               if (data) {
                 mergeData(newData, data);
@@ -32137,8 +31799,8 @@
               stackB,
             ) {
               let index = -1;
-                const arrLength = array.length;
-                const othLength = other.length;
+              const arrLength = array.length;
+              const othLength = other.length;
 
               if (
                 arrLength != othLength &&
@@ -32149,14 +31811,14 @@
               // Ignore non-index properties.
               while (++index < arrLength) {
                 var arrValue = array[index];
-                  const othValue = other[index];
-                  const result = customizer
-                    ? customizer(
-                        isLoose ? othValue : arrValue,
-                        isLoose ? arrValue : othValue,
-                        index,
-                      )
-                    : undefined;
+                const othValue = other[index];
+                const result = customizer
+                  ? customizer(
+                      isLoose ? othValue : arrValue,
+                      isLoose ? arrValue : othValue,
+                      index,
+                    )
+                  : undefined;
 
                 if (result !== undefined) {
                   if (result) {
@@ -32210,11 +31872,11 @@
           function(require, module, exports) {
             /** `Object#toString` result references. */
             const boolTag = "[object Boolean]";
-              const dateTag = "[object Date]";
-              const errorTag = "[object Error]";
-              const numberTag = "[object Number]";
-              const regexpTag = "[object RegExp]";
-              const stringTag = "[object String]";
+            const dateTag = "[object Date]";
+            const errorTag = "[object Error]";
+            const numberTag = "[object Number]";
+            const regexpTag = "[object RegExp]";
+            const stringTag = "[object String]";
 
             /**
              * A specialized version of `baseIsEqualDeep` for comparing objects of
@@ -32250,7 +31912,7 @@
                 case stringTag:
                   // Coerce regexes to strings and treat strings primitives and string
                   // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
-                  return object == `${other  }`;
+                  return object == `${other}`;
               }
               return false;
             }
@@ -32267,7 +31929,7 @@
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * A specialized version of `baseIsEqualDeep` for objects with support for
@@ -32293,9 +31955,9 @@
               stackB,
             ) {
               const objProps = keys(object);
-                const objLength = objProps.length;
-                const othProps = keys(other);
-                const othLength = othProps.length;
+              const objLength = objProps.length;
+              const othProps = keys(other);
+              const othLength = othProps.length;
 
               if (objLength != othLength && !isLoose) {
                 return false;
@@ -32313,14 +31975,14 @@
               while (++index < objLength) {
                 key = objProps[index];
                 const objValue = object[key];
-                  const othValue = other[key];
-                  const result = customizer
-                    ? customizer(
-                        isLoose ? othValue : objValue,
-                        isLoose ? objValue : othValue,
-                        key,
-                      )
-                    : undefined;
+                const othValue = other[key];
+                const result = customizer
+                  ? customizer(
+                      isLoose ? othValue : objValue,
+                      isLoose ? objValue : othValue,
+                      key,
+                    )
+                  : undefined;
 
                 // Recursively compare objects (susceptible to call stack limits).
                 if (
@@ -32341,7 +32003,7 @@
               }
               if (!skipCtor) {
                 const objCtor = object.constructor;
-                  const othCtor = other.constructor;
+                const othCtor = other.constructor;
 
                 // Non `Object` object instances with different constructors are not equal.
                 if (
@@ -32367,7 +32029,7 @@
         110: [
           function(require, module, exports) {
             const metaMap = require("./metaMap");
-              const noop = require("../utility/noop");
+            const noop = require("../utility/noop");
 
             /**
              * Gets metadata for `func`.
@@ -32398,13 +32060,13 @@
              * @returns {string} Returns the function name.
              */
             function getFuncName(func) {
-              const result = `${func.name  }`;
-                const array = realNames[result];
-                let length = array ? array.length : 0;
+              const result = `${func.name}`;
+              const array = realNames[result];
+              let length = array ? array.length : 0;
 
               while (length--) {
                 const data = array[length];
-                  const otherFunc = data.func;
+                const otherFunc = data.func;
                 if (otherFunc == null || otherFunc == func) {
                   return data.name;
                 }
@@ -32439,7 +32101,7 @@
         113: [
           function(require, module, exports) {
             const isStrictComparable = require("./isStrictComparable");
-              const pairs = require("../object/pairs");
+            const pairs = require("../object/pairs");
 
             /**
              * Gets the propery names, values, and compare flags of `object`.
@@ -32450,7 +32112,7 @@
              */
             function getMatchData(object) {
               const result = pairs(object);
-                let {length} = result;
+              let { length } = result;
 
               while (length--) {
                 result[length][2] = isStrictComparable(result[length][1]);
@@ -32495,8 +32157,8 @@
              * @returns {number} Returns the index of the matched `NaN`, else `-1`.
              */
             function indexOfNaN(array, fromIndex, fromRight) {
-              const {length} = array;
-                let index = fromIndex + (fromRight ? 0 : -1);
+              const { length } = array;
+              let index = fromIndex + (fromRight ? 0 : -1);
 
               while (fromRight ? index-- : ++index < length) {
                 const other = array[index];
@@ -32517,7 +32179,7 @@
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * Initializes an array clone.
@@ -32527,8 +32189,8 @@
              * @returns {Array} Returns the initialized clone.
              */
             function initCloneArray(array) {
-              const {length} = array;
-                const result = new array.constructor(length);
+              const { length } = array;
+              const result = new array.constructor(length);
 
               // Add array properties assigned by `RegExp#exec`.
               if (
@@ -32553,27 +32215,27 @@
 
               /** `Object#toString` result references. */
               const boolTag = "[object Boolean]";
-                const dateTag = "[object Date]";
-                const numberTag = "[object Number]";
-                const regexpTag = "[object RegExp]";
-                const stringTag = "[object String]";
+              const dateTag = "[object Date]";
+              const numberTag = "[object Number]";
+              const regexpTag = "[object RegExp]";
+              const stringTag = "[object String]";
 
               const arrayBufferTag = "[object ArrayBuffer]";
-                const float32Tag = "[object Float32Array]";
-                const float64Tag = "[object Float64Array]";
-                const int8Tag = "[object Int8Array]";
-                const int16Tag = "[object Int16Array]";
-                const int32Tag = "[object Int32Array]";
-                const uint8Tag = "[object Uint8Array]";
-                const uint8ClampedTag = "[object Uint8ClampedArray]";
-                const uint16Tag = "[object Uint16Array]";
-                const uint32Tag = "[object Uint32Array]";
+              const float32Tag = "[object Float32Array]";
+              const float64Tag = "[object Float64Array]";
+              const int8Tag = "[object Int8Array]";
+              const int16Tag = "[object Int16Array]";
+              const int32Tag = "[object Int32Array]";
+              const uint8Tag = "[object Uint8Array]";
+              const uint8ClampedTag = "[object Uint8ClampedArray]";
+              const uint16Tag = "[object Uint16Array]";
+              const uint32Tag = "[object Uint32Array]";
 
               /** Used to match `RegExp` flags from their coerced string values. */
               const reFlags = /\w*$/;
 
               /** Native method references. */
-              const {Uint8Array} = global;
+              const { Uint8Array } = global;
 
               /** Used to lookup a type array constructors by `toStringTag`. */
               const ctorByTag = {};
@@ -32622,7 +32284,7 @@
                     if (Ctor instanceof Ctor) {
                       Ctor = ctorByTag[tag];
                     }
-                    var {buffer} = object;
+                    var { buffer } = object;
                     return new Ctor(
                       isDeep ? bufferClone(buffer) : buffer,
                       object.byteOffset,
@@ -32678,7 +32340,7 @@
         119: [
           function(require, module, exports) {
             const getLength = require("./getLength");
-              const isLength = require("./isLength");
+            const isLength = require("./isLength");
 
             /**
              * Checks if `value` is array-like.
@@ -32706,7 +32368,7 @@
              */
             const isHostObject = (function() {
               try {
-                Object(`${{ toString: 0 }  }`);
+                Object(`${{ toString: 0 }}`);
               } catch (e) {
                 return function() {
                   return false;
@@ -32717,7 +32379,7 @@
                 // to strings despite having improperly defined `toString` methods.
                 return (
                   typeof value.toString !== "function" &&
-                  typeof (`${value  }`) === "string"
+                  typeof `${value}` === "string"
                 );
               };
             })();
@@ -32759,8 +32421,8 @@
         122: [
           function(require, module, exports) {
             const isArrayLike = require("./isArrayLike");
-              const isIndex = require("./isIndex");
-              const isObject = require("../lang/isObject");
+            const isIndex = require("./isIndex");
+            const isObject = require("../lang/isObject");
 
             /**
              * Checks if the provided arguments are from an iteratee call.
@@ -32794,11 +32456,11 @@
         123: [
           function(require, module, exports) {
             const isArray = require("../lang/isArray");
-              const toObject = require("./toObject");
+            const toObject = require("./toObject");
 
             /** Used to match property names within property paths. */
             const reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/;
-              const reIsPlainProp = /^\w*$/;
+            const reIsPlainProp = /^\w*$/;
 
             /**
              * Checks if `value` is a property name and not a property path.
@@ -32830,9 +32492,9 @@
         124: [
           function(require, module, exports) {
             const LazyWrapper = require("./LazyWrapper");
-              const getData = require("./getData");
-              const getFuncName = require("./getFuncName");
-              const lodash = require("../chain/lodash");
+            const getData = require("./getData");
+            const getFuncName = require("./getFuncName");
+            const lodash = require("../chain/lodash");
 
             /**
              * Checks if `func` has a lazy counterpart.
@@ -32843,7 +32505,7 @@
              */
             function isLaziable(func) {
               const funcName = getFuncName(func);
-                const other = lodash[funcName];
+              const other = lodash[funcName];
 
               if (
                 typeof other !== "function" ||
@@ -32937,16 +32599,16 @@
         128: [
           function(require, module, exports) {
             const arrayCopy = require("./arrayCopy");
-              const composeArgs = require("./composeArgs");
-              const composeArgsRight = require("./composeArgsRight");
-              const replaceHolders = require("./replaceHolders");
+            const composeArgs = require("./composeArgs");
+            const composeArgsRight = require("./composeArgsRight");
+            const replaceHolders = require("./replaceHolders");
 
             /** Used to compose bitmasks for wrapper metadata. */
             const BIND_FLAG = 1;
-              const CURRY_BOUND_FLAG = 4;
-              const CURRY_FLAG = 8;
-              const ARY_FLAG = 128;
-              const REARG_FLAG = 256;
+            const CURRY_BOUND_FLAG = 4;
+            const CURRY_FLAG = 8;
+            const ARY_FLAG = 128;
+            const REARG_FLAG = 256;
 
             /** Used as the internal argument placeholder. */
             const PLACEHOLDER = "__lodash_placeholder__";
@@ -32971,9 +32633,9 @@
              */
             function mergeData(data, source) {
               const bitmask = data[1];
-                const srcBitmask = source[1];
-                let newBitmask = bitmask | srcBitmask;
-                const isCommon = newBitmask < ARY_FLAG;
+              const srcBitmask = source[1];
+              let newBitmask = bitmask | srcBitmask;
+              const isCommon = newBitmask < ARY_FLAG;
 
               const isCombo =
                 (srcBitmask == ARY_FLAG && bitmask == CURRY_FLAG) ||
@@ -33082,7 +32744,7 @@
         131: [
           function(require, module, exports) {
             const arrayCopy = require("./arrayCopy");
-              const isIndex = require("./isIndex");
+            const isIndex = require("./isIndex");
 
             /* Native method references for those with the same name as other `lodash` methods. */
             const nativeMin = Math.min;
@@ -33099,8 +32761,8 @@
              */
             function reorder(array, indexes) {
               const arrLength = array.length;
-                let length = nativeMin(indexes.length, arrLength);
-                const oldArray = arrayCopy(array);
+              let length = nativeMin(indexes.length, arrLength);
+              const oldArray = arrayCopy(array);
 
               while (length--) {
                 const index = indexes[length];
@@ -33131,9 +32793,9 @@
              */
             function replaceHolders(array, placeholder) {
               let index = -1;
-                const {length} = array;
-                let resIndex = -1;
-                const result = [];
+              const { length } = array;
+              let resIndex = -1;
+              const result = [];
 
               while (++index < length) {
                 if (array[index] === placeholder) {
@@ -33151,11 +32813,11 @@
         133: [
           function(require, module, exports) {
             const baseSetData = require("./baseSetData");
-              const now = require("../date/now");
+            const now = require("../date/now");
 
             /** Used to detect when a function becomes hot. */
             const HOT_COUNT = 150;
-              const HOT_SPAN = 16;
+            const HOT_SPAN = 16;
 
             /**
              * Sets metadata for `func`.
@@ -33172,11 +32834,11 @@
              */
             const setData = (function() {
               let count = 0;
-                let lastCalled = 0;
+              let lastCalled = 0;
 
               return function(key, value) {
                 const stamp = now();
-                  const remaining = HOT_SPAN - (stamp - lastCalled);
+                const remaining = HOT_SPAN - (stamp - lastCalled);
 
                 lastCalled = stamp;
                 if (remaining > 0) {
@@ -33197,17 +32859,17 @@
         134: [
           function(require, module, exports) {
             const isArguments = require("../lang/isArguments");
-              const isArray = require("../lang/isArray");
-              const isIndex = require("./isIndex");
-              const isLength = require("./isLength");
-              const isString = require("../lang/isString");
-              const keysIn = require("../object/keysIn");
+            const isArray = require("../lang/isArray");
+            const isIndex = require("./isIndex");
+            const isLength = require("./isLength");
+            const isString = require("../lang/isString");
+            const keysIn = require("../object/keysIn");
 
             /** Used for native method references. */
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * A fallback implementation of `Object.keys` which creates an array of the
@@ -33219,8 +32881,8 @@
              */
             function shimKeys(object) {
               const props = keysIn(object);
-                const propsLength = props.length;
-                const length = propsLength && object.length;
+              const propsLength = props.length;
+              const length = propsLength && object.length;
 
               const allowIndexes =
                 !!length &&
@@ -33228,7 +32890,7 @@
                 (isArray(object) || isArguments(object) || isString(object));
 
               let index = -1;
-                const result = [];
+              const result = [];
 
               while (++index < propsLength) {
                 const key = props[index];
@@ -33256,8 +32918,8 @@
         135: [
           function(require, module, exports) {
             const isObject = require("../lang/isObject");
-              const isString = require("../lang/isString");
-              const support = require("../support");
+            const isString = require("../lang/isString");
+            const support = require("../support");
 
             /**
              * Converts `value` to an object if it's not one.
@@ -33269,8 +32931,8 @@
             function toObject(value) {
               if (support.unindexedChars && isString(value)) {
                 let index = -1;
-                  const {length} = value;
-                  const result = Object(value);
+                const { length } = value;
+                const result = Object(value);
 
                 while (++index < length) {
                   result[index] = value.charAt(index);
@@ -33291,7 +32953,7 @@
         136: [
           function(require, module, exports) {
             const baseToString = require("./baseToString");
-              const isArray = require("../lang/isArray");
+            const isArray = require("../lang/isArray");
 
             /** Used to match property names within property paths. */
             const rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -33331,8 +32993,8 @@
         137: [
           function(require, module, exports) {
             const LazyWrapper = require("./LazyWrapper");
-              const LodashWrapper = require("./LodashWrapper");
-              const arrayCopy = require("./arrayCopy");
+            const LodashWrapper = require("./LodashWrapper");
+            const arrayCopy = require("./arrayCopy");
 
             /**
              * Creates a clone of `wrapper`.
@@ -33358,7 +33020,7 @@
         138: [
           function(require, module, exports) {
             const baseClone = require("../internal/baseClone");
-              const bindCallback = require("../internal/bindCallback");
+            const bindCallback = require("../internal/bindCallback");
 
             /**
              * Creates a deep clone of `value`. If `customizer` is provided it's invoked
@@ -33418,16 +33080,16 @@
         139: [
           function(require, module, exports) {
             const isArrayLike = require("../internal/isArrayLike");
-              const isObjectLike = require("../internal/isObjectLike");
+            const isObjectLike = require("../internal/isObjectLike");
 
             /** Used for native method references. */
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /** Native method references. */
-            const {propertyIsEnumerable} = objectProto;
+            const { propertyIsEnumerable } = objectProto;
 
             /**
              * Checks if `value` is classified as an `arguments` object.
@@ -33461,8 +33123,8 @@
         140: [
           function(require, module, exports) {
             const getNative = require("../internal/getNative");
-              const isLength = require("../internal/isLength");
-              const isObjectLike = require("../internal/isObjectLike");
+            const isLength = require("../internal/isLength");
+            const isObjectLike = require("../internal/isObjectLike");
 
             /** `Object#toString` result references. */
             const arrayTag = "[object Array]";
@@ -33516,12 +33178,12 @@
         141: [
           function(require, module, exports) {
             const isArguments = require("./isArguments");
-              const isArray = require("./isArray");
-              const isArrayLike = require("../internal/isArrayLike");
-              const isFunction = require("./isFunction");
-              const isObjectLike = require("../internal/isObjectLike");
-              const isString = require("./isString");
-              const keys = require("../object/keys");
+            const isArray = require("./isArray");
+            const isArrayLike = require("../internal/isArrayLike");
+            const isFunction = require("./isFunction");
+            const isObjectLike = require("../internal/isObjectLike");
+            const isString = require("./isString");
+            const keys = require("../object/keys");
 
             /**
              * Checks if `value` is empty. A value is considered empty unless it's an
@@ -33624,8 +33286,8 @@
         143: [
           function(require, module, exports) {
             const isFunction = require("./isFunction");
-              const isHostObject = require("../internal/isHostObject");
-              const isObjectLike = require("../internal/isObjectLike");
+            const isHostObject = require("../internal/isHostObject");
+            const isObjectLike = require("../internal/isObjectLike");
 
             /** Used to detect host constructors (Safari > 5). */
             const reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -33637,19 +33299,17 @@
             const fnToString = Function.prototype.toString;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /** Used to detect if a method is native. */
             const reIsNative = RegExp(
-              `^${ 
-                fnToString
-                  .call(hasOwnProperty)
-                  .replace(/[\\^$.*+?()[\]{}|]/g, "\\$&")
-                  .replace(
-                    /hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
-                    "$1.*?",
-                  ) 
-                }$`,
+              `^${fnToString
+                .call(hasOwnProperty)
+                .replace(/[\\^$.*+?()[\]{}|]/g, "\\$&")
+                .replace(
+                  /hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
+                  "$1.*?",
+                )}$`,
             );
 
             /**
@@ -33725,10 +33385,10 @@
         145: [
           function(require, module, exports) {
             const baseForIn = require("../internal/baseForIn");
-              const isArguments = require("./isArguments");
-              const isHostObject = require("../internal/isHostObject");
-              const isObjectLike = require("../internal/isObjectLike");
-              const support = require("../support");
+            const isArguments = require("./isArguments");
+            const isHostObject = require("../internal/isHostObject");
+            const isObjectLike = require("../internal/isObjectLike");
+            const support = require("../support");
 
             /** `Object#toString` result references. */
             const objectTag = "[object Object]";
@@ -33737,7 +33397,7 @@
             const objectProto = Object.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -33868,33 +33528,33 @@
         147: [
           function(require, module, exports) {
             const isLength = require("../internal/isLength");
-              const isObjectLike = require("../internal/isObjectLike");
+            const isObjectLike = require("../internal/isObjectLike");
 
             /** `Object#toString` result references. */
             const argsTag = "[object Arguments]";
-              const arrayTag = "[object Array]";
-              const boolTag = "[object Boolean]";
-              const dateTag = "[object Date]";
-              const errorTag = "[object Error]";
-              const funcTag = "[object Function]";
-              const mapTag = "[object Map]";
-              const numberTag = "[object Number]";
-              const objectTag = "[object Object]";
-              const regexpTag = "[object RegExp]";
-              const setTag = "[object Set]";
-              const stringTag = "[object String]";
-              const weakMapTag = "[object WeakMap]";
+            const arrayTag = "[object Array]";
+            const boolTag = "[object Boolean]";
+            const dateTag = "[object Date]";
+            const errorTag = "[object Error]";
+            const funcTag = "[object Function]";
+            const mapTag = "[object Map]";
+            const numberTag = "[object Number]";
+            const objectTag = "[object Object]";
+            const regexpTag = "[object RegExp]";
+            const setTag = "[object Set]";
+            const stringTag = "[object String]";
+            const weakMapTag = "[object WeakMap]";
 
             const arrayBufferTag = "[object ArrayBuffer]";
-              const float32Tag = "[object Float32Array]";
-              const float64Tag = "[object Float64Array]";
-              const int8Tag = "[object Int8Array]";
-              const int16Tag = "[object Int16Array]";
-              const int32Tag = "[object Int32Array]";
-              const uint8Tag = "[object Uint8Array]";
-              const uint8ClampedTag = "[object Uint8ClampedArray]";
-              const uint16Tag = "[object Uint16Array]";
-              const uint32Tag = "[object Uint32Array]";
+            const float32Tag = "[object Float32Array]";
+            const float64Tag = "[object Float64Array]";
+            const int8Tag = "[object Int8Array]";
+            const int16Tag = "[object Int16Array]";
+            const int32Tag = "[object Int32Array]";
+            const uint8Tag = "[object Uint8Array]";
+            const uint8ClampedTag = "[object Uint8ClampedArray]";
+            const uint16Tag = "[object Uint16Array]";
+            const uint32Tag = "[object Uint32Array]";
 
             /** Used to identify `toStringTag` values of typed arrays. */
             const typedArrayTags = {};
@@ -33987,10 +33647,10 @@
         149: [
           function(require, module, exports) {
             const getNative = require("../internal/getNative");
-              const isArrayLike = require("../internal/isArrayLike");
-              const isObject = require("../lang/isObject");
-              const shimKeys = require("../internal/shimKeys");
-              const support = require("../support");
+            const isArrayLike = require("../internal/isArrayLike");
+            const isObject = require("../lang/isObject");
+            const shimKeys = require("../internal/shimKeys");
+            const support = require("../support");
 
             /* Native method references for those with the same name as other `lodash` methods. */
             const nativeKeys = getNative(Object, "keys");
@@ -34050,25 +33710,25 @@
         150: [
           function(require, module, exports) {
             const arrayEach = require("../internal/arrayEach");
-              const isArguments = require("../lang/isArguments");
-              const isArray = require("../lang/isArray");
-              const isFunction = require("../lang/isFunction");
-              const isIndex = require("../internal/isIndex");
-              const isLength = require("../internal/isLength");
-              const isObject = require("../lang/isObject");
-              const isString = require("../lang/isString");
-              const support = require("../support");
+            const isArguments = require("../lang/isArguments");
+            const isArray = require("../lang/isArray");
+            const isFunction = require("../lang/isFunction");
+            const isIndex = require("../internal/isIndex");
+            const isLength = require("../internal/isLength");
+            const isObject = require("../lang/isObject");
+            const isString = require("../lang/isString");
+            const support = require("../support");
 
             /** `Object#toString` result references. */
             const arrayTag = "[object Array]";
-              const boolTag = "[object Boolean]";
-              const dateTag = "[object Date]";
-              const errorTag = "[object Error]";
-              const funcTag = "[object Function]";
-              const numberTag = "[object Number]";
-              const objectTag = "[object Object]";
-              const regexpTag = "[object RegExp]";
-              const stringTag = "[object String]";
+            const boolTag = "[object Boolean]";
+            const dateTag = "[object Date]";
+            const errorTag = "[object Error]";
+            const funcTag = "[object Function]";
+            const numberTag = "[object Number]";
+            const objectTag = "[object Object]";
+            const regexpTag = "[object RegExp]";
+            const stringTag = "[object String]";
 
             /** Used to fix the JScript `[[DontEnum]]` bug. */
             const shadowProps = [
@@ -34083,11 +33743,11 @@
 
             /** Used for native method references. */
             const errorProto = Error.prototype;
-              const objectProto = Object.prototype;
-              const stringProto = String.prototype;
+            const objectProto = Object.prototype;
+            const stringProto = String.prototype;
 
             /** Used to check objects for own properties. */
-            const {hasOwnProperty} = objectProto;
+            const { hasOwnProperty } = objectProto;
 
             /**
              * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -34153,7 +33813,7 @@
               if (!isObject(object)) {
                 object = Object(object);
               }
-              let {length} = object;
+              let { length } = object;
 
               length =
                 (length &&
@@ -34165,18 +33825,18 @@
                 0;
 
               const Ctor = object.constructor;
-                let index = -1;
-                let proto = (isFunction(Ctor) && Ctor.prototype) || objectProto;
-                const isProto = proto === object;
-                const result = Array(length);
-                const skipIndexes = length > 0;
-                const skipErrorProps =
-                  support.enumErrorProps &&
-                  (object === errorProto || object instanceof Error);
-                const skipProto = support.enumPrototypes && isFunction(object);
+              let index = -1;
+              let proto = (isFunction(Ctor) && Ctor.prototype) || objectProto;
+              const isProto = proto === object;
+              const result = Array(length);
+              const skipIndexes = length > 0;
+              const skipErrorProps =
+                support.enumErrorProps &&
+                (object === errorProto || object instanceof Error);
+              const skipProto = support.enumPrototypes && isFunction(object);
 
               while (++index < length) {
-                result[index] = `${index  }`;
+                result[index] = `${index}`;
               }
               // lodash skips the `constructor` property when it infers it's iterating
               // over a `prototype` object because IE < 9 can't set the `[[Enumerable]]`
@@ -34197,12 +33857,12 @@
               }
               if (support.nonEnumShadows && object !== objectProto) {
                 const tag =
-                    object === stringProto
-                      ? stringTag
-                      : object === errorProto
-                      ? errorTag
-                      : objToString.call(object);
-                  const nonEnums = nonEnumProps[tag] || nonEnumProps[objectTag];
+                  object === stringProto
+                    ? stringTag
+                    : object === errorProto
+                    ? errorTag
+                    : objToString.call(object);
+                const nonEnums = nonEnumProps[tag] || nonEnumProps[objectTag];
 
                 if (tag == objectTag) {
                   proto = objectProto;
@@ -34241,7 +33901,7 @@
         151: [
           function(require, module, exports) {
             const keys = require("./keys");
-              const toObject = require("../internal/toObject");
+            const toObject = require("../internal/toObject");
 
             /**
              * Creates a two dimensional array of the key-value pairs for `object`,
@@ -34261,9 +33921,9 @@
               object = toObject(object);
 
               let index = -1;
-                const props = keys(object);
-                const {length} = props;
-                const result = Array(length);
+              const props = keys(object);
+              const { length } = props;
+              const result = Array(length);
 
               while (++index < length) {
                 const key = props[index];
@@ -34279,7 +33939,7 @@
         152: [
           function(require, module, exports) {
             const baseValues = require("../internal/baseValues");
-              const keys = require("./keys");
+            const keys = require("./keys");
 
             /**
              * Creates an array of the own enumerable property values of `object`.
@@ -34318,12 +33978,12 @@
           function(require, module, exports) {
             /** Used for native method references. */
             const arrayProto = Array.prototype;
-              const errorProto = Error.prototype;
-              const objectProto = Object.prototype;
+            const errorProto = Error.prototype;
+            const objectProto = Object.prototype;
 
             /** Native method references. */
-            const {propertyIsEnumerable} = objectProto;
-              const {splice} = arrayProto;
+            const { propertyIsEnumerable } = objectProto;
+            const { splice } = arrayProto;
 
             /**
              * An object environment feature flags.
@@ -34336,10 +33996,10 @@
 
             (function(x) {
               const Ctor = function() {
-                  this.x = x;
-                };
-                const object = { "0": x, length: x };
-                const props = [];
+                this.x = x;
+              };
+              const object = { "0": x, length: x };
+              const props = [];
 
               Ctor.prototype = { valueOf: x, y: x };
               for (const key in new Ctor()) {
@@ -34475,8 +34135,8 @@
         156: [
           function(require, module, exports) {
             const baseProperty = require("../internal/baseProperty");
-              const basePropertyDeep = require("../internal/basePropertyDeep");
-              const isKey = require("../internal/isKey");
+            const basePropertyDeep = require("../internal/basePropertyDeep");
+            const isKey = require("../internal/isKey");
 
             /**
              * Creates a function that returns the property value at `path` on a
@@ -34544,8 +34204,6 @@
                */
 
               (function(definition) {
-                
-
                 // This file will function properly as a <script> tag, or a module
                 // using CommonJS and NodeJS or RequireJS module formats.  In
                 // Common/Node/RequireJS, the module exports the Q API and when
@@ -34569,7 +34227,6 @@
                   // SES (Secure EcmaScript)
                 } else if (typeof ses !== "undefined") {
                   if (!ses.ok()) {
-                    
                   } else {
                     ses.makeQ = definition;
                   }
@@ -34600,8 +34257,6 @@
                   );
                 }
               })(function() {
-                
-
                 let hasStacks = false;
                 try {
                   throw new Error();
@@ -34633,7 +34288,8 @@
 
                   function flush() {
                     /* jshint loopfunc: true */
-                    let task; let domain;
+                    let task;
+                    let domain;
 
                     while (head.next) {
                       head = head.next;
@@ -34777,7 +34433,7 @@
                 // the minified code by reducing x.call() to merely x()
                 // See Mark Miller’s explanation of what this does.
                 // http://wiki.ecmascript.org/doku.php?id=conventions:safe_meta_programming
-                const {call} = Function;
+                const { call } = Function;
                 function uncurryThis(f) {
                   return function() {
                     return call.apply(f, arguments);
@@ -34793,7 +34449,7 @@
                   Array.prototype.reduce ||
                     function(callback, basis) {
                       let index = 0;
-                        const {length} = this;
+                      const { length } = this;
                       // concerning the initial value, if one is not provided
                       if (arguments.length === 1) {
                         // seek to the first value in the array, accounting
@@ -34925,7 +34581,7 @@
                     stacks.unshift(error.stack);
 
                     const concatedStacks = stacks.join(
-                      `\n${  STACK_JUMP_SEPARATOR  }\n`,
+                      `\n${STACK_JUMP_SEPARATOR}\n`,
                     );
                     error.stack = filterStackString(concatedStacks);
                   }
@@ -35025,10 +34681,7 @@
                       typeof console.warn === "function"
                     ) {
                       console.warn(
-                        `${name 
-                          } is deprecated, use ${ 
-                          alternative 
-                          } instead.`,
+                        `${name} is deprecated, use ${alternative} instead.`,
                         new Error("").stack,
                       );
                     }
@@ -35055,9 +34708,8 @@
                   // assimilate thenables
                   if (isPromiseAlike(value)) {
                     return coerce(value);
-                  } 
-                    return fulfill(value);
-                  
+                  }
+                  return fulfill(value);
                 }
                 Q.resolve = Q;
 
@@ -35101,8 +34753,8 @@
                   // promise using the `resolve` function because it handles both fully
                   // non-thenable values and other thenables gracefully.
                   let messages = [];
-                    let progressListeners = [];
-                    let resolvedPromise;
+                  let progressListeners = [];
+                  let resolvedPromise;
 
                   const deferred = object_create(defer.prototype);
                   const promise = object_create(Promise.prototype);
@@ -35305,11 +34957,8 @@
                     if (x === y) {
                       // TODO: "===" should be Object.is or equiv
                       return x;
-                    } 
-                      throw new Error(
-                        `Can't join: not the same: ${  x  } ${  y}`,
-                      );
-                    
+                    }
+                    throw new Error(`Can't join: not the same: ${x} ${y}`);
                   });
                 };
 
@@ -35352,7 +35001,7 @@
                   if (fallback === void 0) {
                     fallback = function(op) {
                       return reject(
-                        new Error(`Promise does not support operation: ${  op}`),
+                        new Error(`Promise does not support operation: ${op}`),
                       );
                     };
                   }
@@ -35681,7 +35330,7 @@
                   if (reason && typeof reason.stack !== "undefined") {
                     unhandledReasons.push(reason.stack);
                   } else {
-                    unhandledReasons.push(`(no stack) ${  reason}`);
+                    unhandledReasons.push(`(no stack) ${reason}`);
                   }
                 }
 
@@ -35787,9 +35436,8 @@
                         // promised function.
                         if (name === null || name === void 0) {
                           return value.apply(void 0, args);
-                        } 
-                          return value[name].apply(value, args);
-                        
+                        }
+                        return value[name].apply(value, args);
                       },
                       apply(thisp, args) {
                         return value.apply(thisp, args);
@@ -35922,23 +35570,20 @@
                         }
                         if (result.done) {
                           return Q(result.value);
-                        } 
-                          return when(result.value, callback, errback);
-                        
-                      } 
-                        // SpiderMonkey Generators
-                        // FIXME: Remove this case when SM does ES6 generators.
-                        try {
-                          result = generator[verb](arg);
-                        } catch (exception) {
-                          if (isStopIteration(exception)) {
-                            return Q(exception.value);
-                          } 
-                            return reject(exception);
-                          
                         }
-                        return when(result, callback, errback);
-                      
+                        return when(result.value, callback, errback);
+                      }
+                      // SpiderMonkey Generators
+                      // FIXME: Remove this case when SM does ES6 generators.
+                      try {
+                        result = generator[verb](arg);
+                      } catch (exception) {
+                        if (isStopIteration(exception)) {
+                          return Q(exception.value);
+                        }
+                        return reject(exception);
+                      }
+                      return when(result, callback, errback);
                     }
                     var generator = makeGenerator.apply(this, arguments);
                     var callback = continuer.bind(continuer, "next");
@@ -36518,9 +36163,7 @@
                   const deferred = defer();
                   const timeoutId = setTimeout(function() {
                     if (!error || typeof error === "string") {
-                      error = new Error(
-                        error || `Timed out after ${  ms  } ms`,
-                      );
+                      error = new Error(error || `Timed out after ${ms} ms`);
                       error.code = "ETIMEDOUT";
                     }
                     deferred.reject(error);
@@ -36822,20 +36465,20 @@
                   !root.ActiveXObject)
               ) {
                 return new XMLHttpRequest();
-              } 
-                try {
-                  return new ActiveXObject("Microsoft.XMLHTTP");
-                } catch (e) {}
-                try {
-                  return new ActiveXObject("Msxml2.XMLHTTP.6.0");
-                } catch (e) {}
-                try {
-                  return new ActiveXObject("Msxml2.XMLHTTP.3.0");
-                } catch (e) {}
-                try {
-                  return new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e) {}
-              
+              }
+              try {
+                return new ActiveXObject("Microsoft.XMLHTTP");
+              } catch (e) {}
+              try {
+                return new ActiveXObject("Msxml2.XMLHTTP.6.0");
+              } catch (e) {}
+              try {
+                return new ActiveXObject("Msxml2.XMLHTTP.3.0");
+              } catch (e) {}
+              try {
+                return new ActiveXObject("Msxml2.XMLHTTP");
+              } catch (e) {}
+
               throw Error(
                 "Browser-only verison of superagent could not find XHR",
               );
@@ -36893,13 +36536,13 @@
                   for (const subkey in val) {
                     pushEncodedKeyValuePair(
                       pairs,
-                      `${key  }[${  subkey  }]`,
+                      `${key}[${subkey}]`,
                       val[subkey],
                     );
                   }
                 } else {
                   pairs.push(
-                    `${encodeURIComponent(key)  }=${  encodeURIComponent(val)}`,
+                    `${encodeURIComponent(key)}=${encodeURIComponent(val)}`,
                   );
                 }
               } else if (val === null) {
@@ -37057,8 +36700,8 @@
             function params(str) {
               return str.split(/ *; */).reduce(function(obj, str) {
                 const parts = str.split(/ *= */);
-                  const key = parts.shift();
-                  const val = parts.shift();
+                const key = parts.shift();
+                const val = parts.shift();
 
                 if (key && val) obj[key] = val;
                 return obj;
@@ -37254,12 +36897,11 @@
              */
 
             Response.prototype.toError = function() {
-              const {req} = this;
-              const {method} = req;
-              const {url} = req;
+              const { req } = this;
+              const { method } = req;
+              const { url } = req;
 
-              const msg =
-                `cannot ${  method  } ${  url  } (${  this.status  })`;
+              const msg = `cannot ${method} ${url} (${this.status})`;
               const err = new Error(msg);
               err.status = this.status;
               err.method = method;
@@ -37435,8 +37077,8 @@
 
               switch (options.type) {
                 case "basic":
-                  var str = btoa(`${user  }:${  pass}`);
-                  this.set("Authorization", `Basic ${  str}`);
+                  var str = btoa(`${user}:${pass}`);
+                  this.set("Authorization", `Basic ${str}`);
                   break;
 
                 case "auto":
@@ -37538,7 +37180,7 @@
 
             Request.prototype._timeoutError = function() {
               const timeout = this._timeout;
-              const err = new Error(`timeout of ${  timeout  }ms exceeded`);
+              const err = new Error(`timeout of ${timeout}ms exceeded`);
               err.timeout = timeout;
               this.callback(err);
             };
@@ -37552,7 +37194,7 @@
             Request.prototype._appendQueryString = function() {
               const query = this._query.join("&");
               if (query) {
-                this.url += ~this.url.indexOf("?") ? `&${  query}` : `?${  query}`;
+                this.url += ~this.url.indexOf("?") ? `&${query}` : `?${query}`;
               }
             };
 
@@ -38174,7 +37816,7 @@
                 if (!type) this.type("form");
                 type = this._header["content-type"];
                 if (type == "application/x-www-form-urlencoded") {
-                  this._data = this._data ? `${this._data  }&${  data}` : data;
+                  this._data = this._data ? `${this._data}&${data}` : data;
                 } else {
                   this._data = (this._data || "") + data;
                 }
@@ -38277,8 +37919,8 @@
               fn,
             ) {
               this._callbacks = this._callbacks || {};
-              (this._callbacks[`$${  event}`] =
-                this._callbacks[`$${  event}`] || []).push(fn);
+              (this._callbacks[`$${event}`] =
+                this._callbacks[`$${event}`] || []).push(fn);
               return this;
             };
 
@@ -38326,12 +37968,12 @@
               }
 
               // specific event
-              const callbacks = this._callbacks[`$${  event}`];
+              const callbacks = this._callbacks[`$${event}`];
               if (!callbacks) return this;
 
               // remove all handlers
               if (arguments.length == 1) {
-                delete this._callbacks[`$${  event}`];
+                delete this._callbacks[`$${event}`];
                 return this;
               }
 
@@ -38358,7 +38000,7 @@
             Emitter.prototype.emit = function(event) {
               this._callbacks = this._callbacks || {};
               const args = [].slice.call(arguments, 1);
-                let callbacks = this._callbacks[`$${  event}`];
+              let callbacks = this._callbacks[`$${event}`];
 
               if (callbacks) {
                 callbacks = callbacks.slice(0);
@@ -38380,7 +38022,7 @@
 
             Emitter.prototype.listeners = function(event) {
               this._callbacks = this._callbacks || {};
-              return this._callbacks[`$${  event}`] || [];
+              return this._callbacks[`$${event}`] || [];
             };
 
             /**
@@ -38450,8 +38092,8 @@
       }
 
       // Create an empty div which contains the dom_id
-      if (!$(`#${  this.dom_id}`).length) {
-        $("body").append(`<div id="${  this.dom_id  }"></div>`);
+      if (!$(`#${this.dom_id}`).length) {
+        $("body").append(`<div id="${this.dom_id}"></div>`);
       }
 
       this.options = options;
@@ -38515,7 +38157,7 @@
       if (this.authView) {
         this.authView.remove();
       }
-      let {url} = this.options;
+      let { url } = this.options;
       if (url && url.indexOf("http") !== 0) {
         url = this.buildUrl(window.location.href.toString(), url);
       }
@@ -38552,7 +38194,7 @@
       );
       this.mainView = new SwaggerUi.Views.MainView({
         model: this.api,
-        el: $(`#${  this.dom_id}`),
+        el: $(`#${this.dom_id}`),
         swaggerOptions: this.options,
         router: this,
       }).render();
@@ -38591,27 +38233,26 @@
     buildUrl(base, url) {
       if (url.indexOf("/") === 0) {
         const parts = base.split("/");
-        base = `${parts[0]  }//${  parts[2]}`;
+        base = `${parts[0]}//${parts[2]}`;
         return base + url;
-      } 
-        let endOfPath = base.length;
+      }
+      let endOfPath = base.length;
 
-        if (base.indexOf("?") > -1) {
-          endOfPath = Math.min(endOfPath, base.indexOf("?"));
-        }
+      if (base.indexOf("?") > -1) {
+        endOfPath = Math.min(endOfPath, base.indexOf("?"));
+      }
 
-        if (base.indexOf("#") > -1) {
-          endOfPath = Math.min(endOfPath, base.indexOf("#"));
-        }
+      if (base.indexOf("#") > -1) {
+        endOfPath = Math.min(endOfPath, base.indexOf("#"));
+      }
 
-        base = base.substring(0, endOfPath);
+      base = base.substring(0, endOfPath);
 
-        if (base.indexOf("/", base.length - 1) !== -1) {
-          return base + url;
-        }
+      if (base.indexOf("/", base.length - 1) !== -1) {
+        return base + url;
+      }
 
-        return `${base  }/${  url}`;
-      
+      return `${base}/${url}`;
     },
 
     // Shows message on topbar of the ui
@@ -38735,7 +38376,7 @@
       const oauth2Arr = [];
       const authsArr = [];
       let scopes = [];
-      const {utils} = window.SwaggerUi;
+      const { utils } = window.SwaggerUi;
 
       if (!Array.isArray(security)) {
         return null;
@@ -38770,14 +38411,14 @@
               singleSecurity[key] = Object.assign({}, auths[key]);
             }
           } else if (item[key].type === "oauth2") {
-              singleOauth2Security[key] = Object.assign({}, item[key]);
-              singleOauth2Security[key].scopes = utils.parseOauth2Scopes(
-                singleOauth2Security[key].scopes,
-              );
-              scopes = _.merge(scopes, singleOauth2Security[key].scopes);
-            } else {
-              singleSecurity[key] = item[key];
-            }
+            singleOauth2Security[key] = Object.assign({}, item[key]);
+            singleOauth2Security[key].scopes = utils.parseOauth2Scopes(
+              singleOauth2Security[key].scopes,
+            );
+            scopes = _.merge(scopes, singleOauth2Security[key].scopes);
+          } else {
+            singleSecurity[key] = item[key];
+          }
         }
 
         if (!_.isEmpty(singleSecurity)) {
@@ -39091,7 +38732,9 @@
     },
 
     renderOneAuth(authModel) {
-      let authViewEl; let authView; let authViewName;
+      let authViewEl;
+      let authView;
+      let authViewName;
       const type = authModel.get("type");
 
       if (type === "apiKey") {
@@ -39188,7 +38831,8 @@
 
     authorize() {
       this.authsCollectionView.collection.forEach(function(auth) {
-        let keyAuth; let basicAuth;
+        let keyAuth;
+        let basicAuth;
         const type = auth.get("type");
 
         if (type === "apiKey") {
@@ -39233,8 +38877,7 @@
         0,
         location.pathname.lastIndexOf("/"),
       );
-      const defaultRedirectUrl =
-        `${host.protocol  }//${  host.host  }${pathname  }/o2c.html`;
+      const defaultRedirectUrl = `${host.protocol}//${host.host}${pathname}/o2c.html`;
       const redirectUrl = window.oAuthRedirectUrl || defaultRedirectUrl;
       let url = null;
       const scopes = _.map(auth.get("scopes"), function(scope) {
@@ -39243,7 +38886,9 @@
         }
       });
       const container = window.swaggerUiAuth || (window.swaggerUiAuth = {});
-      let state; let dets; let ep;
+      let state;
+      let dets;
+      let ep;
       container.OAuthSchemeKey = auth.get("title");
 
       window.enabledScopes = scopes;
@@ -39266,10 +38911,9 @@
         (flow === "implicit" || flow === "accessCode")
       ) {
         dets = auth.attributes;
-        url =
-          `${dets.authorizationUrl 
-          }?response_type=${ 
-          flow === "implicit" ? "token" : "code"}`;
+        url = `${dets.authorizationUrl}?response_type=${
+          flow === "implicit" ? "token" : "code"
+        }`;
         container.tokenName = getTokenName(dets) || "access_token";
         container.tokenUrl = flow === "accessCode" ? dets.tokenUrl : null;
         state = container.OAuthSchemeKey;
@@ -39294,12 +38938,12 @@
           if (o.hasOwnProperty(t) && t === "implicit") {
             dets = o[t];
             ep = dets.loginEndpoint.url;
-            url = `${dets.loginEndpoint.url  }?response_type=token`;
+            url = `${dets.loginEndpoint.url}?response_type=token`;
             container.tokenName = getTokenName(dets);
           } else if (o.hasOwnProperty(t) && t === "accessCode") {
             dets = o[t];
             ep = dets.tokenRequestEndpoint.url;
-            url = `${dets.tokenRequestEndpoint.url  }?response_type=code`;
+            url = `${dets.tokenRequestEndpoint.url}?response_type=code`;
             container.tokenName = getTokenName(dets);
           }
         }
@@ -39307,17 +38951,15 @@
 
       redirect_uri = redirectUrl;
 
-      url += `&redirect_uri=${  encodeURIComponent(redirectUrl)}`;
-      url += `&realm=${  encodeURIComponent(realm)}`;
-      url += `&client_id=${  encodeURIComponent(clientId)}`;
-      url += `&scope=${  encodeURIComponent(scopes.join(scopeSeparator))}`;
-      url += `&state=${  encodeURIComponent(state)}`;
+      url += `&redirect_uri=${encodeURIComponent(redirectUrl)}`;
+      url += `&realm=${encodeURIComponent(realm)}`;
+      url += `&client_id=${encodeURIComponent(clientId)}`;
+      url += `&scope=${encodeURIComponent(scopes.join(scopeSeparator))}`;
+      url += `&state=${encodeURIComponent(state)}`;
       for (const key in additionalQueryStringParams) {
-        url +=
-          `&${ 
-          key 
-          }=${ 
-          encodeURIComponent(additionalQueryStringParams[key])}`;
+        url += `&${key}=${encodeURIComponent(
+          additionalQueryStringParams[key],
+        )}`;
       }
 
       window.open(url);
@@ -39340,13 +38982,7 @@
       });
     },
 
-    accessTokenRequest(
-      scopes,
-      oauth,
-      OAuthSchemeKey,
-      grantType,
-      params,
-    ) {
+    accessTokenRequest(scopes, oauth, OAuthSchemeKey, grantType, params) {
       params = $.extend(
         {},
         {
@@ -39360,8 +38996,9 @@
 
       switch (oauth.clientAuthenticationType) {
         case "basic":
-          headers.Authorization =
-            `Basic ${  btoa(`${oauth.clientId  }:${  oauth.clientSecret}`)}`;
+          headers.Authorization = `Basic ${btoa(
+            `${oauth.clientId}:${oauth.clientSecret}`,
+          )}`;
           break;
         case "request-body":
           params.client_id = oauth.clientId;
@@ -39463,7 +39100,7 @@
     initialize() {},
 
     render() {
-      this.model.contentTypeId = `ct${  Math.random()}`;
+      this.model.contentTypeId = `ct${Math.random()}`;
       $(this.el).html(Handlebars.templates.content_type(this.model));
       return this;
     },
@@ -39533,7 +39170,10 @@
       },
     },
     initialize(opts) {
-      let sorterOption; let sorterFn; let key; let value;
+      let sorterOption;
+      let sorterFn;
+      let key;
+      let value;
       opts = opts || {};
 
       this.router = opts.router;
@@ -39619,7 +39259,7 @@
         const resource = this.model.apisArray[i];
         let id = resource.name;
         while (typeof resources[id] !== "undefined") {
-          id = `${id  }_${  counter}`;
+          id = `${id}_${counter}`;
           counter += 1;
         }
         resource.id = sanitizeHtml(id);
@@ -39652,7 +39292,7 @@
         model: resource,
         router: this.router,
         tagName: "li",
-        id: `resource_${  resource.id}`,
+        id: `resource_${resource.id}`,
         className: "resource",
         auths,
         swaggerOptions: this.options.swaggerOptions,
@@ -39687,7 +39327,7 @@
       if (this.attributes && this.attributes.scopes) {
         const attributes = _.cloneDeep(this.attributes);
         let i;
-          const scopes = [];
+        const scopes = [];
         for (i in attributes.scopes) {
           const scope = attributes.scopes[i];
           if (typeof scope.description === "string") {
@@ -39700,7 +39340,7 @@
       }
 
       if (this.attributes && this.attributes.flow) {
-        const {flow} = this.attributes;
+        const { flow } = this.attributes;
         this.set("isPasswordFlow", flow === "password");
         this.set("requireClientAuthentication", flow === "application");
         this.set(
@@ -39799,7 +39439,7 @@
 
     setClientAuthenticationType(e) {
       const type = $(e.target).val();
-      const {$el} = this;
+      const { $el } = this;
       this.model.set("clientAuthenticationType", type);
 
       switch (type) {
@@ -39876,9 +39516,9 @@
 
     selectText(event) {
       const doc = document;
-        const text = event.target.firstChild;
-        let range;
-        let selection;
+      const text = event.target.firstChild;
+      let range;
+      let selection;
       if (doc.body.createTextRange) {
         range = document.body.createTextRange();
         range.moveToElementText(text);
@@ -39929,46 +39569,46 @@
     // TODO: refactor
     render() {
       let a;
-        let auth;
-        let auths;
-        let code;
-        let contentTypeModel;
-        let isMethodSubmissionSupported;
-        let k;
-        let key;
-        let l;
-        let len;
-        let len1;
-        let len2;
-        let len3;
-        let len4;
-        let m;
-        let modelAuths;
-        let n;
-        let o;
-        let p;
-        let param;
-        let q;
-        let ref;
-        let ref1;
-        let ref2;
-        let ref3;
-        let ref4;
-        let ref5;
-        let responseContentTypeView;
-        let responseSignatureView;
-        let schema;
-        let schemaObj;
-        let scopeIndex;
-        let signatureModel;
-        let statusCode;
-        let successResponse;
-        let type;
-        let v;
-        let value;
-        let produces;
-        let isXML;
-        let isJSON;
+      let auth;
+      let auths;
+      let code;
+      let contentTypeModel;
+      let isMethodSubmissionSupported;
+      let k;
+      let key;
+      let l;
+      let len;
+      let len1;
+      let len2;
+      let len3;
+      let len4;
+      let m;
+      let modelAuths;
+      let n;
+      let o;
+      let p;
+      let param;
+      let q;
+      let ref;
+      let ref1;
+      let ref2;
+      let ref3;
+      let ref4;
+      let ref5;
+      let responseContentTypeView;
+      let responseSignatureView;
+      let schema;
+      let schemaObj;
+      let scopeIndex;
+      let signatureModel;
+      let statusCode;
+      let successResponse;
+      let type;
+      let v;
+      let value;
+      let produces;
+      let isXML;
+      let isJSON;
       isMethodSubmissionSupported =
         jQuery.inArray(
           this.model.method,
@@ -40232,7 +39872,7 @@
         _.forEach(header, function(value, key) {
           const properties = ["type", "description"];
           if (properties.indexOf(key.toLowerCase()) === -1) {
-            other.push(`${key  }: ${  value}`);
+            other.push(`${key}: ${value}`);
           }
         });
 
@@ -40288,7 +39928,11 @@
     // Note: copied from CoffeeScript compiled file
     // TODO: redactor
     submitOperation(e) {
-      let error_free; let form; let isFileUpload; let map; let opts;
+      let error_free;
+      let form;
+      let isFileUpload;
+      let map;
+      let opts;
       if (e !== null) {
         e.preventDefault();
       }
@@ -40380,21 +40024,31 @@
             this.showErrorStatus,
             this,
           );
-        } 
-          this.map = map;
-          return this.model.execute(
-            map,
-            opts,
-            this.showCompleteStatus,
-            this.showErrorStatus,
-            this,
-          );
-        
+        }
+        this.map = map;
+        return this.model.execute(
+          map,
+          opts,
+          this.showCompleteStatus,
+          this.showErrorStatus,
+          this,
+        );
       }
     },
 
     getInputMap(form) {
-      let map; let ref1; let l; let len; let o; let ref2; let m; let len1; let val; let ref3; let n; let len2;
+      let map;
+      let ref1;
+      let l;
+      let len;
+      let o;
+      let ref2;
+      let m;
+      let len1;
+      let val;
+      let ref3;
+      let n;
+      let len2;
       map = {};
       ref1 = form.find("input");
       for (l = 0, len = ref1.length; l < len; l++) {
@@ -40426,7 +40080,10 @@
     },
 
     isFileUpload(form) {
-      let ref1; let l; let len; let o;
+      let ref1;
+      let l;
+      let len;
+      let o;
       let isFileUpload = false;
       ref1 = form.find("input");
       for (l = 0, len = ref1.length; l < len; l++) {
@@ -40444,7 +40101,13 @@
 
     // wraps a jquery response as a shred response
     wrap(data) {
-      let h; let headerArray; let headers; let i; let l; let len; let o;
+      let h;
+      let headerArray;
+      let headers;
+      let i;
+      let l;
+      let len;
+      let o;
       headers = {};
       headerArray = data.getAllResponseHeaders().split("\r");
       for (l = 0, len = headerArray.length; l < len; l++) {
@@ -40471,20 +40134,18 @@
     getSelectedValue(select) {
       if (!select.multiple) {
         return select.value;
-      } 
-        const options = [];
-        for (let l = 0, len = select.options.length; l < len; l++) {
-          const opt = select.options[l];
-          if (opt.selected) {
-            options.push(opt.value);
-          }
+      }
+      const options = [];
+      for (let l = 0, len = select.options.length; l < len; l++) {
+        const opt = select.options[l];
+        if (opt.selected) {
+          options.push(opt.value);
         }
-        if (options.length > 0) {
-          return options;
-        } 
-          return null;
-        
-      
+      }
+      if (options.length > 0) {
+        return options;
+      }
+      return null;
     },
 
     // handler for hide response link
@@ -40520,18 +40181,18 @@
     // TODO: Cleanup CoffeeScript artifacts
     formatXml(xml) {
       let contexp;
-        let fn;
-        let formatted;
-        let indent;
-        let l;
-        let lastType;
-        let len;
-        let lines;
-        let ln;
-        let pad;
-        let reg;
-        let transitions;
-        let wsexp;
+      let fn;
+      let formatted;
+      let indent;
+      let l;
+      let lastType;
+      let len;
+      let lines;
+      let ln;
+      let pad;
+      let reg;
+      let transitions;
+      let wsexp;
       reg = /(>)(<)(\/*)/g;
       wsexp = /[ ]*(.*)[ ]+\n/g;
       contexp = /(<.+>)(.+\n)/g;
@@ -40564,7 +40225,13 @@
         "other->other": 0,
       };
       fn = function(ln) {
-        let fromTo; let j; let key; let padding; let type; let types; let value;
+        let fromTo;
+        let j;
+        let key;
+        let padding;
+        let type;
+        let types;
+        let value;
         types = {
           single: Boolean(ln.match(/<.+\/>/)),
           closing: Boolean(ln.match(/<\/.+>/)),
@@ -40582,12 +40249,14 @@
           return results;
         })()[0];
         type = type === void 0 ? "other" : type;
-        fromTo = `${lastType  }->${  type}`;
+        fromTo = `${lastType}->${type}`;
         lastType = type;
         padding = "";
         indent += transitions[fromTo];
         padding = (function() {
-          let m; let ref1; let results;
+          let m;
+          let ref1;
+          let results;
           results = [];
           for (
             j = m = 0, ref1 = indent;
@@ -40599,9 +40268,9 @@
           return results;
         })().join("");
         if (fromTo === "opening->closing") {
-          formatted = `${formatted.substr(0, formatted.length - 1) + ln  }\n`;
+          formatted = `${formatted.substr(0, formatted.length - 1) + ln}\n`;
         } else {
-          formatted += `${padding + ln  }\n`;
+          formatted += `${padding + ln}\n`;
         }
       };
       for (l = 0, len = lines.length; l < len; l++) {
@@ -40613,7 +40282,8 @@
 
     // puts the response data in UI
     showStatus(response) {
-      let url; let content;
+      let url;
+      let content;
       if (response.content === undefined) {
         content = response.data;
         url = response.url;
@@ -40621,7 +40291,7 @@
         content = response.content.data;
         url = response.request.url;
       }
-      const {headers} = response;
+      const { headers } = response;
       if (typeof content === "string") {
         content = jQuery.trim(content);
       }
@@ -40675,9 +40345,7 @@
           } else {
             const binaryData = [];
             binaryData.push(content);
-            href = window.URL.createObjectURL(
-              new Blob(binaryData, { type }),
-            );
+            href = window.URL.createObjectURL(new Blob(binaryData, { type }));
           }
           let fileName = response.url.substr(response.url.lastIndexOf("/") + 1);
           let download = [type, fileName, href].join(":");
@@ -40695,7 +40363,7 @@
 
           a.setAttribute("href", href);
           a.setAttribute("download", download);
-          a.innerText = `Download ${  fileName}`;
+          a.innerText = `Download ${fileName}`;
 
           pre = $("<div/>").append(a);
           skipHighlight = true;
@@ -40712,7 +40380,7 @@
         try {
           json = JSON.stringify(JSON.parse(content), null, "  ");
         } catch (_error) {
-          json = `can't parse JSON.  Raw result:\n\n${  content}`;
+          json = `can't parse JSON.  Raw result:\n\n${content}`;
         }
         code = $("<code />").text(json);
         pre = $('<pre class="json" />').append(code);
@@ -40763,17 +40431,13 @@
       const response_body = pre;
       $(".request_url", $(this.el)).html("<pre></pre>");
       $(".request_url pre", $(this.el)).text(url);
-      $(".response_code", $(this.el)).html(
-        `<pre>${  response.status  }</pre>`,
-      );
+      $(".response_code", $(this.el)).html(`<pre>${response.status}</pre>`);
       $(".response_body", $(this.el)).html(response_body);
       $(".response_headers", $(this.el)).html(
-        `<pre>${ 
-          _.escape(JSON.stringify(response.headers, null, "  ")).replace(
-            /\n/g,
-            "<br>",
-          ) 
-          }</pre>`,
+        `<pre>${_.escape(JSON.stringify(response.headers, null, "  ")).replace(
+          /\n/g,
+          "<br>",
+        )}</pre>`,
       );
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
@@ -40784,25 +40448,21 @@
         responseContentType: contentType,
       });
       curlCommand = curlCommand.replace("!", "&#33;");
-      $("div.curl", $(this.el)).html(
-        `<pre>${  _.escape(curlCommand)  }</pre>`,
-      );
+      $("div.curl", $(this.el)).html(`<pre>${_.escape(curlCommand)}</pre>`);
 
       // only highlight the response if response is less than threshold, default state is highlight response
       const opts = this.options.swaggerOptions;
 
       if (opts.showRequestHeaders) {
         const form = $(".sandbox", $(this.el));
-          const map = this.getInputMap(form);
-          const requestHeaders = this.model.getHeaderParams(map);
+        const map = this.getInputMap(form);
+        const requestHeaders = this.model.getHeaderParams(map);
         delete requestHeaders["Content-Type"];
         $(".request_headers", $(this.el)).html(
-          `<pre>${ 
-            _.escape(JSON.stringify(requestHeaders, null, "  ")).replace(
-              /\n/g,
-              "<br>",
-            ) 
-            }</pre>`,
+          `<pre>${_.escape(JSON.stringify(requestHeaders, null, "  ")).replace(
+            /\n/g,
+            "<br>",
+          )}</pre>`,
         );
       }
 
@@ -40820,17 +40480,15 @@
         skipHighlight
       ) {
         return response_body_el;
-      } 
-        return hljs.highlightBlock(response_body_el);
-      
+      }
+      return hljs.highlightBlock(response_body_el);
     },
 
     toggleOperationContent(event) {
       const elem = $(
-        `#${ 
-          Docs.escapeResourceName(
-            `${this.parentId  }_${  this.nickname  }_content`,
-          )}`,
+        `#${Docs.escapeResourceName(
+          `${this.parentId}_${this.nickname}_content`,
+        )}`,
       );
       if (elem.is(":visible")) {
         $.bbq.pushState("#/", 2);
@@ -40842,7 +40500,10 @@
     },
 
     getTextAreaValue(textArea) {
-      let param; let parsed; let result; let i;
+      let param;
+      let parsed;
+      let result;
+      let i;
       if (textArea.value === null || jQuery.trim(textArea.value).length === 0) {
         return null;
       }
@@ -40856,9 +40517,8 @@
           }
         }
         return result.length > 0 ? result : null;
-      } 
-        return textArea.value;
-      
+      }
+      return textArea.value;
     },
 
     showSnippet() {
@@ -40904,7 +40564,7 @@
     initialize() {},
 
     render() {
-      this.model.parameterContentTypeId = `pct${  Math.random()}`;
+      this.model.parameterContentTypeId = `pct${Math.random()}`;
       $(this.el).html(Handlebars.templates.parameter_content_type(this.model));
       return this;
     },
@@ -40921,9 +40581,8 @@
         const paramType = param.type && param.type.toLowerCase();
         if (paramType === "array" || param.allowMultiple) {
           return opts.fn(this);
-        } 
-          return opts.inverse(this);
-        
+        }
+        return opts.inverse(this);
       });
     },
 
@@ -40933,7 +40592,8 @@
       const modelDefinitions = this.model.modelSignature.definitions;
       const schema = this.model.schema || {};
       const consumes = this.model.consumes || [];
-      let sampleJSON; let signatureView;
+      let sampleJSON;
+      let signatureView;
 
       if (typeof type === "undefined") {
         if (schema.$ref) {
@@ -40958,7 +40618,7 @@
       }
 
       this.model.hasDefault = typeof this.model.default !== "undefined";
-      this.model.valueId = `m${  this.model.name  }${Math.random()}`;
+      this.model.valueId = `m${this.model.name}${Math.random()}`;
 
       if (this.model.allowableValues) {
         this.model.isList = true;
@@ -41109,21 +40769,17 @@
     template() {
       if (this.model.isList) {
         return Handlebars.templates.param_list;
-      } 
-        if (this.options.readOnly) {
-          if (this.model.required) {
-            return Handlebars.templates.param_readonly_required;
-          } 
-            return Handlebars.templates.param_readonly;
-          
-        } 
-          if (this.model.required) {
-            return Handlebars.templates.param_required;
-          } 
-            return Handlebars.templates.param;
-          
-        
-      
+      }
+      if (this.options.readOnly) {
+        if (this.model.required) {
+          return Handlebars.templates.param_readonly_required;
+        }
+        return Handlebars.templates.param_readonly;
+      }
+      if (this.model.required) {
+        return Handlebars.templates.param_required;
+      }
+      return Handlebars.templates.param;
     },
   });
 
@@ -41148,9 +40804,8 @@
 
       if (name.indexOf("#/definitions/") === 0) {
         return name.substring("#/definitions/".length);
-      } 
-        return name;
-      
+      }
+      return name;
     };
 
     // copy-pasted from swagger-js
@@ -41167,18 +40822,18 @@
     // copy-pasted from swagger-js
     const formatXml = function(xml) {
       let contexp;
-        let fn;
-        let formatted;
-        let indent;
-        let l;
-        let lastType;
-        let len;
-        let lines;
-        let ln;
-        let pad;
-        let reg;
-        let transitions;
-        let wsexp;
+      let fn;
+      let formatted;
+      let indent;
+      let l;
+      let lastType;
+      let len;
+      let lines;
+      let ln;
+      let pad;
+      let reg;
+      let transitions;
+      let wsexp;
       reg = /(>)(<)(\/*)/g;
       wsexp = /[ ]*(.*)[ ]+\n/g;
       contexp = /(<.+>)(.+\n)/g;
@@ -41210,7 +40865,13 @@
         "other->other": 0,
       };
       fn = function(ln) {
-        let fromTo; let j; let key; let padding; let type; let types; let value;
+        let fromTo;
+        let j;
+        let key;
+        let padding;
+        let type;
+        let types;
+        let value;
         types = {
           single: Boolean(ln.match(/<.+\/>/)),
           closing: Boolean(ln.match(/<\/.+>/)),
@@ -41228,12 +40889,14 @@
           return results;
         })()[0];
         type = type === void 0 ? "other" : type;
-        fromTo = `${lastType  }->${  type}`;
+        fromTo = `${lastType}->${type}`;
         lastType = type;
         padding = "";
         indent += transitions[fromTo];
         padding = (function() {
-          let m; let ref1; let results;
+          let m;
+          let ref1;
+          let results;
           results = [];
           for (
             j = m = 0, ref1 = indent;
@@ -41245,9 +40908,9 @@
           return results;
         })().join("");
         if (fromTo === "opening->closing") {
-          formatted = `${formatted.substr(0, formatted.length - 1) + ln  }\n`;
+          formatted = `${formatted.substr(0, formatted.length - 1) + ln}\n`;
         } else {
-          formatted += `${padding + ln  }\n`;
+          formatted += `${padding + ln}\n`;
         }
       };
       for (l = 0, len = lines.length; l < len; l++) {
@@ -41258,18 +40921,17 @@
     };
 
     // copy-pasted from swagger-js
-    const getModelSignature = function(name, schema, models, modelPropertyMacro) {
+    const getModelSignature = function(
+      name,
+      schema,
+      models,
+      modelPropertyMacro,
+    ) {
       const strongOpen = '<span class="strong">';
       const strongClose = "</span>";
 
       const optionHtml = function(label, value) {
-        return (
-          `<tr><td class="optionName">${ 
-          label 
-          }:</td><td>${ 
-          value 
-          }</td></tr>`
-        );
+        return `<tr><td class="optionName">${label}:</td><td>${value}</td></tr>`;
       };
 
       // Allow for ignoring the 'name' argument.... shifting the rest
@@ -41287,7 +40949,7 @@
 
       // Return for empty object
       if (_.isEmpty(schema)) {
-        return `${strongOpen  }Empty${  strongClose}`;
+        return `${strongOpen}Empty${strongClose}`;
       }
 
       // Dereference $ref from 'models'
@@ -41295,7 +40957,7 @@
         name = simpleRef(schema.$ref);
         schema = models[name];
         if (typeof schema === "undefined") {
-          return `${strongOpen + name  } is not defined!${  strongClose}`;
+          return `${strongOpen + name} is not defined!${strongClose}`;
         }
       }
 
@@ -41332,7 +40994,7 @@
           if (!seenModel) {
             seenModels.push(name);
 
-            html += `<br />${  processModel(schema, name)}`;
+            html += `<br />${processModel(schema, name)}`;
           }
         });
         /* jshint ignore:end */
@@ -41348,7 +41010,7 @@
           modelName = schema.title || simpleRef(schema.$ref);
           model = models[simpleRef(schema.$ref)];
         } else if (_.isUndefined(name)) {
-          modelName = schema.title || `Inline Model ${  ++inlineModels}`;
+          modelName = schema.title || `Inline Model ${++inlineModels}`;
           model = { definition: schema };
         }
 
@@ -41412,15 +41074,15 @@
         const isArray = type === "array";
 
         if (!_.isUndefined(schema.description)) {
-          html +=
-            `${": " + '<span class="propDesc">'}${  schema.description  }</span>`;
+          html += `${": " + '<span class="propDesc">'}${
+            schema.description
+          }</span>`;
         }
 
         if (schema.enum) {
-          html +=
-            ` = <span class="propVals">['${ 
-            schema.enum.join("', '") 
-            }']</span>`;
+          html += ` = <span class="propVals">['${schema.enum.join(
+            "', '",
+          )}']</span>`;
         }
 
         if (isArray) {
@@ -41502,7 +41164,7 @@
             if (type === "number" || type === "integer") {
               enumString = schema.enum.join(", ");
             } else {
-              enumString = `"${  schema.enum.join('", "')  }"`;
+              enumString = `"${schema.enum.join('", "')}"`;
             }
 
             options += optionHtml("Enum", enumString);
@@ -41510,14 +41172,7 @@
         }
 
         if (options.length > 0) {
-          html =
-            `<span class="propWrap">${ 
-            html 
-            }<table class="optionsWrapper"><tr><th colspan="2">${ 
-            type 
-            }</th></tr>${ 
-            options 
-            }</table></span>`;
+          html = `<span class="propWrap">${html}<table class="optionsWrapper"><tr><th colspan="2">${type}</th></tr>${options}</table></span>`;
         }
 
         return html;
@@ -41526,8 +41181,7 @@
       function processModel(schema, name) {
         const type = schema.type || "object";
         const isArray = schema.type === "array";
-        let html =
-          `${strongOpen + name  } ${  isArray ? "[" : "{"  }${strongClose}`;
+        let html = `${strongOpen + name} ${isArray ? "[" : "{"}${strongClose}`;
         let contents;
 
         if (name) {
@@ -41536,25 +41190,20 @@
 
         if (isArray) {
           if (_.isArray(schema.items)) {
-            html +=
-              `<div>${ 
-              _.map(schema.items, function(item) {
-                const type = item.type || "object";
+            html += `<div>${_.map(schema.items, function(item) {
+              const type = item.type || "object";
 
-                if (_.isUndefined(item.$ref)) {
-                  if (_.indexOf(["array", "object"], type) > -1) {
-                    if (type === "object" && _.isUndefined(item.properties)) {
-                      return "object";
-                    } 
-                      return addReference(item);
-                    
-                  } 
-                    return primitiveToOptionsHTML(item, type);
-                  
-                } 
-                  return addReference(item, simpleRef(item.$ref));
-                
-              }).join(",</div><div>")}`;
+              if (_.isUndefined(item.$ref)) {
+                if (_.indexOf(["array", "object"], type) > -1) {
+                  if (type === "object" && _.isUndefined(item.properties)) {
+                    return "object";
+                  }
+                  return addReference(item);
+                }
+                return primitiveToOptionsHTML(item, type);
+              }
+              return addReference(item, simpleRef(item.$ref));
+            }).join(",</div><div>")}`;
           } else if (_.isPlainObject(schema.items)) {
             if (_.isUndefined(schema.items.$ref)) {
               if (
@@ -41568,19 +41217,19 @@
                 ) {
                   html += "<div>object</div>";
                 } else {
-                  html += `<div>${  addReference(schema.items)  }</div>`;
+                  html += `<div>${addReference(schema.items)}</div>`;
                 }
               } else {
-                html +=
-                  `<div>${ 
-                  primitiveToOptionsHTML(schema.items, schema.items.type) 
-                  }</div>`;
+                html += `<div>${primitiveToOptionsHTML(
+                  schema.items,
+                  schema.items.type,
+                )}</div>`;
               }
             } else {
-              html +=
-                `<div>${ 
-                addReference(schema.items, simpleRef(schema.items.$ref)) 
-                }</div>`;
+              html += `<div>${addReference(
+                schema.items,
+                simpleRef(schema.items.$ref),
+              )}</div>`;
             }
           } else {
             console.log(
@@ -41589,71 +41238,63 @@
             html += "<div>object</div>";
           }
         } else if (schema.$ref) {
-            html += `<div>${  addReference(schema, name)  }</div>`;
-          } else if (type === "object") {
-            if (_.isPlainObject(schema.properties)) {
-              contents = _.map(schema.properties, function(property, name) {
-                const propertyIsRequired = _.indexOf(schema.required, name) >= 0;
-                let cProperty = _.cloneDeep(property);
+          html += `<div>${addReference(schema, name)}</div>`;
+        } else if (type === "object") {
+          if (_.isPlainObject(schema.properties)) {
+            contents = _.map(schema.properties, function(property, name) {
+              const propertyIsRequired = _.indexOf(schema.required, name) >= 0;
+              let cProperty = _.cloneDeep(property);
 
-                const requiredClass = propertyIsRequired ? "required" : "";
-                let html =
-                  `<span class="propName ${ 
-                  requiredClass 
-                  }">${ 
-                  name 
-                  }</span> (`;
-                let model;
+              const requiredClass = propertyIsRequired ? "required" : "";
+              let html = `<span class="propName ${requiredClass}">${name}</span> (`;
+              let model;
 
-                // Allow macro to set the default value
-                cProperty.default = modelPropertyMacro(cProperty);
+              // Allow macro to set the default value
+              cProperty.default = modelPropertyMacro(cProperty);
 
-                // Resolve the schema (Handle nested schemas)
-                cProperty = resolveSchema(cProperty);
+              // Resolve the schema (Handle nested schemas)
+              cProperty = resolveSchema(cProperty);
 
-                // We need to handle property references to primitives (Issue 339)
-                if (!_.isUndefined(cProperty.$ref)) {
-                  model = models[simpleRef(cProperty.$ref)];
+              // We need to handle property references to primitives (Issue 339)
+              if (!_.isUndefined(cProperty.$ref)) {
+                model = models[simpleRef(cProperty.$ref)];
 
-                  if (
-                    !_.isUndefined(model) &&
-                    _.indexOf(
-                      [undefined, "array", "object"],
-                      model.definition.type,
-                    ) === -1
-                  ) {
-                    // Use referenced schema
-                    cProperty = resolveSchema(model.definition);
-                  }
+                if (
+                  !_.isUndefined(model) &&
+                  _.indexOf(
+                    [undefined, "array", "object"],
+                    model.definition.type,
+                  ) === -1
+                ) {
+                  // Use referenced schema
+                  cProperty = resolveSchema(model.definition);
                 }
+              }
 
-                html += primitiveToHTML(cProperty);
+              html += primitiveToHTML(cProperty);
 
-                if (!propertyIsRequired) {
-                  html += ', <span class="propOptKey">optional</span>';
-                }
+              if (!propertyIsRequired) {
+                html += ', <span class="propOptKey">optional</span>';
+              }
 
-                if (property.readOnly) {
-                  html += ', <span class="propReadOnly">read only</span>';
-                }
+              if (property.readOnly) {
+                html += ', <span class="propReadOnly">read only</span>';
+              }
 
-                html += ")";
+              html += ")";
 
-                return (
-                  `<div${ 
-                  property.readOnly ? ' class="readOnly"' : "" 
-                  }>${ 
-                  primitiveToOptionsHTML(cProperty, html)}`
-                );
-              }).join(",</div>");
-            }
-
-            if (contents) {
-              html += `${contents  }</div>`;
-            }
-          } else {
-            html += `<div>${  primitiveToOptionsHTML(schema, type)  }</div>`;
+              return `<div${
+                property.readOnly ? ' class="readOnly"' : ""
+              }>${primitiveToOptionsHTML(cProperty, html)}`;
+            }).join(",</div>");
           }
+
+          if (contents) {
+            html += `${contents}</div>`;
+          }
+        } else {
+          html += `<div>${primitiveToOptionsHTML(schema, type)}</div>`;
+        }
 
         return html + strongOpen + (isArray ? "]" : "}") + strongClose;
       }
@@ -41678,7 +41319,7 @@
       modelsToIgnore = modelsToIgnore || {};
 
       const type = schema.type || "object";
-      const {format} = schema;
+      const { format } = schema;
       let model;
       let output;
 
@@ -41703,10 +41344,10 @@
               );
               delete modelsToIgnore[model.name];
             } else if (model.type === "array") {
-                output = [];
-              } else {
-                output = {};
-              }
+              output = [];
+            } else {
+              output = {};
+            }
           }
         } else if (!_.isUndefined(schema.default)) {
           output = schema.default;
@@ -41824,7 +41465,8 @@
 
     // copy-pasted from swagger-js
     const getParameterModelSignature = function(type, definitions) {
-      let isPrimitive; let listType;
+      let isPrimitive;
+      let listType;
 
       if (type instanceof Array) {
         listType = true;
@@ -41849,36 +41491,31 @@
 
       if (isPrimitive) {
         if (listType) {
-          return `Array[${  type  }]`;
-        } 
-          return type.toString();
-        
-      } 
-        if (listType) {
-          return (
-            `Array[${ 
-            getModelSignature(
-              type.name,
-              type.definition,
-              type.models,
-              type.modelPropertyMacro,
-            ) 
-            }]`
-          );
-        } 
-          return getModelSignature(
-            type.name,
-            type.definition,
-            type.models,
-            type.modelPropertyMacro,
-          );
-        
-      
+          return `Array[${type}]`;
+        }
+        return type.toString();
+      }
+      if (listType) {
+        return `Array[${getModelSignature(
+          type.name,
+          type.definition,
+          type.models,
+          type.modelPropertyMacro,
+        )}]`;
+      }
+      return getModelSignature(
+        type.name,
+        type.definition,
+        type.models,
+        type.modelPropertyMacro,
+      );
     };
 
     // copy-pasted from swagger-js
     const createParameterJSONSample = function(type, models) {
-      let listType; let sampleJson; let innerType;
+      let listType;
+      let sampleJson;
+      let innerType;
       models = models || {};
 
       listType = type instanceof Array;
@@ -41895,7 +41532,8 @@
 
         if (typeof sampleJson === "string") {
           return sampleJson;
-        } if (_.isObject(sampleJson)) {
+        }
+        if (_.isObject(sampleJson)) {
           let t = sampleJson;
 
           if (sampleJson instanceof Array && sampleJson.length > 0) {
@@ -41906,23 +41544,22 @@
             const xmlString = new XMLSerializer().serializeToString(t);
 
             return formatXml(xmlString);
-          } 
-            return JSON.stringify(sampleJson, null, 2);
-          
-        } 
-          return sampleJson;
-        
+          }
+          return JSON.stringify(sampleJson, null, 2);
+        }
+        return sampleJson;
       }
     };
 
     const wrapTag = function(name, value, attrs) {
-      let str; let attributes;
+      let str;
+      let attributes;
 
       attrs = attrs || [];
 
       attributes = attrs
         .map(function(attr) {
-          return ` ${  attr.name  }="${  attr.value  }"`;
+          return ` ${attr.name}="${attr.value}"`;
         })
         .join("");
 
@@ -41959,7 +41596,7 @@
       xml = xml || {};
 
       if (xml.prefix) {
-        result = `${xml.prefix  }:${  result}`;
+        result = `${xml.prefix}:${result}`;
       }
 
       return result;
@@ -41978,7 +41615,7 @@
       }
 
       if (xml.prefix) {
-        name += `:${  xml.prefix}`;
+        name += `:${xml.prefix}`;
       }
 
       return {
@@ -41988,12 +41625,12 @@
     };
 
     const createArrayXML = function(descriptor) {
-      const {name} = descriptor;
-      const {config} = descriptor;
-      const {definition} = descriptor;
-      const {models} = descriptor;
+      const { name } = descriptor;
+      const { config } = descriptor;
+      const { definition } = descriptor;
+      const { models } = descriptor;
       let value;
-      const {items} = definition;
+      const { items } = definition;
       const xml = definition.xml || {};
       const namespace = getNamespace(xml);
       const attributes = [];
@@ -42019,7 +41656,8 @@
     };
 
     const getPrimitiveSignature = function(schema) {
-      let type; let items;
+      let type;
+      let items;
 
       schema = schema || {};
       items = schema.items || {};
@@ -42029,15 +41667,15 @@
         case "object":
           return "Object is not a primitive";
         case "array":
-          return `Array[${  items.format || items.type  }]`;
+          return `Array[${items.format || items.type}]`;
         default:
           return schema.format || type;
       }
     };
 
     const createPrimitiveXML = function(descriptor) {
-      const {name} = descriptor;
-      const {definition} = descriptor;
+      const { name } = descriptor;
+      const { definition } = descriptor;
       const primitivesMap = {
         string: {
           date: new Date(1).toISOString().split("T")[0],
@@ -42054,8 +41692,8 @@
           default: true,
         },
       };
-      const {type} = definition;
-      const {format} = definition;
+      const { type } = definition;
+      const { format } = definition;
       const xml = definition.xml || {};
       const namespace = getNamespace(xml);
       const attributes = [];
@@ -42086,16 +41724,16 @@
     };
 
     function createObjectXML(descriptor) {
-      const {name} = descriptor;
-      const {definition} = descriptor;
-      const {config} = descriptor;
-      const {models} = descriptor;
-      const {isParam} = descriptor.config;
+      const { name } = descriptor;
+      const { definition } = descriptor;
+      const { config } = descriptor;
+      const { models } = descriptor;
+      const { isParam } = descriptor.config;
       let serializedProperties;
       const attrs = [];
-      let {properties} = definition;
-      const {additionalProperties} = definition;
-      const {xml} = definition;
+      let { properties } = definition;
+      const { additionalProperties } = definition;
+      const { xml } = definition;
       const namespace = getNamespace(xml);
 
       if (namespace) {
@@ -42109,7 +41747,8 @@
       properties = properties || {};
 
       serializedProperties = _.map(properties, function(prop, key) {
-        let xml; let result;
+        let xml;
+        let result;
 
         if (isParam && prop.readOnly) {
           return "";
@@ -42134,17 +41773,18 @@
     }
 
     function getInfiniteLoopMessage(name, loopTo) {
-      return wrapTag(name, `<!-- Infinite loop $ref:${  loopTo  } -->`);
+      return wrapTag(name, `<!-- Infinite loop $ref:${loopTo} -->`);
     }
 
     function getErrorMessage(details) {
-      details = details ? `: ${  details}` : "";
-      return `<!-- invalid XML${  details  } -->`;
+      details = details ? `: ${details}` : "";
+      return `<!-- invalid XML${details} -->`;
     }
 
     function createSchemaXML(name, definition, models, config) {
       const $ref = _.isObject(definition) ? definition.$ref : null;
-      let output; let index;
+      let output;
+      let index;
       config = config || {};
       config.modelsToIgnore = config.modelsToIgnore || [];
 
@@ -42246,8 +41886,7 @@
       const prolog = '<?xml version="1.0"?>';
 
       return formatXml(
-        prolog +
-          createSchemaXML(name, definition, models, { isParam }),
+        prolog + createSchemaXML(name, definition, models, { isParam }),
       );
     }
 
@@ -42328,7 +41967,7 @@
         let id = operation.nickname;
 
         while (typeof methods[id] !== "undefined") {
-          id = `${id  }_${  counter}`;
+          id = `${id}_${counter}`;
           counter += 1;
         }
 
@@ -42384,7 +42023,7 @@
     initialize() {},
 
     render() {
-      this.model.responseContentTypeId = `rct${  Math.random()}`;
+      this.model.responseContentTypeId = `rct${Math.random()}`;
       $(this.el).html(Handlebars.templates.response_content_type(this.model));
       return this;
     },
@@ -42439,7 +42078,10 @@
 
     // handler for snippet to text area
     snippetToTextArea(val) {
-      const textArea = $("textarea", $(this.el.parentNode.parentNode.parentNode));
+      const textArea = $(
+        "textarea",
+        $(this.el.parentNode.parentNode.parentNode),
+      );
 
       // Fix for bug in IE 10/11 which causes placeholder text to be copied to "value"
       if (
@@ -42483,7 +42125,8 @@
     },
 
     render() {
-      let responseModel; let responseModelView;
+      let responseModel;
+      let responseModelView;
       const value = this.router.api.models[this.model.responseModel];
       $(this.el).html(Handlebars.templates.status_code(this.model));
 

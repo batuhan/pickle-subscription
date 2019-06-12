@@ -64,162 +64,158 @@ class ModalInvoice extends React.Component {
 
     if (self.state.loading) {
       return <Load />;
-    } 
-      const myNextInvoice = self.state.nextInvoice;
-      if (myNextInvoice) {
-        const amountDue = myNextInvoice.amount_due || 0;
-        const total = myNextInvoice.total || 0;
-        const prefix = getSymbolFromCurrency(myNextInvoice.currency);
-        const nextPaymentAttempt = myNextInvoice.next_payment_attempt || "";
-        const closed = myNextInvoice.closed || false;
-        const paid = myNextInvoice.paid || false;
+    }
+    const myNextInvoice = self.state.nextInvoice;
+    if (myNextInvoice) {
+      const amountDue = myNextInvoice.amount_due || 0;
+      const total = myNextInvoice.total || 0;
+      const prefix = getSymbolFromCurrency(myNextInvoice.currency);
+      const nextPaymentAttempt = myNextInvoice.next_payment_attempt || "";
+      const closed = myNextInvoice.closed || false;
+      const paid = myNextInvoice.paid || false;
 
-        const lineItemCount = myNextInvoice.lines.total_count || 0;
-        const lineItems = myNextInvoice.lines.data; // data is an array of objects
+      const lineItemCount = myNextInvoice.lines.total_count || 0;
+      const lineItems = myNextInvoice.lines.data; // data is an array of objects
 
-        const item_name = item => {
-          if (item.description) {
-            return item.description;
-          } if (item.plan) {
-            return item.plan.name;
-          } 
-            return item.type;
-          
-        };
-
-        const items = () => {
-          return lineItems.map(item => (
-            <tr key={item.id}>
-              <td>{item_name(item)}</td>
-              <td>
-                <DateFormat date={nextPaymentAttempt} />
-              </td>
-              <td>
-                <Price value={item.amount} prefix={prefix} />
-              </td>
-            </tr>
-          ));
-        };
-
-        let last4;
-          let fund = null;
-
-        if (self.state.currentUser) {
-          fund = self.state.currentUser.references.funds;
-          if (fund && fund.length > 0) {
-            last4 = fund[0].source.card.last4;
-          }
+      const item_name = item => {
+        if (item.description) {
+          return item.description;
         }
-
-        const modalHeadingStyle = {};
-        if (this.props.options) {
-          const {options} = this.props;
-          modalHeadingStyle.backgroundColor = _.get(
-            options,
-            "primary_theme_background_color.value",
-            "#000000",
-          );
+        if (item.plan) {
+          return item.plan.name;
         }
+        return item.type;
+      };
 
-        return (
-          <Modal
-            modalTitle={pageName}
-            icon="fa-credit-card-alt"
-            show={this.props.show}
-            hide={this.props.hide}
-          >
-            <div id="invoice-modal" className="table-responsive">
-              <div className="invoice-widget" style={modalHeadingStyle}>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="address">
-                      <strong>Amount To Be Charged</strong>
-                      <br />
-                      <span>
-                        <i className="fa fa-money" />
-                        <Price value={amountDue} perfix={prefix} />
-                      </span>
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="address">
-                      <strong>Charge Date</strong>
-                      <br />
-                      <span>
-                        <i className="fa fa-calendar-o" />
-                        <DateFormat date={nextPaymentAttempt} />
-                      </span>
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="payment-method">
-                      <strong>Using Payment Method</strong>
-                      <br />
-                      <span>
-                        <i className="fa fa-credit-card" />
-                        *** *** *** 
-                        {' '}
-                        {last4}
-                      </span>
-                      <br />
-                    </div>
+      const items = () => {
+        return lineItems.map(item => (
+          <tr key={item.id}>
+            <td>{item_name(item)}</td>
+            <td>
+              <DateFormat date={nextPaymentAttempt} />
+            </td>
+            <td>
+              <Price value={item.amount} prefix={prefix} />
+            </td>
+          </tr>
+        ));
+      };
+
+      let last4;
+      let fund = null;
+
+      if (self.state.currentUser) {
+        fund = self.state.currentUser.references.funds;
+        if (fund && fund.length > 0) {
+          last4 = fund[0].source.card.last4;
+        }
+      }
+
+      const modalHeadingStyle = {};
+      if (this.props.options) {
+        const { options } = this.props;
+        modalHeadingStyle.backgroundColor = _.get(
+          options,
+          "primary_theme_background_color.value",
+          "#000000",
+        );
+      }
+
+      return (
+        <Modal
+          modalTitle={pageName}
+          icon="fa-credit-card-alt"
+          show={this.props.show}
+          hide={this.props.hide}
+        >
+          <div id="invoice-modal" className="table-responsive">
+            <div className="invoice-widget" style={modalHeadingStyle}>
+              <div className="row">
+                <div className="col-xs-12 col-sm-4">
+                  <div className="address">
+                    <strong>Amount To Be Charged</strong>
+                    <br />
+                    <span>
+                      <i className="fa fa-money" />
+                      <Price value={amountDue} perfix={prefix} />
+                    </span>
+                    <br />
                   </div>
                 </div>
-              </div>
-              <table
-                id="invoice-table"
-                className="table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <td className="service-description">
-                      <strong>Service Item</strong>
-                    </td>
-                    <td className="service-billing-date">
-                      <strong>Payment Date</strong>
-                    </td>
-                    <td className="service-price">
-                      <strong>Amount</strong>
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>{items()}</tbody>
-                <tfoot className="invoice-footer">
-                  <tr>
-                    <td />
-                    <td>Total:</td>
-                    <td>
-                      <Price value={total} perfix={prefix} />
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </Modal>
-        );
-      } 
-        return (
-          <Modal
-            modalTitle={pageName}
-            icon={this.props.icon}
-            show={this.props.show}
-            hide={this.props.hide}
-          >
-            <div className="table-responsive">
-              <div className="invoice-widget">
-                <div className="row">
-                  <div className="col-xs-12">
-                    <h4>You do not have any invoice at the moment.</h4>
+                <div className="col-xs-12 col-sm-4">
+                  <div className="address">
+                    <strong>Charge Date</strong>
+                    <br />
+                    <span>
+                      <i className="fa fa-calendar-o" />
+                      <DateFormat date={nextPaymentAttempt} />
+                    </span>
+                    <br />
+                  </div>
+                </div>
+                <div className="col-xs-12 col-sm-4">
+                  <div className="payment-method">
+                    <strong>Using Payment Method</strong>
+                    <br />
+                    <span>
+                      <i className="fa fa-credit-card" />
+                      *** *** *** {last4}
+                    </span>
+                    <br />
                   </div>
                 </div>
               </div>
             </div>
-          </Modal>
-        );
-      
-    
+            <table
+              id="invoice-table"
+              className="table table-striped table-hover"
+            >
+              <thead>
+                <tr>
+                  <td className="service-description">
+                    <strong>Service Item</strong>
+                  </td>
+                  <td className="service-billing-date">
+                    <strong>Payment Date</strong>
+                  </td>
+                  <td className="service-price">
+                    <strong>Amount</strong>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>{items()}</tbody>
+              <tfoot className="invoice-footer">
+                <tr>
+                  <td />
+                  <td>Total:</td>
+                  <td>
+                    <Price value={total} perfix={prefix} />
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </Modal>
+      );
+    }
+    return (
+      <Modal
+        modalTitle={pageName}
+        icon={this.props.icon}
+        show={this.props.show}
+        hide={this.props.hide}
+      >
+        <div className="table-responsive">
+          <div className="invoice-widget">
+            <div className="row">
+              <div className="col-xs-12">
+                <h4>You do not have any invoice at the moment.</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    );
   }
 }
 

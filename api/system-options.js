@@ -40,16 +40,16 @@ module.exports = function(router) {
                 "../public/assets/logos/v1/servicebot-logo-full-white.png",
               ),
             );
-          } if (req.params.id == "loader_logo") {
+          }
+          if (req.params.id == "loader_logo") {
             return res.sendFile(
               path.resolve(
                 __dirname,
                 "../public/assets/logos/v1/servicebot-logo-full-blue.png",
               ),
             );
-          } 
-            res.status(400).send("no image");
-          
+          }
+          res.status(400).send("no image");
         }
       });
     } else {
@@ -63,7 +63,7 @@ module.exports = function(router) {
     upload().single("file"),
     function(req, res, next) {
       if (systemFiles.indexOf(req.params.id) > -1) {
-        const {file} = req;
+        const { file } = req;
         file.name = file.originalname;
         file.user_id = req.user.get("id");
         File.findFile(systemFilePath, req.params.id, function(brandLogo) {

@@ -14,7 +14,7 @@ import TrialActionButton from "../my-services/trial-action-button.jsx";
 class ServiceInstancePaymentPlan extends React.Component {
   getServiceStatus() {
     const self = this;
-    const {owner} = this.props;
+    const { owner } = this.props;
     if (owner.status !== "suspended") {
       const charges = self.props.service.references.charge_items;
       const unpaidCharges = _.filter(charges, item => {
@@ -52,7 +52,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="pending-quote"
           />
         );
-      } if (self.props.status === "requested") {
+      }
+      if (self.props.status === "requested") {
         return (
           <DashboardWidget
             small
@@ -64,7 +65,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="widget-hover"
           />
         );
-      } if (self.props.status === "waiting_cancellation") {
+      }
+      if (self.props.status === "waiting_cancellation") {
         return (
           <DashboardWidget
             small
@@ -76,7 +78,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="cancel-pending"
           />
         );
-      } if (self.props.status === "cancelled") {
+      }
+      if (self.props.status === "cancelled") {
         return (
           <DashboardWidget
             small
@@ -88,7 +91,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="restart"
           />
         );
-      } if (
+      }
+      if (
         this.props.allCharges.false &&
         this.props.allCharges.false.length > 0
       ) {
@@ -103,7 +107,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="widget-hover"
           />
         );
-      } if (
+      }
+      if (
         (self.props.status === "running" ||
           self.props.status === "in_progress") &&
         inTrial
@@ -119,7 +124,8 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="cancel"
           />
         );
-      } if (
+      }
+      if (
         self.props.status === "running" ||
         self.props.status === "in_progress"
       ) {
@@ -134,19 +140,17 @@ class ServiceInstancePaymentPlan extends React.Component {
             widgetHoverClass="cancel"
           />
         );
-      } 
-        return null;
-      
-    } 
-      return (
-        <DashboardWidget
-          widgetColor="#da0304"
-          widgetIcon="ban"
-          widgetData="Suspended"
-          widgetClass="col-xs-12 col-sm-6 col-md-4 col-xl-4 p-r-5"
-        />
-      );
-    
+      }
+      return null;
+    }
+    return (
+      <DashboardWidget
+        widgetColor="#da0304"
+        widgetIcon="ban"
+        widgetData="Suspended"
+        widgetClass="col-xs-12 col-sm-6 col-md-4 col-xl-4 p-r-5"
+      />
+    );
   }
 
   getSplitPayments() {
@@ -168,10 +172,8 @@ class ServiceInstancePaymentPlan extends React.Component {
                       <span>Paid Instantly</span>
                     ) : (
                       <span>
-After
-                        {splitItem.charge_day}
-                        {' '}
-Days
+                        After
+                        {splitItem.charge_day} Days
                       </span>
                     )}
                   </div>
@@ -186,9 +188,8 @@ Days
           </div>
         </div>
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   // TODO: change this to property widget type
@@ -223,9 +224,8 @@ Days
           widgetClass="col-12 instance-price"
         />
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   getTrialButton() {
@@ -250,7 +250,7 @@ Days
   }
 
   getCustomerInfo() {
-    const {owner} = this.props;
+    const { owner } = this.props;
     if (owner.status !== "suspended") {
       return (
         <Authorizer permissions={["can_administrate"]}>
@@ -264,9 +264,7 @@ Days
                   <div>
                     <span>
                       <i className="fa fa-check" />
-                      Status: 
-                      {' '}
-                      {owner.status}
+                      Status: {owner.status}
                     </span>
                     <br />
                   </div>
@@ -275,9 +273,7 @@ Days
                   <div>
                     <span>
                       <i className="fa fa-envelope" />
-                      Email: 
-                      {' '}
-                      {owner.email}
+                      Email: {owner.email}
                     </span>
                     <br />
                   </div>
@@ -286,9 +282,7 @@ Days
                   <div>
                     <span>
                       <i className="fa fa-user" />
-                      Name: 
-                      {' '}
-                      {owner.name}
+                      Name: {owner.name}
                     </span>
                     <br />
                   </div>
@@ -296,9 +290,7 @@ Days
                 {owner.phone && (
                   <span>
                     <i className="fa fa-phone" />
-                    Phone #: 
-                    {' '}
-                    {owner.phone}
+                    Phone #: {owner.phone}
                   </span>
                 )}
               </div>
@@ -314,70 +306,61 @@ Days
           </div>
         </Authorizer>
       );
-    } 
-      return (
-        <Authorizer permissions={["can_administrate"]}>
-          <div className="service-instance-box red">
-            <div className="service-instance-box-title red">
-              <span>Customer is Suspended</span>
-            </div>
-            <div id="instance-owner" className="service-instance-box-content">
-              <div>
-                {owner.status && (
-                  <div>
-                    <span>
-                      <i className="fa fa-ban" />
-                      Status: 
-                      {' '}
-                      {owner.status}
-                    </span>
-                    <br />
-                  </div>
-                )}
-                {owner.email && (
-                  <div>
-                    <span>
-                      <i className="fa fa-envelope" />
-                      Email: 
-                      {' '}
-                      {owner.email}
-                    </span>
-                    <br />
-                  </div>
-                )}
-                {owner.name && (
-                  <div>
-                    <span>
-                      <i className="fa fa-user" />
-                      Name: 
-                      {' '}
-                      {owner.name}
-                    </span>
-                    <br />
-                  </div>
-                )}
-                {owner.phone && (
+    }
+    return (
+      <Authorizer permissions={["can_administrate"]}>
+        <div className="service-instance-box red">
+          <div className="service-instance-box-title red">
+            <span>Customer is Suspended</span>
+          </div>
+          <div id="instance-owner" className="service-instance-box-content">
+            <div>
+              {owner.status && (
+                <div>
                   <span>
-                    <i className="fa fa-phone" />
-                    Phone #: 
-                    {' '}
-                    {owner.phone}
+                    <i className="fa fa-ban" />
+                    Status: {owner.status}
                   </span>
-                )}
-              </div>
-              <div>
-                <Avatar
-                  key={`owner-avatar-${owner.id}`}
-                  linked
-                  size="lg"
-                  uid={owner.id}
-                />
-              </div>
+                  <br />
+                </div>
+              )}
+              {owner.email && (
+                <div>
+                  <span>
+                    <i className="fa fa-envelope" />
+                    Email: {owner.email}
+                  </span>
+                  <br />
+                </div>
+              )}
+              {owner.name && (
+                <div>
+                  <span>
+                    <i className="fa fa-user" />
+                    Name: {owner.name}
+                  </span>
+                  <br />
+                </div>
+              )}
+              {owner.phone && (
+                <span>
+                  <i className="fa fa-phone" />
+                  Phone #: {owner.phone}
+                </span>
+              )}
+            </div>
+            <div>
+              <Avatar
+                key={`owner-avatar-${owner.id}`}
+                linked
+                size="lg"
+                uid={owner.id}
+              />
             </div>
           </div>
-        </Authorizer>
-      );
-    
+        </div>
+      </Authorizer>
+    );
   }
 
   render() {
@@ -390,12 +373,7 @@ Days
             <div className="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 p-r-5">
               <h1>{this.props.service.name}</h1>
               <p>
-                {this.props.service.description} 
-                {' '}
-                <br />
-                {' '}
-Purchased
-                {" "}
+                {this.props.service.description} <br /> Purchased{" "}
                 <strong>
                   <DateFormat date={this.props.service.created_at} time />
                 </strong>
@@ -410,36 +388,30 @@ Purchased
           {this.getCustomerInfo()}
         </div>
       );
-    } 
-      return (
-        <div>
-          <div className="row m-b-10">
-            <div className="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 p-r-5">
-              <h1>{this.props.service.name}</h1>
-              <p>
-                {this.props.service.description} 
-                {' '}
-                <br />
-                {' '}
-Purchased
-                {" "}
-                <strong>
-                  <DateFormat date={this.props.service.created_at} time />
-                </strong>
-              </p>
-              {this.getLinkActionButton()}
-            </div>
+    }
+    return (
+      <div>
+        <div className="row m-b-10">
+          <div className="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-xl-8 p-r-5">
+            <h1>{this.props.service.name}</h1>
+            <p>
+              {this.props.service.description} <br /> Purchased{" "}
+              <strong>
+                <DateFormat date={this.props.service.created_at} time />
+              </strong>
+            </p>
+            {this.getLinkActionButton()}
           </div>
-          <div className="alert-box red">
-            <strong>
-              This service currently has no payment information attached to it.
-              Contact the administrator.
-            </strong>
-          </div>
-          {this.getCustomerInfo()}
         </div>
-      );
-    
+        <div className="alert-box red">
+          <strong>
+            This service currently has no payment information attached to it.
+            Contact the administrator.
+          </strong>
+        </div>
+        {this.getCustomerInfo()}
+      </div>
+    );
   }
 }
 

@@ -57,85 +57,79 @@ class UserFormEditRole extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load type="modal" />;
-    } 
-      const sortedRoles = _.sortBy(this.state.roles, ["id"]);
-      const userOptions = userList => {
-        return _.map(userList, role => {
-          return new Object({ [role.role_name]: role.id });
-        });
-      };
-      const roleOptionList = userOptions(sortedRoles);
+    }
+    const sortedRoles = _.sortBy(this.state.roles, ["id"]);
+    const userOptions = userList => {
+      return _.map(userList, role => {
+        return new Object({ [role.role_name]: role.id });
+      });
+    };
+    const roleOptionList = userOptions(sortedRoles);
 
-      const self = this;
+    const self = this;
 
-      if (this.state.success) {
-        const newRoleName = _.filter(self.state.roles, {
-          id: self.state.updatedUser.role_id,
-        })[0].role_name;
-        return (
-          <div className="edit-user-role-form">
-            <div className="p-20">
-              <p>
-                <strong>
-                  User 
-                  {' '}
-                  {this.props.user.email}
-'s role has been changed to
-                  {" "}
-                  {newRoleName}
-                </strong>
-              </p>
-            </div>
-            <div className="modal-footer text-right p-b-20">
-              <Buttons
-                containerClass="inline"
-                size="md"
-                btnType="default"
-                text="Close"
-                onClick={this.props.hide}
-              />
-            </div>
+    if (this.state.success) {
+      const newRoleName = _.filter(self.state.roles, {
+        id: self.state.updatedUser.role_id,
+      })[0].role_name;
+      return (
+        <div className="edit-user-role-form">
+          <div className="p-20">
+            <p>
+              <strong>
+                User {this.props.user.email}
+                's role has been changed to {newRoleName}
+              </strong>
+            </p>
           </div>
-        );
-      } 
-        return (
-          <div className="edit-user-role-form">
-            <div className="p-20">
-              <p>
-Change user
-                {this.props.user.email}
-'s role.
-              </p>
-              <Inputs
-                type="select"
-                label="User role"
-                name="role_id"
-                defaultValue={this.props.user.role_id}
-                options={roleOptionList}
-              />
-            </div>
-            <div className="modal-footer text-right p-b-20">
-              <Buttons
-                containerClass="inline"
-                size="md"
-                btnType="primary"
-                text="Save User"
-                value="submit"
-                onClick={this.handleSubmission}
-                loading={this.state.ajaxLoad}
-              />
-              <Buttons
-                containerClass="inline"
-                size="md"
-                btnType="default"
-                text="Cancel"
-                onClick={this.props.hide}
-              />
-            </div>
+          <div className="modal-footer text-right p-b-20">
+            <Buttons
+              containerClass="inline"
+              size="md"
+              btnType="default"
+              text="Close"
+              onClick={this.props.hide}
+            />
           </div>
-        );
-      
-    
+        </div>
+      );
+    }
+    return (
+      <div className="edit-user-role-form">
+        <div className="p-20">
+          <p>
+            Change user
+            {this.props.user.email}
+            's role.
+          </p>
+          <Inputs
+            type="select"
+            label="User role"
+            name="role_id"
+            defaultValue={this.props.user.role_id}
+            options={roleOptionList}
+          />
+        </div>
+        <div className="modal-footer text-right p-b-20">
+          <Buttons
+            containerClass="inline"
+            size="md"
+            btnType="primary"
+            text="Save User"
+            value="submit"
+            onClick={this.handleSubmission}
+            loading={this.state.ajaxLoad}
+          />
+          <Buttons
+            containerClass="inline"
+            size="md"
+            btnType="default"
+            text="Cancel"
+            onClick={this.props.hide}
+          />
+        </div>
+      </div>
+    );
   }
 }
 

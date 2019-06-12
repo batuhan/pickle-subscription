@@ -63,7 +63,7 @@ async function buildSwagger(model) {
           (refAcc, [refKey, refValue]) => {
             refAcc.properties[refKey] = {
               type: "array",
-              items: [{ $ref: `#/definitions/${  refKey}` }],
+              items: [{ $ref: `#/definitions/${refKey}` }],
             };
             return refAcc;
           },
@@ -78,7 +78,7 @@ async function buildSwagger(model) {
         acc.required.push(key);
       }
 
-      let {type} = value;
+      let { type } = value;
       if (key === "password") {
         property.format = "password";
       }
@@ -210,10 +210,10 @@ function buildEntityPaths() {
     const { endpointName, resourceName, ownership, deletedRoutes } = resource;
     acc[`/${endpointName}`] = {
       get: {
-        summary: `Get ${  resourceName}`,
+        summary: `Get ${resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
-        operationId: `get_${  endpointName.split("-").join("_")}`,
+        operationId: `get_${endpointName.split("-").join("_")}`,
         security: [
           {
             internalApiKey: [],
@@ -221,11 +221,11 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: `An array of ${  resourceName}`,
+            description: `An array of ${resourceName}`,
             schema: {
               type: "array",
               items: {
-                $ref: `#/definitions/${  resourceName}`,
+                $ref: `#/definitions/${resourceName}`,
               },
             },
           },
@@ -234,10 +234,10 @@ function buildEntityPaths() {
     };
     acc[`/${endpointName}/search`] = {
       get: {
-        summary: `Get ${  resourceName}`,
+        summary: `Get ${resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
-        operationId: `get_${  endpointName.split("-").join("_")  }_search`,
+        operationId: `get_${endpointName.split("-").join("_")}_search`,
         security: [
           {
             internalApiKey: [],
@@ -261,11 +261,11 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: `An array of filtered${  resourceName}`,
+            description: `An array of filtered${resourceName}`,
             schema: {
               type: "array",
               items: {
-                $ref: `#/definitions/${  resourceName}`,
+                $ref: `#/definitions/${resourceName}`,
               },
             },
           },
@@ -275,7 +275,7 @@ function buildEntityPaths() {
 
     acc[`/${endpointName}/{id}`] = {
       get: {
-        summary: `Get ${  resourceName  } by id`,
+        summary: `Get ${resourceName} by id`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `get_${endpointName.split("-").join("_")}_id`,
@@ -288,7 +288,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: `${resourceName  } id`,
+            description: `${resourceName} id`,
             required: true,
             type: "number",
             format: "double",
@@ -296,9 +296,9 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: `${resourceName  } with id`,
+            description: `${resourceName} with id`,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         },
@@ -308,10 +308,10 @@ function buildEntityPaths() {
     if (ownership) {
       acc[`/${endpointName}/own`] = {
         get: {
-          summary: `Get requester's ${  resourceName}`,
+          summary: `Get requester's ${resourceName}`,
           tags: [endpointName],
           produces: ["application/json"],
-          operationId: `get_${  endpointName.split("-").join("_")  }_own`,
+          operationId: `get_${endpointName.split("-").join("_")}_own`,
           security: [
             {
               internalApiKey: [],
@@ -319,12 +319,11 @@ function buildEntityPaths() {
           ],
           responses: {
             "200": {
-              description:
-                `An array of ${  resourceName  }, owned by requester`,
+              description: `An array of ${resourceName}, owned by requester`,
               schema: {
                 type: "array",
                 items: {
-                  $ref: `#/definitions/${  resourceName}`,
+                  $ref: `#/definitions/${resourceName}`,
                 },
               },
             },
@@ -335,7 +334,7 @@ function buildEntityPaths() {
 
     if (!deletedRoutes || !deletedRoutes.includes("post")) {
       acc[`/${endpointName}`].post = {
-        summary: `Create new ${  resourceName}`,
+        summary: `Create new ${resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `post_${endpointName.split("-").join("_")}`,
@@ -348,18 +347,18 @@ function buildEntityPaths() {
           {
             name: "data",
             in: "body",
-            description: `${resourceName  } to create`,
+            description: `${resourceName} to create`,
             required: true,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         ],
         responses: {
           "200": {
-            description: `${resourceName  } with id`,
+            description: `${resourceName} with id`,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         },
@@ -367,7 +366,7 @@ function buildEntityPaths() {
     }
     if (!deletedRoutes || !deletedRoutes.includes("put")) {
       acc[`/${endpointName}/{id}`].put = {
-        summary: `Update ${  resourceName}`,
+        summary: `Update ${resourceName}`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `put_${endpointName.split("-").join("_")}_id`,
@@ -380,7 +379,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: `${resourceName  } id`,
+            description: `${resourceName} id`,
             required: true,
             type: "number",
             format: "double",
@@ -391,15 +390,15 @@ function buildEntityPaths() {
             description: "Data to update",
             required: true,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         ],
         responses: {
           "200": {
-            description: `${resourceName  } with id`,
+            description: `${resourceName} with id`,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         },
@@ -407,7 +406,7 @@ function buildEntityPaths() {
     }
     if (!deletedRoutes || !deletedRoutes.includes("delete")) {
       acc[`/${endpointName}/{id}`].delete = {
-        summary: `Delete ${  resourceName  } by id`,
+        summary: `Delete ${resourceName} by id`,
         tags: [endpointName],
         produces: ["application/json"],
         operationId: `delete_${endpointName.split("-").join("_")}_id`,
@@ -420,7 +419,7 @@ function buildEntityPaths() {
           {
             name: "id",
             in: "path",
-            description: `${resourceName  } id`,
+            description: `${resourceName} id`,
             required: true,
             type: "number",
             format: "double",
@@ -428,9 +427,9 @@ function buildEntityPaths() {
         ],
         responses: {
           "200": {
-            description: `${resourceName  } that was deleted`,
+            description: `${resourceName} that was deleted`,
             schema: {
-              $ref: `#/definitions/${  resourceName}`,
+              $ref: `#/definitions/${resourceName}`,
             },
           },
         },

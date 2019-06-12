@@ -6,10 +6,10 @@ const run = function*(config, provide, services) {
   const request = require("request");
   const semver = require("semver");
   const _ = require("lodash");
-  const {master} = config;
-  const {interval} = config; // 24 hours
+  const { master } = config;
+  const { interval } = config; // 24 hours
   const Notification = require("../../models/notifications");
-  const {dispatchEvent} = require("../../config/redux/store");
+  const { dispatchEvent } = require("../../config/redux/store");
   const salt = process.env.INSTANCE_SALT;
   // let hash = require("bcryptjs").hashSync(salt, 10).toString("hex");
   const checkMaster = async function() {
@@ -29,11 +29,10 @@ const run = function*(config, provide, services) {
     // for each metricName metricValue pair (entries) create a string of metricName=metricValue and join all by & to create query string for url
     const query = Object.entries(stats)
       .map(metric => {
-        return `${metric[0]  }=${  metric[1]}`;
+        return `${metric[0]}=${metric[1]}`;
       })
       .join("&");
-    const url =
-      `${master  }?instance_hash=${  salt  }&version=${  version  }&${  query}`;
+    const url = `${master}?instance_hash=${salt}&version=${version}&${query}`;
     console.log(url);
 
     request(url, function(error, response, body) {
@@ -45,7 +44,7 @@ const run = function*(config, provide, services) {
         try {
           return Promise.all(
             JSON.parse(body).notifications.map(notification => {
-              const {data} = notification;
+              const { data } = notification;
               return Notification.createPromise(data)
                 .then(result => {
                   store.dispatchEvent("master_notification_created", result);
@@ -63,7 +62,7 @@ const run = function*(config, provide, services) {
             }),
           );
         } catch (e) {
-          console.error(`error connecting to hub: ${  e}`);
+          console.error(`error connecting to hub: ${e}`);
         }
       }
     });

@@ -78,7 +78,7 @@ class WysiwygRedux extends React.Component {
           onChange={this.props.onChange}
           name={this.props.name}
           id="editor"
-          ref={`wysiwyg_${  this.props.name}`}
+          ref={`wysiwyg_${this.props.name}`}
           value={this.props.input.value}
         />
         {touched &&

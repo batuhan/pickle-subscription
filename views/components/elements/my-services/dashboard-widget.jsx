@@ -20,7 +20,7 @@ class DashboardWidget extends React.Component {
     const style = { widget: {}, widgetDark: {} };
 
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       style.widget.backgroundColor = _.get(
         options,
         "primary_theme_background_color.value",
@@ -124,7 +124,8 @@ class DashboardWidget extends React.Component {
           </Link>
         </div>
       );
-    } if (this.props.clickAction) {
+    }
+    if (this.props.clickAction) {
       return (
         <div
           className={
@@ -136,17 +137,16 @@ class DashboardWidget extends React.Component {
           </Link>
         </div>
       );
-    } 
-      return (
-        <div
-          className={
-            self.props.widgetClass || "col-xs-12 col-sm-6 col-md-3 col-xl-3"
-          }
-        >
-          {widgetContent}
-        </div>
-      );
-    
+    }
+    return (
+      <div
+        className={
+          self.props.widgetClass || "col-xs-12 col-sm-6 col-md-3 col-xl-3"
+        }
+      >
+        {widgetContent}
+      </div>
+    );
   }
 }
 

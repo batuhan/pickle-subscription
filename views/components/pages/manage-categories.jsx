@@ -170,63 +170,62 @@ class ManageCategories2 extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <Authorizer permissions="can_administrate">
-          <Jumbotron pageName={pageName} subtitle={subtitle} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <ServiceBotTableBase
-                    rows={this.state.rows}
-                    createItemAction={this.openAddCategoryModal}
-                    createItemLabel="Create Category"
-                    fetchRows={this.fetchData}
+    }
+    return (
+      <Authorizer permissions="can_administrate">
+        <Jumbotron pageName={pageName} subtitle={subtitle} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <ServiceBotTableBase
+                  rows={this.state.rows}
+                  createItemAction={this.openAddCategoryModal}
+                  createItemLabel="Create Category"
+                  fetchRows={this.fetchData}
+                >
+                  <TableHeaderColumn
+                    isKey
+                    dataField="name"
+                    dataSort
+                    width={350}
                   >
-                    <TableHeaderColumn
-                      isKey
-                      dataField="name"
-                      dataSort
-                      width={350}
-                    >
-                      Category Name
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataSort
-                      dataField="description"
-                      width={300}
-                    >
-                      Description
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataSort
-                      dataField="created_at"
-                      filterFormatted
-                      dataFormat={this.createdFormatter}
-                      searchable={false}
-                      width={150}
-                    >
-                      Created
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="Actions"
-                      className="action-column-header"
-                      columnClassName="action-column"
-                      dataFormat={this.rowActionsFormatter}
-                      searchable={false}
-                      width={100}
-                      filter={false}
-                    />
-                  </ServiceBotTableBase>
-                </div>
+                    Category Name
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataSort
+                    dataField="description"
+                    width={300}
+                  >
+                    Description
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataSort
+                    dataField="created_at"
+                    filterFormatted
+                    dataFormat={this.createdFormatter}
+                    searchable={false}
+                    width={150}
+                  >
+                    Created
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="Actions"
+                    className="action-column-header"
+                    columnClassName="action-column"
+                    dataFormat={this.rowActionsFormatter}
+                    searchable={false}
+                    width={100}
+                    filter={false}
+                  />
+                </ServiceBotTableBase>
               </div>
-              {renderModals()}
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            </div>
+            {renderModals()}
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

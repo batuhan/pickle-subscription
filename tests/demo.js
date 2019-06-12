@@ -889,9 +889,8 @@ module.exports = new Promise(function(resolve_top, reject_top) {
           newUser.createWithStripe(function(err, result) {
             if (!err) {
               return resolve_user(result);
-            } 
-              return reject_user(err);
-            
+            }
+            return reject_user(err);
           });
         });
       }),

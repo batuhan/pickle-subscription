@@ -201,41 +201,40 @@ class DataForm extends React.Component {
 
           // returning the cloned element with the new props
           return React.cloneElement(child, newProps);
-        } 
-          // otherwise, child is a regular input element
+        }
+        // otherwise, child is a regular input element
 
-          // making sure this element has a name then try and see if it has an error or warning
-          if (_.has(child.props, "name")) {
-            if (
-              Object.keys(self.state.errors).length > 0 &&
-              self.state.errors.constructor === Object
-            ) {
-              if (_.has(self.state.errors, child.props.name)) {
-                if (_.has(self.state.errors[child.props.name], "error")) {
-                  currentError = _.get(self.state.errors, child.props.name)
-                    .error;
-                } else if (
-                  _.has(self.state.errors[child.props.name], "warning")
-                ) {
-                  currentWarning = _.get(self.state.errors, child.props.name)
-                    .warning;
-                }
+        // making sure this element has a name then try and see if it has an error or warning
+        if (_.has(child.props, "name")) {
+          if (
+            Object.keys(self.state.errors).length > 0 &&
+            self.state.errors.constructor === Object
+          ) {
+            if (_.has(self.state.errors, child.props.name)) {
+              if (_.has(self.state.errors[child.props.name], "error")) {
+                currentError = _.get(self.state.errors, child.props.name).error;
+              } else if (
+                _.has(self.state.errors[child.props.name], "warning")
+              ) {
+                currentWarning = _.get(self.state.errors, child.props.name)
+                  .warning;
               }
             }
           }
+        }
 
-          // setting up the props for the element
-          const newProps = {
-            onChange: self.handleInputChange(child, modelName, objectName),
-            "data-error": currentError || false,
-            className: currentError ? "form-control has-error" : "form-control",
-            "data-warning": currentWarning || false,
-          };
+        // setting up the props for the element
+        const newProps = {
+          onChange: self.handleInputChange(child, modelName, objectName),
+          "data-error": currentError || false,
+          className: currentError ? "form-control has-error" : "form-control",
+          "data-warning": currentWarning || false,
+        };
 
-          // returning the cloned element with the new props
-          return React.cloneElement(child, newProps);
-        
-      } if (child.props) {
+        // returning the cloned element with the new props
+        return React.cloneElement(child, newProps);
+      }
+      if (child.props) {
         const currModel = child.props.modelName || modelName;
         const currObject = child.props.objectName || objectName;
         if (child.props.objectName) {
@@ -281,7 +280,7 @@ class DataForm extends React.Component {
 
   submitDataForm() {
     const self = this;
-    const {form} = self.state;
+    const { form } = self.state;
     const formChildren = form.references;
     const errors = {};
 
@@ -325,35 +324,33 @@ class DataForm extends React.Component {
                   );
                 }
               } else if (_.has(formChildren[model][modelItem], "value")) {
-                  if (_.has(childValidators, model)) {
-                    if (_.has(childValidators[model], modelItem)) {
-                      if (
-                        _.isFunction(childValidators[model][modelItem].value)
-                      ) {
-                        const theValidator =
-                          childValidators[model][modelItem].value;
-                        const theValue = formChildren[model][modelItem].value;
-                        const testResult = theValidator(theValue);
-                        if (testResult === true) {
-                        } else {
-                          _.set(
-                            errors,
-                            `references.${model}.${modelItem}.value`,
-                            { error: testResult.error },
-                          );
-                        }
-                      }
-                      // uncomment lines below to help in development to see the warning on fields.
-                      else {
+                if (_.has(childValidators, model)) {
+                  if (_.has(childValidators[model], modelItem)) {
+                    if (_.isFunction(childValidators[model][modelItem].value)) {
+                      const theValidator =
+                        childValidators[model][modelItem].value;
+                      const theValue = formChildren[model][modelItem].value;
+                      const testResult = theValidator(theValue);
+                      if (testResult === true) {
+                      } else {
                         _.set(
                           errors,
-                          `references.${model}.${modelItem}.${modelField}`,
-                          { warning: "no validation function defined" },
+                          `references.${model}.${modelItem}.value`,
+                          { error: testResult.error },
                         );
                       }
                     }
+                    // uncomment lines below to help in development to see the warning on fields.
+                    else {
+                      _.set(
+                        errors,
+                        `references.${model}.${modelItem}.${modelField}`,
+                        { warning: "no validation function defined" },
+                      );
+                    }
                   }
                 }
+              }
             }
           }
         }
@@ -404,7 +401,7 @@ class DataForm extends React.Component {
       let name = "";
 
       if (event && event.target) {
-        const {target} = event;
+        const { target } = event;
         value = target.type === "checkbox" ? target.checked : target.value;
         name = target.name;
         // if target doesn't exist - assume the event is the value
@@ -462,7 +459,11 @@ class DataForm extends React.Component {
   }
 
   render() {
-    const children = this.recursiveInputModifier(this.props.children, null, null);
+    const children = this.recursiveInputModifier(
+      this.props.children,
+      null,
+      null,
+    );
 
     return (
       <form id={this.props.id} className="dataform">

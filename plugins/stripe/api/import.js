@@ -7,7 +7,7 @@ const Fund = require("../../../models/fund");
 const ServiceTemplate = require("../../../models/service-template");
 const ServiceCategory = require("../../../models/service-category");
 const Invoice = require("../../../models/invoice");
-const {dispatchEvent} = require("../../../config/redux/store");
+const { dispatchEvent } = require("../../../config/redux/store");
 const stripe = require("../../../config/stripe");
 
 module.exports = function(knex) {
@@ -48,10 +48,9 @@ module.exports = function(knex) {
                 1000,
                 importStripeUsers(last_customer, notifyUsers, protocol, host),
               );
-            } 
-              console.log(`All users and data have been imported.`);
-              return resolve(true);
-            
+            }
+            console.log(`All users and data have been imported.`);
+            return resolve(true);
           });
         } else {
           return reject("Cannot make the API call to retrieve customers.");
@@ -89,10 +88,9 @@ module.exports = function(knex) {
                 const last_plan = plans.data[plans.data.length - 1].id;
                 console.log(`Parsed all plans until Plan ID ${last_plan}`);
                 return setTimeout(resolve, 1000, importStripePlans(last_plan));
-              } 
-                console.log(`All plans have been imported.`);
-                return resolve(true);
-              
+              }
+              console.log(`All plans have been imported.`);
+              return resolve(true);
             });
           } else {
             console.log(err);
@@ -141,10 +139,9 @@ module.exports = function(knex) {
                 1000,
                 importStripeSubscriptions(last_subscription),
               );
-            } 
-              console.log(`All subscriptions have been imported.`);
-              return resolve(true);
-            
+            }
+            console.log(`All subscriptions have been imported.`);
+            return resolve(true);
           });
         } else {
           return reject("Cannot make the API call to retrieve Plans.");
@@ -180,18 +177,12 @@ module.exports = function(knex) {
                         "email",
                       )}`,
                     );
-                    const apiUrl =
-                      `${protocol 
-                      }://${ 
-                      host 
-                      }/api/v1/users/register?token=${ 
-                      result.get("token")}`;
-                    const frontEndUrl =
-                      `${protocol 
-                      }://${ 
-                      host 
-                      }/invitation/${ 
-                      result.get("token")}`;
+                    const apiUrl = `${protocol}://${host}/api/v1/users/register?token=${result.get(
+                      "token",
+                    )}`;
+                    const frontEndUrl = `${protocol}://${host}/invitation/${result.get(
+                      "token",
+                    )}`;
                     console.log(frontEndUrl);
                     user.set("url", frontEndUrl);
                     user.set("api", apiUrl);
@@ -204,10 +195,9 @@ module.exports = function(knex) {
                 new_user.create(function(err, user_retry) {
                   if (!err) {
                     return resolve(user_retry);
-                  } 
-                    // Reject if the user object cannot be obtained or created
-                    return reject(err);
-                  
+                  }
+                  // Reject if the user object cannot be obtained or created
+                  return reject(err);
                 });
               }
             });
@@ -254,9 +244,8 @@ module.exports = function(knex) {
       ServiceTemplate.findOne("name", plan.id, function(template) {
         if (template.data) {
           return resolve(template);
-        } 
-          return resolve(false);
-        
+        }
+        return resolve(false);
       });
     }).then(function(template) {
       return new Promise(function(resolve, reject) {
@@ -308,24 +297,22 @@ module.exports = function(knex) {
       ) {
         if (!service.data) {
           return resolve(true);
-        } 
-          return reject("Service already exists in ServiceBot!");
-        
+        }
+        return reject("Service already exists in ServiceBot!");
       });
     })
       .then(function() {
         return new Promise(function(resolve, reject) {
           if (!subscription.plan) {
-            const {plan} = subscription.items.data[0];
+            const { plan } = subscription.items.data[0];
             let amount = 0;
             subscription.items.data.map(function(item_plan) {
               amount += parseInt(item_plan.plan.amount);
             });
             plan.amount = amount;
             return resolve(plan);
-          } 
-            return resolve(subscription.plan);
-          
+          }
+          return resolve(subscription.plan);
         });
       })
       .then(function(plan) {
@@ -340,9 +327,8 @@ module.exports = function(knex) {
               service.subscription_id = subscription.id;
               service.status = "running";
               return resolve(service);
-            } 
-              return reject("User was not found! Service will not be created.");
-            
+            }
+            return reject("User was not found! Service will not be created.");
           });
         });
       })
@@ -388,11 +374,11 @@ module.exports = function(knex) {
   };
 
   const importMiddleware = function(req, res, next) {
-    const {protocol} = req;
+    const { protocol } = req;
     const host = req.hostname;
     let notifyUsers = false;
     if (req.body.hasOwnProperty("notifyUsers")) {
-      console.log(`notify users is set to ${  req.body.notifyUsers}`);
+      console.log(`notify users is set to ${req.body.notifyUsers}`);
       notifyUsers = req.body.notifyUsers;
     }
     importStripeUsers(null, notifyUsers, protocol, host)

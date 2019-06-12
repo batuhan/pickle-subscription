@@ -16,12 +16,12 @@ const actionHandler = function(action, state) {
     case "@@redux-form/SET_SUBMIT_SUCCEEDED":
       return {
         category: "Forms",
-        action: `Successfully submitted ${  action.meta.form}`,
+        action: `Successfully submitted ${action.meta.form}`,
       };
     case "@@redux-form/START_SUBMIT":
       return {
         category: "Forms",
-        action: `Start Submit ${  action.meta.form}`,
+        action: `Start Submit ${action.meta.form}`,
       };
     case "@@redux-form/SET_SUBMIT_FAILED":
       if (!state) {
@@ -31,7 +31,7 @@ const actionHandler = function(action, state) {
       const label = form.error || JSON.stringify(form.syncErrors);
       return {
         category: "Forms",
-        action: `Submit Failed ${  action.meta.form}`,
+        action: `Submit Failed ${action.meta.form}`,
         label,
       };
     default:

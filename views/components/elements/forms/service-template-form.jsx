@@ -92,10 +92,7 @@ function renderSplits({ fields, meta: { error, submitFailed } }) {
               </span>
             </button>
 
-            <h4>
-Payment #
-              {index + 1}
-            </h4>
+            <h4>Payment #{index + 1}</h4>
             <label>Days to charge customer after subscribed</label>
             <Field
               name={`${member}.charge_day`}
@@ -124,7 +121,7 @@ class CustomField extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {props} = this;
+    const { props } = this;
     if (nextProps.myValues.type !== props.myValues.type) {
       props.clearConfig();
       props.clearValue();
@@ -135,7 +132,7 @@ class CustomField extends React.Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     let {
       willAutoFocus,
       index,
@@ -464,7 +461,7 @@ class renderCustomProperty extends React.Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     const {
       templateType,
       privateValue,
@@ -526,7 +523,7 @@ class TemplateForm extends React.Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
 
     const changeServiceType = (event, newValue) => {
       if (newValue === "one_time") {
@@ -934,109 +931,108 @@ class ServiceTemplateForm extends React.Component {
     // Todo change this. this is how we are currently making sure the redux store is populated
     if (!this.props.company_name) {
       return <Load />;
-    } 
-      let initialValues = {};
-      const initialRequests = [];
-      let submissionRequest = {};
-      let successMessage = "Template Updated";
-      let imageUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/image`;
-      let iconUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/icon`;
+    }
+    let initialValues = {};
+    const initialRequests = [];
+    let submissionRequest = {};
+    let successMessage = "Template Updated";
+    let imageUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/image`;
+    let iconUploadURL = `/api/v1/service-templates/${this.state.newTemplateId}/icon`;
 
-      if (this.props.params.templateId) {
-        initialRequests.push(
-          {
-            method: "GET",
-            url: `/api/v1/service-templates/${this.props.params.templateId}`,
-          },
-          {
-            method: "GET",
-            url: `/api/v1/service-categories`,
-            name: "_categories",
-          },
-        );
-        if (this.props.params.duplicate) {
-          submissionRequest = {
-            method: "POST",
-            url: `/api/v1/service-templates`,
-          };
-          successMessage = "Template Duplicated";
-        } else {
-          submissionRequest = {
-            method: "PUT",
-            url: `/api/v1/service-templates/${this.props.params.templateId}`,
-          };
-          successMessage = "Template Updated";
-          imageUploadURL = `/api/v1/service-templates/${this.props.params.templateId}/image`;
-          iconUploadURL = `/api/v1/service-templates/${this.props.params.templateId}/icon`;
-        }
-      } else {
-        initialValues = {
-          type: "subscription",
-          category_id: 1,
-          trial_period_days: 0,
-          statement_descriptor: this.props.company_name.value.substring(0, 22),
-          interval: "month",
-          interval_count: 1,
-          published: !!this.props.fieldState.options.stripe_publishable_key,
-          amount: 0,
-        };
-        initialRequests.push({
+    if (this.props.params.templateId) {
+      initialRequests.push(
+        {
+          method: "GET",
+          url: `/api/v1/service-templates/${this.props.params.templateId}`,
+        },
+        {
           method: "GET",
           url: `/api/v1/service-categories`,
           name: "_categories",
-        });
+        },
+      );
+      if (this.props.params.duplicate) {
         submissionRequest = {
           method: "POST",
           url: `/api/v1/service-templates`,
         };
-        successMessage = "Template Created";
+        successMessage = "Template Duplicated";
+      } else {
+        submissionRequest = {
+          method: "PUT",
+          url: `/api/v1/service-templates/${this.props.params.templateId}`,
+        };
+        successMessage = "Template Updated";
+        imageUploadURL = `/api/v1/service-templates/${this.props.params.templateId}/image`;
+        iconUploadURL = `/api/v1/service-templates/${this.props.params.templateId}/icon`;
       }
+    } else {
+      initialValues = {
+        type: "subscription",
+        category_id: 1,
+        trial_period_days: 0,
+        statement_descriptor: this.props.company_name.value.substring(0, 22),
+        interval: "month",
+        interval_count: 1,
+        published: !!this.props.fieldState.options.stripe_publishable_key,
+        amount: 0,
+      };
+      initialRequests.push({
+        method: "GET",
+        url: `/api/v1/service-categories`,
+        name: "_categories",
+      });
+      submissionRequest = {
+        method: "POST",
+        url: `/api/v1/service-templates`,
+      };
+      successMessage = "Template Created";
+    }
 
-      return (
-        <div>
-          <div className="row">
-            <div className="col-md-3">
-              {(!this.state.imageSuccess ||
-                !this.state.iconSuccess ||
-                !this.state.success) && (
-                <div>
-                  <FileUploadForm
-                    upload={this.state.success}
-                    imageUploadURL={imageUploadURL}
-                    name="template-image"
-                    label="Upload Cover Image"
-                    handleImageUploadSuccess={this.handleImageSuccess}
-                  />
-                  <FileUploadForm
-                    upload={this.state.success}
-                    imageUploadURL={iconUploadURL}
-                    name="template-icon"
-                    label="Upload Icon Image"
-                    handleImageUploadSuccess={this.handleIconSuccess}
-                  />
-                </div>
-              )}
-            </div>
-            <div className="col-md-9">
-              <ServiceBotBaseForm
-                form={TemplateForm}
-                formName={TEMPLATE_FORM_NAME}
-                initialValues={initialValues}
-                initialRequests={initialRequests}
-                submissionPrep={this.submissionPrep}
-                submissionRequest={submissionRequest}
-                successMessage={successMessage}
-                handleResponse={this.handleResponse}
-                formProps={{
-                  ...this.props.fieldDispatches,
-                  ...this.props.fieldState,
-                }}
-              />
-            </div>
+    return (
+      <div>
+        <div className="row">
+          <div className="col-md-3">
+            {(!this.state.imageSuccess ||
+              !this.state.iconSuccess ||
+              !this.state.success) && (
+              <div>
+                <FileUploadForm
+                  upload={this.state.success}
+                  imageUploadURL={imageUploadURL}
+                  name="template-image"
+                  label="Upload Cover Image"
+                  handleImageUploadSuccess={this.handleImageSuccess}
+                />
+                <FileUploadForm
+                  upload={this.state.success}
+                  imageUploadURL={iconUploadURL}
+                  name="template-icon"
+                  label="Upload Icon Image"
+                  handleImageUploadSuccess={this.handleIconSuccess}
+                />
+              </div>
+            )}
+          </div>
+          <div className="col-md-9">
+            <ServiceBotBaseForm
+              form={TemplateForm}
+              formName={TEMPLATE_FORM_NAME}
+              initialValues={initialValues}
+              initialRequests={initialRequests}
+              submissionPrep={this.submissionPrep}
+              submissionRequest={submissionRequest}
+              successMessage={successMessage}
+              handleResponse={this.handleResponse}
+              formProps={{
+                ...this.props.fieldDispatches,
+                ...this.props.fieldState,
+              }}
+            />
           </div>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

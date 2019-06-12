@@ -10,11 +10,11 @@ export function hexToRgb(hex) {
 }
 export function componentToHex(c) {
   const hex = c.toString(16);
-  return hex.length == 1 ? `0${  hex}` : hex;
+  return hex.length == 1 ? `0${hex}` : hex;
 }
 
 export function rgbToHex(r, g, b) {
-  return `#${  componentToHex(r)  }${componentToHex(g)  }${componentToHex(b)}`;
+  return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
 }
 
 export function getDarkenedRGB(rgb) {
@@ -39,7 +39,7 @@ export function getThemeHeaderRGB(rgb) {
 
   const r = validation2(rgb.r);
   const g = validation(rgb.g);
-  const {b} = rgb;
+  const { b } = rgb;
 
   return { r, g, b };
 }

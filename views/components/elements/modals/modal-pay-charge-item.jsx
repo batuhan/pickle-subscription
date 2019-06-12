@@ -81,7 +81,7 @@ class ModalPayChargeItem extends React.Component {
             const funds = _.get(response, "references.funds");
             if (funds.length > 0) {
               const fund = funds[0];
-              const {card} = funds[0].source;
+              const { card } = funds[0].source;
               self.setState({
                 loading: false,
                 hasCard: true,
@@ -98,7 +98,7 @@ class ModalPayChargeItem extends React.Component {
             const funds = _.get(response, "[0]references.funds");
             if (funds.length > 0) {
               const fund = funds[0];
-              const {card} = funds[0].source;
+              const { card } = funds[0].source;
               self.setState({
                 loading: false,
                 hasCard: true,
@@ -188,17 +188,15 @@ class ModalPayChargeItem extends React.Component {
                     </strong>
                   </p>
                   <p>
-Service:
+                    Service:
                     {serviceName}
                   </p>
                   <p>
-Line Item:
+                    Line Item:
                     {chargeDescription}
                   </p>
                   <p>
-                    Price: 
-                    {' '}
-                    <Price value={chargeAmount} />
+                    Price: <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
@@ -220,7 +218,8 @@ Line Item:
           </div>
         </Modal>
       );
-    } if (currentModal == "model_pay_charge" && self.state.paid) {
+    }
+    if (currentModal == "model_pay_charge" && self.state.paid) {
       return (
         <Modal
           modalTitle={pageName}
@@ -238,17 +237,15 @@ Line Item:
                     <strong>Thank you, you have paid this line item!</strong>
                   </p>
                   <p>
-Service:
+                    Service:
                     {serviceName}
                   </p>
                   <p>
-Line Item:
+                    Line Item:
                     {chargeDescription}
                   </p>
                   <p>
-                    Price: 
-                    {' '}
-                    <Price value={chargeAmount} />
+                    Price: <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
@@ -264,7 +261,8 @@ Line Item:
           </div>
         </Modal>
       );
-    } if (currentModal == "payment_setup") {
+    }
+    if (currentModal == "payment_setup") {
       return (
         <ModalPaymentSetup
           ownerId={self.state.uid}

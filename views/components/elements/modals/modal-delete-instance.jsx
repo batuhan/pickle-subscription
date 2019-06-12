@@ -44,7 +44,7 @@ class ModalRequestCancellation extends React.Component {
     const self = this;
     const currentModal = this.state.current_modal;
     const instance = self.state.serviceInstance;
-    const {name} = instance;
+    const { name } = instance;
 
     if (currentModal === "model_delete") {
       if (isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
@@ -74,9 +74,7 @@ class ModalRequestCancellation extends React.Component {
                       service!
                     </p>
                     <p>
-                      Service Name: 
-                      {' '}
-                      <b>{name}</b>
+                      Service Name: <b>{name}</b>
                     </p>
                   </div>
                 </div>
@@ -98,12 +96,10 @@ class ModalRequestCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } 
-        return (
-          <div>You do not have the permission to access this feature.</div>
-        );
-      
-    } if (currentModal === "model_delete_success") {
+      }
+      return <div>You do not have the permission to access this feature.</div>;
+    }
+    if (currentModal === "model_delete_success") {
       return (
         <Modal
           modalTitle="Service Cancellation Successful"
@@ -117,10 +113,7 @@ class ModalRequestCancellation extends React.Component {
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Service 
-                      {' '}
-                      {name}
-, has been successfully deleted.
+                      Service {name}, has been successfully deleted.
                     </strong>
                   </p>
                 </div>

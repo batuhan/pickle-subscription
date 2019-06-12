@@ -19,17 +19,16 @@ User.prototype.promiseValid = function() {
   return new Promise(function(resolve, reject) {
     if (!self.data.customer_id) {
       return reject("ERROR: User does not have a Stripe ID!");
-    } 
-      Stripe().connection.customers.retrieve(self.data.customer_id, function(
-        err,
-        customer,
-      ) {
-        if (err) {
-          return reject("ERROR: User does not exist in Stripe!");
-        }
-        return resolve(customer.id);
-      });
-    
+    }
+    Stripe().connection.customers.retrieve(self.data.customer_id, function(
+      err,
+      customer,
+    ) {
+      if (err) {
+        return reject("ERROR: User does not exist in Stripe!");
+      }
+      return resolve(customer.id);
+    });
   });
 };
 
@@ -47,10 +46,9 @@ User.prototype.promiseStripeRemoval = function() {
         if (!err) {
           console.log(`User ${self.data.id} was removed from Stripe!`);
           return resolve(confirmation);
-        } 
-          console.log(`Error during user ${self.data.id} removal in Stripe!`);
-          return reject(err);
-        
+        }
+        console.log(`Error during user ${self.data.id} removal in Stripe!`);
+        return reject(err);
       });
     });
   });
@@ -70,11 +68,10 @@ User.prototype.promiseStripeDisconnect = async function() {
     self.update(function(err, result) {
       if (!err) {
         return resolve(`User ${self.data.id} was disconnected from Stripe`);
-      } 
-        return reject(
-          `ERROR while disconnecting user ${self.data.id} from Stripe`,
-        );
-      
+      }
+      return reject(
+        `ERROR while disconnecting user ${self.data.id} from Stripe`,
+      );
     });
   });
 };
@@ -97,11 +94,8 @@ User.prototype.promiseStripeReconnect = function() {
       ) {
         if (!err) {
           return resolve(customer.id);
-        } 
-          return reject(
-            `ERROR cannot reconnect user ${self.data.id} to Stripe!`,
-          );
-        
+        }
+        return reject(`ERROR cannot reconnect user ${self.data.id} to Stripe!`);
       });
     } else {
       return reject(`User ${self.data.id} is still connected!`);
@@ -113,14 +107,13 @@ User.prototype.promiseStripeReconnect = function() {
         if (!err) {
           console.log(`User ${self.data.id} is now reconnected to Stripe`);
           return resolve(`User ${self.data.id} is now reconnected to Stripe`);
-        } 
-          console.log(
-            `ERROR during updating user customer_id in internal database. Remove manually from Stripe!`,
-          );
-          return reject(
-            `ERROR during updating user customer_id in internal database. Remove manually from Stripe!`,
-          );
-        
+        }
+        console.log(
+          `ERROR during updating user customer_id in internal database. Remove manually from Stripe!`,
+        );
+        return reject(
+          `ERROR during updating user customer_id in internal database. Remove manually from Stripe!`,
+        );
       });
     });
   });
@@ -241,14 +234,13 @@ User.prototype.purgeData = function(fullRemoval = false, callback) {
                   if (!err) {
                     console.log(`Invoice Removed: ${invoice.data.id}`);
                     return resolve(`Invoice Removed: ${invoice.data.id}`);
-                  } 
-                    console.log(
-                      `ERROR removing Invoice: ${invoice.data.id} - ${err}`,
-                    );
-                    return resolve(
-                      `ERROR removing Invoice: ${invoice.data.id} - ${err}`,
-                    );
-                  
+                  }
+                  console.log(
+                    `ERROR removing Invoice: ${invoice.data.id} - ${err}`,
+                  );
+                  return resolve(
+                    `ERROR removing Invoice: ${invoice.data.id} - ${err}`,
+                  );
                 });
               });
             }),
@@ -279,14 +271,13 @@ User.prototype.purgeData = function(fullRemoval = false, callback) {
                   if (!err) {
                     console.log(`Service Removed: ${service.data.id}`);
                     return resolve(`Service Removed: ${service.data.id}`);
-                  } 
-                    console.log(
-                      `ERROR removing Instance: ${service.data.id} - ${err}`,
-                    );
-                    return resolve(
-                      `ERROR removing Instance: ${service.data.id} - ${err}`,
-                    );
-                  
+                  }
+                  console.log(
+                    `ERROR removing Instance: ${service.data.id} - ${err}`,
+                  );
+                  return resolve(
+                    `ERROR removing Instance: ${service.data.id} - ${err}`,
+                  );
                 });
               });
             }),
@@ -319,14 +310,11 @@ User.prototype.purgeData = function(fullRemoval = false, callback) {
                   if (!err) {
                     console.log(`Fund Removed: ${fund.data.id}`);
                     return resolve(`Fund Removed: ${fund.data.id}`);
-                  } 
-                    console.log(
-                      `ERROR removing Fund: ${fund.data.id} - ${err}`,
-                    );
-                    return resolve(
-                      `ERROR removing Fund: ${fund.data.id} - ${err}`,
-                    );
-                  
+                  }
+                  console.log(`ERROR removing Fund: ${fund.data.id} - ${err}`);
+                  return resolve(
+                    `ERROR removing Fund: ${fund.data.id} - ${err}`,
+                  );
                 });
               });
             }),
@@ -412,9 +400,8 @@ User.prototype.suspend = async function() {
     }
     self.data.status = "suspended";
     return await self.update();
-  } 
-    throw "User can not be invited or already suspended";
-  
+  }
+  throw "User can not be invited or already suspended";
 };
 
 /**
@@ -433,10 +420,10 @@ User.prototype.unsuspend = function(callback) {
       }
     });
   } else if (!self.data.customer_id) {
-      callback("User is deleted in Stripe", null);
-    } else {
-      callback("User is not suspended", null);
-    }
+    callback("User is deleted in Stripe", null);
+  } else {
+    callback("User is not suspended", null);
+  }
 };
 
 // TODO: Implement User.prototype.update override once the above create is simplified. Implement when doing user setting page.

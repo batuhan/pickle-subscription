@@ -216,9 +216,8 @@ class DataFormReview extends React.Component {
           </div>
         </div>
       );
-    } 
-      return <p>You don't have information to review yet.</p>;
-    
+    }
+    return <p>You don't have information to review yet.</p>;
   }
 }
 

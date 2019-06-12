@@ -11,9 +11,7 @@ function Adjustment(props) {
     case "add":
       message = (
         <div>
-          $
-          {price}
-          {" "}
+          ${price}{" "}
           <span className="request-form-price-adjust-discount">Add-on</span>
         </div>
       );
@@ -21,9 +19,7 @@ function Adjustment(props) {
     case "subtract":
       message = (
         <div>
-          $
-          {price}
-          {" "}
+          ${price}{" "}
           <span className="request-form-price-adjust-discount">Discount</span>
         </div>
       );
@@ -32,10 +28,7 @@ function Adjustment(props) {
     case "multiply":
       message = (
         <div>
-          $
-          {price}
-%
-          {" "}
+          ${price}%{" "}
           <span className="request-form-price-adjust-increase">Increase</span>
         </div>
       );
@@ -44,10 +37,7 @@ function Adjustment(props) {
     case "divide":
       message = (
         <div>
-          $
-          {price}
-%
-          {" "}
+          ${price}%{" "}
           <span className="request-form-price-adjust-decrease">Discount</span>
         </div>
       );

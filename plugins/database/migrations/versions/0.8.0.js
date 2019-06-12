@@ -15,7 +15,7 @@ module.exports = {
       })
       .then(instances => {
         const instanceUpdates = instances.map(service => {
-          const {payment_plan} = service;
+          const { payment_plan } = service;
           if (payment_plan) {
             service.subscribed_at = payment_plan.created;
           }

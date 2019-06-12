@@ -52,44 +52,45 @@ class RefundForm extends React.Component {
         },
       });
     } else if (response.type == "StripeInvalidRequestError") {
-        this.setState({
-          alerts: {
-            type: "danger",
-            message: response.message,
-            icon: "exclamation-circle",
-          },
-        });
-      } else if (response.error) {
-        this.setState({
-          alerts: {
-            type: "danger",
-            message: response.error.message,
-            icon: "exclamation-circle",
-          },
-        });
-      } else if (response == null) {
-        this.setState({
-          alerts: {
-            type: "danger",
-            message: "Response is null",
-            icon: "exclamation-circle",
-          },
-        });
-      } else {
-        this.setState({
-          alerts: {
-            type: "danger",
-            message: "Other error",
-            icon: "exclamation-circle",
-          },
-        });
-      }
+      this.setState({
+        alerts: {
+          type: "danger",
+          message: response.message,
+          icon: "exclamation-circle",
+        },
+      });
+    } else if (response.error) {
+      this.setState({
+        alerts: {
+          type: "danger",
+          message: response.error.message,
+          icon: "exclamation-circle",
+        },
+      });
+    } else if (response == null) {
+      this.setState({
+        alerts: {
+          type: "danger",
+          message: "Response is null",
+          icon: "exclamation-circle",
+        },
+      });
+    } else {
+      this.setState({
+        alerts: {
+          type: "danger",
+          message: "Other error",
+          icon: "exclamation-circle",
+        },
+      });
+    }
   }
 
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       return (
         <div>
           <div className="p-20">
@@ -147,78 +148,77 @@ class RefundForm extends React.Component {
           </div>
         </div>
       );
-    } 
-      // TODO: Add validation functions and pass into DataForm as props
-      return (
-        <div className="refund-form">
-          {this.state.alerts && (
-            <div className="p-20">
-              <Alerts
-                type={this.state.alerts.type}
-                message={this.state.alerts.message}
-                icon={this.state.alerts.icon}
-              />
-            </div>
-          )}
+    }
+    // TODO: Add validation functions and pass into DataForm as props
+    return (
+      <div className="refund-form">
+        {this.state.alerts && (
+          <div className="p-20">
+            <Alerts
+              type={this.state.alerts.type}
+              message={this.state.alerts.message}
+              icon={this.state.alerts.icon}
+            />
+          </div>
+        )}
 
-          <DataForm
-            handleResponse={this.handleResponse}
-            url={this.state.refundURL}
-            method="POST"
-          >
-            <div className="p-20">
-              <p>
-                <strong>
-                  You can issue a partial or full refund. If you leave the
-                  amount 0 and submit, full refund will be applied. Total amount
-                  of refunds cannot exceed the total transaction amount.
-                </strong>
-              </p>
-              <Inputs
-                type="price"
-                name="amount"
-                label="Refund Amount"
-                defaultValue={0}
-                onChange={function() {}}
-                receiveOnChange
-                receiveValue
-              />
-              <Inputs
-                type="select"
-                name="reason"
-                label="What is the reason for this refund?"
-                defaultValue="requested_by_customer"
-                options={[
-                  { "Requested by customer": "requested_by_customer" },
-                  { Duplicate: "duplicate" },
-                  { Fraudulent: "fraudulent" },
-                ]}
-                onChange={function() {}}
-                receiveOnChange
-                receiveValue
-              />
-            </div>
+        <DataForm
+          handleResponse={this.handleResponse}
+          url={this.state.refundURL}
+          method="POST"
+        >
+          <div className="p-20">
+            <p>
+              <strong>
+                You can issue a partial or full refund. If you leave the amount
+                0 and submit, full refund will be applied. Total amount of
+                refunds cannot exceed the total transaction amount.
+              </strong>
+            </p>
+            <Inputs
+              type="price"
+              name="amount"
+              label="Refund Amount"
+              defaultValue={0}
+              onChange={function() {}}
+              receiveOnChange
+              receiveValue
+            />
+            <Inputs
+              type="select"
+              name="reason"
+              label="What is the reason for this refund?"
+              defaultValue="requested_by_customer"
+              options={[
+                { "Requested by customer": "requested_by_customer" },
+                { Duplicate: "duplicate" },
+                { Fraudulent: "fraudulent" },
+              ]}
+              onChange={function() {}}
+              receiveOnChange
+              receiveValue
+            />
+          </div>
 
-            <div className="modal-footer text-right p-b-20">
-              <Buttons
-                containerClass="inline"
-                btnType="primary"
-                type="submit"
-                value="submit"
-                text="Issue Refund"
-                success={this.state.success}
-              />
-              <Buttons
-                containerClass="inline"
-                btnType="default"
-                text="Later"
-                onClick={this.props.hide}
-              />
-            </div>
-          </DataForm>
-        </div>
-      );
-    
+          <div className="modal-footer text-right p-b-20">
+            <Buttons
+              containerClass="inline"
+              btnType="primary"
+              type="submit"
+              value="submit"
+              text="Issue Refund"
+              success={this.state.success}
+            />
+            <Buttons
+              containerClass="inline"
+              btnType="default"
+              text="Later"
+              onClick={this.props.hide}
+            />
+          </div>
+        </DataForm>
+      </div>
+    );
   }
 }
 

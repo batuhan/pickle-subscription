@@ -66,21 +66,18 @@ class ModalPaymentSetup extends React.Component {
   getModalMessageTitle() {
     if (this.props.message) {
       return this.props.message.title;
-    } 
-      if (this.state.currentUserId === this.state.ownerId) {
-        return `Looks like you don't have a payment source in your account, let's setup your payment here first.`;
-      } 
-        return `Looks like this user doesn't have a payment source in their account, let's setup a payment for them first.`;
-      
-    
+    }
+    if (this.state.currentUserId === this.state.ownerId) {
+      return `Looks like you don't have a payment source in your account, let's setup your payment here first.`;
+    }
+    return `Looks like this user doesn't have a payment source in their account, let's setup a payment for them first.`;
   }
 
   getModalMessageBody() {
     if (this.props.message) {
       return this.props.message.body;
-    } 
-      return "You will be returned to your approval page once your payment is setup.";
-    
+    }
+    return "You will be returned to your approval page once your payment is setup.";
   }
 
   render() {
@@ -119,61 +116,60 @@ class ModalPaymentSetup extends React.Component {
           </div>
         </Modal>
       );
-    } 
-      return (
-        <Modal
-          modalTitle={pageName}
-          icon={icon}
-          hideCloseBtn
-          show={self.props.show}
-          hide={self.props.hide}
-          hideFooter
-          width="700px"
-        >
-          <div className="table-responsive">
-            <div className="p-20">
-              <div className="row">
-                <div className="col-xs-12">
-                  {self.state.form === "credit_card" && (
-                    <div>
-                      <BillingForm
-                        spk={spk}
-                        uid={self.state.ownerId}
-                        handleResponse={self.handleResponse}
-                      />
-                    </div>
-                  )}
-                </div>
+    }
+    return (
+      <Modal
+        modalTitle={pageName}
+        icon={icon}
+        hideCloseBtn
+        show={self.props.show}
+        hide={self.props.hide}
+        hideFooter
+        width="700px"
+      >
+        <div className="table-responsive">
+          <div className="p-20">
+            <div className="row">
+              <div className="col-xs-12">
+                {self.state.form === "credit_card" && (
+                  <div>
+                    <BillingForm
+                      spk={spk}
+                      uid={self.state.ownerId}
+                      handleResponse={self.handleResponse}
+                    />
+                  </div>
+                )}
               </div>
             </div>
-            <div className="modal-footer text-right p-b-20">
-              {self.state.form === "credit_card" ? (
-                <Buttons
-                  text="Back"
-                  btnType="default"
-                  onClick={self.handleBackBtn}
-                />
-              ) : (
-                <div>
-                  <Buttons
-                    containerClass="inline"
-                    btnType="primary"
-                    text="Add Credit Card"
-                    onClick={self.handleCreditCard}
-                  />
-                  <Buttons
-                    containerClass="inline"
-                    btnType="default"
-                    text="Cancel"
-                    onClick={self.props.hide}
-                  />
-                </div>
-              )}
-            </div>
           </div>
-        </Modal>
-      );
-    
+          <div className="modal-footer text-right p-b-20">
+            {self.state.form === "credit_card" ? (
+              <Buttons
+                text="Back"
+                btnType="default"
+                onClick={self.handleBackBtn}
+              />
+            ) : (
+              <div>
+                <Buttons
+                  containerClass="inline"
+                  btnType="primary"
+                  text="Add Credit Card"
+                  onClick={self.handleCreditCard}
+                />
+                <Buttons
+                  containerClass="inline"
+                  btnType="default"
+                  text="Cancel"
+                  onClick={self.props.hide}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </Modal>
+    );
   }
 }
 

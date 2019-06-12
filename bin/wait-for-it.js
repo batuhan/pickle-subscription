@@ -6,6 +6,6 @@ waitForPort(
   { numRetries: 3, retryInterval: 10000 },
   function(err) {
     if (err) throw new Error(err);
-    console.log(`HOST DETECTED ON PORT ${  process.argv[3]}`);
+    console.log(`HOST DETECTED ON PORT ${process.argv[3]}`);
   },
 );

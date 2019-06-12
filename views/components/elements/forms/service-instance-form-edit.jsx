@@ -10,13 +10,13 @@ const _ = require("lodash");
 class ServiceInstanceFormEdit extends React.Component {
   constructor(props) {
     super(props);
-    const {templateId} = this.props;
+    const { templateId } = this.props;
     const instance = this.props.myInstance;
     this.state = {
       instance,
       templateId,
       template: false,
-      url: `/api/v1/service-templates/${  templateId  }/request`,
+      url: `/api/v1/service-templates/${templateId}/request`,
       loading: true,
       success: false,
       countDown: 5,
@@ -108,7 +108,8 @@ class ServiceInstanceFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       const self = this;
 
       setTimeout(function() {
@@ -131,97 +132,93 @@ class ServiceInstanceFormEdit extends React.Component {
           </div>
         </div>
       );
-    } 
-      const {instance} = this.state;
-      const instance_props = this.state.instance.references
-        .service_instance_properties;
-      // const references = this.state.template.references.service_template_properties.length > 0 ? this.state.template.references.service_template_properties : false;
+    }
+    const { instance } = this.state;
+    const instance_props = this.state.instance.references
+      .service_instance_properties;
+    // const references = this.state.template.references.service_template_properties.length > 0 ? this.state.template.references.service_template_properties : false;
 
-      // TODO: Add validation functions and pass into DataForm as props
-      //* * Stripe limits the trial days to 2 years
-      const myValidators = this.getValidators();
+    // TODO: Add validation functions and pass into DataForm as props
+    //* * Stripe limits the trial days to 2 years
+    const myValidators = this.getValidators();
 
-      return (
-        <div>
-          <DataForm
-            validators={myValidators}
-            handleResponse={this.handleResponse}
-            url={`/api/v1/service-instances/${instance.id}`}
-            method="PUT"
-          >
-            <div className="p-20">
-              <div className="row">
-                <div className="basic-info col-md-12">
-                  <h3 className="p-b-20">Basic Info</h3>
+    return (
+      <div>
+        <DataForm
+          validators={myValidators}
+          handleResponse={this.handleResponse}
+          url={`/api/v1/service-instances/${instance.id}`}
+          method="PUT"
+        >
+          <div className="p-20">
+            <div className="row">
+              <div className="basic-info col-md-12">
+                <h3 className="p-b-20">Basic Info</h3>
 
-                  <Inputs
-                    type="text"
-                    label="Service Name"
-                    name="name"
-                    defaultValue={instance.name}
-                    onChange={function() {}}
-                    receiveOnChange
-                    receiveValue
-                  />
+                <Inputs
+                  type="text"
+                  label="Service Name"
+                  name="name"
+                  defaultValue={instance.name}
+                  onChange={function() {}}
+                  receiveOnChange
+                  receiveValue
+                />
 
-                  <Inputs
-                    type="text"
-                    label="Service Description"
-                    name="description"
-                    defaultValue={instance.description}
-                    onChange={function() {}}
-                    receiveOnChange
-                    receiveValue
-                  />
-                </div>
+                <Inputs
+                  type="text"
+                  label="Service Description"
+                  name="description"
+                  defaultValue={instance.description}
+                  onChange={function() {}}
+                  receiveOnChange
+                  receiveValue
+                />
               </div>
-              {/* {references ? */}
-              {/* <div className="row"> */}
-              {/* <div className="col-md-12"> */}
-              {/* <h3 className="p-b-20">Service Fields</h3> */}
-              {/* {references.map( reference => ( */}
-              {/* <div key={`custom-fields-${reference.prop_label}`}> */}
-              {/* <DataChild modelName="service_instance_properties" objectName={reference.name}> */}
-              {/* <Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{console.log("im so weird", _.filter(instance_props, {name: reference.name}))}} */}
-              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
-              {/* <Inputs type="hidden" name="name" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].name : ''} */}
-              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
-              {/* <Inputs type={reference.type} */}
-              {/* label={reference.prop_label || 'No label'} */}
-              {/* name="value" */}
-              {/* defaultValue={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].value : ''} */}
-              {/* options={reference.prop_values} */}
-              {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
-              {/* </DataChild> */}
-              {/* </div> */}
-              {/* ))} */}
-              {/* </div> */}
-              {/* </div> : <div/> */}
-              {/* } */}
             </div>
+            {/* {references ? */}
+            {/* <div className="row"> */}
+            {/* <div className="col-md-12"> */}
+            {/* <h3 className="p-b-20">Service Fields</h3> */}
+            {/* {references.map( reference => ( */}
+            {/* <div key={`custom-fields-${reference.prop_label}`}> */}
+            {/* <DataChild modelName="service_instance_properties" objectName={reference.name}> */}
+            {/* <Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{console.log("im so weird", _.filter(instance_props, {name: reference.name}))}} */}
+            {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+            {/* <Inputs type="hidden" name="name" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].name : ''} */}
+            {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+            {/* <Inputs type={reference.type} */}
+            {/* label={reference.prop_label || 'No label'} */}
+            {/* name="value" */}
+            {/* defaultValue={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].value : ''} */}
+            {/* options={reference.prop_values} */}
+            {/* onChange={function(){}} receiveOnChange={true} receiveValue={true}/> */}
+            {/* </DataChild> */}
+            {/* </div> */}
+            {/* ))} */}
+            {/* </div> */}
+            {/* </div> : <div/> */}
+            {/* } */}
+          </div>
 
-            <div
-              id="request-submission-box"
-              className="modal-footer text-right"
-            >
-              <Buttons
-                containerClass="inline"
-                btnType="primary"
-                text="Submit"
-                type="submit"
-                value="submit"
-              />
-              <Buttons
-                containerClass="inline"
-                btnType="default"
-                text="Close"
-                onClick={this.props.onHide}
-              />
-            </div>
-          </DataForm>
-        </div>
-      );
-    
+          <div id="request-submission-box" className="modal-footer text-right">
+            <Buttons
+              containerClass="inline"
+              btnType="primary"
+              text="Submit"
+              type="submit"
+              value="submit"
+            />
+            <Buttons
+              containerClass="inline"
+              btnType="default"
+              text="Close"
+              onClick={this.props.onHide}
+            />
+          </div>
+        </DataForm>
+      </div>
+    );
   }
 }
 

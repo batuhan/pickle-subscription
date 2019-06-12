@@ -41,32 +41,31 @@ class UserRegisterForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <div className="edit-user-role-form">
-          <div className="p-20">
-            <p>Some text</p>
-            {/* Define Inputs */}
-            <Inputs
-              type="select"
-              label="User role"
-              name="role_id"
-              defaultValue={this.props.user.role_id}
-              options={roleOptionList}
-            />
-          </div>
-          <Buttons
-            containerClass="inline"
-            size="md"
-            btnType="primary"
-            text="Save User"
-            value="submit"
-            onClick={this.handleSubmission}
-            loading={this.state.ajaxLoad}
+    }
+    return (
+      <div className="edit-user-role-form">
+        <div className="p-20">
+          <p>Some text</p>
+          {/* Define Inputs */}
+          <Inputs
+            type="select"
+            label="User role"
+            name="role_id"
+            defaultValue={this.props.user.role_id}
+            options={roleOptionList}
           />
         </div>
-      );
-    
+        <Buttons
+          containerClass="inline"
+          size="md"
+          btnType="primary"
+          text="Save User"
+          value="submit"
+          onClick={this.handleSubmission}
+          loading={this.state.ajaxLoad}
+        />
+      </div>
+    );
   }
 }
 

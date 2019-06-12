@@ -9,7 +9,7 @@ const ServiceInstanceCharges = require("./charge");
 const ServiceInstanceCancellations = require("./service-instance-cancellation");
 const Charges = require("./charge");
 const store = require("../config/redux/store");
-const {promisify} = require("bluebird");
+const { promisify } = require("bluebird");
 const promisifyProxy = require("../lib/promiseProxy");
 const User = require("./user");
 const _ = require("lodash");
@@ -41,7 +41,10 @@ const references = [
   },
   { model: User, referenceField: "user_id", direction: "to", readOnly: true },
 ];
-const ServiceInstance = require("./base/entity")("service_instances", references);
+const ServiceInstance = require("./base/entity")(
+  "service_instances",
+  references,
+);
 const Stripe = require("../config/stripe");
 
 ServiceInstance.serviceFilePath = "uploads/services/files";
@@ -118,9 +121,8 @@ ServiceInstance.prototype.deletePayPlan = async function() {
     await Stripe().connection.plans.del(self.data.payment_plan.id);
     self.data.payment_plan = null;
     return await self.update();
-  } 
-    throw "Service is has no current payment plan!";
-  
+  }
+  throw "Service is has no current payment plan!";
 };
 
 ServiceInstance.prototype.subscribe = async function(paymentPlan = null) {
@@ -292,7 +294,7 @@ ServiceInstance.prototype.changeProperties = async function(properties) {
   }
   const oldProperties =
     updatedInstance.data.references.service_instance_properties;
-  let {lifecycleManager} = store.getState(true).pluginbot.services;
+  let { lifecycleManager } = store.getState(true).pluginbot.services;
   if (lifecycleManager) {
     lifecycleManager = lifecycleManager[0];
     await lifecycleManager.prePropertyChange({
@@ -373,7 +375,7 @@ ServiceInstance.prototype.changePaymentPlan = async function(
 
 ServiceInstance.prototype.unsubscribe = async function() {
   try {
-    let {lifecycleManager} = store.getState(true).pluginbot.services;
+    let { lifecycleManager } = store.getState(true).pluginbot.services;
     if (lifecycleManager) {
       lifecycleManager = lifecycleManager[0];
       await lifecycleManager.preDecommission({

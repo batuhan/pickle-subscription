@@ -1,11 +1,11 @@
 function handleLogin() {
   const e = [];
-    const o =
-      window.swaggerUiAuth.authSchemes ||
-      window.swaggerUiAuth.securityDefinitions;
+  const o =
+    window.swaggerUiAuth.authSchemes ||
+    window.swaggerUiAuth.securityDefinitions;
   if (o) {
     let i;
-      const n = o;
+    const n = o;
     for (i in n) {
       const a = n[i];
       if (a.type === "oauth2" && a.scopes) {
@@ -32,9 +32,7 @@ function handleLogin() {
           "<p>Scopes are used to grant an application different levels of access to data on behalf of the end user. Each API may declare one or more scopes.",
           '<a href="#">Learn how to use</a>',
           "</p>",
-          `<p><strong>${ 
-            appName 
-            }</strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>`,
+          `<p><strong>${appName}</strong> API requires the following scopes. Select which ones you want to grant to Swagger UI.</p>`,
           '<ul class="api-popup-scopes">',
           "</ul>",
           '<p class="error-msg"></p>',
@@ -50,44 +48,26 @@ function handleLogin() {
     p++
   )
     (t = e[p]),
-      (str =
-        `<li><input type="checkbox" id="scope_${ 
-        p 
-        }" scope="${ 
-        t.scope 
-        }"" oauthtype="${ 
-        t.OAuthSchemeKey 
-        }"/><label for="scope_${ 
-        p 
-        }">${ 
-        t.scope}`),
+      (str = `<li><input type="checkbox" id="scope_${p}" scope="${t.scope}"" oauthtype="${t.OAuthSchemeKey}"/><label for="scope_${p}">${t.scope}`),
       t.description &&
         ($.map(o, function(e, o) {
           return o;
         }).length > 1
-          ? (str +=
-              `<br/><span class="api-scope-desc">${ 
-              t.description 
-              } (${ 
-              t.OAuthSchemeKey 
-              })</span>`)
-          : (str +=
-              `<br/><span class="api-scope-desc">${ 
-              t.description 
-              }</span>`)),
+          ? (str += `<br/><span class="api-scope-desc">${t.description} (${t.OAuthSchemeKey})</span>`)
+          : (str += `<br/><span class="api-scope-desc">${t.description}</span>`)),
       (str += "</label></li>"),
       popup.append(str);
   const r = $(window);
-    const s = r.width();
-    const c = r.height();
-    const l = r.scrollTop();
-    const d = popupDialog.outerWidth();
-    const u = popupDialog.outerHeight();
-    const h = (c - u) / 2 + l;
-    const g = (s - d) / 2;
+  const s = r.width();
+  const c = r.height();
+  const l = r.scrollTop();
+  const d = popupDialog.outerWidth();
+  const u = popupDialog.outerHeight();
+  const h = (c - u) / 2 + l;
+  const g = (s - d) / 2;
   popupDialog.css({
-    top: `${h < 0 ? 0 : h  }px`,
-    left: `${g < 0 ? 0 : g  }px`,
+    top: `${h < 0 ? 0 : h}px`,
+    left: `${g < 0 ? 0 : g}px`,
   }),
     popupDialog.find("button.api-popup-cancel").click(function() {
       popupMask.hide(),
@@ -102,15 +82,18 @@ function handleLogin() {
       }
       popupMask.hide(), popupDialog.hide();
       let o;
-        const i = window.swaggerUi.api.authSchemes;
-        const n = window.location;
-        const a = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
-        const t = `${n.protocol  }//${  n.host  }${a  }/o2c.html`;
-        const p = window.oAuthRedirectUrl || t;
-        let r = null;
-        const s = [];
-        var c = popup.find("input:checked");
-        const l = [];
+      const i = window.swaggerUi.api.authSchemes;
+      const n = window.location;
+      const a = location.pathname.substring(
+        0,
+        location.pathname.lastIndexOf("/"),
+      );
+      const t = `${n.protocol}//${n.host}${a}/o2c.html`;
+      const p = window.oAuthRedirectUrl || t;
+      let r = null;
+      const s = [];
+      var c = popup.find("input:checked");
+      const l = [];
       for (k = 0; k < c.length; k++) {
         const d = $(c[k]).attr("scope");
         s.indexOf(d) === -1 && s.push(d);
@@ -139,21 +122,20 @@ function handleLogin() {
                 if (c.hasOwnProperty(f) && f === "implicit") {
                   var w = c[f];
                   w.loginEndpoint.url;
-                  (r = `${w.loginEndpoint.url  }?response_type=token`),
+                  (r = `${w.loginEndpoint.url}?response_type=token`),
                     (window.swaggerUi.tokenName = e(w));
                 } else if (c.hasOwnProperty(f) && f === "accessCode") {
                   var w = c[f];
                   w.tokenRequestEndpoint.url;
-                  (r = `${w.tokenRequestEndpoint.url  }?response_type=code`),
+                  (r = `${w.tokenRequestEndpoint.url}?response_type=code`),
                     (window.swaggerUi.tokenName = e(w));
                 }
             }
           } else {
             var w = i[h];
-            (r =
-              `${w.authorizationUrl 
-              }?response_type=${ 
-              g === "implicit" ? "token" : "code"}`),
+            (r = `${w.authorizationUrl}?response_type=${
+              g === "implicit" ? "token" : "code"
+            }`),
               (window.swaggerUi.tokenName = e(w) || "access_token"),
               (window.swaggerUi.tokenUrl =
                 g === "accessCode" ? w.tokenUrl : null),
@@ -161,13 +143,13 @@ function handleLogin() {
           }
         }
       (redirect_uri = p),
-        (r += `&redirect_uri=${  encodeURIComponent(p)}`),
-        (r += `&realm=${  encodeURIComponent(realm)}`),
-        (r += `&client_id=${  encodeURIComponent(clientId)}`),
-        (r += `&scope=${  encodeURIComponent(s.join(scopeSeparator))}`),
-        (r += `&state=${  encodeURIComponent(o)}`);
+        (r += `&redirect_uri=${encodeURIComponent(p)}`),
+        (r += `&realm=${encodeURIComponent(realm)}`),
+        (r += `&client_id=${encodeURIComponent(clientId)}`),
+        (r += `&scope=${encodeURIComponent(s.join(scopeSeparator))}`),
+        (r += `&state=${encodeURIComponent(o)}`);
       for (var h in additionalQueryStringParams)
-        r += `&${  h  }=${  encodeURIComponent(additionalQueryStringParams[h])}`;
+        r += `&${h}=${encodeURIComponent(additionalQueryStringParams[h])}`;
       window.open(r);
     }),
     popupMask.show(),
@@ -184,7 +166,7 @@ function handleLogout() {
 }
 function initOAuth(e) {
   const o = e || {};
-    const i = [];
+  const i = [];
   return (
     (appName = o.appName || i.push("missing appName")),
     (popupMask = o.popupMask || $("#api-common-mask")),
@@ -195,7 +177,7 @@ function initOAuth(e) {
     (scopeSeparator = o.scopeSeparator || " "),
     (additionalQueryStringParams = o.additionalQueryStringParams || {}),
     i.length > 0
-      ? void log(`auth unable initialize oauth: ${  i}`)
+      ? void log(`auth unable initialize oauth: ${i}`)
       : ($("pre code").each(function(e, o) {
           hljs.highlightBlock(o);
         }),
@@ -225,26 +207,26 @@ function clientCredentialsFlow(e, o, i) {
   });
 }
 let appName;
-  let popupMask;
-  let popupDialog;
-  let clientId;
-  let realm;
-  let redirect_uri;
-  let clientSecret;
-  let scopeSeparator;
-  let additionalQueryStringParams;
+let popupMask;
+let popupDialog;
+let clientId;
+let realm;
+let redirect_uri;
+let clientSecret;
+let scopeSeparator;
+let additionalQueryStringParams;
 (window.processOAuthCode = function(e) {
   const o = e.state;
-    const i = window.location;
-    const n = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
-    const a = `${i.protocol  }//${  i.host  }${n  }/o2c.html`;
-    const t = window.oAuthRedirectUrl || a;
-    const p = {
-      client_id: clientId,
-      code: e.code,
-      grant_type: "authorization_code",
-      redirect_uri: t,
-    };
+  const i = window.location;
+  const n = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
+  const a = `${i.protocol}//${i.host}${n}/o2c.html`;
+  const t = window.oAuthRedirectUrl || a;
+  const p = {
+    client_id: clientId,
+    code: e.code,
+    grant_type: "authorization_code",
+    redirect_uri: t,
+  };
   clientSecret && (p.client_secret = clientSecret),
     $.ajax({
       url: window.swaggerUiAuth.tokenUrl,
@@ -321,7 +303,7 @@ let appName;
                 window.swaggerUiAuth.OAuthSchemeKey,
                 new SwaggerClient.ApiKeyAuthorization(
                   "Authorization",
-                  `Bearer ${  n}`,
+                  `Bearer ${n}`,
                   "header",
                 ),
               ),

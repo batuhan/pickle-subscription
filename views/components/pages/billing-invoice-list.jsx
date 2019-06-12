@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 class BillingInvoiceList extends React.Component {
   constructor(props) {
     super(props);
-    const {invoiceId} = this.props;
+    const { invoiceId } = this.props;
     const uid = cookie.load("uid");
     this.state = {
       loading: true,
@@ -56,10 +56,9 @@ class BillingInvoiceList extends React.Component {
         if (!response.error) {
           self.setState({ invoice: response });
           return response;
-        } 
-          console.error(response.error);
-          self.setState({ loading: false });
-        
+        }
+        console.error(response.error);
+        self.setState({ loading: false });
       })
       .then(function(response) {
         self.fetchUser(response);
@@ -109,16 +108,14 @@ class BillingInvoiceList extends React.Component {
       const prefix = getSymbolFromCurrency(transactions[0].currency);
       return (
         <li>
-          <span className="status-label">Refunded:</span>
-          {" "}
+          <span className="status-label">Refunded:</span>{" "}
           <span>
             <Price value={refunded} prefix={prefix} />
           </span>
         </li>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 
   getRefunds(transactions) {
@@ -136,7 +133,7 @@ class BillingInvoiceList extends React.Component {
             </div>
             <div className="xaas-body">
               {refunds.map((refund, index) => (
-                <div key={`refund-${  index}`} className="xaas-body-row">
+                <div key={`refund-${index}`} className="xaas-body-row">
                   <div className="xaas-data xaas-price">
                     <b>
                       <Price value={refund.amount} prefix={prefix} />
@@ -154,9 +151,8 @@ class BillingInvoiceList extends React.Component {
           </div>
         </div>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 
   getActionButtons() {
@@ -171,222 +167,209 @@ class BillingInvoiceList extends React.Component {
   }
 
   render() {
-    const {options} = this.props;
+    const { options } = this.props;
 
     if (this.state.loading) {
       return <Load type="content" />;
-    } 
-      const {invoice} = this.state;
-      const prefix = getSymbolFromCurrency(invoice.currency);
-      const {invoiceOwner} = this.state;
+    }
+    const { invoice } = this.state;
+    const prefix = getSymbolFromCurrency(invoice.currency);
+    const { invoiceOwner } = this.state;
 
-      const currentModal = () => {
-        if (this.state.refundModal) {
-          return (
-            <ModalRefund
-              invoice={this.state.invoice}
-              show={this.state.refundModal}
-              hide={this.closeRefundModal}
+    const currentModal = () => {
+      if (this.state.refundModal) {
+        return (
+          <ModalRefund
+            invoice={this.state.invoice}
+            show={this.state.refundModal}
+            hide={this.closeRefundModal}
+          />
+        );
+      }
+    };
+
+    return (
+      <div className="col-xs-12">
+        <div className="row">
+          <div className="col-xs-10">
+            <ContentTitle
+              icon="cog"
+              title={`Invoice ID:${invoice.invoice_id}`}
             />
-          );
-        }
-      };
-
-      return (
-        <div className="col-xs-12">
-          <div className="row">
-            <div className="col-xs-10">
-              <ContentTitle
-                icon="cog"
-                title={`Invoice ID:${invoice.invoice_id}`}
-              />
-            </div>
-            <div className="col-xs-2">{this.getActionButtons()}</div>
           </div>
-          <div className="Invoice">
-            <div className="invoice-header">
-              <div className="invoice-header-header">
-                <div className="invoice-entity">
-                  <h2 className="invoice-name">Invoice</h2>
-                  <h2 className="company-name">
-                    {options.hostname && options.hostname.value}
-                  </h2>
-                </div>
-                <div className="invoice-no">
-                  <span className="invoice-date-label">Charge Date:</span>
-                  <DateFormat date={invoice.date} />
-                  <br />
-                  <span className="invoice-no-label">Invoice No:</span>
-                  {invoice.id}
-                  <br />
-                  <span className="invoice-no-label">Invoice ID:</span>
-                  {invoice.invoice_id}
-                  <br />
-                  <span className="invoice-no-label">Subscription ID:</span>
-                  {invoice.subscription}
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div className="entity-info">
-              <div className="invoice-entity-details">
-                <div className="col-xs-12 col-md-4">
-                  <div className="invoice-from-header">
-                    <h3>From</h3>
-                  </div>
-                  <div className="invoice-from-body">
-                    <ul>
-                      <li className="entity-name">
-                        {options.company_name && options.company_name.value}
-                      </li>
-                      <li>
-                        {options.company_address &&
-                          options.company_address.value}
-                      </li>
-                      {options.company_email && (
-                        <li>
-                          <i className="fa fa-envelope" />
-                          {" "}
-                          {options.company_email.value}
-                        </li>
-                      )}
-                      {options.company_phone_number && (
-                        <li>
-                          <i className="fa fa-phone" />
-                          {" "}
-                          {options.company_phone_number.value}
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-xs-12 col-md-4">
-                  <div className="invoice-to-header">
-                    <h3>To</h3>
-                  </div>
-                  <div className="invoice-to-body">
-                    <ul>
-                      {invoiceOwner.name && (
-                        <li className="entity-name">
-                          <i className="fa fa-user" /> 
-                          {' '}
-                          {invoiceOwner.name}
-                        </li>
-                      )}
-                      {invoiceOwner.email && (
-                        <li>
-                          <i className="fa fa-envelope" /> 
-                          {' '}
-                          {invoiceOwner.email}
-                        </li>
-                      )}
-                      {invoiceOwner.phone && (
-                        <li>
-                          <i className="fa fa-phone" /> 
-                          {' '}
-                          {invoiceOwner.phone}
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-xs-12 col-md-4">
-                  <div className="invoice-status-header">
-                    <h3>Details</h3>
-                  </div>
-                  <div className="invoice-status-body">
-                    <ul>
-                      <li>
-                        <span className="status-label">Invoice Total:</span>
-                        {" "}
-                        {_.has(invoice, "references.transactions[0].amount") ? (
-                          <Price
-                            value={invoice.references.transactions[0].amount}
-                            prefix={prefix}
-                          />
-                        ) : (
-                          <Price value={invoice.amount_due} prefix={prefix} />
-                        )}
-                      </li>
-
-                      {this.getRefundDetail(invoice.references.transactions)}
-
-                      <li>
-                        <span className="status-label">Status:</span>
-                        {" "}
-                        <span>{invoice.paid ? "Paid" : "Not Charged"}</span>
-                      </li>
-                      {invoice.next_attempt != null && (
-                        <li>
-                          <span className="status-label">Next Attempt:</span>
-                          {" "}
-                          <DateFormat date={invoice.next_attempt} />
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {this.getRefunds(invoice.references.transactions)}
-
-            <div className="invoice-details">
-              <table className="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Type</th>
-                    <th>Quantity</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {invoice.references.user_invoice_lines.map(line => (
-                    <tr key={`lineitem-${line.line_item_id}`}>
-                      <td>{line.id}</td>
-                      <td>{line.description}</td>
-                      <td>{line.type}</td>
-                      <td>{line.quantity}</td>
-                      <td>
-                        <Price value={line.amount} prefix={prefix} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td />
-                    <td />
-                    <td />
-                    <td>
-                      <strong>Transaction Total</strong>
-                    </td>
-                    {_.has(invoice, "references.transactions[0].amount") ? (
-                      <td>
-                        <strong>
-                          <Price
-                            value={invoice.references.transactions[0].amount}
-                            prefix={prefix}
-                          />
-                        </strong>
-                      </td>
-                    ) : (
-                      <td>
-                        <strong>No Charge</strong>
-                      </td>
-                    )}
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-            <div className="invoice-footer" />
-          </div>
-          {currentModal()}
+          <div className="col-xs-2">{this.getActionButtons()}</div>
         </div>
-      );
-    
+        <div className="Invoice">
+          <div className="invoice-header">
+            <div className="invoice-header-header">
+              <div className="invoice-entity">
+                <h2 className="invoice-name">Invoice</h2>
+                <h2 className="company-name">
+                  {options.hostname && options.hostname.value}
+                </h2>
+              </div>
+              <div className="invoice-no">
+                <span className="invoice-date-label">Charge Date:</span>
+                <DateFormat date={invoice.date} />
+                <br />
+                <span className="invoice-no-label">Invoice No:</span>
+                {invoice.id}
+                <br />
+                <span className="invoice-no-label">Invoice ID:</span>
+                {invoice.invoice_id}
+                <br />
+                <span className="invoice-no-label">Subscription ID:</span>
+                {invoice.subscription}
+                <br />
+              </div>
+            </div>
+          </div>
+          <div className="entity-info">
+            <div className="invoice-entity-details">
+              <div className="col-xs-12 col-md-4">
+                <div className="invoice-from-header">
+                  <h3>From</h3>
+                </div>
+                <div className="invoice-from-body">
+                  <ul>
+                    <li className="entity-name">
+                      {options.company_name && options.company_name.value}
+                    </li>
+                    <li>
+                      {options.company_address && options.company_address.value}
+                    </li>
+                    {options.company_email && (
+                      <li>
+                        <i className="fa fa-envelope" />{" "}
+                        {options.company_email.value}
+                      </li>
+                    )}
+                    {options.company_phone_number && (
+                      <li>
+                        <i className="fa fa-phone" />{" "}
+                        {options.company_phone_number.value}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+              <div className="col-xs-12 col-md-4">
+                <div className="invoice-to-header">
+                  <h3>To</h3>
+                </div>
+                <div className="invoice-to-body">
+                  <ul>
+                    {invoiceOwner.name && (
+                      <li className="entity-name">
+                        <i className="fa fa-user" /> {invoiceOwner.name}
+                      </li>
+                    )}
+                    {invoiceOwner.email && (
+                      <li>
+                        <i className="fa fa-envelope" /> {invoiceOwner.email}
+                      </li>
+                    )}
+                    {invoiceOwner.phone && (
+                      <li>
+                        <i className="fa fa-phone" /> {invoiceOwner.phone}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+              <div className="col-xs-12 col-md-4">
+                <div className="invoice-status-header">
+                  <h3>Details</h3>
+                </div>
+                <div className="invoice-status-body">
+                  <ul>
+                    <li>
+                      <span className="status-label">Invoice Total:</span>{" "}
+                      {_.has(invoice, "references.transactions[0].amount") ? (
+                        <Price
+                          value={invoice.references.transactions[0].amount}
+                          prefix={prefix}
+                        />
+                      ) : (
+                        <Price value={invoice.amount_due} prefix={prefix} />
+                      )}
+                    </li>
+
+                    {this.getRefundDetail(invoice.references.transactions)}
+
+                    <li>
+                      <span className="status-label">Status:</span>{" "}
+                      <span>{invoice.paid ? "Paid" : "Not Charged"}</span>
+                    </li>
+                    {invoice.next_attempt != null && (
+                      <li>
+                        <span className="status-label">Next Attempt:</span>{" "}
+                        <DateFormat date={invoice.next_attempt} />
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {this.getRefunds(invoice.references.transactions)}
+
+          <div className="invoice-details">
+            <table className="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoice.references.user_invoice_lines.map(line => (
+                  <tr key={`lineitem-${line.line_item_id}`}>
+                    <td>{line.id}</td>
+                    <td>{line.description}</td>
+                    <td>{line.type}</td>
+                    <td>{line.quantity}</td>
+                    <td>
+                      <Price value={line.amount} prefix={prefix} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td />
+                  <td />
+                  <td />
+                  <td>
+                    <strong>Transaction Total</strong>
+                  </td>
+                  {_.has(invoice, "references.transactions[0].amount") ? (
+                    <td>
+                      <strong>
+                        <Price
+                          value={invoice.references.transactions[0].amount}
+                          prefix={prefix}
+                        />
+                      </strong>
+                    </td>
+                  ) : (
+                    <td>
+                      <strong>No Charge</strong>
+                    </td>
+                  )}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div className="invoice-footer" />
+        </div>
+        {currentModal()}
+      </div>
+    );
   }
 }
 

@@ -120,7 +120,7 @@ class ManageUsers extends React.Component {
         },
       });
     } else {
-      const {status} = dataObject;
+      const { status } = dataObject;
       const statusString = _.toLower(status);
       if (statusString == "suspended") {
         this.setState({
@@ -239,13 +239,12 @@ class ManageUsers extends React.Component {
           <i className="fa fa-check" />
         </span>
       );
-    } 
-      return (
-        <span className="status-badge red">
-          <i className="fa fa-times" />
-        </span>
-      );
-    
+    }
+    return (
+      <span className="status-badge red">
+        <i className="fa fa-times" />
+      </span>
+    );
   }
 
   statusFormatter(cell, row) {
@@ -269,9 +268,8 @@ class ManageUsers extends React.Component {
     // If the customer_id from Stripe doesn't exist, mark user as disconnected
     if (!row.customer_id) {
       return <span className="status-badge grey">Disconnected</span>;
-    } 
-      return <span className={color}>{cell}</span>;
-    
+    }
+    return <span className={color}>{cell}</span>;
   }
 
   roleFormatter(cell) {
@@ -279,22 +277,21 @@ class ManageUsers extends React.Component {
   }
 
   dropdownStatus(dataObject) {
-    const {status} = dataObject;
+    const { status } = dataObject;
     const statusString = _.toLower(status);
     if (statusString == "suspended") {
       return "Activate User";
-    } 
-      return "Suspend User";
-    
+    }
+    return "Suspend User";
+
     return "Error";
   }
 
   lastLoginFormatter(cell, row) {
     if (row.last_login != null) {
       return <DateFormat time date={row.last_login} />;
-    } 
-      return "Never";
-    
+    }
+    return "Never";
   }
 
   createdAtFormatter(cell, row) {
@@ -399,14 +396,13 @@ class ManageUsers extends React.Component {
               reinviteUser={this.state.reinviteUser.email}
             />
           );
-        } 
-          return (
-            <ModalInviteUser
-              show={this.state.openInviteUserModal}
-              hide={this.closeInviteUserModal}
-            />
-          );
-        
+        }
+        return (
+          <ModalInviteUser
+            show={this.state.openInviteUserModal}
+            hide={this.closeInviteUserModal}
+          />
+        );
       }
       if (this.state.openSuspendUserModal) {
         return (
@@ -475,131 +471,130 @@ class ManageUsers extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <Authorizer permissions="can_administrate">
-          <Jumbotron pageName={pageName} subtitle={subtitle} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <ContentTitle icon="cog" title="Manage all your users here" />
-                  <ServiceBotTableBase
-                    createItemProps={
-                      !this.props.stripe_publishable_key && { disabled: true }
-                    }
-                    createItemAction={
-                      this.props.stripe_publishable_key
-                        ? this.openInviteUserModal
-                        : () => {}
-                    }
-                    createItemLabel={
-                      this.props.stripe_publishable_key ? (
-                        "Invite user"
-                      ) : (
-                        <Link
-                          to="/stripe-settings"
-                          data-tip="Setup Incomplete - Click to finish"
-                        >
-                          Invite User
-                          <ReactTooltip
-                            place="bottom"
-                            type="dark"
-                            effect="solid"
-                          />
-                        </Link>
-                      )
-                    }
-                    rows={this.state.rows}
-                    fetchRows={this.fetchData}
-                    sortColumn="created_at"
-                    sortOrder="desc"
+    }
+    return (
+      <Authorizer permissions="can_administrate">
+        <Jumbotron pageName={pageName} subtitle={subtitle} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <ContentTitle icon="cog" title="Manage all your users here" />
+                <ServiceBotTableBase
+                  createItemProps={
+                    !this.props.stripe_publishable_key && { disabled: true }
+                  }
+                  createItemAction={
+                    this.props.stripe_publishable_key
+                      ? this.openInviteUserModal
+                      : () => {}
+                  }
+                  createItemLabel={
+                    this.props.stripe_publishable_key ? (
+                      "Invite user"
+                    ) : (
+                      <Link
+                        to="/stripe-settings"
+                        data-tip="Setup Incomplete - Click to finish"
+                      >
+                        Invite User
+                        <ReactTooltip
+                          place="bottom"
+                          type="dark"
+                          effect="solid"
+                        />
+                      </Link>
+                    )
+                  }
+                  rows={this.state.rows}
+                  fetchRows={this.fetchData}
+                  sortColumn="created_at"
+                  sortOrder="desc"
+                >
+                  <TableHeaderColumn
+                    isKey
+                    dataField="id"
+                    dataFormat={this.idFormatter}
+                    dataSort={false}
+                    searchable={false}
+                    width="30"
+                  />
+                  <TableHeaderColumn
+                    dataField="email"
+                    dataFormat={this.profileLinkFormatter}
+                    dataSort
+                    width="150"
                   >
-                    <TableHeaderColumn
-                      isKey
-                      dataField="id"
-                      dataFormat={this.idFormatter}
-                      dataSort={false}
-                      searchable={false}
-                      width="30"
-                    />
-                    <TableHeaderColumn
-                      dataField="email"
-                      dataFormat={this.profileLinkFormatter}
-                      dataSort
-                      width="150"
-                    >
-                      Email
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="name"
-                      dataFormat={this.profileLinkFormatter}
-                      dataSort
-                      width="80"
-                    >
-                      name
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="status"
-                      dataFormat={this.statusFormatter}
-                      dataSort
-                      width="80"
-                    >
-                      Status
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="references"
-                      dataFormat={this.fundFormatter}
-                      dataSort
-                      width="80"
-                    >
-                      Fund?
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="references"
-                      dataFormat={this.roleFormatter}
-                      dataSort
-                      filterValue={this.roleFormatter}
-                      width="80"
-                    >
-                      Role
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="last_login"
-                      dataFormat={this.lastLoginFormatter}
-                      dataSort
-                      searchable={false}
-                      width="100"
-                    >
-                      Last Login
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="created_at"
-                      dataFormat={this.createdAtFormatter}
-                      dataSort
-                      searchable={false}
-                      width="100"
-                    >
-                      Created At
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="Actions"
-                      className="action-column-header"
-                      columnClassName="action-column"
-                      dataFormat={this.rowActionsFormatter}
-                      searchable={false}
-                      width="80"
-                      filter={false}
-                    />
-                  </ServiceBotTableBase>
-                </div>
+                    Email
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="name"
+                    dataFormat={this.profileLinkFormatter}
+                    dataSort
+                    width="80"
+                  >
+                    name
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="status"
+                    dataFormat={this.statusFormatter}
+                    dataSort
+                    width="80"
+                  >
+                    Status
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="references"
+                    dataFormat={this.fundFormatter}
+                    dataSort
+                    width="80"
+                  >
+                    Fund?
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="references"
+                    dataFormat={this.roleFormatter}
+                    dataSort
+                    filterValue={this.roleFormatter}
+                    width="80"
+                  >
+                    Role
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="last_login"
+                    dataFormat={this.lastLoginFormatter}
+                    dataSort
+                    searchable={false}
+                    width="100"
+                  >
+                    Last Login
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="created_at"
+                    dataFormat={this.createdAtFormatter}
+                    dataSort
+                    searchable={false}
+                    width="100"
+                  >
+                    Created At
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="Actions"
+                    className="action-column-header"
+                    columnClassName="action-column"
+                    dataFormat={this.rowActionsFormatter}
+                    searchable={false}
+                    width="80"
+                    filter={false}
+                  />
+                </ServiceBotTableBase>
               </div>
-              {getModals()}
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            </div>
+            {getModals()}
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

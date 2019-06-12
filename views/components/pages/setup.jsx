@@ -184,16 +184,14 @@ class SetupStripe extends React.Component {
           <div className="title">
             <h3>ServiceBot works with Stripe:</h3>
             <p>
-              Copy your Standard API keys
-              {" "}
+              Copy your Standard API keys{" "}
               <a
                 className="intext-link"
                 href="https://dashboard.stripe.com/account/apikeys"
                 target="_blank"
               >
                 from Stripe
-              </a>
-              {" "}
+              </a>{" "}
               and paste them in the Secret key and Publishable key below. Once
               you enter your keys, you can import your Stripe account to your
               Servicebot.
@@ -270,9 +268,9 @@ class Setup extends React.Component {
   }
 
   handleInputChange(event) {
-    const {target} = event;
+    const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const {name} = target;
+    const { name } = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -346,14 +344,13 @@ class Setup extends React.Component {
 
     const steps = this.state.steps.map(step => stepMap[step]);
     return (
-      <div style={{ backgroundColor: "#0097f1", minHeight: `${100  }vh` }}>
+      <div style={{ backgroundColor: "#0097f1", minHeight: `${100}vh` }}>
         {this.state.loading && <Load />}
         <div className="installation row">
           <div className="installation-logo col-md-12">
             <img src="/assets/logos/v1/servicebot-logo-full-white.png" />
             <h1>
-              Welcome to ServiceBot Installer - Installing version
-              {" "}
+              Welcome to ServiceBot Installer - Installing version{" "}
               {version.version}
             </h1>
           </div>

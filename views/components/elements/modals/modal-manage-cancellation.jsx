@@ -99,9 +99,9 @@ class ModalManageCancellation extends React.Component {
     const self = this;
     const currentModal = this.state.current_modal;
     const instance = self.state.serviceInstance;
-    const {name} = instance;
+    const { name } = instance;
     const price = instance.payment_plan.amount;
-    const {interval} = instance.payment_plan;
+    const { interval } = instance.payment_plan;
     const success_icon = "fa-check";
 
     if (currentModal == "model_undo_cancel") {
@@ -159,53 +159,52 @@ class ModalManageCancellation extends React.Component {
             </div>
           </Modal>
         );
-      } 
-        return (
-          <Modal
-            modalTitle="Service Cancellation Request"
-            icon="fa-flag"
-            show={self.props.show}
-            hide={self.props.hide}
-            hideFooter
-            top="40%"
-            width="490px"
-          >
-            <div className="table-responsive">
-              <div className="p-20">
-                <div className="row">
-                  <div className="col-xs-12">
-                    <p>
-                      <strong>
-                        Your service cancellation request is pending approval.
-                      </strong>
-                    </p>
-                    <p>
-                      Once your request has been processed, you will be
-                      notified. You can undo cancellation to keep your service
-                      running.
-                    </p>
-                  </div>
+      }
+      return (
+        <Modal
+          modalTitle="Service Cancellation Request"
+          icon="fa-flag"
+          show={self.props.show}
+          hide={self.props.hide}
+          hideFooter
+          top="40%"
+          width="490px"
+        >
+          <div className="table-responsive">
+            <div className="p-20">
+              <div className="row">
+                <div className="col-xs-12">
+                  <p>
+                    <strong>
+                      Your service cancellation request is pending approval.
+                    </strong>
+                  </p>
+                  <p>
+                    Once your request has been processed, you will be notified.
+                    You can undo cancellation to keep your service running.
+                  </p>
                 </div>
               </div>
-              <div className="modal-footer text-right p-b-20">
-                <button
-                  className="btn btn-default btn-rounded"
-                  onClick={self.props.hide}
-                >
-                  Close
-                </button>
-                <button
-                  className="btn btn-default btn-rounded"
-                  onClick={self.onUndoCancel}
-                >
-                  Undo Request
-                </button>
-              </div>
             </div>
-          </Modal>
-        );
-      
-    } if (currentModal == "model_undo_cancel_success") {
+            <div className="modal-footer text-right p-b-20">
+              <button
+                className="btn btn-default btn-rounded"
+                onClick={self.props.hide}
+              >
+                Close
+              </button>
+              <button
+                className="btn btn-default btn-rounded"
+                onClick={self.onUndoCancel}
+              >
+                Undo Request
+              </button>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
+    if (currentModal == "model_undo_cancel_success") {
       return (
         <Modal
           modalTitle="Reverted Cancellation Request"
@@ -229,7 +228,8 @@ class ModalManageCancellation extends React.Component {
           </div>
         </Modal>
       );
-    } if (currentModal == "model_reject_cancel_success") {
+    }
+    if (currentModal == "model_reject_cancel_success") {
       return (
         <Modal
           modalTitle="Cancellation Request is Rejected"
@@ -253,7 +253,8 @@ class ModalManageCancellation extends React.Component {
           </div>
         </Modal>
       );
-    } if (currentModal == "model_confirm_cancel_success") {
+    }
+    if (currentModal == "model_confirm_cancel_success") {
       return (
         <Modal
           modalTitle="Cancellation Request is Approved"

@@ -44,14 +44,15 @@ class Breadcrumb extends React.Component {
             </Link>
           </li>
         );
-      } if (pathArray.length >= 2) {
+      }
+      if (pathArray.length >= 2) {
         let breadcrumbLink = "";
         let count = 0;
         return (
           <ol className="breadcrumb icon-home icon-angle-right no-bg">
             {pathArray.map(breadcrumb => (
               <li
-                data={(breadcrumbLink = `${breadcrumbLink + breadcrumb  }/`)}
+                data={(breadcrumbLink = `${breadcrumbLink + breadcrumb}/`)}
                 key={`breadcrumb-${breadcrumb}-${count++}`}
                 style={this.state.color}
               >
@@ -77,15 +78,14 @@ class Breadcrumb extends React.Component {
             ))}
           </ol>
         );
-      } 
-        return (
-          <li style={this.state.color}>
-            <Link to="/" style={this.state.color}>
-              Home
-            </Link>
-          </li>
-        );
-      
+      }
+      return (
+        <li style={this.state.color}>
+          <Link to="/" style={this.state.color}>
+            Home
+          </Link>
+        </li>
+      );
     }
   }
 }

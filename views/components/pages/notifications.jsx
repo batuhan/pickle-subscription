@@ -22,20 +22,11 @@ class Notification extends React.Component {
   render() {
     return (
       <div>
-        <div>
-Subject :
-          {this.props.subject}
-        </div>
+        <div>Subject :{this.props.subject}</div>
         <br />
-        <p>
-TYPE :
-          {this.props.type}
-        </p>
+        <p>TYPE :{this.props.type}</p>
         <br />
-        <div>
-Message :
-          {this.props.message}
-        </div>
+        <div>Message :{this.props.message}</div>
       </div>
     );
   }
@@ -85,7 +76,7 @@ class NavNotification extends React.Component {
   createMarkup(html) {
     let trimmedHTML = this.trimText(html, 100);
     if (html.length > 100) {
-      trimmedHTML = `${this.trimText(html, 100).props.children  } ...`;
+      trimmedHTML = `${this.trimText(html, 100).props.children} ...`;
     }
     return { __html: trimmedHTML };
   }
@@ -109,9 +100,8 @@ class NavNotification extends React.Component {
   trimText(data, limit) {
     if (data.length <= limit) {
       return data;
-    } 
-      return <span className="trimmed-text">{data.slice(0, limit)}</span>;
-    
+    }
+    return <span className="trimmed-text">{data.slice(0, limit)}</span>;
   }
 
   miniList(unread) {
@@ -151,9 +141,8 @@ class NavNotification extends React.Component {
           </ul>
         </div>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 
   render() {
@@ -245,9 +234,8 @@ class NotificationList extends React.Component {
   modSubject(data, dataObj) {
     if (data.length <= 40) {
       return data;
-    } 
-      return this.trimText(data, 40);
-    
+    }
+    return this.trimText(data, 40);
   }
 
   modMessage(data, dataObj) {
@@ -262,20 +250,19 @@ class NotificationList extends React.Component {
           {data}
         </span>
       );
-    } 
-      const trimmedHTML = this.createMarkup(
-        this.trimText(data, 90).props.children,
-      );
-      return (
-        <span
-          className="trimmed-text btn-link"
-          onClick={() => {
-            return this.openMessageModel(dataObj);
-          }}
-          dangerouslySetInnerHTML={trimmedHTML}
-        />
-      );
-    
+    }
+    const trimmedHTML = this.createMarkup(
+      this.trimText(data, 90).props.children,
+    );
+    return (
+      <span
+        className="trimmed-text btn-link"
+        onClick={() => {
+          return this.openMessageModel(dataObj);
+        }}
+        dangerouslySetInnerHTML={trimmedHTML}
+      />
+    );
   }
 
   modCreatedAt(data, dataObj) {
@@ -285,9 +272,8 @@ class NotificationList extends React.Component {
   rowClasses(dataObj) {
     if (!dataObj.read) {
       return "unread";
-    } 
-      return "read";
-    
+    }
+    return "read";
   }
 
   openMessageModel(dataObj) {
@@ -306,13 +292,12 @@ class NotificationList extends React.Component {
   trimText(data, limit) {
     if (data.length <= limit) {
       return data;
-    } 
-      return <span className="trimmed-text">{data.slice(0, limit)}</span>;
-    
+    }
+    return <span className="trimmed-text">{data.slice(0, limit)}</span>;
   }
 
   render() {
-    const {notificationType} = this.props;
+    const { notificationType } = this.props;
     const notifications =
       notificationType == "_SYSTEM"
         ? this.props.system_notifications
@@ -357,7 +342,7 @@ class Notifications extends React.Component {
 
   componentDidMount() {
     const self = this;
-    Fetcher(`${self.state.url  }/own`)
+    Fetcher(`${self.state.url}/own`)
       .then(function(response) {
         if (!response.error) {
           return self.props.setNotifications(response);
@@ -365,10 +350,9 @@ class Notifications extends React.Component {
       })
       .then(response => {
         if (isAuthorized({ permissions: "put_notification_templates_id" })) {
-          return Fetcher(`${self.state.url  }/system`);
-        } 
-          throw "not authorized for system";
-        
+          return Fetcher(`${self.state.url}/system`);
+        }
+        throw "not authorized for system";
       })
       .then(sys_notifications =>
         self.props.setSystemNotifications(sys_notifications, true),

@@ -1,11 +1,10 @@
-
 /**
  * @author Batch Themes Ltd.
  */
 (function() {
   $(function() {
     const config = $.localStorage.get("config");
-    const {colors} = config;
+    const { colors } = config;
     $(".btn-swal").on("click", function() {
       const action = $(this).data("action");
       const service = $(this).data("service");

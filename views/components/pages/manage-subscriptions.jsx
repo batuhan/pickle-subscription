@@ -158,7 +158,7 @@ class ManageSubscriptions extends React.Component {
   typeFormatter(cell, row) {
     // null check for the payment plan
     if (cell) {
-      let {interval} = cell;
+      let { interval } = cell;
       if (interval == "day") {
         interval = "Daily";
       } else if (interval == "week") {
@@ -203,18 +203,16 @@ class ManageSubscriptions extends React.Component {
   typeDataValue(cell, row) {
     if (cell) {
       return row.type;
-    } 
-      return "N/A";
-    
+    }
+    return "N/A";
   }
 
   amountFormatter(cell, row) {
     if (cell) {
       const prefix = getSymbolFromCurrency(cell.currency);
       return <Price value={cell.amount} prefix={prefix} />;
-    } 
-      return <span className="status-badge red">No Plan</span>;
-    
+    }
+    return <span className="status-badge red">No Plan</span>;
   }
 
   emailDataValue(cell) {
@@ -256,7 +254,7 @@ class ManageSubscriptions extends React.Component {
 
   rowActionsFormatter(cell, row) {
     const self = this;
-    const {status} = row;
+    const { status } = row;
     const customAction = {
       type: "button",
       label: this.dropdownStatusFormatter(row),
@@ -291,15 +289,15 @@ class ManageSubscriptions extends React.Component {
   }
 
   dropdownStatusFormatter(dataObject) {
-    const {status} = dataObject;
+    const { status } = dataObject;
     const statusString = _.toLower(status);
     if (statusString === "waiting_cancellation") {
       return "Manage Cancellation";
-    } if (statusString === "cancelled" || !dataObject.payment_plan) {
+    }
+    if (statusString === "cancelled" || !dataObject.payment_plan) {
       return "Delete Service";
-    } 
-      return "Cancel Service";
-    
+    }
+    return "Cancel Service";
   }
 
   render() {
@@ -321,14 +319,14 @@ class ManageSubscriptions extends React.Component {
       }
     }
     if (_.has(this.props, "location.query.uid")) {
-      const {uid} = this.props.location.query;
+      const { uid } = this.props.location.query;
       pageName = `Services for user ${uid}`;
       pageTitle = `Manage user ${uid} services here.`;
     }
 
     const renderModals = () => {
       // change the status to cancelled if no payment plan is detected
-      let {status} = self.state.currentDataObject;
+      let { status } = self.state.currentDataObject;
       if (!self.state.currentDataObject.payment_plan) {
         status = "cancelled";
       }
@@ -370,96 +368,95 @@ class ManageSubscriptions extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      const qualityType = {
-        0: "good",
-        1: "bad",
-        2: "unknown",
-      };
-      return (
-        <Authorizer permissions={["can_administrate", "can_manage"]}>
-          <Jumbotron pageName={pageName} subtitle={subtitle} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <ContentTitle icon="cog" title={pageTitle} />
-                  <ServiceBotTableBase
-                    rows={this.state.rows}
-                    fetchRows={this.fetchData}
-                    sortColumn="updated_at"
-                    sortOrder="desc"
+    }
+    const qualityType = {
+      0: "good",
+      1: "bad",
+      2: "unknown",
+    };
+    return (
+      <Authorizer permissions={["can_administrate", "can_manage"]}>
+        <Jumbotron pageName={pageName} subtitle={subtitle} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <ContentTitle icon="cog" title={pageTitle} />
+                <ServiceBotTableBase
+                  rows={this.state.rows}
+                  fetchRows={this.fetchData}
+                  sortColumn="updated_at"
+                  sortOrder="desc"
+                >
+                  <TableHeaderColumn
+                    isKey
+                    dataField="name"
+                    dataFormat={this.nameFormatter}
+                    dataSort
+                    width="130"
                   >
-                    <TableHeaderColumn
-                      isKey
-                      dataField="name"
-                      dataFormat={this.nameFormatter}
-                      dataSort
-                      width="130"
-                    >
-                      Offering
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="references"
-                      dataFormat={this.emailFormatter}
-                      dataSort
-                      filterValue={this.emailDataValue}
-                      width="150"
-                    >
-                      Email
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="payment_plan"
-                      dataFormat={this.amountFormatter}
-                      dataSort
-                      searchable={false}
-                      width="80"
-                    >
-                      Amount
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="payment_plan"
-                      dataFormat={this.typeFormatter}
-                      dataSort
-                      filterValue={this.typeDataValue}
-                      width="100"
-                    >
-                      Type
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="status"
-                      dataFormat={this.statusFormatter}
-                      dataSort
-                      width="100"
-                    >
-                      Status
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="updated_at"
-                      dataFormat={this.createdFormatter}
-                      dataSort
-                      searchable={false}
-                      width="140"
-                    >
-                      Updated
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="Actions"
-                      className="action-column-header"
-                      columnClassName="action-column"
-                      dataFormat={this.rowActionsFormatter}
-                      width="80"
-                      searchable={false}
-                    />
-                  </ServiceBotTableBase>
-                </div>
+                    Offering
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="references"
+                    dataFormat={this.emailFormatter}
+                    dataSort
+                    filterValue={this.emailDataValue}
+                    width="150"
+                  >
+                    Email
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="payment_plan"
+                    dataFormat={this.amountFormatter}
+                    dataSort
+                    searchable={false}
+                    width="80"
+                  >
+                    Amount
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="payment_plan"
+                    dataFormat={this.typeFormatter}
+                    dataSort
+                    filterValue={this.typeDataValue}
+                    width="100"
+                  >
+                    Type
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="status"
+                    dataFormat={this.statusFormatter}
+                    dataSort
+                    width="100"
+                  >
+                    Status
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="updated_at"
+                    dataFormat={this.createdFormatter}
+                    dataSort
+                    searchable={false}
+                    width="140"
+                  >
+                    Updated
+                  </TableHeaderColumn>
+                  <TableHeaderColumn
+                    dataField="Actions"
+                    className="action-column-header"
+                    columnClassName="action-column"
+                    dataFormat={this.rowActionsFormatter}
+                    width="80"
+                    searchable={false}
+                  />
+                </ServiceBotTableBase>
               </div>
-              {renderModals()}
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            </div>
+            {renderModals()}
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

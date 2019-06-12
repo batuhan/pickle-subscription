@@ -56,14 +56,13 @@ import Embed from "./components/elements/embed.jsx";
 import Setup from "./components/pages/setup.jsx";
 import GenericNotFound from "./components/pages/notfound.jsx";
 
-
 class AppRouter extends React.Component {
   componentWillMount() {
     this.props.initialize();
   }
 
   render() {
-    const {user} = this.props;
+    const { user } = this.props;
     return (
       <Router history={browserHistory}>
         <Route name="Home" path="/" component={App}>
@@ -307,7 +306,7 @@ class AppWrapper extends React.Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     if (this.state.pluginbot) {
       const history = syncHistoryWithStore(
         this.state.pluginbot.store.getState().history,
@@ -318,9 +317,8 @@ class AppWrapper extends React.Component {
           <AppRouter history={history} store={this.state.pluginbot.store} />
         </PluginbotProvider>
       );
-    } 
-      return <div>Initializing...</div>;
-    
+    }
+    return <div>Initializing...</div>;
   }
 }
 

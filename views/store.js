@@ -93,9 +93,8 @@ function notificationsReducer(state = [], action) {
       return state.map(notification => {
         if (notification.id == action.notification.id) {
           return action.notification;
-        } 
-          return notification;
-        
+        }
+        return notification;
       });
     default:
       return state;
@@ -128,9 +127,8 @@ function systemNotificationReducer(state = [], action) {
       return state.map(notification => {
         if (notification.id == action.notification.id) {
           return action.notification;
-        } 
-          return notification;
-        
+        }
+        return notification;
       });
     default:
       return state;
@@ -166,10 +164,10 @@ function uidReducer(state = cookie.load("uid") || null, action) {
     case INITIALIZE:
       if (action.initialState.uid == undefined) {
         return null;
-      } 
-        DELETETHISCODELATERUID = action.initialState.uid;
-        return action.initialState.uid;
-      
+      }
+      DELETETHISCODELATERUID = action.initialState.uid;
+      return action.initialState.uid;
+
     case SET_UID:
       DELETETHISCODELATERUID = action.uid;
       return action.uid;
@@ -183,15 +181,15 @@ function userReducer(state = {}, action) {
     case INITIALIZE:
       if (action.initialState.user == undefined) {
         return {};
-      } 
-        return action.initialState.user;
-      
+      }
+      return action.initialState.user;
+
     case SET_USER:
       if (action.user == undefined) {
         return {};
-      } 
-        return action.user;
-      
+      }
+      return action.user;
+
     default:
       return state;
   }

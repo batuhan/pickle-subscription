@@ -18,9 +18,13 @@ module.exports = function(app, passport) {
     passport.authenticate("local-login", { session: false }),
     function(req, res) {
       console.log(req.user);
-      const token = jwt.sign({ uid: req.user.data.id }, process.env.SECRET_KEY, {
-        expiresIn: "3h",
-      });
+      const token = jwt.sign(
+        { uid: req.user.data.id },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "3h",
+        },
+      );
       res.json({ token });
     },
   );

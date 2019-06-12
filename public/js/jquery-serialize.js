@@ -34,7 +34,7 @@
       return void 0 === h[e] && (h[e] = 0), h[e]++;
     }
     function u(e) {
-      switch (i(`[name="${  e.name  }"]`, r).attr("type")) {
+      switch (i(`[name="${e.name}"]`, r).attr("type")) {
         case "checkbox":
           return e.value === "on" ? !0 : e.value;
         default:
@@ -59,7 +59,7 @@
       return JSON.stringify(o());
     }
     var l = {};
-      var h = {};
+    var h = {};
     (this.addPair = f),
       (this.addPairs = d),
       (this.serialize = o),

@@ -282,7 +282,8 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } if (status == "running") {
+      }
+      if (status == "running") {
         return (
           <li>
             <Link to="#" onClick={self.handleCancel}>
@@ -290,7 +291,8 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } if (status == "waiting_cancellation") {
+      }
+      if (status == "waiting_cancellation") {
         return (
           <li>
             <Link to="#" onClick={self.handleUndoCancel}>
@@ -298,7 +300,8 @@ class ServiceInstance extends React.Component {
             </Link>
           </li>
         );
-      } if (status == "cancelled") {
+      }
+      if (status == "cancelled") {
         return (
           <li>
             <Link to="#" onClick={self.handleApprove}>
@@ -325,9 +328,7 @@ class ServiceInstance extends React.Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Actions 
-              {' '}
-              <span className="caret" />
+              Actions <span className="caret" />
             </button>
             <ul className="dropdown-menu dropdown-menu-right">
               <li>
@@ -358,9 +359,8 @@ class ServiceInstance extends React.Component {
           </div>
         </Authorizer>
       );
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   getAdditionalCharges(myInstance, myInstanceChargeItems) {
@@ -384,9 +384,8 @@ class ServiceInstance extends React.Component {
             </div>
           </div>
         );
-      } 
-        return null;
-      
+      }
+      return null;
     }
   }
 
@@ -417,240 +416,245 @@ class ServiceInstance extends React.Component {
           </div>
         </Authorizer>
       );
-    } 
-      const myInstance = this.state.instance;
-      const myInstanceChargeItems = _.groupBy(
-        myInstance.references.charge_items,
-        "approved",
-      );
-      let id;
-        let name;
-        let amount;
-        let interval;
-        let owner;
-        let ownerId = null;
+    }
+    const myInstance = this.state.instance;
+    const myInstanceChargeItems = _.groupBy(
+      myInstance.references.charge_items,
+      "approved",
+    );
+    let id;
+    let name;
+    let amount;
+    let interval;
+    let owner;
+    let ownerId = null;
 
-      // Gather data first
-      if (self.state.instance) {
-        const service = self.state.instance;
-        id = service.id;
-        owner = service.references.users[0];
-        ownerId = service.user_id;
-        name = service.name || "N/A";
-        if (service.payment_plan) {
-          amount = service.payment_plan.amount;
-          interval = service.payment_plan.interval;
-        } else {
-          amount = "____";
-          interval = "N/A";
-        }
+    // Gather data first
+    if (self.state.instance) {
+      const service = self.state.instance;
+      id = service.id;
+      owner = service.references.users[0];
+      ownerId = service.user_id;
+      name = service.name || "N/A";
+      if (service.payment_plan) {
+        amount = service.payment_plan.amount;
+        interval = service.payment_plan.interval;
+      } else {
+        amount = "____";
+        interval = "N/A";
       }
+    }
 
-      const currentModal = () => {
-        if (self.state.approveModal) {
-          return (
-            <ModalApprove
-              myInstance={self.state.instance}
-              show={self.state.approveModal}
-              hide={self.onApproveClose}
-            />
-          );
-        } if (self.state.cancelModal) {
-          return (
-            <ModalRequestCancellation
-              myInstance={self.state.instance}
-              show={self.state.cancelModal}
-              hide={self.onCancelClose}
-            />
-          );
-        } if (self.state.undoCancelModal) {
-          return (
-            <ModalManageCancellation
-              myInstance={self.state.instance}
-              show={self.state.undoCancelModal}
-              hide={self.onUndoCancelClose}
-            />
-          );
-        } if (self.state.viewPaymentModal) {
-          return (
-            <ModalPaymentHistory
-              show={self.state.viewPaymentModal}
-              hide={self.onViewPaymentModalClose}
-            />
-          );
-        } if (self.state.editInstanceModal) {
-          return (
-            <ModalEditInstance
-              myInstance={self.state.instance}
-              show={self.state.editInstanceModal}
-              hide={self.onEditInstanceModalClose}
-            />
-          );
-        } if (self.state.editPaymentModal) {
-          return (
-            <ModalEditPaymentPlan
-              myInstance={self.state.instance}
-              show={self.state.editPaymentModal}
-              hide={self.onEditPaymentModalClose}
-            />
-          );
-        } if (self.state.addChargeItemModal) {
-          return (
-            <ModalAddChargeItem
-              myInstance={self.state.instance}
-              show={self.state.editPaymentModal}
-              hide={self.onAddChargeItemModalClose}
-            />
-          );
-        } if (self.state.payChargeItemModal) {
-          return (
-            <ModalPayChargeItem
-              myInstance={self.state.instance}
-              ownerId={ownerId}
-              chargeId={self.state.payChargeItemId}
-              show={self.state.payChargeItemModal}
-              hide={self.onPayChargeItemModalClose}
-            />
-          );
-        } if (self.state.cancelChargeItemModal) {
-          return (
-            <ModalCancelChargeItem
-              myInstance={self.state.instance}
-              ownerId={ownerId}
-              chargeId={self.state.cancelChargeItemId}
-              show={self.state.cancelChargeItemModal}
-              hide={self.onCancelChargeItemModalClose}
-            />
-          );
-        } if (self.state.payAllChargesModal) {
-          return (
-            <ModalPayAllCharges
-              myInstance={self.state.instance}
-              ownerId={ownerId}
-              show={self.state.payAllChargesModal}
-              hide={self.onPayAllChargesModalClose}
-            />
-          );
-        } else if (self.state.fundModal) {
-          return (
-            <ModalPaymentSetup
-              justPayment={true}
-              modalCallback={self.onAddFundClose}
-              ownerId={self.state.instance.user_id}
-              show={self.state.handleAddFund}
-              hide={self.onAddFundClose}
-            />
-          );
-        } else if (self.state.editPropertyModal) {
-          return (
-            <ModalEditProperties
-              instance={self.state.instance}
-              modalCallback={self.onEditPropertiesModalClose}
-              ownerId={self.state.instance.user_id}
-              show={self.state.editPropertyModal}
-              hide={self.onEditPropertiesModalClose}
-            />
-          );
-        }
-      };
-
-      return (
-        <Authorizer>
-          <Jumbotron
-            pageName={pageName}
-            subtitle={(
-              <span>
-                {subtitle}
-                <strong>
-                  <DateFormat date={myInstance.updated_at} time />
-                </strong>
-              </span>
-)}
+    const currentModal = () => {
+      if (self.state.approveModal) {
+        return (
+          <ModalApprove
+            myInstance={self.state.instance}
+            show={self.state.approveModal}
+            hide={self.onApproveClose}
           />
-          {/* <Jumbotron pageName={pageName} subtitle={`${myInstance.description} . ${myInstance.subscription_id || ""}`} /> */}
-          <div className="page-service-instance">
-            <Content>
-              <ReactCSSTransitionGroup
-                component="div"
-                transitionName="fade"
-                transitionAppear
-                transitionEnter
-                transitionLeave
-                transitionAppearTimeout={1000}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}
-              >
-                <div className="row">
-                  <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2 m-b-20">
-                    {self.getActionButtons(myInstance)}
-                  </div>
+        );
+      }
+      if (self.state.cancelModal) {
+        return (
+          <ModalRequestCancellation
+            myInstance={self.state.instance}
+            show={self.state.cancelModal}
+            hide={self.onCancelClose}
+          />
+        );
+      }
+      if (self.state.undoCancelModal) {
+        return (
+          <ModalManageCancellation
+            myInstance={self.state.instance}
+            show={self.state.undoCancelModal}
+            hide={self.onUndoCancelClose}
+          />
+        );
+      }
+      if (self.state.viewPaymentModal) {
+        return (
+          <ModalPaymentHistory
+            show={self.state.viewPaymentModal}
+            hide={self.onViewPaymentModalClose}
+          />
+        );
+      }
+      if (self.state.editInstanceModal) {
+        return (
+          <ModalEditInstance
+            myInstance={self.state.instance}
+            show={self.state.editInstanceModal}
+            hide={self.onEditInstanceModalClose}
+          />
+        );
+      }
+      if (self.state.editPaymentModal) {
+        return (
+          <ModalEditPaymentPlan
+            myInstance={self.state.instance}
+            show={self.state.editPaymentModal}
+            hide={self.onEditPaymentModalClose}
+          />
+        );
+      }
+      if (self.state.addChargeItemModal) {
+        return (
+          <ModalAddChargeItem
+            myInstance={self.state.instance}
+            show={self.state.editPaymentModal}
+            hide={self.onAddChargeItemModalClose}
+          />
+        );
+      }
+      if (self.state.payChargeItemModal) {
+        return (
+          <ModalPayChargeItem
+            myInstance={self.state.instance}
+            ownerId={ownerId}
+            chargeId={self.state.payChargeItemId}
+            show={self.state.payChargeItemModal}
+            hide={self.onPayChargeItemModalClose}
+          />
+        );
+      }
+      if (self.state.cancelChargeItemModal) {
+        return (
+          <ModalCancelChargeItem
+            myInstance={self.state.instance}
+            ownerId={ownerId}
+            chargeId={self.state.cancelChargeItemId}
+            show={self.state.cancelChargeItemModal}
+            hide={self.onCancelChargeItemModalClose}
+          />
+        );
+      }
+      if (self.state.payAllChargesModal) {
+        return (
+          <ModalPayAllCharges
+            myInstance={self.state.instance}
+            ownerId={ownerId}
+            show={self.state.payAllChargesModal}
+            hide={self.onPayAllChargesModalClose}
+          />
+        );
+      } else if (self.state.fundModal) {
+        return (
+          <ModalPaymentSetup
+            justPayment={true}
+            modalCallback={self.onAddFundClose}
+            ownerId={self.state.instance.user_id}
+            show={self.state.handleAddFund}
+            hide={self.onAddFundClose}
+          />
+        );
+      } else if (self.state.editPropertyModal) {
+        return (
+          <ModalEditProperties
+            instance={self.state.instance}
+            modalCallback={self.onEditPropertiesModalClose}
+            ownerId={self.state.instance.user_id}
+            show={self.state.editPropertyModal}
+            hide={self.onEditPropertiesModalClose}
+          />
+        );
+      }
+    };
+
+    return (
+      <Authorizer>
+        <Jumbotron
+          pageName={pageName}
+          subtitle={
+            <span>
+              {subtitle}
+              <strong>
+                <DateFormat date={myInstance.updated_at} time />
+              </strong>
+            </span>
+          }
+        />
+        {/* <Jumbotron pageName={pageName} subtitle={`${myInstance.description} . ${myInstance.subscription_id || ""}`} /> */}
+        <div className="page-service-instance">
+          <Content>
+            <ReactCSSTransitionGroup
+              component="div"
+              transitionName="fade"
+              transitionAppear
+              transitionEnter
+              transitionLeave
+              transitionAppearTimeout={1000}
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}
+            >
+              <div className="row">
+                <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2 m-b-20">
+                  {self.getActionButtons(myInstance)}
                 </div>
+              </div>
 
-                <div id="service-instance-detail" className="row">
-                  <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                    <ServiceInstancePaymentPlan
-                      key={Object.id}
-                      owner={owner}
-                      service={myInstance}
-                      instancePaymentPlan={myInstance.payment_plan}
-                      status={myInstance.status}
-                      approval={self.handleApprove}
-                      cancel={self.handleCancel}
-                      cancelUndo={self.handleUndoCancel}
-                      allCharges={myInstanceChargeItems}
-                      handleAllCharges={self.handlePayAllChargesModal}
-                      userFunds={self.state.userFunds}
-                      fundModal={self.handleAddFund}
-                    />
-                  </div>
+              <div id="service-instance-detail" className="row">
+                <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                  <ServiceInstancePaymentPlan
+                    key={Object.id}
+                    owner={owner}
+                    service={myInstance}
+                    instancePaymentPlan={myInstance.payment_plan}
+                    status={myInstance.status}
+                    approval={self.handleApprove}
+                    cancel={self.handleCancel}
+                    cancelUndo={self.handleUndoCancel}
+                    allCharges={myInstanceChargeItems}
+                    handleAllCharges={self.handlePayAllChargesModal}
+                    userFunds={self.state.userFunds}
+                    fundModal={self.handleAddFund}
+                  />
                 </div>
+              </div>
 
-                {this.getAdditionalCharges(myInstance, myInstanceChargeItems)}
+              {this.getAdditionalCharges(myInstance, myInstanceChargeItems)}
 
-                {myInstanceChargeItems.true &&
-                  myInstanceChargeItems.true.length > 0 && (
-                    <div id="service-instance-approved-charges" className="row">
-                      <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                        <ServiceInstanceApprovedCharges
-                          instanceApprovedItems={myInstanceChargeItems.true}
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                {myInstance.references.service_instance_properties.length >
-                  0 && (
-                  <div id="service-instance-fields" className="row">
+              {myInstanceChargeItems.true &&
+                myInstanceChargeItems.true.length > 0 && (
+                  <div id="service-instance-approved-charges" className="row">
                     <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                      <ServiceInstanceFields
-                        instanceProperties={
-                          myInstance.references.service_instance_properties
-                        }
+                      <ServiceInstanceApprovedCharges
+                        instanceApprovedItems={myInstanceChargeItems.true}
                       />
                     </div>
                   </div>
                 )}
 
-                <div id="service-instance-files" className="row">
+              {myInstance.references.service_instance_properties.length > 0 && (
+                <div id="service-instance-fields" className="row">
                   <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                    <ServiceInstanceFiles instanceId={self.state.instanceId} />
-                  </div>
-                </div>
-
-                <div id="service-instance-message" className="row">
-                  <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                    <ServiceInstanceMessage
-                      instanceId={self.state.instanceId}
+                    <ServiceInstanceFields
+                      instanceProperties={
+                        myInstance.references.service_instance_properties
+                      }
                     />
                   </div>
                 </div>
-              </ReactCSSTransitionGroup>
-            </Content>
-            {currentModal()}
-          </div>
-        </Authorizer>
-      );
-    
+              )}
+
+              <div id="service-instance-files" className="row">
+                <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                  <ServiceInstanceFiles instanceId={self.state.instanceId} />
+                </div>
+              </div>
+
+              <div id="service-instance-message" className="row">
+                <div className="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                  <ServiceInstanceMessage instanceId={self.state.instanceId} />
+                </div>
+              </div>
+            </ReactCSSTransitionGroup>
+          </Content>
+          {currentModal()}
+        </div>
+      </Authorizer>
+    );
   }
 }
 

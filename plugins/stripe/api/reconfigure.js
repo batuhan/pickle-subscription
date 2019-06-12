@@ -17,10 +17,9 @@ module.exports = function(router, knex, stripe) {
         if (!err) {
           console.log("Stripe keys are valid. Continue...");
           return resolve("Stripe keys are valid. Continue...");
-        } 
-          console.log(`ERROR validating Stripe keys - ${err}`);
-          return reject(`ERROR validating Stripe keys - ${err}`);
-        
+        }
+        console.log(`ERROR validating Stripe keys - ${err}`);
+        return reject(`ERROR validating Stripe keys - ${err}`);
       });
     })
       .then(function() {
@@ -29,14 +28,13 @@ module.exports = function(router, knex, stripe) {
           if (stripe_secret.slice(3, 7) == stripe_publishable.slice(3, 7)) {
             console.log("Stripe keys are on the same environment. Continue...");
             return resolve(true);
-          } 
-            console.log(
-              "ERROR: Stripe keys must both be on the same environment!",
-            );
-            return reject(
-              "ERROR: Stripe keys must both be on the same environment!",
-            );
-          
+          }
+          console.log(
+            "ERROR: Stripe keys must both be on the same environment!",
+          );
+          return reject(
+            "ERROR: Stripe keys must both be on the same environment!",
+          );
         });
       })
       .catch(function(err) {
@@ -70,21 +68,19 @@ module.exports = function(router, knex, stripe) {
                         `Both Stripe keys are on the same account: ${new_stripe.id}. Continue without migration...`,
                       );
                       return resolve(false);
-                    } 
-                      // They are on different accounts, initiate migration
-                      console.log(
-                        `Stripe keys belong to two different accounts. Initiate migration...`,
-                      );
-                      return resolve(true);
-                    
-                  } 
-                    // TODO: need to save Stripe account info in the database to ensure rolled keys or diactivated account
-                    // If the old account is not found, forget about migration and update
+                    }
+                    // They are on different accounts, initiate migration
                     console.log(
-                      "Potential rolled keys. No old Stripe account found. Continue without migration...",
+                      `Stripe keys belong to two different accounts. Initiate migration...`,
                     );
-                    return resolve(false);
-                  
+                    return resolve(true);
+                  }
+                  // TODO: need to save Stripe account info in the database to ensure rolled keys or diactivated account
+                  // If the old account is not found, forget about migration and update
+                  console.log(
+                    "Potential rolled keys. No old Stripe account found. Continue without migration...",
+                  );
+                  return resolve(false);
                 });
               } else {
                 console.log(
@@ -122,17 +118,15 @@ module.exports = function(router, knex, stripe) {
         if (!option_publishable_key.data) {
           return res.status(200).json({ secret_key: "", publishable_key: "" });
         }
-        const secret_key =
-          `${option_secret_key.data.value.substring(0, 7) 
-          }******${ 
-          option_secret_key.data.value.substring(
-            option_secret_key.data.value.length - 5,
-            option_secret_key.data.value.length,
-          )}`;
+        const secret_key = `${option_secret_key.data.value.substring(
+          0,
+          7,
+        )}******${option_secret_key.data.value.substring(
+          option_secret_key.data.value.length - 5,
+          option_secret_key.data.value.length,
+        )}`;
         const publishable_key = option_publishable_key.data.value;
-        return res
-          .status(200)
-          .json({ secret_key, publishable_key });
+        return res.status(200).json({ secret_key, publishable_key });
       });
     });
   };
@@ -152,7 +146,7 @@ module.exports = function(router, knex, stripe) {
   const preconfigure = function(req, res) {
     const stripe_config = req.body;
     const stripe_publishable = stripe_config.stripe_public;
-    const {stripe_secret} = stripe_config;
+    const { stripe_secret } = stripe_config;
     console.log(
       "Checking pre-configuration of Stripe keys to: ",
       stripe_config,
@@ -164,12 +158,11 @@ module.exports = function(router, knex, stripe) {
           return res
             .status(200)
             .json({ message: "Migration is needed.", do_migration: true });
-        } 
-          return res.status(200).json({
-            message: "Reconfigurable without migration",
-            do_migration: false,
-          });
-        
+        }
+        return res.status(200).json({
+          message: "Reconfigurable without migration",
+          do_migration: false,
+        });
       })
       .catch(function(err) {
         return res.status(400).json({ error: err });
@@ -183,7 +176,7 @@ module.exports = function(router, knex, stripe) {
   const reconfigure = function(req, res) {
     const stripe_config = req.body;
     const stripe_publishable = stripe_config.stripe_public;
-    const {stripe_secret} = stripe_config;
+    const { stripe_secret } = stripe_config;
     let fullRemoval = stripe_config.full_removal;
     if (!fullRemoval) {
       fullRemoval = false;
@@ -281,11 +274,10 @@ module.exports = function(router, knex, stripe) {
           if (do_migration) {
             // Get upcoming invoices for every user
             return resolve(do_migration);
-          } 
-            // TODO: importing the customer invoices.
-            // console.log('Bypassing upcoming invoice creation...');
-            return resolve(do_migration);
-          
+          }
+          // TODO: importing the customer invoices.
+          // console.log('Bypassing upcoming invoice creation...');
+          return resolve(do_migration);
         });
       })
       .then(function() {

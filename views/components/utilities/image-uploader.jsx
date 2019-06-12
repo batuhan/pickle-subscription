@@ -42,9 +42,8 @@ class ImageUploader extends React.Component {
       if (!this.state.imageChanged) {
         if (this.props.handleSuccess) {
           return this.props.handleSuccess();
-        } 
-          return;
-        
+        }
+        return;
       }
       this.handleImage();
     }
@@ -58,7 +57,9 @@ class ImageUploader extends React.Component {
     const self = this;
     self.setState({ loadingImage: true });
     const src = e.currentTarget;
-    const targetImg = document.getElementById(`edit-${this.state.elementID}-img`);
+    const targetImg = document.getElementById(
+      `edit-${this.state.elementID}-img`,
+    );
     const fileReader = new FileReader();
 
     fileReader.addEventListener(

@@ -40,35 +40,34 @@ class TabContent extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <div
-          className={
-            this.props.classes ? this.props.classes : "tab-content-inner"
-          }
-        >
-          <ContentTitle title={this.props.contentTitle} />
-          <div className="row cards">
-            {this.state.tabContent.length > 0 ? (
-              this.state.tabContent.map(content => (
-                <Card
-                  key={`content-${content.id}`}
-                  id={content.id}
-                  name={content.name}
-                  description={content.description}
-                  amount={content.amount}
-                  interval={content.interval}
-                  imgUrl={this.props.imgUrl}
-                  color="#4ca6cf"
-                />
-              ))
-            ) : (
-              <p> No Content </p>
-            )}
-          </div>
+    }
+    return (
+      <div
+        className={
+          this.props.classes ? this.props.classes : "tab-content-inner"
+        }
+      >
+        <ContentTitle title={this.props.contentTitle} />
+        <div className="row cards">
+          {this.state.tabContent.length > 0 ? (
+            this.state.tabContent.map(content => (
+              <Card
+                key={`content-${content.id}`}
+                id={content.id}
+                name={content.name}
+                description={content.description}
+                amount={content.amount}
+                interval={content.interval}
+                imgUrl={this.props.imgUrl}
+                color="#4ca6cf"
+              />
+            ))
+          ) : (
+            <p> No Content </p>
+          )}
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

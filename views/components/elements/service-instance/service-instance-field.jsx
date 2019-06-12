@@ -6,7 +6,7 @@ const ServiceInstanceField = function(props) {
   // let widgets = this.props.services.widget.reduce((acc, widget) =>  ({...acc, [widget.type] : widget}), {});
   const type = props.field.type || "text";
   const widget = props.services.widget.find(widget => widget.type === type);
-  const {config} = props.field;
+  const { config } = props.field;
   // if(config && config.pricing){
   //     delete config.pricing;
   // }
@@ -22,9 +22,8 @@ const ServiceInstanceField = function(props) {
         />
       </div>
     );
-  } 
-    return <div />;
-  
+  }
+  return <div />;
 };
 
 export default consume("widget")(ServiceInstanceField);

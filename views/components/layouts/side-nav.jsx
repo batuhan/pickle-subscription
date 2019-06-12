@@ -201,9 +201,8 @@ class SlideNavLinks extends React.Component {
           ))}
         </ul>
       );
-    } 
-      return <span>no links</span>;
-    
+    }
+    return <span>no links</span>;
   }
 }
 
@@ -268,8 +267,7 @@ class SideNav extends React.Component {
                       className="btn btn-primary btn-raised dropdown-toggle"
                       data-toggle="dropdown"
                     >
-                      {email}
-                      {" "}
+                      {email}{" "}
                     </Link>
                     <button
                       className="btn btn-link btn-signout"

@@ -55,7 +55,7 @@ Role.prototype.assignPermission = function(permissions, callback) {
       callback(self);
     })
     .catch(function(err) {
-      console.log(`error creating : ${  err}`);
+      console.log(`error creating : ${err}`);
     });
 };
 
@@ -117,7 +117,7 @@ Role.prototype.hasPermission = function(permission, callback) {
         return callback(false);
       }
       const permissionId = permissionEntity.get("id");
-      console.log(`roleid: ${  roleId  }  permissionId :${  permissionId}`);
+      console.log(`roleid: ${roleId}  permissionId :${permissionId}`);
 
       knex("roles_to_permissions")
         .where("role_id", roleId)

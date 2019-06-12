@@ -9,7 +9,7 @@ const ServiceInstance = require("../models/service-instance");
 const Charge = require("../models/charge");
 const EventLogs = require("../models/event-log");
 const File = require("../models/file");
-const {dispatchEvent} = require("../config/redux/store");
+const { dispatchEvent } = require("../config/redux/store");
 const store = require("../config/redux/store");
 // todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
 
@@ -81,7 +81,7 @@ module.exports = function(router) {
     async function(req, res, next) {
       let instance_object = res.locals.valid_object;
       if (instance_object.get("status") === "cancelled") {
-        let {lifecycleManager} = store.getState(true).pluginbot.services;
+        let { lifecycleManager } = store.getState(true).pluginbot.services;
         instance_object = await instance_object.attachReferences();
         if (lifecycleManager) {
           lifecycleManager = lifecycleManager[0];

@@ -159,13 +159,12 @@ class ModalPayAllCharges extends React.Component {
                     </strong>
                   </p>
                   <p>
-Item Name:
+                    Item Name:
                     {serviceName}
                   </p>
                   <p>
                     <strong>
-                      Total Charges:
-                      {" "}
+                      Total Charges:{" "}
                       <Price value={totalCharges} prefix={prefix} />
                     </strong>
                   </p>
@@ -183,15 +182,14 @@ Item Name:
                 className="btn btn-primary btn-rounded"
                 onClick={self.onPay}
               >
-                <i className="fa fa-credit-card" />
-                {' '}
-Confirm Payment
+                <i className="fa fa-credit-card" /> Confirm Payment
               </button>
             </div>
           </div>
         </Modal>
       );
-    } if (currentModal == "model_pay_charge" && self.state.paid) {
+    }
+    if (currentModal == "model_pay_charge" && self.state.paid) {
       return (
         <Modal
           modalTitle={pageName}
@@ -208,10 +206,8 @@ Confirm Payment
                 <div className="col-xs-12">
                   <p>
                     <strong>
-                      Thank you! You have paid
-                      {" "}
-                      <Price value={totalCharges} prefix={prefix} />
-.
+                      Thank you! You have paid{" "}
+                      <Price value={totalCharges} prefix={prefix} />.
                     </strong>
                   </p>
                   <p>
@@ -231,7 +227,8 @@ Confirm Payment
           </div>
         </Modal>
       );
-    } if (currentModal == "payment_setup") {
+    }
+    if (currentModal == "payment_setup") {
       return (
         <ModalPaymentSetup
           ownerId={self.state.uid}

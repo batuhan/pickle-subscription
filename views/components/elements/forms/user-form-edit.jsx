@@ -88,8 +88,9 @@ class UserFormEdit extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (!this.state.loading && this.state.currentAction === "_EDITING") {
-      const {user} = this.state;
+    }
+    if (!this.state.loading && this.state.currentAction === "_EDITING") {
+      const { user } = this.state;
 
       const initialRequests = [{ method: "GET", url: this.state.url }];
       const submissionRequest = {
@@ -113,14 +114,13 @@ class UserFormEdit extends React.Component {
               <div className="profile-header">
                 <div>
                   <h3 className="p-b-20">
-Editing
+                    Editing
                     {user.email}
                   </h3>
                 </div>
                 <div>
                   <small>
-                    Last Login:
-                    {" "}
+                    Last Login:{" "}
                     {user.last_login !== null ? (
                       <DateFormat time date={user.last_login} />
                     ) : (
@@ -129,7 +129,7 @@ Editing
                   </small>
                   <br />
                   <small>
-User Status:
+                    User Status:
                     {user.status}
                   </small>
                 </div>
@@ -162,20 +162,16 @@ User Status:
             </div>
           </div>
         );
-      } 
-        return (
-          <div>
-            <p>Unable to load your user profile</p>
-            <Buttons
-              btnType="default"
-              text="Try again"
-              onClick={self.refresh}
-            />
-          </div>
-        );
-      
-    } if (!this.state.loading && this.state.currentAction === "_VIEW") {
-      const {user} = this.state;
+      }
+      return (
+        <div>
+          <p>Unable to load your user profile</p>
+          <Buttons btnType="default" text="Try again" onClick={self.refresh} />
+        </div>
+      );
+    }
+    if (!this.state.loading && this.state.currentAction === "_VIEW") {
+      const { user } = this.state;
 
       if (user) {
         return (
@@ -189,8 +185,7 @@ User Status:
                   </div>
                   <div>
                     <small>
-                      Last Login:
-                      {" "}
+                      Last Login:{" "}
                       {user.last_login != null ? (
                         <DateFormat time date={user.last_login} />
                       ) : (
@@ -199,9 +194,7 @@ User Status:
                     </small>
                     <br />
                     <small className="text-capitalize">
-                      User Status: 
-                      {' '}
-                      {user.status}
+                      User Status: {user.status}
                     </small>
                   </div>
                 </div>
@@ -242,18 +235,13 @@ User Status:
             </div>
           </div>
         );
-      } 
-        return (
-          <div>
-            <p>Unable to load your user profile</p>
-            <Buttons
-              btnType="default"
-              text="Try again"
-              onClick={self.refresh}
-            />
-          </div>
-        );
-      
+      }
+      return (
+        <div>
+          <p>Unable to load your user profile</p>
+          <Buttons btnType="default" text="Try again" onClick={self.refresh} />
+        </div>
+      );
     }
   }
 }

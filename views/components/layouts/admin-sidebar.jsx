@@ -21,9 +21,8 @@ class AdminEditingGear extends React.Component {
           </span>
         </div>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 }
 

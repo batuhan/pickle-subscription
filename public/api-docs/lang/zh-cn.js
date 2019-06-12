@@ -1,5 +1,3 @@
-
-
 /* jshint quotmark: double */
 window.SwaggerTranslator.learn({
   "Warning: Deprecated": "警告：已过时",

@@ -92,8 +92,8 @@ class Buttons extends React.Component {
   render() {
     const btnStyle = { border: "none" };
     if (this.props.options) {
-      const {options} = this.props;
-      const {hover} = this.state;
+      const { options } = this.props;
+      const { hover } = this.state;
       if (this.state.btnType == "default") {
         if (!hover) {
           btnStyle.backgroundColor = _.get(

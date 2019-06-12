@@ -66,9 +66,7 @@ class ServiceBotTableBase extends React.Component {
                   );
             }}
           >
-            <i className="fa fa-plus" /> 
-            {' '}
-            {self.props.createItemLabel}
+            <i className="fa fa-plus" /> {self.props.createItemLabel}
           </button>
         )}
         {props.showSelectedOnlyBtn}
@@ -105,7 +103,7 @@ class ServiceBotTableBase extends React.Component {
   }
 
   onAfterDeleteRow(rowKeys) {
-    alert(`The rowkey you drop: ${  rowKeys}`);
+    alert(`The rowkey you drop: ${rowKeys}`);
   }
 
   customConfirmDeleteRow(next, dropRowKeys) {

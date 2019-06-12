@@ -4,8 +4,8 @@ const ServiceCategories = require("../models/service-category");
 module.exports = function(router) {
   router.get("/service-categories", function(req, res, next) {
     if (!req.isAuthenticated()) {
-      let {key} = req.query;
-      let {value} = req.query;
+      let { key } = req.query;
+      let { value } = req.query;
       if (!key || !value) {
         key = undefined;
         value = undefined;

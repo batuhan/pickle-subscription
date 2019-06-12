@@ -240,90 +240,89 @@ class ManageCatalogList extends React.Component {
 
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <div className="row m-b-20">
-          <div className="col-xs-12">
-            <ServiceBotTableBase
-              rows={this.state.rows}
-              createItemAction={() => {
-                browserHistory.push("/manage-catalog/create");
-              }}
-              createItemLabel="Create Product / Service"
-              fetchRows={this.fetchData}
-              sortColumn="updated_at"
-              sortOrder="desc"
+    }
+    return (
+      <div className="row m-b-20">
+        <div className="col-xs-12">
+          <ServiceBotTableBase
+            rows={this.state.rows}
+            createItemAction={() => {
+              browserHistory.push("/manage-catalog/create");
+            }}
+            createItemLabel="Create Product / Service"
+            fetchRows={this.fetchData}
+            sortColumn="updated_at"
+            sortOrder="desc"
+          >
+            <TableHeaderColumn
+              isKey
+              dataField="name"
+              dataSort
+              dataFormat={this.nameFormatter}
+              width={200}
             >
-              <TableHeaderColumn
-                isKey
-                dataField="name"
-                dataSort
-                dataFormat={this.nameFormatter}
-                width={200}
-              >
-                Product / Service Name
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="amount"
-                dataSort
-                dataFormat={this.priceFormatter}
-                searchable={false}
-                width={100}
-              >
-                Pricing
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="type"
-                dataSort
-                dataFormat={this.paymentTypeFormatter}
-                searchable={false}
-                width={100}
-              >
-                Type
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="references"
-                dataSort
-                dataFormat={this.categoryFormatter}
-                filterFormatted
-                width={120}
-              >
-                Category
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="published"
-                dataSort
-                dataFormat={this.publishedFormatter}
-                searchable={false}
-                filterFormatted
-                width={100}
-              >
-                Status
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="updated_at"
-                dataSort
-                dataFormat={this.createdFormatter}
-                searchable={false}
-                filterFormatted
-                width={150}
-              >
-                Updated At
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="Actions"
-                className="action-column-header"
-                columnClassName="action-column"
-                dataFormat={this.rowActionsFormatter}
-                searchable={false}
-                width={100}
-              />
-            </ServiceBotTableBase>
-            {renderModals()}
-          </div>
+              Product / Service Name
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="amount"
+              dataSort
+              dataFormat={this.priceFormatter}
+              searchable={false}
+              width={100}
+            >
+              Pricing
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="type"
+              dataSort
+              dataFormat={this.paymentTypeFormatter}
+              searchable={false}
+              width={100}
+            >
+              Type
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="references"
+              dataSort
+              dataFormat={this.categoryFormatter}
+              filterFormatted
+              width={120}
+            >
+              Category
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="published"
+              dataSort
+              dataFormat={this.publishedFormatter}
+              searchable={false}
+              filterFormatted
+              width={100}
+            >
+              Status
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="updated_at"
+              dataSort
+              dataFormat={this.createdFormatter}
+              searchable={false}
+              filterFormatted
+              width={150}
+            >
+              Updated At
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataField="Actions"
+              className="action-column-header"
+              columnClassName="action-column"
+              dataFormat={this.rowActionsFormatter}
+              searchable={false}
+              width={100}
+            />
+          </ServiceBotTableBase>
+          {renderModals()}
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

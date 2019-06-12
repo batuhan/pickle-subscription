@@ -43,7 +43,7 @@ function* run(config, provide, channels) {
     async update(user, userData) {
       if (user.data.id) {
         try {
-          const {provider} = user.data;
+          const { provider } = user.data;
           delete userData.provider;
           if (
             provider !== "local" &&

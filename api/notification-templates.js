@@ -9,7 +9,7 @@ module.exports = function(router) {
     auth(),
     function(req, res, next) {
       const modelName = res.locals.valid_object.get("model");
-      const model = require(`../models/${  modelName}`);
+      const model = require(`../models/${modelName}`);
       model.getSchema(true, false, function(result) {
         const template = res.locals.valid_object;
         template.schema = result;

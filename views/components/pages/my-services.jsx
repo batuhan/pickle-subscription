@@ -106,119 +106,118 @@ class MyServices extends React.Component {
           </div>
         </div>
       );
-    } 
-      const allServices = self.state.services;
-      const grouped = _.groupBy(allServices, "status");
-      const runningServiceCount = grouped.running
-        ? grouped.running.length
-        : false;
-      const requestedServiceCount = grouped.requested
-        ? grouped.requested.length
-        : false;
-      const nextInvoiceAmountDue = self.state.nextInvoice
-        ? self.state.nextInvoice.amount_due
-        : 0;
-      const userStatus = this.props.user.status;
-      const widgetColor = () => {
-        switch (self.props.user.status) {
-          case "active":
-            return "#27ae60";
-          case "suspended":
-            return "#ff0000"; // this will not happen because suspended user cannot login
-          case "invited":
-            return "#0069ff";
-          case "flagged":
-            return "#e67e22";
-          case "disconnected":
-            return "#95a5a6";
-          default:
-            return "#111111";
-        }
-      };
+    }
+    const allServices = self.state.services;
+    const grouped = _.groupBy(allServices, "status");
+    const runningServiceCount = grouped.running
+      ? grouped.running.length
+      : false;
+    const requestedServiceCount = grouped.requested
+      ? grouped.requested.length
+      : false;
+    const nextInvoiceAmountDue = self.state.nextInvoice
+      ? self.state.nextInvoice.amount_due
+      : 0;
+    const userStatus = this.props.user.status;
+    const widgetColor = () => {
+      switch (self.props.user.status) {
+        case "active":
+          return "#27ae60";
+        case "suspended":
+          return "#ff0000"; // this will not happen because suspended user cannot login
+        case "invited":
+          return "#0069ff";
+        case "flagged":
+          return "#e67e22";
+        case "disconnected":
+          return "#95a5a6";
+        default:
+          return "#111111";
+      }
+    };
 
-      const widgetIcon = () => {
-        switch (self.props.user.status) {
-          case "active":
-            return "check";
-          case "suspended":
-            return "ban"; // this will not happen because suspended user cannot login
-          case "invited":
-            return "envelope";
-          case "flagged":
-            return "flag";
-          case "disconnected":
-            return "chain-broken";
-          default:
-            return "#111111";
-        }
-      };
+    const widgetIcon = () => {
+      switch (self.props.user.status) {
+        case "active":
+          return "check";
+        case "suspended":
+          return "ban"; // this will not happen because suspended user cannot login
+        case "invited":
+          return "envelope";
+        case "flagged":
+          return "flag";
+        case "disconnected":
+          return "chain-broken";
+        default:
+          return "#111111";
+      }
+    };
 
-      const currentModal = () => {
-        if (self.state.InvoiceModal) {
-          return (
-            <ModalInvoice
-              show={self.state.InvoiceModal}
-              hide={self.onCloseInvoiceModal}
-            />
-          );
-        }
-      };
+    const currentModal = () => {
+      if (self.state.InvoiceModal) {
+        return (
+          <ModalInvoice
+            show={self.state.InvoiceModal}
+            hide={self.onCloseInvoiceModal}
+          />
+        );
+      }
+    };
 
-      return (
-        <Authorizer>
-          <Jumbotron pageName={pageName} location={this.props.location} />
-          <div className="page-service-instance">
-            <Content>
-              <ReactCSSTransitionGroup
-                component="div"
-                transitionName="fade"
-                transitionAppear
-                transitionAppearTimeout={1000}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}
-              >
-                <div className="row account-status-row">
-                  <DashboardWidget
-                    widgetClass="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3"
-                    widgetIcon="credit-card"
-                    widgetName="Upcoming Invoice"
-                    clickAction={self.onOpenInvoiceModal}
-                    iconPadding={10}
-                    borderRadius={50}
-                  />
-                  <DashboardWidget
-                    widgetClass="col-xs-12 col-sm-6 col-md-4 col-lg-3"
-                    widgetIcon={widgetIcon()}
-                    widgetName={`Status: ${userStatus}`}
-                    widgetColor={widgetColor()}
-                    iconPadding={10}
-                    borderRadius={50}
-                  />
-                </div>
-                <div className="row">
-                  <DashboardServiceList
-                    handleComponentUpdating={self.handleComponentUpdating}
-                    services={self.state.services}
-                  />
-                </div>
-              </ReactCSSTransitionGroup>
-            </Content>
+    return (
+      <Authorizer>
+        <Jumbotron pageName={pageName} location={this.props.location} />
+        <div className="page-service-instance">
+          <Content>
             <ReactCSSTransitionGroup
               component="div"
               transitionName="fade"
               transitionAppear
-              transitionEnter
-              transitionLeave
               transitionAppearTimeout={1000}
               transitionEnterTimeout={1000}
               transitionLeaveTimeout={1000}
             >
-              {currentModal()}
+              <div className="row account-status-row">
+                <DashboardWidget
+                  widgetClass="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3"
+                  widgetIcon="credit-card"
+                  widgetName="Upcoming Invoice"
+                  clickAction={self.onOpenInvoiceModal}
+                  iconPadding={10}
+                  borderRadius={50}
+                />
+                <DashboardWidget
+                  widgetClass="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+                  widgetIcon={widgetIcon()}
+                  widgetName={`Status: ${userStatus}`}
+                  widgetColor={widgetColor()}
+                  iconPadding={10}
+                  borderRadius={50}
+                />
+              </div>
+              <div className="row">
+                <DashboardServiceList
+                  handleComponentUpdating={self.handleComponentUpdating}
+                  services={self.state.services}
+                />
+              </div>
             </ReactCSSTransitionGroup>
-          </div>
-        </Authorizer>
-      );
-    
+          </Content>
+          <ReactCSSTransitionGroup
+            component="div"
+            transitionName="fade"
+            transitionAppear
+            transitionEnter
+            transitionLeave
+            transitionAppearTimeout={1000}
+            transitionEnterTimeout={1000}
+            transitionLeaveTimeout={1000}
+          >
+            {currentModal()}
+          </ReactCSSTransitionGroup>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

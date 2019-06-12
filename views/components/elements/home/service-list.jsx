@@ -451,27 +451,26 @@ class ServiceList extends React.Component {
           </Authorizer>
         </div>
       );
-    } 
-      return (
-        <div className="call-services" ref="allServices">
-          <div className="row" ref="hello">
-            {this.state.services.map(service => (
-              <ServiceListItem
-                key={`service-${service.id}`}
-                service={service}
-                height={this.state.height || "auto"}
-                name={service.name}
-                created={service.created}
-                description={service.description}
-                amount={service.amount}
-                interval={service.interval}
-                url={`/service-catalog/${service.id}/request`}
-              />
-            ))}
-          </div>
+    }
+    return (
+      <div className="call-services" ref="allServices">
+        <div className="row" ref="hello">
+          {this.state.services.map(service => (
+            <ServiceListItem
+              key={`service-${service.id}`}
+              service={service}
+              height={this.state.height || "auto"}
+              name={service.name}
+              created={service.created}
+              description={service.description}
+              amount={service.amount}
+              interval={service.interval}
+              url={`/service-catalog/${service.id}/request`}
+            />
+          ))}
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

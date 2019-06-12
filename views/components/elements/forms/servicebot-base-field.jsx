@@ -323,7 +323,7 @@ class priceField extends React.Component {
   }
 
   handleChange(e, maskedValue, floatvalue) {
-    const {name} = e.target;
+    const { name } = e.target;
     const self = this;
     const price = this.props.isCents ? toCents(floatvalue) : floatvalue;
     this.setState({ [name]: price }, () => {

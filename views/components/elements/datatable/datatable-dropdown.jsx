@@ -49,18 +49,17 @@ class Dropdown extends React.Component {
           {_.isFunction(button.name) ? button.name(myData) : button.name}
         </Link>
       );
-    } 
-      return (
-        <Link
-          to={this.processDropDownButtons(button.link, this.props.id)}
-          style={button.style}
-        >
-          {_.isFunction(button.name)
-            ? button.name(this.props.active)
-            : button.name}
-        </Link>
-      );
-    
+    }
+    return (
+      <Link
+        to={this.processDropDownButtons(button.link, this.props.id)}
+        style={button.style}
+      >
+        {_.isFunction(button.name)
+          ? button.name(this.props.active)
+          : button.name}
+      </Link>
+    );
   }
 
   getButton(button) {
@@ -76,40 +75,32 @@ class Dropdown extends React.Component {
               className="divider"
             />
           );
-        } 
-          return null;
-        
-      } 
-        return (
-          <li
-            key={`${self.props.id}-separator`}
-            role="separator"
-            className="divider"
-          />
-        );
-      
-    } 
-      if (button.permission) {
-        if (isAuthorized({ permissions: button.permission })) {
-          return (
-            <li
-              key={`button-${button.id}-${self.props.id}`}
-              style={button.style}
-            >
-              {self.processLink(button)}
-            </li>
-          );
-        } 
-          return null;
-        
-      } 
+        }
+        return null;
+      }
+      return (
+        <li
+          key={`${self.props.id}-separator`}
+          role="separator"
+          className="divider"
+        />
+      );
+    }
+    if (button.permission) {
+      if (isAuthorized({ permissions: button.permission })) {
         return (
           <li key={`button-${button.id}-${self.props.id}`} style={button.style}>
             {self.processLink(button)}
           </li>
         );
-      
-    
+      }
+      return null;
+    }
+    return (
+      <li key={`button-${button.id}-${self.props.id}`} style={button.style}>
+        {self.processLink(button)}
+      </li>
+    );
   }
 
   render() {
@@ -123,9 +114,7 @@ class Dropdown extends React.Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {this.props.name} 
-          {' '}
-          <span className="caret" />
+          {this.props.name} <span className="caret" />
         </button>
         <ul
           className={`dropdown-menu ${

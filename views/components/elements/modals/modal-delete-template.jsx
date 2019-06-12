@@ -9,7 +9,7 @@ import Alerts from "../alerts.jsx";
 class ModalDeleteTemplate extends React.Component {
   constructor(props) {
     super(props);
-    const {templateObject} = this.props;
+    const { templateObject } = this.props;
     this.state = {
       loading: true,
       template: templateObject,
@@ -75,110 +75,102 @@ class ModalDeleteTemplate extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      const self = this;
-      const pageName = "Delete a Service";
-      const pageMessage = "delete";
-      const actionFunction = this.onDelete;
-      const currentModal = self.state.current_modal;
-      const {template} = self.state;
-      const {name} = template;
-      const {description} = template;
-      const status = template.published;
+    }
+    const self = this;
+    const pageName = "Delete a Service";
+    const pageMessage = "delete";
+    const actionFunction = this.onDelete;
+    const currentModal = self.state.current_modal;
+    const { template } = self.state;
+    const { name } = template;
+    const { description } = template;
+    const status = template.published;
 
-      if (currentModal == "modal_action") {
-        return (
-          <Modal
-            modalTitle={pageName}
-            show={self.props.show}
-            hide={self.props.hide}
-            hideFooter
-            top="40%"
-            width="490px"
-          >
-            <div className="table-responsive">
-              <div className="p-20">
-                {this.state.alerts && this.state.alerts.message && (
-                  <div>
-                    <Alerts
-                      type={this.state.alerts.type}
-                      message={this.state.alerts.message}
-                    />
-                  </div>
-                )}
-                <div className="row">
-                  <div className="col-xs-12">
-                    <p>
-                      <strong>
-                        You are about to 
-                        {' '}
-                        {pageMessage}
-                        {' '}
-the following service.
-                      </strong>
-                    </p>
-                    <ul>
-                      <li>
-Service:
-                        {name}
-                      </li>
-                      <li>
-Description:
-                        {description}
-                      </li>
-                      <li>
-Status:
-                        {status ? "Published" : "Unpublished"}
-                      </li>
-                    </ul>
-                  </div>
+    if (currentModal == "modal_action") {
+      return (
+        <Modal
+          modalTitle={pageName}
+          show={self.props.show}
+          hide={self.props.hide}
+          hideFooter
+          top="40%"
+          width="490px"
+        >
+          <div className="table-responsive">
+            <div className="p-20">
+              {this.state.alerts && this.state.alerts.message && (
+                <div>
+                  <Alerts
+                    type={this.state.alerts.type}
+                    message={this.state.alerts.message}
+                  />
                 </div>
-              </div>
-              <div className="modal-footer text-right p-b-20">
-                <button
-                  className="btn btn-primary btn-rounded"
-                  onClick={actionFunction}
-                >
-                  <span className="capitalize">{pageMessage}</span>
-                </button>
-                <button
-                  className="btn btn-default btn-rounded"
-                  onClick={self.props.hide}
-                >
-                  Nevermind
-                </button>
-              </div>
-            </div>
-          </Modal>
-        );
-      } if (currentModal == "modal_action_success") {
-        return (
-          <Modal
-            modalTitle={pageName}
-            show={self.props.show}
-            hide={self.props.hide}
-          >
-            <div className="table-responsive">
-              <div className="p-20">
-                <div className="row">
-                  <div className="col-xs-12">
-                    <p>
-                      <strong>
-                        You have successfully 
-                        {' '}
-                        {pageMessage} 
-                        {' '}
-                        {name}
-                      </strong>
-                    </p>
-                  </div>
+              )}
+              <div className="row">
+                <div className="col-xs-12">
+                  <p>
+                    <strong>
+                      You are about to {pageMessage} the following service.
+                    </strong>
+                  </p>
+                  <ul>
+                    <li>
+                      Service:
+                      {name}
+                    </li>
+                    <li>
+                      Description:
+                      {description}
+                    </li>
+                    <li>
+                      Status:
+                      {status ? "Published" : "Unpublished"}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </Modal>
-        );
-      }
-    
+            <div className="modal-footer text-right p-b-20">
+              <button
+                className="btn btn-primary btn-rounded"
+                onClick={actionFunction}
+              >
+                <span className="capitalize">{pageMessage}</span>
+              </button>
+              <button
+                className="btn btn-default btn-rounded"
+                onClick={self.props.hide}
+              >
+                Nevermind
+              </button>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
+    if (currentModal == "modal_action_success") {
+      return (
+        <Modal
+          modalTitle={pageName}
+          show={self.props.show}
+          hide={self.props.hide}
+        >
+          <div className="table-responsive">
+            <div className="p-20">
+              <div className="row">
+                <div className="col-xs-12">
+                  <p>
+                    <strong>
+                      You have successfully {pageMessage} {name}
+                    </strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
   }
 }
 

@@ -59,50 +59,42 @@ class ServiceApplicationLauncher extends React.Component {
             widgetClass="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 p-l-0"
           />
         );
-      } 
+      }
+      return (
+        <div className="btn btn-default btn-rounded btn-sm m-r-5 application-launcher">
+          Creating App <i className="fa fa-refresh fa-spin fa-fw" />
+        </div>
+      );
+    }
+    const websiteLink = this.props.instanceLink;
+    // Make sure the URL is set.
+    if (websiteLink.data) {
+      if (self.props.large) {
         return (
-          <div className="btn btn-default btn-rounded btn-sm m-r-5 application-launcher">
-            Creating App 
-            {' '}
-            <i className="fa fa-refresh fa-spin fa-fw" />
-          </div>
+          <DashboardWidget
+            reversed
+            small
+            margins="m-t-0"
+            link={websiteLink.data.value}
+            widgetColor="#4404bb"
+            widgetIcon="external-link-square"
+            widgetData="Open Application"
+            widgetClass="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 p-l-0"
+            widgetHoverClass="open-application"
+          />
         );
-      
-    } 
-      const websiteLink = this.props.instanceLink;
-      // Make sure the URL is set.
-      if (websiteLink.data) {
-        if (self.props.large) {
-          return (
-            <DashboardWidget
-              reversed
-              small
-              margins="m-t-0"
-              link={websiteLink.data.value}
-              widgetColor="#4404bb"
-              widgetIcon="external-link-square"
-              widgetData="Open Application"
-              widgetClass="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 p-l-0"
-              widgetHoverClass="open-application"
-            />
-          );
-        } 
-          return (
-            <button
-              className="btn btn-default btn-rounded btn-sm m-r-5"
-              onClick={self.urlLink(websiteLink.data.value)}
-            >
-              {" "}
-              Open Application 
-              {' '}
-              <i className="fa fa-external-link-square" />
-            </button>
-          );
-        
-      } 
-        return null;
-      
-    
+      }
+      return (
+        <button
+          className="btn btn-default btn-rounded btn-sm m-r-5"
+          onClick={self.urlLink(websiteLink.data.value)}
+        >
+          {" "}
+          Open Application <i className="fa fa-external-link-square" />
+        </button>
+      );
+    }
+    return null;
   }
 }
 

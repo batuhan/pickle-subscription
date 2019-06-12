@@ -9,7 +9,7 @@ const _ = require("lodash");
 class DeleteCategoryForm extends React.Component {
   constructor(props) {
     super(props);
-    const {id} = this.props;
+    const { id } = this.props;
     this.state = {
       url: `/api/v1/service-categories/${id}`,
       response: {},
@@ -43,7 +43,8 @@ class DeleteCategoryForm extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } if (this.state.success) {
+    }
+    if (this.state.success) {
       return (
         <div>
           <div className="p-20">
@@ -61,42 +62,41 @@ class DeleteCategoryForm extends React.Component {
           </div>
         </div>
       );
-    } 
-      // TODO: Add validation functions and pass into DataForm as props
-      return (
-        <div className="suspend-user-form">
-          <div className="p-20">
-            {this.state.alerts && this.state.alerts.message && (
-              <div>
-                <Alerts
-                  type={this.state.alerts.type}
-                  message={this.state.alerts.message}
-                />
-              </div>
-            )}
-            <p>
-              <strong>Are you sure you want to delete this Category?</strong>
-            </p>
-          </div>
-
-          <div className="modal-footer text-right p-b-20">
-            <Buttons
-              containerClass="inline"
-              btnType="primary"
-              text="Delete Category"
-              success={this.state.success}
-              onClick={this.fetchDeleteCategory}
-            />
-            <Buttons
-              containerClass="inline"
-              btnType="default"
-              text="Cancel"
-              onClick={this.props.hide}
-            />
-          </div>
+    }
+    // TODO: Add validation functions and pass into DataForm as props
+    return (
+      <div className="suspend-user-form">
+        <div className="p-20">
+          {this.state.alerts && this.state.alerts.message && (
+            <div>
+              <Alerts
+                type={this.state.alerts.type}
+                message={this.state.alerts.message}
+              />
+            </div>
+          )}
+          <p>
+            <strong>Are you sure you want to delete this Category?</strong>
+          </p>
         </div>
-      );
-    
+
+        <div className="modal-footer text-right p-b-20">
+          <Buttons
+            containerClass="inline"
+            btnType="primary"
+            text="Delete Category"
+            success={this.state.success}
+            onClick={this.fetchDeleteCategory}
+          />
+          <Buttons
+            containerClass="inline"
+            btnType="default"
+            text="Cancel"
+            onClick={this.props.hide}
+          />
+        </div>
+      </div>
+    );
   }
 }
 

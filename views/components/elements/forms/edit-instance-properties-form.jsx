@@ -40,25 +40,23 @@ let renderCustomProperty = props => {
               validate={required()}
             />
           );
-        } 
-          if (formJSON[index].data && formJSON[index].data.value) {
-            return (
-              <div className="form-group form-group-flex">
-                {formJSON[index].prop_label &&
-                  formJSON[index].type !== "hidden" && (
-                    <label className="control-label form-label-flex-md">
-                      {formJSON[index].prop_label}
-                    </label>
-                  )}
-                <div className="form-input-flex">
-                  <p>{formJSON[index].data.value}</p>
-                </div>
+        }
+        if (formJSON[index].data && formJSON[index].data.value) {
+          return (
+            <div className="form-group form-group-flex">
+              {formJSON[index].prop_label &&
+                formJSON[index].type !== "hidden" && (
+                  <label className="control-label form-label-flex-md">
+                    {formJSON[index].prop_label}
+                  </label>
+                )}
+              <div className="form-input-flex">
+                <p>{formJSON[index].data.value}</p>
               </div>
-            );
-          } 
-            return <span />;
-          
-        
+            </div>
+          );
+        }
+        return <span />;
       })}
     </div>
   );

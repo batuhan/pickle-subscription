@@ -39,8 +39,7 @@ class AllServices extends React.Component {
     const value = target.type === "checkbox" ? target.checked : target.value;
     if (value && value != 0) {
       this.setState({
-        serviceUrl:
-          `/api/v1/service-templates/search?key=category_id&value=${  value}`,
+        serviceUrl: `/api/v1/service-templates/search?key=category_id&value=${value}`,
         searchValue: value,
       });
     } else {
@@ -55,7 +54,7 @@ class AllServices extends React.Component {
     let headingText = "All Products & Services";
 
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       headingText = _.get(
         options,
         "services_listing_page_heading_text.value",

@@ -33,7 +33,8 @@ class ManagePermission extends React.Component {
           </div>
         </div>
       );
-    } if (isAuthorized({ permissions: ["can_manage"] })) {
+    }
+    if (isAuthorized({ permissions: ["can_manage"] })) {
       return (
         <div>
           <Jumbotron pageName={pageName} location={this.props.location} />
@@ -46,20 +47,19 @@ class ManagePermission extends React.Component {
           </div>
         </div>
       );
-    } 
-      return (
-        <div>
-          <Jumbotron pageName={pageName} location={this.props.location} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <p>Unauthorized</p>
-              </div>
-            </Content>
-          </div>
+    }
+    return (
+      <div>
+        <Jumbotron pageName={pageName} location={this.props.location} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <p>Unauthorized</p>
+            </div>
+          </Content>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

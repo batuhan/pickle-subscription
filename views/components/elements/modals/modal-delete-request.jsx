@@ -52,9 +52,9 @@ class ModalDeleteRequest extends React.Component {
     const pageName = "Service Approval";
     const currentModal = this.state.current_modal;
     const instance = this.state.serviceInstance;
-    const {name} = instance;
+    const { name } = instance;
     const price = instance.payment_plan.amount;
-    const {interval} = instance.payment_plan;
+    const { interval } = instance.payment_plan;
 
     if (currentModal == "model_delete") {
       return (
@@ -77,14 +77,7 @@ class ModalDeleteRequest extends React.Component {
                     </strong>
                   </p>
                   <p>
-                    Service: 
-                    {' '}
-                    {name}
-, 
-                    {' '}
-                    <Price value={price} />
-/
-                    {interval}
+                    Service: {name}, <Price value={price} />/{interval}
                   </p>
                 </div>
               </div>
@@ -106,7 +99,8 @@ class ModalDeleteRequest extends React.Component {
           </div>
         </Modal>
       );
-    } if (currentModal == "model_delete_success") {
+    }
+    if (currentModal == "model_delete_success") {
       return (
         <Modal
           modalTitle={pageName}
@@ -121,15 +115,11 @@ class ModalDeleteRequest extends React.Component {
                     <strong>This service request has been deleted.</strong>
                   </p>
                   <p>
-Service:
+                    Service:
                     {name}
                   </p>
                   <p>
-                    Price: 
-                    {' '}
-                    <Price value={price} />
-/
-                    {interval}
+                    Price: <Price value={price} />/{interval}
                   </p>
                 </div>
               </div>

@@ -13,7 +13,7 @@ class UserForm extends React.Component {
     super(props);
     this.state = {
       user: {},
-      url: `/api/v1/users/${  props.params.userId}`,
+      url: `/api/v1/users/${props.params.userId}`,
       loading: true,
     };
     this.handleImage = this.handleImage.bind(this);
@@ -52,48 +52,45 @@ class UserForm extends React.Component {
     if (this.state.loading) return <Load />;
     if (this.state.user == {}) {
       return <p className="help-block center-align">There is no user</p>;
-    } 
-      const {user} = this.state;
+    }
+    const { user } = this.state;
 
-      const pageName = this.props.route.name;
-      return (
-        <Authorizer>
-          <Jumbotron pageName={pageName} location={this.props.location} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="badge badge-40">
-                <img
-                  src={`${this.state.url  }/avatar`}
-                  className="max-w-40 h-40 img-circle"
-                  alt="badge"
-                />
+    const pageName = this.props.route.name;
+    return (
+      <Authorizer>
+        <Jumbotron pageName={pageName} location={this.props.location} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="badge badge-40">
+              <img
+                src={`${this.state.url}/avatar`}
+                className="max-w-40 h-40 img-circle"
+                alt="badge"
+              />
+            </div>
+
+            <div key={user.id} className="article-item">
+              <div className="article-item-title">
+                <div>{user.email}</div>
               </div>
-
-              <div key={user.id} className="article-item">
-                <div className="article-item-title">
-                  <div>{user.email}</div>
+              <Authorizer permission="can_administrate">
+                <div className="article-item-description">
+                  Created {new Date(user.created).toDateString()}
                 </div>
-                <Authorizer permission="can_administrate">
-                  <div className="article-item-description">
-                    Created 
-                    {' '}
-                    {new Date(user.created).toDateString()}
-                  </div>
-                </Authorizer>
-              </div>
+              </Authorizer>
+            </div>
 
-              <h5 className="m-20 m-t-40 m-b-10">Upload your profile picture</h5>
-              <form id="imgform" encType="multipart/form-data">
-                <input id="avatar" type="file" name="avatar" />
-                <button type="submit" onClick={this.handleImage}>
-                  Upload
-                </button>
-              </form>
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            <h5 className="m-20 m-t-40 m-b-10">Upload your profile picture</h5>
+            <form id="imgform" encType="multipart/form-data">
+              <input id="avatar" type="file" name="avatar" />
+              <button type="submit" onClick={this.handleImage}>
+                Upload
+              </button>
+            </form>
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

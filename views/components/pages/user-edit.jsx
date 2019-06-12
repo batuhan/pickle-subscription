@@ -21,9 +21,8 @@ class UserEdit extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ permissions: ["can_administrate", "can_manage"] })) {
       return browserHistory.push("/login");
-    } 
-      this.fetchUser();
-    
+    }
+    this.fetchUser();
   }
 
   fetchUser() {
@@ -60,22 +59,21 @@ class UserEdit extends React.Component {
           </div>
         </Authorizer>
       );
-    } 
-      return (
-        <Authorizer permissions="can_administrate">
-          <Jumbotron pageName={pageName} location={this.props.location} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <UserFormEdit myUser={this.state.myUser} />
-                </div>
+    }
+    return (
+      <Authorizer permissions="can_administrate">
+        <Jumbotron pageName={pageName} location={this.props.location} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <UserFormEdit myUser={this.state.myUser} />
               </div>
-            </Content>
-          </div>
-        </Authorizer>
-      );
-    
+            </div>
+          </Content>
+        </div>
+      </Authorizer>
+    );
   }
 }
 

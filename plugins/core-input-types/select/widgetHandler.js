@@ -6,7 +6,7 @@ const handleConfig = {
   },
   validator(data, config) {
     if (config.value.indexOf(data.value) < 0) {
-      return `Selected value: ${  data.value  } not a valid choice`;
+      return `Selected value: ${data.value} not a valid choice`;
     }
     return true;
   },

@@ -96,50 +96,49 @@ class DashboardCancellationRequests extends React.Component {
   render() {
     if (this.state.loading) {
       return <Load />;
-    } 
-      return (
-        <ServiceBotTableBase
-          noDataText="Great! There are no pending cancellation requests!"
-          rows={this.state.rows}
-          fetchRows={this.fetchData}
+    }
+    return (
+      <ServiceBotTableBase
+        noDataText="Great! There are no pending cancellation requests!"
+        rows={this.state.rows}
+        fetchRows={this.fetchData}
+      >
+        <TableHeaderColumn
+          isKey
+          dataField="user_id"
+          dataFormat={this.userIdFormatter}
+          dataSort={false}
+          searchable={false}
+          width="30"
+          filter={false}
+        />
+        <TableHeaderColumn
+          dataField="name"
+          dataFormat={this.nameFormatter}
+          dataSort
+          width="200"
         >
-          <TableHeaderColumn
-            isKey
-            dataField="user_id"
-            dataFormat={this.userIdFormatter}
-            dataSort={false}
-            searchable={false}
-            width="30"
-            filter={false}
-          />
-          <TableHeaderColumn
-            dataField="name"
-            dataFormat={this.nameFormatter}
-            dataSort
-            width="200"
-          >
-            Product / Service Name
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataField="created_at"
-            dataFormat={this.createdFormatter}
-            dataSort
-            width="80"
-          >
-            Created On
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataField="Actions"
-            className="action-column-header"
-            columnClassName="action-column"
-            dataFormat={this.rowActionsFormatter}
-            searchable={false}
-            width="80"
-            filter={false}
-          />
-        </ServiceBotTableBase>
-      );
-    
+          Product / Service Name
+        </TableHeaderColumn>
+        <TableHeaderColumn
+          dataField="created_at"
+          dataFormat={this.createdFormatter}
+          dataSort
+          width="80"
+        >
+          Created On
+        </TableHeaderColumn>
+        <TableHeaderColumn
+          dataField="Actions"
+          className="action-column-header"
+          columnClassName="action-column"
+          dataFormat={this.rowActionsFormatter}
+          searchable={false}
+          width="80"
+          filter={false}
+        />
+      </ServiceBotTableBase>
+    );
   }
 }
 

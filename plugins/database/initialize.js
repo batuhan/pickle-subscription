@@ -4,7 +4,7 @@ const { call, put } = require("redux-saga/effects");
 const createTable = function(knex) {
   return async function(tableName, tableFunction) {
     const table = await knex.schema.createTable(tableName, tableFunction);
-    console.log(`Created table : ${  tableName}`);
+    console.log(`Created table : ${tableName}`);
     return table;
   };
 };

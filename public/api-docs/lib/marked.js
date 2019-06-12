@@ -82,9 +82,9 @@
     if (i || typeof n === "function") {
       i || ((i = n), (n = null)), (n = h({}, a.defaults, n || {}));
       let l;
-        let o;
-        const p = n.highlight;
-        let u = 0;
+      let o;
+      const p = n.highlight;
+      let u = 0;
       try {
         l = e.lex(t, n);
       } catch (c) {
@@ -124,9 +124,7 @@
             "\nPlease report this to https://github.com/chjj/marked."),
           (n || a.defaults).silent)
         )
-          return (
-            `<p>An error occured:</p><pre>${  s(`${c.message  }`, !0)  }</pre>`
-          );
+          return `<p>An error occured:</p><pre>${s(`${c.message}`, !0)}</pre>`;
         throw c;
       }
   }
@@ -152,7 +150,7 @@
     (p.list = l(p.list)(/bull/g, p.bullet)(
       "hr",
       "\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))",
-    )("def", `\\n+(?=${  p.def.source  })`)()),
+    )("def", `\\n+(?=${p.def.source})`)()),
     (p.blockquote = l(p.blockquote)("def", p.def)()),
     (p._tag =
       "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b"),
@@ -163,7 +161,7 @@
     (p.paragraph = l(p.paragraph)("hr", p.hr)("heading", p.heading)(
       "lheading",
       p.lheading,
-    )("blockquote", p.blockquote)("tag", `<${  p._tag}`)("def", p.def)()),
+    )("blockquote", p.blockquote)("tag", `<${p._tag}`)("def", p.def)()),
     (p.normal = h({}, p)),
     (p.gfm = h({}, p.normal, {
       fences: /^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,
@@ -171,11 +169,10 @@
     })),
     (p.gfm.paragraph = l(p.paragraph)(
       "(?!",
-      `(?!${ 
-        p.gfm.fences.source.replace("\\1", "\\2") 
-        }|${ 
-        p.list.source.replace("\\1", "\\3") 
-        }|`,
+      `(?!${p.gfm.fences.source.replace("\\1", "\\2")}|${p.list.source.replace(
+        "\\1",
+        "\\3",
+      )}|`,
     )()),
     (p.tables = h({}, p.gfm, {
       nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
@@ -277,7 +274,7 @@
                 ((a -= h.length),
                 (h = this.options.pedantic
                   ? h.replace(/^ {1,4}/gm, "")
-                  : h.replace(new RegExp(`^ {1,${  a  }}`, "gm"), ""))),
+                  : h.replace(new RegExp(`^ {1,${a}}`, "gm"), ""))),
               this.options.smartLists &&
                 u !== c - 1 &&
                 ((o = p.bullet.exec(i[u + 1])[0]),
@@ -344,7 +341,7 @@
           (e = e.substring(i[0].length)),
             this.tokens.push({ type: "text", text: i[0] });
         else if (e)
-          throw new Error(`Infinite loop on byte: ${  e.charCodeAt(0)}`);
+          throw new Error(`Infinite loop on byte: ${e.charCodeAt(0)}`);
       return this.tokens;
     });
   var u = {
@@ -445,7 +442,7 @@
           else if ((i = this.rules.text.exec(e)))
             (e = e.substring(i[0].length)), (l += s(this.smartypants(i[0])));
           else if (e)
-            throw new Error(`Infinite loop on byte: ${  e.charCodeAt(0)}`);
+            throw new Error(`Infinite loop on byte: ${e.charCodeAt(0)}`);
         } else
           (e = e.substring(i[0].length)),
             (n = s(i[1])),
@@ -455,7 +452,7 @@
     }),
     (t.prototype.outputLink = function(e, t) {
       const n = s(t.href);
-        const r = t.title ? s(t.title) : null;
+      const r = t.title ? s(t.title) : null;
       return e[0].charAt(0) !== "!"
         ? this.renderer.link(n, r, this.output(e[1]))
         : this.renderer.image(n, r, s(e[1]));
@@ -474,8 +471,8 @@
     (t.prototype.mangle = function(e) {
       for (var t, n = "", r = e.length, s = 0; s < r; s++)
         (t = e.charCodeAt(s)),
-          Math.random() > 0.5 && (t = `x${  t.toString(16)}`),
-          (n += `&#${  t  };`);
+          Math.random() > 0.5 && (t = `x${t.toString(16)}`),
+          (n += `&#${t};`);
       return n;
     }),
     (n.prototype.code = function(e, t, n) {
@@ -484,80 +481,60 @@
         r != null && r !== e && ((n = !0), (e = r));
       }
       return t
-        ? `<pre><code class="${ 
-            this.options.langPrefix 
-            }${s(t, !0) 
-            }">${ 
-            n ? e : s(e, !0) 
-            }\n</code></pre>\n`
-        : `<pre><code>${  n ? e : s(e, !0)  }\n</code></pre>`;
+        ? `<pre><code class="${this.options.langPrefix}${s(t, !0)}">${
+            n ? e : s(e, !0)
+          }\n</code></pre>\n`
+        : `<pre><code>${n ? e : s(e, !0)}\n</code></pre>`;
     }),
     (n.prototype.blockquote = function(e) {
-      return `<blockquote>\n${  e  }</blockquote>\n`;
+      return `<blockquote>\n${e}</blockquote>\n`;
     }),
     (n.prototype.html = function(e) {
       return e;
     }),
     (n.prototype.heading = function(e, t, n) {
-      return (
-        `<h${ 
-        t 
-        } id="${ 
-        this.options.headerPrefix 
-        }${n.toLowerCase().replace(/[^\w]+/g, "-") 
-        }">${ 
-        e 
-        }</h${ 
-        t 
-        }>\n`
-      );
+      return `<h${t} id="${this.options.headerPrefix}${n
+        .toLowerCase()
+        .replace(/[^\w]+/g, "-")}">${e}</h${t}>\n`;
     }),
     (n.prototype.hr = function() {
       return this.options.xhtml ? "<hr/>\n" : "<hr>\n";
     }),
     (n.prototype.list = function(e, t) {
       const n = t ? "ol" : "ul";
-      return `<${  n  }>\n${  e  }</${  n  }>\n`;
+      return `<${n}>\n${e}</${n}>\n`;
     }),
     (n.prototype.listitem = function(e) {
-      return `<li>${  e  }</li>\n`;
+      return `<li>${e}</li>\n`;
     }),
     (n.prototype.paragraph = function(e) {
-      return `<p>${  e  }</p>\n`;
+      return `<p>${e}</p>\n`;
     }),
     (n.prototype.table = function(e, t) {
-      return (
-        `<table>\n<thead>\n${ 
-        e 
-        }</thead>\n<tbody>\n${ 
-        t 
-        }</tbody>\n</table>\n`
-      );
+      return `<table>\n<thead>\n${e}</thead>\n<tbody>\n${t}</tbody>\n</table>\n`;
     }),
     (n.prototype.tablerow = function(e) {
-      return `<tr>\n${  e  }</tr>\n`;
+      return `<tr>\n${e}</tr>\n`;
     }),
     (n.prototype.tablecell = function(e, t) {
       const n = t.header ? "th" : "td";
-        const r = t.align
-          ? `<${  n  } style="text-align:${  t.align  }">`
-          : `<${  n  }>`;
-      return `${r + e  }</${  n  }>\n`;
+      const r = t.align ? `<${n} style="text-align:${t.align}">` : `<${n}>`;
+      return `${r + e}</${n}>\n`;
     }),
     (n.prototype.strong = function(e) {
-      return `<strong>${  e  }</strong>`;
+      return `<strong>${e}</strong>`;
     }),
     (n.prototype.em = function(e) {
-      return `<em>${  e  }</em>`;
+      return `<em>${e}</em>`;
     }),
     (n.prototype.codespan = function(e) {
-      return `<code>${  e  }</code>`;
+      return `<code>${e}</code>`;
     }),
     (n.prototype.br = function() {
       return this.options.xhtml ? "<br/>" : "<br>";
     }),
     (n.prototype.del = function(e) {
-      return `<del>${  e  }</del>`;
+      return `<del>${e}</del>`;
     }),
     (n.prototype.link = function(e, t, n) {
       if (this.options.sanitize) {
@@ -570,13 +547,13 @@
         }
         if (r.indexOf("javascript:") === 0) return "";
       }
-      let l = `<a href="${  e  }"`;
-      return t && (l += ` title="${  t  }"`), (l += `>${  n  }</a>`);
+      let l = `<a href="${e}"`;
+      return t && (l += ` title="${t}"`), (l += `>${n}</a>`);
     }),
     (n.prototype.image = function(e, t, n) {
-      let r = `<img src="${  e  }" alt="${  n  }"`;
+      let r = `<img src="${e}" alt="${n}"`;
       return (
-        t && (r += ` title="${  t  }"`), (r += this.options.xhtml ? "/>" : ">")
+        t && (r += ` title="${t}"`), (r += this.options.xhtml ? "/>" : ">")
       );
     }),
     (r.parse = function(e, t, n) {
@@ -597,7 +574,7 @@
     }),
     (r.prototype.parseText = function() {
       for (var e = this.token.text; this.peek().type === "text"; )
-        e += `\n${  this.next().text}`;
+        e += `\n${this.next().text}`;
       return this.inline.output(e);
     }),
     (r.prototype.tok = function() {
@@ -620,12 +597,12 @@
           );
         case "table":
           var e;
-            var t;
-            var n;
-            var r;
-            var s;
-            var i = "";
-            var l = "";
+          var t;
+          var n;
+          var r;
+          var s;
+          var i = "";
+          var l = "";
           for (n = "", e = 0; e < this.token.header.length; e++)
             (r = { header: !0, align: this.token.align[e] }),
               (n += this.renderer.tablecell(

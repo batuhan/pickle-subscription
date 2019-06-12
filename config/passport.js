@@ -4,7 +4,7 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const JwtStrategy = require("passport-jwt").Strategy;
-const {ExtractJwt} = require("passport-jwt");
+const { ExtractJwt } = require("passport-jwt");
 
 process.on("unhandledRejection", function(e) {
   console.log(e.message, e.stack);
@@ -94,17 +94,16 @@ module.exports = function(passport) {
               false,
               req.flash("signupMessage", "That email is already taken."),
             );
-          } 
-            const newUser = new User({
-              email: name,
-              password: bcrypt.hashSync(password, 10),
-              role_id: 1,
-            });
-            newUser.createWithStripe(function(err, result) {
-              console.log(result.get("id"));
-              return done(err, result);
-            });
-          
+          }
+          const newUser = new User({
+            email: name,
+            password: bcrypt.hashSync(password, 10),
+            role_id: 1,
+          });
+          newUser.createWithStripe(function(err, result) {
+            console.log(result.get("id"));
+            return done(err, result);
+          });
         });
       },
     ),
@@ -144,7 +143,10 @@ module.exports = function(passport) {
             .userManager[0];
           if (userManager) {
             try {
-              const authResult = await userManager.authenticate(result, password);
+              const authResult = await userManager.authenticate(
+                result,
+                password,
+              );
             } catch (e) {
               console.error(e);
               return done(null, false, { message: e }); // create the loginMessage and save it to session as flashdata

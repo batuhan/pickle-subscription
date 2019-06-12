@@ -20,7 +20,7 @@ const config = async function() {
       ...pluginMap,
     },
     output: {
-      path: `${BUILD_DIR  }/plugins`,
+      path: `${BUILD_DIR}/plugins`,
       publicPath: "/build/plugins/",
       filename: "[name].js",
       chunkFilename: "[name]-[id].js",
@@ -54,7 +54,7 @@ const config = async function() {
 
   const app = {
     entry: {
-      bundle: ["react-hot-loader/patch", `${APP_DIR  }/index.jsx`],
+      bundle: ["react-hot-loader/patch", `${APP_DIR}/index.jsx`],
     },
     output: {
       path: BUILD_DIR,
@@ -95,8 +95,8 @@ const config = async function() {
           test: /\.jsx?/,
           include: [
             APP_DIR,
-            `${APP_DIR2  }/node_modules/pluginbot-react`,
-            `${APP_DIR2  }/node_modules/pluginbot`,
+            `${APP_DIR2}/node_modules/pluginbot-react`,
+            `${APP_DIR2}/node_modules/pluginbot`,
           ],
           loader: "babel-loader",
         },

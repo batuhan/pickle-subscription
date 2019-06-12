@@ -39,9 +39,9 @@ class ForgotPassword extends React.Component {
   }
 
   handleInputChange(event) {
-    const {target} = event;
+    const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const {name} = target;
+    const { name } = target;
     const formState = update(this.state, {
       form: {
         [name]: { $set: value },
@@ -70,9 +70,7 @@ class ForgotPassword extends React.Component {
             <div className="sign-in">
               <p>
                 Email Sent! You will receive an email with instructions to reset
-                your password at 
-                {' '}
-                <b>{this.state.form.email}</b>
+                your password at <b>{this.state.form.email}</b>
               </p>
               <button
                 onClick={() => {
@@ -87,61 +85,56 @@ class ForgotPassword extends React.Component {
           </div>
         </Content>
       );
-    } 
-      return (
-        <Authorizer anonymous>
-          <Content primary>
-            <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-              <form className="sign-in">
-                <h3>Forgot Password?</h3>
-                <p>
-                  Please enter your email address to reset your password. You
-                  will receive an emil with password reset instructions.
-                </p>
-                <div
-                  className={`form-group ${!this.state.form.email &&
-                    this.state.submitted &&
-                    "has-error"}`}
-                >
-                  <label
-                    htmlFor="sign-in-2-email"
-                    className="bmd-label-floating"
-                  >
-                    Email address
-                  </label>
-                  <input
-                    onChange={this.handleInputChange}
-                    id="email"
-                    type="text"
-                    name="email"
-                    className="form-control"
-                  />
-                  {!this.state.form.email && this.state.submitted ? (
-                    <span className="help-block">Email is required</span>
-                  ) : (
-                    <span />
-                  )}
-                </div>
-                <button
-                  onClick={this.handleReset}
-                  type="submit"
-                  className="btn btn-raised btn-lg btn-primary btn-block"
-                >
-                  Reset Password
-                </button>
-                <p className="sign-up-link">
-                  Back to
-                  {" "}
-                  <Link to={{ pathname: "/login", state: { fromLogin: true } }}>
-                    Login
-                  </Link>
-                </p>
-              </form>
-            </div>
-          </Content>
-        </Authorizer>
-      );
-    
+    }
+    return (
+      <Authorizer anonymous>
+        <Content primary>
+          <div className="centered-box col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+            <form className="sign-in">
+              <h3>Forgot Password?</h3>
+              <p>
+                Please enter your email address to reset your password. You will
+                receive an emil with password reset instructions.
+              </p>
+              <div
+                className={`form-group ${!this.state.form.email &&
+                  this.state.submitted &&
+                  "has-error"}`}
+              >
+                <label htmlFor="sign-in-2-email" className="bmd-label-floating">
+                  Email address
+                </label>
+                <input
+                  onChange={this.handleInputChange}
+                  id="email"
+                  type="text"
+                  name="email"
+                  className="form-control"
+                />
+                {!this.state.form.email && this.state.submitted ? (
+                  <span className="help-block">Email is required</span>
+                ) : (
+                  <span />
+                )}
+              </div>
+              <button
+                onClick={this.handleReset}
+                type="submit"
+                className="btn btn-raised btn-lg btn-primary btn-block"
+              >
+                Reset Password
+              </button>
+              <p className="sign-up-link">
+                Back to{" "}
+                <Link to={{ pathname: "/login", state: { fromLogin: true } }}>
+                  Login
+                </Link>
+              </p>
+            </form>
+          </div>
+        </Content>
+      </Authorizer>
+    );
   }
 }
 

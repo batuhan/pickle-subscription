@@ -29,9 +29,8 @@ class Profile extends React.Component {
   componentDidMount() {
     if (!isAuthorized({ uid: this.props.uid })) {
       return browserHistory.push("/login");
-    } 
-      this.fetchUser();
-    
+    }
+    this.fetchUser();
   }
 
   fetchUser() {
@@ -47,19 +46,18 @@ class Profile extends React.Component {
   }
 
   getUserEditForm() {
-    const {user} = this.props;
+    const { user } = this.props;
     if (user && user.status != "invited") {
       return <UserFormEdit myUser={this.state.myUser} />;
-    } 
-      return (
-        <div className="invited-user-profile basic-info col-md-6 col-md-offset-3">
-          <span>
-            Please complete your registration by following the link that was
-            emailed to you prior to editing your profile.
-          </span>
-        </div>
-      );
-    
+    }
+    return (
+      <div className="invited-user-profile basic-info col-md-6 col-md-offset-3">
+        <span>
+          Please complete your registration by following the link that was
+          emailed to you prior to editing your profile.
+        </span>
+      </div>
+    );
   }
 
   render() {
@@ -81,23 +79,22 @@ class Profile extends React.Component {
           </div>
         </div>
       );
-    } 
-      return (
-        <div>
-          <Jumbotron pageName={pageName} location={this.props.location} />
-          <div className="page-service-instance">
-            <Content>
-              <div className="row m-b-20">
-                <div className="col-xs-12">
-                  <ContentTitle icon="user" title="My Profile" />
-                  {this.getUserEditForm()}
-                </div>
+    }
+    return (
+      <div>
+        <Jumbotron pageName={pageName} location={this.props.location} />
+        <div className="page-service-instance">
+          <Content>
+            <div className="row m-b-20">
+              <div className="col-xs-12">
+                <ContentTitle icon="user" title="My Profile" />
+                {this.getUserEditForm()}
               </div>
-            </Content>
-          </div>
+            </div>
+          </Content>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 

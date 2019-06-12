@@ -16,7 +16,7 @@ import Alerts from "../alerts.jsx";
 class UserFormInvite extends React.Component {
   constructor(props) {
     super(props);
-    const {token} = this.props;
+    const { token } = this.props;
     this.state = {
       token,
       url: `/api/v1/users/register?token=${token}`,
@@ -100,51 +100,50 @@ class UserFormInvite extends React.Component {
     };
     if (this.state.loading) {
       return <Load />;
-    } 
-      // TODO: Add validation functions and pass into DataForm as props
-      return (
-        <div className="sign-up">
-          {getAlerts()}
-          <DataForm
-            validators={this.getValidators()}
-            handleResponse={this.handleResponse}
-            url={this.state.url}
-            method="POST"
+    }
+    // TODO: Add validation functions and pass into DataForm as props
+    return (
+      <div className="sign-up">
+        {getAlerts()}
+        <DataForm
+          validators={this.getValidators()}
+          handleResponse={this.handleResponse}
+          url={this.state.url}
+          method="POST"
+        >
+          <div>
+            <h3 className="m-b-20">Finish Your Invitation</h3>
+            <p>
+              Please enter your information to finish your registration and
+              access your account.
+            </p>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="form-control"
+            />
+          </div>
+          <button
+            className="btn btn-raised btn-lg btn-primary btn-block"
+            type="submit"
+            value="submit"
           >
-            <div>
-              <h3 className="m-b-20">Finish Your Invitation</h3>
-              <p>
-                Please enter your information to finish your registration and
-                access your account.
-              </p>
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="form-control"
-              />
-            </div>
-            <button
-              className="btn btn-raised btn-lg btn-primary btn-block"
-              type="submit"
-              value="submit"
-            >
-              Finish Registration
-            </button>
-          </DataForm>
-        </div>
-      );
-    
+            Finish Registration
+          </button>
+        </DataForm>
+      </div>
+    );
   }
 }
 

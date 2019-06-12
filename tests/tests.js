@@ -8,7 +8,7 @@ stream.on("data", function(buffer) {
 });
 
 stream.on("end", function() {
-  console.log(`final output ${  string}`);
+  console.log(`final output ${string}`);
 });
 
 let request = require("supertest");
@@ -25,7 +25,7 @@ require("dotenv").config({
   path: require("path").join(__dirname, "../env/.env"),
 });
 
-const {log} = console;
+const { log } = console;
 
 const config = {
   host: process.env.POSTGRES_DB_HOST,
@@ -117,7 +117,7 @@ before("before", function(assert) {
         baseHeaders = {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `JWT ${  token}`,
+          Authorization: `JWT ${token}`,
         };
         assert.end();
       });

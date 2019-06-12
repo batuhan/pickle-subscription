@@ -113,13 +113,11 @@ class ModalPayChargeItem extends React.Component {
                     </strong>
                   </p>
                   <p>
-Charge Description:
+                    Charge Description:
                     {chargeDescription}
                   </p>
                   <p>
-                    Charge Amount: 
-                    {' '}
-                    <Price value={chargeAmount} />
+                    Charge Amount: <Price value={chargeAmount} />
                   </p>
                 </div>
               </div>
@@ -141,7 +139,8 @@ Charge Description:
           </div>
         </Modal>
       );
-    } if (currentModal == "model_cancel_charge" && self.state.cancelled) {
+    }
+    if (currentModal == "model_cancel_charge" && self.state.cancelled) {
       return (
         <Modal
           modalTitle={pageName}

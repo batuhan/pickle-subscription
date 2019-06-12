@@ -131,9 +131,8 @@ class ServiceRequest extends React.Component {
         console.error(e);
       }
       return { total: newPrice, adjustments };
-    } 
-      return { total: 0, adjustments: [] };
-    
+    }
+    return { total: 0, adjustments: [] };
   }
 
   getService() {
@@ -155,34 +154,20 @@ class ServiceRequest extends React.Component {
       case "subtract":
         return (
           <span>
-            - 
-            {' '}
-            <Price value={adjustment.value} prefix={prefix} />
+            - <Price value={adjustment.value} prefix={prefix} />
           </span>
         );
         break;
       case "multiply":
-        return (
-          <span>
-+ %
-            {adjustment.value}
-          </span>
-);
+        return <span>+ %{adjustment.value}</span>;
         break;
       case "divide":
-        return (
-          <span>
-- %
-            {adjustment.value}
-          </span>
-);
+        return <span>- %{adjustment.value}</span>;
         break;
       default:
         return (
           <span>
-            + 
-            {' '}
-            <Price value={adjustment.value} prefix={prefix} />
+            + <Price value={adjustment.value} prefix={prefix} />
           </span>
         );
     }
@@ -191,291 +176,276 @@ class ServiceRequest extends React.Component {
   render() {
     if (this.state.loading) {
       return <span />;
-    } 
-      const { formJSON, options } = this.props;
-      const { service } = this.state;
-      const prefix = getSymbolFromCurrency(service.currency);
+    }
+    const { formJSON, options } = this.props;
+    const { service } = this.state;
+    const prefix = getSymbolFromCurrency(service.currency);
 
-      const featuredStyle = {
-        height: _.get(
-          options,
-          "purchase_page_featured_area_height.value",
-          "auto",
-        ),
-        minHeight: _.get(
-          options,
-          "purchase_page_featured_area_height.value",
-          "auto",
-        ),
-        paddingTop: _.get(
-          options,
-          "purchase_page_featured_area_padding_top.value",
-          "90px",
-        ),
-        paddingBottom: _.get(
-          options,
-          "purchase_page_featured_area_padding_bottom.value",
-          "0px",
-        ),
-      };
-
-      const featuredOverlayStyle = {
-        backgroundColor: _.get(
-          options,
-          "purchase_page_featured_area_overlay_color.value",
-          "#000000",
-        ),
-        opacity: _.get(
-          options,
-          "purchase_page_featured_area_overlay_opacity.value",
-          "0",
-        ),
-      };
-
-      const featuredTextStyle = {
-        color: _.get(
-          options,
-          "purchase_page_featured_area_text_color.value",
-          "#ffffff",
-        ),
-      };
-
-      // const {formJSON, options} = this.props;
-      const service_request_title_description = _.get(
+    const featuredStyle = {
+      height: _.get(
         options,
-        "service_request_title_description.value",
-        "What you are getting",
-      );
-      const service_request_title_form = _.get(
+        "purchase_page_featured_area_height.value",
+        "auto",
+      ),
+      minHeight: _.get(
         options,
-        "service_request_title_form.value",
-        "Get Your Service",
-      );
-      const formAmount = _.get(formJSON, "amount", "N/A");
-      const { total, adjustments } = this.getPriceData();
-      const filteredAdjustments = adjustments.filter(
-        adjustment => adjustment.value > 0,
-      );
-      const splitPricing = service.split_configuration;
-      let splitTotal = 0;
+        "purchase_page_featured_area_height.value",
+        "auto",
+      ),
+      paddingTop: _.get(
+        options,
+        "purchase_page_featured_area_padding_top.value",
+        "90px",
+      ),
+      paddingBottom: _.get(
+        options,
+        "purchase_page_featured_area_padding_bottom.value",
+        "0px",
+      ),
+    };
 
-      let rightHeading = "Plan Summary";
-      switch (service.type) {
-        case "one_time":
-          rightHeading = "Payment Summary";
-          break;
-        case "custom":
-          rightHeading = "Custom Service";
-          break;
-        case "split":
-          rightHeading = "Scheduled Payments";
-          if (splitPricing) {
-            splitPricing.splits.map(split => {
-              splitTotal += split.amount;
-            });
-          }
-          break;
-        default:
-          rightHeading = "Plan Summary";
-      }
+    const featuredOverlayStyle = {
+      backgroundColor: _.get(
+        options,
+        "purchase_page_featured_area_overlay_color.value",
+        "#000000",
+      ),
+      opacity: _.get(
+        options,
+        "purchase_page_featured_area_overlay_opacity.value",
+        "0",
+      ),
+    };
 
-      return (
-        <div className="request-wrap">
-          {/* {JSON.stringify(this.getPriceData())} */}
-          <div className="request-content col-lg-offset-1 col-xl-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-8">
-            <div className="request-user-form col-xs-12 col-sm-12 col-md-8 col-lg-8">
-              <div className="request-form-heading">
-                {this.state.icon ? (
-                  <img
-                    className="request-icon"
-                    src={this.state.icon}
-                    alt="Service Icon"
-                  />
-                ) : (
-                  <div className="request-icon" />
-                )}
-                {service.name}
-              </div>
-              <div className="request-form-content">
-                <div className="basic-info">
-                  <div className="service-request-details">
-                    <div
-                      dangerouslySetInnerHTML={{ __html: service.details }}
-                    />
-                  </div>
-                </div>
-                <div className="devider">
-                  <hr />
-                </div>
-                <ServiceRequestForm
-                  templateId={this.state.id}
-                  service={service}
+    const featuredTextStyle = {
+      color: _.get(
+        options,
+        "purchase_page_featured_area_text_color.value",
+        "#ffffff",
+      ),
+    };
+
+    // const {formJSON, options} = this.props;
+    const service_request_title_description = _.get(
+      options,
+      "service_request_title_description.value",
+      "What you are getting",
+    );
+    const service_request_title_form = _.get(
+      options,
+      "service_request_title_form.value",
+      "Get Your Service",
+    );
+    const formAmount = _.get(formJSON, "amount", "N/A");
+    const { total, adjustments } = this.getPriceData();
+    const filteredAdjustments = adjustments.filter(
+      adjustment => adjustment.value > 0,
+    );
+    const splitPricing = service.split_configuration;
+    let splitTotal = 0;
+
+    let rightHeading = "Plan Summary";
+    switch (service.type) {
+      case "one_time":
+        rightHeading = "Payment Summary";
+        break;
+      case "custom":
+        rightHeading = "Custom Service";
+        break;
+      case "split":
+        rightHeading = "Scheduled Payments";
+        if (splitPricing) {
+          splitPricing.splits.map(split => {
+            splitTotal += split.amount;
+          });
+        }
+        break;
+      default:
+        rightHeading = "Plan Summary";
+    }
+
+    return (
+      <div className="request-wrap">
+        {/* {JSON.stringify(this.getPriceData())} */}
+        <div className="request-content col-lg-offset-1 col-xl-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-8">
+          <div className="request-user-form col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div className="request-form-heading">
+              {this.state.icon ? (
+                <img
+                  className="request-icon"
+                  src={this.state.icon}
+                  alt="Service Icon"
                 />
-              </div>
+              ) : (
+                <div className="request-icon" />
+              )}
+              {service.name}
             </div>
-            <div className="request-summary col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div className="request-summary-heading">{rightHeading}</div>
-              <StickyContainer style={{ height: "100%" }}>
-                <Sticky>
-                  {({
-                    isSticky,
-                    wasSticky,
-                    style,
-                    distanceFromTop,
-                    distanceFromBottom,
-                    calculatedHeight,
-                  }) => {
-                    return (
-                      <div style={style}>
-                        <div className="request-summary-content">
-                          {service.trial_period_days > 0 ? (
-                            <div className="free-trial-content">
-                              {service.trial_period_days}
-                              {' '}
-Day Free Trial
-                            </div>
-                          ) : null}
-                          {service.type === "subscription" ||
-                          service.type === "one_time" ? (
-                            <div>
-                              <div className="pricing-wrapper">
-                                <div className="subscription-pricing row m-r-0 m-l-0">
-                                  {service.type === "subscription" ? (
-                                    <div className="col-md-6 p-r-0 p-l-0">
-                                      Recurring Fee
-                                    </div>
-                                  ) : null}
-                                  {service.type === "one_time" ? (
-                                    <div className="col-md-6 p-r-0 p-l-0">
-                                      Base Cost
-                                    </div>
-                                  ) : null}
-                                  <div className="col-md-6 p-r-0 p-l-0 text-right">
-                                    <b>{getPrice(service)}</b>
+            <div className="request-form-content">
+              <div className="basic-info">
+                <div className="service-request-details">
+                  <div dangerouslySetInnerHTML={{ __html: service.details }} />
+                </div>
+              </div>
+              <div className="devider">
+                <hr />
+              </div>
+              <ServiceRequestForm
+                templateId={this.state.id}
+                service={service}
+              />
+            </div>
+          </div>
+          <div className="request-summary col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div className="request-summary-heading">{rightHeading}</div>
+            <StickyContainer style={{ height: "100%" }}>
+              <Sticky>
+                {({
+                  isSticky,
+                  wasSticky,
+                  style,
+                  distanceFromTop,
+                  distanceFromBottom,
+                  calculatedHeight,
+                }) => {
+                  return (
+                    <div style={style}>
+                      <div className="request-summary-content">
+                        {service.trial_period_days > 0 ? (
+                          <div className="free-trial-content">
+                            {service.trial_period_days} Day Free Trial
+                          </div>
+                        ) : null}
+                        {service.type === "subscription" ||
+                        service.type === "one_time" ? (
+                          <div>
+                            <div className="pricing-wrapper">
+                              <div className="subscription-pricing row m-r-0 m-l-0">
+                                {service.type === "subscription" ? (
+                                  <div className="col-md-6 p-r-0 p-l-0">
+                                    Recurring Fee
                                   </div>
+                                ) : null}
+                                {service.type === "one_time" ? (
+                                  <div className="col-md-6 p-r-0 p-l-0">
+                                    Base Cost
+                                  </div>
+                                ) : null}
+                                <div className="col-md-6 p-r-0 p-l-0 text-right">
+                                  <b>{getPrice(service)}</b>
                                 </div>
                               </div>
-                              {filteredAdjustments.map((lineItem, index) => (
-                                <div
-                                  key={`line-${  index}`}
-                                  className="pricing-wrapper"
-                                >
-                                  <div className="subscription-pricing row m-r-0 m-l-0">
-                                    <div className="col-md-6 p-r-0 p-l-0">
-                                      {lineItem.name}
-                                    </div>
-                                    <div className="col-md-6 p-r-0 p-l-0 text-right">
-                                      <b>
-                                        {this.getAdjustmentSign(
-                                          lineItem,
-                                          prefix,
-                                        )}
-                                      </b>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                              <div className="total-price">
-                                <div className="row m-r-0 m-l-0">
+                            </div>
+                            {filteredAdjustments.map((lineItem, index) => (
+                              <div
+                                key={`line-${index}`}
+                                className="pricing-wrapper"
+                              >
+                                <div className="subscription-pricing row m-r-0 m-l-0">
                                   <div className="col-md-6 p-r-0 p-l-0">
-                                    Total:
+                                    {lineItem.name}
                                   </div>
                                   <div className="col-md-6 p-r-0 p-l-0 text-right">
                                     <b>
-                                      <Price value={total} prefix={prefix} />
+                                      {this.getAdjustmentSign(lineItem, prefix)}
                                     </b>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          ) : null}
-
-                          {service.type === "custom" ? (
-                            <div className="quote-content">Custom Quote</div>
-                          ) : null}
-
-                          {service.type === "split" && splitPricing ? (
-                            <div>
-                              {splitPricing.splits.map((splitItem, index) => (
-                                <div
-                                  key={`split-${  index}`}
-                                  className="split-wrapper"
-                                >
-                                  <div className="subscription-pricing row m-r-0 m-l-0">
-                                    <div className="col-md-6 p-r-0 p-l-0">
-                                      {splitItem.charge_day === 0 ? (
-                                        <span>Right Now</span>
-                                      ) : (
-                                        <span>
-                                          After 
-                                          {' '}
-                                          {splitItem.charge_day}
-                                          {' '}
-Days
-                                        </span>
-                                      )}
-                                    </div>
-                                    <div className="col-md-6 p-r-0 p-l-0 text-right">
-                                      <b>
-                                        <Price
-                                          value={splitItem.amount}
-                                          prefix={prefix}
-                                        />
-                                      </b>
-                                    </div>
-                                  </div>
+                            ))}
+                            <div className="total-price">
+                              <div className="row m-r-0 m-l-0">
+                                <div className="col-md-6 p-r-0 p-l-0">
+                                  Total:
                                 </div>
-                              ))}
-                              <div className="total-price">
-                                <div className="row m-r-0 m-l-0">
+                                <div className="col-md-6 p-r-0 p-l-0 text-right">
+                                  <b>
+                                    <Price value={total} prefix={prefix} />
+                                  </b>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
+
+                        {service.type === "custom" ? (
+                          <div className="quote-content">Custom Quote</div>
+                        ) : null}
+
+                        {service.type === "split" && splitPricing ? (
+                          <div>
+                            {splitPricing.splits.map((splitItem, index) => (
+                              <div
+                                key={`split-${index}`}
+                                className="split-wrapper"
+                              >
+                                <div className="subscription-pricing row m-r-0 m-l-0">
                                   <div className="col-md-6 p-r-0 p-l-0">
-                                    Total:
+                                    {splitItem.charge_day === 0 ? (
+                                      <span>Right Now</span>
+                                    ) : (
+                                      <span>
+                                        After {splitItem.charge_day} Days
+                                      </span>
+                                    )}
                                   </div>
                                   <div className="col-md-6 p-r-0 p-l-0 text-right">
                                     <b>
                                       <Price
-                                        value={splitTotal}
+                                        value={splitItem.amount}
                                         prefix={prefix}
                                       />
                                     </b>
                                   </div>
                                 </div>
                               </div>
+                            ))}
+                            <div className="total-price">
+                              <div className="row m-r-0 m-l-0">
+                                <div className="col-md-6 p-r-0 p-l-0">
+                                  Total:
+                                </div>
+                                <div className="col-md-6 p-r-0 p-l-0 text-right">
+                                  <b>
+                                    <Price value={splitTotal} prefix={prefix} />
+                                  </b>
+                                </div>
+                              </div>
                             </div>
-                          ) : null}
-                        </div>
+                          </div>
+                        ) : null}
                       </div>
-                    );
-                  }}
-                </Sticky>
-              </StickyContainer>
-            </div>
+                    </div>
+                  );
+                }}
+              </Sticky>
+            </StickyContainer>
           </div>
-
-          {this.state.editingGear && (
-            <AdminEditingGear
-              toggle={this.toggleEditingMode}
-              name="Heading Settings"
-            />
-          )}
-          {this.state.editingMode && (
-            <AdminEditingSidebar
-              toggle={this.toggleEditingMode}
-              filter={[
-                "purchase_page_featured_area_overlay_color",
-                "purchase_page_featured_area_overlay_opacity",
-                "purchase_page_featured_area_text_color",
-                "purchase_page_featured_area_height",
-                "purchase_page_featured_area_padding_top",
-                "purchase_page_featured_area_padding_bottom",
-                "service_request_title_description",
-                "service_request_title_form",
-              ]}
-            />
-          )}
         </div>
-      );
-    
+
+        {this.state.editingGear && (
+          <AdminEditingGear
+            toggle={this.toggleEditingMode}
+            name="Heading Settings"
+          />
+        )}
+        {this.state.editingMode && (
+          <AdminEditingSidebar
+            toggle={this.toggleEditingMode}
+            filter={[
+              "purchase_page_featured_area_overlay_color",
+              "purchase_page_featured_area_overlay_opacity",
+              "purchase_page_featured_area_text_color",
+              "purchase_page_featured_area_height",
+              "purchase_page_featured_area_padding_top",
+              "purchase_page_featured_area_padding_bottom",
+              "service_request_title_description",
+              "service_request_title_form",
+            ]}
+          />
+        )}
+      </div>
+    );
   }
 }
 

@@ -36,7 +36,7 @@ class Home extends React.Component {
     const value = target.type === "checkbox" ? target.checked : target.value;
     if (value != "") {
       this.setState({
-        serviceUrl: `/api/v1/service-templates/search?key=name&value=${  value}`,
+        serviceUrl: `/api/v1/service-templates/search?key=name&value=${value}`,
         searchValue: value,
       });
     } else {
@@ -73,11 +73,11 @@ class Home extends React.Component {
 
   render() {
     let featuredServicesHeading;
-      let featuredServicesShowAllButton;
-      let featuredServiceSectionBackgroundColor = "";
+    let featuredServicesShowAllButton;
+    let featuredServiceSectionBackgroundColor = "";
 
     if (this.props.options) {
-      const {options} = this.props;
+      const { options } = this.props;
       featuredServicesHeading = _.get(
         options,
         "featured_service_heading.value",
@@ -194,9 +194,9 @@ class HomeFeatures extends React.Component {
     };
 
     let featuredHeading;
-      let featuredDescription = "";
+    let featuredDescription = "";
 
-    const {options} = this.props;
+    const { options } = this.props;
     featuredHeading = _.get(
       options,
       "home_featured_heading.value",

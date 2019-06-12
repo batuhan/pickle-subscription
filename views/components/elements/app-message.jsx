@@ -75,9 +75,8 @@ class AppMessage extends React.Component {
           ))}
         </div>
       );
-    } 
-      return <span />;
-    
+    }
+    return <span />;
   }
 }
 

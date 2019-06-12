@@ -25,9 +25,8 @@ const validateRequest = function(
         // If the object exist, return it as well as continuing the process:
         res.locals.valid_object = result;
         return next();
-      } 
-        return res.status(404).send("Sorry, we cannot find that!");
-      
+      }
+      return res.status(404).send("Sorry, we cannot find that!");
     });
   };
 };

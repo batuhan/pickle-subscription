@@ -16,7 +16,7 @@ module.exports = function(router) {
         ? 0
         : serviceInstance.get("user_id");
     const from = req.body.user_id;
-    const {message} = req.body;
+    const { message } = req.body;
     const newMessage = await messageManager.send(
       to,
       from,

@@ -128,7 +128,7 @@ let getInitialConfig = function() {
 
 let getAppConf = function() {
   return {
-    configPath: `${__dirname  }/pluginbot.config.js`,
+    configPath: `${__dirname}/pluginbot.config.js`,
     port: process.env.PORT || 3000,
     bundle_path: process.env.BUNDLE_PATH || "/build/bundle.js",
     ssl_port: process.env.SSL_PORT || 3001,

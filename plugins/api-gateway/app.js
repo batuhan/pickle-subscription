@@ -17,7 +17,7 @@ const createServer = require("./server");
 
 module.exports = {
   *run(config, provide, services) {
-    const {appConfig} = config;
+    const { appConfig } = config;
     const app = express();
     app.use(
       helmet({
@@ -201,7 +201,11 @@ module.exports = {
       const clientPlugins = Object.keys(
         (await configBuilder.buildClientConfig(CONFIG_PATH)).plugins,
       );
-      const { site_title, site_description, hostname } = store.getState().options;
+      const {
+        site_title,
+        site_description,
+        hostname,
+      } = store.getState().options;
       res.render("main", {
         bundle: appConfig.bundle_path,
         plugins: clientPlugins,

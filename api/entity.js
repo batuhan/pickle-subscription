@@ -12,8 +12,8 @@ module.exports = function(router, model, resourceName, userCorrelator) {
 
   if (userCorrelator) {
     router.get(`/${resourceName}/own`, auth(), function(req, res, next) {
-      let {key} = req.query;
-      let {value} = req.query;
+      let { key } = req.query;
+      let { value } = req.query;
       if (!key || !value) {
         key = undefined;
         value = undefined;
@@ -52,8 +52,8 @@ module.exports = function(router, model, resourceName, userCorrelator) {
   }
 
   router.get(`/${resourceName}/`, auth(), function(req, res, next) {
-    let {key} = req.query;
-    let {value} = req.query;
+    let { key } = req.query;
+    let { value } = req.query;
     if (!key || !value) {
       key = undefined;
       value = undefined;
@@ -164,7 +164,7 @@ module.exports = function(router, model, resourceName, userCorrelator) {
       entity = await entity.attachReferences();
       entity.delete(function(err, result) {
         if (err) {
-          console.error(`Server error deleting entity: ${  err}`);
+          console.error(`Server error deleting entity: ${err}`);
           res.status(500).send({ error: "Error deleting" });
         } else {
           store.dispatchEvent(`${model.table}_deleted`, entity);
@@ -187,36 +187,53 @@ module.exports = function(router, model, resourceName, userCorrelator) {
     const entity = new model(req.body);
     entity.create(function(err, newEntity) {
       if (err) {
-        console.error(`Server error creating entity: ${  err}`);
-        res.status(500).send({ error: `Error creating new ${  resourceName}` });
+        console.error(`Server error creating entity: ${err}`);
+        res.status(500).send({ error: `Error creating new ${resourceName}` });
       } else if (
-          references.length === 0 ||
-          req.body.references === undefined ||
-          req.body.references.length == 0
-        ) {
-          res.locals.json = newEntity.data;
-          store.dispatchEvent(`${model.table}_created`, newEntity);
-          EventLogs.logEvent(
-            req.user.get("id"),
-            `${resourceName} ${newEntity.get(
-              model.primaryKey,
-            )} was created by user ${req.user.get("email")}`,
-          );
-          next();
-        } else {
-          const requestReferenceData = req.body.references;
-          newEntity.data.references = {};
-          let counter = 0;
-          for (const reference of references) {
-            if (
-              !requestReferenceData[reference.model.table] ||
-              requestReferenceData[reference.model.table].length == 0
+        references.length === 0 ||
+        req.body.references === undefined ||
+        req.body.references.length == 0
+      ) {
+        res.locals.json = newEntity.data;
+        store.dispatchEvent(`${model.table}_created`, newEntity);
+        EventLogs.logEvent(
+          req.user.get("id"),
+          `${resourceName} ${newEntity.get(
+            model.primaryKey,
+          )} was created by user ${req.user.get("email")}`,
+        );
+        next();
+      } else {
+        const requestReferenceData = req.body.references;
+        newEntity.data.references = {};
+        let counter = 0;
+        for (const reference of references) {
+          if (
+            !requestReferenceData[reference.model.table] ||
+            requestReferenceData[reference.model.table].length == 0
+          ) {
+            counter++;
+            if (counter == references.length) {
+              res.locals.json = newEntity.data;
+              store.dispatchEvent(`${model.table}_created`, newEntity);
+
+              EventLogs.logEvent(
+                req.user.get("id"),
+                `${resourceName} ${newEntity.get(
+                  model.primaryKey,
+                )} was created by user ${req.user.get("email")}`,
+              );
+              next();
+            }
+          } else {
+            const referenceData = requestReferenceData[reference.model.table];
+            newEntity.createReferences(referenceData, reference, function(
+              modifiedEntity,
             ) {
               counter++;
               if (counter == references.length) {
-                res.locals.json = newEntity.data;
-                store.dispatchEvent(`${model.table}_created`, newEntity);
-
+                res.locals.json = modifiedEntity.data;
+                store.dispatchEvent(`${model.table}_created`, modifiedEntity);
                 EventLogs.logEvent(
                   req.user.get("id"),
                   `${resourceName} ${newEntity.get(
@@ -225,27 +242,10 @@ module.exports = function(router, model, resourceName, userCorrelator) {
                 );
                 next();
               }
-            } else {
-              const referenceData = requestReferenceData[reference.model.table];
-              newEntity.createReferences(referenceData, reference, function(
-                modifiedEntity,
-              ) {
-                counter++;
-                if (counter == references.length) {
-                  res.locals.json = modifiedEntity.data;
-                  store.dispatchEvent(`${model.table}_created`, modifiedEntity);
-                  EventLogs.logEvent(
-                    req.user.get("id"),
-                    `${resourceName} ${newEntity.get(
-                      model.primaryKey,
-                    )} was created by user ${req.user.get("email")}`,
-                  );
-                  next();
-                }
-              });
-            }
+            });
           }
         }
+      }
     });
   });
 

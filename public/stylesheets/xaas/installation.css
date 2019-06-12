@@ -1,127 +1,128 @@
-.installation-logo img{
-    max-width: 350px;
+.installation-logo img {
+  max-width: 350px;
 }
 .installation-logo {
-    padding: 40px 25px 25px 25px;
-    text-align: center;
+  padding: 40px 25px 25px 25px;
+  text-align: center;
 }
-.installation-logo, .installation-form {
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*flex-direction: column;*/
-    /*padding: 5%;*/
-    /*height: 100vh;*/
+.installation-logo,
+.installation-form {
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*flex-direction: column;*/
+  /*padding: 5%;*/
+  /*height: 100vh;*/
 }
-.installation-form{
-    background-color: #fff;
-    overflow: scroll;
-    padding: 20px 25px;
-    border-radius: 5px;
-}
-
-.installation h1{
-    text-align: center;
-    color: #7fcaf7;
-    font-size: 20px;
-    padding: 30px 20px 10px 20px;
+.installation-form {
+  background-color: #fff;
+  overflow: scroll;
+  padding: 20px 25px;
+  border-radius: 5px;
 }
 
-.installation h4{
-    color: #20ca47;
-    margin-top: 10px;
+.installation h1 {
+  text-align: center;
+  color: #7fcaf7;
+  font-size: 20px;
+  padding: 30px 20px 10px 20px;
 }
 
-.installation .logo-installation{
-    text-align: center;
+.installation h4 {
+  color: #20ca47;
+  margin-top: 10px;
 }
 
-.installation .logo-installation img{
-    width: 80px;
-    padding-top: 30px;
+.installation .logo-installation {
+  text-align: center;
 }
 
-.installation .main .page-on-top{
-    background: transparent;
-    box-shadow: none;
+.installation .logo-installation img {
+  width: 80px;
+  padding-top: 30px;
 }
 
-.installation .main .page-on-top p{
-    color: white;
-    margin-bottom: 25px;
+.installation .main .page-on-top {
+  background: transparent;
+  box-shadow: none;
 }
 
-.installation .main .page-on-top a{
-    color: white;
-    text-decoration: underline;
-}
-.installation .main .page-on-top a:hover{
-    color: black;
-    text-decoration: none;
+.installation .main .page-on-top p {
+  color: white;
+  margin-bottom: 25px;
 }
 
-.installation .form-control{
-    /*border: 0;*/
-    /*box-shadow: none;*/
+.installation .main .page-on-top a {
+  color: white;
+  text-decoration: underline;
+}
+.installation .main .page-on-top a:hover {
+  color: black;
+  text-decoration: none;
 }
 
-.installation label{
-    /*font-family: 'Roboto Slab', "Helvetica", sans-serif;*/
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 32px;
-    margin-bottom: 0;
-    /*letter-spacing: 1px;*/
+.installation .form-control {
+  /*border: 0;*/
+  /*box-shadow: none;*/
+}
+
+.installation label {
+  /*font-family: 'Roboto Slab', "Helvetica", sans-serif;*/
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 0;
+  /*letter-spacing: 1px;*/
 }
 
 .installation input {
-    /*font-family: 'Roboto Slab', "Helvetica", sans-serif;*/
-    /*letter-spacing: 1px;*/
+  /*font-family: 'Roboto Slab', "Helvetica", sans-serif;*/
+  /*letter-spacing: 1px;*/
 }
 
-.installation .row{
-    margin-bottom: 10px;
-    margin-left: 0;
-    margin-right: 0;
+.installation .row {
+  margin-bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.installation .control-btns{
-    margin-top: 35px;
-    text-align: right;
+.installation .control-btns {
+  margin-top: 35px;
+  text-align: right;
 }
 
-.installation .control-btns button{
-    margin-left: 10px;
+.installation .control-btns button {
+  margin-left: 10px;
 }
 
-.installation hr{
-    border-top: 1px solid #5267a7;
+.installation hr {
+  border-top: 1px solid #5267a7;
 }
 
-.installation .s-alert-box{
-    background: #000000;
-    border-radius: 3px;
-    padding: 5px 15px;
-    font-size: 16px;
-    font-weight: normal;
-    color: white;
-    margin-bottom: 5px;
-    width: 100%;
+.installation .s-alert-box {
+  background: #000000;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: normal;
+  color: white;
+  margin-bottom: 5px;
+  width: 100%;
 }
 
 .installation .main {
-    min-height: 200px;
+  min-height: 200px;
 }
 
 /* desktops only */
 /* top navigation bar */
-@media (min-width: 1000px){
-    .installation .main .page-on-top{
-        padding: 0 25%;
-    }
+@media (min-width: 1000px) {
+  .installation .main .page-on-top {
+    padding: 0 25%;
+  }
 }
 /* iPad or smaller */
-@media (max-width: 450px){
-    .installation .main .page-on-top{
-        padding: 0 15%;
-    }
+@media (max-width: 450px) {
+  .installation .main .page-on-top {
+    padding: 0 15%;
+  }
 }

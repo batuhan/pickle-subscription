@@ -18,7 +18,9 @@
   border-color: #fff;
 }
 
-.servicetron .jumbotron .btn-primary.btn-outline:hover, .servicetron .jumbotron .btn-primary.btn-outline:active, .servicetron .jumbotron .btn-primary.btn-outline:focus {
+.servicetron .jumbotron .btn-primary.btn-outline:hover,
+.servicetron .jumbotron .btn-primary.btn-outline:active,
+.servicetron .jumbotron .btn-primary.btn-outline:focus {
   color: #fff;
   border-color: #fff;
 }
@@ -28,7 +30,7 @@
   bottom: 0;
   right: 0;
   -webkit-transform: translate3d(-55px, -25px, 0);
-          transform: translate3d(-55px, -25px, 0);
+  transform: translate3d(-55px, -25px, 0);
   z-index: 2;
 }
 
@@ -45,17 +47,17 @@
   display: flex;
   height: 40px;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   color: #212121;
 }
 
@@ -65,8 +67,8 @@
 
 .servicetron .jumbotron .dropdown-menu .dropdown-item .title {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 [data-navbar="primary"] .servicetron {
@@ -88,8 +90,6 @@
   color: #ffffff;
 }
 
-
-
 @media screen and (min-width: 768px) {
   .jumbotron {
     padding: 30px 45px 45px;
@@ -98,7 +98,7 @@
 }
 
 @media (max-width: 543px) {
-  .jumbotron{
+  .jumbotron {
     padding: 30px 15px;
   }
   .servicetron .btn-outline {

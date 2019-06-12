@@ -5,7 +5,7 @@
 }
 
 .breadcrumb > li,
-.breadcrumbs > span{
+.breadcrumbs > span {
   float: left;
   padding-right: 10px;
 }
@@ -114,7 +114,7 @@
 }
 
 .breadcrumb.icon-home > li:first-child:before,
-.breadcrumbs > span:first-child:before{
+.breadcrumbs > span:first-child:before {
   font-family: FontAwesome;
   content: "\f015";
   padding-right: 10px;
@@ -133,7 +133,7 @@
 }
 
 .breadcrumb.icon-angle-right > li + li:before,
-.breadcrumbs > span + span:before{
+.breadcrumbs > span + span:before {
   font-family: FontAwesome;
   content: "\f105";
   padding-right: 10px;

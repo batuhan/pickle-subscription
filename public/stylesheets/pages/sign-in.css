@@ -1,4 +1,5 @@
-.sign-in, .sign-up {
+.sign-in,
+.sign-up {
   position: relative;
   background: #fff;
   padding: 40px;
@@ -27,7 +28,8 @@
   margin-bottom: 20px;
 }
 
-.sign-in .sign-up-link a, .sign-up-link a {
+.sign-in .sign-up-link a,
+.sign-up-link a {
   color: #0d47a1;
 }
 
@@ -43,15 +45,16 @@
 }
 
 /* front login page */
-body.login .featured{
-    background: none;
+body.login .featured {
+  background: none;
 }
-.login-brand{
+.login-brand {
   margin-bottom: 30px;
 }
 
 @media (max-width: 543px) {
-  .sign-in, .sign-up {
+  .sign-in,
+  .sign-up {
     max-width: 500px;
     margin: 0px;
     width: 100%;
@@ -59,4 +62,3 @@ body.login .featured{
     box-shadow: none;
   }
 }
-

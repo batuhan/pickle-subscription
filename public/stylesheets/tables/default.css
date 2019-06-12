@@ -4,7 +4,8 @@
   border-width: 1px;
 }
 
-.table thead th, .table thead td,
+.table thead th,
+.table thead td,
 .table tbody th,
 .table tbody td {
   border-color: #bdbdbd;
@@ -134,7 +135,9 @@
   color: #fff;
 }
 
-.table.table-unbordered thead th, .table.table-unbordered thead td, .table.table-unbordered thead tr,
+.table.table-unbordered thead th,
+.table.table-unbordered thead td,
+.table.table-unbordered thead tr,
 .table.table-unbordered tbody th,
 .table.table-unbordered tbody td,
 .table.table-unbordered tbody tr {
@@ -206,4 +209,3 @@
   background-color: #d32f2f;
   color: #fff;
 }
-

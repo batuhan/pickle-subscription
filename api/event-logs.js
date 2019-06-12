@@ -1,9 +1,7 @@
-
-let EventLogs = require('../models/event-log');
+let EventLogs = require("../models/event-log");
 
 module.exports = function(router) {
+  require("./entity")(router, EventLogs, "event-logs");
 
-    require("./entity")(router, EventLogs, "event-logs");
-
-    return router;
+  return router;
 };

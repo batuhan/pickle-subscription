@@ -1,4 +1,4 @@
-let EventEmitter = require('events').EventEmitter;
+let EventEmitter = require("events").EventEmitter;
 
 let emitter = new EventEmitter();
 

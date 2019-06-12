@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "main": "stripe-init.js",
   "private": true,
-  "pluginbot" : {
-    "main" : "stripe.js",
-    "consumes" : ["database"]
+  "pluginbot": {
+    "main": "stripe.js",
+    "consumes": [
+      "database"
+    ]
   }
 }

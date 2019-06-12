@@ -738,9 +738,7 @@
         }
       }
     },
-    "required": [
-      "name"
-    ]
+    "required": ["name"]
   },
   "system_options": {
     "type": "object",
@@ -771,9 +769,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "option"
-    ]
+    "required": ["option"]
   },
   "transactions": {
     "type": "object",
@@ -922,9 +918,7 @@
         }
       }
     },
-    "required": [
-      "email"
-    ]
+    "required": ["email"]
   },
   "webhooks": {
     "type": "object",
@@ -950,8 +944,6 @@
         "type": "string"
       }
     },
-    "required": [
-      "endpoint_url"
-    ]
+    "required": ["endpoint_url"]
   }
 }

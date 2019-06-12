@@ -1,9 +1,9 @@
-.text-widget-wrapper{
+.text-widget-wrapper {
   display: flex;
   align-items: center;
   border-radius: 5px;
 }
-.text-widget-wrapper.plain{
+.text-widget-wrapper.plain {
   padding: 10px 0;
   text-align: center;
   vertical-align: middle;
@@ -13,12 +13,12 @@
   /*border: 1px solid #bbc5ce;*/
 }
 
-.instance-price .text-widget-wrapper.plain{
+.instance-price .text-widget-wrapper.plain {
   border: 2px solid #000;
   background-color: white !important;
 }
 
-.instance-price .text-widget-1 .subtitle{
+.instance-price .text-widget-1 .subtitle {
   font-size: 26px;
 }
 
@@ -59,18 +59,18 @@
   font-size: 16px;
 }
 
-.widget-hover:hover{
+.widget-hover:hover {
   background: #055d3d !important;
 }
-.cancel:hover{
+.cancel:hover {
   background: #004498 !important;
 }
-.cancel-pending:hover{
+.cancel-pending:hover {
   background: #ef9505 !important;
 }
-.restart:hover{
+.restart:hover {
   background: #055d3d !important;
 }
-.open-application:hover{
+.open-application:hover {
   background: #7f04bb !important;
 }

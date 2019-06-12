@@ -2,17 +2,9 @@
   "/users/{id}/avatar": {
     "get": {
       "summary": "Gets User Avatar",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_users_id_avatar",
       "security": [
         {
@@ -44,17 +36,9 @@
     },
     "put": {
       "summary": "Adds a User Avatar",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "put_users_id_avatar",
       "security": [
         {
@@ -97,17 +81,9 @@
   "/users/register": {
     "post": {
       "summary": "Registers a new User",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_users_register",
       "security": [
         {
@@ -147,16 +123,9 @@
   "/users/{id}/suspend": {
     "post": {
       "summary": "Suspend the User",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_users_id_suspend",
       "security": [
         {
@@ -191,16 +160,9 @@
   "/users/{id}/unsuspend": {
     "post": {
       "summary": "UnSuspend the User",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_users_id_unsuspend",
       "security": [
         {
@@ -235,16 +197,9 @@
   "/users/invite": {
     "post": {
       "summary": "Invites a new User",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_users_invite",
       "security": [
         {
@@ -277,15 +232,9 @@
   "/users/{id}/token": {
     "post": {
       "summary": "Get a token for a user",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "post_users_id_token",
       "security": [
         {
@@ -312,15 +261,9 @@
   "/roles/manage-permissions": {
     "get": {
       "summary": "Gets all roles with permissions",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_roles_manage_permissions",
       "security": [
         {
@@ -347,15 +290,9 @@
     },
     "post": {
       "summary": "Update role with permission",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "post_roles_manage_permissions",
       "security": [
         {
@@ -395,17 +332,9 @@
   "/service-templates/public": {
     "get": {
       "summary": "Gets all public service-templates",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_templates_public",
       "security": [
         {
@@ -434,17 +363,9 @@
   "/service-templates/{id}/icon": {
     "get": {
       "summary": "Gets Service Template Icon",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_templates_id_icon",
       "security": [
         {
@@ -476,16 +397,9 @@
     },
     "put": {
       "summary": "Adds a Service Template Icon",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "put_service_templates_id_icon",
       "security": [
         {
@@ -526,16 +440,9 @@
     },
     "delete": {
       "summary": "Deletes Service Template Icon",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "delete_service_templates_id_icon",
       "security": [
         {
@@ -569,17 +476,9 @@
   "/service-templates/{id}/image": {
     "get": {
       "summary": "Gets Service Template Image",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_templates_id_image",
       "security": [
         {
@@ -611,16 +510,9 @@
     },
     "put": {
       "summary": "Adds a Service Template Image",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "put_service_templates_id_image",
       "security": [
         {
@@ -661,16 +553,9 @@
     },
     "delete": {
       "summary": "Deletes Service Template Image",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "delete_service_templates_id_image",
       "security": [
         {
@@ -704,17 +589,9 @@
   "/service-templates/{id}/request": {
     "get": {
       "summary": "Gets a service-template Request",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_templates_id_request",
       "security": [
         {
@@ -747,17 +624,9 @@
     "post": {
       "summary": "Requests a service-instance",
       "description": "Can make this call unauthorized, but must also send 'email' and 'token_id' in the request JSON",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "put_service_templates_id_request",
       "security": [
         {
@@ -787,7 +656,7 @@
         "200": {
           "description": "The newly provisioned service instance",
           "schema": {
-              "$ref": "#/definitions/service_instances"
+            "$ref": "#/definitions/service_instances"
           }
         },
         "default": {
@@ -802,17 +671,9 @@
   "/service-instances/{id}/approve": {
     "post": {
       "summary": "Approves a service-instance",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_approve",
       "security": [
         {
@@ -848,17 +709,9 @@
   "/service-instances/{id}/reactivate": {
     "post": {
       "summary": "Reactivates a cancelled service-instance",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_reactivate",
       "security": [
         {
@@ -894,16 +747,9 @@
   "/service-instances/{id}/change-price": {
     "post": {
       "summary": "Change a service-instance payment plan",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_service_instances_id_change_price",
       "security": [
         {
@@ -978,25 +824,16 @@
   "/service-instances/{id}/change-properties": {
     "post": {
       "summary": "Changes a service instance properties, can affect instance pricing if subscription.",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_change_properties",
       "security": [
         {
           "internalApiKey": []
         }
       ],
-      "parameters": [
-      ],
+      "parameters": [],
       "responses": {
         "200": {
           "description": "A service-instance",
@@ -1016,16 +853,9 @@
   "/service-instances/{id}/cancel": {
     "post": {
       "summary": "Cancel a service-instance",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_service_instances_id_cancel",
       "security": [
         {
@@ -1061,17 +891,9 @@
   "/service-instances/{id}/request-cancellation": {
     "post": {
       "summary": "Request Cancellation of a service-instance",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_request_cancellation",
       "security": [
         {
@@ -1107,16 +929,9 @@
   "/service-instances/{id}/add-charge": {
     "post": {
       "summary": "Add a charge to a service-instance",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_service_instances_id_add_charge",
       "security": [
         {
@@ -1152,17 +967,9 @@
   "/service-instances/{id}/awaiting-charges": {
     "get": {
       "summary": "Get service-instance awaiting charges",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_instances_id_awaiting_charges",
       "security": [
         {
@@ -1201,17 +1008,9 @@
   "/service-instances/{id}/approve-charges": {
     "post": {
       "summary": "Approve a service-instance charges",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_approve_charges",
       "security": [
         {
@@ -1250,17 +1049,9 @@
   "/service-instances/{id}/files": {
     "post": {
       "summary": "Add a service-instance Files",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instances_id_files",
       "security": [
         {
@@ -1307,17 +1098,9 @@
     },
     "get": {
       "summary": "Get service-instance files",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_instances_id_files",
       "security": [
         {
@@ -1356,17 +1139,9 @@
   "/service-instances/{id}/files/{fid}": {
     "delete": {
       "summary": "Add a service-instance Files",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "delete_service_instances_id_files_fid",
       "security": [
         {
@@ -1406,17 +1181,9 @@
     },
     "get": {
       "summary": "Get service-instance files",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_service_instances_id_files_fid",
       "security": [
         {
@@ -1458,16 +1225,9 @@
   "/service-instance-cancellations/{id}/approve": {
     "post": {
       "summary": "Approves a service-instance-cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_service_instance_cancellations_id_approve",
       "security": [
         {
@@ -1503,16 +1263,9 @@
   "/service-instance-cancellations/{id}/reject": {
     "post": {
       "summary": "Rejects a service-instance-cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_service_instance_cancellations_id_reject",
       "security": [
         {
@@ -1548,17 +1301,9 @@
   "/service-instance-cancellations/{id}/undo": {
     "post": {
       "summary": "Rejects a service-instance-cancellations for the user who created it",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_service_instance_cancellations_id_undo",
       "security": [
         {
@@ -1594,15 +1339,9 @@
   "/notification-templates/{id}/roles": {
     "get": {
       "summary": "Gets Notification Template Roles",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_notification_templates_id_roles",
       "security": [
         {
@@ -1634,15 +1373,9 @@
     },
     "put": {
       "summary": "Updates an Notification Template Role",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "put_notification_templates_id_roles",
       "security": [
         {
@@ -1683,17 +1416,9 @@
   "/invoices/upcoming/{id}": {
     "get": {
       "summary": "Gets upcoming Invoices",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_invoices_upcoming_id",
       "security": [
         {
@@ -1729,16 +1454,9 @@
   "/invoices/{id}/refund": {
     "post": {
       "summary": "Performs refund on Invoice",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_invoices_id_refund",
       "security": [
         {
@@ -1789,15 +1507,9 @@
   "/system-options": {
     "get": {
       "summary": "Gets all System Options",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_system_options",
       "security": [
         {
@@ -1824,15 +1536,9 @@
     },
     "put": {
       "summary": "Batch Updates System Options",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "put_system_options",
       "security": [
         {
@@ -1875,17 +1581,9 @@
   "/system-options/public": {
     "get": {
       "summary": "Gets all public System Options",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_system_options_public",
       "security": [
         {
@@ -1914,15 +1612,9 @@
   "/system-options/{id}": {
     "get": {
       "summary": "Gets a System Option",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_system_options_id",
       "security": [
         {
@@ -1956,15 +1648,9 @@
     },
     "put": {
       "summary": "Updates a System Option",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "put_system_options_id",
       "security": [
         {
@@ -2012,17 +1698,9 @@
   "/system-options/file/{id}": {
     "get": {
       "summary": "Gets a System File Options. Ids are 'front_page_image', 'brand_logo'",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_system_options_file_id",
       "security": [
         {
@@ -2054,15 +1732,9 @@
     },
     "put": {
       "summary": "Updates a System Option. Ids are 'front_page_image', 'brand_logo'",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "put_system_options_file_id",
       "security": [
         {
@@ -2108,17 +1780,9 @@
   "/system-options/version": {
     "get": {
       "summary": "Gets System version",
-      "tags": [
-        "system-options"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["system-options"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_system_options_version",
       "security": [
         {
@@ -2142,16 +1806,9 @@
   "/charge/{id}/approve": {
     "post": {
       "summary": "Approves a Charge Item",
-      "tags": [
-        "charge"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["charge"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_charge_id_approve",
       "security": [
         {
@@ -2187,16 +1844,9 @@
   "/charge/{id}/cancel": {
     "post": {
       "summary": "Cancels a Charge Item",
-      "tags": [
-        "charge"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["charge"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "post_charge_id_cancel",
       "security": [
         {
@@ -2232,17 +1882,9 @@
   "/auth/token": {
     "post": {
       "summary": "Gets a Authorization Token",
-      "tags": [
-        "auth"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["auth"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_auth_token",
       "security": [
         {
@@ -2277,17 +1919,9 @@
   "/auth/session/clear": {
     "post": {
       "summary": "Clears session",
-      "tags": [
-        "auth"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["auth"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_auth_session_clear",
       "security": [
         {
@@ -2311,17 +1945,9 @@
   "/auth/reset-password": {
     "post": {
       "summary": "Send Reset password email",
-      "tags": [
-        "auth"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["auth"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_auth_reset_password",
       "security": [
         {
@@ -2354,17 +1980,9 @@
   "/auth/reset-password/{uid}/{token}": {
     "get": {
       "summary": "Get User password reset token",
-      "tags": [
-        "auth"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["auth"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "get_auth_reset_password_uid_token",
       "security": [
         {
@@ -2403,17 +2021,9 @@
     },
     "post": {
       "summary": "Reset user password",
-      "tags": [
-        "auth"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff",
-        "user"
-      ],
+      "tags": ["auth"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff", "user"],
       "operationId": "post_auth_reset_password_uid_token",
       "security": [
         {
@@ -2462,16 +2072,9 @@
     "get": {
       "summary": "Gets Analytics Data",
       "description": "Gets Analytics Data from instance",
-      "tags": [
-        "analytics"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["analytics"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "get_analytics_data",
       "security": [
         {
@@ -2495,16 +2098,9 @@
   "/analytics/properties/{id}": {
     "get": {
       "summary": "Gets all instance properties based on template id",
-      "tags": [
-        "analytics"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin",
-        "staff"
-      ],
+      "tags": ["analytics"],
+      "produces": ["application/json"],
+      "x-roles": ["admin", "staff"],
       "operationId": "get_analytics_properties_id",
       "security": [
         {
@@ -2538,15 +2134,9 @@
   "/permissions": {
     "get": {
       "summary": "Gets all permissions",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_permissions",
       "security": [
         {
@@ -2575,15 +2165,9 @@
   "/stripe/preconfigure": {
     "post": {
       "summary": "First call to make to change stripe keys",
-      "tags": [
-        "stripe"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["stripe"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "post_stripe_preconfigure",
       "security": [
         {
@@ -2620,15 +2204,9 @@
   "/stripe/reconfigure": {
     "post": {
       "summary": "Second call to make to change stripe keys",
-      "tags": [
-        "stripe"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["stripe"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "post_stripe_reconfigure",
       "security": [
         {
@@ -2664,15 +2242,9 @@
   "/stripe/keys": {
     "get": {
       "summary": "Gets stripe keys",
-      "tags": [
-        "stripe"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "x-roles": [
-        "admin"
-      ],
+      "tags": ["stripe"],
+      "produces": ["application/json"],
+      "x-roles": ["admin"],
       "operationId": "get_stripe_keys",
       "security": [
         {

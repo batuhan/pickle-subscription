@@ -123,7 +123,7 @@ table.dataTable thead .sorting_desc_disabled:after {
   bottom: 8px;
   right: 8px;
   display: block;
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   opacity: 0.5;
 }
 
@@ -216,11 +216,17 @@ div.table-responsive > div.dataTables_wrapper > div.row {
   margin: 0;
 }
 
-div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:first-child {
+div.table-responsive
+  > div.dataTables_wrapper
+  > div.row
+  > div[class^="col-"]:first-child {
   padding-left: 0;
 }
 
-div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
+div.table-responsive
+  > div.dataTables_wrapper
+  > div.row
+  > div[class^="col-"]:last-child {
   padding-right: 0;
 }
 
@@ -257,7 +263,9 @@ div.dataTables_wrapper div.dataTables_paginate .paginate_button.next {
   border-right: 1px solid #e0e0e0;
 }
 
-div.dataTables_wrapper div.dataTables_paginate .paginate_button:hover, div.dataTables_wrapper div.dataTables_paginate .paginate_button:active, div.dataTables_wrapper div.dataTables_paginate .paginate_button:focus {
+div.dataTables_wrapper div.dataTables_paginate .paginate_button:hover,
+div.dataTables_wrapper div.dataTables_paginate .paginate_button:active,
+div.dataTables_wrapper div.dataTables_paginate .paginate_button:focus {
   background-color: #f5f5f5;
 }
 
@@ -266,31 +274,36 @@ table.dataTable thead .sorting_desc_disabled:after {
   color: #212121;
 }
 
-
 /* xaas customized */
-.table{
+.table {
   background-color: white;
   overflow: hidden;
 }
 
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-    border-top: 0px;
-    line-height: 2rem;
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  border-top: 0px;
+  line-height: 2rem;
 }
 
-.table th, .table td{
-    padding: 10px 15px !important;
+.table th,
+.table td {
+  padding: 10px 15px !important;
 }
 
-#tables-datatable{
-    max-width: 100%;
-    overflow-x: scroll;
-    overflow: visible;
-    position: initial;
+#tables-datatable {
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow: visible;
+  position: initial;
   /*padding-bottom: 100px;*/
 }
 
-#tables-datatable .table{
+#tables-datatable .table {
   padding-bottom: 90px !important;
   border-radius: 5px;
   overflow-y: visible;
@@ -298,33 +311,34 @@ table.dataTable thead .sorting_desc_disabled:after {
 
 /* condensed */
 .table.condensed th,
-.table.condensed td{
+.table.condensed td {
   padding: 8px !important;
 }
-.table.condensed thead td{
+.table.condensed thead td {
   font-weight: bold;
 }
-.table>thead>tr>th, .table>tbody>tr>td{
-    font-size: 0.94rem;
-    border: none;
+.table > thead > tr > th,
+.table > tbody > tr > td {
+  font-size: 0.94rem;
+  border: none;
 }
 .table thead {
-    color: #ffffff;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+  color: #ffffff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
-.table thead th{
-    background: #3e3e3e;
+.table thead th {
+  background: #3e3e3e;
 }
 .table th.sorted {
-    background: #292929;
+  background: #292929;
 }
-.table thead th:first-child{
-    border-top-left-radius: 5px;
+.table thead th:first-child {
+  border-top-left-radius: 5px;
 }
-.table thead th:last-child{
-    border-top-right-radius: 5px;
+.table thead th:last-child {
+  border-top-right-radius: 5px;
 }
 
 .datatable thead th:hover {

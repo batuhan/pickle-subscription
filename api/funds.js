@@ -1,19 +1,18 @@
-let async = require("async");
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let Funds = require("../models/fund");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const Funds = require("../models/fund");
 
 module.exports = function(router) {
   router.post("/funds", auth(), function(req, res) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       //Always set the user to the current requests user id
       let user_id = req.user.get("id");
       //But if the user is admin, they can create funds for the users
       if (
         res.locals.permissions.some(
           p =>
-            p.get("permission_name") == "can_administrate" ||
-            p.get("permission_name") == "can_manage",
+            p.get("permission_name") === "can_administrate" ||
+            p.get("permission_name") === "can_manage",
         )
       ) {
         if (req.body.user_id) {

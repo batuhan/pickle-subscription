@@ -1,14 +1,14 @@
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let EventLogs = require("../models/event-log");
-let async = require("async");
-let store = require("../config/redux/store");
+const auth = require("../middleware/auth");
+const validate = require("../middleware/validate");
+const EventLogs = require("../models/event-log");
+const async = require("async");
+const store = require("../config/redux/store");
 
 //TODO : Strip password field from getters
 //todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
 //todo - generify the method we use to "find all" and reduce code duplication in the getters
 module.exports = function(router, model, resourceName, userCorrelator) {
-  let references = model.references || [];
+  const references = model.references || [];
 
   if (userCorrelator) {
     router.get(`/${resourceName}/own`, auth(), function(req, res, next) {
@@ -20,12 +20,12 @@ module.exports = function(router, model, resourceName, userCorrelator) {
       }
       model.findAll(key, value, function(parents) {
         parents = parents.filter(resource => {
-          return resource.get(userCorrelator) == req.user.get("id");
+          return resource.get(userCorrelator) === req.user.get("id");
         });
         if (
           references === undefined ||
-          references.length == 0 ||
-          parents.length == 0
+          references.length === 0 ||
+          parents.length === 0
         ) {
           res.locals.json = parents.map(entity => entity.data);
           next();
@@ -67,7 +67,7 @@ module.exports = function(router, model, resourceName, userCorrelator) {
         res.locals.json = parents.map(entity => entity.data);
         next();
       } else {
-        let results = await model.batchAttatchReference(parents);
+        const results = await model.batchAttatchReference(parents);
         res.locals.json = results.map(entity => entity.data);
         next();
       }
@@ -78,8 +78,8 @@ module.exports = function(router, model, resourceName, userCorrelator) {
     model.search(req.query.key, req.query.value, function(parents) {
       if (
         references === undefined ||
-        references.length == 0 ||
-        parents.length == 0
+        references.length === 0 ||
+        parents.length === 0
       ) {
         res.locals.json = parents.map(entity => entity.data);
         next();
@@ -109,8 +109,8 @@ module.exports = function(router, model, resourceName, userCorrelator) {
     validate(model),
     auth(null, model, userCorrelator),
     function(req, res, next) {
-      let entity = res.locals.valid_object;
-      if (references === undefined || references.length == 0) {
+      const entity = res.locals.valid_object;
+      if (references === undefined || references.length === 0) {
         res.locals.json = entity.data;
         next();
       } else {
@@ -129,20 +129,17 @@ module.exports = function(router, model, resourceName, userCorrelator) {
     auth(null, model, userCorrelator),
     async function(req, res, next) {
       try {
-        let entity = res.locals.valid_object;
+        const entity = res.locals.valid_object;
         req.body.id = entity.get("id");
         Object.assign(entity.data, req.body);
-        let updatedEntity = await entity.update();
-        let requestReferences = req.body.references || {};
+        const updatedEntity = await entity.update();
+        const requestReferences = req.body.references || {};
 
         //todo: combine updateReferences into a single transaction
-        for (let reference of references) {
-          let referenceData = requestReferences[reference.model.table];
+        for (const reference of references) {
+          const referenceData = requestReferences[reference.model.table];
           if (referenceData) {
-            let upsertedReferences = await updatedEntity.updateReferences(
-              referenceData,
-              reference,
-            );
+            await updatedEntity.updateReferences(referenceData, reference);
           }
         }
         res.locals.json = updatedEntity.data;
@@ -162,7 +159,7 @@ module.exports = function(router, model, resourceName, userCorrelator) {
     async function(req, res, next) {
       let entity = res.locals.valid_object;
       entity = await entity.attachReferences();
-      entity.delete(function(err, result) {
+      entity.delete(function(err) {
         if (err) {
           console.error("Server error deleting entity: " + err);
           res.status(500).send({ error: "Error deleting" });
@@ -184,7 +181,7 @@ module.exports = function(router, model, resourceName, userCorrelator) {
   );
 
   router.post(`/${resourceName}`, auth(), function(req, res, next) {
-    let entity = new model(req.body);
+    const entity = new model(req.body);
     entity.create(function(err, newEntity) {
       if (err) {
         console.error("Server error creating entity: " + err);
@@ -193,7 +190,7 @@ module.exports = function(router, model, resourceName, userCorrelator) {
         if (
           references.length === 0 ||
           req.body.references === undefined ||
-          req.body.references.length == 0
+          req.body.references.length === 0
         ) {
           res.locals.json = newEntity.data;
           store.dispatchEvent(`${model.table}_created`, newEntity);
@@ -205,16 +202,16 @@ module.exports = function(router, model, resourceName, userCorrelator) {
           );
           next();
         } else {
-          let requestReferenceData = req.body.references;
+          const requestReferenceData = req.body.references;
           newEntity.data.references = {};
           let counter = 0;
-          for (let reference of references) {
+          for (const reference of references) {
             if (
               !requestReferenceData[reference.model.table] ||
-              requestReferenceData[reference.model.table].length == 0
+              requestReferenceData[reference.model.table].length === 0
             ) {
               counter++;
-              if (counter == references.length) {
+              if (counter === references.length) {
                 res.locals.json = newEntity.data;
                 store.dispatchEvent(`${model.table}_created`, newEntity);
 
@@ -227,12 +224,12 @@ module.exports = function(router, model, resourceName, userCorrelator) {
                 next();
               }
             } else {
-              let referenceData = requestReferenceData[reference.model.table];
+              const referenceData = requestReferenceData[reference.model.table];
               newEntity.createReferences(referenceData, reference, function(
                 modifiedEntity,
               ) {
                 counter++;
-                if (counter == references.length) {
+                if (counter === references.length) {
                   res.locals.json = modifiedEntity.data;
                   store.dispatchEvent(`${model.table}_created`, modifiedEntity);
                   EventLogs.logEvent(

@@ -1,5 +1,4 @@
-let auth = require("../middleware/auth");
-let ServiceCategories = require("../models/service-category");
+const ServiceCategories = require("../models/service-category");
 
 module.exports = function(router) {
   router.get("/service-categories", function(req, res, next) {

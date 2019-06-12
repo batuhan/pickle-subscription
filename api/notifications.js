@@ -1,4 +1,4 @@
-let Notification = require("../models/notifications");
+const Notification = require("../models/notifications");
 
 //Notification.createFromTemplate()
 

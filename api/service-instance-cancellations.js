@@ -1,10 +1,10 @@
-let ServiceInstanceCancellations = require("../models/service-instance-cancellation");
-let ServiceInstance = require("../models/service-instance");
-let EventLogs = require("../models/event-log");
-let validate = require("../middleware/validate");
-let auth = require("../middleware/auth");
+const ServiceInstanceCancellations = require("../models/service-instance-cancellation");
+const ServiceInstance = require("../models/service-instance");
+const EventLogs = require("../models/event-log");
+const validate = require("../middleware/validate");
+const auth = require("../middleware/auth");
 module.exports = function(router) {
-  let store = require("../config/redux/store");
+  const store = require("../config/redux/store");
 
   //TODO add updated time stamp thingy
   router.post(
@@ -12,17 +12,17 @@ module.exports = function(router) {
     validate(ServiceInstanceCancellations),
     auth(),
     async function(req, res, next) {
-      let entity = res.locals.valid_object;
+      const entity = res.locals.valid_object;
       try {
         //Only approve is the request is waiting
-        if (entity.data.status == "waiting") {
-          let service_instance = (await ServiceInstance.find({
+        if (entity.data.status === "waiting") {
+          const service_instance = (await ServiceInstance.find({
             id: entity.get("service_instance_id"),
           }))[0];
           entity.set("status", "approved");
           entity.set("fulfilled_by", req.user.get("id"));
           await entity.update();
-          let unsub_obj = await service_instance.unsubscribe();
+          const unsub_obj = await service_instance.unsubscribe();
           res.status(200).json(unsub_obj);
           store.dispatchEvent(
             "service_instance_cancellation_approved",
@@ -45,9 +45,9 @@ module.exports = function(router) {
     validate(ServiceInstanceCancellations),
     auth(),
     function(req, res, next) {
-      let entity = res.locals.valid_object;
+      const entity = res.locals.valid_object;
       //Only approve is the request is waiting
-      if (entity.data.status == "waiting") {
+      if (entity.data.status === "waiting") {
         ServiceInstance.findOne(
           "id",
           entity.get("service_instance_id"),
@@ -87,16 +87,16 @@ module.exports = function(router) {
     validate(ServiceInstanceCancellations),
     auth(null, ServiceInstanceCancellations),
     function(req, res) {
-      let entity = res.locals.valid_object;
+      const entity = res.locals.valid_object;
       //Only approve is the request is waiting
-      if (entity.data.status == "waiting") {
+      if (entity.data.status === "waiting") {
         ServiceInstance.findOne(
           "id",
           entity.get("service_instance_id"),
           function(service_instance) {
             entity.set("status", "rejected");
             entity.set("fulfilled_by", req.user.get("id"));
-            entity.update(function(err, result) {
+            entity.update(function() {
               service_instance.data.status = "running";
               service_instance.update(function(err, instance_obj) {
                 EventLogs.logEvent(

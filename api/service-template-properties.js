@@ -1,4 +1,4 @@
-let ServiceTemplateProperty = require("../models/service-template-property");
+const ServiceTemplateProperty = require("../models/service-template-property");
 
 module.exports = function(router) {
   require("./entity")(

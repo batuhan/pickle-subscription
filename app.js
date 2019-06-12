@@ -1,10 +1,6 @@
 //todo, integrate this into a plugin.
 
-const {
-  EVENT,
-  SET_OPTIONS,
-  INIT_STORE,
-} = require("./config/redux/actions");
+const { EVENT, SET_OPTIONS, INIT_STORE } = require("./config/redux/actions");
 const defaultAppState = {
   eventReducer: null,
   eventSagas: {},

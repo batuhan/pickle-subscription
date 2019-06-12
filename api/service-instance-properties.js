@@ -1,4 +1,4 @@
-let ServiceInstanceProperty = require("../models/service-instance-property");
+const ServiceInstanceProperty = require("../models/service-instance-property");
 
 module.exports = function(router) {
   require("./entity")(

@@ -1,4 +1,4 @@
-let EventLogs = require("../models/event-log");
+const EventLogs = require("../models/event-log");
 
 module.exports = function(router) {
   require("./entity")(router, EventLogs, "event-logs");

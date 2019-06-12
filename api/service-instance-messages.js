@@ -1,22 +1,22 @@
-let ServiceInstanceMessage = require("../models/service-instance-message");
-let ServiceInstance = require("../models/service-instance");
+const ServiceInstanceMessage = require("../models/service-instance-message");
+const ServiceInstance = require("../models/service-instance");
 module.exports = function(router) {
-  router.post(`/service-instance-messages`, async function(req, res, next) {
-    let store = require("../config/redux/store");
+  router.post(`/service-instance-messages`, async function(req, res) {
+    const store = require("../config/redux/store");
     //todo:movethiscodeintoaplugin
-    let messageManager = store.getState(true).pluginbot.services
+    const messageManager = store.getState(true).pluginbot.services
       .messageManager[0];
-    let serviceInstance = await ServiceInstance.findOne(
+    const serviceInstance = await ServiceInstance.findOne(
       "id",
       req.body.service_instance_id,
     );
-    let to =
+    const to =
       serviceInstance.get("user_id") === req.body.user_id
         ? 0
         : serviceInstance.get("user_id");
-    let from = req.body.user_id;
-    let message = req.body.message;
-    let newMessage = await messageManager.send(
+    const from = req.body.user_id;
+    const message = req.body.message;
+    const newMessage = await messageManager.send(
       to,
       from,
       req.body.service_instance_id,

@@ -1,14 +1,10 @@
-let auth = require("../middleware/auth");
-let validate = require("../middleware/validate");
-let async = require("async");
-let jwt = require("jsonwebtoken");
-let bcrypt = require("bcryptjs");
-let NotificationTemplate = require("../models/notification-template");
-let Role = require("../models/role");
-let ResetRequest = require("../models/password-reset-request");
-let User = require("../models/user");
-let Alert = require("react-s-alert").default;
-let store = require("../config/redux/store");
+const async = require("async");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const Role = require("../models/role");
+const ResetRequest = require("../models/password-reset-request");
+const User = require("../models/user");
+const store = require("../config/redux/store");
 
 module.exports = function(app, passport) {
   //TODO: buff up security so each user has their own secret key
@@ -18,9 +14,13 @@ module.exports = function(app, passport) {
     passport.authenticate("local-login", { session: false }),
     function(req, res) {
       console.log(req.user);
-      let token = jwt.sign({ uid: req.user.data.id }, process.env.SECRET_KEY, {
-        expiresIn: "3h",
-      });
+      const token = jwt.sign(
+        { uid: req.user.data.id },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "3h",
+        },
+      );
       res.json({ token: token });
     },
   );
@@ -33,26 +33,26 @@ module.exports = function(app, passport) {
     res.json({ message: "successful logout" });
   });
 
-  app.post("/auth/reset-password", function(req, res, next) {
+  app.post("/auth/reset-password", function(req, res) {
     User.findOne("email", req.body.email, function(user) {
       if (user.data) {
         ResetRequest.findAll("user_id", user.get("id"), function(requests) {
           async.each(
             requests,
             function(request, callback) {
-              request.delete(function(result) {
+              request.delete(function() {
                 callback();
               });
             },
-            function(err) {
+            function() {
               require("crypto").randomBytes(20, function(err, buffer) {
-                let token = buffer.toString("hex");
-                let reset = new ResetRequest({
+                const token = buffer.toString("hex");
+                const reset = new ResetRequest({
                   user_id: user.get("id"),
                   hash: bcrypt.hashSync(token, 10),
                 });
-                reset.create(function(err, newReset) {
-                  let frontEndUrl = `${req.protocol}://${req.get(
+                reset.create(function() {
+                  const frontEndUrl = `${req.protocol}://${req.get(
                     "host",
                   )}/reset-password/${user.get("id")}/${token}`;
                   res.json({ message: "Success" });
@@ -71,7 +71,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get("/auth/reset-password/:uid/:token", function(req, res, next) {
+  app.get("/auth/reset-password/:uid/:token", function(req, res) {
     ResetRequest.findOne("user_id", req.params.uid, function(result) {
       if (
         result.data &&
@@ -85,8 +85,8 @@ module.exports = function(app, passport) {
   });
 
   //todo -- token expiration
-  app.post("/auth/reset-password/:uid/:token", function(req, res, next) {
-    let userManager = store.getState(true).pluginbot.services.userManager[0];
+  app.post("/auth/reset-password/:uid/:token", function(req, res) {
+    const userManager = store.getState(true).pluginbot.services.userManager[0];
 
     ResetRequest.findOne("user_id", req.params.uid, function(result) {
       if (
@@ -95,11 +95,11 @@ module.exports = function(app, passport) {
       ) {
         User.findOne("id", result.get("user_id"), async function(user) {
           // let password = bcrypt.hashSync(req.body.password, 10);
-          let newUserData = { password: req.body.password };
-          let updated = await userManager.update(user, newUserData);
+          const newUserData = { password: req.body.password };
+          await userManager.update(user, newUserData);
           // user.set("password", password);
           res.json({ message: "Password successfully reset" });
-          result.delete(function(r) {});
+          result.delete(function() {});
         });
       } else {
         res.status(400).json({ error: "Invalid Reset Link" });
@@ -110,7 +110,7 @@ module.exports = function(app, passport) {
   app.post(
     "/auth/session",
     function(req, res, next) {
-      passport.authenticate("local-login", function(err, user, info) {
+      passport.authenticate("local-login", function(err, user) {
         if (err) {
           console.error(err);
           return res.json({ error: "Invalid username or password" });
@@ -124,7 +124,7 @@ module.exports = function(app, passport) {
             return next(err);
           }
           user.set("last_login", new Date());
-          user.update(function(err, result) {
+          user.update(function(err) {
             if (err) {
               return next(err);
             }
@@ -134,10 +134,10 @@ module.exports = function(app, passport) {
       })(req, res, next);
     },
     require("../middleware/role-session")(),
-    function(req, res, next) {
-      let user_role = new Role({ id: req.user.data.role_id });
+    function(req, res) {
+      const user_role = new Role({ id: req.user.data.role_id });
       user_role.getPermissions(function(perms) {
-        let permission_names = perms.map(perm => perm.data.permission_name);
+        const permission_names = perms.map(perm => perm.data.permission_name);
         res.json({
           message: "successful login",
           permissions: permission_names,

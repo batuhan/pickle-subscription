@@ -1,4 +1,4 @@
-var waitForPort = require("wait-for-port");
+const waitForPort = require("wait-for-port");
 waitForPort(
   process.argv[2],
   process.argv[3],

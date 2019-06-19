@@ -1,18 +1,15 @@
-const async = require("async");
 const multer = require("multer");
-const mkdirp = require("mkdirp");
-const path = require("path");
 const _ = require("lodash");
 const xss = require("xss");
+const jwt = require("jsonwebtoken");
+const slug = require("slug");
+const iap = require("in-app-purchase");
 const auth = require("../middleware/auth");
 const validate = require("../middleware/validate");
-const EventLogs = require("../models/event-log");
 const File = require("../models/file");
 const Fund = require("../models/fund");
 const Invitation = require("../models/invitation");
-const ServiceCategory = require("../models/service-category");
 const ServiceTemplate = require("../models/service-template");
-const ServiceInstance = require("../models/service-instance");
 const ServiceTemplateProperty = require("../models/service-template-property");
 const Role = require("../models/role");
 const User = require("../models/user");
@@ -20,11 +17,8 @@ const store = require("../config/redux/store");
 // todo: generify single file upload for icon, image, avatar, right now duplicate code
 const { iconFilePath } = ServiceTemplate;
 const { imageFilePath } = ServiceTemplate;
-const slug = require("slug");
-const { validateProperties } = require("../lib/handleInputs");
 
 const fileManager = store.getState(true).pluginbot.services.fileManager[0];
-const jwt = require("jsonwebtoken");
 
 const upload = path => {
   return multer({
@@ -268,10 +262,10 @@ module.exports = function(router) {
       const serviceTemplate = res.locals.valid_object;
       const props =
         (await serviceTemplate.getRelated(ServiceTemplateProperty)) || null;
-      const req_body = req.body;
+      const reqBody = req.body;
       const reqProps =
-        (req_body.references &&
-          req_body.references.service_template_properties) ||
+        (reqBody.references &&
+          reqBody.references.service_template_properties) ||
         [];
       await authPromise(req, res);
       const permission_array = res.locals.permissions || [];
@@ -289,7 +283,7 @@ module.exports = function(router) {
       );
       const templatePrice = serviceTemplate.get("amount");
       let price = hasPermission
-        ? req_body.amount || templatePrice
+        ? reqBody.amount || templatePrice
         : templatePrice;
       const trialPeriod = serviceTemplate.get("trial_period_days");
 
@@ -320,10 +314,22 @@ module.exports = function(router) {
 
       res.locals.adjusted_price = price;
       res.locals.merged_props = mergedProps;
+
+      if (
+        (!Object.prototype.hasOwnProperty.call(reqBody, "token_type") ||
+          reqBody.token_type === "") &&
+        price !== 0 &&
+        trialPeriod <= 0
+      ) {
+        return res
+          .status(400)
+          .json({ error: "Must have property: token_type" });
+      }
+
       if (!req.isAuthenticated()) {
-        if (req_body.hasOwnProperty("email")) {
+        if (reqBody.hasOwnProperty("email")) {
           const mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          if (!req_body.email.match(mailFormat)) {
+          if (!reqBody.email.match(mailFormat)) {
             return res.status(400).json({ error: "Invalid email format" });
           }
         } else {
@@ -331,7 +337,7 @@ module.exports = function(router) {
         }
 
         if (
-          (!req_body.hasOwnProperty("token_id") || req_body.token_id === "") &&
+          (!reqBody.hasOwnProperty("token_id") || reqBody.token_id === "") &&
           price !== 0 &&
           trialPeriod <= 0
         ) {
@@ -340,7 +346,7 @@ module.exports = function(router) {
             .json({ error: "Must have property: token_id" });
         }
 
-        const user = await User.findOne("email", req_body.email);
+        const user = await User.findOne("email", reqBody.email);
         if (user.data) {
           const invitation = await Invitation.findOne(
             "user_id",
@@ -381,8 +387,8 @@ module.exports = function(router) {
         const props = references
           ? references.service_template_properties
           : null;
-        const req_body = req.body;
-        req_body.references.service_template_properties =
+        const reqBody = req.body;
+        reqBody.references.service_template_properties =
           res.locals.merged_props;
         const Promise = require("bluebird");
         const permission_array = res.locals.permissions || [];
@@ -406,7 +412,7 @@ module.exports = function(router) {
           lifecycleManager = lifecycleManager[0];
           try {
             await lifecycleManager.preProvision({
-              request: req_body,
+              request: reqBody,
               template: serviceTemplate,
             });
           } catch (e) {
@@ -419,15 +425,12 @@ module.exports = function(router) {
           const roleId = globalProps.default_user_role;
 
           const newUser = new User({
-            email: req_body.email,
+            email: reqBody.email,
             role_id: roleId,
             status: "invited",
           });
-          if (req_body.password) {
-            const password = require("bcryptjs").hashSync(
-              req_body.password,
-              10,
-            );
+          if (reqBody.password) {
+            const password = require("bcryptjs").hashSync(reqBody.password, 10);
 
             newUser.set("password", password);
             newUser.set("status", "active");
@@ -439,7 +442,7 @@ module.exports = function(router) {
 
           // create the new user
           const createdUser = await createUser();
-          if (!req_body.password) {
+          if (!reqBody.password) {
             const invite = new Invitation({ user_id: createdUser.get("id") });
             const createInvite = Promise.promisify(invite.create, {
               context: invite,
@@ -496,27 +499,35 @@ module.exports = function(router) {
 
         let newFund = null;
         // if token_id exists, create/update the user's fund
-        if (req_body.token_id && req_body.token_id !== "") {
-          newFund = Fund.promiseFundCreateOrUpdate(
-            user.get("id"),
-            req_body.token_id,
-          );
+        const tokenType = reqBody.token_type;
+        const tokenId = reqBody.token_id;
+
+        if (tokenId && tokenId !== "") {
+          if (tokenType === "stripe") {
+            newFund = Fund.promiseFundCreateOrUpdate(user.get("id"), tokenId);
+          } else if (tokenType === "iap") {
+            try {
+              await iap.validate(tokenId);
+            } catch (e) {
+              res.status(400).end("Error validating iap receipt");
+            }
+          }
         }
 
         // create the service instance
 
         // adjusted price...
-        req_body.amount = res.locals.adjusted_price;
+        reqBody.amount = res.locals.adjusted_price;
         // elevated accounts can override things
         if (hasPermission) {
           res.locals.overrides = {
-            user_id: req_body.client_id || req.user.get("id"),
+            user_id: reqBody.client_id || req.user.get("id"),
             requested_by: req.user.get("id"),
             description:
-              req_body.description || serviceTemplate.get("description"),
-            name: req_body.name || serviceTemplate.get("name"),
+              reqBody.description || serviceTemplate.get("description"),
+            name: reqBody.name || serviceTemplate.get("name"),
             trial_period_days:
-              req_body.trial_period_days ||
+              reqBody.trial_period_days ||
               serviceTemplate.get("trial_period_days"),
           };
         } else {
@@ -530,14 +541,14 @@ module.exports = function(router) {
         await newFund;
 
         let newInstance = await serviceTemplate.requestPromise({
-          ...req_body,
+          ...reqBody,
           ...res.locals.overrides,
         });
         newInstance = await newInstance.attachReferences();
         let postData = {};
         if (lifecycleManager) {
           postData = await lifecycleManager.postProvision({
-            request: req_body,
+            request: reqBody,
             instance: newInstance,
             template: serviceTemplate,
           });
@@ -546,11 +557,11 @@ module.exports = function(router) {
           ...responseJSON,
           ...newInstance.data,
           ...postData,
-          request: req_body,
+          request: reqBody,
         });
 
         try {
-          if (isNew && req_body.password === undefined) {
+          if (isNew && reqBody.password === undefined) {
             newInstance.set("api", responseJSON.api);
             newInstance.set("url", responseJSON.url);
             store.dispatchEvent(

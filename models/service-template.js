@@ -82,10 +82,12 @@ ServiceTemplate.prototype.requestPromise = async function(instanceRequest) {
       instanceRequest.amount === 0 || instanceRequest.amount === undefined
         ? null
         : await service.buildPayStructure(plan);
-    const payPlan = await service.createPayPlan(payStructure);
+    if (instanceRequest.token_type === "stripe") {
+      const payPlan = await service.createPayPlan(payStructure);
 
-    if (instanceAttributes.requested_by === instanceAttributes.user_id) {
-      await service.subscribe();
+      if (instanceAttributes.requested_by === instanceAttributes.user_id) {
+        await service.subscribe();
+      }
     }
 
     return service;

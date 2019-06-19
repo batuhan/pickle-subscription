@@ -63,6 +63,10 @@
         "format": "email",
         "description": "Email of user to create"
       },
+      "token_type": {
+        "type": "string",
+        "description": "Token type (ex: stripe, iap)"
+      },
       "token_id": {
         "type": "string",
         "description": "[Stripe Token ID](https://stripe.com/docs/api#token_object-id)"

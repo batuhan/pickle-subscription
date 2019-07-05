@@ -1,5 +1,4 @@
-.status-badge{
-
+.status-badge {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -13,24 +12,40 @@
   background-color: #dedede;
   color: black;
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     min-height: 18px;
     line-height: 18px;
     margin: 0;
   }
 
-  .fa:not(:first-child){
+  .fa:not(:first-child) {
     margin-left: 8px;
   }
 
-  &.red{ background-color: $color-error; color: white; }
-  &.green{ background-color: $color-success; color: white; }
-  &.blue{ background-color: $color-blue; color: white; }
-  &.grey, &.gray{ background-color: $color-gray; color: white; }
-  &.yellow{ background-color: $color-warning; color: white; }
+  &.red {
+    background-color: $color-error;
+    color: white;
+  }
+  &.green {
+    background-color: $color-success;
+    color: white;
+  }
+  &.blue {
+    background-color: $color-blue;
+    color: white;
+  }
+  &.grey,
+  &.gray {
+    background-color: $color-gray;
+    color: white;
+  }
+  &.yellow {
+    background-color: $color-warning;
+    color: white;
+  }
 
-  @include mediaQuery(max, iPhone){
-    &.__default{
+  @include mediaQuery(max, iPhone) {
+    &.__default {
       background-color: #dcdcdc;
     }
   }

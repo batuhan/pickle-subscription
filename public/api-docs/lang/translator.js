@@ -1,5 +1,3 @@
-
-
 /**
  * Translator for documentation pages.
  *
@@ -14,26 +12,27 @@
  *
  */
 window.SwaggerTranslator = {
+  _words: [],
 
-    _words:[],
+  translate(sel) {
+    const $this = this;
+    sel = sel || "[data-sw-translate]";
 
-    translate(sel) {
-      const $this = this;
-      sel = sel || '[data-sw-translate]';
+    $(sel).each(function() {
+      $(this).html($this._tryTranslate($(this).html()));
 
-      $(sel).each(function() {
-        $(this).html($this._tryTranslate($(this).html()));
+      $(this).val($this._tryTranslate($(this).val()));
+      $(this).attr("title", $this._tryTranslate($(this).attr("title")));
+    });
+  },
 
-        $(this).val($this._tryTranslate($(this).val()));
-        $(this).attr('title', $this._tryTranslate($(this).attr('title')));
-      });
-    },
+  _tryTranslate(word) {
+    return this._words[$.trim(word)] !== undefined
+      ? this._words[$.trim(word)]
+      : word;
+  },
 
-    _tryTranslate(word) {
-      return this._words[$.trim(word)] !== undefined ? this._words[$.trim(word)] : word;
-    },
-
-    learn(wordsMap) {
-      this._words = wordsMap;
-    }
+  learn(wordsMap) {
+    this._words = wordsMap;
+  },
 };

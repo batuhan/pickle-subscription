@@ -4,8 +4,7 @@ import Checkout from "./embeddables/checkout";
 const consume = require("pluginbot/effects/consume");
 
 module.exports = {
-    *run (config, provide, services) {
-        yield provide({embeddable : [Checkout, Billing]});
-    }
-
+  *run(config, provide, services) {
+    yield provide({ embeddable: [Checkout, Billing] });
+  },
 };

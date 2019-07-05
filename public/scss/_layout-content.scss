@@ -2,28 +2,24 @@
 ===== APP LAYOUT =====
 ***/
 
-.app-content{
-
-  ._title-container{
+.app-content {
+  ._title-container {
     background: $color-white;
     border-bottom: 1px solid $color-title-container-border;
 
-    ._heading{
-
+    ._heading {
       font-size: 1.2rem;
       font-weight: 600;
       text-transform: uppercase;
       color: $color-blue-gray;
-      padding: 18px $gutter*2 18px;
+      padding: 18px $gutter * 2 18px;
       margin-bottom: 0;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         font-size: 18px;
         padding: 14px 12px 15px;
       }
-
     }
-
   }
 
   ._content-container {
@@ -41,52 +37,51 @@
     ._content {
       flex-grow: 1;
       width: calc(100vw - 300px - 300px - 20px);
-      min-height: calc( 100vh - 57px );
+      min-height: calc(100vh - 57px);
 
       @include fadeInContent;
 
-      ._section{
-
+      ._section {
         @include fadeInContent;
 
         background-color: $color-extra-light-gray;
-        margin: $gutter $gutter*2;
+        margin: $gutter $gutter * 2;
         padding: $gutter $gutter * 1.5;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.06);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 
-        &:first-child{
+        &:first-child {
           padding-top: $gutter * 1.5;
 
-          @include mediaQuery(max, iPhone){
+          @include mediaQuery(max, iPhone) {
             padding-top: 12px;
           }
         }
 
-        &:last-child{
+        &:last-child {
           margin-bottom: $gutter * 6;
 
-          @include mediaQuery(max, iPhone){
+          @include mediaQuery(max, iPhone) {
             margin-bottom: $gutter * 2;
           }
         }
 
-        @include mediaQuery(max, iPhone){
+        @include mediaQuery(max, iPhone) {
           margin: 0;
           padding: 12px;
         }
 
-        .caret{
+        .caret {
           @include defaultTransition;
           display: block;
           float: right;
           margin: 8px;
         }
 
-        & > h3{
+        & > h3 {
           @include _section_heading;
           margin-bottom: $gutter;
 
-          & > .form-step-count{
+          & > .form-step-count {
             @include steps;
           }
         }
@@ -96,8 +91,7 @@
         }
 
         &._active {
-
-          .caret{
+          .caret {
             @include defaultTransition;
             transform: rotate(180deg);
           }
@@ -106,17 +100,13 @@
             padding-top: $gutter;
             padding-bottom: $gutter / 2;
 
-            @include mediaQuery(max, iPhone){
+            @include mediaQuery(max, iPhone) {
               padding-top: 0;
               padding-left: 0;
             }
           }
         }
-
       }
-
     }
-
   }
-
 }

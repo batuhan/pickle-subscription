@@ -1,51 +1,56 @@
 /* _section font */
 $section_heading: 16px;
 
-@mixin text{
+@mixin text {
   color: $color-blue-gray;
   font-size: 14px;
   font-family: "Open Sans", "Arial";
 }
-@mixin text_muted{
+@mixin text_muted {
   @include text;
   color: $color-heading;
   font-size: 12px;
 }
 
-@mixin sub_heading{
+@mixin sub_heading {
   color: $color-heading;
   line-height: 22px;
   font-size: 16px;
   font-family: "Avenir", "Arial";
 }
-._sub-heading{
+._sub-heading {
   @include sub_heading;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800');
-$heading-font: 'Montserrat', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800");
+$heading-font: "Montserrat", sans-serif;
 
-body{
+body {
   font-family: "Open Sans", "Arial";
 }
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Avenir", "Arial";
 }
 
-.content-title{
-
-  h3, h4{
+.content-title {
+  h3,
+  h4 {
     font-weight: 500;
     color: #30468a;
     padding: 4px 0;
     margin: 0 !important;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       font-size: 18px;
     }
   }
 }
 
-.capitalize{
+.capitalize {
   text-transform: capitalize;
 }

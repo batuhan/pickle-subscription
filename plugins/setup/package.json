@@ -1,13 +1,14 @@
 {
   "name": "setup",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
-  "pluginbot" : {
-    "server" : {
-      "main" : "setup.js",
-      "consumes" : ["startSetup", "expressApp"]
+  "dependencies": {},
+  "pluginbot": {
+    "server": {
+      "main": "setup.js",
+      "consumes": [
+        "startSetup",
+        "expressApp"
+      ]
     }
   }
 }

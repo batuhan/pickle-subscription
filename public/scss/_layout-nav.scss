@@ -1,4 +1,4 @@
-.app-header{
+.app-header {
   position: fixed;
   width: 100%;
   display: flex;
@@ -6,30 +6,30 @@
   height: $nav-header-height;
   padding: $gutter / 2 $gutter + 10;
   background-color: $color-light-gray;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
   z-index: $z-nav-header;
 
-  .app-header-left, .app-header-right{
+  .app-header-left,
+  .app-header-right {
     display: flex;
     align-content: flex-end;
   }
 
-  .app-header-left{
+  .app-header-left {
   }
-  .app-header-right{
-
-    & > *{
+  .app-header-right {
+    & > * {
       margin-left: $gutter / 2;
     }
   }
 
-  .app-logo{
+  .app-logo {
     height: 100%;
     max-height: calc(#{$nav-header-height} - 20px);
     margin-top: 1px;
   }
 
-  .app-profile{
+  .app-profile {
     height: 44px;
     max-width: 44px;
     line-height: 40px;
@@ -38,30 +38,30 @@
     border-radius: 50px;
     overflow: hidden;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       display: block;
       height: 100%;
       width: 100%;
       margin: 0;
     }
 
-    img{
+    img {
       height: 100%;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         display: block;
       }
     }
   }
 
-  .buttons.logout{
+  .buttons.logout {
     margin-left: 8px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
   }
 
-  .app-notification{
+  .app-notification {
     height: 44px;
     width: 44px;
     line-height: 44px;
@@ -73,14 +73,14 @@
     position: relative;
     @include fadeInContent;
 
-    ._toggle{
+    ._toggle {
       height: 40px;
       width: 40px;
       line-height: 40px;
       text-align: center;
       padding: 0;
 
-      svg{
+      svg {
         fill: #fff;
         margin-top: -5px;
       }
@@ -101,8 +101,8 @@
       z-index: $z-mini-notification;
       @include text;
 
-      :before{
-        content: '';
+      :before {
+        content: "";
         height: 0;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
@@ -113,7 +113,9 @@
         right: 17px;
       }
 
-      .__header, .__unread-heading, .__empty-heading{
+      .__header,
+      .__unread-heading,
+      .__empty-heading {
         @include text;
         padding: $gutter;
         font-size: 16px;
@@ -124,52 +126,53 @@
         letter-spacing: 1px;
         text-rendering: optimizeLegibility;
       }
-      .__header{
+      .__header {
         background-color: $color-light-gray;
-        box-shadow: 1px 1px 3px 0 #CCD1D9, 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        box-shadow: 1px 1px 3px 0 #ccd1d9, 0 2px 4px 0 rgba(0, 0, 0, 0.06);
         padding: 24px 16px 20px;
         display: flex;
         align-items: center;
-        svg{
+        svg {
           fill: #475981;
           margin-right: 8px;
         }
       }
-      .__unread-heading, .__empty-heading{
+      .__unread-heading,
+      .__empty-heading {
         font-size: 14px;
         color: gray;
       }
-      .__unread-list{
+      .__unread-list {
         padding-left: 0;
         margin: 0;
         list-style: none;
 
-        .__unread-item{
+        .__unread-item {
           @include text;
           padding: $gutter/2 $gutter;
           border-bottom: 1px solid $color-light-gray;
           color: #000;
           font-weight: 400;
 
-          &:hover{
+          &:hover {
             cursor: pointer;
             background-color: $color-light-accent;
           }
         }
-        ._view-all{
+        ._view-all {
           padding: $gutter/2 $gutter;
-          &:hover{
+          &:hover {
             cursor: pointer;
             background-color: $color-light-accent;
           }
-          .buttons{
+          .buttons {
             text-transform: uppercase;
             letter-spacing: 1px;
           }
         }
       }
 
-      .app-notification-backdrop{
+      .app-notification-backdrop {
         position: fixed;
         top: 0;
         left: 0;
@@ -180,38 +183,37 @@
   }
   /* end app-notification */
 
-  @include mediaQuery(max, iPad){
+  @include mediaQuery(max, iPad) {
     padding: $gutter/2 10px;
     align-items: center;
 
-    .app-logo{
+    .app-logo {
       max-height: 100%;
       width: 140px;
       height: auto;
       margin-top: -3px;
     }
 
-    .app-header-right{
+    .app-header-right {
       align-items: center;
     }
 
-    .app-profile, .app-notification{
+    .app-profile,
+    .app-notification {
       height: 29px;
       width: 28px;
     }
 
-    .app-notification{
-
-      .app-notification-list{
+    .app-notification {
+      .app-notification-list {
         position: fixed;
         width: 100%;
       }
     }
   }
-
 }
 
-.app-navigation{
+.app-navigation {
   position: fixed;
   width: $nav-panel-width;
   padding-top: $nav-header-height;
@@ -237,7 +239,7 @@
         list-style: none;
 
         & > li {
-          border-bottom: 1px solid #5C6A8B;
+          border-bottom: 1px solid #5c6a8b;
         }
 
         li {
@@ -255,9 +257,9 @@
             color: $color-white;
             position: relative;
             letter-spacing: 1px;
-            opacity: .6;
+            opacity: 0.6;
 
-            @include mediaQuery(max, iPhone){
+            @include mediaQuery(max, iPhone) {
               padding: 14px;
               padding-left: 67px;
             }
@@ -266,7 +268,7 @@
               position: absolute;
 
               &:before {
-                content: '';
+                content: "";
                 width: 28px;
                 height: 28px;
                 background-size: contain;
@@ -274,7 +276,7 @@
                 position: absolute;
                 left: -46px;
 
-                @include mediaQuery(max, iPad){
+                @include mediaQuery(max, iPad) {
                   left: -53px;
                 }
               }
@@ -363,7 +365,7 @@
               position: absolute;
 
               &:before {
-                content: '';
+                content: "";
                 width: 28px;
                 height: 28px;
                 background-size: contain;
@@ -371,7 +373,7 @@
                 position: absolute;
                 left: -46px;
 
-                @include mediaQuery(max, iPad){
+                @include mediaQuery(max, iPad) {
                   left: -53px;
                 }
               }
@@ -416,11 +418,9 @@
                   background-image: $helpcenter;
                 }
               }
-
             }
 
             &.nav-link-parent {
-
               .caret {
                 @include defaultTransition;
                 margin-left: 50px;
@@ -450,17 +450,12 @@
                 overflow: hidden;
               }
             }
-
-
           }
-
-
 
           .app-dropdown {
             padding: 0;
 
             li {
-
               &:last-child a {
                 padding-bottom: 17px;
               }
@@ -474,7 +469,8 @@
                 padding-top: $gutter / 2;
                 padding-bottom: $gutter / 2;
 
-                &.active, &:hover {
+                &.active,
+                &:hover {
                   @include defaultTransition;
                   background-color: $color-nav-child-active;
                   color: $color-white;
@@ -487,25 +483,18 @@
     }
   }
 
-  @include mediaQuery(max, iPad){
+  @include mediaQuery(max, iPad) {
     width: $nav-panel-width-collapsed;
 
     .app-links-container {
-
       ._main {
-
         .app-links {
-
           & > li {
-
           }
 
           li {
-
             &.fake {
-
               .nav-icons {
-
                 &:before {
                   width: 24px;
                   height: 24px;
@@ -513,12 +502,11 @@
               }
             }
 
-            a{
+            a {
               padding: 14px;
               padding-left: 67px;
 
               .nav-icons {
-
                 &:before {
                   width: 24px;
                   height: 24px;
@@ -537,27 +525,27 @@
       padding: 8px 0 4px;
       font-size: 11px;
       line-height: 18px;
-      box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.23);
+      box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.23);
       z-index: 9900;
       background: #f7f8fa;
 
-      a{
+      a {
         font-size: 9px;
       }
     }
   }
 }
 
-.nav-footer{
+.nav-footer {
   padding-top: $gutter * 2;
   padding-bottom: $gutter;
   text-align: center;
   width: 100%;
 
-  .navvbar-badge{
+  .navvbar-badge {
     padding: 0;
 
-    .stripe{
+    .stripe {
       background: #4553ff;
       padding: 6px 12px 5px 12px;
       text-align: center;
@@ -567,13 +555,13 @@
       color: white;
       font-weight: 600;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         font-size: 0.8em;
       }
     }
   }
 
-  a{
+  a {
     font-size: 12px;
     margin-bottom: $gutter / 2;
     color: #90a3d0;
@@ -581,27 +569,26 @@
   }
 }
 
-.nav-setup-checklist{
-
-  .app-navigation .app-links-container ._main .app-links &{
-
-    .nav-link-parent{
+.nav-setup-checklist {
+  .app-navigation .app-links-container ._main .app-links & {
+    .nav-link-parent {
       font-size: 1.25em;
       padding-left: $gutter * 2.5;
       text-transform: capitalize;
     }
 
-    .nav-link-parent, .nav-link-child {
+    .nav-link-parent,
+    .nav-link-child {
       background-color: $color-nav-checklist;
       color: $color-nav-checklist-text;
     }
 
-    ._list{
+    ._list {
       background-color: $color-nav-checklist;
       padding-bottom: $gutter;
 
       .nav-link-child {
-        padding: $gutter/2 $gutter $gutter/2 $gutter*2+2;
+        padding: $gutter/2 $gutter $gutter/2 $gutter * 2+2;
         text-transform: none;
         font-size: 0.9em;
 
@@ -628,15 +615,13 @@
 
   .app-navigation .app-links-container ._main .app-links & {
     .nav-link-child {
-
       &._completed {
-
       }
     }
   }
 }
 
-.app-dashboard .app-body{
+.app-dashboard .app-body {
   padding-top: $nav-header-height;
   //padding-left: $nav-panel-width;
   min-height: 100vh;
@@ -648,7 +633,8 @@
 
   @include fadeInContent;
 
-  .loader, .page-loader{
+  .loader,
+  .page-loader {
     position: fixed;
     height: 100%;
     width: calc(100% - 280px);
@@ -658,41 +644,41 @@
     top: 0;
     z-index: $z-loader;
 
-    &.servicebot-embed-custom-loader{
+    &.servicebot-embed-custom-loader {
       @include embedLoader;
     }
 
-    @include mediaQuery(max, iPad){
+    @include mediaQuery(max, iPad) {
       width: calc(100% - 80px);
       left: $nav-panel-width-collapsed;
     }
 
-    .lds-ellipsis{
+    .lds-ellipsis {
       margin-top: 0;
     }
   }
 
-  .page-loader{
+  .page-loader {
     left: $nav-panel-width;
     top: $nav-header-height;
 
-    &.servicebot-embed-custom-loader{
+    &.servicebot-embed-custom-loader {
       @include embedLoader;
     }
 
-    @include mediaQuery(max, iPad){
+    @include mediaQuery(max, iPad) {
       left: $nav-panel-width-collapsed;
     }
   }
 
-  @include mediaQuery(max, iPad){
+  @include mediaQuery(max, iPad) {
     //padding-left: $nav-panel-width-collapsed;
     width: calc(100% - 50px);
     padding-bottom: 60px;
   }
 }
 
-.caret{
+.caret {
   display: inline-block;
   width: 0;
   height: 0;
@@ -706,7 +692,7 @@
 }
 
 /* todo: To be cleaned up */
-.app-dashboard .servicetron{
+.app-dashboard .servicetron {
   display: none !important;
 }
 .app-dashboard .navvbar-badge {

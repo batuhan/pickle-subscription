@@ -1,5 +1,4 @@
-@mixin steps{
-
+@mixin steps {
   border: 2px solid currentColor;
   border-radius: 50px;
   width: 28px;
@@ -11,37 +10,34 @@
   padding-right: 1px;
   padding-top: 1px;
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     margin-bottom: 8px;
     margin-right: 8px;
   }
-
 }
 
-@mixin _tier_box{
-
+@mixin _tier_box {
   flex-shrink: 0;
   height: 186px;
   width: 312px;
   border-radius: 3px;
-  background-color: #36476B;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.28);
+  background-color: #36476b;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.28);
   list-style: none;
   margin-right: 16px;
   overflow: hidden;
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     height: 166px;
     width: 262px;
   }
 }
 
-@mixin list-boxes{
-
+@mixin list-boxes {
   list-style: none;
   padding: 0;
 
-  li{
+  li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -52,12 +48,14 @@
     margin: 7px 0;
     @include defaultTransition(150ms);
 
-    &:hover, &:active{
-      background-color: #E0E8EE;
+    &:hover,
+    &:active {
+      background-color: #e0e8ee;
       @include defaultTransition(150ms);
     }
 
-    p, span {
+    p,
+    span {
       font-size: 16px;
       color: #000;
       padding: 0;
@@ -65,18 +63,17 @@
       margin-bottom: 5px;
     }
 
-    button.buttons{
+    button.buttons {
       background-color: transparent;
       color: $gray-text;
       font-weight: 400;
       font-size: 14px;
     }
   }
-
 }
 
 /* fonts */
-@mixin _section_heading{
+@mixin _section_heading {
   color: $color-heading;
   font-size: $section_heading;
   font-weight: normal;
@@ -84,33 +81,31 @@
   line-height: 22px;
   font-family: "Open Sans", "Arial";
 }
-@mixin _label_text{
+@mixin _label_text {
   @include _section_heading;
 }
 
 /* form */
-@mixin _formGroup($direction){
-
+@mixin _formGroup($direction) {
   .form-group.form-group-flex {
     width: 100%;
     flex-direction: $direction;
     margin: 0 !important;
 
-    @if($direction == 'column') {
-      .form-label-flex-md{
+    @if ($direction == "column") {
+      .form-label-flex-md {
         flex-basis: auto;
       }
     }
   }
-
 }
-@mixin  _formLabel($color){
-  label{
-    @if($color == 'dark'){
+@mixin _formLabel($color) {
+  label {
+    @if ($color == "dark") {
       color: $color-heading;
-    }@else if($color == 'light'){
+    } @else if($color == "light") {
       color: $color-white;
-    }@else{
+    } @else {
       color: $color;
     }
     font-size: 16px;
@@ -119,14 +114,15 @@
     text-transform: uppercase;
     font-family: "Open Sans", "Arial";
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       font-size: 14px;
       line-height: 18px;
     }
   }
 }
-@mixin _formInput{
-  input, select{
+@mixin _formInput {
+  input,
+  select {
     color: $color-black;
     font-size: 16px;
     font-weight: 300;
@@ -135,15 +131,15 @@
     height: 42px;
   }
 }
-@mixin react-tagsinput{
+@mixin react-tagsinput {
   .react-tagsinput {
     padding: 0 4px;
 
-    &--focused{
+    &--focused {
       border-color: $color-blue;
     }
 
-    .react-tagsinput-tag{
+    .react-tagsinput-tag {
       background: #0091ea;
       border: none;
       border-radius: 5px;
@@ -161,33 +157,33 @@
   }
 }
 
-@mixin defaultTransition($speed:""){
-  @if($speed) {
+@mixin defaultTransition($speed: "") {
+  @if ($speed) {
     transition: all $speed linear;
-  }
-  @else {
+  } @else {
     transition: all 300ms linear;
   }
 }
 
-@mixin border{
-
+@mixin border {
   border: 1px solid $color-light-blue-gray;
-  box-shadow: inset 1px 1px 3px 0 #CCD1D9;
+  box-shadow: inset 1px 1px 3px 0 #ccd1d9;
   border-radius: 1px;
 
-  &:focus{
+  &:focus {
     border-color: $color-blue;
   }
 }
 
-@mixin resetUl{
+@mixin resetUl {
   list-style: none;
   padding-left: 0;
 }
 
-@mixin fadeInContent{
-  &>div, &>span, &>li{
+@mixin fadeInContent {
+  & > div,
+  & > span,
+  & > li {
     animation: fadeIn 600ms;
     animation-fill-mode: forwards;
   }
@@ -201,8 +197,7 @@
     }
   }
 }
-@mixin fadeUpContent($top1, $top2, $time: 400ms){
-
+@mixin fadeUpContent($top1, $top2, $time: 400ms) {
   animation: moveUp $time;
   animation-fill-mode: forwards;
 
@@ -217,7 +212,7 @@
     }
   }
 }
-@mixin fadeDownInAppModal($top1, $top2, $time: 400ms){
+@mixin fadeDownInAppModal($top1, $top2, $time: 400ms) {
   animation: moveDown $time;
   animation-fill-mode: forwards;
 
@@ -234,7 +229,7 @@
 }
 
 /* Modals */
-@mixin modalBackdrop(){
+@mixin modalBackdrop() {
   position: fixed;
   top: 0;
   left: 0;
@@ -246,27 +241,34 @@
 
 @mixin breakpoint($point) {
   @if $point == FourK {
-    @media (max-width: 1600px) { @content; }
-  }
-  @else if $point == TwoK {
-    @media (max-width: 1250px) { @content; }
-  }
-  @else if $point == Retina {
-    @media (max-width: 650px)  { @content; }
-  }
-  @else if $point == FullHD {
-    @media (max-width: 1080px) { @content; }
-  }
-  @else if $point == iPad {
-    @media (max-width: 768px) { @content; }
-  }
-  @else if $point == iPhone {
-    @media (max-width: 414px) { @content; }
+    @media (max-width: 1600px) {
+      @content;
+    }
+  } @else if $point == TwoK {
+    @media (max-width: 1250px) {
+      @content;
+    }
+  } @else if $point == Retina {
+    @media (max-width: 650px) {
+      @content;
+    }
+  } @else if $point == FullHD {
+    @media (max-width: 1080px) {
+      @content;
+    }
+  } @else if $point == iPad {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == iPhone {
+    @media (max-width: 414px) {
+      @content;
+    }
   }
 }
 
 /* Loader */
-@mixin embedLoader(){
+@mixin embedLoader() {
   position: absolute;
   top: 0;
   left: 0;

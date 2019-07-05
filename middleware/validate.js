@@ -6,27 +6,29 @@
  * @param correlation_id - Is the field to check the req.params.<NAME> against. Default to id.
  * @returns - Returns the found object, otherwise it will redirect to 404 page.
  */
-const User = require('../models/user.js');
+const User = require("../models/user.js");
 
-const validateRequest = function (model=User, correlation_id="id", params_name="id") {
-    return function (req, res, next) {
-        let id;
-        if(req.params[correlation_id]) {
-            id = req.params[correlation_id];
-        }
-        else{
-            id = correlation_id;
-        }
-        model.findOne(params_name, id, function(result){
-            if(result.data){
-                // If the object exist, return it as well as continuing the process:
-                res.locals.valid_object = result;
-                return next();
-            } 
-                return res.status(404).send('Sorry, we cannot find that!');
-            
-        });
+const validateRequest = function(
+  model = User,
+  correlation_id = "id",
+  params_name = "id",
+) {
+  return function(req, res, next) {
+    let id;
+    if (req.params[correlation_id]) {
+      id = req.params[correlation_id];
+    } else {
+      id = correlation_id;
     }
-}
+    model.findOne(params_name, id, function(result) {
+      if (result.data) {
+        // If the object exist, return it as well as continuing the process:
+        res.locals.valid_object = result;
+        return next();
+      }
+      return res.status(404).send("Sorry, we cannot find that!");
+    });
+  };
+};
 
 module.exports = validateRequest;

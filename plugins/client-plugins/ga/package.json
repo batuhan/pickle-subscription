@@ -1,12 +1,10 @@
 {
   "name": "ga",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
-  "pluginbot" : {
+  "dependencies": {},
+  "pluginbot": {
     "client": {
-      "main" : "index.js"
+      "main": "index.js"
     }
   }
 }

@@ -1,11 +1,12 @@
 const _ = require("lodash");
 const Role = require("../models/role.js");
 
-const swaggerJSON = {...require("../api-docs/api-entity-paths.json"), ...require("../api-docs/api-paths.json")};
-
+const swaggerJSON = {
+  ...require("../api-docs/api-entity-paths.json"),
+  ...require("../api-docs/api-paths.json"),
+};
 
 // todo:  allow for multiple permissions
-
 
 /**
  *
@@ -15,20 +16,25 @@ const swaggerJSON = {...require("../api-docs/api-entity-paths.json"), ...require
  * @param callback - callback function with true if authorized false otherwise as param
  *
  */
-const isAuthorized = function (user, permission, bypassPermissions, callback){
-
-    // TODO: clean this up so hasPermission can be passed multiple roles
-    Role.findOne("id", user.get("role_id"), function(role){
-        role.getPermissions(function(permissions){
-            const status = permissions.some(p => p.data.permission_name == permission || !permission);
-            const shouldBypass = permissions.some(p => bypassPermissions.includes(p.data.permission_name));
-            console.log(`userName: ${  user.get('email')  } has permission: ${  permission  }. Ability to make api call: ${  status}`);
-            callback(status, shouldBypass, permissions)
-        })
-    })
-}
-
-
+const isAuthorized = function(user, permission, bypassPermissions, callback) {
+  // TODO: clean this up so hasPermission can be passed multiple roles
+  Role.findOne("id", user.get("role_id"), function(role) {
+    role.getPermissions(function(permissions) {
+      const status = permissions.some(
+        p => p.data.permission_name == permission || !permission,
+      );
+      const shouldBypass = permissions.some(p =>
+        bypassPermissions.includes(p.data.permission_name),
+      );
+      console.log(
+        `userName: ${user.get(
+          "email",
+        )} has permission: ${permission}. Ability to make api call: ${status}`,
+      );
+      callback(status, shouldBypass, permissions);
+    });
+  });
+};
 
 /**
  *
@@ -41,72 +47,77 @@ const isAuthorized = function (user, permission, bypassPermissions, callback){
  */
 
 // todo: move parameters into a config json... icky icky!
-const auth = function(permission=null, model=null, correlation_id="user_id", bypassPermissions=["can_administrate"]) {
-    return function (req, res, next, reject=(err)=>{}) {
-        // if user is authenticated in the session, call the next() to call the next request handler
-        // Passport adds this method to request object. A middleware is allowed to add properties to
-        // request and response object
+const auth = function(
+  permission = null,
+  model = null,
+  correlation_id = "user_id",
+  bypassPermissions = ["can_administrate"],
+) {
+  return function(req, res, next, reject = err => {}) {
+    // if user is authenticated in the session, call the next() to call the next request handler
+    // Passport adds this method to request object. A middleware is allowed to add properties to
+    // request and response object
 
+    let permissionToCheck = permission;
 
-        let permissionToCheck = permission;
+    if (!req.isAuthenticated()) {
+      return reject(res.status(401).json({ error: "Unauthenticated" }));
+    }
 
-        if (!req.isAuthenticated()) {
-            return reject(res.status(401).json({"error": "Unauthenticated"}));
-        }
+    if (req.user.data.status == "suspended") {
+      return reject(res.status(401).json({ error: "Account suspended" }));
+    }
 
-        if(req.user.data.status == "suspended"){
-            return reject(res.status(401).json({"error" : "Account suspended"}));
-        }
+    try {
+      if (!permissionToCheck) {
+        const tempReq = req.route.path.replace(/:/g, "{");
+        const replacement = tempReq.replace("(\\d+)", "");
+        const route = replacement.replace(/\{[^\/]*/g, "$&}");
+        const finalRoute = route.replace(/\/$/g, "");
+        const method = req.method.toLowerCase();
+        permissionToCheck = swaggerJSON[finalRoute][method].operationId;
+        console.log(`permission for ${req.route.path} is ${permissionToCheck}`);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    isAuthorized(req.user, permissionToCheck, bypassPermissions, function(
+      status,
+      shouldBypass,
+      permissions,
+    ) {
+      res.locals.permissions = permissions;
+      if (shouldBypass) {
+        return next();
+      }
 
-        try {
-            if (!permissionToCheck) {
-                const tempReq = req.route.path.replace(/:/g, "{");
-                const replacement = tempReq.replace("(\\d+)", "");
-                const route = replacement.replace(/\{[^\/]*/g, '$&}');
-                const finalRoute = route.replace(/\/$/g, '');
-                const method = req.method.toLowerCase();
-                permissionToCheck = swaggerJSON[finalRoute][method].operationId;
-                console.log(`permission for ${  req.route.path  } is ${  permissionToCheck}`);
+      if (status) {
+        if (model) {
+          // TODO be able to handle other ids, not just 'id'
+          const { id } = req.params;
+          model.findOne("id", id, function(result) {
+            console.log(
+              `correlation id: ${correlation_id} ${req.user.get("id")}`,
+            );
+            if (
+              result.get(correlation_id) == req.user.get("id") ||
+              permissions.some(p => p.data.permission_name === "can_manage")
+            ) {
+              console.log(`user owns id ${id}or has can_manage`);
+              return next();
             }
-        }catch(e){
-            console.error(e);
+            return reject(res.status(401).json({ error: "Unauthorized user" }));
+          });
+        } else {
+          return next();
         }
-        isAuthorized(req.user, permissionToCheck, bypassPermissions,  function (status, shouldBypass, permissions) {
-            res.locals.permissions = permissions;
-            if(shouldBypass){
-                return next();
-            }
-            
-                if(status){
-                    if (model) {
-                        // TODO be able to handle other ids, not just 'id'
-                        const {id} = req.params;
-                        model.findOne("id", id, function (result) {
-                            console.log(`correlation id: ${  correlation_id  } ${  req.user.get("id")}`);
-                            if (result.get(correlation_id) == req.user.get("id") || permissions.some(p => p.data.permission_name === 'can_manage')) {
-                                console.log(`user owns id ${  id  }or has can_manage`)
-                                return next();
-                            }
-                            return reject(res.status(401).json({error: "Unauthorized user"}));
-
-                        });
-                        
-                    }
-                    else{
-                        return next();
-                    }
-                }
-                else{
-                    return reject(res.status(401).json({error: "Unauthorized user"}));
-                }
-            
-        });
-
-    };
+      } else {
+        return reject(res.status(401).json({ error: "Unauthorized user" }));
+      }
+    });
+  };
 };
 
 auth.isAuthorized = isAuthorized;
 
 module.exports = auth;
-
-

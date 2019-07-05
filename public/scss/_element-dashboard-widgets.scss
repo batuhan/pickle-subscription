@@ -1,40 +1,39 @@
 $widget-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
 
-.dashboard-widgets{
-
+.dashboard-widgets {
   display: grid;
   color: white;
   overflow: hidden;
   border-radius: 3px;
 
-  .dashboard-widget{
+  .dashboard-widget {
     box-shadow: $widget-shadow;
     margin-right: 6px;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       margin-bottom: $gutter;
     }
   }
 
-  &.__top-widgets{
+  &.__top-widgets {
     grid-template-columns: 25% 25% 25% 25%;
     justify-content: space-evenly;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       grid-template-columns: 100%;
       margin-bottom: $gutter * 2;
     }
   }
 
-  &.__metrics-widgets{
+  &.__metrics-widgets {
     grid-template-columns: 33.33% auto 33.33%;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       grid-template-columns: 100%;
       margin-bottom: $gutter * 2;
     }
 
-    .section-wrapper{
+    .section-wrapper {
       color: black;
       overflow: hidden;
       margin-right: 6px;
@@ -42,30 +41,29 @@ $widget-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
       background-color: white;
       box-shadow: $widget-shadow;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         margin-bottom: $gutter;
       }
 
-      .dashboard-widget{
+      .dashboard-widget {
         margin: 5px;
         box-shadow: none;
       }
     }
   }
 
-  &.__churn-widgets{
+  &.__churn-widgets {
     grid-template-columns: 50% 50%;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       grid-template-columns: 100%;
       grid-row-gap: $gutter;
       margin-bottom: $gutter * 2;
     }
   }
 
-  .widget-data{
+  .widget-data {
     font-weight: 300;
-    text-rendering: optimizeLegibility;;
+    text-rendering: optimizeLegibility;
   }
-
 }

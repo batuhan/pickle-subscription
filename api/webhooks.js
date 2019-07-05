@@ -1,3 +1,7 @@
 module.exports = function(router) {
-    require("./entity")(router, require("../models/base/entity")("webhooks"), "webhooks");
+  require("./entity")(
+    router,
+    require("../models/base/entity")("webhooks"),
+    "webhooks",
+  );
 };

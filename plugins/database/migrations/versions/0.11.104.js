@@ -1,12 +1,9 @@
 module.exports = {
-
-
-    async up (knex) {
-        
-        const registrationUserEmail = {
-            name: "registration_user",
-            event_name: "service_instance_requested_by_user",
-            message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+  async up(knex) {
+    const registrationUserEmail = {
+      name: "registration_user",
+      event_name: "service_instance_requested_by_user",
+      message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
 <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
     <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
         <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -30,18 +27,17 @@ module.exports = {
 </div>
 <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-            subject: "Welcome to [[_company_name]]",
-            description: "Sent to users when they sign up",
-            model: "service-instance",
-            send_email: false,
-            send_to_owner: true
-        };
-        const newEmails = [
-            
-            {
-                name: "new_invoice",
-                event_name: "new_invoice",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+      subject: "Welcome to [[_company_name]]",
+      description: "Sent to users when they sign up",
+      model: "service-instance",
+      send_email: false,
+      send_to_owner: true,
+    };
+    const newEmails = [
+      {
+        name: "new_invoice",
+        event_name: "new_invoice",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -81,16 +77,16 @@ module.exports = {
         <span style="display: inline-block;"></span>
     </div>
 </div>`,
-                subject: "Thank you for the payment",
-                description: "Sent to users when a new invoice is generated",
-                model: "invoice",
-                send_email: false,
-                send_to_owner: true
-            },
-            {
-                name: "resubscribe_notification_admin",
-                event_name: "service_instance_resubscribed",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Thank you for the payment",
+        description: "Sent to users when a new invoice is generated",
+        model: "invoice",
+        send_email: false,
+        send_to_owner: true,
+      },
+      {
+        name: "resubscribe_notification_admin",
+        event_name: "service_instance_resubscribed",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -113,16 +109,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Account has resubscribed to [[_company_name]]!",
-                description: "Sent to admins when a user resubscribed",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: false
-            },
-            {
-                name: "resubscribe_notification_user",
-                event_name: "service_instance_resubscribed",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Account has resubscribed to [[_company_name]]!",
+        description: "Sent to admins when a user resubscribed",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: false,
+      },
+      {
+        name: "resubscribe_notification_user",
+        event_name: "service_instance_resubscribed",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -148,16 +144,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "We are happy to see you back!",
-                description: "Sent to users when they resubscribe",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: true
-            },
-            {
-                name: "service_cancellation_goodbye",
-                event_name: "service_instance_cancellation_requested",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "We are happy to see you back!",
+        description: "Sent to users when they resubscribe",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: true,
+      },
+      {
+        name: "service_cancellation_goodbye",
+        event_name: "service_instance_cancellation_requested",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -186,15 +182,15 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "We're sad to let you go",
-                description: "Sent to a user after they cancel their subscription",
-                model: "service-instance-cancellation",
-                send_email: false
-            },
-            {
-                name: "registration_enterprise_user",
-                event_name: "service_instance_custom_requested_by_user",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "We're sad to let you go",
+        description: "Sent to a user after they cancel their subscription",
+        model: "service-instance-cancellation",
+        send_email: false,
+      },
+      {
+        name: "registration_enterprise_user",
+        event_name: "service_instance_custom_requested_by_user",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -216,16 +212,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Pricing request received",
-                description: "Sent to customer when an enterprise service is requested",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: true
-            },
-            {
-                name: "registration_enterprise_admin",
-                event_name: "service_instance_custom_requested_by_user",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Pricing request received",
+        description: "Sent to customer when an enterprise service is requested",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: true,
+      },
+      {
+        name: "registration_enterprise_admin",
+        event_name: "service_instance_custom_requested_by_user",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -248,16 +244,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "New pricing request",
-                description: "Sent to admins when an enterprise service is requested",
-                model: "service-instance",
-                send_email: true,
-                send_to_owner: false
-            },
-            {
-                name: "service_instance_plan_change_user",
-                event_name: "service_instance_plan_change",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "New pricing request",
+        description: "Sent to admins when an enterprise service is requested",
+        model: "service-instance",
+        send_email: true,
+        send_to_owner: false,
+      },
+      {
+        name: "service_instance_plan_change_user",
+        event_name: "service_instance_plan_change",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -283,17 +279,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Your [[_company_name]] plan has changed",
-                description: "Sent to users when a payment plan has been changed",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: true
-
-            },
-            {
-                name: "service_instance_plan_change_admin",
-                event_name: "service_instance_plan_change",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Your [[_company_name]] plan has changed",
+        description: "Sent to users when a payment plan has been changed",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: true,
+      },
+      {
+        name: "service_instance_plan_change_admin",
+        event_name: "service_instance_plan_change",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -316,16 +311,17 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "[[references.users.email]] has changed their plan",
-                description: "Sent to admins when a service payment plan has been changed",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: false
-            },
-            {
-                name: "trial_expiration",
-                event_name: "service_instance_trial_expired",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "[[references.users.email]] has changed their plan",
+        description:
+          "Sent to admins when a service payment plan has been changed",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: false,
+      },
+      {
+        name: "trial_expiration",
+        event_name: "service_instance_trial_expired",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -351,19 +347,18 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Your free trial has expired",
-                description: "Sent when a free trial has ended",
-                model: "service-instance",
-                send_email: false,
-                send_to_owner: true
-            }
-        ];
-        const emails = [
-            
-            {
-                name: "password_reset",
-                event_name: "password_reset_request_created",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Your free trial has expired",
+        description: "Sent when a free trial has ended",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: true,
+      },
+    ];
+    const emails = [
+      {
+        name: "password_reset",
+        event_name: "password_reset_request_created",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -386,15 +381,15 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Password Reset",
-                description: "Sent when a user requests a password reset",
-                model: "user",
-                send_email: true
-            },
-            {
-                name: "registration_admin",
-                event_name: "service_instance_requested_by_user",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Password Reset",
+        description: "Sent when a user requests a password reset",
+        model: "user",
+        send_email: true,
+      },
+      {
+        name: "registration_admin",
+        event_name: "service_instance_requested_by_user",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -418,16 +413,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "New signup for [[_company_name]]!",
-                description: "Sent to admins when a new user has signed up",
-                model: "service-instance",
-                send_email: true,
-                send_to_owner: false
-            },
-            {
-                name: "payment_failure",
-                event_name: "payment_failure",
-                message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "New signup for [[_company_name]]!",
+        description: "Sent to admins when a new user has signed up",
+        model: "service-instance",
+        send_email: true,
+        send_to_owner: false,
+      },
+      {
+        name: "payment_failure",
+        event_name: "payment_failure",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -453,14 +448,16 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject: "Oh no, your payment failed",
-                description: "Sent when a payment has failed to go through. It notifies the user to update their payment method",
-                model: "user",
-                send_email: true
-            },
-            {name:"invitation",
-                event_name:"user_invited",
-                message:`<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+        subject: "Oh no, your payment failed",
+        description:
+          "Sent when a payment has failed to go through. It notifies the user to update their payment method",
+        model: "user",
+        send_email: true,
+      },
+      {
+        name: "invitation",
+        event_name: "user_invited",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
     <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
         <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
             <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -483,27 +480,34 @@ module.exports = {
     </div>
     <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-                subject:"Invitation",
-                description:"Sent when a user is invited to they system by an admin",
-                model:"user",
-                send_email:true
-            }
-        ];
+        subject: "Invitation",
+        description: "Sent when a user is invited to they system by an admin",
+        model: "user",
+        send_email: true,
+      },
+    ];
 
-        const regUser = await knex("notification_templates").where("name", "registration_user");
-        if(regUser.length > 0){
-            emails.push(registrationUserEmail);
-        }else{
-            newEmails.push(registrationUserEmail);
-        }
-        for(const email of emails){
-            await knex("notification_templates").where("name", email.name).update(email)
-        }
+    const regUser = await knex("notification_templates").where(
+      "name",
+      "registration_user",
+    );
+    if (regUser.length > 0) {
+      emails.push(registrationUserEmail);
+    } else {
+      newEmails.push(registrationUserEmail);
+    }
+    for (const email of emails) {
+      await knex("notification_templates")
+        .where("name", email.name)
+        .update(email);
+    }
 
-        await knex("notification_templates").where("name", "service_cancellation_submitted").update({
-            name: "service_cancellation",
-            event_name: "service_instance_cancellation_requested",
-            message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
+    await knex("notification_templates")
+      .where("name", "service_cancellation_submitted")
+      .update({
+        name: "service_cancellation",
+        event_name: "service_instance_cancellation_requested",
+        message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
 <div class="___email-content" style="height: auto; width: 600px; max-width: 100%; margin: auto; line-height: 1.8rem; color: #49575F; background-color: #fff;">
     <div class="___header" style="padding: 60px 0px 12px 0px; line-height: 50px; height: 50px; margin: 0;">
         <div class="___logo" style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;"><h2 style="text-align: center; font-size: 18px; color: #0097D7; line-height: 50px; height: 50px; margin: 0;">[[_company_name]]</h2></div>
@@ -526,41 +530,64 @@ module.exports = {
 </div>
 <div class="___power-by" style="font-size: 10px; line-height: 16px; text-align: center; color: #9B9B9B; margin-top: 11px;">Powered by <span style="display: inline-block;"><img class="___footer-logo" alt="servicebot-logo" src="https://[[_hostname]]/assets/email-templates/footer-logo.png" style="display: inline-block; width: auto; margin: auto 0px -1px 1px; max-height: 12px; line-height: 12px;"></span></div>
 </div>`,
-            subject: "User just cancelled a subscription",
-            description: "Sent when a service cancellation has been requested by a user",
-            model: "service-instance",
-            send_email: false,
-            send_to_owner: false
-        });
-    
-        const updated = await knex("notification_templates").where("name", "service_cancellation");
+        subject: "User just cancelled a subscription",
+        description:
+          "Sent when a service cancellation has been requested by a user",
+        model: "service-instance",
+        send_email: false,
+        send_to_owner: false,
+      });
 
-        const newRecords = await knex("notification_templates").returning('*').insert(newEmails);
+    const updated = await knex("notification_templates").where(
+      "name",
+      "service_cancellation",
+    );
 
-        const admin = await knex("notification_templates_to_roles").returning("id").insert([{
-            notification_template_id: newRecords[1].id,
-            role_id: 1
+    const newRecords = await knex("notification_templates")
+      .returning("*")
+      .insert(newEmails);
 
+    const admin = await knex("notification_templates_to_roles")
+      .returning("id")
+      .insert([
+        {
+          notification_template_id: newRecords[1].id,
+          role_id: 1,
         },
         {
-            notification_template_id: updated[0].id,
-            role_id: 1
+          notification_template_id: updated[0].id,
+          role_id: 1,
         },
         {
-            notification_template_id: newRecords[5].id,
-            role_id: 1
+          notification_template_id: newRecords[5].id,
+          role_id: 1,
         },
         {
-            notification_template_id: newRecords[7].id,
-            role_id: 1
-        }])
-        const templateNamesToDelete = ["request_service_instance_admin", "request_service_instance_user", "request_service_instance_new_user", "service_requires_payment_approval", "service_instance_update", "instance_cancellation_rejected", "instance_cancellation_approved", "user_suspension"];
-        const toDelete = (await knex("notification_templates").returning("*").whereIn("name", templateNamesToDelete)).map(template => template.id);
-        await knex("notification_templates_to_roles").whereIn("notification_template_id", toDelete).delete();
-        await knex("notification_templates").whereIn("name", templateNamesToDelete).delete();
-        return await knex;
-    },
+          notification_template_id: newRecords[7].id,
+          role_id: 1,
+        },
+      ]);
+    const templateNamesToDelete = [
+      "request_service_instance_admin",
+      "request_service_instance_user",
+      "request_service_instance_new_user",
+      "service_requires_payment_approval",
+      "service_instance_update",
+      "instance_cancellation_rejected",
+      "instance_cancellation_approved",
+      "user_suspension",
+    ];
+    const toDelete = (await knex("notification_templates")
+      .returning("*")
+      .whereIn("name", templateNamesToDelete)).map(template => template.id);
+    await knex("notification_templates_to_roles")
+      .whereIn("notification_template_id", toDelete)
+      .delete();
+    await knex("notification_templates")
+      .whereIn("name", templateNamesToDelete)
+      .delete();
+    return await knex;
+  },
 
-    async down (knex) {
-    }
-}
+  async down(knex) {},
+};

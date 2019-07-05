@@ -1,23 +1,19 @@
+const { triggerEvent } = require("./actions");
 
+class Store {
+  constructor() {}
 
-const { triggerEvent}  =  require("./actions");
+  setStore(store) {
+    this.store = store;
+  }
 
-class Store{
-    constructor(){
-    }
+  getState(fullState = false) {
+    return fullState ? this.store.getState() : this.store.getState().servicebot;
+  }
 
-    setStore(store){
-      this.store = store;
-    }
-
-    getState(fullState=false){
-        return fullState ? this.store.getState() : this.store.getState().servicebot;
-    }
-
-    dispatchEvent(eventName, eventObject){
-        return this.store.dispatch(triggerEvent(eventName, eventObject));
-
-    };
+  dispatchEvent(eventName, eventObject) {
+    return this.store.dispatch(triggerEvent(eventName, eventObject));
+  }
 }
 
 module.exports = new Store();

@@ -1,77 +1,77 @@
-@mixin modalTables{
-  .table{
+@mixin modalTables {
+  .table {
     margin-top: $gutter;
     font-size: 0.9rem;
     width: 100%;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       display: block;
     }
-    thead{
+    thead {
       color: #051f60;
       background: #ececec;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         display: none;
       }
     }
-    tbody{
-      @include mediaQuery(max, iPhone){
+    tbody {
+      @include mediaQuery(max, iPhone) {
         display: flex;
         flex-direction: column;
       }
-      tr{
+      tr {
         @include mediaQuery(max, iPhone) {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
 
-          td{
+          td {
             line-height: 12px;
             font-size: 12px;
 
-            &:first-child{
+            &:first-child {
               font-weight: bold;
             }
           }
         }
       }
     }
-    td{
+    td {
       padding: 4px !important;
       font-size: 13px;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         font-size: 12px;
-        line-height: 12px
+        line-height: 12px;
       }
 
-      &.__right{
+      &.__right {
         text-align: right;
       }
-      &.__center{
+      &.__center {
         text-align: center;
       }
     }
   }
 }
 
-.modal-wrapper{
-
-  .loader, .page-loader{
+.modal-wrapper {
+  .loader,
+  .page-loader {
     position: absolute;
     height: 100% !important;
     width: 100% !important;
     background: white;
     left: 0 !important;
 
-    &.servicebot-embed-custom-loader{
+    &.servicebot-embed-custom-loader {
       @include embedLoader;
     }
   }
 }
 
-.servicebot-in-app-modal{
+.servicebot-in-app-modal {
   max-height: 80vh;
   overflow: auto;
 
@@ -81,7 +81,6 @@
     @include mediaQuery(max, iPhone) {
       table {
         thead {
-
         }
 
         tbody {
@@ -115,20 +114,16 @@
   }
 }
 
-
-
 /* Individual Modals */
-.__modal{
-
-  &.__upcoming-invoice{
-    .__invoice-information{
+.__modal {
+  &.__upcoming-invoice {
+    .__invoice-information {
       display: flex;
       justify-content: space-between;
-      i{
+      i {
         margin-right: $gutter/2;
       }
     }
     @include modalTables;
   }
-
 }

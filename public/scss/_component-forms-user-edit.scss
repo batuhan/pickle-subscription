@@ -1,41 +1,37 @@
-.__my-profile{
-
+.__my-profile {
   ._content-container ._content {
     .columns {
       display: grid;
       grid-template-columns: 30% 70%;
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         grid-template-columns: 100%;
       }
     }
   }
 
-  ._section{
-
-    @include mediaQuery(max, iPhone){
+  ._section {
+    @include mediaQuery(max, iPhone) {
       margin-bottom: 0;
     }
 
-    &.__avatar-form{
+    &.__avatar-form {
       text-align: center;
-      .avatar{
+      .avatar {
         margin: auto;
       }
     }
-    &.__edit-form{
-
+    &.__edit-form {
       .sb-form-group._group-default {
         width: 50%;
         min-width: 300px;
       }
-      ._group-password-one, ._group-password-two{
+      ._group-password-one,
+      ._group-password-two {
         float: left;
         width: 50%;
         min-width: 300px;
       }
-
     }
   }
-
 }

@@ -1,13 +1,14 @@
 {
   "name": "database",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
-  "pluginbot" : {
-    "server" : {
-      "main" : "database.js",
-      "consumes" : ["dbConfig", "initialConfig"]
+  "dependencies": {},
+  "pluginbot": {
+    "server": {
+      "main": "database.js",
+      "consumes": [
+        "dbConfig",
+        "initialConfig"
+      ]
     }
   }
 }

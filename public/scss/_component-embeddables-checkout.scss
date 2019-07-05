@@ -1,18 +1,13 @@
 /* Embeddable Page - Checkout Page Embed */
 
 #plugin_embeddable-checkout {
-
   #_section-1 {
-
   }
 
   #_section-2 {
-
-    .custom-property-fields{
-
+    .custom-property-fields {
       .addon-checkbox-widget-default-value-wrapper {
         .iconToggleField {
-
           &::before {
             content: "";
             color: $color-blue;
@@ -27,19 +22,19 @@
             transform: rotate(-45deg);
           }
 
-          &.inactive{
+          &.inactive {
             border: 1px solid #c6cbce;
-            &::before{
+            &::before {
               color: #c6cbce;
               @include defaultTransition(150ms);
             }
           }
-          &.active{
+          &.active {
             border: 1px solid $color-blue;
             @include defaultTransition(150ms);
           }
-          &:hover{
-            &::before{
+          &:hover {
+            &::before {
               color: $color-blue;
               @include defaultTransition(150ms);
             }
@@ -50,12 +45,8 @@
         }
       }
     }
-
   }
 
   #_section-3 {
-
-
   }
-
 }

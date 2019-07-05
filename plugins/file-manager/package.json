@@ -1,13 +1,13 @@
 {
   "name": "file-manager",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
-  "pluginbot" : {
-    "server" : {
-      "main" : "file-manager.js",
-      "consumes" : ["database"]
+  "dependencies": {},
+  "pluginbot": {
+    "server": {
+      "main": "file-manager.js",
+      "consumes": [
+        "database"
+      ]
     }
   }
 }

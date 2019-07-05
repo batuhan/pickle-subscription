@@ -1,18 +1,18 @@
-@mixin pageActions{
-  ._content{
+@mixin pageActions {
+  ._content {
     position: relative;
   }
   .servicebot-table-base {
     .react-bs-table-tool-bar {
       .row {
-        &>div:nth-child(1) {
+        & > div:nth-child(1) {
           .buttons-group {
             position: absolute;
             top: 0;
             right: 0;
             width: auto;
 
-            @include mediaQuery(max, iPhone){
+            @include mediaQuery(max, iPhone) {
               top: 46px;
               left: 0;
               right: auto;
@@ -25,75 +25,64 @@
 }
 $page-datatable-extra-bottom-padding: 160px;
 
-.page{
-  padding: $gutter $gutter * 3 $gutter*1.5;
+.page {
+  padding: $gutter $gutter * 3 $gutter * 1.5;
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     padding: 12px;
   }
 }
 
-.page, .app-content{
-
+.page,
+.app-content {
   /* System */
-  &.__dashboard{
-
-    .content-title h4{
+  &.__dashboard {
+    .content-title h4 {
       font-size: 16px;
       margin-top: $gutter * 2;
       margin-bottom: $gutter !important;
     }
 
-    @include mediaQuery('max', 'iPhone'){
+    @include mediaQuery("max", "iPhone") {
       //padding: $gutter * 1.5;
 
-      .content-title:nth-child(1n) h4{
+      .content-title:nth-child(1n) h4 {
         margin-top: 0;
       }
     }
   }
 
-  &.__manage-services{
-
+  &.__manage-services {
     padding-bottom: $page-datatable-extra-bottom-padding;
     @include pageActions;
-
   }
 
-  &.__manage-subscriptions{
-
+  &.__manage-subscriptions {
     padding-bottom: $page-datatable-extra-bottom-padding;
     @include pageActions;
-
   }
 
-  &.__manage-users{
-
+  &.__manage-users {
     padding-bottom: $page-datatable-extra-bottom-padding;
     @include pageActions;
-
   }
 
-  &.__manage-notification-templates{
-
+  &.__manage-notification-templates {
     padding-bottom: $page-datatable-extra-bottom-padding;
     @include pageActions;
-
   }
 
-  &.__view-service-instance{
-    
-    @include mediaQuery(max, iPhone){
+  &.__view-service-instance {
+    @include mediaQuery(max, iPhone) {
       background: $color-extra-light-gray;
     }
 
-    .service-instance-actions{
-
-      .buttons-group{
+    .service-instance-actions {
+      .buttons-group {
         line-height: 80px;
         margin-right: $gutter * 2;
 
-        @include mediaQuery(max, iPhone){
+        @include mediaQuery(max, iPhone) {
           margin: 0;
           display: flex;
           flex-direction: row;
@@ -105,7 +94,7 @@ $page-datatable-extra-bottom-padding: 160px;
           width: 100%;
         }
 
-        .buttons{
+        .buttons {
           flex-basis: 50%;
           font-size: 12px;
           flex-grow: 1;
@@ -116,32 +105,29 @@ $page-datatable-extra-bottom-padding: 160px;
   }
 
   /* Settings */
-  &.__manage-system-settings{
-
+  &.__manage-system-settings {
   }
-  &.__manage-stripe-settings{
-
-    .form-help-text{
+  &.__manage-stripe-settings {
+    .form-help-text {
       line-height: 1.8rem;
     }
   }
-  &.__servicebot-webhooks{
-
-    ._section{
+  &.__servicebot-webhooks {
+    ._section {
       position: relative;
 
-      & > h3{
+      & > h3 {
         margin-bottom: $gutter !important;
       }
 
-      .buttons-group{
+      .buttons-group {
         margin-top: $gutter;
       }
 
-      &.__webhook-event-info{
+      &.__webhook-event-info {
         min-height: 100px;
 
-        .tiers{
+        .tiers {
           margin-top: $gutter * 2;
         }
       }
@@ -162,7 +148,7 @@ $page-datatable-extra-bottom-padding: 160px;
       }
     }
 
-    #button-view-events{
+    #button-view-events {
       position: absolute;
       right: $gutter * 1.5;
       top: $gutter;
@@ -170,9 +156,10 @@ $page-datatable-extra-bottom-padding: 160px;
   }
 
   /* Profile */
-  &.__app-login, &.__app-login-forgot-password, &.__app-login-password-reset{
-
-    ._content-container{
+  &.__app-login,
+  &.__app-login-forgot-password,
+  &.__app-login-password-reset {
+    ._content-container {
       width: 500px;
       max-width: 100%;
       margin: auto;
@@ -183,7 +170,7 @@ $page-datatable-extra-bottom-padding: 160px;
       top: 50%;
       transform: translate(-50%, -50%);
 
-      @include mediaQuery(max, iPhone){
+      @include mediaQuery(max, iPhone) {
         height: 100%;
         top: $nav-header-height;
         left: 0;
@@ -191,53 +178,39 @@ $page-datatable-extra-bottom-padding: 160px;
         transform: none;
       }
     }
-
   }
-  &.__password-reset{
-    ._content-container ._content ._section{
+  &.__password-reset {
+    ._content-container ._content ._section {
       width: 500px;
       max-width: 100%;
       margin: $gutter * 2 auto;
     }
   }
-  &.__view-my-profile{
-
-
+  &.__view-my-profile {
   }
 
-  &.__manage-my-profile{
-
-
+  &.__manage-my-profile {
   }
 
-  &.__manage-my-cards{
-
-
+  &.__manage-my-cards {
   }
 
-  &.__manage-my-instance{
-
-    .account-status{
+  &.__manage-my-instance {
+    .account-status {
       display: flex;
       justify-content: space-between;
       margin-bottom: $gutter;
     }
-
   }
 
   /* Billing */
-  &.__billing-history{
-
-
+  &.__billing-history {
   }
 
-  &.__billing-invoice{
-
+  &.__billing-invoice {
   }
 
   /* Notifications */
-  &.__manage-notifications{
-
+  &.__manage-notifications {
   }
-
 }

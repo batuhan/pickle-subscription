@@ -1,18 +1,18 @@
-@mixin _icon_plus($color){
+@mixin _icon_plus($color) {
   color: $color;
   position: absolute;
   margin-left: 3px;
   margin-top: 10px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 15px;
     height: 1px;
     background-color: currentColor;
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 15px;
     height: 1px;
@@ -22,15 +22,15 @@
   }
 }
 
-@mixin _icon_close($color){
-    color: $color;
-    position: absolute;
-    margin-top: 0;
-    margin-left: 0;
-    width: 21px;
-    height: 21px;
+@mixin _icon_close($color) {
+  color: $color;
+  position: absolute;
+  margin-top: 0;
+  margin-left: 0;
+  width: 21px;
+  height: 21px;
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 10px;
     width: 21px;
@@ -40,7 +40,7 @@
     transform: rotate(-45deg);
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 10px;
     width: 21px;
@@ -55,7 +55,7 @@
   &.plus {
     @include _icon_plus(#000);
   }
-  &.close{
-    @include _icon_close(#000)
+  &.close {
+    @include _icon_close(#000);
   }
 }

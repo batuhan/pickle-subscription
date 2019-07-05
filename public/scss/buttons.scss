@@ -1,4 +1,4 @@
-@mixin button($type, $bg, $rounded:false, $color:''){
+@mixin button($type, $bg, $rounded: false, $color: "") {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: $font-size - 2;
@@ -12,42 +12,40 @@
   user-select: none;
   background-image: none;
   border-radius: 4px;
-  @if($type == 'solid'){
+  @if ($type == "solid") {
     background-color: $bg;
     color: $color;
     border-color: $bg;
-  }@else if($type == 'border'){
+  } @else if($type == "border") {
     background-color: $color-white;
     border: 1px solid $bg;
     color: $bg;
   }
-  @if($rounded == true){
+  @if ($rounded == true) {
     border-radius: 50px;
   }
 }
 @mixin disabledBtn() {
   @include defaultTransition(300);
-  &:disabled, &[disabled] {
+  &:disabled,
+  &[disabled] {
     background-color: #ccc;
     cursor: default;
     @include defaultTransition(300);
   }
 }
 
-.buttons-group{
-
-  &.__gap{
-
+.buttons-group {
+  &.__gap {
     .buttons {
       &:not(:last-child) {
         margin-right: $gutter/2;
       }
     }
   }
-
 }
 
-.buttons{
+.buttons {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: $font-size - 2;
@@ -63,34 +61,36 @@
   border: 1px solid transparent;
   border-radius: 4px;
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     padding: 4px 8px;
   }
 
-  &.rounded{
+  &.rounded {
     border-radius: 50px;
   }
 
-  &._add, &._primary{
+  &._add,
+  &._primary {
     font-size: $font-size;
     padding: 14px 24px;
-    background-color: #4C82FC;
+    background-color: #4c82fc;
     color: $color-white;
     border-radius: 1px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       padding: 8px 16px;
     }
   }
 
-  &._save, &._success{
+  &._save,
+  &._success {
     font-size: $font-size;
     padding: 14px 24px;
-    background-color: #1ABE98;
+    background-color: #1abe98;
     color: $color-white;
     border-radius: 1px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   }
 
   &._default {
@@ -98,7 +98,7 @@
     background-color: $blue;
     color: $color-white;
     border-radius: 2px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
     letter-spacing: 1px;
 
     &:hover {
@@ -106,18 +106,18 @@
     }
   }
 
-  &._text{
+  &._text {
     background: none !important;
     color: $color-blue-gray !important;
     box-shadow: none !important;
 
-    &.__white{
+    &.__white {
       color: $color-white !important;
     }
   }
 
   &._green {
-    background-color: #1ABE98;
+    background-color: #1abe98;
     color: white;
     &:hover {
       background-color: #17a886;
@@ -153,29 +153,26 @@
     color: #484848;
   }
 
-  &._right{
+  &._right {
     float: right;
   }
-
 }
 
-
-.action-column{
+.action-column {
   overflow: visible !important;
   text-align: right !important;
 }
-.action-dropdown{
+.action-dropdown {
   position: relative;
-  
-  &.open{
-    
-    .dropdown-menu{
+
+  &.open {
+    .dropdown-menu {
       display: block;
       z-index: $z-dropdown;
       box-shadow: $shadow-small;
     }
 
-    .__close{
+    .__close {
       z-index: $z-dropdown - 1;
       position: fixed;
       top: 0;
@@ -186,7 +183,7 @@
     }
   }
 
-  .dropdown-menu{
+  .dropdown-menu {
     background: white;
     position: absolute;
     top: 41px;
@@ -196,15 +193,15 @@
     border-radius: 6px;
     display: none;
 
-    li{
+    li {
       cursor: pointer;
       padding: 4px 24px;
 
-      &:hover{
+      &:hover {
         background-color: #f2f2f2;
       }
 
-      &.divider{
+      &.divider {
         padding: 0;
         border-bottom: 1px solid #e6e6e6;
       }
@@ -212,12 +209,11 @@
   }
 }
 
-
-.clear{
+.clear {
   display: block;
   clear: both;
 }
 
-[role="button"]{
+[role="button"] {
   cursor: pointer;
 }

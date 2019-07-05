@@ -1,12 +1,12 @@
-.modal-wrapper{
+.modal-wrapper {
   z-index: $z-modal;
 
-  .modal{
+  .modal {
     max-width: 100%;
     background: rgba(255, 255, 255, 0.858824);
   }
 
-  .modal-backdrop{
+  .modal-backdrop {
     @include modalBackdrop;
   }
 }
@@ -15,7 +15,7 @@
   z-index: $z-modal + 1;
   position: fixed;
   top: 33%;
-  margin-left: $nav-panel-width /2;
+  margin-left: $nav-panel-width / 2;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   width: 580px;
   max-width: 70%;
@@ -23,19 +23,19 @@
   transform: translate(-50%);
   @include fadeDownInAppModal(30%, 32%);
 
-  @include mediaQuery(max, iPhone){
+  @include mediaQuery(max, iPhone) {
     margin-left: $nav-panel-width-collapsed / 2;
     max-width: calc(100% - 74px);
     top: 80px;
     @include fadeDownInAppModal(75px, 85px);
   }
 
-  &.__invoice{
+  &.__invoice {
     width: 100%;
   }
 
   .modal-content {
-    background-color: #F9FCFF;
+    background-color: #f9fcff;
     border-radius: 2px;
   }
 
@@ -47,7 +47,7 @@
     .modal-title {
       font-size: 1.1rem;
       font-weight: normal;
-      letter-spacing: .5px;
+      letter-spacing: 0.5px;
       margin-bottom: 0;
     }
 
@@ -67,13 +67,13 @@
     }
   }
 
-  .modal-body{
+  .modal-body {
     padding: $gutter;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       padding: 12px;
 
-      .sb-form-group{
+      .sb-form-group {
         padding: 6px 0;
       }
     }
@@ -84,7 +84,7 @@
     padding: 15px 20px;
     border-top: 1px solid #eee;
 
-    &.hide{
+    &.hide {
       display: none;
     }
   }

@@ -2,62 +2,60 @@
  * Equal height - by Lewi Hussey
  */
 
-const matchHeight = function () {
+const matchHeight = (function() {
+  let initialized = false;
+  const untilFound = intervalTrigger();
 
-    let initialized = false;
-    const untilFound = intervalTrigger();
+  function init() {
+    eventListeners();
+    //
+    setInterval(() => {
+      if (initialized) {
+        window.clearInterval(untilFound);
+      }
+    }, 1000);
+  }
 
-    function init() {
-        eventListeners();
-        // 
-        setInterval(()=>{
-            if(initialized){
-                window.clearInterval(untilFound);
-            }
-        }, 1000);
-    }
+  function intervalTrigger() {
+    return window.setInterval(function() {
+      matchHeight();
+    }, 1000);
+  }
 
-    function intervalTrigger() {
-        return window.setInterval( function() {
-            matchHeight();
-        }, 1000 );
-    }
+  function eventListeners() {
+    $(window).on("resize", function() {
+      matchHeight();
+    });
+  }
 
-    function eventListeners(){
-        $(window).on('resize', function() {
-            matchHeight();
-        });
-    }
+  function matchHeight() {
+    $(document).ready(function() {
+      //
+      const groupName = $(".card");
+      if (groupName.length > 0) {
+        initialized = true;
+      }
+      //
+      const groupHeights = [];
 
-    function matchHeight(){
-        $(document).ready(function(){
-            // 
-            const groupName = $('.card');
-            if(groupName.length > 0){
-                initialized = true;
-            }
-            // 
-            const groupHeights = [];
+      groupName.css("min-height", "auto");
 
-            groupName.css('min-height', 'auto');
+      groupName.each(function() {
+        groupHeights.push($(this).outerHeight());
+        //
+      });
 
-            groupName.each(function() {
-                groupHeights.push($(this).outerHeight());
-                // 
-            });
+      const maxHeight = Math.max.apply(null, groupHeights);
+      groupName.css("min-height", maxHeight);
+    });
+  }
 
-            const maxHeight = Math.max.apply(null, groupHeights);
-            groupName.css('min-height', maxHeight);
-        });
-    };
-
-    return {
-        init
-    };
-
-} ();
+  return {
+    init,
+  };
+})();
 
 $(document).ready(function() {
-    matchHeight.init();
-    // TODO: fix on load height match
+  matchHeight.init();
+  // TODO: fix on load height match
 });

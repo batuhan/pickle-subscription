@@ -1,7 +1,16 @@
-const references =    [ {"model": require("./base/entity")("tiers"), "referenceField": "tier_id", "direction": "to", "readOnly": true}];
+const references = [
+  {
+    model: require("./base/entity")("tiers"),
+    referenceField: "tier_id",
+    direction: "to",
+    readOnly: true,
+  },
+];
 
-const PaymentStructureTemplate = require("./base/entity")("payment_structure_templates",references);
-
+const PaymentStructureTemplate = require("./base/entity")(
+  "payment_structure_templates",
+  references,
+);
 
 // Notification.createFromTemplate()
 

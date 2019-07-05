@@ -2,12 +2,8 @@
   "/users": {
     "get": {
       "summary": "Get users",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "get_users",
       "security": [
         {
@@ -30,12 +26,8 @@
   "/users/search": {
     "get": {
       "summary": "Get users",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "get_users_search",
       "security": [
         {
@@ -74,12 +66,8 @@
   "/users/{id}": {
     "get": {
       "summary": "Get users by id",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "get_users_id",
       "security": [
         {
@@ -107,12 +95,8 @@
     },
     "put": {
       "summary": "Update users",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "put_users_id",
       "security": [
         {
@@ -149,12 +133,8 @@
     },
     "delete": {
       "summary": "Delete users by id",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "delete_users_id",
       "security": [
         {
@@ -184,12 +164,8 @@
   "/users/own": {
     "get": {
       "summary": "Get requester's users",
-      "tags": [
-        "users"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["users"],
+      "produces": ["application/json"],
       "operationId": "get_users_own",
       "security": [
         {
@@ -212,12 +188,8 @@
   "/event-logs": {
     "get": {
       "summary": "Get event_logs",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "get_event_logs",
       "security": [
         {
@@ -238,12 +210,8 @@
     },
     "post": {
       "summary": "Create new event_logs",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "post_event_logs",
       "security": [
         {
@@ -274,12 +242,8 @@
   "/event-logs/search": {
     "get": {
       "summary": "Get event_logs",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "get_event_logs_search",
       "security": [
         {
@@ -318,12 +282,8 @@
   "/event-logs/{id}": {
     "get": {
       "summary": "Get event_logs by id",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "get_event_logs_id",
       "security": [
         {
@@ -351,12 +311,8 @@
     },
     "put": {
       "summary": "Update event_logs",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "put_event_logs_id",
       "security": [
         {
@@ -393,12 +349,8 @@
     },
     "delete": {
       "summary": "Delete event_logs by id",
-      "tags": [
-        "event-logs"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["event-logs"],
+      "produces": ["application/json"],
       "operationId": "delete_event_logs_id",
       "security": [
         {
@@ -428,12 +380,8 @@
   "/funds": {
     "get": {
       "summary": "Get funds",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "get_funds",
       "security": [
         {
@@ -454,12 +402,8 @@
     },
     "post": {
       "summary": "Create new funds",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "post_funds",
       "security": [
         {
@@ -490,12 +434,8 @@
   "/funds/search": {
     "get": {
       "summary": "Get funds",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "get_funds_search",
       "security": [
         {
@@ -534,12 +474,8 @@
   "/funds/{id}": {
     "get": {
       "summary": "Get funds by id",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "get_funds_id",
       "security": [
         {
@@ -567,12 +503,8 @@
     },
     "put": {
       "summary": "Update funds",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "put_funds_id",
       "security": [
         {
@@ -611,12 +543,8 @@
   "/funds/own": {
     "get": {
       "summary": "Get requester's funds",
-      "tags": [
-        "funds"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["funds"],
+      "produces": ["application/json"],
       "operationId": "get_funds_own",
       "security": [
         {
@@ -639,12 +567,8 @@
   "/invoices": {
     "get": {
       "summary": "Get invoices",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
       "operationId": "get_invoices",
       "security": [
         {
@@ -667,12 +591,8 @@
   "/invoices/search": {
     "get": {
       "summary": "Get invoices",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
       "operationId": "get_invoices_search",
       "security": [
         {
@@ -711,12 +631,8 @@
   "/invoices/{id}": {
     "get": {
       "summary": "Get invoices by id",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
       "operationId": "get_invoices_id",
       "security": [
         {
@@ -746,12 +662,8 @@
   "/invoices/own": {
     "get": {
       "summary": "Get requester's invoices",
-      "tags": [
-        "invoices"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["invoices"],
+      "produces": ["application/json"],
       "operationId": "get_invoices_own",
       "security": [
         {
@@ -774,12 +686,8 @@
   "/notification-templates": {
     "get": {
       "summary": "Get notification_templates",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "get_notification_templates",
       "security": [
         {
@@ -800,12 +708,8 @@
     },
     "post": {
       "summary": "Create new notification_templates",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "post_notification_templates",
       "security": [
         {
@@ -836,12 +740,8 @@
   "/notification-templates/search": {
     "get": {
       "summary": "Get notification_templates",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "get_notification_templates_search",
       "security": [
         {
@@ -880,12 +780,8 @@
   "/notification-templates/{id}": {
     "get": {
       "summary": "Get notification_templates by id",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "get_notification_templates_id",
       "security": [
         {
@@ -913,12 +809,8 @@
     },
     "put": {
       "summary": "Update notification_templates",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "put_notification_templates_id",
       "security": [
         {
@@ -955,12 +847,8 @@
     },
     "delete": {
       "summary": "Delete notification_templates by id",
-      "tags": [
-        "notification-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notification-templates"],
+      "produces": ["application/json"],
       "operationId": "delete_notification_templates_id",
       "security": [
         {
@@ -990,12 +878,8 @@
   "/notifications": {
     "get": {
       "summary": "Get notifications",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "get_notifications",
       "security": [
         {
@@ -1016,12 +900,8 @@
     },
     "post": {
       "summary": "Create new notifications",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "post_notifications",
       "security": [
         {
@@ -1052,12 +932,8 @@
   "/notifications/search": {
     "get": {
       "summary": "Get notifications",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "get_notifications_search",
       "security": [
         {
@@ -1096,12 +972,8 @@
   "/notifications/{id}": {
     "get": {
       "summary": "Get notifications by id",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "get_notifications_id",
       "security": [
         {
@@ -1129,12 +1001,8 @@
     },
     "put": {
       "summary": "Update notifications",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "put_notifications_id",
       "security": [
         {
@@ -1171,12 +1039,8 @@
     },
     "delete": {
       "summary": "Delete notifications by id",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "delete_notifications_id",
       "security": [
         {
@@ -1206,12 +1070,8 @@
   "/notifications/own": {
     "get": {
       "summary": "Get requester's notifications",
-      "tags": [
-        "notifications"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["notifications"],
+      "produces": ["application/json"],
       "operationId": "get_notifications_own",
       "security": [
         {
@@ -1234,12 +1094,8 @@
   "/permissions": {
     "get": {
       "summary": "Get user_permissions",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "get_permissions",
       "security": [
         {
@@ -1260,12 +1116,8 @@
     },
     "post": {
       "summary": "Create new user_permissions",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "post_permissions",
       "security": [
         {
@@ -1296,12 +1148,8 @@
   "/permissions/search": {
     "get": {
       "summary": "Get user_permissions",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "get_permissions_search",
       "security": [
         {
@@ -1340,12 +1188,8 @@
   "/permissions/{id}": {
     "get": {
       "summary": "Get user_permissions by id",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "get_permissions_id",
       "security": [
         {
@@ -1373,12 +1217,8 @@
     },
     "put": {
       "summary": "Update user_permissions",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "put_permissions_id",
       "security": [
         {
@@ -1415,12 +1255,8 @@
     },
     "delete": {
       "summary": "Delete user_permissions by id",
-      "tags": [
-        "permissions"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["permissions"],
+      "produces": ["application/json"],
       "operationId": "delete_permissions_id",
       "security": [
         {
@@ -1450,12 +1286,8 @@
   "/roles": {
     "get": {
       "summary": "Get user_roles",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "get_roles",
       "security": [
         {
@@ -1476,12 +1308,8 @@
     },
     "post": {
       "summary": "Create new user_roles",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "post_roles",
       "security": [
         {
@@ -1512,12 +1340,8 @@
   "/roles/search": {
     "get": {
       "summary": "Get user_roles",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "get_roles_search",
       "security": [
         {
@@ -1556,12 +1380,8 @@
   "/roles/{id}": {
     "get": {
       "summary": "Get user_roles by id",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "get_roles_id",
       "security": [
         {
@@ -1589,12 +1409,8 @@
     },
     "put": {
       "summary": "Update user_roles",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "put_roles_id",
       "security": [
         {
@@ -1631,12 +1447,8 @@
     },
     "delete": {
       "summary": "Delete user_roles by id",
-      "tags": [
-        "roles"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["roles"],
+      "produces": ["application/json"],
       "operationId": "delete_roles_id",
       "security": [
         {
@@ -1666,12 +1478,8 @@
   "/service-categories": {
     "get": {
       "summary": "Get service_categories",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "get_service_categories",
       "security": [
         {
@@ -1692,12 +1500,8 @@
     },
     "post": {
       "summary": "Create new service_categories",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "post_service_categories",
       "security": [
         {
@@ -1728,12 +1532,8 @@
   "/service-categories/search": {
     "get": {
       "summary": "Get service_categories",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "get_service_categories_search",
       "security": [
         {
@@ -1772,12 +1572,8 @@
   "/service-categories/{id}": {
     "get": {
       "summary": "Get service_categories by id",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "get_service_categories_id",
       "security": [
         {
@@ -1805,12 +1601,8 @@
     },
     "put": {
       "summary": "Update service_categories",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "put_service_categories_id",
       "security": [
         {
@@ -1847,12 +1639,8 @@
     },
     "delete": {
       "summary": "Delete service_categories by id",
-      "tags": [
-        "service-categories"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-categories"],
+      "produces": ["application/json"],
       "operationId": "delete_service_categories_id",
       "security": [
         {
@@ -1882,12 +1670,8 @@
   "/service-instance-cancellations": {
     "get": {
       "summary": "Get service_instance_cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_cancellations",
       "security": [
         {
@@ -1908,12 +1692,8 @@
     },
     "post": {
       "summary": "Create new service_instance_cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "post_service_instance_cancellations",
       "security": [
         {
@@ -1944,12 +1724,8 @@
   "/service-instance-cancellations/search": {
     "get": {
       "summary": "Get service_instance_cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_cancellations_search",
       "security": [
         {
@@ -1988,12 +1764,8 @@
   "/service-instance-cancellations/{id}": {
     "get": {
       "summary": "Get service_instance_cancellations by id",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_cancellations_id",
       "security": [
         {
@@ -2021,12 +1793,8 @@
     },
     "put": {
       "summary": "Update service_instance_cancellations",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "put_service_instance_cancellations_id",
       "security": [
         {
@@ -2063,12 +1831,8 @@
     },
     "delete": {
       "summary": "Delete service_instance_cancellations by id",
-      "tags": [
-        "service-instance-cancellations"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-cancellations"],
+      "produces": ["application/json"],
       "operationId": "delete_service_instance_cancellations_id",
       "security": [
         {
@@ -2098,12 +1862,8 @@
   "/service-instance-messages": {
     "get": {
       "summary": "Get service_instance_messages",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_messages",
       "security": [
         {
@@ -2124,12 +1884,8 @@
     },
     "post": {
       "summary": "Create new service_instance_messages",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "post_service_instance_messages",
       "security": [
         {
@@ -2160,12 +1916,8 @@
   "/service-instance-messages/search": {
     "get": {
       "summary": "Get service_instance_messages",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_messages_search",
       "security": [
         {
@@ -2204,12 +1956,8 @@
   "/service-instance-messages/{id}": {
     "get": {
       "summary": "Get service_instance_messages by id",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_messages_id",
       "security": [
         {
@@ -2237,12 +1985,8 @@
     },
     "put": {
       "summary": "Update service_instance_messages",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "put_service_instance_messages_id",
       "security": [
         {
@@ -2279,12 +2023,8 @@
     },
     "delete": {
       "summary": "Delete service_instance_messages by id",
-      "tags": [
-        "service-instance-messages"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-messages"],
+      "produces": ["application/json"],
       "operationId": "delete_service_instance_messages_id",
       "security": [
         {
@@ -2314,12 +2054,8 @@
   "/service-instance-properties": {
     "get": {
       "summary": "Get service_instance_properties",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_properties",
       "security": [
         {
@@ -2340,12 +2076,8 @@
     },
     "post": {
       "summary": "Create new service_instance_properties",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "post_service_instance_properties",
       "security": [
         {
@@ -2376,12 +2108,8 @@
   "/service-instance-properties/search": {
     "get": {
       "summary": "Get service_instance_properties",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_properties_search",
       "security": [
         {
@@ -2420,12 +2148,8 @@
   "/service-instance-properties/{id}": {
     "get": {
       "summary": "Get service_instance_properties by id",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_instance_properties_id",
       "security": [
         {
@@ -2453,12 +2177,8 @@
     },
     "put": {
       "summary": "Update service_instance_properties",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "put_service_instance_properties_id",
       "security": [
         {
@@ -2495,12 +2215,8 @@
     },
     "delete": {
       "summary": "Delete service_instance_properties by id",
-      "tags": [
-        "service-instance-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instance-properties"],
+      "produces": ["application/json"],
       "operationId": "delete_service_instance_properties_id",
       "security": [
         {
@@ -2530,12 +2246,8 @@
   "/service-instances": {
     "get": {
       "summary": "Get service_instances",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "get_service_instances",
       "security": [
         {
@@ -2558,12 +2270,8 @@
   "/service-instances/search": {
     "get": {
       "summary": "Get service_instances",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "get_service_instances_search",
       "security": [
         {
@@ -2602,12 +2310,8 @@
   "/service-instances/{id}": {
     "get": {
       "summary": "Get service_instances by id",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "get_service_instances_id",
       "security": [
         {
@@ -2635,12 +2339,8 @@
     },
     "put": {
       "summary": "Update service_instances",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "put_service_instances_id",
       "security": [
         {
@@ -2677,12 +2377,8 @@
     },
     "delete": {
       "summary": "Delete service_instances by id",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "delete_service_instances_id",
       "security": [
         {
@@ -2712,12 +2408,8 @@
   "/service-instances/own": {
     "get": {
       "summary": "Get requester's service_instances",
-      "tags": [
-        "service-instances"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-instances"],
+      "produces": ["application/json"],
       "operationId": "get_service_instances_own",
       "security": [
         {
@@ -2740,12 +2432,8 @@
   "/service-template-properties": {
     "get": {
       "summary": "Get service_template_properties",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_template_properties",
       "security": [
         {
@@ -2766,12 +2454,8 @@
     },
     "post": {
       "summary": "Create new service_template_properties",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "post_service_template_properties",
       "security": [
         {
@@ -2802,12 +2486,8 @@
   "/service-template-properties/search": {
     "get": {
       "summary": "Get service_template_properties",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_template_properties_search",
       "security": [
         {
@@ -2846,12 +2526,8 @@
   "/service-template-properties/{id}": {
     "get": {
       "summary": "Get service_template_properties by id",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "get_service_template_properties_id",
       "security": [
         {
@@ -2879,12 +2555,8 @@
     },
     "put": {
       "summary": "Update service_template_properties",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "put_service_template_properties_id",
       "security": [
         {
@@ -2921,12 +2593,8 @@
     },
     "delete": {
       "summary": "Delete service_template_properties by id",
-      "tags": [
-        "service-template-properties"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-template-properties"],
+      "produces": ["application/json"],
       "operationId": "delete_service_template_properties_id",
       "security": [
         {
@@ -2956,12 +2624,8 @@
   "/service-templates": {
     "get": {
       "summary": "Get service_templates",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "get_service_templates",
       "security": [
         {
@@ -2982,12 +2646,8 @@
     },
     "post": {
       "summary": "Create new service_templates",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "post_service_templates",
       "security": [
         {
@@ -3018,12 +2678,8 @@
   "/service-templates/search": {
     "get": {
       "summary": "Get service_templates",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "get_service_templates_search",
       "security": [
         {
@@ -3062,12 +2718,8 @@
   "/service-templates/{id}": {
     "get": {
       "summary": "Get service_templates by id",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "get_service_templates_id",
       "security": [
         {
@@ -3095,12 +2747,8 @@
     },
     "put": {
       "summary": "Update service_templates",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "put_service_templates_id",
       "security": [
         {
@@ -3137,12 +2785,8 @@
     },
     "delete": {
       "summary": "Delete service_templates by id",
-      "tags": [
-        "service-templates"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["service-templates"],
+      "produces": ["application/json"],
       "operationId": "delete_service_templates_id",
       "security": [
         {
@@ -3172,12 +2816,8 @@
   "/webhooks": {
     "get": {
       "summary": "Get webhooks",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "get_webhooks",
       "security": [
         {
@@ -3198,12 +2838,8 @@
     },
     "post": {
       "summary": "Create new webhooks",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "post_webhooks",
       "security": [
         {
@@ -3234,12 +2870,8 @@
   "/webhooks/search": {
     "get": {
       "summary": "Get webhooks",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "get_webhooks_search",
       "security": [
         {
@@ -3278,12 +2910,8 @@
   "/webhooks/{id}": {
     "get": {
       "summary": "Get webhooks by id",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "get_webhooks_id",
       "security": [
         {
@@ -3311,12 +2939,8 @@
     },
     "put": {
       "summary": "Update webhooks",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "put_webhooks_id",
       "security": [
         {
@@ -3353,12 +2977,8 @@
     },
     "delete": {
       "summary": "Delete webhooks by id",
-      "tags": [
-        "webhooks"
-      ],
-      "produces": [
-        "application/json"
-      ],
+      "tags": ["webhooks"],
+      "produces": ["application/json"],
       "operationId": "delete_webhooks_id",
       "security": [
         {

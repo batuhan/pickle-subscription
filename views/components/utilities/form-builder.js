@@ -1,211 +1,251 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import _ from "lodash";
-import update from 'immutability-helper';
-import React from 'react';
-import PropTypes from 'prop-types';
+import update from "immutability-helper";
+import React from "react";
+import PropTypes from "prop-types";
 import { setFormData } from "./actions";
 
-
-const mapStateToProps = function(name, mapState){
-
-    return function(state, ownProps) {
-        if (state.allForms[name]) {
-            return {...mapState(state), "formData": state.allForms[name]};
-        }
-            return {};
-        
+const mapStateToProps = function(name, mapState) {
+  return function(state, ownProps) {
+    if (state.allForms[name]) {
+      return { ...mapState(state), formData: state.allForms[name] };
     }
+    return {};
+  };
 };
 
+const mapDispatchToProps = function(name, mapDispatch) {
+  return (dispatch, ownProps) => {
+    return {
+      ...mapDispatch(dispatch),
+      setFormData: newFormData => {
+        dispatch(setFormData(name, newFormData));
+      },
+      validateForm: formData => {
+        const validatedForm = handleValidation(formData);
+        dispatch(setFormData(name, validatedForm));
+        return validatedForm;
+      },
+    };
+  };
+};
 
-const mapDispatchToProps = function(name, mapDispatch){
-    return (dispatch, ownProps) => {
-        return {
-            ...mapDispatch(dispatch),
-            setFormData: (newFormData) => {
-                dispatch(setFormData(name, newFormData))
+let handleValidation = function(
+  stateFormData,
+  newFormData = null,
+  refModel = null,
+  refIndex = null,
+) {
+  //
+
+  const self = this;
+  let errors = false; // this is used to check and set the boolean error at the top level of formData object.
+  const currentDataset = stateFormData; // this will be a subset of the original formData when it's in the recursive call.
+  let formData = newFormData || stateFormData; // this is to keep a full object of the updated formData in every recursive call.
+  if (refModel === null && refIndex === null) {
+    formData = update(formData, { hasErrors: { $set: false } });
+  }
+  if (currentDataset.validators && currentDataset.validators.length) {
+    currentDataset.validators.map(validator => {
+      const key = Object.keys(validator)[0];
+      const result =
+        typeof validator[key] === "function"
+          ? validator[key](currentDataset[key])
+          : true;
+      if (result !== true) {
+        errors = true;
+        if (refModel === null && refIndex === null) {
+          formData = update(formData, {
+            errors: { $set: [{ field: key, message: result }] },
+          });
+        } else {
+          formData = update(formData, {
+            references: {
+              [refModel]: {
+                [refIndex]: {
+                  errors: { $set: [{ field: key, message: result }] },
+                },
+              },
             },
-            validateForm: (formData) => {
-                const validatedForm = handleValidation(formData);
-                dispatch(setFormData(name, validatedForm));
-                return validatedForm;
-            }
+          });
+          return formData;
         }
-    }
-};
-
-
-let handleValidation = function(stateFormData, newFormData = null, refModel = null, refIndex = null){
-
-    //
-
-    const self = this;
-    let errors = false; // this is used to check and set the boolean error at the top level of formData object.
-    const currentDataset = stateFormData; // this will be a subset of the original formData when it's in the recursive call.
-    let formData = newFormData || stateFormData; // this is to keep a full object of the updated formData in every recursive call.
-    if(refModel === null && refIndex === null){
-        formData = update(formData, { "hasErrors": {$set: false} });
-    }
-    if(currentDataset.validators && currentDataset.validators.length) {
-        currentDataset.validators.map((validator) => {
-            const key = Object.keys(validator)[0];
-            const result = typeof(validator[key]) === "function" ? validator[key](currentDataset[key]) : true;
-            if (result !== true) {
-                errors = true;
-                if(refModel === null && refIndex === null) {
-                    formData = update(formData, { "errors": { $set: [{ "field": key, "message": result }] } });
-                }else{
-                    formData = update(formData, { "references" : { [refModel] : { [refIndex]: { "errors": { $set: [{ "field": key, "message": result }] } } } } });
-                    return(formData);
-                }
-            }else{ // the error is corrected, remove item from the error object
-                if(refModel === null && refIndex === null) {
-                    const filteredErrors = _.filter(formData.errors, (obj)=>{ return obj.field != key });
-                    formData = update(formData, { "errors": {$set: filteredErrors} });
-                }else{
-                    const filteredErrors = _.filter(currentDataset.errors, (obj)=>{ return obj.field != key });
-                    formData = update(formData, { "references" : { [refModel] : { [refIndex]: { "errors": { $set: filteredErrors } } } } });
-                    return(formData);
-                }
-            }
+      } else {
+        // the error is corrected, remove item from the error object
+        if (refModel === null && refIndex === null) {
+          const filteredErrors = _.filter(formData.errors, obj => {
+            return obj.field != key;
+          });
+          formData = update(formData, { errors: { $set: filteredErrors } });
+        } else {
+          const filteredErrors = _.filter(currentDataset.errors, obj => {
+            return obj.field != key;
+          });
+          formData = update(formData, {
+            references: {
+              [refModel]: { [refIndex]: { errors: { $set: filteredErrors } } },
+            },
+          });
+          return formData;
+        }
+      }
+    });
+    if (
+      currentDataset.references &&
+      Object.keys(currentDataset.references).length
+    ) {
+      _.map(currentDataset.references, (refModel, key) => {
+        refModel.map((refField, index) => {
+          formData = handleValidation(refField, formData, key, index);
         });
-        if(currentDataset.references && Object.keys(currentDataset.references).length){
-            _.map(currentDataset.references, (refModel, key)=>{
-                refModel.map((refField, index)=>{
-                    formData = handleValidation(refField, formData, key, index);
-                });
-            });
-        }
+      });
     }
-    if(errors){
-        formData = update(formData, { "hasErrors": {$set: true} });
-    }
-    return formData;
+  }
+  if (errors) {
+    formData = update(formData, { hasErrors: { $set: true } });
+  }
+  return formData;
 };
 
-
-const buildFormData = function(name, value, refName = null, refID = null, validator = null){
-   return function(formData) {
-       if (refName && refID) {
-
-           let refIndex = _.findIndex(formData.references[refName], ['id', refID]);
-           if (refIndex == -1) {
-               refIndex = formData.references[refName].length;
-           }
-           const newData = update(formData, {
-               references: {
-                   [refName]: {
-                       [refIndex]: {
-                           [name]: {$set: value},
-                           "validators": {$set: [{[name]: validator}]}
-                       }
-                   }
-               }
-           });
-           return update(formData, {$set: newData});
-
-       } 
-
-           const newData = update(formData, {
-               [name]: {$set: value},
-               "validators": {$set: [{[name]: validator}]}
-           });
-           return update(formData, {$set: newData});
-
-       
-   }
-};
-
-
-const buildFormRefsData = function (name, value, refName, refID, validator) {
-    return function (formData) {
-        if ((!refName && !refID) || !refName) {
-            return buildFormData(name, value, refName, refID, validator)(formData)
-        }
-        if (formData.references && !formData.references[refName]) {
-            formData = update(formData, {
-                "references": {$merge: {[refName]: []}}
-            });
-        }
-
-        if (formData.references && !formData.references[refName][refID]) {
-
-            formData = update(formData, {"references": {[refName]: {$push: [{id: refID}]}}});
-        }
-
-
-        return buildFormData(name, value, refName, refID, validator)(formData)
+const buildFormData = function(
+  name,
+  value,
+  refName = null,
+  refID = null,
+  validator = null,
+) {
+  return function(formData) {
+    if (refName && refID) {
+      let refIndex = _.findIndex(formData.references[refName], ["id", refID]);
+      if (refIndex == -1) {
+        refIndex = formData.references[refName].length;
+      }
+      const newData = update(formData, {
+        references: {
+          [refName]: {
+            [refIndex]: {
+              [name]: { $set: value },
+              validators: { $set: [{ [name]: validator }] },
+            },
+          },
+        },
+      });
+      return update(formData, { $set: newData });
     }
+
+    const newData = update(formData, {
+      [name]: { $set: value },
+      validators: { $set: [{ [name]: validator }] },
+    });
+    return update(formData, { $set: newData });
+  };
 };
 
+const buildFormRefsData = function(name, value, refName, refID, validator) {
+  return function(formData) {
+    if ((!refName && !refID) || !refName) {
+      return buildFormData(name, value, refName, refID, validator)(formData);
+    }
+    if (formData.references && !formData.references[refName]) {
+      formData = update(formData, {
+        references: { $merge: { [refName]: [] } },
+      });
+    }
 
-const formBuilder =  function(formName, defaultFormData=null, mapState = ()=>{}, mapDispatch = ()=>{}){
-    return function(Component){
+    if (formData.references && !formData.references[refName][refID]) {
+      formData = update(formData, {
+        references: { [refName]: { $push: [{ id: refID }] } },
+      });
+    }
 
-        class FormWrapper extends React.Component {
-            constructor(props) {
-                super(props);
-                this.handleInputsChange = this.handleInputsChange.bind(this);
-                this.initializeInput = this.initializeInput.bind(this);
+    return buildFormData(name, value, refName, refID, validator)(formData);
+  };
+};
 
-                this.props.setFormData(defaultFormData || {"references" : {}});
-            }
+const formBuilder = function(
+  formName,
+  defaultFormData = null,
+  mapState = () => {},
+  mapDispatch = () => {},
+) {
+  return function(Component) {
+    class FormWrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.handleInputsChange = this.handleInputsChange.bind(this);
+        this.initializeInput = this.initializeInput.bind(this);
 
-            initializeInput(component){
-                const self = this;
-                //
-                this.props.setFormData(buildFormRefsData(
-                    component.props.name,
-                    component.props.defaultValue ||  component.props.value || null,
-                    component.props.refName || null,
-                    component.props.refID || null,
-                    component.props.validator));
-            }
+        this.props.setFormData(defaultFormData || { references: {} });
+      }
 
-            handleInputsChange(e = null, component){
-                if(e) {
-                    if(component.props.onChange){
-                        component.props.onChange(e);
-                    }
-                    if (component.props.refName) {
-                        this.props.setFormData(buildFormData(
-                            component.props.name,
-                            e.target.value,
-                            component.props.refName,
-                            component.props.refID,
-                            component.props.validator || null));
-                    } else {
-                        this.props.setFormData(buildFormData(
-                            component.props.name, e.target.value, null, null,
-                            component.props.validator || null));
-                    }
-                }
-            }
+      initializeInput(component) {
+        const self = this;
+        //
+        this.props.setFormData(
+          buildFormRefsData(
+            component.props.name,
+            component.props.defaultValue || component.props.value || null,
+            component.props.refName || null,
+            component.props.refID || null,
+            component.props.validator,
+          ),
+        );
+      }
 
-            getChildContext() {
-                return {
-                    formName,
-                    handleInputsChange : this.handleInputsChange,
-                    initializeInput : this.initializeInput
-                };
-            }
-
-            render(){ // renders your form component
-                return <Component {...this.props} />
-            }
-
+      handleInputsChange(e = null, component) {
+        if (e) {
+          if (component.props.onChange) {
+            component.props.onChange(e);
+          }
+          if (component.props.refName) {
+            this.props.setFormData(
+              buildFormData(
+                component.props.name,
+                e.target.value,
+                component.props.refName,
+                component.props.refID,
+                component.props.validator || null,
+              ),
+            );
+          } else {
+            this.props.setFormData(
+              buildFormData(
+                component.props.name,
+                e.target.value,
+                null,
+                null,
+                component.props.validator || null,
+              ),
+            );
+          }
         }
+      }
 
-        FormWrapper.childContextTypes = {
-            formName: PropTypes.string,
-            handleInputsChange : PropTypes.func,
-            initializeInput : PropTypes.func
-
+      getChildContext() {
+        return {
+          formName,
+          handleInputsChange: this.handleInputsChange,
+          initializeInput: this.initializeInput,
         };
+      }
 
-        return connect(mapStateToProps(formName, mapState), mapDispatchToProps(formName, mapDispatch))(FormWrapper)
+      render() {
+        // renders your form component
+        return <Component {...this.props} />;
+      }
     }
+
+    FormWrapper.childContextTypes = {
+      formName: PropTypes.string,
+      handleInputsChange: PropTypes.func,
+      initializeInput: PropTypes.func,
+    };
+
+    return connect(
+      mapStateToProps(formName, mapState),
+      mapDispatchToProps(formName, mapDispatch),
+    )(FormWrapper);
+  };
 };
 
-
-export { formBuilder }
+export { formBuilder };

@@ -1,17 +1,17 @@
 {
   "name": "webhooks",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
-  "pluginbot" : {
-    "server" : {
-      "main" : "main.js",
-      "consumes" : ["database", "lifecycleManager"]
+  "dependencies": {},
+  "pluginbot": {
+    "server": {
+      "main": "main.js",
+      "consumes": [
+        "database",
+        "lifecycleManager"
+      ]
     },
-    "client" : {
-      "main" : "client-main.js"
+    "client": {
+      "main": "client-main.js"
     }
   }
-
 }

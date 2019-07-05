@@ -1,16 +1,16 @@
 {
   "name": "core-embeddables",
   "version": "0.0.1",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "pluginbot": {
     "client": {
-      "main" : "client.js"
+      "main": "client.js"
     },
     "server": {
-      "main" : "main.js",
-      "consumes" : ["database"]
+      "main": "main.js",
+      "consumes": [
+        "database"
+      ]
     }
   }
 }

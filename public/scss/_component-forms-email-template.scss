@@ -24,11 +24,11 @@
     min-height: 280px;
   }
 
-  .sb-form-group{
+  .sb-form-group {
     padding: 0 0 $gutter 0;
 
-    &._group-email-subject{
-      input{
+    &._group-email-subject {
+      input {
         width: 100%;
         padding: 0 $gutter;
       }
@@ -41,22 +41,23 @@
     }
   }
 
-  ._content-container ._content{
-    .columns{
+  ._content-container ._content {
+    .columns {
       display: grid;
       grid-template-columns: 30% 70%;
     }
   }
 
-  .__email-role-settings, .__email-notification-settings{
-
-    input, label{
+  .__email-role-settings,
+  .__email-notification-settings {
+    input,
+    label {
       display: inline-block;
       line-height: 20px;
       height: 16px;
       margin: 0;
     }
-    input{
+    input {
       margin: 0 $gutter 0 0;
     }
   }

@@ -47,17 +47,15 @@
 /* embeddable in-app overrides */
 @import "_component-embeddables-billing-overrides.scss";
 
-
 body {
   line-height: 1.9rem;
-  
-  a{
-    &:hover{
+
+  a {
+    &:hover {
       text-decoration: none;
-    }  
+    }
   }
   img {
     @include text_muted;
   }
-
 }

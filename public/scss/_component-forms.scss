@@ -2,24 +2,25 @@
 @include _formLabel(dark);
 @include _formInput;
 
-.form-help-text{
+.form-help-text {
   font-size: 0.89rem;
   line-height: 1.2rem;
   color: $help-text;
   margin-bottom: $gutter;
 }
 
-.sb-form-group{
+.sb-form-group {
   padding: 0 $gutter $gutter $gutter;
 
-  &.hidden, &._hidden{
+  &.hidden,
+  &._hidden {
     display: none;
   }
 
-  ._input-container-{
+  ._input-container- {
     position: relative;
 
-    ._form-error-{
+    ._form-error- {
       position: absolute;
       top: -30px;
       right: 0;
@@ -34,15 +35,14 @@
     }
   }
 
-  ._label-{
-
+  ._label- {
   }
 
-  ._input-{
+  ._input- {
     padding: $gutter/2 $gutter;
     width: 100%;
 
-    &.has-error{
+    &.has-error {
       border-color: $color-error;
       border-width: 2px;
     }
@@ -50,7 +50,7 @@
 }
 
 /* @mixins */
-@mixin form-checkboxes{
+@mixin form-checkboxes {
   .iconToggleField {
     cursor: pointer;
     position: relative;
@@ -95,11 +95,11 @@
     }
   }
 }
-@mixin form-checkboxes-2{
+@mixin form-checkboxes-2 {
   .iconToggleField {
     cursor: pointer;
     position: relative;
-    border: 1px solid #0033A0;
+    border: 1px solid #0033a0;
     background: white;
     width: 24px;
     height: 24px;
@@ -119,19 +119,19 @@
       transform: rotate(-45deg);
     }
 
-    &.inactive{
+    &.inactive {
       border: 1px solid #c6cbce;
-      &::before{
+      &::before {
         color: #c6cbce;
         @include defaultTransition(150ms);
       }
     }
-    &.active{
+    &.active {
       border: 1px solid $color-blue;
       @include defaultTransition(150ms);
     }
-    &:hover{
-      &::before{
+    &:hover {
+      &::before {
         color: $color-blue;
         @include defaultTransition(150ms);
       }

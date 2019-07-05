@@ -1,46 +1,42 @@
 @import "variables";
 
-.form-offering{
-
-  ._section > h3{
+.form-offering {
+  ._section > h3 {
     margin-bottom: 0 !important;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       margin-bottom: $gutter !important;
     }
   }
 
-  ._form-field-group{
+  ._form-field-group {
     max-width: $_max-fields-width;
     min-width: $_min-fields-width;
 
-    @include mediaQuery(max, iPhone){
+    @include mediaQuery(max, iPhone) {
       width: 100%;
       max-width: 100%;
       min-width: 0;
 
-      .sb-form-group{
+      .sb-form-group {
         padding: 0;
       }
     }
 
-    &._form-field-name_software_name{
-
-      ._group-default{
+    &._form-field-name_software_name {
+      ._group-default {
         padding-left: 0;
       }
 
-      label{
+      label {
         display: none;
       }
     }
-
   }
 
-  ._save{
+  ._save {
     float: right;
     margin: $gutter;
     margin-right: 12px;
   }
-
 }

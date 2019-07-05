@@ -1,9 +1,10 @@
 module.exports = {
-
-    async up (knex) {
-        await knex("notification_templates").where({name: "invitation"}).update({
-            subject: "Invitation",
-            message: `<style>
+  async up(knex) {
+    await knex("notification_templates")
+      .where({ name: "invitation" })
+      .update({
+        subject: "Invitation",
+        message: `<style>
       /* -------------------------------------
           GLOBAL RESETS
       ------------------------------------- */
@@ -310,11 +311,13 @@ module.exports = {
           </div>
         </td>
       </tr>
-    </tbody></table>`
-        });
+    </tbody></table>`,
+      });
 
-        await knex("notification_templates").where({name: "password_reset"}).update({
-            message: `<style>
+    await knex("notification_templates")
+      .where({ name: "password_reset" })
+      .update({
+        message: `<style>
             /* -------------------------------------
                 GLOBAL RESETS
             ------------------------------------- */
@@ -622,14 +625,12 @@ module.exports = {
 </td>
 </tr>
 </tbody></table>`,
-            subject: "Password Reset"
-        });
-        return await knex;
-    },
+        subject: "Password Reset",
+      });
+    return await knex;
+  },
 
-    async down (knex) {
-
-        return await knex;
-
-    }
-}
+  async down(knex) {
+    return await knex;
+  },
+};

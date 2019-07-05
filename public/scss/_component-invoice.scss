@@ -1,70 +1,70 @@
-.Invoice{
+.Invoice {
   @include text;
 
-  .invoice-header{
+  .invoice-header {
     background-color: $color-dark-blue;
 
-    .invoice-header-header{
+    .invoice-header-header {
       padding: $gutter;
 
-      .invoice-entity{
-
+      .invoice-entity {
       }
 
-      .invoice-no{
+      .invoice-no {
         font-size: 0.8rem;
         line-height: 1.2rem;
       }
     }
   }
 
-  .xaas-dashboard{
-
-    .xaas-row{
+  .xaas-dashboard {
+    .xaas-row {
       margin-bottom: 0;
       border: none;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       border-radius: 0;
 
-      .xaas-title{
+      .xaas-title {
         background-color: $color-blue-gray;
         color: $color-white;
       }
     }
   }
 
-  .entity-info{
-
-    .invoice-entity-details{
+  .entity-info {
+    .invoice-entity-details {
       display: flex;
 
-      &>div{
+      & > div {
         flex-grow: 1;
       }
-      &>div:first-child{
+      & > div:first-child {
         padding-left: $gutter;
       }
-      &>div:last-child{
+      & > div:last-child {
         padding-right: $gutter;
       }
 
-      h3{
+      h3 {
         font-size: 1.2rem;
         margin: $gutter / 2 0;
       }
 
-      .invoice-from-header, .invoice-to-header, .invoice-status-header{
+      .invoice-from-header,
+      .invoice-to-header,
+      .invoice-status-header {
         border-bottom: 1px solid $color-dark-blue;
         padding: $gutter/2 0;
       }
 
-      .invoice-from-body, .invoice-to-body, .invoice-status-body{
-
-        ul{
+      .invoice-from-body,
+      .invoice-to-body,
+      .invoice-status-body {
+        ul {
           padding: $gutter/2 0;
 
-          li{
+          li {
             font-size: 0.9rem;
             line-height: 1.5rem;
           }
@@ -73,44 +73,33 @@
     }
   }
 
-  .invoice-details{
-
-    .table{
-
-      thead{
-
-        tr{
-
-          th{
+  .invoice-details {
+    .table {
+      thead {
+        tr {
+          th {
             background-color: $color-blue-gray;
           }
         }
       }
 
-      tbody{
-
-        tr{
-
-          td{
-
+      tbody {
+        tr {
+          td {
           }
         }
       }
 
-      tfoot{
-
-        tr{
-
-          td{
-
+      tfoot {
+        tr {
+          td {
           }
         }
       }
     }
-
   }
 
-  .invoice-actions{
+  .invoice-actions {
     background-color: transparent;
     display: flex;
     justify-content: flex-end;
@@ -119,7 +108,8 @@
 }
 
 //Print invoice style within the app dashboard
-.servicebot--embeddable--print { //targets the print window body class
+.servicebot--embeddable--print {
+  //targets the print window body class
 
   .servicebot-invoice-modal-container .__modal {
     margin-left: auto;

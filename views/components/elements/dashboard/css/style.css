@@ -1,58 +1,59 @@
 .dashboard-widget {
-    color: white;
-    border-radius: 3px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
+  color: white;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
 }
 
-.dashboard-widget.linked{
-    cursor: pointer;
+.dashboard-widget.linked {
+  cursor: pointer;
 }
 
-.dashboard-widget .widget-label, .dashboard-widget .widget-data {
-    text-align: center;
-    padding: 10px 0px;
+.dashboard-widget .widget-label,
+.dashboard-widget .widget-data {
+  text-align: center;
+  padding: 10px 0px;
 }
 
 .dashboard-widget .widget-label-mini {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .dashboard-widget .widget-data {
-    font-size: 2em;
-    font-weight: 100;
-    padding: 20px 0px;
+  font-size: 2em;
+  font-weight: 100;
+  padding: 20px 0px;
 }
 
-.offerings-widgets{
-    background: white;
-    margin: 15px 0;
-    border-radius: 5px;
+.offerings-widgets {
+  background: white;
+  margin: 15px 0;
+  border-radius: 5px;
 }
 
 .offerings-widget {
-    padding: 5px 15px;
-    text-align: center;
+  padding: 5px 15px;
+  text-align: center;
 }
 
 .offerings-widget.master {
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    background: #000000;
-    color: white;
-    text-align: left;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  background: #000000;
+  color: white;
+  text-align: left;
 }
-.chartjs-render-monitor{
-    margin: 0 auto;
+.chartjs-render-monitor {
+  margin: 0 auto;
 }
 
-.full-height{
-    height: 100%;
+.full-height {
+  height: 100%;
 }
 
 .section-wrapper .dashboard-widget {
-    box-shadow: none;
-    margin-bottom: 0;
+  box-shadow: none;
+  margin-bottom: 0;
 }

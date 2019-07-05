@@ -1,14 +1,14 @@
-let roleMap = {}
-let swaggerJSON = require("../../../api-docs/api-paths.json");
+const roleMap = {}
+const swaggerJSON = require("../../../api-docs/api-paths.json");
 
-let initialRoleMap = {
+const initialRoleMap = {
     "admin": [],
     "staff": [],
     "user": []
 };
-let permissions = [];
-for (let route in swaggerJSON) {
-    for (let method in swaggerJSON[route]) {
+const permissions = [];
+for (const route in swaggerJSON) {
+    for (const method in swaggerJSON[route]) {
         if (swaggerJSON[route][method]['x-roles'].includes("admin")) {
             initialRoleMap.admin.push(swaggerJSON[route][method].operationId);
         }

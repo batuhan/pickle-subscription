@@ -1,5 +1,5 @@
-//the default system options
-let systemOptions =
+// the default system options
+const systemOptions =
     {
         options: [
             {
@@ -313,7 +313,7 @@ let systemOptions =
             {"option": "auto_approve_cancellations", "value": true, public: true, "type": "system", "data_type": "bool"}
 
         ],
-        populateOptions: function (options = systemOptions.options, model = require("../models/system-options")) {
+        populateOptions (options = systemOptions.options, model = require("../models/system-options")) {
             return Promise.all(options.map((option) => {
                 return new Promise((resolve, reject) => {
                     new model(option).create((err, result) => {

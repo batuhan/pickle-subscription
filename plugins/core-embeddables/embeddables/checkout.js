@@ -3,15 +3,16 @@ import cookie from "react-cookie";
 import {Fetcher, inputField, iconToggleField, ServicebotBaseForm} from "servicebot-base-form";
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {connect} from "react-redux";
-import {RenderWidget, WidgetList, widgets} from "../../../views/components/utilities/widgets";
 import slug from "slug"
-import {numericality, required} from 'redux-form-validators'
-const CHECKOUT_FORM = "checkoutForm";
-const selector = formValueSelector(CHECKOUT_FORM); // <-- same as form name
+import {numericality, required} from 'redux-form-validators' // <-- same as form name
 import { duotoneDark } from 'react-syntax-highlighter/styles/prism';
 import SyntaxHighlighter from 'react-syntax-highlighter/prism';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {RenderWidget, WidgetList, widgets} from "../../../views/components/utilities/widgets";
 import Load from '../../../views/components/utilities/load.jsx';
+
+const CHECKOUT_FORM = "checkoutForm";
+const selector = formValueSelector(CHECKOUT_FORM);
 
 class CustomField extends React.Component {
 
@@ -21,7 +22,7 @@ class CustomField extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let props = this.props;
+        const {props} = this;
         if ((nextProps.myValues.type !== props.myValues.type) && (nextProps.length === props.length)) {
             props.clearConfig();
             props.clearValue();
@@ -33,7 +34,7 @@ class CustomField extends React.Component {
 
     render() {
 
-        let props = this.props;
+        const {props} = this;
         let {
             willAutoFocus, index, typeValue, member, myValues, privateValue, requiredValue, promptValue, configValue,
             setPrivate, setRequired, setPrompt, changePrivate, changeRequired, changePrompt, templateType, currency
@@ -43,76 +44,79 @@ class CustomField extends React.Component {
             willAutoFocus = false;
         }
         if(typeValue === "metric"){
-            return <div/>
+            return <div />
         }
         return (
-            <div className="custom-property-fields">
-                <div id="custom-prop-name" className="custom-property-field-group">
-                    <Field
-                        willAutoFocus={willAutoFocus}
-                        name={`${member}.prop_label`}
-                        label={`Field Name`}
-                        className={`custom-prop-name`}
-                        type="text"
-                        component={inputField}
-                        validate={required()}
-                        placeholder="Custom Property Label"
-                    />
-                </div>
-
-                <div id="custom-prop-type" className="custom-property-field-group">
-                    <WidgetList name={`${member}.type`} id="type"/>
-                </div>
-
-                <div id="custom-prop-settings" className="custom-property-field-group">
-                    {!privateValue && !requiredValue &&
-                    <Field
-                        onChange={changePrompt}
-                        setValue={setPrompt}
-                        name={`${member}.prompt_user`}
-                        type="checkbox"
-                        label={promptValue ? "Prompt User" : "Set Prompt User"}
-                        defaultValue={true}
-                        color="#0091EA"
-                        faIcon="eye"
-                        component={iconToggleField}
-                    />
-                    }
-                    {!privateValue &&
-                    <Field
-                        onChange={changeRequired}
-                        setValue={setRequired}
-                        name={`${member}.required`}
-                        type="checkbox"
-                        label={requiredValue ? "Required" : "Set Required"}
-                        color="#FF1744"
-                        faIcon="check"
-                        component={iconToggleField}
-                    />
-                    }
-                    {!requiredValue && !promptValue &&
-                    <Field
-                        onChange={changePrivate}
-                        setValue={setPrivate}
-                        name={`${member}.private`}
-                        type="checkbox"
-                        label={privateValue ? "Private" : "Set Private"}
-                        color="#424242"
-                        faIcon="hand-paper-o"
-                        component={iconToggleField}
-                    />
-                    }
-                </div>
-                <div id="custom-prop-widget" className="custom-property-field-group">
-                    {typeValue && <RenderWidget
-                        currency={currency}
-                        showPrice={(templateType !== "custom" && templateType !== "split")}
-                        member={member}
-                        configValue={configValue}
-                        widgetType={typeValue}/>
-                    }
-                </div>
+          <div className="custom-property-fields">
+            <div id="custom-prop-name" className="custom-property-field-group">
+              <Field
+                willAutoFocus={willAutoFocus}
+                name={`${member}.prop_label`}
+                label="Field Name"
+                className="custom-prop-name"
+                type="text"
+                component={inputField}
+                validate={required()}
+                placeholder="Custom Property Label"
+              />
             </div>
+
+            <div id="custom-prop-type" className="custom-property-field-group">
+              <WidgetList name={`${member}.type`} id="type" />
+            </div>
+
+            <div id="custom-prop-settings" className="custom-property-field-group">
+              {!privateValue && !requiredValue && (
+              <Field
+                onChange={changePrompt}
+                setValue={setPrompt}
+                name={`${member}.prompt_user`}
+                type="checkbox"
+                label={promptValue ? "Prompt User" : "Set Prompt User"}
+                defaultValue
+                color="#0091EA"
+                faIcon="eye"
+                component={iconToggleField}
+              />
+)}
+              {!privateValue && (
+              <Field
+                onChange={changeRequired}
+                setValue={setRequired}
+                name={`${member}.required`}
+                type="checkbox"
+                label={requiredValue ? "Required" : "Set Required"}
+                color="#FF1744"
+                faIcon="check"
+                component={iconToggleField}
+              />
+)}
+              {!requiredValue && !promptValue && (
+              <Field
+                onChange={changePrivate}
+                setValue={setPrivate}
+                name={`${member}.private`}
+                type="checkbox"
+                label={privateValue ? "Private" : "Set Private"}
+                color="#424242"
+                faIcon="hand-paper-o"
+                component={iconToggleField}
+              />
+)}
+            </div>
+            <div id="custom-prop-widget" className="custom-property-field-group">
+              {typeValue && (
+              <RenderWidget
+                currency={currency}
+                showPrice={(templateType !== "custom" && templateType !== "split")}
+                member={member}
+                configValue={configValue}
+                widgetType={typeValue}
+              />
+)
+                    }
+            </div>
+          </div>
         )
     };
 }
@@ -186,7 +190,7 @@ CustomField = connect((state, ownProps) => {
 })(CustomField);
 
 
-//Custom property
+// Custom property
 class renderCustomProperty extends React.Component {
 
     constructor(props) {
@@ -207,64 +211,81 @@ class renderCustomProperty extends React.Component {
     }
 
     render() {
-        let props = this.props;
+        const {props} = this;
         const {templateType, currency, privateValue, fields, meta: {touched, error}} = props;
 
         return (
-            <React.Fragment>
-                <ul className="custom-fields-list">
-                    {fields.map((customProperty, index) =>{
-                        let property = fields.get(index);
+          <React.Fragment>
+            <ul className="custom-fields-list">
+              {fields.map((customProperty, index) =>{
+                        const property = fields.get(index);
                         if(property.name && property.name.slice(0, 2) === "__"){
-                            return <div/>
+                            return <div />
                         }
-                        return (<li className="custom-field-item" key={index}>
+                        return (
+                          <li className="custom-field-item" key={index}>
                             <div className="custom-field-name">
-                                {/*{fields.get(index).prop_label ?*/}
-                                {/*<p>{fields.get(index).prop_label}</p> : <p>Field #{index + 1}</p>*/}
-                                {/*}*/}
-                                <button className="btn btn-rounded custom-field-button iconToggleField"
-                                        id="custom-field-delete-button"
-                                        type="button"
-                                        title="Remove Field"
-                                        onClick={() => fields.remove(index)}>
-                                    <span className="itf-icon"><i className="fa fa-close"/></span>
-                                </button>
+                              {/* {fields.get(index).prop_label ? */}
+                              {/* <p>{fields.get(index).prop_label}</p> : <p>Field #{index + 1}</p> */}
+                              {/* } */}
+                              <button
+                                className="btn btn-rounded custom-field-button iconToggleField"
+                                id="custom-field-delete-button"
+                                type="button"
+                                title="Remove Field"
+                                onClick={() => fields.remove(index)}
+                              >
+                                <span className="itf-icon"><i className="fa fa-close" /></span>
+                              </button>
                             </div>
-                            <CustomField currency={currency} length={fields.length} templateType={templateType} member={customProperty} index={index}
-                                         willAutoFocus={fields.length - 1 == index}/>
-                        </li>)
+                            <CustomField
+                              currency={currency}
+                              length={fields.length}
+                              templateType={templateType}
+                              member={customProperty}
+                              index={index}
+                              willAutoFocus={fields.length - 1 == index}
+                            />
+                          </li>
+)
                     }
                     )}
-                    <li className="custom-field-item">
-                        <div className="sb-form-group __add-a-field">
-                            <input className="_input- _input-add-a-field" autoFocus={false}
-                                   placeholder="Add Custom Field ..." onClick={this.onAdd}/>
-                        </div>
-                        {/*<button className="btn btn-rounded" type="button" onClick={this.onAdd}>Add Field</button>*/}
-                        {touched && error && <span>{error}</span>}
-                    </li>
-                </ul>
-            </React.Fragment>
+              <li className="custom-field-item">
+                <div className="sb-form-group __add-a-field">
+                  <input
+                    className="_input- _input-add-a-field"
+                    autoFocus={false}
+                    placeholder="Add Custom Field ..."
+                    onClick={this.onAdd}
+                  />
+                </div>
+                {/* <button className="btn btn-rounded" type="button" onClick={this.onAdd}>Add Field</button> */}
+                {touched && error && <span>{error}</span>}
+              </li>
+            </ul>
+          </React.Fragment>
         )
     };
 }
 
-let CheckoutForm = function(props){
-    return <React.Fragment>
+const CheckoutForm = function(props){
+    return (
+      <React.Fragment>
         <FormSection name="references">
-            <FieldArray name="service_template_properties"
-                        props={{currency: props.currency, templateType: props.serviceTypeValue}}
-                        component={renderCustomProperty}
-            />
-            <button className="buttons _primary _right" onClick={props.handleSubmit} >Save Checkout Form</button>
-            <span class="clear"/>
+          <FieldArray
+            name="service_template_properties"
+            props={{currency: props.currency, templateType: props.serviceTypeValue}}
+            component={renderCustomProperty}
+          />
+          <button className="buttons _primary _right" onClick={props.handleSubmit}>Save Checkout Form</button>
+          <span className="clear" />
         </FormSection>
-    </React.Fragment>
+      </React.Fragment>
+)
 };
 
 
-//The full form
+// The full form
 
 
 
@@ -289,8 +310,9 @@ class CheckoutPage extends React.Component {
         this.handleCopy = this.handleCopy.bind(this);
 
     }
+
     generateEmbedCode(){
-        let {selectedPlan, selectedTemplate} = this.state;
+        const {selectedPlan, selectedTemplate} = this.state;
         return `<div id="servicebot-request-form"></div>
                 <script src="https://js.stripe.com/v3/"></script>
                 <script src="https://js.servicebot.io/js/servicebot-checkout-embed.js" type="text/javascript"></script>
@@ -308,33 +330,38 @@ class CheckoutPage extends React.Component {
                     })
                 </script>`
     }
+
     async componentDidMount(){
-        let templates = await Fetcher(`/api/v1/service-templates/`);
+        const templates = await Fetcher(`/api/v1/service-templates/`);
         this.setState({ templates, loading: false});
     }
+
     async changeTemplate(e) {
         const selectedTemplate = e.currentTarget.value;
-        let currentTemplate = this.state.templates.find(template => template.id == selectedTemplate)
+        const currentTemplate = this.state.templates.find(template => template.id == selectedTemplate)
 
-        let selectedTier = currentTemplate.references.tiers[0].id;
-        let tier = await Fetcher(`/api/v1/tiers/${selectedTier}`);
+        const selectedTier = currentTemplate.references.tiers[0].id;
+        const tier = await Fetcher(`/api/v1/tiers/${selectedTier}`);
 
         this.setState({selectedTemplate, selectedTier, tier, selectedPlan: null});
 
     }
+
     async changeTier(e) {
         const selectedTier = e.currentTarget.value;
-        let tier = await Fetcher(`/api/v1/tiers/${selectedTier}`);
+        const tier = await Fetcher(`/api/v1/tiers/${selectedTier}`);
         this.setState({selectedTier, tier, selectedPlan: null});
 
     }
+
     changePlan(e) {
         const selectedPlan = e.currentTarget.value;
         this.setState({selectedPlan});
 
     }
+
     handleCopy(){
-        let self = this;
+        const self = this;
         this.setState({'copied': true}, function () {
             setTimeout(function(){ self.setState({'copied': false}) }, 3000);
         });
@@ -342,100 +369,114 @@ class CheckoutPage extends React.Component {
 
     render(props) {
         let formHTML;
-        let {loading, selectedTemplate, templates, selectedPlan, selectedTier, tier, copied} = this.state;
+        const {loading, selectedTemplate, templates, selectedPlan, selectedTier, tier, copied} = this.state;
         console.log(tier, "TIERRR")
         if(loading){
-            return <Load/>;
+            return <Load />;
         }
 
         if (selectedTemplate === null || selectedTemplate == 0) {
             formHTML = "Select a service from the list to embed"
         }
-        let  submissionRequest = {
+        const  submissionRequest = {
             'method': 'PUT',
             'url': `/api/v1/service-templates/${selectedTemplate}`
         };
-        let currentTemplate = templates.find(template => template.id == selectedTemplate)
-        let formEmbed = (
-            <div id="plugin_embeddable-checkout" className="plugin_container">
-                <div id="_section-1" className="_section _active">
-                    <span className="caret"/>
-                    <h3><span className="form-step-count">1</span>Select a service</h3>
-                    <div className="_indented">
-                        <select className="_input- _input-select-a-service" onChange={this.changeTemplate}>
-                            <option key={"default-0"} value="0">Select a service</option>
-                            {this.state.templates.map(template => {
+        const currentTemplate = templates.find(template => template.id == selectedTemplate)
+        const formEmbed = (
+          <div id="plugin_embeddable-checkout" className="plugin_container">
+            <div id="_section-1" className="_section _active">
+              <span className="caret" />
+              <h3>
+                <span className="form-step-count">1</span>
+Select a service
+              </h3>
+              <div className="_indented">
+                <select className="_input- _input-select-a-service" onChange={this.changeTemplate}>
+                  <option key="default-0" value="0">Select a service</option>
+                  {this.state.templates.map(template => {
                                 return (<option key={template.id} value={template.id}>{template.name}</option>)
                             })}
-                        </select>
-                    </div>
-                </div>
-                <div id="_section-2" className={`_section ${selectedTemplate && '_active'}`}>
-                    <span className="caret"/>
-                    <h3><span className="form-step-count">2</span>Build your checkout form</h3>
-                    <div className="_indented">
-                        { selectedTemplate ?
-                            <ServicebotBaseForm key={"base-"+selectedTemplate}
-                                                form={CheckoutForm}
-                                                formProps={{currency: (tier && tier.references.payment_structure_templates[0].currency) || "USD"}}
-                                                formName={CHECKOUT_FORM}
-                                                initialValues={currentTemplate}
-                                                reShowForm={true}
-                                                submissionRequest={submissionRequest}
-                                                successMessage={"Checkout form updated"}
-                            /> :
-                            <div className="_inactive"/>
+                </select>
+              </div>
+            </div>
+            <div id="_section-2" className={`_section ${selectedTemplate && '_active'}`}>
+              <span className="caret" />
+              <h3>
+                <span className="form-step-count">2</span>
+Build your checkout form
+              </h3>
+              <div className="_indented">
+                { selectedTemplate ? (
+                  <ServicebotBaseForm
+                    key={`base-${selectedTemplate}`}
+                    form={CheckoutForm}
+                    formProps={{currency: (tier && tier.references.payment_structure_templates[0].currency) || "USD"}}
+                    formName={CHECKOUT_FORM}
+                    initialValues={currentTemplate}
+                    reShowForm
+                    submissionRequest={submissionRequest}
+                    successMessage="Checkout form updated"
+                  />
+):
+                  <div className="_inactive" />
                         }
-                    </div>
-                </div>
-                <div id="_section-3" className={`_section ${selectedTemplate && '_active'}`}>
-                    <span className="caret"/>
-                    <h3><span className="form-step-count">3</span>Copy and Embed your code</h3>
-                { selectedTemplate ?
-                    <React.Fragment>
-                        <div className="_indented">
-                            <p className="form-help-text"> Paste the generated HTML on the page you want to embed
+              </div>
+            </div>
+            <div id="_section-3" className={`_section ${selectedTemplate && '_active'}`}>
+              <span className="caret" />
+              <h3>
+                <span className="form-step-count">3</span>
+Copy and Embed your code
+              </h3>
+              { selectedTemplate ? (
+                <React.Fragment>
+                  <div className="_indented">
+                    <p className="form-help-text">
+                      {' '}
+Paste the generated HTML on the page you want to embed
                                 a request form. You can find more detailed documentation
-                                <a href="https://docs.servicebot.io/checkout-embed"> here</a>
-                            </p>
+                      <a href="https://docs.servicebot.io/checkout-embed"> here</a>
+                    </p>
 
-                            <div className="_embed-code-form">
-                                <div id="_select-a-tier" className="sb-form-group __select-a-tier">
-                                    <label className="_label-">Select a tier</label>
-                                    <select className="_input- _input-select-a-tier" onChange={this.changeTier}>
-                                        <option key={"default-0"} value="0">Select a tier</option>
-                                        {currentTemplate.references.tiers.map(tier => {
+                    <div className="_embed-code-form">
+                      <div id="_select-a-tier" className="sb-form-group __select-a-tier">
+                        <label className="_label-">Select a tier</label>
+                        <select className="_input- _input-select-a-tier" onChange={this.changeTier}>
+                          <option key="default-0" value="0">Select a tier</option>
+                          {currentTemplate.references.tiers.map(tier => {
                                             return (<option key={tier.id} value={tier.id}>{tier.name}</option>)
                                         })}
-                                    </select>
-                                </div>
-                                {selectedTier &&
-                                <div id="_select-a-plan" className="sb-form-group __select-a-plan">
-                                    <label className="_label-">Select a plan</label>
-                                    <select className="_input- _input-select-a-plan" onChange={this.changePlan}>
-                                        <option key={"default-0"} value="0">Select a plan</option>
-                                        {tier.references.payment_structure_templates.map(plan => {
+                        </select>
+                      </div>
+                      {selectedTier && (
+                      <div id="_select-a-plan" className="sb-form-group __select-a-plan">
+                        <label className="_label-">Select a plan</label>
+                        <select className="_input- _input-select-a-plan" onChange={this.changePlan}>
+                          <option key="default-0" value="0">Select a plan</option>
+                          {tier.references.payment_structure_templates.map(plan => {
                                             return (<option key={plan.id} value={plan.id}>{`${plan.amount/100} - ${plan.interval} - ${plan.type}`}</option>)
                                         })}
-                                    </select>
-                                </div>
-                                }
-                            </div>
-                        </div>
-                        {selectedPlan &&
-                        <div className="_embed-code-copy">
-                            <SyntaxHighlighter showLineNumbers language='javascript' style={duotoneDark}>{this.generateEmbedCode()}</SyntaxHighlighter>
-                            <CopyToClipboard text={this.generateEmbedCode()} onCopy={this.handleCopy}>
-                                <button className="buttons _success _right __copied">{copied ? 'Copied!' : 'Copy Embed Code'}</button>
-                            </CopyToClipboard>
-                            <div className="clear"/>
-                        </div>
-                        }
-                    </React.Fragment> :
-                    <div className="_inactive"/>
+                        </select>
+                      </div>
+)}
+                    </div>
+                  </div>
+                  {selectedPlan && (
+                  <div className="_embed-code-copy">
+                    <SyntaxHighlighter showLineNumbers language='javascript' style={duotoneDark}>{this.generateEmbedCode()}</SyntaxHighlighter>
+                    <CopyToClipboard text={this.generateEmbedCode()} onCopy={this.handleCopy}>
+                      <button className="buttons _success _right __copied">{copied ? 'Copied!' : 'Copy Embed Code'}</button>
+                    </CopyToClipboard>
+                    <div className="clear" />
+                  </div>
+)}
+                </React.Fragment>
+):
+                <div className="_inactive" />
                 }
-                </div>
             </div>
+          </div>
         );
         return formEmbed
 

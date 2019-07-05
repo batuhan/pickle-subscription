@@ -1,7 +1,7 @@
 module.exports = {
 
 
-    up: async function (knex) {
+    async up (knex) {
         await knex.schema.createTable("service_instance_seats", table => {
             table.increments();
             table.integer('user_id').references('users.id').notNullable().onDelete('cascade');
@@ -18,7 +18,7 @@ module.exports = {
         return await knex;
     },
 
-    down: async function (knex) {
+    async down (knex) {
         await knex.schema.alterTable("users", table => {
             table.dropColumns("google_user_id");
         });

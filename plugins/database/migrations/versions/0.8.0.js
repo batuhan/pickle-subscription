@@ -1,5 +1,5 @@
 module.exports = {
-    up : function(knex){
+    up(knex){
         console.log("migrating database to version 0.8");
         return knex.schema.alterTable("users", t => {
             t.string("provider").defaultTo("local");
@@ -10,8 +10,8 @@ module.exports = {
         }).then(result => {
             return knex("service_instances").where(true, true);
         }).then(instances => {
-            let instanceUpdates = instances.map(service => {
-                let payment_plan = service.payment_plan;
+            const instanceUpdates = instances.map(service => {
+                const {payment_plan} = service;
                 if(payment_plan) {
                     service.subscribed_at = payment_plan.created;
                 }
@@ -21,7 +21,7 @@ module.exports = {
         })
 
     },
-    down : function(knex){
+    down(knex){
         console.log("rolling back version 0.8 migration");
         return knex.schema.alterTable("users", t => {
             t.dropColumns("provider");

@@ -1,9 +1,10 @@
-let PaymentStructureTemplate = require("./payment-structure-template");
-let references = [
+const PaymentStructureTemplate = require("./payment-structure-template");
+
+const references = [
     {"model" :PaymentStructureTemplate, "referenceField": "tier_id", "direction" : "from", "readOnly" : false}
 ];
 
-let Tier = require("./base/entity")("tiers", references);
+const Tier = require("./base/entity")("tiers", references);
 
 
 module.exports = Tier;

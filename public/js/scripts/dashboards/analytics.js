@@ -1,4 +1,4 @@
-'use strict';
+
 /**
  * @author Batch Themes Ltd.
  */
@@ -7,8 +7,8 @@
         if (!element_exists('#dashboards-analytics')) {
             return false;
         }
-        var config = $.localStorage.get('config');
-        var colors = config.colors;
-        var loaderTime = 3200;
+        const config = $.localStorage.get('config');
+        const {colors} = config;
+        const loaderTime = 3200;
     });
 })();

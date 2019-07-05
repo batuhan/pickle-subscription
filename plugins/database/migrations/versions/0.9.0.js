@@ -1,5 +1,5 @@
 module.exports = {
-    up: function (knex) {
+    up (knex) {
         console.log("migrating database to version 0.9");
         return knex.schema.alterTable("service_templates", t => {
             t.jsonb('split_configuration');
@@ -32,7 +32,7 @@ module.exports = {
         })
     },
 
-    down: function (knex) {
+    down (knex) {
         console.log("rolling back version 0.9 migration");
         return knex.schema.alterTable("service_instances", t => {
             t.dropColumns("split_configuration");
@@ -50,7 +50,7 @@ module.exports = {
             return knex("service_instances").where("type", "split").update({type: "custom"});
         }).then(instance => {
 
-            //revert enums
+            // revert enums
             return knex.schema.raw(`
     ALTER TABLE "service_instances"
     DROP CONSTRAINT "service_instances_type_check",

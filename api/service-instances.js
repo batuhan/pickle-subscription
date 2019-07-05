@@ -1,35 +1,35 @@
-let async = require('async');
-let auth = require('../middleware/auth');
-let validate = require('../middleware/validate');
-let ServiceInstance = require('../models/service-instance');
-let Charge = require('../models/charge');
-let EventLogs = require('../models/event-log');
-let File = require("../models/file");
-let mkdirp = require("mkdirp");
-let path = require("path");
-let multer= require("multer");
-let _ = require('lodash');
-let PaymentStructureTemplate = require("../models/payment-structure-template");
-let dispatchEvent = require("../config/redux/store").dispatchEvent;
-let store = require("../config/redux/store");
-//todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
+const async = require('async');
+const mkdirp = require("mkdirp");
+const path = require("path");
+const multer= require("multer");
+const _ = require('lodash');
+const auth = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const ServiceInstance = require('../models/service-instance');
+const Charge = require('../models/charge');
+const EventLogs = require('../models/event-log');
+const File = require("../models/file");
+const PaymentStructureTemplate = require("../models/payment-structure-template");
+const {dispatchEvent} = require("../config/redux/store");
+const store = require("../config/redux/store");
+// todo - entity posting should have correct error handling, response should tell user what is wrong like if missing column
 
-let serviceFilePath = "uploads/services/files";
-let fileManager = store.getState(true).pluginbot.services.fileManager[0];
+const serviceFilePath = "uploads/services/files";
+const fileManager = store.getState(true).pluginbot.services.fileManager[0];
 
-let uploadLimit = function(){
+const uploadLimit = function(){
 
     return store.getState().options.upload_limit * 1000000;
 
 }
 
-let upload = () => {
+const upload = () => {
     return multer({storage: fileManager.storage(serviceFilePath), limits : {fileSize : uploadLimit()}})
 }
 
 async function reactivate(instance_object, trialDays=0){
     if(instance_object.get("status") === "cancelled") {
-        let lifecycleManager = store.getState(true).pluginbot.services.lifecycleManager;
+        let {lifecycleManager} = store.getState(true).pluginbot.services;
         instance_object = await instance_object.attachReferences();
         if(lifecycleManager) {
             lifecycleManager = lifecycleManager[0];
@@ -37,9 +37,9 @@ async function reactivate(instance_object, trialDays=0){
                 instance: instance_object
             });
         }
-        let paymentPlan = instance_object.get("payment_plan");
+        const paymentPlan = instance_object.get("payment_plan");
         paymentPlan.trial_period_days = trialDays;
-        let updatedInstance = await instance_object.subscribe(paymentPlan);
+        const updatedInstance = await instance_object.subscribe(paymentPlan);
         if(lifecycleManager) {
             lifecycleManager.postReactivate({
                 instance: instance_object
@@ -48,7 +48,7 @@ async function reactivate(instance_object, trialDays=0){
         let accessManager = store.getState(true).pluginbot.services.embedAccessManager
         if(accessManager){
             accessManager = accessManager[0];
-            let token = await accessManager.createToken(instance_object.data.user_id);
+            const token = await accessManager.createToken(instance_object.data.user_id);
             instance_object.data.billing_settings_url = accessManager.createLink(instance_object.data.user_id, token);
         }
 
@@ -56,10 +56,10 @@ async function reactivate(instance_object, trialDays=0){
 
         return updatedInstance;
 
-    }else if (instance_object.get("status") === "cancellation_pending"){
-        let sub = await instance_object.getSubscription();
+    }if (instance_object.get("status") === "cancellation_pending"){
+        const sub = await instance_object.getSubscription();
         if(sub){
-            let Stripe = require("../config/stripe");
+            const Stripe = require("../config/stripe");
             await Stripe().connection.subscriptions.update(instance_object.data.subscription_id, {cancel_at_period_end: false});
             instance_object.data.status = "running"
             await instance_object.update();
@@ -85,8 +85,8 @@ module.exports = function(router) {
     });
 
     router.delete(`/service-instances/:id(\\d+)`, validate(ServiceInstance), auth(), function(req,res,next){
-        let instance_object = res.locals.valid_object;
-        //Only allow removal if the instance is cancelled.
+        const instance_object = res.locals.valid_object;
+        // Only allow removal if the instance is cancelled.
         if(instance_object.data.status === 'cancelled' || !instance_object.data.payment_plan) {
             next();
         } else {
@@ -95,17 +95,17 @@ module.exports = function(router) {
     });
 
     router.post('/service-instances/:id/approve', validate(ServiceInstance), auth(), async function(req, res, next) {
-        let instance_object = res.locals.valid_object;
-        let updatedInstance = await instance_object.subscribe();
+        const instance_object = res.locals.valid_object;
+        const updatedInstance = await instance_object.subscribe();
         res.json(updatedInstance);
     });
 
 
 
     router.post('/service-instances/:id/reactivate', validate(ServiceInstance), auth(), async function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         try{
-            let updatedInstance = await reactivate(instance_object);
+            const updatedInstance = await reactivate(instance_object);
             res.json(updatedInstance)
         }catch(e){
             console.error(e);
@@ -115,10 +115,10 @@ module.exports = function(router) {
 
 
     router.post('/service-instances/:id/change-price', validate(ServiceInstance), auth(), async function(req, res, next) {
-        let instance_object = res.locals.valid_object;
-        if(instance_object.get("status") === "cancelled" && req.body["trial_period_days"] > 0){
+        const instance_object = res.locals.valid_object;
+        if(instance_object.get("status") === "cancelled" && req.body.trial_period_days > 0){
             try{
-                let updated_subscription = await reactivate(instance_object, req.body["trial_period_days"]);
+                const updated_subscription = await reactivate(instance_object, req.body.trial_period_days);
                 res.json(updated_subscription);
                 store.dispatchEvent("service_instance_updated", updated_subscription);
 
@@ -126,7 +126,7 @@ module.exports = function(router) {
                 res.json({error})
             }
         }else {
-            let disableProration = req.body["trial_period_days"] > 0 || req.body.disableProration;
+            const disableProration = req.body.trial_period_days > 0 || req.body.disableProration;
             instance_object.changePaymentPlan(req.body, false, disableProration).then(function (updated_subscription) {
                 res.json(updated_subscription);
                 store.dispatchEvent("service_instance_updated", updated_subscription);
@@ -136,10 +136,10 @@ module.exports = function(router) {
         }
     });
     router.post('/service-instances/:id/apply-payment-structure/:payment_structure_id(\\d+)', validate(ServiceInstance), auth(), async function(req, res, next) {
-        let instance_object = await res.locals.valid_object.attachReferences();
-        let newPaymentStructure = (await PaymentStructureTemplate.find({id: req.params.payment_structure_id}))[0];
-        let permission_array = res.locals.permissions;
-        let hasPermission = (permission_array.some(p => p.get("permission_name") === "can_administrate" || p.get("permission_name") === "can_manage"));
+        const instance_object = await res.locals.valid_object.attachReferences();
+        const newPaymentStructure = (await PaymentStructureTemplate.find({id: req.params.payment_structure_id}))[0];
+        const permission_array = res.locals.permissions;
+        const hasPermission = (permission_array.some(p => p.get("permission_name") === "can_administrate" || p.get("permission_name") === "can_manage"));
         if((instance_object.data.type === "custom" || newPaymentStructure.data.type === "custom" ) && !hasPermission){
             return res.status(403).json({error: "Unauthorized"});
         }
@@ -149,7 +149,7 @@ module.exports = function(router) {
             let accessManager = store.getState(true).pluginbot.services.embedAccessManager
             if(accessManager){
                 accessManager = accessManager[0];
-                let token = await accessManager.createToken(updatedInstance.data.user_id);
+                const token = await accessManager.createToken(updatedInstance.data.user_id);
                 updatedInstance.data.billing_settings_url = accessManager.createLink(instance_object.data.user_id, token);
             }
             store.dispatchEvent("service_instance_plan_change", updatedInstance);
@@ -165,10 +165,10 @@ module.exports = function(router) {
 
 
     router.post('/service-instances/:id/change-properties', validate(ServiceInstance),auth(), async function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         try {
-            let updatedInstance = await instance_object.changeProperties(req.body.service_instance_properties);
-            let attached = await updatedInstance.attachReferences()
+            const updatedInstance = await instance_object.changeProperties(req.body.service_instance_properties);
+            const attached = await updatedInstance.attachReferences()
             res.json(attached.data);
             store.dispatchEvent("service_instance_updated", updatedInstance);
         }catch(error){
@@ -178,14 +178,14 @@ module.exports = function(router) {
     });
 
     router.post('/service-instances/:id/cancel', validate(ServiceInstance), auth(), async function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         try {
-            let result = await instance_object.scheduleCancellation();
+            const result = await instance_object.scheduleCancellation();
             res.json(result);
             let accessManager = store.getState(true).pluginbot.services.embedAccessManager
             if(accessManager){
                 accessManager = accessManager[0];
-                let token = await accessManager.createToken(instance_object.data.user_id);
+                const token = await accessManager.createToken(instance_object.data.user_id);
                 instance_object.data.billing_settings_url = accessManager.createLink(instance_object.data.user_id, token);
             }
             store.dispatchEvent("service_instance_cancellation_requested", instance_object);
@@ -199,14 +199,14 @@ module.exports = function(router) {
 
 
     router.post('/service-instances/:id/request-cancellation', validate(ServiceInstance), auth(), function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         instance_object.scheduleCancellation().then(async result => {
             res.locals.json = result;
             next();
             let accessManager = store.getState(true).pluginbot.services.embedAccessManager
             if(accessManager){
                 accessManager = accessManager[0];
-                let token = await accessManager.createToken(instance_object.data.user_id);
+                const token = await accessManager.createToken(instance_object.data.user_id);
                 console.log("OK!", token);
                 instance_object.data.billing_settings_url = accessManager.createLink(instance_object.data.user_id, token);
                 console.log(instance_object.data.billing_settings_url, "URL TIME");
@@ -222,15 +222,15 @@ module.exports = function(router) {
 
 
     router.post('/service-instances/:id/add-charge', validate(ServiceInstance), auth(), function(req, res, next) {
-        let instance_object = res.locals.valid_object;
-        let default_charge = {
+        const instance_object = res.locals.valid_object;
+        const default_charge = {
             'user_id': instance_object.get('user_id'),
             'service_instance_id': instance_object.get('id'),
             'subscription_id': instance_object.get('subscription_id'),
             'currency': instance_object.data.payment_plan.currency
         };
-        let charge_obj = _.assign(default_charge, req.body);
-        let charge = new Charge(charge_obj);
+        const charge_obj = _.assign(default_charge, req.body);
+        const charge = new Charge(charge_obj);
         charge.create(function (err, charge_item) {
             res.json(charge_item);
             store.dispatchEvent("service_instance_charge_added", instance_object);
@@ -238,14 +238,14 @@ module.exports = function(router) {
     });
 
     router.get('/service-instances/:id/awaiting-charges', validate(ServiceInstance), auth(null, ServiceInstance), function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         instance_object.getAllAwaitingCharges(function(charges){
             res.json(charges);
         });
     });
 
     router.post('/service-instances/:id/approve-charges', validate(ServiceInstance), auth(null, ServiceInstance), function(req, res, next) {
-        let instance_object = res.locals.valid_object;
+        const instance_object = res.locals.valid_object;
         if(instance_object.get('subscription_id')) {
             instance_object.approveAllCharges(function(charges){
                 EventLogs.logEvent(req.user.get('id'), `service-instances ${req.params.id} had charges approved by user ${req.user.get('email')}`);
@@ -257,7 +257,7 @@ module.exports = function(router) {
     });
 
     router.post('/service-instances/:id/files', validate(ServiceInstance), auth(null, ServiceInstance), upload().array('files'), function(req, res, next) {
-        let filesToInsert = req.files.map(function(file){
+        const filesToInsert = req.files.map(function(file){
             if(req.user) {
                 file.user_id = req.user.data.id;
             }else{
@@ -293,7 +293,7 @@ module.exports = function(router) {
         })
     });
 
-    //Override post route to hide adding instances
+    // Override post route to hide adding instances
     router.post(`/service-instances`, function(req,res,next){
         res.sendStatus(404);
     });

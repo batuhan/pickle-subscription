@@ -1,23 +1,23 @@
 
-let async = require("async");
-let charge = require("../../models/charge");
-let serviceInstance = require("../../models/service-instance");
-let serviceInstanceCancellation = require("../../models/service-instance-cancellation");
-let serviceInstanceProperty = require("../../models/service-instance-property");
-let serviceTemplate = require("../../models/service-template");
-let transaction = require("../../models/transaction");
-let invoice = require("../../models/invoice");
-let user = require("../../models/user");
-let fund = require("../../models/fund");
-let webhook = require("../../models/base/entity")("webhooks");
+const async = require("async");
+const charge = require("../../models/charge");
+const serviceInstance = require("../../models/service-instance");
+const serviceInstanceCancellation = require("../../models/service-instance-cancellation");
+const serviceInstanceProperty = require("../../models/service-instance-property");
+const serviceTemplate = require("../../models/service-template");
+const transaction = require("../../models/transaction");
+const invoice = require("../../models/invoice");
+const user = require("../../models/user");
+const fund = require("../../models/fund");
+const webhook = require("../../models/base/entity")("webhooks");
 
-let properties = require("../../models/system-options");
+const properties = require("../../models/system-options");
 
 
-//Reusable functions
-let getARR = function (payPlan) {
+// Reusable functions
+const getARR = function (payPlan) {
     let arr = 0;
-    //Build the logic for ARR & MRR
+    // Build the logic for ARR & MRR
     if(payPlan) {
         if(payPlan.interval === 'day') {
             arr += (payPlan.amount * (365/payPlan.interval_count));
@@ -31,18 +31,18 @@ let getARR = function (payPlan) {
     }
     return arr;
 };
-let getFunding = function (users, funds, instance) {
-    let fundingData = {
+const getFunding = function (users, funds, instance) {
+    const fundingData = {
         hasFunding : false,
         fundingCount : 0,
         flagged : false,
         flagCount : 0
     };
-    //Check if account is paid
-    let fundAvailable = funds.filter(card => card.data.user_id === instance.data.user_id);
-    let user = users.filter(user => user.data.id === instance.data.user_id);
+    // Check if account is paid
+    const fundAvailable = funds.filter(card => card.data.user_id === instance.data.user_id);
+    const user = users.filter(user => user.data.id === instance.data.user_id);
     if(fundAvailable.length > 0){
-        //if(user.length > 0 && user[0].data.status !== 'flagged') {
+        // if(user.length > 0 && user[0].data.status !== 'flagged') {
         if(user.length > 0) {
             fundingData.hasFunding = true;
             fundingData.fundingCount++;
@@ -58,17 +58,17 @@ let getFunding = function (users, funds, instance) {
 module.exports = {
     getAnalyticsData: () => {
         return new Promise(async (resolve, reject) => {
-            let props = (await properties.find()).reduce((acc, prop) => {acc[prop.data.option] = prop.data.value; return acc;}, {});
-            let users = (await user.find());
-            let funds = (await fund.find());
-            let templates = (await serviceTemplate.find());
-            let instances = (await serviceInstance.find());
-            let charges = (await charge.find());
-            let transactions = (await transaction.find());
-            let invoices = (await invoice.find());
+            const props = (await properties.find()).reduce((acc, prop) => {acc[prop.data.option] = prop.data.value; return acc;}, {});
+            const users = (await user.find());
+            const funds = (await fund.find());
+            const templates = (await serviceTemplate.find());
+            const instances = (await serviceInstance.find());
+            const charges = (await charge.find());
+            const transactions = (await transaction.find());
+            const invoices = (await invoice.find());
             async.parallel({
-                customerStats: function (callback) {
-                    let stats = {};
+                customerStats (callback) {
+                    const stats = {};
                     stats.total = users.length;
                     stats.active = stats.invited = stats.flagged = stats.fundsTotal = 0;
                     users.map(user => {
@@ -79,15 +79,15 @@ module.exports = {
                     });
                     callback(null,stats);
                 },
-                offeringStats: function (callback) {
-                    let stats = {};
+                offeringStats (callback) {
+                    const stats = {};
                     stats.total = templates.length;
                     callback(null, stats);
                 },
-                salesStats: function (callback) {
-                    let stats = {};
+                salesStats (callback) {
+                    const stats = {};
                     let activeSales = requested = waitingCancellation  = cancelled = subCancelled = 0;
-                    let usersWithActiveOffering = [];
+                    const usersWithActiveOffering = [];
                     let arr = arrForecast = 0;
                     let inTrial = inTrialPaying = inPaying =  inFlagged = inPayingCancelled = 0;
                     let subActive = subAnnual  = subTotalCharges = subPaidCharges = 0;
@@ -95,37 +95,37 @@ module.exports = {
                     let customActive = customTotalAmt = customTotalPaidAmt = 0;
                     let allCharges = allChargesApproved = 0;
                     instances.map(instance => {
-                        //Currently most analytical data is from the active instances.
+                        // Currently most analytical data is from the active instances.
                         if(instance.data.subscription_id !== null) {
                             activeSales++;
                             usersWithActiveOffering.push(instance.data.user_id);
                             if(instance.data.type === 'subscription') {
                                 subActive++;
-                                let payPlan = instance.data.payment_plan;
-                                let trial = instance.data.payment_plan.trial_period_days;
-                                let trialEnd = instance.data.trial_end;
-                                //Get forecast ARR
+                                const payPlan = instance.data.payment_plan;
+                                const trial = instance.data.payment_plan.trial_period_days;
+                                const trialEnd = instance.data.trial_end;
+                                // Get forecast ARR
                                 arrForecast += getARR(payPlan);
-                                let currentDate = new Date();
-                                let trialEndDate = new Date(trialEnd * 1000);
-                                let userFunding = getFunding(users, funds, instance);
-                                //If user is paying, then add to ARR
+                                const currentDate = new Date();
+                                const trialEndDate = new Date(trialEnd * 1000);
+                                const userFunding = getFunding(users, funds, instance);
+                                // If user is paying, then add to ARR
                                 if(userFunding.fundingCount > 0) {
                                     arr += getARR(payPlan);
                                 }
-                                //Service is trialing if the expiration is after current date
+                                // Service is trialing if the expiration is after current date
                                 if(trial > 0 && currentDate < trialEndDate) {
                                     inTrial++;
                                     inTrialPaying += userFunding.fundingCount;
                                 }
-                                //Check if account is paid
+                                // Check if account is paid
                                 inPaying += userFunding.fundingCount;
                                 inFlagged += userFunding.flagCount;
                             }
                             else if(instance.data.type === 'one_time') { singleActive++; }
                             else if(instance.data.type === 'custom') { customActive++; }
                         }
-                        //Check for types
+                        // Check for types
                         if(instance.data.status === 'requested') { requested++; }
                         else if(instance.data.status === 'waiting_cancellation') { waitingCancellation++; }
                         else if(instance.data.status === 'cancelled') {
@@ -133,7 +133,7 @@ module.exports = {
                             if(instance.data.type === 'subscription') {
                                 subCancelled++;
                             }
-                            //Find the paying cancelled accounts
+                            // Find the paying cancelled accounts
                             inPayingCancelled += (getFunding(users, funds, instance)).fundingCount;
                         }
                     });
@@ -143,12 +143,12 @@ module.exports = {
                             allChargesApproved += charge.data.amount;
                         }
                     });
-                    //Calculate multi-level metrics
+                    // Calculate multi-level metrics
                     let averageConversion = 0;
                     if(inPaying > 0) {
                         averageConversion = inPaying/(subActive + subCancelled);
                     }
-                    //Calculate ARPA & Churn
+                    // Calculate ARPA & Churn
                     let arpa = 0;
                     let churn = 0;
                     if(inPaying > 0) {
@@ -189,110 +189,110 @@ module.exports = {
                     stats.oneTimeStats.approvedCharges = allChargesApproved;
                     callback(null, stats);
                 },
-                hasStripeKeys:function(callback){
+                hasStripeKeys(callback){
                     callback(null, props.stripe_publishable_key != null && props.stripe_secret_key != null)
 
                 },
-                isLive: function(callback){
+                isLive(callback){
                     callback(null, props.stripe_publishable_key && props.stripe_publishable_key.substring(3, 7).toUpperCase() === "LIVE");
                 },
-                hasChangedHeader:function(callback){
+                hasChangedHeader(callback){
                     callback(null, props.home_featured_heading !== "Start selling your offerings in minutes!");
                 },
-                totalCustomers: function (callback) {
+                totalCustomers (callback) {
                     user.getRowCountByKey(null, null, function (totalCustomers) {
                         callback(null, totalCustomers);
                     });
                 },
-                totalFlaggedCustomers: function (callback) {
+                totalFlaggedCustomers (callback) {
                     fund.getRowCountByKey('flagged', 'true', function (totalUsers) {
                         callback(null, totalUsers);
                     });
                 },
-                totalServiceInstances: function (callback) {
+                totalServiceInstances (callback) {
                     serviceInstance.getRowCountByKey(null, null, function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalRequestedServiceInstances: function (callback) {
+                totalRequestedServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'requested', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalRunningServiceInstances: function (callback) {
+                totalRunningServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'running', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalWaitingServiceInstances: function (callback) {
+                totalWaitingServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'waiting', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalMissingPaymentServiceInstances: function (callback) {
+                totalMissingPaymentServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'missing-payment', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalCancelledServiceInstances: function (callback) {
+                totalCancelledServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'cancelled', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalRejectedServiceInstances: function (callback) {
+                totalRejectedServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'rejected', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalWaitingCancellationServiceInstances: function (callback) {
+                totalWaitingCancellationServiceInstances (callback) {
                     serviceInstance.getRowCountByKey('status', 'waiting_cancellation', function (totalInstances) {
                         callback(null, totalInstances);
                     });
                 },
-                totalChargeItems: function (callback) {
+                totalChargeItems (callback) {
                     charge.getRowCountByKey(null, null, function (totalCharges) {
                         callback(null, totalCharges);
                     });
                 },
-                totalPaidChargeItems: function (callback) {
+                totalPaidChargeItems (callback) {
                     charge.getRowCountByKey('approved', 'true', function (totalSuccessfulCharges) {
                         callback(null, totalSuccessfulCharges);
                     });
                 },
-                totalUnpaidChargeItems: function (callback) {
+                totalUnpaidChargeItems (callback) {
                     charge.getRowCountByKey('approved', 'false', function (totalUnsuccessfulCharges) {
                         callback(null, totalUnsuccessfulCharges);
                     });
                 },
-                totalApprovedChargeItems: function (callback) {
+                totalApprovedChargeItems (callback) {
                     charge.getRowCountByKey('approved', 'true', function (totalApprovedCharges) {
                         callback(null, totalApprovedCharges);
                     });
                 },
-                totalRefunds: function (callback) {
+                totalRefunds (callback) {
                     transaction.getRowCountByKey('refunded', 'true', function (totalRefunds) {
                         callback(null, totalRefunds);
                     });
                 },
-                totalRefundAmount: function (callback) {
+                totalRefundAmount (callback) {
                     transaction.getSumOfColumnFiltered('amount_refunded', null, null, function (totalRefundAmount) {
-                        let total = (totalRefundAmount == null ? 0 : totalRefundAmount);
+                        const total = (totalRefundAmount == null ? 0 : totalRefundAmount);
                         callback(null, total);
                     });
                 },
-                totalWebhooks: function(callback){
+                totalWebhooks(callback){
                     webhook.getRowCountByKey(null, null, (total) => {
                         callback(null, total);
                     })
                 },
-                totalInvoiced: function (callback) {
+                totalInvoiced (callback) {
                     let total = 0;
                     invoices.map(inv => {
                         total += inv.data.total;
                     });
                     callback(null, total);
                 },
-                totalSales: function (callback) {
+                totalSales (callback) {
                     let total = 0;
                     transactions.map(payment => {
                         if(payment.data.paid === true) {
@@ -301,17 +301,17 @@ module.exports = {
                     })
                     callback(null, total);
                 },
-                totalServiceInstanceCancellations: function (callback) {
+                totalServiceInstanceCancellations (callback) {
                     serviceInstanceCancellation.getRowCountByKey(null, null, function (totalCancellations) {
                         callback(null, totalCancellations);
                     });
                 },
-                totalPublishedTemplates: function (callback) {
+                totalPublishedTemplates (callback) {
                     serviceTemplate.getRowCountByKey('published', 'true', function (totalPublishedTemplates) {
                         callback(null, totalPublishedTemplates);
                     });
                 },
-                totalUnpublishedTemplates: function (callback) {
+                totalUnpublishedTemplates (callback) {
                     serviceTemplate.getRowCountByKey('published', 'false', function (totalUnpublishedTemplates) {
                         callback(null, totalUnpublishedTemplates);
                     });

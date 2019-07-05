@@ -1,7 +1,7 @@
 module.exports = {
 
 
-    up: async function (knex) {
+    async up (knex) {
     
         await knex.schema.alterTable("users", table => {
                 table.string('google_refresh_token');
@@ -11,7 +11,7 @@ module.exports = {
         return await knex;
     },
 
-    down: async function (knex) {
+    async down (knex) {
         await knex.schema.alterTable("users", table => {
             table.dropColumns("google_refresh_token");
         });

@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * Translator for documentation pages.
@@ -17,8 +17,8 @@ window.SwaggerTranslator = {
 
     _words:[],
 
-    translate: function(sel) {
-      var $this = this;
+    translate(sel) {
+      const $this = this;
       sel = sel || '[data-sw-translate]';
 
       $(sel).each(function() {
@@ -29,11 +29,11 @@ window.SwaggerTranslator = {
       });
     },
 
-    _tryTranslate: function(word) {
+    _tryTranslate(word) {
       return this._words[$.trim(word)] !== undefined ? this._words[$.trim(word)] : word;
     },
 
-    learn: function(wordsMap) {
+    learn(wordsMap) {
       this._words = wordsMap;
     }
 };

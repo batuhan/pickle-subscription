@@ -1,4 +1,4 @@
 
-let ResetRequest = require("./base/entity")("password_reset_request");
+const ResetRequest = require("./base/entity")("password_reset_request");
 
 module.exports = ResetRequest;

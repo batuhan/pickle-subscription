@@ -1,6 +1,6 @@
 module.exports = {
 
-    up: async function (knex) {
+    async up (knex) {
         await knex("notification_templates").where({name: "invitation"}).update({
             subject: "Invitation",
             message: `<style>
@@ -627,7 +627,7 @@ module.exports = {
         return await knex;
     },
 
-    down: async function (knex) {
+    async down (knex) {
 
         return await knex;
 

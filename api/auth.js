@@ -1,15 +1,15 @@
 
-let auth = require('../middleware/auth');
-let validate = require('../middleware/validate');
-let async = require("async")
-let jwt = require('jsonwebtoken');
-let bcrypt = require("bcryptjs");
-let NotificationTemplate = require("../models/notification-template");
-let Role = require("../models/role");
-let ResetRequest = require("../models/password-reset-request")
-let User = require("../models/user");
-let Alert = require("react-s-alert").default;
-let store = require("../config/redux/store");
+const async = require("async")
+const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const auth = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const NotificationTemplate = require("../models/notification-template");
+const Role = require("../models/role");
+const ResetRequest = require("../models/password-reset-request")
+const User = require("../models/user");
+const Alert = require("react-s-alert").default;
+const store = require("../config/redux/store");
 
 module.exports = function(app, passport) {
 
@@ -21,16 +21,16 @@ module.exports = function(app, passport) {
         }
 
     }, async function(req, res) {
-        let payload = {  uid: req.user.data.id };
+        const payload = {  uid: req.user.data.id };
         if(req.query.includeUser){
             await req.user.attachReferences();
             payload.user = req.user.data;
             delete payload.user.password;
             delete payload.user.references.funds;
         }
-        let expiration = req.body.noExpiration ? undefined : "3h"
-        let token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: expiration  });
-        res.json({token:token});
+        const expiration = req.body.noExpiration ? undefined : "3h"
+        const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: expiration  });
+        res.json({token});
     });
 
     app.get('/auth/session/clear', function(req, res) {
@@ -51,13 +51,13 @@ module.exports = function(app, passport) {
                         })
                     }, function(err){
                         require('crypto').randomBytes(20, function(err, buffer) {
-                            let token = buffer.toString("hex");
-                            let reset = new ResetRequest({
+                            const token = buffer.toString("hex");
+                            const reset = new ResetRequest({
                                 user_id: user.get("id"),
                                 hash: bcrypt.hashSync(token, 10)
                             });
                             reset.create(function(err, newReset){
-                                let resetURL = store.getState().options.reset_url;
+                                const resetURL = store.getState().options.reset_url;
                                 let frontEndUrl = `${req.protocol}://${req.get('host')}/reset-password/${user.get("id")}/${token}`;
                                 if(resetURL){
                                     frontEndUrl = `${resetURL}?uid=${user.get("id")}&resetToken=${token}`
@@ -87,16 +87,16 @@ module.exports = function(app, passport) {
         });
     });
 
-    //todo -- token expiration
+    // todo -- token expiration
     app.post("/auth/reset-password/:uid/:token", function(req, res, next){
-        let userManager = store.getState(true).pluginbot.services.userManager[0]
+        const userManager = store.getState(true).pluginbot.services.userManager[0]
 
         ResetRequest.findOne("user_id", req.params.uid , function(result){
             if(result.data && bcrypt.compareSync(req.params.token, result.get("hash"))){
                 User.findOne("id", result.get("user_id"), async function(user){
                     // let password = bcrypt.hashSync(req.body.password, 10);
-                    let newUserData = {password : req.body.password};
-                    let updated = await userManager.update(user, newUserData);
+                    const newUserData = {password : req.body.password};
+                    const updated = await userManager.update(user, newUserData);
                     // user.set("password", password);
                     res.json({"message" : "Password successfully reset"});
                     result.delete(function(r){
@@ -113,7 +113,7 @@ module.exports = function(app, passport) {
 
     app.post('/auth/session', function(req,res,next){
 
-        let cb = function(err, user, info) {
+        const cb = function(err, user, info) {
             if (err) { console.error(err); return res.json({"error" : "Invalid username or password"}); }
             if (!user) { console.error("no user"); return res.json({"error" : "Invalid username or password"}) }
             req.logIn(user, {session:true}, function(err) {
@@ -131,9 +131,9 @@ module.exports = function(app, passport) {
             passport.authenticate('local-login', cb)(req, res, next);
         }
     },require("../middleware/role-session")(), function(req, res, next){
-        let user_role = new Role({"id" : req.user.data.role_id});
+        const user_role = new Role({"id" : req.user.data.role_id});
         user_role.getPermissions(function(perms){
-            let permission_names = perms.map(perm => perm.data.permission_name);
+            const permission_names = perms.map(perm => perm.data.permission_name);
             res.json({"message" : "successful login", "permissions" : permission_names })
         });
     });

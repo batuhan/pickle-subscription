@@ -1,10 +1,10 @@
-'use strict';
+
 /**
  * @author Batch Themes Ltd.
  */
 (function() {
     $(function() {
-        var colors = {
+        const colors = {
             'white': '#ffffff',
             'black': '#000000',
             'red-50': '#ffebee',
@@ -275,27 +275,27 @@
             'blue-grey-a400': '#78909c',
             'blue-grey-a700': '#455a64'
         };
-        colors['light'] = colors['grey-100'];
-        colors['dark'] = colors['grey-900'];
-        colors['default'] = colors['grey-900'];
-        colors['primary'] = colors['blue-900'];
-        colors['secondary'] = colors['pink-a700'];
-        colors['info'] = colors['light-blue-a700'];
-        colors['success'] = colors['green-700'];
-        colors['warning'] = colors['amber-700'];
-        colors['danger'] = colors['red-700'];
-        var camelCasedColors = {};
-        for (var i in colors) {
+        colors.light = colors['grey-100'];
+        colors.dark = colors['grey-900'];
+        colors.default = colors['grey-900'];
+        colors.primary = colors['blue-900'];
+        colors.secondary = colors['pink-a700'];
+        colors.info = colors['light-blue-a700'];
+        colors.success = colors['green-700'];
+        colors.warning = colors['amber-700'];
+        colors.danger = colors['red-700'];
+        const camelCasedColors = {};
+        for (const i in colors) {
             camelCasedColors[_.camelCase(i)] = colors[i];
         }
-        var config = {
+        const config = {
             name: 'Peak',
             colors: camelCasedColors
         };
         if ($('html').hasClass('loading')) {
-            var loaderTime = 1;
-            var loaderColor = colors.primary;
-            var htmlClass = $('html').attr('class').toString();
+            const loaderTime = 1;
+            let loaderColor = colors.primary;
+            const htmlClass = $('html').attr('class').toString();
             if (htmlClass.match(/loading-secondary/gi)) {
                 loaderColor = colors.secondary;
             } else if (htmlClass.match(/loading\-info/gi)) {
@@ -311,8 +311,8 @@
             }
             $("#fakeloader").fakeLoader({
                 timeToHide: loaderTime,
-                zIndex: "99999", //Default zIndex
-                spinner: "spinner1", //Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
+                zIndex: "99999", // Default zIndex
+                spinner: "spinner1", // Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7'
                 bgColor: loaderColor
             });
             setTimeout(function() {
@@ -332,7 +332,7 @@
             $.removeAllStorages();
         });
         Mousetrap.bind('ctrl+2', function() {
-            var layout = $('body').data('layout');
+            const layout = $('body').data('layout');
             $('body').toggleClass('layout-collapsed');
             if (layout === 'default-sidebar-2' && $('body').hasClass('layout-collapsed')) {
                 $('.left-sidebar-backdrop').toggleClass('fade in');
@@ -349,7 +349,7 @@
         });
         Mousetrap.bind('ctrl+3', function() {
             $('.right-sidebar-outer').toggleClass('show-from-right');
-            var layout = $('body').data('layout');
+            const layout = $('body').data('layout');
             if ($('.right-sidebar-outer').hasClass('show-from-right')) {
                 $('.right-sidebar-backdrop').toggleClass('fade in');
             } else {

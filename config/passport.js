@@ -1,10 +1,10 @@
 // config/passport.js
 
 // load all the things we need
-let LocalStrategy = require('passport-local').Strategy;
-let bcrypt = require('bcryptjs');
-var JwtStrategy = require('passport-jwt').Strategy;
-var ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
+const JwtStrategy = require('passport-jwt').Strategy;
+const {ExtractJwt} = require('passport-jwt');
 
 process.on('unhandledRejection', function (e) {
 
@@ -15,9 +15,9 @@ process.on('unhandledRejection', function (e) {
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
-    let User = require('../models/user');
-    let Invitation = require('../models/invitation');
-    let Invoices = require('../models/invoice');
+    const User = require('../models/user');
+    const Invitation = require('../models/invitation');
+    const Invoices = require('../models/invoice');
 
     // =========================================================================
     // passport session setup ==================================================
@@ -88,13 +88,13 @@ module.exports = function (passport) {
                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
 
                 }
-                else {
-                    var newUser = new User({"email": name, "password": bcrypt.hashSync(password, 10), "role_id": 1});
+                
+                    const newUser = new User({"email": name, "password": bcrypt.hashSync(password, 10), "role_id": 1});
                     newUser.createWithStripe(function (err, result) {
 
                         return done(err, result);
                     })
-                }
+                
             });
 
         }));
@@ -120,14 +120,14 @@ module.exports = function (passport) {
                     return done(null, false, {message: "invited user has no password"});
                 }
 
-                let store = require("../config/redux/store");
+                const store = require("../config/redux/store");
 
-                //todo : this needs to be moved in plugin
-                let userManager = store.getState(true).pluginbot.services.userManager[0]
+                // todo : this needs to be moved in plugin
+                const userManager = store.getState(true).pluginbot.services.userManager[0]
                 if (userManager) {
                     try {
 
-                        let authResult = await userManager.authenticate(result, password);
+                        const authResult = await userManager.authenticate(result, password);
                     } catch (e) {
                         console.error(e)
                         return done(null, false, {message: e}); // create the loginMessage and save it to session as flashdata
@@ -150,16 +150,16 @@ module.exports = function (passport) {
 
         }));
 
-    let opts = {};
+    const opts = {};
     opts.secretOrKey = process.env.SECRET_KEY;
     opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 
     passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
-        let query = jwt_payload.email ? {email: jwt_payload.email} : {id: jwt_payload.uid};
+        const query = jwt_payload.email ? {email: jwt_payload.email} : {id: jwt_payload.uid};
         if(!jwt_payload.uid && !jwt_payload.email){
             return done("Invalid token");
         }
-        let user = (await User.find(query))[0];
+        const user = (await User.find(query))[0];
         if (user && user.data) {
             if (user.data.status === "suspended") {
                 return done(null, false, {"message": "account suspended"});

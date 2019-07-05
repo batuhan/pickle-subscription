@@ -1,8 +1,8 @@
 module.exports = {
 
 
-    up: async function (knex) {
-        let ServiceTemplate = require("../../../../models/base/entity")("service_templates", [], "id", knex);
+    async up (knex) {
+        const ServiceTemplate = require("../../../../models/base/entity")("service_templates", [], "id", knex);
 
         await knex.schema.createTable("tiers", table => {
             table.increments();
@@ -27,21 +27,21 @@ module.exports = {
             table.timestamps(true, true);
         });
 
-        let templates = await ServiceTemplate.find();
-        let tiers = templates.map(template => {
+        const templates = await ServiceTemplate.find();
+        const tiers = templates.map(template => {
             return {
-                name: template.data.name + "-tier",
+                name: `${template.data.name  }-tier`,
                 service_template_id: template.data.id
             }
         });
 
-        let createdTiers = await knex("tiers").insert(tiers).returning("*") || [];
-        let templateMap = templates.reduce((acc, template) => {
+        const createdTiers = await knex("tiers").insert(tiers).returning("*") || [];
+        const templateMap = templates.reduce((acc, template) => {
             acc[template.data.id] = template.data;
             return acc;
         }, {});
-        let paymentTemplates = createdTiers.map(tier => {
-            let template = templateMap[tier.service_template_id];
+        const paymentTemplates = createdTiers.map(tier => {
+            const template = templateMap[tier.service_template_id];
             return {
                 amount: template.amount,
                 trial_period_days: template.trial_period_days,
@@ -55,7 +55,7 @@ module.exports = {
                 type: template.type
             }
         });
-        let createdPayments = await knex("payment_structure_templates").insert(paymentTemplates);
+        const createdPayments = await knex("payment_structure_templates").insert(paymentTemplates);
         await knex.schema.alterTable("service_templates", table => {
             table.dropColumns("description", "type", "overhead", "details", "amount", "currency", "interval", "interval_count", "split_configuration", "statement_descriptor", "trial_period_days", "subscription_prorate")
         });
@@ -65,9 +65,9 @@ module.exports = {
         return await knex;
     },
 
-    down: async function (knex) {
-        let paymentStructures = await knex("payment_structure_templates").select();
-        let tiers = await knex("tiers").select();
+    async down (knex) {
+        const paymentStructures = await knex("payment_structure_templates").select();
+        const tiers = await knex("tiers").select();
         await knex.schema.alterTable("service_templates", table => {
             table.integer('trial_period_days');
             table.float('amount');
@@ -86,8 +86,8 @@ module.exports = {
         await knex.schema.alterTable("service_instances", table => {
             table.dropColumns('payment_structure_template_id');
         });
-        for (let struct of paymentStructures) {
-            let service_template_id = tiers.find(tier => tier.id === struct.tier_id).service_template_id;
+        for (const struct of paymentStructures) {
+            const {service_template_id} = tiers.find(tier => tier.id === struct.tier_id);
             delete struct.id;
             delete struct.tier_id;
             await knex("service_templates").update(struct).where("id", service_template_id);

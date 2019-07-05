@@ -1,41 +1,41 @@
 
-let async = require('async');
-let _ = require('lodash');
-let Charge = require("./base/entity")("charge_items");
-let Stripe = require('../config/stripe');
-let User = require('./user');
-let promiseProxy = require("../lib/promiseProxy");
+const async = require('async');
+const _ = require('lodash');
+const Charge = require("./base/entity")("charge_items");
+const Stripe = require('../config/stripe');
+const User = require('./user');
+const promiseProxy = require("../lib/promiseProxy");
 
 /**
  * Function to approve an individual charge item on the database and Stripe
  */
-let approve = function (callback) {
-    let self = this;
+const approve = function (callback) {
+    const self = this;
 
     User.findById(self.data.user_id, function (user_object) {
-        let ServiceInstance = require('./service-instance');
-        //Only approve if the charge is attached to an instance
+        const ServiceInstance = require('./service-instance');
+        // Only approve if the charge is attached to an instance
         ServiceInstance.findOne('id',self.data.service_instance_id, function (service) {
-            //Initiate the charge fee
-            let charge_item = {
+            // Initiate the charge fee
+            const charge_item = {
                 customer : user_object.data.customer_id,
                 amount: self.data.amount,
                 currency: self.data.currency,
                 description: self.data.description,
                 subscription: service.data.subscription_id
             };
-            //Approve charge in Stripe
+            // Approve charge in Stripe
             Stripe().connection.invoiceItems.create(charge_item, function(err, invoiceItem) {
-                //Change the status in the database to approved
+                // Change the status in the database to approved
                 if(!err){
-                    //Get the current start billing date of the subscription
+                    // Get the current start billing date of the subscription
                     Stripe().connection.subscriptions.retrieve(service.data.subscription_id, function(subscription_err, subscription) {
                         if(!subscription_err){
                             self.data.approved = true;
                             self.data.item_id = invoiceItem.id;
                             self.data.period_start = subscription.current_period_start;
                             self.data.period_end = subscription.current_period_end;
-                            //Update the Charge item in the database
+                            // Update the Charge item in the database
                             self.update(function () {
                                 callback(null, invoiceItem);
                             });
@@ -57,33 +57,33 @@ let approve = function (callback) {
  * Function to cancel the charge item and delete it from the database and Stripe
  */
 Charge.prototype.cancel = function (callback) {
-    let self = this;
-    let currentTimestamp = Math.ceil(_.now()/1000);
+    const self = this;
+    const currentTimestamp = Math.ceil(_.now()/1000);
     async.series([
         function (callback) {
             if((self.data.period_end < currentTimestamp) && self.data.period_end){
-                let err = 'Charge has already been processed. Cannot delete! Please process refund.';
+                const err = 'Charge has already been processed. Cannot delete! Please process refund.';
                 callback(err, null);
             } else {
-                let output = 'Charge is removable';
+                const output = 'Charge is removable';
                 callback(null, output);
             }
         },
         function (callback) {
-            //If the invoice charge item has not been applied yet, then remove it from stripe
+            // If the invoice charge item has not been applied yet, then remove it from stripe
             if(self.data.period_end > currentTimestamp){
                 Stripe().connection.invoiceItems.del(self.data.item_id, function(err, confirmation){
                     callback(err, confirmation);
                 });
             } else {
-               let output = 'Stripe removal bypassed.';
+               const output = 'Stripe removal bypassed.';
                 callback(null, output);
             }
         },
         function (callback) {
-            //Finally remove the charge from the database.
+            // Finally remove the charge from the database.
             self.delete(function(result){
-                let output = 'Charge has been removed from database.';
+                const output = 'Charge has been removed from database.';
                 callback(null, output);
             });
         }
@@ -113,7 +113,7 @@ Charge.findOnRelative = function(key, value, callback){
             return include;
         }));
     });
-};*/
+}; */
 
 
 Charge.prototype.approve = promiseProxy(approve, false);

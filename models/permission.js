@@ -1,5 +1,5 @@
 
-var knex = require('../config/db.js');
+const knex = require('../config/db.js');
 
 /**
  *
@@ -9,10 +9,10 @@ var knex = require('../config/db.js');
  *
  */
 
-let Permission = require("./base/entity")("user_permissions");
+const Permission = require("./base/entity")("user_permissions");
 
 Permission.prototype.delete = function (callback) {
-    var id = this.get('id');
+    const id = this.get('id');
     if(!id){
         throw "cannot update non existant"
     }

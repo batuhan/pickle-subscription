@@ -1,15 +1,15 @@
-let {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let sagaMiddleware = require("../../middleware/express-saga-middleware");
+const {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const sagaMiddleware = require("../../middleware/express-saga-middleware");
 
 function* run(config, provide, channels) {
-    let configurationManager = yield consume(channels.configurationManager);
+    const configurationManager = yield consume(channels.configurationManager);
     let middleware =  function*(req, res, next){
-        let publicConfigurations = yield call(configurationManager.getConfigurations, true);
+        const publicConfigurations = yield call(configurationManager.getConfigurations, true);
     };
     middleware = yield call(sagaMiddleware, middleware);
 
-    let routeDefinition = {
+    const routeDefinition = {
             endpoint : "/initial-state",
             method : "get",
             middleware : [middleware],

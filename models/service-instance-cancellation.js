@@ -1,5 +1,5 @@
 
-let ServiceInstanceCancellation = require("./base/entity")("service_instance_cancellations");
+const ServiceInstanceCancellation = require("./base/entity")("service_instance_cancellations");
 
 ServiceInstanceCancellation.findOnRelative = function(key, value, callback){
     ServiceInstanceCancellation.findAll(key, value, function(result){

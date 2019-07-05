@@ -1,11 +1,11 @@
 
-let Notification = require("../models/notifications");
+const Notification = require("../models/notifications");
 
 
-//Notification.createFromTemplate()
+// Notification.createFromTemplate()
 
 module.exports = function(router){
-    //get system notifications
+    // get system notifications
     router.get("/notifications/system", function(req, res, next){
         Notification.findAll("user_id", null, (notifications) => {
             res.locals.json = notifications.map(notification => notification.data);

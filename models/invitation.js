@@ -1,11 +1,11 @@
-let knex = require('../config/db');
+const knex = require('../config/db');
 
-let Invitation = require("./base/entity")("invitations");
+const Invitation = require("./base/entity")("invitations");
 
-//requires a user_id
+// requires a user_id
 Invitation.prototype.create = function (callback) {
-    let self = this;
-    //this.data = this.sanitize(this.data);
+    const self = this;
+    // this.data = this.sanitize(this.data);
 
     require('crypto').randomBytes(20, function(err, buffer) {
 		self.set("token", buffer.toString('hex'));

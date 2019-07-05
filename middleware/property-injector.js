@@ -1,12 +1,13 @@
 
-let System = require('../models/system-options');
-let Stripe = require('../config/stripe');
-let _ = require("lodash")
-let injectProperties = function () {
+const _ = require("lodash")
+const System = require('../models/system-options');
+const Stripe = require('../config/stripe');
+
+const injectProperties = function () {
     return function (req, res, next) {
-        let store = require("../config/redux/store");
-        let options = store.getState().options;
-        Object.defineProperty(res.locals, 'sysprops', { get: function() { return store.getState().options } });
+        const store = require("../config/redux/store");
+        const {options} = store.getState();
+        Object.defineProperty(res.locals, 'sysprops', { get() { return store.getState().options } });
         if(options.stripe_publishable_key) {
             res.cookie("spk", options.stripe_publishable_key);
         }else{

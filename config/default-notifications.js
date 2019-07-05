@@ -1,4 +1,4 @@
-let default_notifications = {};
+const default_notifications = {};
 default_notifications.templates = [
   {
     name: "service_cancellation",
@@ -528,8 +528,8 @@ default_notifications.templates = [
         send_to_owner: true
     }
 ];
-//Setting the registration_admin role to admin
-//todo: no more hardcoded id...
+// Setting the registration_admin role to admin
+// todo: no more hardcoded id...
 default_notifications.templates_to_roles = [
   {
     notification_template_id: 3,

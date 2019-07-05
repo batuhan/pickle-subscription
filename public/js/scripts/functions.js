@@ -1,7 +1,7 @@
-'use strict';
+
 
 function isError(element, message) {
-    var el = $(element);
+    const el = $(element);
     el.parent().removeClass('has-success').addClass('has-danger')
     el.removeClass('form-control-success').addClass('form-control-danger')
     el.next().text(message).removeClass('text-success').addClass('text-danger');
@@ -9,7 +9,7 @@ function isError(element, message) {
 }
 
 function isSuccess(element, message) {
-    var el = $(element);
+    const el = $(element);
     el.parent().removeClass('has-danger').addClass('has-success')
     el.removeClass('form-control-danger').addClass('form-control-success')
     el.next().text(message).removeClass('text-danger').addClass('text-success');
@@ -17,7 +17,7 @@ function isSuccess(element, message) {
 }
 
 function resetMessages(element) {
-    var el = $(element);
+    const el = $(element);
     el.parent().removeClass('has-danger').removeClass('has-success')
     el.removeClass('form-control-danger').removeClass('form-control-success')
     el.next().text('');
@@ -26,12 +26,12 @@ function resetMessages(element) {
 function validateOnChange(element, rules, successMessage, errorMessage) {
     $(document).on('focus', element, function(e) {
         e.preventDefault();
-        //resetMessages(element);
+        // resetMessages(element);
         return false;
     });
     $(document).on('blur', element, function(e) {
         e.preventDefault();
-        var result = approve.value($(element).val(), rules);
+        const result = approve.value($(element).val(), rules);
         if (result.approved) {
             isSuccess(element, successMessage);
         } else {
@@ -42,14 +42,14 @@ function validateOnChange(element, rules, successMessage, errorMessage) {
 }
 
 function animatedPeityBar(element, height, color) {
-    var chart = $(element).peity('bar', {
-        height: height,
+    const chart = $(element).peity('bar', {
+        height,
         width: '100%',
         fill: [color]
     });
     setInterval(function() {
-        var random = Math.floor(Math.random() * 10) + 2;
-        var values = chart.text().split(',');
+        const random = Math.floor(Math.random() * 10) + 2;
+        const values = chart.text().split(',');
         values.shift();
         values.push(random);
         chart.text(values.join(',')).change();
@@ -57,15 +57,15 @@ function animatedPeityBar(element, height, color) {
 }
 
 function animatedPeityArea(element, height, color) {
-    var chart = $(element).peity('line', {
-        height: height,
+    const chart = $(element).peity('line', {
+        height,
         width: '100%',
         fill: color,
         stroke: color
     });
     setInterval(function() {
-        var random = Math.floor(Math.random() * 10) + 2;
-        var values = chart.text().split(',');
+        const random = Math.floor(Math.random() * 10) + 2;
+        const values = chart.text().split(',');
         values.shift();
         values.push(random);
         chart.text(values.join(',')).change();
@@ -73,15 +73,15 @@ function animatedPeityArea(element, height, color) {
 }
 
 function animatedPeityLine(element, height, color) {
-    var chart = $(element).peity('line', {
-        height: height,
+    const chart = $(element).peity('line', {
+        height,
         width: '100%',
         fill: 'white',
         stroke: color
     });
     setInterval(function() {
-        var random = Math.floor(Math.random() * 10) + 2;
-        var values = chart.text().split(',');
+        const random = Math.floor(Math.random() * 10) + 2;
+        const values = chart.text().split(',');
         values.shift();
         values.push(random);
         chart.text(values.join(',')).change();
@@ -89,7 +89,7 @@ function animatedPeityLine(element, height, color) {
 }
 
 function animatedLineChart(id, color) {
-    var lineChart = echarts.init(document.getElementById(id));
+    const lineChart = echarts.init(document.getElementById(id));
 
     function randomData() {
         now = new Date(+now + oneDay);
@@ -102,24 +102,24 @@ function animatedLineChart(id, color) {
             ]
         };
     }
-    var data = [];
+    const data = [];
     var now = new Date(2010, 9, 3);
     var oneDay = 24 * 3600 * 1000;
     var value = Math.random() * 1000;
-    for (var i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
         data.push(randomData());
     }
-    var option = {
+    const option = {
         color: [color],
         title: {
             text: null
         },
         tooltip: {
             trigger: 'axis',
-            formatter: function(params) {
+            formatter(params) {
                 params = params[0];
-                var date = new Date(params.name);
-                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+                const date = new Date(params.name);
+                return `${date.getDate()  }/${  date.getMonth() + 1  }/${  date.getFullYear()  } : ${  params.value[1]}`;
             },
             axisPointer: {
                 animation: false
@@ -145,18 +145,18 @@ function animatedLineChart(id, color) {
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
-            data: data
+            data
         }]
     };
     lineChart.setOption(option);
     setInterval(function() {
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             data.shift();
             data.push(randomData());
         }
         lineChart.setOption({
             series: [{
-                data: data
+                data
             }]
         });
     }, 1000);
@@ -165,7 +165,7 @@ function animatedLineChart(id, color) {
 function peityDonut(element, radius, colors) {
     return $(element).peity('donut', {
         width: radius,
-        radius: radius,
+        radius,
         fill: colors
     });
 }
@@ -174,23 +174,23 @@ function peityPie(element, radius, colors) {
     return $(element).peity('pie', {
         height: radius,
         width: radius,
-        radius: radius,
+        radius,
         fill: colors
     });
 }
 
 function peityBar(element, height, width, color) {
     return $(element).peity('bar', {
-        height: height,
-        width: width,
+        height,
+        width,
         fill: [color]
     });
 }
 
 function peityLine(element, height, width, color) {
     return $(element).peity('line', {
-        height: height,
-        width: width,
+        height,
+        width,
         fill: color,
         stroke: color
     });
@@ -202,7 +202,7 @@ function element_exists(id) {
         }
         return true;
     }
-    //http://www.sitepoint.com/javascript-generate-lighter-darker-color/
+    // http://www.sitepoint.com/javascript-generate-lighter-darker-color/
 
 function colorLuminance(hex, lum) {
         // validate hex string
@@ -212,79 +212,79 @@ function colorLuminance(hex, lum) {
         }
         lum = lum || 0;
         // convert to decimal and change luminosity
-        var rgb = "#",
-            c, i;
+        let rgb = "#";
+            let c; let i;
         for (i = 0; i < 3; i++) {
             c = parseInt(hex.substr(i * 2, 2), 16);
             c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-            rgb += ("00" + c).substr(c.length);
+            rgb += (`00${  c}`).substr(c.length);
         }
         return rgb;
     }
-    //http://stackoverflow.com/questions/21646738/convert-hex-to-rgba
+    // http://stackoverflow.com/questions/21646738/convert-hex-to-rgba
 
 function hexToRgbA(hex, opacity) {
-    var c;
-    var o = opacity || 1;
+    let c;
+    const o = opacity || 1;
     if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
         c = hex.substring(1).split('');
         if (c.length == 3) {
             c = [c[0], c[0], c[1], c[1], c[2], c[2]];
         }
-        c = '0x' + c.join('');
-        return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + o + ')';
+        c = `0x${  c.join('')}`;
+        return `rgba(${  [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',')  },${  o  })`;
     }
     return false;
 }
 
 function incrementingData() {
-    var series = [];
-    var labels = [];
-    for (var x = 0; x < 50; x++) {
+    const series = [];
+    const labels = [];
+    for (let x = 0; x < 50; x++) {
         if (x % 2 === 0) {
             continue;
         }
-        labels.push('Label ' + x);
+        labels.push(`Label ${  x}`);
         series.push(Functions.random(x, x + 10));
     }
     return {
-        series: series,
-        labels: labels
+        series,
+        labels
     }
 }
 
 function decrementingData() {
-    var series = [];
-    var labels = [];
-    for (var x = 50; x > 0; x--) {
+    const series = [];
+    const labels = [];
+    for (let x = 50; x > 0; x--) {
         if (x % 2 === 0) {
             continue;
         }
-        labels.push('Label ' + x);
+        labels.push(`Label ${  x}`);
         series.push(Functions.random(x + 10, x));
     }
     return {
-        series: series,
-        labels: labels
+        series,
+        labels
     }
 }
 
 function randomData() {
-    var series = [];
-    var labels = [];
-    for (var x = 0; x < 30; x++) {
-        labels.push('Label ' + x);
+    const series = [];
+    const labels = [];
+    for (let x = 0; x < 30; x++) {
+        labels.push(`Label ${  x}`);
         series.push(Functions.random(20, 80));
     }
     return {
-        series: series,
-        labels: labels
+        series,
+        labels
     }
 }
 
 function reverseArray(input) {
-    var ret = [];
-    for (var i = input.length - 1; i >= 0; i--) {
+    const ret = [];
+    for (let i = input.length - 1; i >= 0; i--) {
         ret.push(input[i]);
     }
     return ret;
@@ -296,7 +296,7 @@ function random(min, max) {
 
 function lighten(col, amt) {
     amt = Math.abs(amt);
-    amt = amt / 100;
+    amt /= 100;
     return colorLuminance(col, amt);
 }
 

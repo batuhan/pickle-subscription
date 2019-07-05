@@ -1,11 +1,12 @@
-let {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let bcrypt = require('bcryptjs');
-let fetch = require("node-fetch");
-let Promise = require("bluebird");
+const {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const bcrypt = require('bcryptjs');
+const fetch = require("node-fetch");
+const Promise = require("bluebird");
 const crypto = require('crypto');
+
 function* run(config, provide, channels) {
-    let db = yield consume(channels.database);
+    const db = yield consume(channels.database);
     yield call(db.createTableIfNotExist, "webhooks", function (table) {
         table.increments();
         table.string('endpoint_url').unique().notNullable();
@@ -15,38 +16,38 @@ function* run(config, provide, channels) {
         console.log("Created 'webhooks ' table.");
     });
 
-    //todo: possibly may need to give users ability to set these themselves...
+    // todo: possibly may need to give users ability to set these themselves...
     const headers = {
         "Content-Type": "application/json",
         "Accepts": "application/json"
     };
 
-    let sendToWebhooks = (eventName) => async (event, sync_all = false) => {
-        let webhooks = await db("webhooks").where(true, true);
-        let webhook_responses = await Promise.reduce(webhooks, async (responses, webhook) => {
+    const sendToWebhooks = (eventName) => async (event, sync_all = false) => {
+        const webhooks = await db("webhooks").where(true, true);
+        const webhook_responses = await Promise.reduce(webhooks, async (responses, webhook) => {
 
-            let parsedEvent = Object.entries(event).reduce((acc, [key, eventValue]) => {
+            const parsedEvent = Object.entries(event).reduce((acc, [key, eventValue]) => {
                 acc[key] = eventValue.data ? eventValue.data : eventValue;
                 return acc;
             }, {});
-            let eventPayload = JSON.stringify({event_name : eventName, event_data : parsedEvent});
-            let hmac = generateHmac(eventPayload, process.env.SECRET_KEY);
-            let webhookRequest = fetch(webhook.endpoint_url, {method: "POST", body: eventPayload, headers: {...headers, "X-Servicebot-Signature" : hmac}})
+            const eventPayload = JSON.stringify({event_name : eventName, event_data : parsedEvent});
+            const hmac = generateHmac(eventPayload, process.env.SECRET_KEY);
+            const webhookRequest = fetch(webhook.endpoint_url, {method: "POST", body: eventPayload, headers: {...headers, "X-Servicebot-Signature" : hmac}})
                 .then(async response => {
                     if (!response.ok) {
                         console.error("error making webhook request", response.statusText);
                     }
-                    let statusText = (response.status >= 200 && response.status <= 299) ? "OK" : response.statusText;
+                    const statusText = (response.status >= 200 && response.status <= 299) ? "OK" : response.statusText;
                     await db("webhooks").where("id", webhook.id).update({health: statusText});
                 })
                 .catch(error => {
-                    let health = error.errno || error
+                    const health = error.errno || error
                     db("webhooks").where("id", webhook.id).update({health}).then(result => {
 
                     })
                 });
 
-            //if its not async, store responses
+            // if its not async, store responses
             if (!webhook.async_lifecycle || sync_all) {
                 try {
                     responses[webhook.endpoint_url] = await (await webhookRequest).json();
@@ -59,8 +60,8 @@ function* run(config, provide, channels) {
         return {webhook_responses};
     };
 
-    //todo: make this not hardcoded?
-    let lifecycleHook = [
+    // todo: make this not hardcoded?
+    const lifecycleHook = [
         {
             stage: "pre",
             run: sendToWebhooks("pre_provision")
@@ -118,9 +119,9 @@ function* run(config, provide, channels) {
     ];
 
 
-    let processWebhooks = async (req, res, next) => {
-        let responses = await sendToWebhooks("test")({"event_name": "test", "event_data" : {"test" : "data"}}, true);
-        res.json({responses : responses});
+    const processWebhooks = async (req, res, next) => {
+        const responses = await sendToWebhooks("test")({"event_name": "test", "event_data" : {"test" : "data"}}, true);
+        res.json({responses});
     }
 
     let generateHmac = function(body, secret){
@@ -130,7 +131,7 @@ function* run(config, provide, channels) {
     };
 
 
-    let routeDefinition = [
+    const routeDefinition = [
         {
             endpoint: "/webhooks/test",
             method: "post",

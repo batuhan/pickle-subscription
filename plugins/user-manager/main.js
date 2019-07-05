@@ -1,12 +1,12 @@
-let {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let bcrypt = require('bcryptjs');
+const {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const bcrypt = require('bcryptjs');
 
 function* run(config, provide, channels) {
-    let db = yield consume(channels.database);
-    let userProviders = {
+    const db = yield consume(channels.database);
+    const userProviders = {
         "local": {
-            update : async function(oldUser, newUserData){
+            async update(oldUser, newUserData){
                 newUserData.id = oldUser.get("id");
                 if (newUserData.password) {
                     newUserData.password = bcrypt.hashSync(newUserData.password, 10);
@@ -14,7 +14,7 @@ function* run(config, provide, channels) {
                 Object.assign(oldUser.data, newUserData);
                 console.log("updating the user");
                 try {
-                    let result = await oldUser.updateWithStripe();
+                    const result = await oldUser.updateWithStripe();
                     delete result.password;
                     return {
                         message: 'User is successfully updated',
@@ -25,21 +25,21 @@ function* run(config, provide, channels) {
                 }
 
             },
-            authenticate : function(user, password){
+            authenticate(user, password){
                 if (!bcrypt.compareSync(password, user.get("password"))) {
                     throw "Invalid username/password"
                 }
             }
         }
     };
-    let userManager = {
-        update: async function (user, userData) {
+    const userManager = {
+        async update (user, userData) {
             if(user.data.id){
                 try {
-                    let provider = user.data.provider;
+                    const {provider} = user.data;
                     delete userData.provider;
                     if (provider !== "local" && userProviders[provider] && userProviders[provider].update ) {
-                        let providerResult = await userProviders[provider].update(user, userData);
+                        const providerResult = await userProviders[provider].update(user, userData);
                         console.log("PROVIDER RESULT\n\n", providerResult);
                     }
                     return await userProviders.local.update(user, userData);
@@ -50,9 +50,9 @@ function* run(config, provide, channels) {
 
             }
         },
-        authenticate: async function (user, password) {
+        async authenticate (user, password) {
             if(user.data.id) {
-                let provider = user.data.provider || "local";
+                const provider = user.data.provider || "local";
                 return await userProviders[provider].authenticate(user, password);
             }
         }
@@ -60,7 +60,7 @@ function* run(config, provide, channels) {
     yield provide({userManager});
 
     while (true) {
-        let userProvider = yield consume(channels.userProvider);
+        const userProvider = yield consume(channels.userProvider);
         userProviders[userProvider.name] = userProvider;
     }
 

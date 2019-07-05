@@ -1,9 +1,10 @@
-let Role = require("../models/role.js");
-let _ = require("lodash");
-let swaggerJSON = {...require("../api-docs/api-entity-paths.json"), ...require("../api-docs/api-paths.json")};
+const _ = require("lodash");
+const Role = require("../models/role.js");
+
+const swaggerJSON = {...require("../api-docs/api-entity-paths.json"), ...require("../api-docs/api-paths.json")};
 
 
-//todo:  allow for multiple permissions
+// todo:  allow for multiple permissions
 
 
 /**
@@ -14,14 +15,14 @@ let swaggerJSON = {...require("../api-docs/api-entity-paths.json"), ...require("
  * @param callback - callback function with true if authorized false otherwise as param
  *
  */
-let isAuthorized = function (user, permission, bypassPermissions, callback){
+const isAuthorized = function (user, permission, bypassPermissions, callback){
 
-    //TODO: clean this up so hasPermission can be passed multiple roles
+    // TODO: clean this up so hasPermission can be passed multiple roles
     Role.findOne("id", user.get("role_id"), function(role){
         role.getPermissions(function(permissions){
-            let status = permissions.some(p => p.data.permission_name == permission || !permission);
-            let shouldBypass = permissions.some(p => bypassPermissions.includes(p.data.permission_name));
-            console.log("userName: " + user.get('email') + " has permission: " + permission + ". Ability to make api call: " + status);
+            const status = permissions.some(p => p.data.permission_name == permission || !permission);
+            const shouldBypass = permissions.some(p => bypassPermissions.includes(p.data.permission_name));
+            console.log(`userName: ${  user.get('email')  } has permission: ${  permission  }. Ability to make api call: ${  status}`);
             callback(status, shouldBypass, permissions)
         })
     })
@@ -39,8 +40,8 @@ let isAuthorized = function (user, permission, bypassPermissions, callback){
  * @returns {Function}
  */
 
-//todo: move parameters into a config json... icky icky!
-let auth = function(permission=null, model=null, correlation_id="user_id", bypassPermissions=["can_administrate"]) {
+// todo: move parameters into a config json... icky icky!
+const auth = function(permission=null, model=null, correlation_id="user_id", bypassPermissions=["can_administrate"]) {
     return function (req, res, next, reject=(err)=>{}) {
         // if user is authenticated in the session, call the next() to call the next request handler
         // Passport adds this method to request object. A middleware is allowed to add properties to
@@ -59,13 +60,13 @@ let auth = function(permission=null, model=null, correlation_id="user_id", bypas
 
         try {
             if (!permissionToCheck) {
-                let tempReq = req.route.path.replace(/:/g, "{");
-                let replacement = tempReq.replace("(\\d+)", "");
-                let route = replacement.replace(/\{[^\/]*/g, '$&}');
-                let finalRoute = route.replace(/\/$/g, '');
-                let method = req.method.toLowerCase();
+                const tempReq = req.route.path.replace(/:/g, "{");
+                const replacement = tempReq.replace("(\\d+)", "");
+                const route = replacement.replace(/\{[^\/]*/g, '$&}');
+                const finalRoute = route.replace(/\/$/g, '');
+                const method = req.method.toLowerCase();
                 permissionToCheck = swaggerJSON[finalRoute][method].operationId;
-                console.log("permission for " + req.route.path + " is " + permissionToCheck);
+                console.log(`permission for ${  req.route.path  } is ${  permissionToCheck}`);
             }
         }catch(e){
             console.error(e);
@@ -75,21 +76,21 @@ let auth = function(permission=null, model=null, correlation_id="user_id", bypas
             if(shouldBypass){
                 return next();
             }
-            else{
+            
                 if(status){
                     if (model) {
-                        //TODO be able to handle other ids, not just 'id'
-                        let id = req.params.id;
+                        // TODO be able to handle other ids, not just 'id'
+                        const {id} = req.params;
                         model.findOne("id", id, function (result) {
-                            console.log("correlation id: " + correlation_id + " " + req.user.get("id"));
+                            console.log(`correlation id: ${  correlation_id  } ${  req.user.get("id")}`);
                             if (result.get(correlation_id) == req.user.get("id") || permissions.some(p => p.data.permission_name === 'can_manage')) {
-                                console.log("user owns id " + id + "or has can_manage")
+                                console.log(`user owns id ${  id  }or has can_manage`)
                                 return next();
                             }
                             return reject(res.status(401).json({error: "Unauthorized user"}));
 
                         });
-                        return;
+                        
                     }
                     else{
                         return next();
@@ -98,7 +99,7 @@ let auth = function(permission=null, model=null, correlation_id="user_id", bypas
                 else{
                     return reject(res.status(401).json({error: "Unauthorized user"}));
                 }
-            }
+            
         });
 
     };

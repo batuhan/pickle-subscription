@@ -1,13 +1,13 @@
 
-let auth = require('../middleware/auth');
-let ServiceCategories = require('../models/service-category');
+const auth = require('../middleware/auth');
+const ServiceCategories = require('../models/service-category');
 
 module.exports = function(router) {
 
     router.get("/service-categories", function(req, res, next){
         if (!req.isAuthenticated()) {
-            let key = req.query.key;
-            let value = req.query.value;
+            let {key} = req.query;
+            let {value} = req.query;
             if (!key || !value) {
                 key = undefined;
                 value = undefined;

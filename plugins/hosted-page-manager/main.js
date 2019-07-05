@@ -1,13 +1,14 @@
-let { call, put, all, select, fork, spawn, take } = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let mustache = require("mustache");
-let fs = require('fs');
-let jsonwebtoken = require("jsonwebtoken")
-let join = require("path").join;
-const EXP = 24; //hours before link expires
+const { call, put, all, select, fork, spawn, take } = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const mustache = require("mustache");
+const fs = require('fs');
+const jsonwebtoken = require("jsonwebtoken")
+const {join} = require("path");
+
+const EXP = 24; // hours before link expires
 function* run(config, provide, channels) {
-    let database = yield consume(channels.database);
-    let store = require("../../config/redux/store");
+    const database = yield consume(channels.database);
+    const store = require("../../config/redux/store");
     yield call(database.createTableIfNotExist, "embed_configurations", function (table) {
         table.text('config');
         table.string("name");
@@ -24,7 +25,7 @@ function* run(config, provide, channels) {
     function createToken(userId) {
         return new Promise(async resolve => {
             require('crypto').randomBytes(20, async function (err, buffer) {
-                let token = buffer.toString("hex");
+                const token = buffer.toString("hex");
                 await database("embed_access_tokens").insert({
                     user_id: userId,
                     token,
@@ -34,9 +35,9 @@ function* run(config, provide, channels) {
             })
         });
     }
-    let router = yield consume(channels.pageRouter);
+    const router = yield consume(channels.pageRouter);
     async function validateToken(token, userId) {
-        let entry = (await database("embed_access_tokens").where({
+        const entry = (await database("embed_access_tokens").where({
             token,
             user_id: userId
         }))[0];
@@ -50,15 +51,15 @@ function* run(config, provide, channels) {
     }
     async function sendLink(req, res) {
         try {
-            let userId = req.params.userId;
-            let user = (await database("users").where({ id: userId }))[0]
+            const {userId} = req.params;
+            const user = (await database("users").where({ id: userId }))[0]
             if (!user) {
                 return res.status(400).json({ error: "User doesn't exist" });
             }
 
-            let token = await createToken(userId);
+            const token = await createToken(userId);
 
-            let mailer = require("../../lib/mailer");
+            const mailer = require("../../lib/mailer");
 
             mailer(user.email, `Access to billing account with ${store.getState().options.company_name} was requested, go <a href="${createLink(userId, token)}">here</a> to access your billing settings - this link will only work for ${EXP} hours`, "Billing Dashboard Access");
             res.status(200).json({ message: "Link sent" })
@@ -73,17 +74,17 @@ function* run(config, provide, channels) {
     }
 
     async function generateJWT(req, res) {
-        let { userId, token } = req.params;
+        const { userId, token } = req.params;
         try {
             if (await validateToken(token, userId)) {
-                let token = jsonwebtoken.sign({ uid: userId }, process.env.SECRET_KEY, { expiresIn: '3h' });
+                const token = jsonwebtoken.sign({ uid: userId }, process.env.SECRET_KEY, { expiresIn: '3h' });
                 res.json({ token });
             }
         } catch (e) {
             res.status(400).json({ error: e });
         }
     }
-    let routeDefinition = [
+    const routeDefinition = [
         {
             endpoint: "/auth/link/:userId/generate",
             method: "post",
@@ -100,13 +101,13 @@ function* run(config, provide, channels) {
             description: "Generate a new JWT from link token"
         }
     ]
-    let embedAccessManager = {
+    const embedAccessManager = {
         createToken,
         createLink
     }
     yield provide({ routeDefinition, embedAccessManager });
     while (true) {
-        let { path, name, needsToken } = yield consume(channels.hostedPage);
+        const { path, name, needsToken } = yield consume(channels.hostedPage);
 
         database("embed_configurations").where("name", name).then(async config => {
             if (config.length === 0) {
@@ -116,11 +117,11 @@ function* run(config, provide, channels) {
             }
         });
 
-        router.get("/" + name, async function (req, res) {
+        router.get(`/${  name}`, async function (req, res) {
             try {
                 let jwt = null;
                 if (needsToken) {
-                    let { user, token } = req.query;
+                    const { user, token } = req.query;
                     try {
                         if (await validateToken(token, user)) {
                             jwt = jsonwebtoken.sign({ uid: user }, process.env.SECRET_KEY, { expiresIn: '3h' });
@@ -135,11 +136,11 @@ function* run(config, provide, channels) {
 
                 }
                 fs.readFile(path, "utf8", async function (err, data) {
-                    let embedConfiguration = (await database("embed_configurations").returning("*").where("name", name))[0].config || "{}";
-                    let url = "https://" + store.getState().options.hostname;
+                    const embedConfiguration = (await database("embed_configurations").returning("*").where("name", name))[0].config || "{}";
+                    const url = `https://${  store.getState().options.hostname}`;
                     try{
-                    let rendered = mustache.render(data, {
-                        dbConfig: "var dbConfig = " + embedConfiguration,
+                    const rendered = mustache.render(data, {
+                        dbConfig: `var dbConfig = ${  embedConfiguration}`,
                         query: req.query,
                         generatedConfig: `var genConfig = {
                             selector: document.getElementById('servicebot-hosted-embeddable'),

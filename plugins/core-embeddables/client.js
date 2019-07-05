@@ -1,8 +1,10 @@
-let consume = require("pluginbot/effects/consume");
 import Billing from "./embeddables/billing-settings";
 import Checkout from "./embeddables/checkout";
+
+const consume = require("pluginbot/effects/consume");
+
 module.exports = {
-    run: function* (config, provide, services) {
+    *run (config, provide, services) {
         yield provide({embeddable : [Checkout, Billing]});
     }
 

@@ -1,26 +1,26 @@
-var webpack = require('webpack');
-var path = require('path');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'public/build');
-var APP_DIR = path.resolve(__dirname, 'views');
+const BUILD_DIR = path.resolve(__dirname, 'public/build');
+const APP_DIR = path.resolve(__dirname, 'views');
 const CONFIG_PATH = process.env.CONFIG_PATH || path.resolve(__dirname, './config/pluginbot.config.js');
 const PLUGIN_DIR = path.resolve(__dirname, "./plugins");
 
-var config = async function () {
-    let configBuilder = require("pluginbot/config");
-    let pluginConfigs = await configBuilder.buildClientConfig(CONFIG_PATH);
-    let pluginMap = await configBuilder.buildClientPluginMap(CONFIG_PATH);
-    let entryMap = Object.entries(pluginMap).reduce((acc, [key, value]) => {
+const config = async function () {
+    const configBuilder = require("pluginbot/config");
+    const pluginConfigs = await configBuilder.buildClientConfig(CONFIG_PATH);
+    const pluginMap = await configBuilder.buildClientPluginMap(CONFIG_PATH);
+    const entryMap = Object.entries(pluginMap).reduce((acc, [key, value]) => {
         acc[`plugins/${key}`] = value;
         return acc;
     }, {});
-    let plugins =
+    const plugins =
         {
             entry: {
                 "vendor" : ["react-router", "redux", "react", "react-redux", "redux-form", "servicebot-base-form", "redux-form-validators"],
                 ...entryMap,
-                "bundle" : ['react-hot-loader/patch', APP_DIR + '/index.jsx'],
+                "bundle" : ['react-hot-loader/patch', `${APP_DIR  }/index.jsx`],
 
 
             },

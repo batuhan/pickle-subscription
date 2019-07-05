@@ -1,9 +1,9 @@
 module.exports = {
 
 
-    up: async function (knex) {
+    async up (knex) {
         
-        var registrationUserEmail = {
+        const registrationUserEmail = {
             name: "registration_user",
             event_name: "service_instance_requested_by_user",
             message: `<div id="servicebot-notification-email" style="background-color: #F4F6F9; padding: 60px 20px; font-family: 'Open Sans', sans-serif; font-size: 12px;">
@@ -36,7 +36,7 @@ module.exports = {
             send_email: false,
             send_to_owner: true
         };
-        let newEmails = [
+        const newEmails = [
             
             {
                 name: "new_invoice",
@@ -358,7 +358,7 @@ module.exports = {
                 send_to_owner: true
             }
         ];
-        let emails = [
+        const emails = [
             
             {
                 name: "password_reset",
@@ -490,13 +490,13 @@ module.exports = {
             }
         ];
 
-        let regUser = await knex("notification_templates").where("name", "registration_user");
+        const regUser = await knex("notification_templates").where("name", "registration_user");
         if(regUser.length > 0){
             emails.push(registrationUserEmail);
         }else{
             newEmails.push(registrationUserEmail);
         }
-        for(let email of emails){
+        for(const email of emails){
             await knex("notification_templates").where("name", email.name).update(email)
         }
 
@@ -533,11 +533,11 @@ module.exports = {
             send_to_owner: false
         });
     
-        let updated = await knex("notification_templates").where("name", "service_cancellation");
+        const updated = await knex("notification_templates").where("name", "service_cancellation");
 
-        let newRecords = await knex("notification_templates").returning('*').insert(newEmails);
+        const newRecords = await knex("notification_templates").returning('*').insert(newEmails);
 
-        let admin = await knex("notification_templates_to_roles").returning("id").insert([{
+        const admin = await knex("notification_templates_to_roles").returning("id").insert([{
             notification_template_id: newRecords[1].id,
             role_id: 1
 
@@ -554,13 +554,13 @@ module.exports = {
             notification_template_id: newRecords[7].id,
             role_id: 1
         }])
-        var templateNamesToDelete = ["request_service_instance_admin", "request_service_instance_user", "request_service_instance_new_user", "service_requires_payment_approval", "service_instance_update", "instance_cancellation_rejected", "instance_cancellation_approved", "user_suspension"];
-        let toDelete = (await knex("notification_templates").returning("*").whereIn("name", templateNamesToDelete)).map(template => template.id);
+        const templateNamesToDelete = ["request_service_instance_admin", "request_service_instance_user", "request_service_instance_new_user", "service_requires_payment_approval", "service_instance_update", "instance_cancellation_rejected", "instance_cancellation_approved", "user_suspension"];
+        const toDelete = (await knex("notification_templates").returning("*").whereIn("name", templateNamesToDelete)).map(template => template.id);
         await knex("notification_templates_to_roles").whereIn("notification_template_id", toDelete).delete();
         await knex("notification_templates").whereIn("name", templateNamesToDelete).delete();
         return await knex;
     },
 
-    down: async function (knex) {
+    async down (knex) {
     }
 }

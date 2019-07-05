@@ -1,10 +1,10 @@
-let {eventChannel, END} = require("redux-saga");
-let {take, fork, spawn, call} = require("redux-saga/effects");
+const {eventChannel, END} = require("redux-saga");
+const {take, fork, spawn, call} = require("redux-saga/effects");
 
 
 function* reqSaga(requestChannel, sagaMiddleware){
     while(true){
-        let {req, res, next} = yield take(requestChannel);
+        const {req, res, next} = yield take(requestChannel);
         yield fork(sagaMiddleware, req, res, next);
 
     }
@@ -18,7 +18,7 @@ module.exports = function*(saga){
     let middleware = null;
     const channel = eventChannel(emitter => {
 
-        //this code is synchronously called so not toooo bad
+        // this code is synchronously called so not toooo bad
         middleware = function(req, res, next){
             emitter({req, res, next});
         };
@@ -27,7 +27,7 @@ module.exports = function*(saga){
             console.error("unsubscribe...")
         }
     });
-    let requestHandler = yield spawn(reqSaga, channel, saga);
+    const requestHandler = yield spawn(reqSaga, channel, saga);
     return middleware;
 }
 

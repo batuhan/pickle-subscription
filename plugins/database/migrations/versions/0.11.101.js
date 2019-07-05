@@ -1,7 +1,7 @@
 module.exports = {
 
 
-    up: async function (knex) {
+    async up (knex) {
         await knex.schema.raw(`
     ALTER TABLE "service_instances"
     DROP CONSTRAINT "service_instances_status_check",
@@ -11,6 +11,6 @@ module.exports = {
         return await knex;
     },
 
-    down: async function (knex) {
+    async down (knex) {
     }
 }

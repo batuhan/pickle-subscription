@@ -1,4 +1,4 @@
-'use strict';
+
 
 /* jshint quotmark: double */
 window.SwaggerTranslator.learn({

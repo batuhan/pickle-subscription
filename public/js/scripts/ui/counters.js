@@ -1,4 +1,4 @@
-'use strict';
+
 /**
  * @author Batch Themes Ltd.
  */

@@ -2,7 +2,7 @@
  * JQuery function to disable form submission prior to receiving Stripe Token.
  */
 $(function() {
-    var $form = $('#payment-form');
+    const $form = $('#payment-form');
     $form.submit(function(event) {
         // Disable the submit button to prevent repeated clicks:
         $form.find('.submit').prop('disabled', true);
@@ -20,7 +20,7 @@ $(function() {
  */
 function stripeResponseHandler(status, response) {
     // Grab the form:
-    var $form = $('#payment-form');
+    const $form = $('#payment-form');
 
     if (response.error) { // Problem!
 
@@ -31,7 +31,7 @@ function stripeResponseHandler(status, response) {
     } else { // Token was created!
 
         // Get the token ID:
-        var token = response.id;
+        const token = response.id;
 
         // Insert the token ID into the form so it gets submitted to the server:
         $form.append($('<input type="hidden" name="stripeToken">').val(token));

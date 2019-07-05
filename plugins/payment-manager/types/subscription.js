@@ -1,1 +1,1 @@
-//todo - implement subscription type in plugin
+// todo - implement subscription type in plugin

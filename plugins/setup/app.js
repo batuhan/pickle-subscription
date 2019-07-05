@@ -1,7 +1,7 @@
-let express = require('express')
-let path = require("path");
-let {eventChannel, END} = require("redux-saga");
-let {take} = require("redux-saga/effects")
+const express = require('express')
+const path = require("path");
+const {eventChannel, END} = require("redux-saga");
+const {take} = require("redux-saga/effects")
 
 
 module.exports = function* (appConfig, initialConfig, dbConfig, app) {
@@ -9,7 +9,7 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
 
     const channel = eventChannel(emitter => {
 
-        //todo move setup disabled into a .use instead of duplicate code everywhere..
+        // todo move setup disabled into a .use instead of duplicate code everywhere..
         let setupDisabled = false;
         if(dbConfig && initialConfig.admin_user && initialConfig.admin_password && initialConfig.company_name && initialConfig.company_email){
             console.log("Configuration pre-set, initialization starting")
@@ -20,7 +20,7 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                 emitter(END);
             });
         }
-        let api = express.Router();
+        const api = express.Router();
         app.get('/', function (req, res, next) {
             if (setupDisabled) {
                 return next();
@@ -37,7 +37,7 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
             if (setupDisabled) {
                 return next();
             }
-            let steps = [];
+            const steps = [];
             if (!dbConfig) {
                 steps.push("database");
             }
@@ -62,21 +62,21 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                 return next();
             }
 
-            let dbconfig = req.body;
+            const dbconfig = req.body;
 
-            //Null Check
+            // Null Check
             if (!dbconfig.db_host || !dbconfig.db_user || !dbconfig.db_name || !dbconfig.db_password) {
                 res.status(400).json({error: "Database values are required!"});
             }
 
-            let config = {
+            const config = {
                 host: dbconfig.db_host,
                 user: dbconfig.db_user,
                 database: dbconfig.db_name,
                 password: dbconfig.db_password,
                 port: dbconfig.db_port
             };
-            let knex = require('knex')({
+            const knex = require('knex')({
                 client: 'pg',
                 connection: config
             });
@@ -91,7 +91,7 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                     }
                 });
             }).catch(function (err) {
-                res.status(400).json({error: "Invalid Database: " + err.toString()});
+                res.status(400).json({error: `Invalid Database: ${  err.toString()}`});
             });
         });
 
@@ -100,16 +100,16 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                 return next();
             }
 
-            let stripe_config = req.body;
-            let publishable = stripe_config.stripe_public;
-            let secret = stripe_config.stripe_secret;
+            const stripe_config = req.body;
+            const publishable = stripe_config.stripe_public;
+            const secret = stripe_config.stripe_secret;
             console.log(stripe_config);
             require("../../lib/stripeValidator")(publishable, secret, function (err, result) {
                 if (err) {
                     return res.status(400).json({error: err});
-                } else {
+                } 
                     return res.status(200).json({message: result});
-                }
+                
             })
         });
 
@@ -121,9 +121,9 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
             }
 
 
-            let stripe_config = req.body;
-            let publishable = stripe_config.stripe_public;
-            let secret = stripe_config.stripe_secret;
+            const stripe_config = req.body;
+            const publishable = stripe_config.stripe_public;
+            const secret = stripe_config.stripe_secret;
             if (!publishable || !secret) {
                 return res.json({"error": "Stripe keys not inputted"});
             }
@@ -133,7 +133,7 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                     return res.status(400).json({error: err});
                 }
 
-                let config = {
+                const config = {
                     ...initialConfig,
                     ...req.body,
                 }
@@ -149,12 +149,12 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
                         emitter(END);
                     });
                 } catch (e) {
-                    res.json({"error": "Error - " + e});
+                    res.json({"error": `Error - ${  e}`});
                 }
             })
         });
 
-        //todo - figure out how to have this be served by the api gateway
+        // todo - figure out how to have this be served by the api gateway
         app.get('/setup', async function (request, response, next) {
             if (setupDisabled) {
                 return next();
@@ -162,8 +162,8 @@ module.exports = function* (appConfig, initialConfig, dbConfig, app) {
 
             const CONFIG_PATH = appConfig.configPath;
 
-            let configBuilder = require("pluginbot/config");
-            let clientPlugins = Object.keys((await configBuilder.buildClientConfig(CONFIG_PATH)).plugins);
+            const configBuilder = require("pluginbot/config");
+            const clientPlugins = Object.keys((await configBuilder.buildClientConfig(CONFIG_PATH)).plugins);
 
             response.render("main", {vendor: appConfig.vendor_path, bundle: appConfig.bundle_path, plugins: clientPlugins});
         });

@@ -1,9 +1,10 @@
-let {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let path = require("path")
+const {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const path = require("path")
+
 function* run(config, provide, channels) {
-    let database = yield consume(channels.database);
-    let pages = [
+    const database = yield consume(channels.database);
+    const pages = [
         {
             name: "payment",
             path: path.join(__dirname, "./pages/payment.handlebars")

@@ -1,5 +1,5 @@
 module.exports = {
-    up : function(knex){
+    up(knex){
         console.log("migrating database to version 0.2.0");
         return knex.schema.renameTable("email_templates", "notification_templates")
             .alterTable("notification_templates", t => {
@@ -34,7 +34,7 @@ module.exports = {
             })
 
     },
-    down : function(knex){
+    down(knex){
         console.log("rolling back version 0.2.0 migration");
         return knex.schema.renameTable("notification_templates", "email_templates")
             .alterTable("email_templates", t => {

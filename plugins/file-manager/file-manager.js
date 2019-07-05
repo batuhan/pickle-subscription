@@ -1,28 +1,29 @@
-let {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
-let consume = require("pluginbot/effects/consume");
-let multer = require("multer");
-let fs = require("fs");
-let path = require("path");
-let mkdirp = require("mkdirp");
+const {call, put, all, select, fork, spawn, take} = require("redux-saga/effects");
+const consume = require("pluginbot/effects/consume");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const mkdirp = require("mkdirp");
+
 function* run(config, provide, channels) {
-    let db = yield consume(channels.database);
+    const db = yield consume(channels.database);
 
-    //todo - implement better file system
-    let File = require("../../models/file");
+    // todo - implement better file system
+    const File = require("../../models/file");
 
-    let storage = function (path) {
+    const storage = function (path) {
         return multer.diskStorage({
-            destination: function (req, file, cb) {
+            destination (req, file, cb) {
                 mkdirp(path, err => cb(err, path))
             },
-            filename: function (req, file, cb) {
+            filename (req, file, cb) {
                 require('crypto').pseudoRandomBytes(8, function (err, raw) {
-                    cb(err, err ? undefined : req.params.id + "-" + raw.toString('hex'))
+                    cb(err, err ? undefined : `${req.params.id  }-${  raw.toString('hex')}`)
                 })
             }
         });
     }
-    let fileManager = {
+    const fileManager = {
         storage: (filePath) => storage(filePath),
         // middleware: function (req, res, next) {
         //
@@ -34,13 +35,13 @@ function* run(config, provide, channels) {
         // getFileByPath: function (path, prefix) {
         //
         // },
-        sendFile : function(file, res){
-            let options = {
+        sendFile(file, res){
+            const options = {
                 headers: {
-                    'Content-Disposition': "inline; filename=" + file.get("name")
+                    'Content-Disposition': `inline; filename=${  file.get("name")}`
                 }
             };
-            let abs = path.resolve(__dirname, "../../" + file.get("path"));
+            const abs = path.resolve(__dirname, `../../${  file.get("path")}`);
 
             res.sendFile(abs, options, (err) => {
                 if(err) {
@@ -50,14 +51,14 @@ function* run(config, provide, channels) {
             })
 
         },
-        deleteFile: async function (file) {
+        async deleteFile (file) {
             if (!file) {
                 throw "File not found";
             }
-            let filePath = file.get("path");
+            const filePath = file.get("path");
             fs.unlink(filePath, err => {
                 if (err) {
-                    console.log("error deleting file " + err);
+                    console.log(`error deleting file ${  err}`);
                 }
                 else {
                     console.log(`deleted file ${file.get("id")} with path ${filePath}`)

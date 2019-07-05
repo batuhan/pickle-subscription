@@ -1,24 +1,24 @@
-import { setFormData } from "./actions";
 import { connect } from 'react-redux';
 import _ from "lodash";
 import update from 'immutability-helper';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { setFormData } from "./actions";
 
 
-let mapStateToProps = function(name, mapState){
+const mapStateToProps = function(name, mapState){
 
     return function(state, ownProps) {
         if (state.allForms[name]) {
             return {...mapState(state), "formData": state.allForms[name]};
-        }else{
-            return {};
         }
+            return {};
+        
     }
 };
 
 
-let mapDispatchToProps = function(name, mapDispatch){
+const mapDispatchToProps = function(name, mapDispatch){
     return (dispatch, ownProps) => {
         return {
             ...mapDispatch(dispatch),
@@ -26,7 +26,7 @@ let mapDispatchToProps = function(name, mapDispatch){
                 dispatch(setFormData(name, newFormData))
             },
             validateForm: (formData) => {
-                let validatedForm = handleValidation(formData);
+                const validatedForm = handleValidation(formData);
                 dispatch(setFormData(name, validatedForm));
                 return validatedForm;
             }
@@ -39,17 +39,17 @@ let handleValidation = function(stateFormData, newFormData = null, refModel = nu
 
     //
 
-    let self = this;
-    let errors = false; //this is used to check and set the boolean error at the top level of formData object.
-    let currentDataset = stateFormData; //this will be a subset of the original formData when it's in the recursive call.
-    let formData = newFormData || stateFormData; //this is to keep a full object of the updated formData in every recursive call.
+    const self = this;
+    let errors = false; // this is used to check and set the boolean error at the top level of formData object.
+    const currentDataset = stateFormData; // this will be a subset of the original formData when it's in the recursive call.
+    let formData = newFormData || stateFormData; // this is to keep a full object of the updated formData in every recursive call.
     if(refModel === null && refIndex === null){
         formData = update(formData, { "hasErrors": {$set: false} });
     }
     if(currentDataset.validators && currentDataset.validators.length) {
         currentDataset.validators.map((validator) => {
-            let key = Object.keys(validator)[0];
-            let result = typeof(validator[key]) === "function" ? validator[key](currentDataset[key]) : true;
+            const key = Object.keys(validator)[0];
+            const result = typeof(validator[key]) === "function" ? validator[key](currentDataset[key]) : true;
             if (result !== true) {
                 errors = true;
                 if(refModel === null && refIndex === null) {
@@ -58,12 +58,12 @@ let handleValidation = function(stateFormData, newFormData = null, refModel = nu
                     formData = update(formData, { "references" : { [refModel] : { [refIndex]: { "errors": { $set: [{ "field": key, "message": result }] } } } } });
                     return(formData);
                 }
-            }else{ //the error is corrected, remove item from the error object
+            }else{ // the error is corrected, remove item from the error object
                 if(refModel === null && refIndex === null) {
-                    let filteredErrors = _.filter(formData.errors, (obj)=>{ return obj.field != key });
+                    const filteredErrors = _.filter(formData.errors, (obj)=>{ return obj.field != key });
                     formData = update(formData, { "errors": {$set: filteredErrors} });
                 }else{
-                    let filteredErrors = _.filter(currentDataset.errors, (obj)=>{ return obj.field != key });
+                    const filteredErrors = _.filter(currentDataset.errors, (obj)=>{ return obj.field != key });
                     formData = update(formData, { "references" : { [refModel] : { [refIndex]: { "errors": { $set: filteredErrors } } } } });
                     return(formData);
                 }
@@ -84,7 +84,7 @@ let handleValidation = function(stateFormData, newFormData = null, refModel = nu
 };
 
 
-let buildFormData = function(name, value, refName = null, refID = null, validator = null){
+const buildFormData = function(name, value, refName = null, refID = null, validator = null){
    return function(formData) {
        if (refName && refID) {
 
@@ -104,7 +104,7 @@ let buildFormData = function(name, value, refName = null, refID = null, validato
            });
            return update(formData, {$set: newData});
 
-       } else {
+       } 
 
            const newData = update(formData, {
                [name]: {$set: value},
@@ -112,12 +112,12 @@ let buildFormData = function(name, value, refName = null, refID = null, validato
            });
            return update(formData, {$set: newData});
 
-       }
+       
    }
 };
 
 
-let buildFormRefsData = function (name, value, refName, refID, validator) {
+const buildFormRefsData = function (name, value, refName, refID, validator) {
     return function (formData) {
         if ((!refName && !refID) || !refName) {
             return buildFormData(name, value, refName, refID, validator)(formData)
@@ -139,7 +139,7 @@ let buildFormRefsData = function (name, value, refName, refID, validator) {
 };
 
 
-let formBuilder =  function(formName, defaultFormData=null, mapState = ()=>{}, mapDispatch = ()=>{}){
+const formBuilder =  function(formName, defaultFormData=null, mapState = ()=>{}, mapDispatch = ()=>{}){
     return function(Component){
 
         class FormWrapper extends React.Component {
@@ -152,7 +152,7 @@ let formBuilder =  function(formName, defaultFormData=null, mapState = ()=>{}, m
             }
 
             initializeInput(component){
-                let self = this;
+                const self = this;
                 //
                 this.props.setFormData(buildFormRefsData(
                     component.props.name,
@@ -184,13 +184,13 @@ let formBuilder =  function(formName, defaultFormData=null, mapState = ()=>{}, m
 
             getChildContext() {
                 return {
-                    formName : formName,
+                    formName,
                     handleInputsChange : this.handleInputsChange,
                     initializeInput : this.initializeInput
                 };
             }
 
-            render(){ //renders your form component
+            render(){ // renders your form component
                 return <Component {...this.props} />
             }
 

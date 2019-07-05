@@ -1,7 +1,7 @@
 
 
 module.exports = function(router) {
-    let Tier = require('../models/tier');
+    const Tier = require('../models/tier');
     // router.get("/service-categories", function(req, res, next){
     //     if (!req.isAuthenticated()) {
     //         let key = req.query.key;

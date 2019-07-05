@@ -1,12 +1,12 @@
-let knex = require('../../config/db.js');
-let _ = require('lodash');
-let Promise = require("bluebird");
-let promiseProxy = require("../../lib/promiseProxy");
-var whereFilter = require('knex-filter-loopback').whereFilter;
+const _ = require('lodash');
+const Promise = require("bluebird");
+const {whereFilter} = require('knex-filter-loopback');
+const promiseProxy = require("../../lib/promiseProxy");
+const knex = require('../../config/db.js');
 
-//TODO - BIG TASK - relationship system, allow to define relationships in model and relationship tables - would autodelete rel rows
-//TODO - Big task - full promise support..........
-//todo - big task - refactor ORM completely....
+// TODO - BIG TASK - relationship system, allow to define relationships in model and relationship tables - would autodelete rel rows
+// TODO - Big task - full promise support..........
+// todo - big task - refactor ORM completely....
 /**
  *
  * @param tableName - name of table the entity belongs to
@@ -17,8 +17,8 @@ var whereFilter = require('knex-filter-loopback').whereFilter;
  */
 
 var CreateEntity = function (tableName, references = [], primaryKey = 'id', database = knex) {
-    var Entity = function (data) {
-        let self = this;
+    const Entity = function (data) {
+        const self = this;
         this.data = data;
         // this.references = new Proxy({}, {
         //     get: async function (target, name) {
@@ -44,7 +44,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
     Entity.prototype.data = {};
 
-    //introduced to support plugins
+    // introduced to support plugins
     Entity.changeDB = (db) => {
         Entity.database = db;
     };
@@ -61,14 +61,14 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
         if (Entity.references == null || Entity.references.length == 0) {
             callback([]);
         }
-        let self = this;
-        let reference = Entity.references.find(rel => rel.model.table == model.table);
+        const self = this;
+        const reference = Entity.references.find(rel => rel.model.table == model.table);
         if (!reference) {
             callback([]);
             return;
         }
-        let referenceModel = reference.model;
-        let referenceField = reference.referenceField;
+        const referenceModel = reference.model;
+        const {referenceField} = reference;
         if (reference.direction === "from") {
             referenceModel.findOnRelative(referenceField, self.get("id"), function (results) {
                 callback(results);
@@ -83,7 +83,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
     };
 
     Entity.createPromise = function (entityData) {
-        let self = this
+        const self = this
         return Entity.database(Entity.table).columnInfo()
             .then(function (info) {
                 return _.pick(entityData, _.keys(info));
@@ -98,8 +98,8 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
                 throw err
             });
     };
-    let create = function (callback) {
-        let self = this;
+    const create = function (callback) {
+        const self = this;
         Entity.database(Entity.table).columnInfo()
             .then(function (info) {
                 return _.pick(self.data, _.keys(info));
@@ -118,8 +118,8 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
 
     function update(callback) {
-        var self = this;
-        var id = this.get(primaryKey);
+        const self = this;
+        const id = this.get(primaryKey);
         if (!id) {
             throw "cannot update non existent"
         }
@@ -141,8 +141,8 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
     };
 
-    let deleteE = function (callback) {
-        let id = this.get('id');
+    const deleteE = function (callback) {
+        const id = this.get('id');
         Entity.database(Entity.table).where('id', id).del()
             .then(function (res) {
                 callback(null, res);
@@ -153,14 +153,14 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             });
     };
 
-    let attachReferences = function (callback) {
+    const attachReferences = function (callback) {
         this.data.references = {};
-        let self = this;
+        const self = this;
         if (references == null || references.length == 0) {
             return callback(self);
         }
-        for (let reference of references) {
-            let referenceModel = reference.model;
+        for (const reference of references) {
+            const referenceModel = reference.model;
             this.getRelated(referenceModel, function (results) {
                 self.data.references[referenceModel.table] = results.map(entity => entity.data);
                 if (Object.keys(self.data.references).length == references.length) {
@@ -172,7 +172,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
 
     Entity.prototype.createReferences = function (referenceData, reference, callback) {
-        let self = this;
+        const self = this;
         if (reference.readOnly) {
 
             callback(self);
@@ -180,7 +180,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
         else {
             referenceData.forEach(newChild => (newChild[reference.referenceField] = this.get(primaryKey)));
             //
-            //console.log(referenceData);
+            // console.log(referenceData);
             reference.model.batchCreate(referenceData, function (response) {
                 if (reference.direction == "to") {
                     self.set(reference.referenceField, response[0][reference.model.primaryKey]);
@@ -197,28 +197,28 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
         }
     }
 
-    //todo - combine stuff into a single query
-    //todo - possibly dispatch events
+    // todo - combine stuff into a single query
+    // todo - possibly dispatch events
     Entity.prototype.updateReferences = async function (referenceData, reference, isTransaction=false) {
-        let self = this;
+        const self = this;
         if (reference.readOnly) {
 
             this;
         }
         else {
             console.error(referenceData, reference);
-            let ids = referenceData.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
+            const ids = referenceData.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
             referenceData.forEach(newChild => (newChild[reference.referenceField] = this.get(primaryKey)));
 
-            let references = await this.getRelated(reference.model.table);
-            let removedReferences = await reference.model.batchDelete({
+            const references = await this.getRelated(reference.model.table);
+            const removedReferences = await reference.model.batchDelete({
                 not: {id: {"in": ids}},
                 [reference.referenceField]: self.get(primaryKey)
             });
 
-            let upsertedReferences = await reference.model.batchUpdate(referenceData, true, isTransaction);
+            const upsertedReferences = await reference.model.batchUpdate(referenceData, true, isTransaction);
 
-            //change "to" reference if it's different
+            // change "to" reference if it's different
             if(reference.direction === "to" && upsertedReferences[0][reference.model.primaryKey] !== self.get(reference.referenceField)){
                 self.set(reference.referenceField, upsertedReferences[0][reference.model.primaryKey]);
                 await self.update();
@@ -230,16 +230,16 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
         }
     };
 
-    //TODO: think about no result case, not too happy how handling it now.
+    // TODO: think about no result case, not too happy how handling it now.
 
-    //Also want to think about having generic find method all models would use
+    // Also want to think about having generic find method all models would use
     Entity.findAll = function (key = true, value = true, callback) {
         Entity.database(Entity.table).where(key, value)
             .then(function (result) {
                 if (!result) {
                     result = [];
                 }
-                let entities = result.map(e => new Entity(e));
+                const entities = result.map(e => new Entity(e));
                 callback(entities);
             })
             .catch(function (err) {
@@ -247,10 +247,10 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             });
     };
 
-    //best one! (todo... clean up ORM cuz it sucks)
+    // best one! (todo... clean up ORM cuz it sucks)
     Entity.find = async function (filter = {}, attatchReferences = false) {
         try {
-            let result = await Entity.database(Entity.table).where(whereFilter(filter));
+            const result = await Entity.database(Entity.table).where(whereFilter(filter));
             let entities = result ? result.map(e => new Entity(e)) : [];
             if(attatchReferences){
                 entities = await Entity.batchAttatchReference(entities);
@@ -262,7 +262,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
         }
     };
 
-    //Find on relative function will call the findAll function by default. Allowing overrides at a model layer.
+    // Find on relative function will call the findAll function by default. Allowing overrides at a model layer.
     Entity.findOnRelative = function (key = true, value = true, callback) {
         Entity.findAll(key, value, function (result) {
             callback(result);
@@ -275,7 +275,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
                 if (!result) {
                     result = [];
                 }
-                let entities = result.map(e => new Entity(e));
+                const entities = result.map(e => new Entity(e));
                 callback(entities);
             })
             .catch(function (err) {
@@ -283,7 +283,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             });
     };
 
-    let findOne = function (key, value, callback) {
+    const findOne = function (key, value, callback) {
         Entity.database(Entity.table).where(key, value)
             .then(function (result) {
                 if (!result) {
@@ -295,7 +295,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
                 console.error(err);
             });
     };
-    //Generic findById function. Finds the record by passing the id.
+    // Generic findById function. Finds the record by passing the id.
     Entity.findById = function (id, callback) {
         Entity.database(Entity.table).where('id', id)
             .then(function (result) {
@@ -309,18 +309,18 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             });
     };
 
-    let getSchema = function (includeTo, includeFrom, callback) {
-        //get column info for this entity
+    const getSchema = function (includeTo, includeFrom, callback) {
+        // get column info for this entity
         Entity.database(Entity.table).columnInfo()
             .then(function (info) {
-                let schema = info;
+                const schema = info;
                 schema.references = {};
                 Entity.references.reduce(function (promise, relationship) {
                     if ((relationship.direction == "to" && !includeTo) || (relationship.direction == "from" && !includeFrom)) {
                         return promise;
                     }
 
-                    //reduce by returning same promise with .then for each relationship where the schema has the relationship added
+                    // reduce by returning same promise with .then for each relationship where the schema has the relationship added
                     return promise.then(function () {
                         return Entity.database(relationship.model.table).columnInfo().then(function (relInfo) {
                             schema.references[relationship.model.table] = relInfo;
@@ -333,19 +333,19 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
     };
 
-    //gets results that contain the value
+    // gets results that contain the value
 
     Entity.search = function (key, value, callback) {
-        let query = "LOWER(" + key + ") LIKE '%' || LOWER(?) || '%' "
+        let query = `LOWER(${  key  }) LIKE '%' || LOWER(?) || '%' `
         if (value % 1 === 0) {
-            query = key + " = ?";
+            query = `${key  } = ?`;
         }
         Entity.database(Entity.table).whereRaw(query, value)
             .then(function (result) {
                 if (!result) {
                     result = [];
                 }
-                let entities = result.map(e => new Entity(e));
+                const entities = result.map(e => new Entity(e));
                 callback(entities);
             })
             .catch(function (err) {
@@ -353,10 +353,10 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             });
     };
 
-    //Returns the total number of rows for the Entity Table
+    // Returns the total number of rows for the Entity Table
 
     Entity.getRowCountByKey = function (key, value, callback) {
-        let query = Entity.database(Entity.table).count();
+        const query = Entity.database(Entity.table).count();
         if (key) {
             query.where(key, value)
         }
@@ -369,7 +369,7 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
     };
 
     Entity.getSumOfColumnFiltered = function (column, key, value, callback) {
-        let query = Entity.database(Entity.table).sum(column);
+        const query = Entity.database(Entity.table).sum(column);
         if (key) {
             query.where(key, value)
         }
@@ -381,14 +381,14 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
                 console.error(err);
             });
     };
-    //get objects created between dates
+    // get objects created between dates
     Entity.findBetween = function (from, to, dateField = 'created', callback) {
         Entity.database(Entity.table).whereBetween(dateField, [from, to])
             .then(function (result) {
                 if (!result) {
                     result = [];
                 }
-                let entities = result.map(e => new Entity(e));
+                const entities = result.map(e => new Entity(e));
                 callback(entities);
             })
             .catch(function (err) {
@@ -400,9 +400,9 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
 
     async function getReferences(reference, filter={}) {
-        let refTable = reference.model.table
-        let referenceField = reference.referenceField;
-        let join = [refTable];
+        const refTable = reference.model.table
+        const {referenceField} = reference;
+        const join = [refTable];
 
         if (reference.direction === "from") {
             join.push(`${refTable}.${referenceField}`, `${Entity.table}.${Entity.primaryKey}`)
@@ -411,11 +411,11 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             join.push(`${refTable}.${reference.model.primaryKey}`, `${Entity.table}.${referenceField}`)
         }
 
-        let results = await Entity.database(Entity.table)
+        const results = await Entity.database(Entity.table)
             .select(`${Entity.table}.${Entity.primaryKey} as parent_key`, `${refTable}.*`)
             .leftJoin(...join).where(whereFilter(filter));
         return results.reduce((acc, row) => {
-            let parent_key = row.parent_key;
+            const {parent_key} = row;
             delete row.parent_key;
             if(row[reference.model.primaryKey]){
                 acc[parent_key] = (acc[parent_key] || []).concat(row);
@@ -430,23 +430,23 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
             return entities;
         }
 
-        let ids = entities.map(entity => entity.data[Entity.primaryKey]);
-        let key =`${Entity.table}.${Entity.primaryKey}`
-        let filter = {[key] : {"in" : ids}};
-        for(let reference of Entity.references){
-            let referenceData = await getReferences(reference, filter);
+        const ids = entities.map(entity => entity.data[Entity.primaryKey]);
+        const key =`${Entity.table}.${Entity.primaryKey}`
+        const filter = {[key] : {"in" : ids}};
+        for(const reference of Entity.references){
+            const referenceData = await getReferences(reference, filter);
             entities = entities.map(entity => {
                 let entityReferences = referenceData[entity.data[Entity.primaryKey]] || []
 
-                //todo: maybe come up with a better answer to password stripping...
+                // todo: maybe come up with a better answer to password stripping...
                 if(reference.model.table === "users"){
                     entityReferences = entityReferences.map(user => {
                         delete user.password;
                         return user;
                     })
                 }
-                entity.data["references"] = {
-                    ...entity.data["references"],
+                entity.data.references = {
+                    ...entity.data.references,
                     [reference.model.table] : entityReferences
                 }
                 return entity;
@@ -464,8 +464,8 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
      * @param callback
      */
 
-        //todo: refactor..
-    let batchCreate = function (dataArray, callback) {
+        // todo: refactor..
+    const batchCreate = function (dataArray, callback) {
             Entity.database(Entity.table).columnInfo()
                 .then(function (info) {
                     return dataArray.map(function (entity) {
@@ -483,13 +483,13 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
                 })
         };
 
-    //TODO: figure out if updateReferences is even needed, if it is figure out how to remove it.
+    // TODO: figure out if updateReferences is even needed, if it is figure out how to remove it.
     Entity.batchUpdate = async function (dataArray, updateReferences, isTransaction=false) {
-        let columns = await Entity.database(Entity.table).columnInfo()
-        let data = dataArray.map(function (entity) {
+        const columns = await Entity.database(Entity.table).columnInfo()
+        const data = dataArray.map(function (entity) {
             return _.pick(entity, _.keys(columns));
         })
-        let transaction = Entity.database.transaction;
+        let {transaction} = Entity.database;
         if(isTransaction){
             transaction = async (callback) => {
                 return callback(Entity.database);
@@ -506,33 +506,31 @@ var CreateEntity = function (tableName, references = [], primaryKey = 'id', data
 
                 if(updateReferences && dataArray[index].references){
                     record.references = dataArray[index].references;
-                    for(let [refName, refValues] of Object.entries(dataArray[index].references)){
-                        let reference = references.find(ref => ref.model.table === refName);
+                    for(const [refName, refValues] of Object.entries(dataArray[index].references)){
+                        const reference = references.find(ref => ref.model.table === refName);
                         if(reference && !reference.readOnly){
-                            let trxReference = CreateEntity(reference.model.table, reference.model.references, reference.model.primaryKey, trx);
-                            let ids = refValues.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
-                            let removedReferences = await trxReference.batchDelete({
+                            const trxReference = CreateEntity(reference.model.table, reference.model.references, reference.model.primaryKey, trx);
+                            const ids = refValues.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
+                            const removedReferences = await trxReference.batchDelete({
                                 not: {id: {"in": ids}},
                                 [reference.referenceField]: record[Entity.primaryKey]
                             });
-                            let refsToUpdate = refValues.reduce((acc, val) => {
+                            const refsToUpdate = refValues.reduce((acc, val) => {
                                 if(val[reference.model.primaryKey]){
 
-                                    //make sure that the referenceField is pointing properly
+                                    // make sure that the referenceField is pointing properly
                                     if(reference.direction === "from" && val[reference.referenceField] === record[Entity.primaryKey]){
                                         acc.push(val);
 
                                     }else if(reference.direction === "to" && record[reference.referenceField] === val[reference.model.primaryKey]){
                                         acc.push(val);
                                     }
-                                }else{
-                                    if(reference.direction === "from"){
+                                }else if(reference.direction === "from"){
 
                                         val[reference.referenceField] = record[Entity.primaryKey];
                                         acc.push(val);
 
                                     }
-                                }
                                 return acc;
                             }, []);
                             record.references[reference.model.table] = (await trxReference.batchUpdate(refsToUpdate, true, true)) || [];

@@ -1,16 +1,16 @@
-let consume = require("pluginbot/effects/consume");
-let initializeDB = require("./initialize");
-let {call, put} = require("redux-saga/effects")
-let populateDB = require("./populate");
+const consume = require("pluginbot/effects/consume");
+const {call, put} = require("redux-saga/effects")
+const initializeDB = require("./initialize");
+const populateDB = require("./populate");
 
 
-let tablesExist = async function(database){
+const tablesExist = async function(database){
     return (await database("pg_catalog.pg_tables").select("tablename").where("schemaname", "public")).length === 0;
 }
 
 
 module.exports = {
-    run : function*(config, provide, services){
+    *run(config, provide, services){
         let dbConf = config.dbConfig;
         let initialConfig = null;
         if(!dbConf){
@@ -22,16 +22,16 @@ module.exports = {
             console.log("got a config");
         }
 
-        //this is so bigints are parsed properly...
-        var pg = require('pg')
+        // this is so bigints are parsed properly...
+        const pg = require('pg')
         pg.types.setTypeParser(20, 'text', parseInt)
 
-        let database = require('knex')({
+        const database = require('knex')({
             client: 'pg',
             connection: dbConf
         });
 
-        let isPristine = yield call(tablesExist, database);
+        const isPristine = yield call(tablesExist, database);
         if(isPristine){
             console.log("DB EMPTY");
             if(!initialConfig){
@@ -45,22 +45,22 @@ module.exports = {
             console.log("Initialization complete!!!!!");
         }else{
 
-            //todo: move this to a plugin
-            let migrate = require("./migrations/migrate");
+            // todo: move this to a plugin
+            const migrate = require("./migrations/migrate");
             yield call(migrate, database);
-            //todo : implement new system options?
-            //check migrate
-            //check new system options?
+            // todo : implement new system options?
+            // check migrate
+            // check new system options?
         }
 
         database.createTableIfNotExist = function(tableName, knexCreateTable, db=database){
             return db.schema.hasTable(tableName).then(function(exists){
                 if(!exists){
                     return db.schema.createTable(tableName, knexCreateTable);
-                }else{
-                    console.log("Table: " + tableName + " Already Exists, no need to create")
-                    return false;
                 }
+                    console.log(`Table: ${  tableName  } Already Exists, no need to create`)
+                    return false;
+                
             })
         };
 

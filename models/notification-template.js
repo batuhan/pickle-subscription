@@ -1,13 +1,13 @@
-let _ = require("lodash")
-let async = require("async");
-let NotificationTemplate = require("./base/entity")("notification_templates");
-let Notification = require("./notifications");
-let User = require("./user");
-let Role = require("./role");
-let knex = require('../config/db');
-let store = require('../config/redux/store');
-let {put, call, fork, all} = require("redux-saga/effects")
-let mailer = require('../lib/mailer');
+const _ = require("lodash")
+const async = require("async");
+const NotificationTemplate = require("./base/entity")("notification_templates");
+const Notification = require("./notifications");
+const User = require("./user");
+const Role = require("./role");
+const knex = require('../config/db');
+const store = require('../config/redux/store');
+const {put, call, fork, all} = require("redux-saga/effects")
+const mailer = require('../lib/mailer');
 
 /**
  *
@@ -15,7 +15,7 @@ let mailer = require('../lib/mailer');
  * @param callback
  */
 NotificationTemplate.prototype.getRoles = function (callback) {
-    let templateId = this.get('id');
+    const templateId = this.get('id');
     knex(Role.table).whereIn("id", function () {
         this.select("role_id").from("notification_templates_to_roles").where("notification_template_id", templateId)
     }).then(function (result) {
@@ -26,19 +26,19 @@ NotificationTemplate.prototype.getRoles = function (callback) {
 };
 
 NotificationTemplate.prototype.setRoles = function (roleIds, callback) {
-    let templateId = this.get("id");
-    let links = [];
+    const templateId = this.get("id");
+    const links = [];
     knex("notification_templates_to_roles").where("notification_template_id", templateId).delete().then(function (result) {
         roleIds.forEach(id => {
-            let notificationToRole = {"role_id": id, notification_template_id: templateId}
+            const notificationToRole = {"role_id": id, notification_template_id: templateId}
             links.push(notificationToRole);
         });
         knex("notification_templates_to_roles").insert(links).then(callback);
     })
 };
 NotificationTemplate.prototype.build = function (map, callback) {
-    let parseTemplate = function (match, replaceString, offset, string) {
-        let splitStr = replaceString.split(".");
+    const parseTemplate = function (match, replaceString, offset, string) {
+        const splitStr = replaceString.split(".");
         if (splitStr.length > 1 && splitStr[0] != "properties") {
             splitStr[1] += "[0]";
             replaceString = splitStr.join(".");
@@ -51,48 +51,48 @@ NotificationTemplate.prototype.build = function (map, callback) {
     };
 
     const regex = /\[\[([\w, \.]+)]]/gm;
-    let message = this.get("message").replace(regex, parseTemplate);
-    let subject = this.get("subject").replace(regex, parseTemplate);
+    const message = this.get("message").replace(regex, parseTemplate);
+    const subject = this.get("subject").replace(regex, parseTemplate);
 
     callback(message, subject);
 
 
 };
 
-let createNotifications = function(recipients, message, subject, notificationTemplate){
+const createNotifications = function(recipients, message, subject, notificationTemplate){
     if(notificationTemplate.get('create_notification')) {
 
         return Promise.all(recipients.map(recipient => {
             return new Promise((resolve, reject) => {
-                let notificationAttributes = {
-                    message: message,
+                const notificationAttributes = {
+                    message,
                     user_id: recipient.get('id'),
-                    subject: subject
+                    subject
                 };
-                //Create Notification
-                let newNotification = new Notification(notificationAttributes);
+                // Create Notification
+                const newNotification = new Notification(notificationAttributes);
                 newNotification.create(function (err, notification) {
                     if (!err) {
 
                         return resolve(notification);
-                    } else {
+                    } 
                         return reject(err);
-                    }
+                    
                 });
             }).catch(e => {
                 console.error('error when creating notification: ', e)
             })
         }))
     }
-    else{
+    
         console.log("no notifications to create")
         return true;
-    }
+    
 };
 
-let createEmailNotifications = function(recipients, message, subject, notificationTemplate){
+const createEmailNotifications = function(recipients, message, subject, notificationTemplate){
     if(notificationTemplate.get('send_email')){
-        let additionalRecipients = notificationTemplate.get('additional_recipients');
+        const additionalRecipients = notificationTemplate.get('additional_recipients');
         let emailArray = recipients.map(recipient => recipient.get('email'));
         emailArray = _.union(emailArray, additionalRecipients);
 
@@ -107,22 +107,22 @@ let createEmailNotifications = function(recipients, message, subject, notificati
             console.error("error sending email notifications", e)
         })
     }
-    else{
+    
         console.log("no emails to send")
         return true;
-    }
+    
 }
 
 
 NotificationTemplate.prototype.createNotification =  function* (object) {
-    let self = (yield call(NotificationTemplate.find, {id : this.get("id")}))[0];
-    let notificationContent = yield call(getNotificationContents, self, object);
-    let usersToNotify = yield call(getRoleUsers, self);
+    const self = (yield call(NotificationTemplate.find, {id : this.get("id")}))[0];
+    const notificationContent = yield call(getNotificationContents, self, object);
+    const usersToNotify = yield call(getRoleUsers, self);
 
     if(self.get('send_to_owner')) {
-        //todo: saga
-        let owner = yield new Promise((resolve, reject) => {
-            let userId = self.get("model") === 'user' ? object.get('id') : object.get('user_id');
+        // todo: saga
+        const owner = yield new Promise((resolve, reject) => {
+            const userId = self.get("model") === 'user' ? object.get('id') : object.get('user_id');
             User.findOne("id", userId, function (user) {
                 resolve(user);
             })
@@ -138,20 +138,20 @@ NotificationTemplate.prototype.createNotification =  function* (object) {
 let getNotificationContents = function(template, targetObject){
 
     return new Promise(function (resolve, reject) {
-        //Attach references
+        // Attach references
         targetObject.attachReferences(updatedObject => {
-            let store = require('../config/redux/store');
-            let globalProps = store.getState().options;
-            let map = {...updatedObject.data};
-            Object.keys(globalProps).forEach(key => map["_" + key] = globalProps[key]);
+            const store = require('../config/redux/store');
+            const globalProps = store.getState().options;
+            const map = {...updatedObject.data};
+            Object.keys(globalProps).forEach(key => map[`_${  key}`] = globalProps[key]);
             return resolve(map)
         });
     }).then(updatedObject => {
         return new Promise(function (resolve, reject) {
-            //Build Message and Subject from template
+            // Build Message and Subject from template
             template.build(updatedObject, function (message, subject) {
 
-                return resolve({message: message, subject: subject})
+                return resolve({message, subject})
             });
         });
     }).catch(e => {
@@ -173,7 +173,7 @@ let getRoleUsers = function(template){
             })
         })
     )).then(usersInRoles => {
-        let users = usersInRoles.reduce((allUsers, userInRole) => allUsers.concat(userInRole), []);
+        const users = usersInRoles.reduce((allUsers, userInRole) => allUsers.concat(userInRole), []);
         return users
     }).catch(e => {
         console.log('error when getting list of users from roles: ', e);

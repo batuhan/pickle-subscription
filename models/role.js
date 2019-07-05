@@ -1,5 +1,5 @@
 
-var knex = require('../config/db');
+const knex = require('../config/db');
 
 /**
  *
@@ -9,10 +9,11 @@ var knex = require('../config/db');
  *
  */
 
-let Role = require("./base/entity")("user_roles");
-let Permission = require("./permission");
+const Role = require("./base/entity")("user_roles");
+const Permission = require("./permission");
+
 Role.prototype.delete = function (callback) {
-    var id = this.get('id');
+    const id = this.get('id');
     if(!id){
         throw "cannot update non existant"
     }
@@ -34,8 +35,8 @@ Role.prototype.delete = function (callback) {
  * @param callback
  */
 Role.prototype.assignPermission = function (permissions, callback) {
-    var self = this;
-    var insert = permissions.map(function(permission){
+    const self = this;
+    const insert = permissions.map(function(permission){
         return {
             role_id : self.get("id"),
             permission_id : permission.get('id')
@@ -49,17 +50,17 @@ Role.prototype.assignPermission = function (permissions, callback) {
             callback(self);
         })
         .catch(function(err){
-            console.error("error creating : " + err);
+            console.error(`error creating : ${  err}`);
         });
 };
 
 
-//todo: improve to not delete
+// todo: improve to not delete
 Role.prototype.setPermissions = function(permissions, callback){
-    let self = this;
+    const self = this;
     knex('roles_to_permissions').where("role_id", self.get("id")).delete()
         .then(function(result){
-            let roles_to_permission = permissions.map(function(perm){
+            const roles_to_permission = permissions.map(function(perm){
                 return {"permission_id" : perm, "role_id" : self.get("id")};
             })
             knex('roles_to_permissions').returning("*").insert(roles_to_permission)
@@ -70,10 +71,10 @@ Role.prototype.setPermissions = function(permissions, callback){
         })
 
 }
-let promiseProxy = require("../lib/promiseProxy");
+const promiseProxy = require("../lib/promiseProxy");
 
-let getPermissions = function(callback){
-    let roleId = this.get('id');
+const getPermissions = function(callback){
+    const roleId = this.get('id');
     knex(Permission.table).whereIn("id", function(){
       this.select("permission_id").from("roles_to_permissions").where("role_id", roleId)
     }).then(function(result){
@@ -97,15 +98,15 @@ Role.prototype.hasPermission = function (permission, callback) {
         callback(true);
 
     }else {
-        let roleId = this.get('id');
+        const roleId = this.get('id');
         Permission.findOne("permission_name", permission, function (permissionEntity) {
-            //console.log(permissionEntity);
-            //TODO FIX THIS SHIT, it's broken if you pass a permission not in db
+            // console.log(permissionEntity);
+            // TODO FIX THIS SHIT, it's broken if you pass a permission not in db
             if(permissionEntity.data == null) {
                 return callback(false);
 
             }
-            let permissionId = permissionEntity.get('id');
+            const permissionId = permissionEntity.get('id');
 
 
             knex('roles_to_permissions').where('role_id', roleId).andWhere('permission_id', permissionId)

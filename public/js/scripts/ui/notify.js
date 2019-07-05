@@ -1,11 +1,11 @@
-'use strict';
+
 /**
  * @author Batch Themes Ltd.
  */
 (function() {
     $(function() {
         $('.btn-notify').on('click', function() {
-            var action = $(this).data('action');
+            const action = $(this).data('action');
             if (action === 'success') {
                 $.notify("Access granted", {
                     className: 'success',

@@ -1,4 +1,4 @@
-var config = {
+const config = {
     host: process.env.POSTGRES_DB_HOST,
     user: process.env.POSTGRES_DB_USER,
     database: process.env.POSTGRES_DB_NAME,
@@ -6,11 +6,12 @@ var config = {
     port: process.env.POSTGRES_DB_PORT
 };
 
-//this is for parsing bigints
-var pg = require('pg')
+// this is for parsing bigints
+const pg = require('pg')
+
 pg.types.setTypeParser(20, 'text', parseInt)
 
-var knex = require('knex')({
+const knex = require('knex')({
     client: 'pg',
     connection: config,
     pool: { min: 0, max: 10 }

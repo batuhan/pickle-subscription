@@ -39,7 +39,7 @@
     "immutability-helper": "^2.4.0",
     "imports-loader": "^0.7.1",
     "install": "^0.8.9",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^7.4.3",
     "knex": "^0.12.9",
     "knex-filter-loopback": "^0.1.0",

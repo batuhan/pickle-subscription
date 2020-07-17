@@ -44,7 +44,7 @@
     "knex": "^0.12.9",
     "knex-filter-loopback": "^0.1.0",
     "kubernetes-client": "^3.16.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "mkdirp": "^0.5.1",
     "morgan": "^1.9.0",
     "multer": "^1.3.0",

@@ -130,7 +130,7 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "jest": "^22.4.3",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.0.1",
     "react-to-print": "^2.0.0-alpha-6",

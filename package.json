@@ -105,7 +105,7 @@
     "stripe": "^4.25.0",
     "style-loader": "^0.13.2",
     "swagger-jsdoc": "^1.9.7",
-    "underscore": "^1.8.3",
+    "underscore": "^1.12.1",
     "wait-for-port": "0.0.2",
     "whatwg-fetch": "^2.0.4",
     "xss": "^0.3.4"

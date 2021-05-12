@@ -51,7 +51,7 @@
     "mustache": "^3.0.1",
     "node-fetch": "^2.1.2",
     "node-schedule": "^1.2.5",
-    "nodemailer": "^2.7.2",
+    "nodemailer": "^6.4.16",
     "object.values": "^1.0.4",
     "passport": "^0.3.2",
     "passport-custom": "^1.0.5",
